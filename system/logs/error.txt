@@ -1,0 +1,11 @@
+2015-06-04 8:07:14 - PHP Notice:  Error: Could not load language chinese! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-06-04 8:11:38 - PHP Notice:  Undefined index: USD in D:\wamp\www\yuankong\system\library\currency.php on line 55
+2015-06-04 8:11:38 - PHP Notice:  Undefined index: USD in D:\wamp\www\yuankong\system\library\currency.php on line 56
+2015-06-04 8:11:38 - PHP Notice:  Undefined index: USD in D:\wamp\www\yuankong\system\library\currency.php on line 57
+2015-06-04 8:11:38 - PHP Notice:  Undefined index: USD in D:\wamp\www\yuankong\system\library\currency.php on line 65
+2015-06-04 8:11:38 - PHP Notice:  Undefined index: USD in D:\wamp\www\yuankong\system\library\currency.php on line 55
+2015-06-04 8:11:38 - PHP Notice:  Undefined index: USD in D:\wamp\www\yuankong\system\library\currency.php on line 56
+2015-06-04 8:11:38 - PHP Notice:  Undefined index: USD in D:\wamp\www\yuankong\system\library\currency.php on line 57
+2015-06-04 8:11:38 - PHP Notice:  Undefined index: USD in D:\wamp\www\yuankong\system\library\currency.php on line 65
+2015-06-04 8:14:32 - PHP Notice:  Error: Could not load language chinese! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-06-04 8:15:14 - PHP Notice:  Error: Could not load language chinese! in D:\wamp\www\yuankong\system\library\language.php on line 39
