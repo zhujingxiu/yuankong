@@ -7,6 +7,20 @@ class ControllerCommonLogin extends Controller {
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
+
+		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
+			$this->data['base'] = HTTPS_SERVER;
+		} else {
+			$this->data['base'] = HTTP_SERVER;
+		}
+		
+		$this->data['description'] = $this->document->getDescription();
+		$this->data['keywords'] = $this->document->getKeywords();
+		$this->data['links'] = $this->document->getLinks();	
+		$this->data['lang'] = $this->language->get('code');
+		$this->data['direction'] = $this->language->get('direction');
+		
+
 		if ($this->user->isLogged() && isset($this->request->get['token']) && ($this->request->get['token'] == $this->session->data['token'])) {
 			$this->redirect($this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL'));
 		}
@@ -88,7 +102,8 @@ class ControllerCommonLogin extends Controller {
 		} else {
 			$this->data['forgotten'] = '';
 		}
-		
+		$this->data['homepage'] = HTTP_CATALOG;	
+		$this->data['text_homepage'] = $this->language->get('text_homepage');	
 		$this->template = 'common/login.tpl';
 		$this->children = array(
 			'common/header',
