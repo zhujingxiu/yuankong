@@ -132,7 +132,7 @@ class ControllerCommonHeader extends Controller {
 			$this->data['feed'] = $this->url->link('extension/feed', 'token=' . $this->session->data['token'], 'SSL');	
 			$this->data['filter'] = $this->url->link('catalog/filter', 'token=' . $this->session->data['token'], 'SSL');			
 			$this->data['geo_zone'] = $this->url->link('localisation/geo_zone', 'token=' . $this->session->data['token'], 'SSL');
-			$this->data['help'] = $this->url->link('catalog/help', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['help'] = $this->url->link('extension/help', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['information'] = $this->url->link('catalog/information', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['language'] = $this->url->link('localisation/language', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['layout'] = $this->url->link('design/layout', 'token=' . $this->session->data['token'], 'SSL');
@@ -178,8 +178,8 @@ class ControllerCommonHeader extends Controller {
 			$this->data['length_class'] = $this->url->link('localisation/length_class', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['zone'] = $this->url->link('localisation/zone', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['project'] = $this->url->link('sale/project', 'token=' . $this->session->data['token'], 'SSL');
-			$this->data['news'] = $this->url->link('catalog/news', 'token=' . $this->session->data['token'], 'SSL');
-			$this->data['link'] = $this->url->link('catalog/link', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['news'] = $this->url->link('extension/news', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['link'] = $this->url->link('extension/link', 'token=' . $this->session->data['token'], 'SSL');
 			
 			$this->data['stores'] = array();
 			

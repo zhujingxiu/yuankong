@@ -125,6 +125,43 @@ function deldir($dir) {
     }
 }
 
+function newsCategory(){
+    return array(
+        'xffg'  => '消防法规',
+        'xfxw'  => '消防新闻',
+        'gfgg'  => '官方公告',
+        'xfzs'  => '消防知识',
+        'glpx'  => '管理培训',
+    );
+}
+
+function projectCategory(){
+    return array(
+        'xfsj'  => '消防设计',
+        'xfjc'  => '消防检测',
+        'xfgc'  => '消防工程',
+        'xfwb'  => '消防维保',
+    );
+}
+
+function getProjectStatus($status,$entry_id){
+    $text = '';
+    switch ((int)$status) {
+        case 1:
+            $text = '<span class="red">未处理</span><i class="padlr12 cd">|</i><em class="zt-reset" data-status="'.$status.'" data-entry="'.$entry_id.'">修改</em>';
+            break;
+        case 2:
+            $text = '<span class="cgreen">处理中</span><i class="padlr12 cd">|</i><em class="zt-reset" data-status="'.$status.'" data-entry="'.$entry_id.'">修改</em>';
+            break;
+        case 3:
+            $text = '<span class="c9">已完成</span>';
+            break;
+        default :
+            $text = '<span class="red">未知异常</span>';
+    }
+    return $text;
+}
+
   /**
    * *
    * @param string $value

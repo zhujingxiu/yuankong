@@ -104,7 +104,7 @@ class ControllerSaleProject extends Controller {
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
-			$sort = 'cgd.name';
+			$sort = 'p.project_sn';
 		}
 
 		if (isset($this->request->get['order'])) {
@@ -141,12 +141,14 @@ class ControllerSaleProject extends Controller {
 
 		$this->data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
-			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
+			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL'),
+			'separator' => false
 		);
 
 		$this->data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
-			'href' => $this->url->link('sale/project', 'token=' . $this->session->data['token'] . $url, 'SSL')
+			'href' => $this->url->link('sale/project', 'token=' . $this->session->data['token'] . $url, 'SSL'),
+			'separator' => '::'
 		);
 
 		$this->data['all'] = $this->url->link('sale/project', 'tab=all&token=' . $this->session->data['token'] , 'SSL');
@@ -171,28 +173,35 @@ class ControllerSaleProject extends Controller {
 		$results = $this->model_sale_project->getProjects($filter_data);
 
 		foreach ($results as $result) {
+			$action = array();
+						
+			$action[] = array(
+				'text' => $this->language->get('text_edit'),
+				'href' => 'javascript:changeStatus('.(int)$result['project_id'].','.(int)$result['status'].')'
+			);
+
 			$this->data['projects'][] = array(
 				'project_id' => $result['project_id'],
 				'project_sn' => $result['project_sn'] ,
-				'group'      => isset($this->data['groups'][$result['group']]) ? $this->data['groups'][$result['group']] : $this->language->get(''),
+				'group'      => isset($this->data['groups'][$result['group']]) ? $this->data['groups'][$result['group']] : $this->language->get('text_unknown'),
 				'telephone'	 => $result['telephone'],
 				'account'	 => $result['account'],
 				'date_applied'=> date('Y-m-d H:i:s',strtotime($result['date_applied'])),
-				'status_text' => getProjectStatus($result['status'],$result['project_id']),
-				'edit'       => $this->url->link('sale/project/edit', 'token=' . $this->session->data['token'] . '&project_id=' . $result['project_id'] . $url, 'SSL')
+				'selected'   => isset($this->request->post['selected']) && in_array($result['project_id'], $this->request->post['selected']),
+				'action'      => $action
 			);
 		}
 
 		$this->data['heading_title'] = $this->language->get('heading_title');
 		
 		$this->data['text_list'] = $this->language->get('text_list');
+		$this->data['text_title'] = $this->language->get('text_title');
 		$this->data['text_no_results'] = $this->language->get('text_no_results');
 		$this->data['text_confirm'] = $this->language->get('text_confirm');
 		$this->data['tab_all'] = $this->language->get('tab_all');
 		$this->data['tab_pending'] = $this->language->get('tab_pending');
 		$this->data['tab_processing'] = $this->language->get('tab_processing');
 		$this->data['tab_processed'] = $this->language->get('tab_processed');
-
 
 		$this->data['column_project_sn'] = $this->language->get('column_project_sn');
 		$this->data['column_account'] = $this->language->get('column_account');
@@ -201,9 +210,13 @@ class ControllerSaleProject extends Controller {
 		$this->data['column_date_applied'] = $this->language->get('column_date_applied');
 		$this->data['column_action'] = $this->language->get('column_action');
 
+		$this->data['entry_status'] = $this->language->get('entry_status');
+
 		$this->data['button_add'] = $this->language->get('button_add');
 		$this->data['button_edit'] = $this->language->get('button_edit');
 		$this->data['button_delete'] = $this->language->get('button_delete');
+		$this->data['button_save'] = $this->language->get('button_save');
+		$this->data['button_close'] = $this->language->get('button_close');
 
 		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
@@ -261,12 +274,11 @@ class ControllerSaleProject extends Controller {
 		$pagination = new Pagination();
 		$pagination->total = $project_total;
 		$pagination->page = $page;
-		$pagination->limit = $this->config->get('config_limit_admin');
-		$pagination->url = $this->url->link('sale/project', 'token=' . $this->session->data['token'] . $url . '&page={page}', 'SSL');
+		$pagination->limit = $this->config->get('config_admin_limit');
+		$pagination->text = $this->language->get('text_pagination');
+		$pagination->url = HTTPS_SERVER . 'index.php?route=sale/coupon&token=' . $this->session->data['token'] . $url . '&page={page}';
 
 		$this->data['pagination'] = $pagination->render();
-
-		$this->data['results'] = sprintf($this->language->get('text_pagination'), ($project_total) ? (($page - 1) * $this->config->get('config_limit_admin')) + 1 : 0, ((($page - 1) * $this->config->get('config_limit_admin')) > ($project_total - $this->config->get('config_limit_admin'))) ? $project_total : ((($page - 1) * $this->config->get('config_limit_admin')) + $this->config->get('config_limit_admin')), $project_total, ceil($project_total / $this->config->get('config_limit_admin')));
 
 		$this->data['sort'] = $sort;
 		$this->data['order'] = $order;
