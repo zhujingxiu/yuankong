@@ -40,6 +40,7 @@ class ControllerCommonHeader extends Controller {
 		$this->data['text_sale'] = $this->language->get('text_sale');
 		$this->data['text_design'] = $this->language->get('text_design');
 		$this->data['text_news'] = $this->language->get('text_news');
+		$this->data['text_news_group'] = $this->language->get('text_news_group');
 		$this->data['text_download'] = $this->language->get('text_download');
 		$this->data['text_error_log'] = $this->language->get('text_error_log');
 		$this->data['text_extension'] = $this->language->get('text_extension');
@@ -48,6 +49,7 @@ class ControllerCommonHeader extends Controller {
 		$this->data['text_front'] = $this->language->get('text_front');
 		$this->data['text_geo_zone'] = $this->language->get('text_geo_zone');
 		$this->data['text_help'] = $this->language->get('text_help');
+		$this->data['text_help_group'] = $this->language->get('text_help_group');
 		$this->data['text_dashboard'] = $this->language->get('text_dashboard');
 		$this->data['text_all_orders'] = $this->language->get('text_all_orders');
 		$this->data['text_information'] = $this->language->get('text_information');
@@ -104,6 +106,7 @@ class ControllerCommonHeader extends Controller {
 		$this->data['text_length_class'] = $this->language->get('text_length_class');
 		$this->data['text_zone'] = $this->language->get('text_zone');
 		$this->data['text_project'] = $this->language->get('text_project');
+		$this->data['text_project_group'] = $this->language->get('text_project_group');
 		
 		if (!$this->user->isLogged() || !isset($this->request->get['token']) || !isset($this->session->data['token']) || ($this->request->get['token'] != $this->session->data['token'])) {
 			$this->data['logged'] = '';
@@ -133,6 +136,7 @@ class ControllerCommonHeader extends Controller {
 			$this->data['filter'] = $this->url->link('catalog/filter', 'token=' . $this->session->data['token'], 'SSL');			
 			$this->data['geo_zone'] = $this->url->link('localisation/geo_zone', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['help'] = $this->url->link('extension/help', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['help_group'] = $this->url->link('extension/help_group', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['information'] = $this->url->link('catalog/information', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['language'] = $this->url->link('localisation/language', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['layout'] = $this->url->link('design/layout', 'token=' . $this->session->data['token'], 'SSL');
@@ -178,7 +182,9 @@ class ControllerCommonHeader extends Controller {
 			$this->data['length_class'] = $this->url->link('localisation/length_class', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['zone'] = $this->url->link('localisation/zone', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['project'] = $this->url->link('sale/project', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['project_group'] = $this->url->link('sale/project_group', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['news'] = $this->url->link('extension/news', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['news_group'] = $this->url->link('extension/news_group', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['link'] = $this->url->link('extension/link', 'token=' . $this->session->data['token'], 'SSL');
 			
 			$this->data['stores'] = array();

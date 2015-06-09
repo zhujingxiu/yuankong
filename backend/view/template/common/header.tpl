@@ -196,6 +196,9 @@ $(document).ready(function(){
               </li>
               <li><a href="<?php echo $length_class; ?>"><?php echo $text_length_class; ?></a></li>
               <li><a href="<?php echo $weight_class; ?>"><?php echo $text_weight_class; ?></a></li>
+              <li><a href="<?php echo $news_group; ?>"><?php echo $text_news_group; ?></a></li>
+              <li><a href="<?php echo $help_group; ?>"><?php echo $text_help_group; ?></a></li>
+              <li><a href="<?php echo $project_group; ?>"><?php echo $text_project_group; ?></a></li>
             </ul>
           </li>
           <li><a href="<?php echo $error_log; ?>"><?php echo $text_error_log; ?></a></li>

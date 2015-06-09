@@ -52,7 +52,7 @@ class ControllerExtensionNewsGroup extends Controller {
 		$this->load->model('extension/news_group');
 		
     	if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-	  		$this->model_extension_news_group->editNewsGroup($this->request->get['news_group_id'], $this->request->post);
+	  		$this->model_extension_news_group->editNewsGroup($this->request->get['group_id'], $this->request->post);
 			
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -84,8 +84,8 @@ class ControllerExtensionNewsGroup extends Controller {
 		$this->load->model('extension/news_group');
 		
     	if (isset($this->request->post['selected']) && $this->validateDelete()) {
-			foreach ($this->request->post['selected'] as $news_group_id) {
-				$this->model_extension_news_group->deleteNewsGroup($news_group_id);
+			foreach ($this->request->post['selected'] as $group_id) {
+				$this->model_extension_news_group->deleteNewsGroup($group_id);
 			}
 			      		
 			$this->session->data['success'] = $this->language->get('text_success');
@@ -178,14 +178,15 @@ class ControllerExtensionNewsGroup extends Controller {
 			
 			$action[] = array(
 				'text' => $this->language->get('text_edit'),
-				'href' => $this->url->link('extension/news_group/update', 'token=' . $this->session->data['token'] . '&news_group_id=' . $result['news_group_id'] . $url, 'SSL')
+				'href' => $this->url->link('extension/news_group/update', 'token=' . $this->session->data['token'] . '&group_id=' . $result['group_id'] . $url, 'SSL')
 			);
 						
 			$this->data['news_groups'][] = array(
-				'news_group_id' => $result['news_group_id'],
+				'group_id' 			 => $result['group_id'],
 				'name'               => $result['name'],
+				'show'               => $result['show'] ? $this->language->get('text_yes') : $this->language->get('text_no'),
 				'sort_order'         => $result['sort_order'],
-				'selected'           => isset($this->request->post['selected']) && in_array($result['news_group_id'], $this->request->post['selected']),
+				'selected'           => isset($this->request->post['selected']) && in_array($result['group_id'], $this->request->post['selected']),
 				'action'             => $action
 			);
 		}	
@@ -195,6 +196,7 @@ class ControllerExtensionNewsGroup extends Controller {
 		$this->data['text_no_results'] = $this->language->get('text_no_results');
 
 		$this->data['column_name'] = $this->language->get('column_name');
+		$this->data['column_show'] = $this->language->get('column_show');
 		$this->data['column_sort_order'] = $this->language->get('column_sort_order');
 		$this->data['column_action'] = $this->language->get('column_action');		
 		
@@ -227,8 +229,9 @@ class ControllerExtensionNewsGroup extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 		
-		$this->data['sort_name'] = $this->url->link('extension/news_group', 'token=' . $this->session->data['token'] . '&sort=agd.name' . $url, 'SSL');
-		$this->data['sort_sort_order'] = $this->url->link('extension/news_group', 'token=' . $this->session->data['token'] . '&sort=ag.sort_order' . $url, 'SSL');
+		$this->data['sort_name'] = $this->url->link('extension/news_group', 'token=' . $this->session->data['token'] . '&sort=ng.name' . $url, 'SSL');
+		$this->data['sort_show'] = $this->url->link('extension/news_group', 'token=' . $this->session->data['token'] . '&sort=ng.show' . $url, 'SSL');
+		$this->data['sort_sort_order'] = $this->url->link('extension/news_group', 'token=' . $this->session->data['token'] . '&sort=ng.sort_order' . $url, 'SSL');
 		
 		$url = '';
 
@@ -265,7 +268,11 @@ class ControllerExtensionNewsGroup extends Controller {
      	$this->data['heading_title'] = $this->language->get('heading_title');
 
     	$this->data['entry_name'] = $this->language->get('entry_name');
+    	$this->data['entry_show'] = $this->language->get('entry_show');
 		$this->data['entry_sort_order'] = $this->language->get('entry_sort_order');
+
+		$this->data['text_yes'] = $this->language->get('text_yes');
+    	$this->data['text_no'] = $this->language->get('text_no');
 
     	$this->data['button_save'] = $this->language->get('button_save');
     	$this->data['button_cancel'] = $this->language->get('button_cancel');
@@ -279,7 +286,7 @@ class ControllerExtensionNewsGroup extends Controller {
  		if (isset($this->error['name'])) {
 			$this->data['error_name'] = $this->error['name'];
 		} else {
-			$this->data['error_name'] = array();
+			$this->data['error_name'] = '';
 		}
 		
 		$url = '';
@@ -310,28 +317,33 @@ class ControllerExtensionNewsGroup extends Controller {
       		'separator' => ' :: '
    		);
 		
-		if (!isset($this->request->get['news_group_id'])) {
+		if (!isset($this->request->get['group_id'])) {
 			$this->data['action'] = $this->url->link('extension/news_group/insert', 'token=' . $this->session->data['token'] . $url, 'SSL');
 		} else {
-			$this->data['action'] = $this->url->link('extension/news_group/update', 'token=' . $this->session->data['token'] . '&news_group_id=' . $this->request->get['news_group_id'] . $url, 'SSL');
+			$this->data['action'] = $this->url->link('extension/news_group/update', 'token=' . $this->session->data['token'] . '&group_id=' . $this->request->get['group_id'] . $url, 'SSL');
 		}
 			
 		$this->data['cancel'] = $this->url->link('extension/news_group', 'token=' . $this->session->data['token'] . $url, 'SSL');
 
-		if (isset($this->request->get['news_group_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
-			$news_group_info = $this->model_extension_news_group->getNewsGroup($this->request->get['news_group_id']);
+		if (isset($this->request->get['group_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
+			$news_group_info = $this->model_extension_news_group->getNewsGroup($this->request->get['group_id']);
 		}
 				
-		$this->load->model('localisation/language');
-		
-		$this->data['languages'] = $this->model_localisation_language->getLanguages();
-		
-		if (isset($this->request->post['news_group_description'])) {
-			$this->data['news_group_description'] = $this->request->post['news_group_description'];
-		} elseif (isset($this->request->get['news_group_id'])) {
-			$this->data['news_group_description'] = $this->model_extension_news_group->getNewsGroupDescriptions($this->request->get['news_group_id']);
+	
+		if (isset($this->request->post['name'])) {
+			$this->data['name'] = $this->request->post['name'];
+		} elseif (!empty($news_group_info)) {
+			$this->data['name'] = $news_group_info['name'];
 		} else {
-			$this->data['news_group_description'] = array();
+			$this->data['name'] = '';
+		}
+
+		if (isset($this->request->post['show'])) {
+			$this->data['show'] = $this->request->post['show'];
+		} elseif (!empty($news_group_info)) {
+			$this->data['show'] = $news_group_info['show'];
+		} else {
+			$this->data['show'] = '';
 		}
 
 		if (isset($this->request->post['sort_order'])) {
@@ -356,11 +368,11 @@ class ControllerExtensionNewsGroup extends Controller {
       		$this->error['warning'] = $this->language->get('error_permission');
     	}
 	
-    	foreach ($this->request->post['news_group_description'] as $language_id => $value) {
-      		if ((utf8_strlen($value['name']) < 3) || (utf8_strlen($value['name']) > 64)) {
-        		$this->error['name'][$language_id] = $this->language->get('error_name');
-      		}
-    	}
+    	
+  		if ((utf8_strlen($this->request->post['name']) < 3) || (utf8_strlen($this->request->post['name']) > 64)) {
+    		$this->error['name'] = $this->language->get('error_name');
+  		}
+    	
 		
 		if (!$this->error) {
 	  		return true;
@@ -374,16 +386,6 @@ class ControllerExtensionNewsGroup extends Controller {
       		$this->error['warning'] = $this->language->get('error_permission');
     	}
 		
-		$this->load->model('extension/news');
-		
-		foreach ($this->request->post['selected'] as $news_group_id) {
-			$news_total = $this->model_catalog_news->getTotalNewssByNewsGroupId($news_group_id);
-
-			if ($news_total) {
-				$this->error['warning'] = sprintf($this->language->get('error_news'), $news_total);
-			}
-	  	}
-		
 		if (!$this->error) { 
 	  		return true;
 		} else {
@@ -391,4 +393,3 @@ class ControllerExtensionNewsGroup extends Controller {
 		}
   	}	  
 }
-?>

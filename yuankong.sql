@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.1
+-- version 4.3.12
 -- http://www.phpmyadmin.net
 --
--- 主机: localhost
--- 生成日期: 2015 年 06 月 08 日 14:30
--- 服务器版本: 5.5.24-log
--- PHP 版本: 5.4.3
+-- Host: localhost
+-- Generation Time: 2015-06-09 06:57:32
+-- 服务器版本： 5.5.24-log
+-- PHP Version: 5.4.3
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- 数据库: `yuankong`
+-- Database: `yuankong`
 --
 
 -- --------------------------------------------------------
@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `yk_address` (
-  `address_id` int(11) NOT NULL AUTO_INCREMENT,
+  `address_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `firstname` varchar(32) NOT NULL,
   `lastname` varchar(32) NOT NULL,
@@ -39,10 +39,8 @@ CREATE TABLE IF NOT EXISTS `yk_address` (
   `city` varchar(128) NOT NULL,
   `postcode` varchar(10) NOT NULL,
   `country_id` int(11) NOT NULL DEFAULT '0',
-  `zone_id` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`address_id`),
-  KEY `customer_id` (`customer_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `zone_id` int(11) NOT NULL DEFAULT '0'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -51,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `yk_address` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_affiliate` (
-  `affiliate_id` int(11) NOT NULL AUTO_INCREMENT,
+  `affiliate_id` int(11) NOT NULL,
   `firstname` varchar(32) NOT NULL,
   `lastname` varchar(32) NOT NULL,
   `email` varchar(96) NOT NULL,
@@ -81,9 +79,8 @@ CREATE TABLE IF NOT EXISTS `yk_affiliate` (
   `ip` varchar(40) NOT NULL,
   `status` tinyint(1) NOT NULL,
   `approved` tinyint(1) NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`affiliate_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `date_added` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -92,14 +89,13 @@ CREATE TABLE IF NOT EXISTS `yk_affiliate` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_affiliate_transaction` (
-  `affiliate_transaction_id` int(11) NOT NULL AUTO_INCREMENT,
+  `affiliate_transaction_id` int(11) NOT NULL,
   `affiliate_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `description` text NOT NULL,
   `amount` decimal(15,4) NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`affiliate_transaction_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `date_added` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -108,11 +104,10 @@ CREATE TABLE IF NOT EXISTS `yk_affiliate_transaction` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_attribute` (
-  `attribute_id` int(11) NOT NULL AUTO_INCREMENT,
+  `attribute_id` int(11) NOT NULL,
   `attribute_group_id` int(11) NOT NULL,
-  `sort_order` int(3) NOT NULL,
-  PRIMARY KEY (`attribute_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+  `sort_order` int(3) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_attribute`
@@ -140,8 +135,7 @@ INSERT INTO `yk_attribute` (`attribute_id`, `attribute_group_id`, `sort_order`) 
 CREATE TABLE IF NOT EXISTS `yk_attribute_description` (
   `attribute_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `name` varchar(64) NOT NULL,
-  PRIMARY KEY (`attribute_id`,`language_id`)
+  `name` varchar(64) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -164,36 +158,13 @@ INSERT INTO `yk_attribute_description` (`attribute_id`, `language_id`, `name`) V
 -- --------------------------------------------------------
 
 --
--- 表的结构 `yk_attribute_group`
---
-
-CREATE TABLE IF NOT EXISTS `yk_attribute_group` (
-  `attribute_group_id` int(11) NOT NULL AUTO_INCREMENT,
-  `sort_order` int(3) NOT NULL,
-  PRIMARY KEY (`attribute_group_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
-
---
--- 转存表中的数据 `yk_attribute_group`
---
-
-INSERT INTO `yk_attribute_group` (`attribute_group_id`, `sort_order`) VALUES
-(3, 2),
-(4, 1),
-(5, 3),
-(6, 4);
-
--- --------------------------------------------------------
-
---
 -- 表的结构 `yk_attribute_group_description`
 --
 
 CREATE TABLE IF NOT EXISTS `yk_attribute_group_description` (
   `attribute_group_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `name` varchar(64) NOT NULL,
-  PRIMARY KEY (`attribute_group_id`,`language_id`)
+  `name` varchar(64) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -213,11 +184,10 @@ INSERT INTO `yk_attribute_group_description` (`attribute_group_id`, `language_id
 --
 
 CREATE TABLE IF NOT EXISTS `yk_banner` (
-  `banner_id` int(11) NOT NULL AUTO_INCREMENT,
+  `banner_id` int(11) NOT NULL,
   `name` varchar(64) NOT NULL,
-  `status` tinyint(1) NOT NULL,
-  PRIMARY KEY (`banner_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+  `status` tinyint(1) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_banner`
@@ -235,12 +205,11 @@ INSERT INTO `yk_banner` (`banner_id`, `name`, `status`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `yk_banner_image` (
-  `banner_image_id` int(11) NOT NULL AUTO_INCREMENT,
+  `banner_image_id` int(11) NOT NULL,
   `banner_id` int(11) NOT NULL,
   `link` varchar(255) NOT NULL,
-  `image` varchar(255) NOT NULL,
-  PRIMARY KEY (`banner_image_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=78 ;
+  `image` varchar(255) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=78 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_banner_image`
@@ -266,8 +235,7 @@ CREATE TABLE IF NOT EXISTS `yk_banner_image_description` (
   `banner_image_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `banner_id` int(11) NOT NULL,
-  `title` varchar(64) NOT NULL,
-  PRIMARY KEY (`banner_image_id`,`language_id`)
+  `title` varchar(64) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -291,7 +259,7 @@ INSERT INTO `yk_banner_image_description` (`banner_image_id`, `language_id`, `ba
 --
 
 CREATE TABLE IF NOT EXISTS `yk_category` (
-  `category_id` int(11) NOT NULL AUTO_INCREMENT,
+  `category_id` int(11) NOT NULL,
   `image` varchar(255) DEFAULT NULL,
   `parent_id` int(11) NOT NULL DEFAULT '0',
   `top` tinyint(1) NOT NULL,
@@ -299,9 +267,8 @@ CREATE TABLE IF NOT EXISTS `yk_category` (
   `sort_order` int(3) NOT NULL DEFAULT '0',
   `status` tinyint(1) NOT NULL,
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`category_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=59 ;
+  `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=MyISAM AUTO_INCREMENT=59 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_category`
@@ -359,9 +326,7 @@ CREATE TABLE IF NOT EXISTS `yk_category_description` (
   `name` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `meta_description` varchar(255) NOT NULL,
-  `meta_keyword` varchar(255) NOT NULL,
-  PRIMARY KEY (`category_id`,`language_id`),
-  KEY `name` (`name`)
+  `meta_keyword` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -416,8 +381,7 @@ INSERT INTO `yk_category_description` (`category_id`, `language_id`, `name`, `de
 
 CREATE TABLE IF NOT EXISTS `yk_category_filter` (
   `category_id` int(11) NOT NULL,
-  `filter_id` int(11) NOT NULL,
-  PRIMARY KEY (`category_id`,`filter_id`)
+  `filter_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -429,8 +393,7 @@ CREATE TABLE IF NOT EXISTS `yk_category_filter` (
 CREATE TABLE IF NOT EXISTS `yk_category_path` (
   `category_id` int(11) NOT NULL,
   `path_id` int(11) NOT NULL,
-  `level` int(11) NOT NULL,
-  PRIMARY KEY (`category_id`,`path_id`)
+  `level` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -519,8 +482,7 @@ INSERT INTO `yk_category_path` (`category_id`, `path_id`, `level`) VALUES
 CREATE TABLE IF NOT EXISTS `yk_category_to_layout` (
   `category_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
-  `layout_id` int(11) NOT NULL,
-  PRIMARY KEY (`category_id`,`store_id`)
+  `layout_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -531,8 +493,7 @@ CREATE TABLE IF NOT EXISTS `yk_category_to_layout` (
 
 CREATE TABLE IF NOT EXISTS `yk_category_to_store` (
   `category_id` int(11) NOT NULL,
-  `store_id` int(11) NOT NULL,
-  PRIMARY KEY (`category_id`,`store_id`)
+  `store_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -586,15 +547,14 @@ INSERT INTO `yk_category_to_store` (`category_id`, `store_id`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `yk_country` (
-  `country_id` int(11) NOT NULL AUTO_INCREMENT,
+  `country_id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL,
   `iso_code_2` varchar(2) NOT NULL,
   `iso_code_3` varchar(3) NOT NULL,
   `address_format` text NOT NULL,
   `postcode_required` tinyint(1) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`country_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=252 ;
+  `status` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=MyISAM AUTO_INCREMENT=252 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_country`
@@ -858,7 +818,7 @@ INSERT INTO `yk_country` (`country_id`, `name`, `iso_code_2`, `iso_code_3`, `add
 --
 
 CREATE TABLE IF NOT EXISTS `yk_coupon` (
-  `coupon_id` int(11) NOT NULL AUTO_INCREMENT,
+  `coupon_id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL,
   `code` varchar(10) NOT NULL,
   `type` char(1) NOT NULL,
@@ -871,9 +831,8 @@ CREATE TABLE IF NOT EXISTS `yk_coupon` (
   `uses_total` int(11) NOT NULL,
   `uses_customer` varchar(11) NOT NULL,
   `status` tinyint(1) NOT NULL,
-  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`coupon_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_coupon`
@@ -892,8 +851,7 @@ INSERT INTO `yk_coupon` (`coupon_id`, `name`, `code`, `type`, `discount`, `logge
 
 CREATE TABLE IF NOT EXISTS `yk_coupon_category` (
   `coupon_id` int(11) NOT NULL,
-  `category_id` int(11) NOT NULL,
-  PRIMARY KEY (`coupon_id`,`category_id`)
+  `category_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -903,14 +861,13 @@ CREATE TABLE IF NOT EXISTS `yk_coupon_category` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_coupon_history` (
-  `coupon_history_id` int(11) NOT NULL AUTO_INCREMENT,
+  `coupon_history_id` int(11) NOT NULL,
   `coupon_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `amount` decimal(15,4) NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`coupon_history_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `date_added` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -919,11 +876,10 @@ CREATE TABLE IF NOT EXISTS `yk_coupon_history` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_coupon_product` (
-  `coupon_product_id` int(11) NOT NULL AUTO_INCREMENT,
+  `coupon_product_id` int(11) NOT NULL,
   `coupon_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  PRIMARY KEY (`coupon_product_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `product_id` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -932,7 +888,7 @@ CREATE TABLE IF NOT EXISTS `yk_coupon_product` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_currency` (
-  `currency_id` int(11) NOT NULL AUTO_INCREMENT,
+  `currency_id` int(11) NOT NULL,
   `title` varchar(32) NOT NULL,
   `code` varchar(3) NOT NULL,
   `symbol_left` varchar(12) NOT NULL,
@@ -940,9 +896,8 @@ CREATE TABLE IF NOT EXISTS `yk_currency` (
   `decimal_place` char(1) NOT NULL,
   `value` float(15,8) NOT NULL,
   `status` tinyint(1) NOT NULL,
-  `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`currency_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+  `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_currency`
@@ -958,7 +913,7 @@ INSERT INTO `yk_currency` (`currency_id`, `title`, `code`, `symbol_left`, `symbo
 --
 
 CREATE TABLE IF NOT EXISTS `yk_customer` (
-  `customer_id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL DEFAULT '0',
   `firstname` varchar(32) NOT NULL,
   `lastname` varchar(32) NOT NULL,
@@ -976,9 +931,8 @@ CREATE TABLE IF NOT EXISTS `yk_customer` (
   `status` tinyint(1) NOT NULL,
   `approved` tinyint(1) NOT NULL,
   `token` varchar(255) NOT NULL,
-  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`customer_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -987,11 +941,9 @@ CREATE TABLE IF NOT EXISTS `yk_customer` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_customer_ban_ip` (
-  `customer_ban_ip_id` int(11) NOT NULL AUTO_INCREMENT,
-  `ip` varchar(40) NOT NULL,
-  PRIMARY KEY (`customer_ban_ip_id`),
-  KEY `ip` (`ip`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `customer_ban_ip_id` int(11) NOT NULL,
+  `ip` varchar(40) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1005,8 +957,7 @@ CREATE TABLE IF NOT EXISTS `yk_customer_field` (
   `custom_field_value_id` int(11) NOT NULL,
   `name` int(128) NOT NULL,
   `value` text NOT NULL,
-  `sort_order` int(3) NOT NULL,
-  PRIMARY KEY (`customer_id`,`custom_field_id`,`custom_field_value_id`)
+  `sort_order` int(3) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1016,15 +967,14 @@ CREATE TABLE IF NOT EXISTS `yk_customer_field` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_customer_group` (
-  `customer_group_id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_group_id` int(11) NOT NULL,
   `approval` int(1) NOT NULL,
   `company_id_display` int(1) NOT NULL,
   `company_id_required` int(1) NOT NULL,
   `tax_id_display` int(1) NOT NULL,
   `tax_id_required` int(1) NOT NULL,
-  `sort_order` int(3) NOT NULL,
-  PRIMARY KEY (`customer_group_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  `sort_order` int(3) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_customer_group`
@@ -1043,8 +993,7 @@ CREATE TABLE IF NOT EXISTS `yk_customer_group_description` (
   `customer_group_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `name` varchar(32) NOT NULL,
-  `description` text NOT NULL,
-  PRIMARY KEY (`customer_group_id`,`language_id`)
+  `description` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -1061,12 +1010,11 @@ INSERT INTO `yk_customer_group_description` (`customer_group_id`, `language_id`,
 --
 
 CREATE TABLE IF NOT EXISTS `yk_customer_history` (
-  `customer_history_id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_history_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `comment` text NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`customer_history_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `date_added` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1075,13 +1023,11 @@ CREATE TABLE IF NOT EXISTS `yk_customer_history` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_customer_ip` (
-  `customer_ip_id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_ip_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `ip` varchar(40) NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`customer_ip_id`),
-  KEY `ip` (`ip`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `date_added` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1094,8 +1040,7 @@ CREATE TABLE IF NOT EXISTS `yk_customer_online` (
   `customer_id` int(11) NOT NULL,
   `url` text NOT NULL,
   `referer` text NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`ip`)
+  `date_added` datetime NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1105,14 +1050,13 @@ CREATE TABLE IF NOT EXISTS `yk_customer_online` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_customer_reward` (
-  `customer_reward_id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_reward_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL DEFAULT '0',
   `order_id` int(11) NOT NULL DEFAULT '0',
   `description` text NOT NULL,
   `points` int(8) NOT NULL DEFAULT '0',
-  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`customer_reward_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1121,14 +1065,13 @@ CREATE TABLE IF NOT EXISTS `yk_customer_reward` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_customer_transaction` (
-  `customer_transaction_id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_transaction_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `description` text NOT NULL,
   `amount` decimal(15,4) NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`customer_transaction_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `date_added` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1137,15 +1080,14 @@ CREATE TABLE IF NOT EXISTS `yk_customer_transaction` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_custom_field` (
-  `custom_field_id` int(11) NOT NULL AUTO_INCREMENT,
+  `custom_field_id` int(11) NOT NULL,
   `type` varchar(32) NOT NULL,
   `value` text NOT NULL,
   `required` tinyint(1) NOT NULL,
   `location` varchar(32) NOT NULL,
   `position` int(3) NOT NULL,
-  `sort_order` int(3) NOT NULL,
-  PRIMARY KEY (`custom_field_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `sort_order` int(3) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1156,8 +1098,7 @@ CREATE TABLE IF NOT EXISTS `yk_custom_field` (
 CREATE TABLE IF NOT EXISTS `yk_custom_field_description` (
   `custom_field_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `name` varchar(128) NOT NULL,
-  PRIMARY KEY (`custom_field_id`,`language_id`)
+  `name` varchar(128) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1168,8 +1109,7 @@ CREATE TABLE IF NOT EXISTS `yk_custom_field_description` (
 
 CREATE TABLE IF NOT EXISTS `yk_custom_field_to_customer_group` (
   `custom_field_id` int(11) NOT NULL,
-  `customer_group_id` int(11) NOT NULL,
-  PRIMARY KEY (`custom_field_id`,`customer_group_id`)
+  `customer_group_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1179,11 +1119,10 @@ CREATE TABLE IF NOT EXISTS `yk_custom_field_to_customer_group` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_custom_field_value` (
-  `custom_field_value_id` int(11) NOT NULL AUTO_INCREMENT,
+  `custom_field_value_id` int(11) NOT NULL,
   `custom_field_id` int(11) NOT NULL,
-  `sort_order` int(3) NOT NULL,
-  PRIMARY KEY (`custom_field_value_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `sort_order` int(3) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1195,8 +1134,7 @@ CREATE TABLE IF NOT EXISTS `yk_custom_field_value_description` (
   `custom_field_value_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `custom_field_id` int(11) NOT NULL,
-  `name` varchar(128) NOT NULL,
-  PRIMARY KEY (`custom_field_value_id`,`language_id`)
+  `name` varchar(128) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1206,13 +1144,12 @@ CREATE TABLE IF NOT EXISTS `yk_custom_field_value_description` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_download` (
-  `download_id` int(11) NOT NULL AUTO_INCREMENT,
+  `download_id` int(11) NOT NULL,
   `filename` varchar(128) NOT NULL,
   `mask` varchar(128) NOT NULL,
   `remaining` int(11) NOT NULL DEFAULT '0',
-  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`download_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1223,8 +1160,7 @@ CREATE TABLE IF NOT EXISTS `yk_download` (
 CREATE TABLE IF NOT EXISTS `yk_download_description` (
   `download_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `name` varchar(64) NOT NULL,
-  PRIMARY KEY (`download_id`,`language_id`)
+  `name` varchar(64) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1234,11 +1170,10 @@ CREATE TABLE IF NOT EXISTS `yk_download_description` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_extension` (
-  `extension_id` int(11) NOT NULL AUTO_INCREMENT,
+  `extension_id` int(11) NOT NULL,
   `type` varchar(32) NOT NULL,
-  `code` varchar(32) NOT NULL,
-  PRIMARY KEY (`extension_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=430 ;
+  `code` varchar(32) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=430 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_extension`
@@ -1274,11 +1209,10 @@ INSERT INTO `yk_extension` (`extension_id`, `type`, `code`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `yk_filter` (
-  `filter_id` int(11) NOT NULL AUTO_INCREMENT,
+  `filter_id` int(11) NOT NULL,
   `filter_group_id` int(11) NOT NULL,
-  `sort_order` int(3) NOT NULL,
-  PRIMARY KEY (`filter_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `sort_order` int(3) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1290,8 +1224,7 @@ CREATE TABLE IF NOT EXISTS `yk_filter_description` (
   `filter_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `filter_group_id` int(11) NOT NULL,
-  `name` varchar(64) NOT NULL,
-  PRIMARY KEY (`filter_id`,`language_id`)
+  `name` varchar(64) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1301,10 +1234,9 @@ CREATE TABLE IF NOT EXISTS `yk_filter_description` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_filter_group` (
-  `filter_group_id` int(11) NOT NULL AUTO_INCREMENT,
-  `sort_order` int(3) NOT NULL,
-  PRIMARY KEY (`filter_group_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `filter_group_id` int(11) NOT NULL,
+  `sort_order` int(3) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1315,8 +1247,7 @@ CREATE TABLE IF NOT EXISTS `yk_filter_group` (
 CREATE TABLE IF NOT EXISTS `yk_filter_group_description` (
   `filter_group_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `name` varchar(64) NOT NULL,
-  PRIMARY KEY (`filter_group_id`,`language_id`)
+  `name` varchar(64) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1326,13 +1257,12 @@ CREATE TABLE IF NOT EXISTS `yk_filter_group_description` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_geo_zone` (
-  `geo_zone_id` int(11) NOT NULL AUTO_INCREMENT,
+  `geo_zone_id` int(11) NOT NULL,
   `name` varchar(32) NOT NULL,
   `description` varchar(255) NOT NULL,
   `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`geo_zone_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_geo_zone`
@@ -1349,7 +1279,8 @@ INSERT INTO `yk_geo_zone` (`geo_zone_id`, `name`, `description`, `date_modified`
 --
 
 CREATE TABLE IF NOT EXISTS `yk_help` (
-  `help_id` int(11) NOT NULL AUTO_INCREMENT,
+  `help_id` int(11) NOT NULL,
+  `group_id` smallint(6) NOT NULL DEFAULT '0',
   `account` varchar(128) NOT NULL,
   `telephone` varchar(16) NOT NULL,
   `text` text,
@@ -1359,17 +1290,39 @@ CREATE TABLE IF NOT EXISTS `yk_help` (
   `reply` text,
   `user_id` int(11) NOT NULL DEFAULT '0',
   `date_replied` datetime DEFAULT NULL,
-  `date_added` datetime DEFAULT NULL,
-  PRIMARY KEY (`help_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+  `date_added` datetime DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_help`
 --
 
-INSERT INTO `yk_help` (`help_id`, `account`, `telephone`, `text`, `status`, `is_top`, `sort_order`, `reply`, `user_id`, `date_replied`, `date_added`) VALUES
-(1, 'asdsad', '12312312', 'asdsadasdasdas', 1, 0, 0, 'asdsadasdsa', 1, '2015-05-25 08:29:28', '2015-05-25 05:16:00'),
-(2, 'asdsafafasdasd', '12321321312', 'adasdasdsadassa', 1, 0, 0, NULL, 0, NULL, '2015-05-25 07:37:26');
+INSERT INTO `yk_help` (`help_id`, `group_id`, `account`, `telephone`, `text`, `status`, `is_top`, `sort_order`, `reply`, `user_id`, `date_replied`, `date_added`) VALUES
+(1, 0, 'asdsad', '12312312', 'asdsadasdasdas', 1, 0, 0, 'asdsadasdsa', 1, '2015-05-25 08:29:28', '2015-05-25 05:16:00'),
+(2, 0, 'asdsafafasdasd', '12321321312', 'adasdasdsadassa', 1, 0, 0, NULL, 0, NULL, '2015-05-25 07:37:26');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `yk_help_group`
+--
+
+CREATE TABLE IF NOT EXISTS `yk_help_group` (
+  `group_id` int(11) NOT NULL,
+  `name` varchar(128) DEFAULT NULL,
+  `show` tinyint(4) NOT NULL DEFAULT '0',
+  `sort_order` int(3) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `yk_help_group`
+--
+
+INSERT INTO `yk_help_group` (`group_id`, `name`, `show`, `sort_order`) VALUES
+(3, NULL, 0, 2),
+(4, NULL, 0, 1),
+(5, NULL, 0, 3),
+(6, NULL, 0, 4);
 
 -- --------------------------------------------------------
 
@@ -1378,12 +1331,11 @@ INSERT INTO `yk_help` (`help_id`, `account`, `telephone`, `text`, `status`, `is_
 --
 
 CREATE TABLE IF NOT EXISTS `yk_information` (
-  `information_id` int(11) NOT NULL AUTO_INCREMENT,
+  `information_id` int(11) NOT NULL,
   `bottom` int(1) NOT NULL DEFAULT '0',
   `sort_order` int(3) NOT NULL DEFAULT '0',
-  `status` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`information_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+  `status` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_information`
@@ -1405,8 +1357,7 @@ CREATE TABLE IF NOT EXISTS `yk_information_description` (
   `information_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `title` varchar(64) NOT NULL,
-  `description` text NOT NULL,
-  PRIMARY KEY (`information_id`,`language_id`)
+  `description` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -1428,8 +1379,7 @@ INSERT INTO `yk_information_description` (`information_id`, `language_id`, `titl
 CREATE TABLE IF NOT EXISTS `yk_information_to_layout` (
   `information_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
-  `layout_id` int(11) NOT NULL,
-  PRIMARY KEY (`information_id`,`store_id`)
+  `layout_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1440,8 +1390,7 @@ CREATE TABLE IF NOT EXISTS `yk_information_to_layout` (
 
 CREATE TABLE IF NOT EXISTS `yk_information_to_store` (
   `information_id` int(11) NOT NULL,
-  `store_id` int(11) NOT NULL,
-  PRIMARY KEY (`information_id`,`store_id`)
+  `store_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -1461,7 +1410,7 @@ INSERT INTO `yk_information_to_store` (`information_id`, `store_id`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `yk_language` (
-  `language_id` int(11) NOT NULL AUTO_INCREMENT,
+  `language_id` int(11) NOT NULL,
   `name` varchar(32) NOT NULL,
   `code` varchar(5) NOT NULL,
   `locale` varchar(255) NOT NULL,
@@ -1469,10 +1418,8 @@ CREATE TABLE IF NOT EXISTS `yk_language` (
   `directory` varchar(32) NOT NULL,
   `filename` varchar(64) NOT NULL,
   `sort_order` int(3) NOT NULL DEFAULT '0',
-  `status` tinyint(1) NOT NULL,
-  PRIMARY KEY (`language_id`),
-  KEY `name` (`name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+  `status` tinyint(1) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_language`
@@ -1488,10 +1435,9 @@ INSERT INTO `yk_language` (`language_id`, `name`, `code`, `locale`, `image`, `di
 --
 
 CREATE TABLE IF NOT EXISTS `yk_layout` (
-  `layout_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(64) NOT NULL,
-  PRIMARY KEY (`layout_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+  `layout_id` int(11) NOT NULL,
+  `name` varchar(64) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_layout`
@@ -1517,12 +1463,11 @@ INSERT INTO `yk_layout` (`layout_id`, `name`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `yk_layout_route` (
-  `layout_route_id` int(11) NOT NULL AUTO_INCREMENT,
+  `layout_route_id` int(11) NOT NULL,
   `layout_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
-  `route` varchar(255) NOT NULL,
-  PRIMARY KEY (`layout_route_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=33 ;
+  `route` varchar(255) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_layout_route`
@@ -1547,10 +1492,9 @@ INSERT INTO `yk_layout_route` (`layout_route_id`, `layout_id`, `store_id`, `rout
 --
 
 CREATE TABLE IF NOT EXISTS `yk_length_class` (
-  `length_class_id` int(11) NOT NULL AUTO_INCREMENT,
-  `value` decimal(15,8) NOT NULL,
-  PRIMARY KEY (`length_class_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+  `length_class_id` int(11) NOT NULL,
+  `value` decimal(15,8) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_length_class`
@@ -1568,12 +1512,11 @@ INSERT INTO `yk_length_class` (`length_class_id`, `value`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `yk_length_class_description` (
-  `length_class_id` int(11) NOT NULL AUTO_INCREMENT,
+  `length_class_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `title` varchar(32) NOT NULL,
-  `unit` varchar(4) NOT NULL,
-  PRIMARY KEY (`length_class_id`,`language_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+  `unit` varchar(4) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_length_class_description`
@@ -1591,12 +1534,11 @@ INSERT INTO `yk_length_class_description` (`length_class_id`, `language_id`, `ti
 --
 
 CREATE TABLE IF NOT EXISTS `yk_manufacturer` (
-  `manufacturer_id` int(11) NOT NULL AUTO_INCREMENT,
+  `manufacturer_id` int(11) NOT NULL,
   `name` varchar(64) NOT NULL,
   `image` varchar(255) DEFAULT NULL,
-  `sort_order` int(3) NOT NULL,
-  PRIMARY KEY (`manufacturer_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+  `sort_order` int(3) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_manufacturer`
@@ -1618,8 +1560,7 @@ INSERT INTO `yk_manufacturer` (`manufacturer_id`, `name`, `image`, `sort_order`)
 
 CREATE TABLE IF NOT EXISTS `yk_manufacturer_to_store` (
   `manufacturer_id` int(11) NOT NULL,
-  `store_id` int(11) NOT NULL,
-  PRIMARY KEY (`manufacturer_id`,`store_id`)
+  `store_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -1641,24 +1582,8 @@ INSERT INTO `yk_manufacturer_to_store` (`manufacturer_id`, `store_id`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `yk_news` (
-  `news_id` int(11) NOT NULL AUTO_INCREMENT,
-  `group_id` int(11) NOT NULL DEFAULT '0',
-  `from` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `date_added` datetime NOT NULL,
-  `status` tinyint(1) NOT NULL,
-  `sort_order` smallint(6) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`news_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- 表的结构 `yk_newsbk`
---
-
-CREATE TABLE IF NOT EXISTS `yk_newsbk` (
-  `news_id` int(11) NOT NULL AUTO_INCREMENT,
-  `group` char(4) DEFAULT NULL,
+  `news_id` int(11) NOT NULL,
+  `group_id` smallint(4) DEFAULT '0',
   `user_id` int(11) DEFAULT NULL,
   `title` varchar(128) DEFAULT NULL,
   `subtitle` varchar(256) NOT NULL,
@@ -1667,33 +1592,16 @@ CREATE TABLE IF NOT EXISTS `yk_newsbk` (
   `is_top` tinyint(4) NOT NULL DEFAULT '0',
   `from` varchar(512) DEFAULT NULL,
   `sort_order` smallint(6) NOT NULL DEFAULT '0',
-  `date_added` datetime DEFAULT NULL,
-  PRIMARY KEY (`news_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+  `date_added` datetime DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
--- 转存表中的数据 `yk_newsbk`
+-- 转存表中的数据 `yk_news`
 --
 
-INSERT INTO `yk_newsbk` (`news_id`, `group`, `user_id`, `title`, `subtitle`, `text`, `status`, `is_top`, `from`, `sort_order`, `date_added`) VALUES
-(2, 'xffg', 1, '新闻测试数据标题', '新闻测试数据副本标题', '&lt;span style=&quot;font-family:Tahoma, Helvetica, Arial, 宋体, sans-serif;font-size:14px;line-height:30px;&quot;&gt;2015年5月初，美国数字地球公司拍摄的卫星照片显示越南非法建岛行为，在非法侵占我南沙岛礁上大规模填海造地。越南非法建岛激起了中方愤慨，我外交部发言人洪磊表示，中国要求有关国家立即停止一切侵犯中国主权和权益的言行。洪磊还揭露，越南非法建岛，共计侵占20多个岛礁，填海造地的同时还设立了机场、港池，甚至还有导弹阵地，中国外交部严厉指责越南非法建岛行为。&lt;/span&gt;', 1, 0, '腾讯新闻', 0, '2015-05-24 21:37:30'),
-(3, 'glpx', 1, '最新款式灭火器', '5.1日家用汽载灭火器全场5折', '&lt;span style=&quot;color:#CC0000;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;&quot;&gt;齐齐哈尔&lt;/span&gt;&lt;span style=&quot;color:#333333;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;&quot;&gt;警方与绑架案犯发生激烈&lt;/span&gt;&lt;span style=&quot;color:#CC0000;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;&quot;&gt;枪战&lt;/span&gt;&lt;span style=&quot;color:#333333;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;&quot;&gt;&amp;nbsp;一民警头部中弹&lt;/span&gt;', 1, 0, '消防e站', 2, '0000-00-00 00:00:00');
-
--- --------------------------------------------------------
-
---
--- 表的结构 `yk_news_description`
---
-
-CREATE TABLE IF NOT EXISTS `yk_news_description` (
-  `news_description_id` int(11) NOT NULL AUTO_INCREMENT,
-  `news_id` int(11) NOT NULL,
-  `language_id` int(11) NOT NULL,
-  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `subtitle` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `description` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`news_description_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+INSERT INTO `yk_news` (`news_id`, `group_id`, `user_id`, `title`, `subtitle`, `text`, `status`, `is_top`, `from`, `sort_order`, `date_added`) VALUES
+(2, 0, 1, '新闻测试数据标题', '新闻测试数据副本标题', '&lt;span style=&quot;font-family:Tahoma, Helvetica, Arial, 宋体, sans-serif;font-size:14px;line-height:30px;&quot;&gt;2015年5月初，美国数字地球公司拍摄的卫星照片显示越南非法建岛行为，在非法侵占我南沙岛礁上大规模填海造地。越南非法建岛激起了中方愤慨，我外交部发言人洪磊表示，中国要求有关国家立即停止一切侵犯中国主权和权益的言行。洪磊还揭露，越南非法建岛，共计侵占20多个岛礁，填海造地的同时还设立了机场、港池，甚至还有导弹阵地，中国外交部严厉指责越南非法建岛行为。&lt;/span&gt;', 1, 0, '腾讯新闻', 0, '2015-05-24 21:37:30'),
+(3, 0, 1, '最新款式灭火器', '5.1日家用汽载灭火器全场5折', '&lt;span style=&quot;color:#CC0000;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;&quot;&gt;齐齐哈尔&lt;/span&gt;&lt;span style=&quot;color:#333333;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;&quot;&gt;警方与绑架案犯发生激烈&lt;/span&gt;&lt;span style=&quot;color:#CC0000;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;&quot;&gt;枪战&lt;/span&gt;&lt;span style=&quot;color:#333333;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;&quot;&gt;&amp;nbsp;一民警头部中弹&lt;/span&gt;', 1, 0, '消防e站', 2, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -1702,43 +1610,22 @@ CREATE TABLE IF NOT EXISTS `yk_news_description` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_news_group` (
-  `news_group_id` int(11) NOT NULL AUTO_INCREMENT,
-  `sort_order` int(3) NOT NULL,
-  PRIMARY KEY (`news_group_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+  `group_id` int(11) NOT NULL,
+  `name` varchar(128) DEFAULT NULL,
+  `show` tinyint(4) NOT NULL DEFAULT '0',
+  `sort_order` int(3) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_news_group`
 --
 
-INSERT INTO `yk_news_group` (`news_group_id`, `sort_order`) VALUES
-(3, 2),
-(4, 1),
-(5, 3),
-(6, 4);
-
--- --------------------------------------------------------
-
---
--- 表的结构 `yk_news_group_description`
---
-
-CREATE TABLE IF NOT EXISTS `yk_news_group_description` (
-  `news_group_id` int(11) NOT NULL,
-  `language_id` int(11) NOT NULL,
-  `name` varchar(64) NOT NULL,
-  PRIMARY KEY (`news_group_id`,`language_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `yk_news_group_description`
---
-
-INSERT INTO `yk_news_group_description` (`news_group_id`, `language_id`, `name`) VALUES
-(3, 2, 'Memory'),
-(4, 2, 'Technical'),
-(5, 2, 'Motherboard'),
-(6, 2, 'Processor');
+INSERT INTO `yk_news_group` (`group_id`, `name`, `show`, `sort_order`) VALUES
+(1, '消防法规', 0, 1),
+(2, '消防新闻', 0, 2),
+(3, '官方公告', 0, 3),
+(4, '消防知识', 0, 4),
+(7, '管理培训', 0, 5);
 
 -- --------------------------------------------------------
 
@@ -1747,11 +1634,10 @@ INSERT INTO `yk_news_group_description` (`news_group_id`, `language_id`, `name`)
 --
 
 CREATE TABLE IF NOT EXISTS `yk_option` (
-  `option_id` int(11) NOT NULL AUTO_INCREMENT,
+  `option_id` int(11) NOT NULL,
   `type` varchar(32) NOT NULL,
-  `sort_order` int(3) NOT NULL,
-  PRIMARY KEY (`option_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+  `sort_order` int(3) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_option`
@@ -1779,8 +1665,7 @@ INSERT INTO `yk_option` (`option_id`, `type`, `sort_order`) VALUES
 CREATE TABLE IF NOT EXISTS `yk_option_description` (
   `option_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `name` varchar(128) NOT NULL,
-  PRIMARY KEY (`option_id`,`language_id`)
+  `name` varchar(128) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -1807,12 +1692,11 @@ INSERT INTO `yk_option_description` (`option_id`, `language_id`, `name`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `yk_option_value` (
-  `option_value_id` int(11) NOT NULL AUTO_INCREMENT,
+  `option_value_id` int(11) NOT NULL,
   `option_id` int(11) NOT NULL,
   `image` varchar(255) NOT NULL,
-  `sort_order` int(3) NOT NULL,
-  PRIMARY KEY (`option_value_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=49 ;
+  `sort_order` int(3) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=49 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_option_value`
@@ -1844,8 +1728,7 @@ CREATE TABLE IF NOT EXISTS `yk_option_value_description` (
   `option_value_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `option_id` int(11) NOT NULL,
-  `name` varchar(128) NOT NULL,
-  PRIMARY KEY (`option_value_id`,`language_id`)
+  `name` varchar(128) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -1875,7 +1758,7 @@ INSERT INTO `yk_option_value_description` (`option_value_id`, `language_id`, `op
 --
 
 CREATE TABLE IF NOT EXISTS `yk_order` (
-  `order_id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_id` int(11) NOT NULL,
   `invoice_no` int(11) NOT NULL DEFAULT '0',
   `invoice_prefix` varchar(26) NOT NULL,
   `store_id` int(11) NOT NULL DEFAULT '0',
@@ -1932,9 +1815,8 @@ CREATE TABLE IF NOT EXISTS `yk_order` (
   `user_agent` varchar(255) NOT NULL,
   `accept_language` varchar(255) NOT NULL,
   `date_added` datetime NOT NULL,
-  `date_modified` datetime NOT NULL,
-  PRIMARY KEY (`order_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `date_modified` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1943,15 +1825,14 @@ CREATE TABLE IF NOT EXISTS `yk_order` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_order_download` (
-  `order_download_id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_download_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `order_product_id` int(11) NOT NULL,
   `name` varchar(64) NOT NULL,
   `filename` varchar(128) NOT NULL,
   `mask` varchar(128) NOT NULL,
-  `remaining` int(3) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`order_download_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `remaining` int(3) NOT NULL DEFAULT '0'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1965,8 +1846,7 @@ CREATE TABLE IF NOT EXISTS `yk_order_field` (
   `custom_field_value_id` int(11) NOT NULL,
   `name` int(128) NOT NULL,
   `value` text NOT NULL,
-  `sort_order` int(3) NOT NULL,
-  PRIMARY KEY (`order_id`,`custom_field_id`,`custom_field_value_id`)
+  `sort_order` int(3) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -2028,8 +1908,7 @@ CREATE TABLE IF NOT EXISTS `yk_order_fraud` (
   `queries_remaining` int(11) NOT NULL,
   `maxmind_id` varchar(8) NOT NULL,
   `error` text NOT NULL,
-  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`order_id`)
+  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -2039,14 +1918,13 @@ CREATE TABLE IF NOT EXISTS `yk_order_fraud` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_order_history` (
-  `order_history_id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_history_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `order_status_id` int(5) NOT NULL,
   `notify` tinyint(1) NOT NULL DEFAULT '0',
   `comment` text NOT NULL,
-  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`order_history_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -2055,16 +1933,15 @@ CREATE TABLE IF NOT EXISTS `yk_order_history` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_order_option` (
-  `order_option_id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_option_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `order_product_id` int(11) NOT NULL,
   `product_option_id` int(11) NOT NULL,
   `product_option_value_id` int(11) NOT NULL DEFAULT '0',
   `name` varchar(255) NOT NULL,
   `value` text NOT NULL,
-  `type` varchar(32) NOT NULL,
-  PRIMARY KEY (`order_option_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `type` varchar(32) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -2073,7 +1950,7 @@ CREATE TABLE IF NOT EXISTS `yk_order_option` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_order_product` (
-  `order_product_id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_product_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -2082,9 +1959,8 @@ CREATE TABLE IF NOT EXISTS `yk_order_product` (
   `price` decimal(15,4) NOT NULL DEFAULT '0.0000',
   `total` decimal(15,4) NOT NULL DEFAULT '0.0000',
   `tax` decimal(15,4) NOT NULL DEFAULT '0.0000',
-  `reward` int(8) NOT NULL,
-  PRIMARY KEY (`order_product_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `reward` int(8) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -2093,11 +1969,10 @@ CREATE TABLE IF NOT EXISTS `yk_order_product` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_order_status` (
-  `order_status_id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_status_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `name` varchar(32) NOT NULL,
-  PRIMARY KEY (`order_status_id`,`language_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
+  `name` varchar(32) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_order_status`
@@ -2126,16 +2001,14 @@ INSERT INTO `yk_order_status` (`order_status_id`, `language_id`, `name`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `yk_order_total` (
-  `order_total_id` int(10) NOT NULL AUTO_INCREMENT,
+  `order_total_id` int(10) NOT NULL,
   `order_id` int(11) NOT NULL,
   `code` varchar(32) NOT NULL,
   `title` varchar(255) NOT NULL,
   `text` varchar(255) NOT NULL,
   `value` decimal(15,4) NOT NULL DEFAULT '0.0000',
-  `sort_order` int(3) NOT NULL,
-  PRIMARY KEY (`order_total_id`),
-  KEY `idx_orders_total_orders_id` (`order_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `sort_order` int(3) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -2144,7 +2017,7 @@ CREATE TABLE IF NOT EXISTS `yk_order_total` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_order_voucher` (
-  `order_voucher_id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_voucher_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `voucher_id` int(11) NOT NULL,
   `description` varchar(255) NOT NULL,
@@ -2155,9 +2028,8 @@ CREATE TABLE IF NOT EXISTS `yk_order_voucher` (
   `to_email` varchar(96) NOT NULL,
   `voucher_theme_id` int(11) NOT NULL,
   `message` text NOT NULL,
-  `amount` decimal(15,4) NOT NULL,
-  PRIMARY KEY (`order_voucher_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `amount` decimal(15,4) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -2166,7 +2038,7 @@ CREATE TABLE IF NOT EXISTS `yk_order_voucher` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_product` (
-  `product_id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_id` int(11) NOT NULL,
   `model` varchar(64) NOT NULL,
   `sku` varchar(64) NOT NULL,
   `upc` varchar(12) NOT NULL,
@@ -2196,9 +2068,8 @@ CREATE TABLE IF NOT EXISTS `yk_product` (
   `status` tinyint(1) NOT NULL DEFAULT '0',
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `viewed` int(5) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`product_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=50 ;
+  `viewed` int(5) NOT NULL DEFAULT '0'
+) ENGINE=MyISAM AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_product`
@@ -2235,8 +2106,7 @@ CREATE TABLE IF NOT EXISTS `yk_product_attribute` (
   `product_id` int(11) NOT NULL,
   `attribute_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `text` text NOT NULL,
-  PRIMARY KEY (`product_id`,`attribute_id`,`language_id`)
+  `text` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -2263,9 +2133,7 @@ CREATE TABLE IF NOT EXISTS `yk_product_description` (
   `description` text NOT NULL,
   `meta_description` varchar(255) NOT NULL,
   `meta_keyword` varchar(255) NOT NULL,
-  `tag` text NOT NULL,
-  PRIMARY KEY (`product_id`,`language_id`),
-  KEY `name` (`name`)
+  `tag` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -2300,17 +2168,15 @@ INSERT INTO `yk_product_description` (`product_id`, `language_id`, `name`, `desc
 --
 
 CREATE TABLE IF NOT EXISTS `yk_product_discount` (
-  `product_discount_id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_discount_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `customer_group_id` int(11) NOT NULL,
   `quantity` int(4) NOT NULL DEFAULT '0',
   `priority` int(5) NOT NULL DEFAULT '1',
   `price` decimal(15,4) NOT NULL DEFAULT '0.0000',
   `date_start` date NOT NULL DEFAULT '0000-00-00',
-  `date_end` date NOT NULL DEFAULT '0000-00-00',
-  PRIMARY KEY (`product_discount_id`),
-  KEY `product_id` (`product_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=441 ;
+  `date_end` date NOT NULL DEFAULT '0000-00-00'
+) ENGINE=MyISAM AUTO_INCREMENT=441 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_product_discount`
@@ -2329,8 +2195,7 @@ INSERT INTO `yk_product_discount` (`product_discount_id`, `product_id`, `custome
 
 CREATE TABLE IF NOT EXISTS `yk_product_filter` (
   `product_id` int(11) NOT NULL,
-  `filter_id` int(11) NOT NULL,
-  PRIMARY KEY (`product_id`,`filter_id`)
+  `filter_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -2340,12 +2205,11 @@ CREATE TABLE IF NOT EXISTS `yk_product_filter` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_product_image` (
-  `product_image_id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_image_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `image` varchar(255) DEFAULT NULL,
-  `sort_order` int(3) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`product_image_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2352 ;
+  `sort_order` int(3) NOT NULL DEFAULT '0'
+) ENGINE=MyISAM AUTO_INCREMENT=2352 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_product_image`
@@ -2421,13 +2285,12 @@ INSERT INTO `yk_product_image` (`product_image_id`, `product_id`, `image`, `sort
 --
 
 CREATE TABLE IF NOT EXISTS `yk_product_option` (
-  `product_option_id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_option_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `option_id` int(11) NOT NULL,
   `option_value` text NOT NULL,
-  `required` tinyint(1) NOT NULL,
-  PRIMARY KEY (`product_option_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=227 ;
+  `required` tinyint(1) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=227 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_product_option`
@@ -2454,7 +2317,7 @@ INSERT INTO `yk_product_option` (`product_option_id`, `product_id`, `option_id`,
 --
 
 CREATE TABLE IF NOT EXISTS `yk_product_option_value` (
-  `product_option_value_id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_option_value_id` int(11) NOT NULL,
   `product_option_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `option_id` int(11) NOT NULL,
@@ -2466,9 +2329,8 @@ CREATE TABLE IF NOT EXISTS `yk_product_option_value` (
   `points` int(8) NOT NULL,
   `points_prefix` varchar(1) NOT NULL,
   `weight` decimal(15,8) NOT NULL,
-  `weight_prefix` varchar(1) NOT NULL,
-  PRIMARY KEY (`product_option_value_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
+  `weight_prefix` varchar(1) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_product_option_value`
@@ -2500,8 +2362,7 @@ INSERT INTO `yk_product_option_value` (`product_option_value_id`, `product_optio
 
 CREATE TABLE IF NOT EXISTS `yk_product_related` (
   `product_id` int(11) NOT NULL,
-  `related_id` int(11) NOT NULL,
-  PRIMARY KEY (`product_id`,`related_id`)
+  `related_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -2521,12 +2382,11 @@ INSERT INTO `yk_product_related` (`product_id`, `related_id`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `yk_product_reward` (
-  `product_reward_id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_reward_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL DEFAULT '0',
   `customer_group_id` int(11) NOT NULL DEFAULT '0',
-  `points` int(8) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`product_reward_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=546 ;
+  `points` int(8) NOT NULL DEFAULT '0'
+) ENGINE=MyISAM AUTO_INCREMENT=546 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_product_reward`
@@ -2560,16 +2420,14 @@ INSERT INTO `yk_product_reward` (`product_reward_id`, `product_id`, `customer_gr
 --
 
 CREATE TABLE IF NOT EXISTS `yk_product_special` (
-  `product_special_id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_special_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `customer_group_id` int(11) NOT NULL,
   `priority` int(5) NOT NULL DEFAULT '1',
   `price` decimal(15,4) NOT NULL DEFAULT '0.0000',
   `date_start` date NOT NULL DEFAULT '0000-00-00',
-  `date_end` date NOT NULL DEFAULT '0000-00-00',
-  PRIMARY KEY (`product_special_id`),
-  KEY `product_id` (`product_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=440 ;
+  `date_end` date NOT NULL DEFAULT '0000-00-00'
+) ENGINE=MyISAM AUTO_INCREMENT=440 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_product_special`
@@ -2588,8 +2446,7 @@ INSERT INTO `yk_product_special` (`product_special_id`, `product_id`, `customer_
 
 CREATE TABLE IF NOT EXISTS `yk_product_to_category` (
   `product_id` int(11) NOT NULL,
-  `category_id` int(11) NOT NULL,
-  PRIMARY KEY (`product_id`,`category_id`)
+  `category_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -2636,8 +2493,7 @@ INSERT INTO `yk_product_to_category` (`product_id`, `category_id`) VALUES
 
 CREATE TABLE IF NOT EXISTS `yk_product_to_download` (
   `product_id` int(11) NOT NULL,
-  `download_id` int(11) NOT NULL,
-  PRIMARY KEY (`product_id`,`download_id`)
+  `download_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -2649,8 +2505,7 @@ CREATE TABLE IF NOT EXISTS `yk_product_to_download` (
 CREATE TABLE IF NOT EXISTS `yk_product_to_layout` (
   `product_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
-  `layout_id` int(11) NOT NULL,
-  PRIMARY KEY (`product_id`,`store_id`)
+  `layout_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -2661,8 +2516,7 @@ CREATE TABLE IF NOT EXISTS `yk_product_to_layout` (
 
 CREATE TABLE IF NOT EXISTS `yk_product_to_store` (
   `product_id` int(11) NOT NULL,
-  `store_id` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`product_id`,`store_id`)
+  `store_id` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -2697,7 +2551,7 @@ INSERT INTO `yk_product_to_store` (`product_id`, `store_id`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `yk_project` (
-  `project_id` int(11) NOT NULL AUTO_INCREMENT,
+  `project_id` int(11) NOT NULL,
   `project_sn` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `group` char(4) COLLATE utf8_unicode_ci NOT NULL,
   `account` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
@@ -2705,9 +2559,8 @@ CREATE TABLE IF NOT EXISTS `yk_project` (
   `status` tinyint(4) NOT NULL DEFAULT '1',
   `date_applied` datetime DEFAULT NULL,
   `user_id` int(11) NOT NULL DEFAULT '0',
-  `date_modified` datetime DEFAULT NULL,
-  PRIMARY KEY (`project_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
+  `date_modified` datetime DEFAULT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- 转存表中的数据 `yk_project`
@@ -2729,43 +2582,21 @@ INSERT INTO `yk_project` (`project_id`, `project_sn`, `group`, `account`, `telep
 --
 
 CREATE TABLE IF NOT EXISTS `yk_project_group` (
-  `news_group_id` int(11) NOT NULL AUTO_INCREMENT,
-  `sort_order` int(3) NOT NULL,
-  PRIMARY KEY (`news_group_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+  `group_id` int(11) NOT NULL,
+  `name` varchar(128) DEFAULT NULL,
+  `show` tinyint(4) NOT NULL DEFAULT '0',
+  `sort_order` int(3) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_project_group`
 --
 
-INSERT INTO `yk_project_group` (`news_group_id`, `sort_order`) VALUES
-(3, 2),
-(4, 1),
-(5, 3),
-(6, 4);
-
--- --------------------------------------------------------
-
---
--- 表的结构 `yk_project_group_description`
---
-
-CREATE TABLE IF NOT EXISTS `yk_project_group_description` (
-  `news_group_id` int(11) NOT NULL,
-  `language_id` int(11) NOT NULL,
-  `name` varchar(64) NOT NULL,
-  PRIMARY KEY (`news_group_id`,`language_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `yk_project_group_description`
---
-
-INSERT INTO `yk_project_group_description` (`news_group_id`, `language_id`, `name`) VALUES
-(3, 2, 'Memory'),
-(4, 2, 'Technical'),
-(5, 2, 'Motherboard'),
-(6, 2, 'Processor');
+INSERT INTO `yk_project_group` (`group_id`, `name`, `show`, `sort_order`) VALUES
+(1, '消防设计', 0, 1),
+(2, '消防检测', 0, 2),
+(3, '消防工程', 0, 3),
+(4, '消防维保', 0, 4);
 
 -- --------------------------------------------------------
 
@@ -2774,7 +2605,7 @@ INSERT INTO `yk_project_group_description` (`news_group_id`, `language_id`, `nam
 --
 
 CREATE TABLE IF NOT EXISTS `yk_return` (
-  `return_id` int(11) NOT NULL AUTO_INCREMENT,
+  `return_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
@@ -2792,9 +2623,8 @@ CREATE TABLE IF NOT EXISTS `yk_return` (
   `comment` text,
   `date_ordered` date NOT NULL,
   `date_added` datetime NOT NULL,
-  `date_modified` datetime NOT NULL,
-  PRIMARY KEY (`return_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `date_modified` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -2803,11 +2633,10 @@ CREATE TABLE IF NOT EXISTS `yk_return` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_return_action` (
-  `return_action_id` int(11) NOT NULL AUTO_INCREMENT,
+  `return_action_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL DEFAULT '0',
-  `name` varchar(64) NOT NULL,
-  PRIMARY KEY (`return_action_id`,`language_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+  `name` varchar(64) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_return_action`
@@ -2825,14 +2654,13 @@ INSERT INTO `yk_return_action` (`return_action_id`, `language_id`, `name`) VALUE
 --
 
 CREATE TABLE IF NOT EXISTS `yk_return_history` (
-  `return_history_id` int(11) NOT NULL AUTO_INCREMENT,
+  `return_history_id` int(11) NOT NULL,
   `return_id` int(11) NOT NULL,
   `return_status_id` int(11) NOT NULL,
   `notify` tinyint(1) NOT NULL,
   `comment` text NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`return_history_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `date_added` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -2841,11 +2669,10 @@ CREATE TABLE IF NOT EXISTS `yk_return_history` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_return_reason` (
-  `return_reason_id` int(11) NOT NULL AUTO_INCREMENT,
+  `return_reason_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL DEFAULT '0',
-  `name` varchar(128) NOT NULL,
-  PRIMARY KEY (`return_reason_id`,`language_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+  `name` varchar(128) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_return_reason`
@@ -2865,11 +2692,10 @@ INSERT INTO `yk_return_reason` (`return_reason_id`, `language_id`, `name`) VALUE
 --
 
 CREATE TABLE IF NOT EXISTS `yk_return_status` (
-  `return_status_id` int(11) NOT NULL AUTO_INCREMENT,
+  `return_status_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL DEFAULT '0',
-  `name` varchar(32) NOT NULL,
-  PRIMARY KEY (`return_status_id`,`language_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+  `name` varchar(32) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_return_status`
@@ -2887,7 +2713,7 @@ INSERT INTO `yk_return_status` (`return_status_id`, `language_id`, `name`) VALUE
 --
 
 CREATE TABLE IF NOT EXISTS `yk_review` (
-  `review_id` int(11) NOT NULL AUTO_INCREMENT,
+  `review_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `author` varchar(64) NOT NULL,
@@ -2895,10 +2721,8 @@ CREATE TABLE IF NOT EXISTS `yk_review` (
   `rating` int(1) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0',
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`review_id`),
-  KEY `product_id` (`product_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -2907,14 +2731,13 @@ CREATE TABLE IF NOT EXISTS `yk_review` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_setting` (
-  `setting_id` int(11) NOT NULL AUTO_INCREMENT,
+  `setting_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL DEFAULT '0',
   `group` varchar(32) NOT NULL,
   `key` varchar(64) NOT NULL,
   `value` text NOT NULL,
-  `serialized` tinyint(1) NOT NULL,
-  PRIMARY KEY (`setting_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=443 ;
+  `serialized` tinyint(1) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=443 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_setting`
@@ -3070,11 +2893,10 @@ INSERT INTO `yk_setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `se
 --
 
 CREATE TABLE IF NOT EXISTS `yk_stock_status` (
-  `stock_status_id` int(11) NOT NULL AUTO_INCREMENT,
+  `stock_status_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `name` varchar(32) NOT NULL,
-  PRIMARY KEY (`stock_status_id`,`language_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+  `name` varchar(32) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_stock_status`
@@ -3093,12 +2915,11 @@ INSERT INTO `yk_stock_status` (`stock_status_id`, `language_id`, `name`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `yk_store` (
-  `store_id` int(11) NOT NULL AUTO_INCREMENT,
+  `store_id` int(11) NOT NULL,
   `name` varchar(64) NOT NULL,
   `url` varchar(255) NOT NULL,
-  `ssl` varchar(255) NOT NULL,
-  PRIMARY KEY (`store_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `ssl` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -3107,13 +2928,12 @@ CREATE TABLE IF NOT EXISTS `yk_store` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_tax_class` (
-  `tax_class_id` int(11) NOT NULL AUTO_INCREMENT,
+  `tax_class_id` int(11) NOT NULL,
   `title` varchar(32) NOT NULL,
   `description` varchar(255) NOT NULL,
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`tax_class_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+  `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_tax_class`
@@ -3130,15 +2950,14 @@ INSERT INTO `yk_tax_class` (`tax_class_id`, `title`, `description`, `date_added`
 --
 
 CREATE TABLE IF NOT EXISTS `yk_tax_rate` (
-  `tax_rate_id` int(11) NOT NULL AUTO_INCREMENT,
+  `tax_rate_id` int(11) NOT NULL,
   `geo_zone_id` int(11) NOT NULL DEFAULT '0',
   `name` varchar(32) NOT NULL,
   `rate` decimal(15,4) NOT NULL DEFAULT '0.0000',
   `type` char(1) NOT NULL,
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`tax_rate_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=88 ;
+  `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=MyISAM AUTO_INCREMENT=88 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_tax_rate`
@@ -3156,8 +2975,7 @@ INSERT INTO `yk_tax_rate` (`tax_rate_id`, `geo_zone_id`, `name`, `rate`, `type`,
 
 CREATE TABLE IF NOT EXISTS `yk_tax_rate_to_customer_group` (
   `tax_rate_id` int(11) NOT NULL,
-  `customer_group_id` int(11) NOT NULL,
-  PRIMARY KEY (`tax_rate_id`,`customer_group_id`)
+  `customer_group_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -3175,13 +2993,12 @@ INSERT INTO `yk_tax_rate_to_customer_group` (`tax_rate_id`, `customer_group_id`)
 --
 
 CREATE TABLE IF NOT EXISTS `yk_tax_rule` (
-  `tax_rule_id` int(11) NOT NULL AUTO_INCREMENT,
+  `tax_rule_id` int(11) NOT NULL,
   `tax_class_id` int(11) NOT NULL,
   `tax_rate_id` int(11) NOT NULL,
   `based` varchar(10) NOT NULL,
-  `priority` int(5) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`tax_rule_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=129 ;
+  `priority` int(5) NOT NULL DEFAULT '1'
+) ENGINE=MyISAM AUTO_INCREMENT=129 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_tax_rule`
@@ -3200,11 +3017,10 @@ INSERT INTO `yk_tax_rule` (`tax_rule_id`, `tax_class_id`, `tax_rate_id`, `based`
 --
 
 CREATE TABLE IF NOT EXISTS `yk_url_alias` (
-  `url_alias_id` int(11) NOT NULL AUTO_INCREMENT,
+  `url_alias_id` int(11) NOT NULL,
   `query` varchar(255) NOT NULL,
-  `keyword` varchar(255) NOT NULL,
-  PRIMARY KEY (`url_alias_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=774 ;
+  `keyword` varchar(255) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=774 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_url_alias`
@@ -3228,7 +3044,7 @@ INSERT INTO `yk_url_alias` (`url_alias_id`, `query`, `keyword`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `yk_user` (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
   `user_group_id` int(11) NOT NULL,
   `username` varchar(20) NOT NULL,
   `password` varchar(40) NOT NULL,
@@ -3239,9 +3055,8 @@ CREATE TABLE IF NOT EXISTS `yk_user` (
   `code` varchar(40) NOT NULL,
   `ip` varchar(40) NOT NULL,
   `status` tinyint(1) NOT NULL,
-  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_user`
@@ -3257,11 +3072,10 @@ INSERT INTO `yk_user` (`user_id`, `user_group_id`, `username`, `password`, `salt
 --
 
 CREATE TABLE IF NOT EXISTS `yk_user_group` (
-  `user_group_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_group_id` int(11) NOT NULL,
   `name` varchar(64) NOT NULL,
-  `permission` text NOT NULL,
-  PRIMARY KEY (`user_group_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+  `permission` text NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_user_group`
@@ -3278,7 +3092,7 @@ INSERT INTO `yk_user_group` (`user_group_id`, `name`, `permission`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `yk_voucher` (
-  `voucher_id` int(11) NOT NULL AUTO_INCREMENT,
+  `voucher_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `code` varchar(10) NOT NULL,
   `from_name` varchar(64) NOT NULL,
@@ -3289,9 +3103,8 @@ CREATE TABLE IF NOT EXISTS `yk_voucher` (
   `message` text NOT NULL,
   `amount` decimal(15,4) NOT NULL,
   `status` tinyint(1) NOT NULL,
-  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`voucher_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -3300,13 +3113,12 @@ CREATE TABLE IF NOT EXISTS `yk_voucher` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_voucher_history` (
-  `voucher_history_id` int(11) NOT NULL AUTO_INCREMENT,
+  `voucher_history_id` int(11) NOT NULL,
   `voucher_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `amount` decimal(15,4) NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`voucher_history_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `date_added` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -3315,10 +3127,9 @@ CREATE TABLE IF NOT EXISTS `yk_voucher_history` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_voucher_theme` (
-  `voucher_theme_id` int(11) NOT NULL AUTO_INCREMENT,
-  `image` varchar(255) NOT NULL,
-  PRIMARY KEY (`voucher_theme_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+  `voucher_theme_id` int(11) NOT NULL,
+  `image` varchar(255) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_voucher_theme`
@@ -3338,8 +3149,7 @@ INSERT INTO `yk_voucher_theme` (`voucher_theme_id`, `image`) VALUES
 CREATE TABLE IF NOT EXISTS `yk_voucher_theme_description` (
   `voucher_theme_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `name` varchar(32) NOT NULL,
-  PRIMARY KEY (`voucher_theme_id`,`language_id`)
+  `name` varchar(32) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -3358,10 +3168,9 @@ INSERT INTO `yk_voucher_theme_description` (`voucher_theme_id`, `language_id`, `
 --
 
 CREATE TABLE IF NOT EXISTS `yk_weight_class` (
-  `weight_class_id` int(11) NOT NULL AUTO_INCREMENT,
-  `value` decimal(15,8) NOT NULL DEFAULT '0.00000000',
-  PRIMARY KEY (`weight_class_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+  `weight_class_id` int(11) NOT NULL,
+  `value` decimal(15,8) NOT NULL DEFAULT '0.00000000'
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_weight_class`
@@ -3380,12 +3189,11 @@ INSERT INTO `yk_weight_class` (`weight_class_id`, `value`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `yk_weight_class_description` (
-  `weight_class_id` int(11) NOT NULL AUTO_INCREMENT,
+  `weight_class_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `title` varchar(32) NOT NULL,
-  `unit` varchar(4) NOT NULL,
-  PRIMARY KEY (`weight_class_id`,`language_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+  `unit` varchar(4) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_weight_class_description`
@@ -3404,13 +3212,12 @@ INSERT INTO `yk_weight_class_description` (`weight_class_id`, `language_id`, `ti
 --
 
 CREATE TABLE IF NOT EXISTS `yk_zone` (
-  `zone_id` int(11) NOT NULL AUTO_INCREMENT,
+  `zone_id` int(11) NOT NULL,
   `country_id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL,
   `code` varchar(32) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`zone_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4033 ;
+  `status` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=MyISAM AUTO_INCREMENT=4033 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_zone`
@@ -4951,9 +4758,9 @@ INSERT INTO `yk_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (1555, 101, 'Bushehr', 'BSH', 1),
 (1556, 101, 'Fars', 'FAR', 1),
 (1557, 101, 'Hormozgan', 'HRM', 1),
-(1558, 101, 'Sistan and Baluchistan', 'SBL', 1);
+(1558, 101, 'Sistan and Baluchistan', 'SBL', 1),
+(1559, 101, 'Kerman', 'KRB', 1);
 INSERT INTO `yk_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
-(1559, 101, 'Kerman', 'KRB', 1),
 (1560, 101, 'Yazd', 'YZD', 1),
 (1561, 101, 'Esfahan', 'EFH', 1),
 (1562, 101, 'Semnan', 'SMN', 1),
@@ -6451,9 +6258,9 @@ INSERT INTO `yk_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (3055, 199, 'Shamal Darfur', 'SDA', 1),
 (3056, 199, 'Shamal Kurdufan', 'SKU', 1),
 (3057, 199, 'Sharq al Istiwa''iyah', 'SIS', 1),
-(3058, 199, 'Sinnar', 'SNR', 1);
+(3058, 199, 'Sinnar', 'SNR', 1),
+(3059, 199, 'Warab', 'WRB', 1);
 INSERT INTO `yk_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
-(3059, 199, 'Warab', 'WRB', 1),
 (3060, 200, 'Brokopondo', 'BR', 1),
 (3061, 200, 'Commewijne', 'CM', 1),
 (3062, 200, 'Coronie', 'CR', 1),
@@ -7412,14 +7219,13 @@ INSERT INTO `yk_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `yk_zone_to_geo_zone` (
-  `zone_to_geo_zone_id` int(11) NOT NULL AUTO_INCREMENT,
+  `zone_to_geo_zone_id` int(11) NOT NULL,
   `country_id` int(11) NOT NULL,
   `zone_id` int(11) NOT NULL DEFAULT '0',
   `geo_zone_id` int(11) NOT NULL,
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`zone_to_geo_zone_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=66 ;
+  `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=MyISAM AUTO_INCREMENT=66 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `yk_zone_to_geo_zone`
@@ -7429,6 +7235,1088 @@ INSERT INTO `yk_zone_to_geo_zone` (`zone_to_geo_zone_id`, `country_id`, `zone_id
 (57, 222, 0, 3, '2010-02-26 22:33:24', '0000-00-00 00:00:00'),
 (65, 222, 0, 4, '2010-12-15 15:18:13', '0000-00-00 00:00:00');
 
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `yk_address`
+--
+ALTER TABLE `yk_address`
+  ADD PRIMARY KEY (`address_id`), ADD KEY `customer_id` (`customer_id`);
+
+--
+-- Indexes for table `yk_affiliate`
+--
+ALTER TABLE `yk_affiliate`
+  ADD PRIMARY KEY (`affiliate_id`);
+
+--
+-- Indexes for table `yk_affiliate_transaction`
+--
+ALTER TABLE `yk_affiliate_transaction`
+  ADD PRIMARY KEY (`affiliate_transaction_id`);
+
+--
+-- Indexes for table `yk_attribute`
+--
+ALTER TABLE `yk_attribute`
+  ADD PRIMARY KEY (`attribute_id`);
+
+--
+-- Indexes for table `yk_attribute_description`
+--
+ALTER TABLE `yk_attribute_description`
+  ADD PRIMARY KEY (`attribute_id`,`language_id`);
+
+--
+-- Indexes for table `yk_attribute_group_description`
+--
+ALTER TABLE `yk_attribute_group_description`
+  ADD PRIMARY KEY (`attribute_group_id`,`language_id`);
+
+--
+-- Indexes for table `yk_banner`
+--
+ALTER TABLE `yk_banner`
+  ADD PRIMARY KEY (`banner_id`);
+
+--
+-- Indexes for table `yk_banner_image`
+--
+ALTER TABLE `yk_banner_image`
+  ADD PRIMARY KEY (`banner_image_id`);
+
+--
+-- Indexes for table `yk_banner_image_description`
+--
+ALTER TABLE `yk_banner_image_description`
+  ADD PRIMARY KEY (`banner_image_id`,`language_id`);
+
+--
+-- Indexes for table `yk_category`
+--
+ALTER TABLE `yk_category`
+  ADD PRIMARY KEY (`category_id`);
+
+--
+-- Indexes for table `yk_category_description`
+--
+ALTER TABLE `yk_category_description`
+  ADD PRIMARY KEY (`category_id`,`language_id`), ADD KEY `name` (`name`);
+
+--
+-- Indexes for table `yk_category_filter`
+--
+ALTER TABLE `yk_category_filter`
+  ADD PRIMARY KEY (`category_id`,`filter_id`);
+
+--
+-- Indexes for table `yk_category_path`
+--
+ALTER TABLE `yk_category_path`
+  ADD PRIMARY KEY (`category_id`,`path_id`);
+
+--
+-- Indexes for table `yk_category_to_layout`
+--
+ALTER TABLE `yk_category_to_layout`
+  ADD PRIMARY KEY (`category_id`,`store_id`);
+
+--
+-- Indexes for table `yk_category_to_store`
+--
+ALTER TABLE `yk_category_to_store`
+  ADD PRIMARY KEY (`category_id`,`store_id`);
+
+--
+-- Indexes for table `yk_country`
+--
+ALTER TABLE `yk_country`
+  ADD PRIMARY KEY (`country_id`);
+
+--
+-- Indexes for table `yk_coupon`
+--
+ALTER TABLE `yk_coupon`
+  ADD PRIMARY KEY (`coupon_id`);
+
+--
+-- Indexes for table `yk_coupon_category`
+--
+ALTER TABLE `yk_coupon_category`
+  ADD PRIMARY KEY (`coupon_id`,`category_id`);
+
+--
+-- Indexes for table `yk_coupon_history`
+--
+ALTER TABLE `yk_coupon_history`
+  ADD PRIMARY KEY (`coupon_history_id`);
+
+--
+-- Indexes for table `yk_coupon_product`
+--
+ALTER TABLE `yk_coupon_product`
+  ADD PRIMARY KEY (`coupon_product_id`);
+
+--
+-- Indexes for table `yk_currency`
+--
+ALTER TABLE `yk_currency`
+  ADD PRIMARY KEY (`currency_id`);
+
+--
+-- Indexes for table `yk_customer`
+--
+ALTER TABLE `yk_customer`
+  ADD PRIMARY KEY (`customer_id`);
+
+--
+-- Indexes for table `yk_customer_ban_ip`
+--
+ALTER TABLE `yk_customer_ban_ip`
+  ADD PRIMARY KEY (`customer_ban_ip_id`), ADD KEY `ip` (`ip`);
+
+--
+-- Indexes for table `yk_customer_field`
+--
+ALTER TABLE `yk_customer_field`
+  ADD PRIMARY KEY (`customer_id`,`custom_field_id`,`custom_field_value_id`);
+
+--
+-- Indexes for table `yk_customer_group`
+--
+ALTER TABLE `yk_customer_group`
+  ADD PRIMARY KEY (`customer_group_id`);
+
+--
+-- Indexes for table `yk_customer_group_description`
+--
+ALTER TABLE `yk_customer_group_description`
+  ADD PRIMARY KEY (`customer_group_id`,`language_id`);
+
+--
+-- Indexes for table `yk_customer_history`
+--
+ALTER TABLE `yk_customer_history`
+  ADD PRIMARY KEY (`customer_history_id`);
+
+--
+-- Indexes for table `yk_customer_ip`
+--
+ALTER TABLE `yk_customer_ip`
+  ADD PRIMARY KEY (`customer_ip_id`), ADD KEY `ip` (`ip`);
+
+--
+-- Indexes for table `yk_customer_online`
+--
+ALTER TABLE `yk_customer_online`
+  ADD PRIMARY KEY (`ip`);
+
+--
+-- Indexes for table `yk_customer_reward`
+--
+ALTER TABLE `yk_customer_reward`
+  ADD PRIMARY KEY (`customer_reward_id`);
+
+--
+-- Indexes for table `yk_customer_transaction`
+--
+ALTER TABLE `yk_customer_transaction`
+  ADD PRIMARY KEY (`customer_transaction_id`);
+
+--
+-- Indexes for table `yk_custom_field`
+--
+ALTER TABLE `yk_custom_field`
+  ADD PRIMARY KEY (`custom_field_id`);
+
+--
+-- Indexes for table `yk_custom_field_description`
+--
+ALTER TABLE `yk_custom_field_description`
+  ADD PRIMARY KEY (`custom_field_id`,`language_id`);
+
+--
+-- Indexes for table `yk_custom_field_to_customer_group`
+--
+ALTER TABLE `yk_custom_field_to_customer_group`
+  ADD PRIMARY KEY (`custom_field_id`,`customer_group_id`);
+
+--
+-- Indexes for table `yk_custom_field_value`
+--
+ALTER TABLE `yk_custom_field_value`
+  ADD PRIMARY KEY (`custom_field_value_id`);
+
+--
+-- Indexes for table `yk_custom_field_value_description`
+--
+ALTER TABLE `yk_custom_field_value_description`
+  ADD PRIMARY KEY (`custom_field_value_id`,`language_id`);
+
+--
+-- Indexes for table `yk_download`
+--
+ALTER TABLE `yk_download`
+  ADD PRIMARY KEY (`download_id`);
+
+--
+-- Indexes for table `yk_download_description`
+--
+ALTER TABLE `yk_download_description`
+  ADD PRIMARY KEY (`download_id`,`language_id`);
+
+--
+-- Indexes for table `yk_extension`
+--
+ALTER TABLE `yk_extension`
+  ADD PRIMARY KEY (`extension_id`);
+
+--
+-- Indexes for table `yk_filter`
+--
+ALTER TABLE `yk_filter`
+  ADD PRIMARY KEY (`filter_id`);
+
+--
+-- Indexes for table `yk_filter_description`
+--
+ALTER TABLE `yk_filter_description`
+  ADD PRIMARY KEY (`filter_id`,`language_id`);
+
+--
+-- Indexes for table `yk_filter_group`
+--
+ALTER TABLE `yk_filter_group`
+  ADD PRIMARY KEY (`filter_group_id`);
+
+--
+-- Indexes for table `yk_filter_group_description`
+--
+ALTER TABLE `yk_filter_group_description`
+  ADD PRIMARY KEY (`filter_group_id`,`language_id`);
+
+--
+-- Indexes for table `yk_geo_zone`
+--
+ALTER TABLE `yk_geo_zone`
+  ADD PRIMARY KEY (`geo_zone_id`);
+
+--
+-- Indexes for table `yk_help`
+--
+ALTER TABLE `yk_help`
+  ADD PRIMARY KEY (`help_id`);
+
+--
+-- Indexes for table `yk_help_group`
+--
+ALTER TABLE `yk_help_group`
+  ADD PRIMARY KEY (`group_id`);
+
+--
+-- Indexes for table `yk_information`
+--
+ALTER TABLE `yk_information`
+  ADD PRIMARY KEY (`information_id`);
+
+--
+-- Indexes for table `yk_information_description`
+--
+ALTER TABLE `yk_information_description`
+  ADD PRIMARY KEY (`information_id`,`language_id`);
+
+--
+-- Indexes for table `yk_information_to_layout`
+--
+ALTER TABLE `yk_information_to_layout`
+  ADD PRIMARY KEY (`information_id`,`store_id`);
+
+--
+-- Indexes for table `yk_information_to_store`
+--
+ALTER TABLE `yk_information_to_store`
+  ADD PRIMARY KEY (`information_id`,`store_id`);
+
+--
+-- Indexes for table `yk_language`
+--
+ALTER TABLE `yk_language`
+  ADD PRIMARY KEY (`language_id`), ADD KEY `name` (`name`);
+
+--
+-- Indexes for table `yk_layout`
+--
+ALTER TABLE `yk_layout`
+  ADD PRIMARY KEY (`layout_id`);
+
+--
+-- Indexes for table `yk_layout_route`
+--
+ALTER TABLE `yk_layout_route`
+  ADD PRIMARY KEY (`layout_route_id`);
+
+--
+-- Indexes for table `yk_length_class`
+--
+ALTER TABLE `yk_length_class`
+  ADD PRIMARY KEY (`length_class_id`);
+
+--
+-- Indexes for table `yk_length_class_description`
+--
+ALTER TABLE `yk_length_class_description`
+  ADD PRIMARY KEY (`length_class_id`,`language_id`);
+
+--
+-- Indexes for table `yk_manufacturer`
+--
+ALTER TABLE `yk_manufacturer`
+  ADD PRIMARY KEY (`manufacturer_id`);
+
+--
+-- Indexes for table `yk_manufacturer_to_store`
+--
+ALTER TABLE `yk_manufacturer_to_store`
+  ADD PRIMARY KEY (`manufacturer_id`,`store_id`);
+
+--
+-- Indexes for table `yk_news`
+--
+ALTER TABLE `yk_news`
+  ADD PRIMARY KEY (`news_id`);
+
+--
+-- Indexes for table `yk_news_group`
+--
+ALTER TABLE `yk_news_group`
+  ADD PRIMARY KEY (`group_id`);
+
+--
+-- Indexes for table `yk_option`
+--
+ALTER TABLE `yk_option`
+  ADD PRIMARY KEY (`option_id`);
+
+--
+-- Indexes for table `yk_option_description`
+--
+ALTER TABLE `yk_option_description`
+  ADD PRIMARY KEY (`option_id`,`language_id`);
+
+--
+-- Indexes for table `yk_option_value`
+--
+ALTER TABLE `yk_option_value`
+  ADD PRIMARY KEY (`option_value_id`);
+
+--
+-- Indexes for table `yk_option_value_description`
+--
+ALTER TABLE `yk_option_value_description`
+  ADD PRIMARY KEY (`option_value_id`,`language_id`);
+
+--
+-- Indexes for table `yk_order`
+--
+ALTER TABLE `yk_order`
+  ADD PRIMARY KEY (`order_id`);
+
+--
+-- Indexes for table `yk_order_download`
+--
+ALTER TABLE `yk_order_download`
+  ADD PRIMARY KEY (`order_download_id`);
+
+--
+-- Indexes for table `yk_order_field`
+--
+ALTER TABLE `yk_order_field`
+  ADD PRIMARY KEY (`order_id`,`custom_field_id`,`custom_field_value_id`);
+
+--
+-- Indexes for table `yk_order_fraud`
+--
+ALTER TABLE `yk_order_fraud`
+  ADD PRIMARY KEY (`order_id`);
+
+--
+-- Indexes for table `yk_order_history`
+--
+ALTER TABLE `yk_order_history`
+  ADD PRIMARY KEY (`order_history_id`);
+
+--
+-- Indexes for table `yk_order_option`
+--
+ALTER TABLE `yk_order_option`
+  ADD PRIMARY KEY (`order_option_id`);
+
+--
+-- Indexes for table `yk_order_product`
+--
+ALTER TABLE `yk_order_product`
+  ADD PRIMARY KEY (`order_product_id`);
+
+--
+-- Indexes for table `yk_order_status`
+--
+ALTER TABLE `yk_order_status`
+  ADD PRIMARY KEY (`order_status_id`,`language_id`);
+
+--
+-- Indexes for table `yk_order_total`
+--
+ALTER TABLE `yk_order_total`
+  ADD PRIMARY KEY (`order_total_id`), ADD KEY `idx_orders_total_orders_id` (`order_id`);
+
+--
+-- Indexes for table `yk_order_voucher`
+--
+ALTER TABLE `yk_order_voucher`
+  ADD PRIMARY KEY (`order_voucher_id`);
+
+--
+-- Indexes for table `yk_product`
+--
+ALTER TABLE `yk_product`
+  ADD PRIMARY KEY (`product_id`);
+
+--
+-- Indexes for table `yk_product_attribute`
+--
+ALTER TABLE `yk_product_attribute`
+  ADD PRIMARY KEY (`product_id`,`attribute_id`,`language_id`);
+
+--
+-- Indexes for table `yk_product_description`
+--
+ALTER TABLE `yk_product_description`
+  ADD PRIMARY KEY (`product_id`,`language_id`), ADD KEY `name` (`name`);
+
+--
+-- Indexes for table `yk_product_discount`
+--
+ALTER TABLE `yk_product_discount`
+  ADD PRIMARY KEY (`product_discount_id`), ADD KEY `product_id` (`product_id`);
+
+--
+-- Indexes for table `yk_product_filter`
+--
+ALTER TABLE `yk_product_filter`
+  ADD PRIMARY KEY (`product_id`,`filter_id`);
+
+--
+-- Indexes for table `yk_product_image`
+--
+ALTER TABLE `yk_product_image`
+  ADD PRIMARY KEY (`product_image_id`);
+
+--
+-- Indexes for table `yk_product_option`
+--
+ALTER TABLE `yk_product_option`
+  ADD PRIMARY KEY (`product_option_id`);
+
+--
+-- Indexes for table `yk_product_option_value`
+--
+ALTER TABLE `yk_product_option_value`
+  ADD PRIMARY KEY (`product_option_value_id`);
+
+--
+-- Indexes for table `yk_product_related`
+--
+ALTER TABLE `yk_product_related`
+  ADD PRIMARY KEY (`product_id`,`related_id`);
+
+--
+-- Indexes for table `yk_product_reward`
+--
+ALTER TABLE `yk_product_reward`
+  ADD PRIMARY KEY (`product_reward_id`);
+
+--
+-- Indexes for table `yk_product_special`
+--
+ALTER TABLE `yk_product_special`
+  ADD PRIMARY KEY (`product_special_id`), ADD KEY `product_id` (`product_id`);
+
+--
+-- Indexes for table `yk_product_to_category`
+--
+ALTER TABLE `yk_product_to_category`
+  ADD PRIMARY KEY (`product_id`,`category_id`);
+
+--
+-- Indexes for table `yk_product_to_download`
+--
+ALTER TABLE `yk_product_to_download`
+  ADD PRIMARY KEY (`product_id`,`download_id`);
+
+--
+-- Indexes for table `yk_product_to_layout`
+--
+ALTER TABLE `yk_product_to_layout`
+  ADD PRIMARY KEY (`product_id`,`store_id`);
+
+--
+-- Indexes for table `yk_product_to_store`
+--
+ALTER TABLE `yk_product_to_store`
+  ADD PRIMARY KEY (`product_id`,`store_id`);
+
+--
+-- Indexes for table `yk_project`
+--
+ALTER TABLE `yk_project`
+  ADD PRIMARY KEY (`project_id`);
+
+--
+-- Indexes for table `yk_project_group`
+--
+ALTER TABLE `yk_project_group`
+  ADD PRIMARY KEY (`group_id`);
+
+--
+-- Indexes for table `yk_return`
+--
+ALTER TABLE `yk_return`
+  ADD PRIMARY KEY (`return_id`);
+
+--
+-- Indexes for table `yk_return_action`
+--
+ALTER TABLE `yk_return_action`
+  ADD PRIMARY KEY (`return_action_id`,`language_id`);
+
+--
+-- Indexes for table `yk_return_history`
+--
+ALTER TABLE `yk_return_history`
+  ADD PRIMARY KEY (`return_history_id`);
+
+--
+-- Indexes for table `yk_return_reason`
+--
+ALTER TABLE `yk_return_reason`
+  ADD PRIMARY KEY (`return_reason_id`,`language_id`);
+
+--
+-- Indexes for table `yk_return_status`
+--
+ALTER TABLE `yk_return_status`
+  ADD PRIMARY KEY (`return_status_id`,`language_id`);
+
+--
+-- Indexes for table `yk_review`
+--
+ALTER TABLE `yk_review`
+  ADD PRIMARY KEY (`review_id`), ADD KEY `product_id` (`product_id`);
+
+--
+-- Indexes for table `yk_setting`
+--
+ALTER TABLE `yk_setting`
+  ADD PRIMARY KEY (`setting_id`);
+
+--
+-- Indexes for table `yk_stock_status`
+--
+ALTER TABLE `yk_stock_status`
+  ADD PRIMARY KEY (`stock_status_id`,`language_id`);
+
+--
+-- Indexes for table `yk_store`
+--
+ALTER TABLE `yk_store`
+  ADD PRIMARY KEY (`store_id`);
+
+--
+-- Indexes for table `yk_tax_class`
+--
+ALTER TABLE `yk_tax_class`
+  ADD PRIMARY KEY (`tax_class_id`);
+
+--
+-- Indexes for table `yk_tax_rate`
+--
+ALTER TABLE `yk_tax_rate`
+  ADD PRIMARY KEY (`tax_rate_id`);
+
+--
+-- Indexes for table `yk_tax_rate_to_customer_group`
+--
+ALTER TABLE `yk_tax_rate_to_customer_group`
+  ADD PRIMARY KEY (`tax_rate_id`,`customer_group_id`);
+
+--
+-- Indexes for table `yk_tax_rule`
+--
+ALTER TABLE `yk_tax_rule`
+  ADD PRIMARY KEY (`tax_rule_id`);
+
+--
+-- Indexes for table `yk_url_alias`
+--
+ALTER TABLE `yk_url_alias`
+  ADD PRIMARY KEY (`url_alias_id`);
+
+--
+-- Indexes for table `yk_user`
+--
+ALTER TABLE `yk_user`
+  ADD PRIMARY KEY (`user_id`);
+
+--
+-- Indexes for table `yk_user_group`
+--
+ALTER TABLE `yk_user_group`
+  ADD PRIMARY KEY (`user_group_id`);
+
+--
+-- Indexes for table `yk_voucher`
+--
+ALTER TABLE `yk_voucher`
+  ADD PRIMARY KEY (`voucher_id`);
+
+--
+-- Indexes for table `yk_voucher_history`
+--
+ALTER TABLE `yk_voucher_history`
+  ADD PRIMARY KEY (`voucher_history_id`);
+
+--
+-- Indexes for table `yk_voucher_theme`
+--
+ALTER TABLE `yk_voucher_theme`
+  ADD PRIMARY KEY (`voucher_theme_id`);
+
+--
+-- Indexes for table `yk_voucher_theme_description`
+--
+ALTER TABLE `yk_voucher_theme_description`
+  ADD PRIMARY KEY (`voucher_theme_id`,`language_id`);
+
+--
+-- Indexes for table `yk_weight_class`
+--
+ALTER TABLE `yk_weight_class`
+  ADD PRIMARY KEY (`weight_class_id`);
+
+--
+-- Indexes for table `yk_weight_class_description`
+--
+ALTER TABLE `yk_weight_class_description`
+  ADD PRIMARY KEY (`weight_class_id`,`language_id`);
+
+--
+-- Indexes for table `yk_zone`
+--
+ALTER TABLE `yk_zone`
+  ADD PRIMARY KEY (`zone_id`);
+
+--
+-- Indexes for table `yk_zone_to_geo_zone`
+--
+ALTER TABLE `yk_zone_to_geo_zone`
+  ADD PRIMARY KEY (`zone_to_geo_zone_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `yk_address`
+--
+ALTER TABLE `yk_address`
+  MODIFY `address_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `yk_affiliate`
+--
+ALTER TABLE `yk_affiliate`
+  MODIFY `affiliate_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `yk_affiliate_transaction`
+--
+ALTER TABLE `yk_affiliate_transaction`
+  MODIFY `affiliate_transaction_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `yk_attribute`
+--
+ALTER TABLE `yk_attribute`
+  MODIFY `attribute_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+--
+-- AUTO_INCREMENT for table `yk_banner`
+--
+ALTER TABLE `yk_banner`
+  MODIFY `banner_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT for table `yk_banner_image`
+--
+ALTER TABLE `yk_banner_image`
+  MODIFY `banner_image_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=78;
+--
+-- AUTO_INCREMENT for table `yk_category`
+--
+ALTER TABLE `yk_category`
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=59;
+--
+-- AUTO_INCREMENT for table `yk_country`
+--
+ALTER TABLE `yk_country`
+  MODIFY `country_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=252;
+--
+-- AUTO_INCREMENT for table `yk_coupon`
+--
+ALTER TABLE `yk_coupon`
+  MODIFY `coupon_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `yk_coupon_history`
+--
+ALTER TABLE `yk_coupon_history`
+  MODIFY `coupon_history_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `yk_coupon_product`
+--
+ALTER TABLE `yk_coupon_product`
+  MODIFY `coupon_product_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `yk_currency`
+--
+ALTER TABLE `yk_currency`
+  MODIFY `currency_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `yk_customer`
+--
+ALTER TABLE `yk_customer`
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `yk_customer_ban_ip`
+--
+ALTER TABLE `yk_customer_ban_ip`
+  MODIFY `customer_ban_ip_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `yk_customer_group`
+--
+ALTER TABLE `yk_customer_group`
+  MODIFY `customer_group_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `yk_customer_history`
+--
+ALTER TABLE `yk_customer_history`
+  MODIFY `customer_history_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `yk_customer_ip`
+--
+ALTER TABLE `yk_customer_ip`
+  MODIFY `customer_ip_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `yk_customer_reward`
+--
+ALTER TABLE `yk_customer_reward`
+  MODIFY `customer_reward_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `yk_customer_transaction`
+--
+ALTER TABLE `yk_customer_transaction`
+  MODIFY `customer_transaction_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `yk_custom_field`
+--
+ALTER TABLE `yk_custom_field`
+  MODIFY `custom_field_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `yk_custom_field_value`
+--
+ALTER TABLE `yk_custom_field_value`
+  MODIFY `custom_field_value_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `yk_download`
+--
+ALTER TABLE `yk_download`
+  MODIFY `download_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `yk_extension`
+--
+ALTER TABLE `yk_extension`
+  MODIFY `extension_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=430;
+--
+-- AUTO_INCREMENT for table `yk_filter`
+--
+ALTER TABLE `yk_filter`
+  MODIFY `filter_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `yk_filter_group`
+--
+ALTER TABLE `yk_filter_group`
+  MODIFY `filter_group_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `yk_geo_zone`
+--
+ALTER TABLE `yk_geo_zone`
+  MODIFY `geo_zone_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `yk_help`
+--
+ALTER TABLE `yk_help`
+  MODIFY `help_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `yk_help_group`
+--
+ALTER TABLE `yk_help_group`
+  MODIFY `group_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `yk_information`
+--
+ALTER TABLE `yk_information`
+  MODIFY `information_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `yk_language`
+--
+ALTER TABLE `yk_language`
+  MODIFY `language_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `yk_layout`
+--
+ALTER TABLE `yk_layout`
+  MODIFY `layout_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+--
+-- AUTO_INCREMENT for table `yk_layout_route`
+--
+ALTER TABLE `yk_layout_route`
+  MODIFY `layout_route_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=33;
+--
+-- AUTO_INCREMENT for table `yk_length_class`
+--
+ALTER TABLE `yk_length_class`
+  MODIFY `length_class_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `yk_length_class_description`
+--
+ALTER TABLE `yk_length_class_description`
+  MODIFY `length_class_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `yk_manufacturer`
+--
+ALTER TABLE `yk_manufacturer`
+  MODIFY `manufacturer_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT for table `yk_news`
+--
+ALTER TABLE `yk_news`
+  MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `yk_news_group`
+--
+ALTER TABLE `yk_news_group`
+  MODIFY `group_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `yk_option`
+--
+ALTER TABLE `yk_option`
+  MODIFY `option_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT for table `yk_option_value`
+--
+ALTER TABLE `yk_option_value`
+  MODIFY `option_value_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=49;
+--
+-- AUTO_INCREMENT for table `yk_order`
+--
+ALTER TABLE `yk_order`
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `yk_order_download`
+--
+ALTER TABLE `yk_order_download`
+  MODIFY `order_download_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `yk_order_history`
+--
+ALTER TABLE `yk_order_history`
+  MODIFY `order_history_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `yk_order_option`
+--
+ALTER TABLE `yk_order_option`
+  MODIFY `order_option_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `yk_order_product`
+--
+ALTER TABLE `yk_order_product`
+  MODIFY `order_product_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `yk_order_status`
+--
+ALTER TABLE `yk_order_status`
+  MODIFY `order_status_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
+--
+-- AUTO_INCREMENT for table `yk_order_total`
+--
+ALTER TABLE `yk_order_total`
+  MODIFY `order_total_id` int(10) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `yk_order_voucher`
+--
+ALTER TABLE `yk_order_voucher`
+  MODIFY `order_voucher_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `yk_product`
+--
+ALTER TABLE `yk_product`
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=50;
+--
+-- AUTO_INCREMENT for table `yk_product_discount`
+--
+ALTER TABLE `yk_product_discount`
+  MODIFY `product_discount_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=441;
+--
+-- AUTO_INCREMENT for table `yk_product_image`
+--
+ALTER TABLE `yk_product_image`
+  MODIFY `product_image_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2352;
+--
+-- AUTO_INCREMENT for table `yk_product_option`
+--
+ALTER TABLE `yk_product_option`
+  MODIFY `product_option_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=227;
+--
+-- AUTO_INCREMENT for table `yk_product_option_value`
+--
+ALTER TABLE `yk_product_option_value`
+  MODIFY `product_option_value_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
+--
+-- AUTO_INCREMENT for table `yk_product_reward`
+--
+ALTER TABLE `yk_product_reward`
+  MODIFY `product_reward_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=546;
+--
+-- AUTO_INCREMENT for table `yk_product_special`
+--
+ALTER TABLE `yk_product_special`
+  MODIFY `product_special_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=440;
+--
+-- AUTO_INCREMENT for table `yk_project`
+--
+ALTER TABLE `yk_project`
+  MODIFY `project_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `yk_project_group`
+--
+ALTER TABLE `yk_project_group`
+  MODIFY `group_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `yk_return`
+--
+ALTER TABLE `yk_return`
+  MODIFY `return_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `yk_return_action`
+--
+ALTER TABLE `yk_return_action`
+  MODIFY `return_action_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `yk_return_history`
+--
+ALTER TABLE `yk_return_history`
+  MODIFY `return_history_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `yk_return_reason`
+--
+ALTER TABLE `yk_return_reason`
+  MODIFY `return_reason_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `yk_return_status`
+--
+ALTER TABLE `yk_return_status`
+  MODIFY `return_status_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `yk_review`
+--
+ALTER TABLE `yk_review`
+  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `yk_setting`
+--
+ALTER TABLE `yk_setting`
+  MODIFY `setting_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=443;
+--
+-- AUTO_INCREMENT for table `yk_stock_status`
+--
+ALTER TABLE `yk_stock_status`
+  MODIFY `stock_status_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT for table `yk_store`
+--
+ALTER TABLE `yk_store`
+  MODIFY `store_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `yk_tax_class`
+--
+ALTER TABLE `yk_tax_class`
+  MODIFY `tax_class_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT for table `yk_tax_rate`
+--
+ALTER TABLE `yk_tax_rate`
+  MODIFY `tax_rate_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=88;
+--
+-- AUTO_INCREMENT for table `yk_tax_rule`
+--
+ALTER TABLE `yk_tax_rule`
+  MODIFY `tax_rule_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=129;
+--
+-- AUTO_INCREMENT for table `yk_url_alias`
+--
+ALTER TABLE `yk_url_alias`
+  MODIFY `url_alias_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=774;
+--
+-- AUTO_INCREMENT for table `yk_user`
+--
+ALTER TABLE `yk_user`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `yk_user_group`
+--
+ALTER TABLE `yk_user_group`
+  MODIFY `user_group_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT for table `yk_voucher`
+--
+ALTER TABLE `yk_voucher`
+  MODIFY `voucher_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `yk_voucher_history`
+--
+ALTER TABLE `yk_voucher_history`
+  MODIFY `voucher_history_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `yk_voucher_theme`
+--
+ALTER TABLE `yk_voucher_theme`
+  MODIFY `voucher_theme_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT for table `yk_weight_class`
+--
+ALTER TABLE `yk_weight_class`
+  MODIFY `weight_class_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `yk_weight_class_description`
+--
+ALTER TABLE `yk_weight_class_description`
+  MODIFY `weight_class_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `yk_zone`
+--
+ALTER TABLE `yk_zone`
+  MODIFY `zone_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4033;
+--
+-- AUTO_INCREMENT for table `yk_zone_to_geo_zone`
+--
+ALTER TABLE `yk_zone_to_geo_zone`
+  MODIFY `zone_to_geo_zone_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=66;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

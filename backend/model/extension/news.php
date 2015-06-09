@@ -1,37 +1,40 @@
 <?php
 class ModelExtensionNews extends Model {
 	public function addNews($data) {
-		$this->db->query("INSERT INTO " . DB_PREFIX . "news SET date_added = NOW(), status = '" . (int)$data['status'] . "'");
-		
-		$news_id = $this->db->getLastId();
-		
-		foreach ($data['news'] as $key => $value) {
-			$this->db->query("INSERT INTO " . DB_PREFIX ."news_description SET news_id = '" . (int)$news_id . "', language_id = '" . (int)$key . "', title = '" . $this->db->escape($value['title']) . "', description = '" . $this->db->escape($value['description']) . "'");
-		}
-		
-		if ($data['keyword']) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "url_alias SET query = 'news_id=" . (int)$news_id . "', keyword = '" . $this->db->escape($data['keyword']) . "'");
-		}
+		$fields = array(
+			'title' => isset($data['title']) ? strip_tags(trim($data['title'])) : '',
+			'subtitle' => isset($data['subtitle']) ? strip_tags(trim($data['subtitle'])) : '',
+			'from' => isset($data['from']) ? strip_tags($data['from']) : '',
+			'text' => isset($data['text']) ? htmlspecialchars_decode($data['text']) : '',
+			'sort_order' => isset($data['sort_order']) ? (int)$data['sort_order'] : 0,
+			'group_id' => isset($data['group_id']) ? (int)$data['group_id'] : 0,
+			'is_top' => isset($data['is_top']) ? (int)$data['is_top'] : 0,
+			'user_id' => $this->user->getId(),
+			'date_added' => date('Y-m-d H:i:s'),
+		);
+
+		return $this->db->insert("news",$fields);
+
 	}
 	
 	public function editNews($id, $data) {
-		$this->db->query("UPDATE " . DB_PREFIX . "news SET status = '" . (int)$data['status'] . "' WHERE news_id = '" . (int)$id . "'");
-		
-		$this->db->query("DELETE FROM " . DB_PREFIX . "news_description WHERE news_id = '" . (int)$id. "'");
-		
-		foreach ($data['news'] as $key => $value) {
-			$this->db->query("INSERT INTO " . DB_PREFIX ."news_description SET news_id = '" . (int)$id . "', language_id = '" . (int)$key . "', title = '" . $this->db->escape($value['title']) . "', description = '" . $this->db->escape($value['description']) . "'");
-		}
-		
-		$this->db->query("DELETE FROM " . DB_PREFIX . "url_alias WHERE query = 'news_id=" . (int)$id. "'");
-		
-		if ($data['keyword']) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "url_alias SET query = 'news_id=" . (int)$id . "', keyword = '" . $this->db->escape($data['keyword']) . "'");
-		}
+		$fields = array(
+			'title' => isset($data['title']) ? strip_tags(trim($data['title'])) : '',
+			'subtitle' => isset($data['subtitle']) ? strip_tags(trim($data['subtitle'])) : '',
+			'from' => isset($data['from']) ? strip_tags($data['from']) : '',
+			'text' => isset($data['text']) ? htmlspecialchars_decode($data['text']) : '',
+			'sort_order' => isset($data['sort_order']) ? (int)$data['sort_order'] : 0,
+			'group_id' => isset($data['group_id']) ? (int)$data['group_id'] : 0,
+			'is_top' => isset($data['is_top']) ? (int)$data['is_top'] : 0,
+			'user_id' => $this->user->getId(),
+			'date_added' => date('Y-m-d H:i:s'),
+		);
+
+		return $this->db->insert("news",array('news_id'=>$id),$fields);
 	}
 	
 	public function getNews($id) {
-		$query = $this->db->query("SELECT DISTINCT *, (SELECT keyword FROM " . DB_PREFIX . "url_alias WHERE query = 'news_id=" . (int)$id . "') AS keyword FROM " . DB_PREFIX . "news WHERE news_id = '" . (int)$id . "'"); 
+		$query = $this->db->query("SELECT *  FROM " . DB_PREFIX . "news WHERE news_id = '" . (int)$id . "'"); 
  
 		if ($query->num_rows) {
 			return $query->row;
@@ -40,21 +43,8 @@ class ModelExtensionNews extends Model {
 		}
 	}
    
-	public function getNewsDescription($id) {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "news_description WHERE news_id = '" . (int)$id . "'"); 
-		
-		foreach ($query->rows as $result) {
-			$news_description[$result['language_id']] = array(
-				'title'       => $result['title'],
-				'description' => $result['description']
-			);
-		}
-		
-		return $news_description;
-	}
- 
 	public function getAllNews($data) {
-		$sql = "SELECT * FROM " . DB_PREFIX . "news n LEFT JOIN " . DB_PREFIX . "news_description nd ON n.news_id = nd.news_id WHERE nd.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY date_added DESC";
+		$sql = "SELECT * FROM " . DB_PREFIX . "news n LEFT JOIN " . DB_PREFIX . "news_group ng ON n.group_id = ng.group_id WHERE 1 ORDER BY date_added DESC";
 		
 		if (isset($data['start']) || isset($data['limit'])) {
 			if ($data['start'] < 0) {
@@ -74,14 +64,12 @@ class ModelExtensionNews extends Model {
    
 	public function deleteNews($id) {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "news WHERE news_id = '" . (int)$id . "'");
-		$this->db->query("DELETE FROM " . DB_PREFIX . "news_description WHERE news_id = '" . (int)$id . "'");
-		$this->db->query("DELETE FROM " . DB_PREFIX . "url_alias WHERE query = 'news_id=" . (int)$id. "'");
 	}
    
 	public function countNews() {
-		$count = $this->db->query("SELECT * FROM " . DB_PREFIX . "news");
+		$query = $this->db->query("SELECT COUNT(news_id) total FROM " . DB_PREFIX . "news");
 	
-		return $count->num_rows;
+		return $query->row['total'];
 	}
 }
 ?>

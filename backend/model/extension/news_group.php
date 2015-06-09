@@ -1,48 +1,48 @@
 <?php 
 class ModelExtensionNewsGroup extends Model {
 	public function addNewsGroup($data) {
-		$this->db->query("INSERT INTO " . DB_PREFIX . "news_group SET sort_order = '" . (int)$data['sort_order'] . "'");
-		
-		$news_group_id = $this->db->getLastId();
-		
-		foreach ($data['news_group_description'] as $language_id => $value) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "news_group_description SET news_group_id = '" . (int)$news_group_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "'");
-		}
+		$fields = array(
+			'name' => isset($data['name']) ? strip_tags(trim($data['name'])) : '',
+			'show' => isset($data['show']) ? (int)$data['show'] : 0,
+			'sort_order' => isset($data['sort_order']) ? (int)$data['sort_order'] : 0
+		);
+
+		return $this->db->insert("news_group",$fields);
 	}
 
 	public function editNewsGroup($news_group_id, $data) {
-		$this->db->query("UPDATE " . DB_PREFIX . "news_group SET sort_order = '" . (int)$data['sort_order'] . "' WHERE news_group_id = '" . (int)$news_group_id . "'");
-		
-		$this->db->query("DELETE FROM " . DB_PREFIX . "news_group_description WHERE news_group_id = '" . (int)$news_group_id . "'");
+		$fields = array(
+			'name' => isset($data['name']) ? strip_tags(trim($data['name'])) : 0,
+			'show' => isset($data['show']) ? (int)$data['show'] : 0,
+			'sort_order' => isset($data['sort_order']) ? (int)$data['sort_order'] : 0
+		);
 
-		foreach ($data['news_group_description'] as $language_id => $value) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "news_group_description SET news_group_id = '" . (int)$news_group_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "'");
-		}
+		return $this->db->update("news_group",array('group_id'=>$news_group_id),$fields);
 	}
 	
 	public function deleteNewsGroup($news_group_id) {
-		$this->db->query("DELETE FROM " . DB_PREFIX . "news_group WHERE news_group_id = '" . (int)$news_group_id . "'");
-		$this->db->query("DELETE FROM " . DB_PREFIX . "news_group_description WHERE news_group_id = '" . (int)$news_group_id . "'");
+		$this->db->delete("news_group",array('news_group_id' => (int)$news_group_id));
 	}
 		
 	public function getNewsGroup($news_group_id) {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "news_group WHERE news_group_id = '" . (int)$news_group_id . "'");
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "news_group WHERE group_id = '" . (int)$news_group_id . "'");
 		
 		return $query->row;
 	}
 		
 	public function getNewsGroups($data = array()) {
-		$sql = "SELECT * FROM " . DB_PREFIX . "news_group ag LEFT JOIN " . DB_PREFIX . "news_group_description agd ON (ag.news_group_id = agd.news_group_id) WHERE agd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
+		$sql = "SELECT * FROM " . DB_PREFIX . "news_group ng  ";
 			
 		$sort_data = array(
-			'agd.name',
-			'ag.sort_order'
+			'ng.name',
+			'ng.show',
+			'ng.sort_order'
 		);	
 		
 		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
 			$sql .= " ORDER BY " . $data['sort'];	
 		} else {
-			$sql .= " ORDER BY agd.name";	
+			$sql .= " ORDER BY ng.group_id";	
 		}	
 			
 		if (isset($data['order']) && ($data['order'] == 'DESC')) {
@@ -68,17 +68,6 @@ class ModelExtensionNewsGroup extends Model {
 		return $query->rows;
 	}
 	
-	public function getNewsGroupDescriptions($news_group_id) {
-		$news_group_data = array();
-		
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "news_group_description WHERE news_group_id = '" . (int)$news_group_id . "'");
-		
-		foreach ($query->rows as $result) {
-			$news_group_data[$result['language_id']] = array('name' => $result['name']);
-		}
-		
-		return $news_group_data;
-	}
 	
 	public function getTotalNewsGroups() {
       	$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "news_group");

@@ -67,6 +67,8 @@ class ControllerExtensionNews extends Controller {
 		$this->data['heading_title'] = $this->language->get('heading_title');
 		
 		$this->data['text_title'] = $this->language->get('text_title');
+		$this->data['text_subtitle'] = $this->language->get('text_subtitle');
+		$this->data['text_from'] = $this->language->get('text_from');
 		$this->data['text_date'] = $this->language->get('text_date');
 		$this->data['text_action'] = $this->language->get('text_action');
 		$this->data['text_edit'] = $this->language->get('text_edit');
@@ -77,14 +79,16 @@ class ControllerExtensionNews extends Controller {
 		$this->data['insert'] = $this->url->link('extension/news/insert', '&token=' . $this->session->data['token'], 'SSL');
 		$this->data['delete'] = $this->url->link('extension/news/delete', 'token=' . $this->session->data['token'], 'SSL');
 		
-		$this->data['allnews'] = array();
+		$this->data['news'] = array();
 		
-		$allnews = $this->model_extension_news->getAllNews($data);
+		$news = $this->model_extension_news->getAllNews($data);
 		
-		foreach ($allnews as $news) {
-			$this->data['allnews'][] = array (
+		foreach ($news as $news) {
+			$this->data['news'][] = array (
 				'news_id' => $news['news_id'],
 				'title' => $news['title'],
+				'subtitle' => $news['subtitle'],
+				'from' => $news['from'],
 				'date_added' => date('d M Y', strtotime($news['date_added'])),
 				'edit' => $this->url->link('extension/news/edit', '&news_id=' . $news['news_id'] . '&token=' . $this->session->data['token'], 'SSL')
 			);
@@ -192,21 +196,26 @@ class ControllerExtensionNews extends Controller {
 	private function form() {
 		$this->language->load('extension/news');
 		$this->load->model('extension/news');
-		$this->load->model('localisation/language');
+		
 		
 		$this->data['heading_title'] = $this->language->get('heading_title');
 		
+		$this->data['text_group'] = $this->language->get('text_group');
 		$this->data['text_title'] = $this->language->get('text_title');
-		$this->data['text_description'] = $this->language->get('text_description');
+		$this->data['text_subtitle'] = $this->language->get('text_subtitle');
 		$this->data['text_status'] = $this->language->get('text_status');
-		$this->data['text_keyword'] = $this->language->get('text_keyword');
+		$this->data['text_from'] = $this->language->get('text_from');
+		$this->data['text_text'] = $this->language->get('text_text');
+		$this->data['text_top'] = $this->language->get('text_top');
+		$this->data['text_sort_order'] = $this->language->get('text_sort_order');
 		$this->data['text_enabled'] = $this->language->get('text_enabled');
 		$this->data['text_disabled'] = $this->language->get('text_disabled');
+		$this->data['text_yes'] = $this->language->get('text_yes');
+		$this->data['text_no'] = $this->language->get('text_no');
 		
 		$this->data['button_submit'] = $this->language->get('button_submit');
 		$this->data['button_cancel'] = $this->language->get('button_cancel');
 		
-		$this->data['languages'] = $this->model_localisation_language->getLanguages();
 		
 		if (isset($this->request->get['news_id'])) {
 			$news = $this->model_extension_news->getNews($this->request->get['news_id']);
@@ -214,22 +223,54 @@ class ControllerExtensionNews extends Controller {
 			$news = '';
 		}
 		
-		if (isset($this->request->post['news'])) {
-			$this->data['news'] = $this->request->post['news'];
+		if (isset($this->request->post['title'])) {
+			$this->data['title'] = $this->request->post['title'];
 		} elseif (!empty($news)) {
-			$this->data['news'] = $this->model_extension_news->getNewsDescription($this->request->get['news_id']);
+			$this->data['title'] = $news['title'];
 		} else {
-			$this->data['news'] = '';
+			$this->data['title'] = '';
 		}
 		
-		if (isset($this->request->post['keyword'])) {
-			$this->data['keyword'] = $this->request->post['keyword'];
+		if (isset($this->request->post['subtitle'])) {
+			$this->data['subtitle'] = $this->request->post['subtitle'];
 		} elseif (!empty($news)) {
-			$this->data['keyword'] = $news['keyword'];
+			$this->data['subtitle'] = $news['subtitle'];
 		} else {
-			$this->data['keyword'] = '';
+			$this->data['subtitle'] = '';
+		}
+
+		if (isset($this->request->post['from'])) {
+			$this->data['from'] = $this->request->post['from'];
+		} elseif (!empty($news)) {
+			$this->data['from'] = $news['from'];
+		} else {
+			$this->data['from'] = '';
 		}
 		
+		if (isset($this->request->post['text'])) {
+			$this->data['text'] = $this->request->post['text'];
+		} elseif (!empty($news)) {
+			$this->data['text'] = $news['text'];
+		} else {
+			$this->data['text'] = '';
+		}
+
+		if (isset($this->request->post['is_top'])) {
+			$this->data['is_top'] = $this->request->post['is_top'];
+		} elseif (!empty($news)) {
+			$this->data['is_top'] = $news['is_top'];
+		} else {
+			$this->data['is_top'] = '';
+		}
+
+		if (isset($this->request->post['group_id'])) {
+			$this->data['group_id'] = $this->request->post['group_id'];
+		} elseif (!empty($news)) {
+			$this->data['group_id'] = $news['group_id'];
+		} else {
+			$this->data['group_id'] = '';
+		}
+
 		if (isset($this->request->post['status'])) {
 			$this->data['status'] = $this->request->post['status'];
 		} elseif (!empty($news)) {
@@ -237,6 +278,17 @@ class ControllerExtensionNews extends Controller {
 		} else {
 			$this->data['status'] = '';
 		}
+
+		if (isset($this->request->post['sort_order'])) {
+			$this->data['sort_order'] = $this->request->post['sort_order'];
+		} elseif (!empty($news)) {
+			$this->data['sort_order'] = $news['sort_order'];
+		} else {
+			$this->data['sort_order'] = '';
+		}
+
+		$this->load->model('extension/news_group');
+		$this->data['groups'] = $this->model_extension_news_group->get
 		
 		$this->template = 'extension/news_form.tpl';
 		$this->children = array(
@@ -291,4 +343,3 @@ class ControllerExtensionNews extends Controller {
 		}	
 	}
 }
-?>

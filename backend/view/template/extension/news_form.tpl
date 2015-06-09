@@ -15,42 +15,69 @@
     </div>
     <div class="content">
 	 <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
-		<div id="language" class="htabs">
-            <?php foreach ($languages as $language) { ?>
-            <a href="#tab-language-<?php echo $language['language_id']; ?>"><img src="<?php echo TPL_IMG ?>flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /> <?php echo $language['name']; ?></a>
-            <?php } ?>
-        </div>
-		<?php foreach ($languages as $language) { ?>
-          <div id="tab-language-<?php echo $language['language_id']; ?>">
-			<table class="form">
-				<tr>
-					<td class="left"><?php echo $text_title; ?></td>
-					<td><input type="text" name="news[<?php echo $language['language_id']; ?>][title]" value="<?php echo isset($news[$language['language_id']]) ? $news[$language['language_id']]['title'] : ''; ?>" /></td>
-				</tr>
-				<tr>
-					<td class="left"><?php echo $text_subtitle; ?></td>
-					<td><input type="text" name="news[<?php echo $language['language_id']; ?>][subtitle]" value="<?php echo isset($news[$language['language_id']]) ? $news[$language['language_id']]['subtitle'] : ''; ?>" /></td>
-				</tr>
-				<tr>
-					<td><?php echo $text_description; ?></td>
-					<td><textarea name="news[<?php echo $language['language_id']; ?>][description]" id="description-<?php echo $language['language_id']; ?>"><?php echo isset($news[$language['language_id']]) ? $news[$language['language_id']]['description'] : ''; ?></textarea></td>
-				</tr>
-			</table>
-		  </div>
-		<?php } ?>
-			<table class="form">
-				<tr>
-					<td><?php echo $text_keyword; ?></td>
-					<td><input type="text" value="<?php echo $keyword; ?>" name="keyword" /></td>
-				</tr>
-				<tr>
-					<td><?php echo $text_status; ?></td>
-					<td><select name="status">
-						<option <?php if ($status == '1') { ?>selected="selected" <?php } ?>value="1"><?php echo $text_enabled; ?></option>
-						<option <?php if ($status == '0') { ?>selected="selected" <?php } ?>value="0"><?php echo $text_disabled; ?></option>
-					</select></td>
-				</tr>
-			</table>
+		<table class="form">
+            <tr>
+                <td class="left"><?php echo $text_group; ?></td>
+                <td>
+                    <select name="group_id">
+                        <?php foreach ($groups as $item): ?>
+                        <option value="<?php echo $item['group_id'] ?>" <?php echo $group_id == $item['group_id'] ? 'selected' : '' ?>><?php echo $item['name'] ?></option>
+                        <?php endforeach ?>
+                    </select>
+                </td>
+            </tr>
+			<tr>
+				<td class="left"><?php echo $text_title; ?></td>
+				<td><input type="text" name="title" value="<?php echo $title; ?>" style="width:380px;"/></td>
+			</tr>
+			<tr>
+				<td class="left"><?php echo $text_subtitle; ?></td>
+				<td><input type="text" name="subtitle" value="<?php echo $subtitle ?>" style="width:380px;"/></td>
+			</tr>
+            <tr>
+                <td class="left"><?php echo $text_from; ?></td>
+                <td><input type="text" name="from" value="<?php echo $from ?>" style="width:380px;"/></td>
+            </tr>
+			<tr>
+				<td><?php echo $text_text; ?></td>
+				<td><textarea name="text" id="news-text"><?php echo $text; ?></textarea></td>
+			</tr>
+
+			<tr>
+				<td><?php echo $text_sort_order; ?></td>
+				<td><input type="text" value="<?php echo $sort_order; ?>" name="sort_order" /></td>
+			</tr>
+            <tr>
+                <td><?php echo $text_top; ?></td>
+                <td>
+                    <select name="is_top">
+                    <?php if($is_top){ ?>
+                    <option value="1" selected><?php echo $text_yes ?></option>
+                    <option value="0"><?php echo $text_no ?></option>
+                    <?php }else{ ?>
+                    <option value="0" selected><?php echo $text_no ?></option>
+                    <option value="1"><?php echo $text_yes ?></option>
+                    <?php }?>
+                    <option>
+                  </select> 
+                </td>
+            </tr>
+			<tr>
+				<td><?php echo $text_status; ?></td>
+				<td>
+                    <select name="status">
+                    <?php if($status){ ?>
+                    <option value="1" selected><?php echo $text_enabled ?></option>
+                    <option value="0"><?php echo $text_disabled ?></option>
+                    <?php }else{ ?>
+                    <option value="0" selected><?php echo $text_disabled ?></option>
+                    <option value="1"><?php echo $text_enabled ?></option>
+                    <?php }?>
+                    <option>
+                  </select>            
+                </td>
+			</tr>
+		</table>
 	 </form>
     </div>
   </div>
@@ -58,8 +85,8 @@
 
 <script type="text/javascript" src="view/javascript/ckeditor/ckeditor.js"></script> 
 <script type="text/javascript"><!--
-<?php foreach ($languages as $language) { ?>
-CKEDITOR.replace('description-<?php echo $language['language_id']; ?>', {
+
+CKEDITOR.replace('news-text', {
 	filebrowserBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
 	filebrowserImageBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
 	filebrowserFlashBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
@@ -67,7 +94,7 @@ CKEDITOR.replace('description-<?php echo $language['language_id']; ?>', {
 	filebrowserImageUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
 	filebrowserFlashUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>'
 });
-<?php } ?>
+
 //--></script> 
 <script type="text/javascript"><!--
 $('#language a').tabs();

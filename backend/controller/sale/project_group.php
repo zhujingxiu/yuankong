@@ -20,7 +20,7 @@ class ControllerSaleProjectGroup extends Controller {
 		$this->load->model('sale/project_group');
 			
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-      		$this->model_sale_project_group->addNewsGroup($this->request->post);
+      		$this->model_sale_project_group->addProjectGroup($this->request->post);
 		  	
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -52,7 +52,7 @@ class ControllerSaleProjectGroup extends Controller {
 		$this->load->model('sale/project_group');
 		
     	if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-	  		$this->model_sale_project_group->editNewsGroup($this->request->get['project_group_id'], $this->request->post);
+	  		$this->model_sale_project_group->editProjectGroup($this->request->get['group_id'], $this->request->post);
 			
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -84,8 +84,8 @@ class ControllerSaleProjectGroup extends Controller {
 		$this->load->model('sale/project_group');
 		
     	if (isset($this->request->post['selected']) && $this->validateDelete()) {
-			foreach ($this->request->post['selected'] as $project_group_id) {
-				$this->model_sale_project_group->deleteNewsGroup($project_group_id);
+			foreach ($this->request->post['selected'] as $group_id) {
+				$this->model_sale_project_group->deleteProjectGroup($group_id);
 			}
 			      		
 			$this->session->data['success'] = $this->language->get('text_success');
@@ -169,23 +169,24 @@ class ControllerSaleProjectGroup extends Controller {
 			'limit' => $this->config->get('config_admin_limit')
 		);
 		
-		$project_group_total = $this->model_sale_project_group->getTotalNewsGroups();
+		$project_group_total = $this->model_sale_project_group->getTotalProjectGroups();
 	
-		$results = $this->model_sale_project_group->getNewsGroups($data);
+		$results = $this->model_sale_project_group->getProjectGroups($data);
  
     	foreach ($results as $result) {
 			$action = array();
 			
 			$action[] = array(
 				'text' => $this->language->get('text_edit'),
-				'href' => $this->url->link('sale/project_group/update', 'token=' . $this->session->data['token'] . '&project_group_id=' . $result['project_group_id'] . $url, 'SSL')
+				'href' => $this->url->link('sale/project_group/update', 'token=' . $this->session->data['token'] . '&group_id=' . $result['group_id'] . $url, 'SSL')
 			);
 						
 			$this->data['project_groups'][] = array(
-				'project_group_id' => $result['project_group_id'],
+				'group_id' 			 => $result['group_id'],
 				'name'               => $result['name'],
+				'show'               => $result['show'] ? $this->language->get('text_yes') : $this->language->get('text_no'),
 				'sort_order'         => $result['sort_order'],
-				'selected'           => isset($this->request->post['selected']) && in_array($result['project_group_id'], $this->request->post['selected']),
+				'selected'           => isset($this->request->post['selected']) && in_array($result['group_id'], $this->request->post['selected']),
 				'action'             => $action
 			);
 		}	
@@ -195,6 +196,7 @@ class ControllerSaleProjectGroup extends Controller {
 		$this->data['text_no_results'] = $this->language->get('text_no_results');
 
 		$this->data['column_name'] = $this->language->get('column_name');
+		$this->data['column_show'] = $this->language->get('column_show');
 		$this->data['column_sort_order'] = $this->language->get('column_sort_order');
 		$this->data['column_action'] = $this->language->get('column_action');		
 		
@@ -227,8 +229,9 @@ class ControllerSaleProjectGroup extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 		
-		$this->data['sort_name'] = $this->url->link('sale/project_group', 'token=' . $this->session->data['token'] . '&sort=agd.name' . $url, 'SSL');
-		$this->data['sort_sort_order'] = $this->url->link('sale/project_group', 'token=' . $this->session->data['token'] . '&sort=ag.sort_order' . $url, 'SSL');
+		$this->data['sort_name'] = $this->url->link('sale/project_group', 'token=' . $this->session->data['token'] . '&sort=pg.name' . $url, 'SSL');
+		$this->data['sort_show'] = $this->url->link('sale/project_group', 'token=' . $this->session->data['token'] . '&sort=pg.show' . $url, 'SSL');
+		$this->data['sort_sort_order'] = $this->url->link('sale/project_group', 'token=' . $this->session->data['token'] . '&sort=pg.sort_order' . $url, 'SSL');
 		
 		$url = '';
 
@@ -265,7 +268,11 @@ class ControllerSaleProjectGroup extends Controller {
      	$this->data['heading_title'] = $this->language->get('heading_title');
 
     	$this->data['entry_name'] = $this->language->get('entry_name');
+    	$this->data['entry_show'] = $this->language->get('entry_show');
 		$this->data['entry_sort_order'] = $this->language->get('entry_sort_order');
+
+		$this->data['text_yes'] = $this->language->get('text_yes');
+    	$this->data['text_no'] = $this->language->get('text_no');
 
     	$this->data['button_save'] = $this->language->get('button_save');
     	$this->data['button_cancel'] = $this->language->get('button_cancel');
@@ -279,7 +286,7 @@ class ControllerSaleProjectGroup extends Controller {
  		if (isset($this->error['name'])) {
 			$this->data['error_name'] = $this->error['name'];
 		} else {
-			$this->data['error_name'] = array();
+			$this->data['error_name'] = '';
 		}
 		
 		$url = '';
@@ -310,28 +317,33 @@ class ControllerSaleProjectGroup extends Controller {
       		'separator' => ' :: '
    		);
 		
-		if (!isset($this->request->get['project_group_id'])) {
+		if (!isset($this->request->get['group_id'])) {
 			$this->data['action'] = $this->url->link('sale/project_group/insert', 'token=' . $this->session->data['token'] . $url, 'SSL');
 		} else {
-			$this->data['action'] = $this->url->link('sale/project_group/update', 'token=' . $this->session->data['token'] . '&project_group_id=' . $this->request->get['project_group_id'] . $url, 'SSL');
+			$this->data['action'] = $this->url->link('sale/project_group/update', 'token=' . $this->session->data['token'] . '&group_id=' . $this->request->get['group_id'] . $url, 'SSL');
 		}
 			
 		$this->data['cancel'] = $this->url->link('sale/project_group', 'token=' . $this->session->data['token'] . $url, 'SSL');
 
-		if (isset($this->request->get['project_group_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
-			$project_group_info = $this->model_sale_project_group->getNewsGroup($this->request->get['project_group_id']);
+		if (isset($this->request->get['group_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
+			$project_group_info = $this->model_sale_project_group->getProjectGroup($this->request->get['group_id']);
 		}
 				
-		$this->load->model('localisation/language');
-		
-		$this->data['languages'] = $this->model_localisation_language->getLanguages();
-		
-		if (isset($this->request->post['project_group_description'])) {
-			$this->data['project_group_description'] = $this->request->post['project_group_description'];
-		} elseif (isset($this->request->get['project_group_id'])) {
-			$this->data['project_group_description'] = $this->model_sale_project_group->getNewsGroupDescriptions($this->request->get['project_group_id']);
+	
+		if (isset($this->request->post['name'])) {
+			$this->data['name'] = $this->request->post['name'];
+		} elseif (!empty($project_group_info)) {
+			$this->data['name'] = $project_group_info['name'];
 		} else {
-			$this->data['project_group_description'] = array();
+			$this->data['name'] = '';
+		}
+
+		if (isset($this->request->post['show'])) {
+			$this->data['show'] = $this->request->post['show'];
+		} elseif (!empty($project_group_info)) {
+			$this->data['show'] = $project_group_info['show'];
+		} else {
+			$this->data['show'] = '';
 		}
 
 		if (isset($this->request->post['sort_order'])) {
@@ -356,11 +368,11 @@ class ControllerSaleProjectGroup extends Controller {
       		$this->error['warning'] = $this->language->get('error_permission');
     	}
 	
-    	foreach ($this->request->post['project_group_description'] as $language_id => $value) {
-      		if ((utf8_strlen($value['name']) < 3) || (utf8_strlen($value['name']) > 64)) {
-        		$this->error['name'][$language_id] = $this->language->get('error_name');
-      		}
-    	}
+    	
+  		if ((utf8_strlen($this->request->post['name']) < 3) || (utf8_strlen($this->request->post['name']) > 64)) {
+    		$this->error['name'] = $this->language->get('error_name');
+  		}
+    	
 		
 		if (!$this->error) {
 	  		return true;
@@ -373,16 +385,6 @@ class ControllerSaleProjectGroup extends Controller {
 		if (!$this->user->hasPermission('modify', 'sale/project_group')) {
       		$this->error['warning'] = $this->language->get('error_permission');
     	}
-		
-		$this->load->model('sale/project');
-		
-		foreach ($this->request->post['selected'] as $project_group_id) {
-			$project_total = $this->model_catalog_project->getTotalNewssByNewsGroupId($project_group_id);
-
-			if ($project_total) {
-				$this->error['warning'] = sprintf($this->language->get('error_project'), $project_total);
-			}
-	  	}
 		
 		if (!$this->error) { 
 	  		return true;

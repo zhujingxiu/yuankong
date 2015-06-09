@@ -1,29 +1,19 @@
 <?php
 // Version
-define('VERSION', '1.5.5.1');
-
+define('VERSION', '1.0.0.1');
+define('APP_PATH', rtrim(dirname(__FILE__),"/")."/");
 // Configuration
 if (file_exists('config.php')) {
 	require_once('config.php');
 }  
-
-// Install 
-if (!defined('DIR_APPLICATION')) {
-	header('Location: install/index.php');
-	exit;
+// Environment
+if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+	defined('APP_ENV')  || define('APP_ENV',  'development' );
+} else {
+	defined('APP_ENV')  || define('APP_ENV',  'production' );
 }
-
 // Startup
 require_once(DIR_SYSTEM . 'startup.php');
-
-// Application Classes
-require_once(DIR_SYSTEM . 'library/customer.php');
-require_once(DIR_SYSTEM . 'library/affiliate.php');
-require_once(DIR_SYSTEM . 'library/currency.php');
-require_once(DIR_SYSTEM . 'library/tax.php');
-require_once(DIR_SYSTEM . 'library/weight.php');
-require_once(DIR_SYSTEM . 'library/length.php');
-require_once(DIR_SYSTEM . 'library/cart.php');
 
 // Registry
 $registry = new Registry();
@@ -34,6 +24,7 @@ $registry->set('load', $loader);
 
 // Config
 $config = new Config();
+$config->load(APP_ENV,true);
 $registry->set('config', $config);
 
 // Database 

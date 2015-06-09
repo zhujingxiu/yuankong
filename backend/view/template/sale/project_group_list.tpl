@@ -22,12 +22,17 @@
           <thead>
             <tr>
               <td width="1" style="text-align: center;"><input type="checkbox" onclick="$('input[name*=\'selected\']').attr('checked', this.checked);" /></td>
-              <td class="left"><?php if ($sort == 'agd.name') { ?>
+              <td class="left"><?php if ($sort == 'ng.name') { ?>
                 <a href="<?php echo $sort_name; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_name; ?></a>
                 <?php } else { ?>
                 <a href="<?php echo $sort_name; ?>"><?php echo $column_name; ?></a>
                 <?php } ?></td>
-              <td class="right"><?php if ($sort == 'ag.sort_order') { ?>
+              <td class="left"><?php if ($sort == 'ng.show') { ?>
+                <a href="<?php echo $sort_show; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_show; ?></a>
+                <?php } else { ?>
+                <a href="<?php echo $sort_show; ?>"><?php echo $column_show; ?></a>
+                <?php } ?></td>
+              <td class="right"><?php if ($sort == 'ng.sort_order') { ?>
                 <a href="<?php echo $sort_sort_order; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_sort_order; ?></a>
                 <?php } else { ?>
                 <a href="<?php echo $sort_sort_order; ?>"><?php echo $column_sort_order; ?></a>
@@ -37,23 +42,27 @@
           </thead>
           <tbody>
             <?php if ($project_groups) { ?>
-            <?php foreach ($project_groups as $project_group) { ?>
+            <?php foreach ($project_groups as $item) { ?>
             <tr>
-              <td style="text-align: center;"><?php if ($project_group['selected']) { ?>
-                <input type="checkbox" name="selected[]" value="<?php echo $project_group['project_group_id']; ?>" checked="checked" />
+              <td style="text-align: center;">
+                <?php echo $item['group_id']; ?>
+                <br>
+                <?php if ($item['selected']) { ?>
+                <input type="checkbox" name="selected[]" value="<?php echo $item['group_id']; ?>" checked="checked" />
                 <?php } else { ?>
-                <input type="checkbox" name="selected[]" value="<?php echo $project_group['project_group_id']; ?>" />
+                <input type="checkbox" name="selected[]" value="<?php echo $item['group_id']; ?>" />
                 <?php } ?></td>
-              <td class="left"><?php echo $project_group['name']; ?></td>
-              <td class="right"><?php echo $project_group['sort_order']; ?></td>
-              <td class="right"><?php foreach ($project_group['action'] as $action) { ?>
+              <td class="left"><?php echo $item['name']; ?></td>
+              <td class="left"><?php echo $item['show']; ?></td>
+              <td class="right"><?php echo $item['sort_order']; ?></td>
+              <td class="right"><?php foreach ($item['action'] as $action) { ?>
                 [ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
                 <?php } ?></td>
             </tr>
             <?php } ?>
             <?php } else { ?>
             <tr>
-              <td class="center" colspan="4"><?php echo $text_no_results; ?></td>
+              <td class="center" colspan="5"><?php echo $text_no_results; ?></td>
             </tr>
             <?php } ?>
           </tbody>

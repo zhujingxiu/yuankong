@@ -41,8 +41,8 @@
             </tr>
           </thead>
           <tbody>
-            <?php if ($news_groups) { ?>
-            <?php foreach ($news_groups as $item) { ?>
+            <?php if ($help_groups) { ?>
+            <?php foreach ($help_groups as $item) { ?>
             <tr>
               <td style="text-align: center;">
                 <?php echo $item['group_id']; ?>

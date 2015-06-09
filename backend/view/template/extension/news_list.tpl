@@ -22,19 +22,23 @@
 	    <thead>
 		<tr>
 			<td width="1" style="text-align: center;"><input type="checkbox" onclick="$('input[name*=\'selected\']').attr('checked', this.checked);" /></td>
-			<td class="left"><?php echo $text_title; ?></td>
+            <td class="left"><?php echo $text_title; ?></td>
+            <td class="left"><?php echo $text_subtitle; ?></td>
+			<td class="left"><?php echo $text_from; ?></td>
 			<td class="left"><?php echo $text_date; ?></td>
 			<td class="right"><?php echo $text_action; ?></td>
 		</tr>
 		</thead>
 		<tbody>
-		<?php if ($allnews) { ?>
-			<?php foreach ($allnews as $news) { ?>
+		<?php if ($news) { ?>
+			<?php foreach ($news as $item) { ?>
 				<tr>
-					<td width="1" style="text-align: center;"><input type="checkbox" name="selected[]" value="<?php echo $news['news_id']; ?>" /></td>
-					<td class="left"><?php echo $news['title']; ?></td>
-					<td class="left"><?php echo $news['date_added']; ?></td>
-					<td class="right">[ <a href="<?php echo $news['edit']; ?>"><?php echo $text_edit; ?></a> ]</td>
+					<td width="1" style="text-align: center;"><input type="checkbox" name="selected[]" value="<?php echo $item['news_id']; ?>" /></td>
+                    <td class="left"><?php echo $item['title']; ?></td>
+                    <td class="left"><?php echo $item['subtitle']; ?></td>
+					<td class="left"><?php echo $item['from']; ?></td>
+					<td class="left"><?php echo $item['date_added']; ?></td>
+					<td class="right">[ <a href="<?php echo $item['edit']; ?>"><?php echo $text_edit; ?></a> ]</td>
 				</tr>
 			<?php } ?>
 		<?php } ?>

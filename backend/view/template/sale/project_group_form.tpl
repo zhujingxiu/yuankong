@@ -18,13 +18,28 @@
         <table class="form">
           <tr>
             <td><span class="required">*</span> <?php echo $entry_name; ?></td>
-            <td><?php foreach ($languages as $language) { ?>
-              <input type="text" name="project_group_description[<?php echo $language['language_id']; ?>][name]" value="<?php echo isset($project_group_description[$language['language_id']]) ? $project_group_description[$language['language_id']]['name'] : ''; ?>" />
-              <img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /><br />
-              <?php if (isset($error_name[$language['language_id']])) { ?>
-              <span class="error"><?php echo $error_name[$language['language_id']]; ?></span><br />
+            <td>
+              <input type="text" name="name" value="<?php echo $name ?>" />
+
+              <?php if (isset($error_name)) { ?>
+              <span class="error"><?php echo $error_name; ?></span><br />
               <?php } ?>
-              <?php } ?></td>
+              </td>
+          </tr>
+          <tr>
+            <td><?php echo $entry_show; ?></td>
+            <td>
+              <select name="show">
+                <?php if($show){ ?>
+                <option value="1" selected><?php echo $text_yes ?></option>
+                <option value="0"><?php echo $text_no ?></option>
+                <?php }else{ ?>
+                <option value="0" selected><?php echo $text_no ?></option>
+                <option value="1"><?php echo $text_yes ?></option>
+                <?php }?>
+                <option>
+              </select>  
+            </td>
           </tr>
           <tr>
             <td><?php echo $entry_sort_order; ?></td>
