@@ -1,25 +1,33 @@
 <?php
 // Heading
-$_['heading_title']       = 'Faq';
+$_['heading_title']       = '问答管理';
 
 // Text
-$_['text_success']      = 'Success: You have modified faqs!';
+$_['text_success']      = '编辑问答成功';
+$_['text_unreply']      = '未回答';
+$_['text_replied']      = '已回答';
 
 // Column
-$_['column_top']     = 'Is Top';
-$_['column_title']      = 'Title';
-$_['column_status']     = 'Status';
-$_['column_date_added'] = 'Date Added';
-$_['column_action']     = 'Action';
+$_['column_top']        = '置顶';
+$_['column_text']       = '问题';
+$_['column_account']    = '用户';
+$_['column_telephone']  = '手机';
+$_['column_reply']      = '回复状态';
+$_['column_status']     = '状态';
+$_['column_date_added'] = '添加日期';
+$_['column_action']     = '操作';
 
 // Entry
-$_['entry_title']       = 'Title:';
-$_['entry_status']      = 'Status:';
-$_['entry_text']        = 'Text:';
-$_['entry_top']      = 'Is Top:';
+$_['entry_account']     = '用户:';
+$_['entry_telephone']   = '手机号:';
+$_['entry_sort_order']  = '排序:';
+$_['entry_reply']       = '回答:';
+$_['entry_status']      = '状态:';
+$_['entry_text']        = '内容:';
+$_['entry_top']         = '置顶:';
 
 // Error
-$_['error_permission']  = 'Warning: You do not have permission to modify faq!';
+$_['error_permission']  = '没有编辑权限';
 
-$_['error_title']       = 'Title must be between 3 and 128 characters!';
-$_['error_text']        = 'Question Text must be at least 1 character!';
+$_['error_text']       = '问答内容必须在3到256个字符之间';
+$_['error_reply']      = '回复内容必须大于1个字符';

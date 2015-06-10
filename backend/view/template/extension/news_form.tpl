@@ -95,8 +95,7 @@ CKEDITOR.replace('news-text', {
 	filebrowserFlashUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>'
 });
 
-//--></script> 
-<script type="text/javascript"><!--
+
 $('#language a').tabs();
 //--></script> 
 <?php echo $footer; ?>

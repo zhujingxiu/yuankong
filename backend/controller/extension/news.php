@@ -89,7 +89,7 @@ class ControllerExtensionNews extends Controller {
 				'title' => $news['title'],
 				'subtitle' => $news['subtitle'],
 				'from' => $news['from'],
-				'date_added' => date('d M Y', strtotime($news['date_added'])),
+				'date_added' => date('Y-m-d H:i:s', strtotime($news['date_added'])),
 				'edit' => $this->url->link('extension/news/edit', '&news_id=' . $news['news_id'] . '&token=' . $this->session->data['token'], 'SSL')
 			);
 		}
@@ -288,7 +288,7 @@ class ControllerExtensionNews extends Controller {
 		}
 
 		$this->load->model('extension/news_group');
-		$this->data['groups'] = $this->model_extension_news_group->get
+		$this->data['groups'] = $this->model_extension_news_group->getNewsGroups();
 		
 		$this->template = 'extension/news_form.tpl';
 		$this->children = array(

@@ -14,55 +14,61 @@
       <div class="buttons"><a onclick="$('#form').submit();" class="button"><?php echo $button_save; ?></a><a href="<?php echo $cancel; ?>" class="button"><?php echo $button_cancel; ?></a></div>
     </div>
     <div class="content">
-      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
-      	<div id="languages" class="htabs">
-            <?php foreach ($languages as $language) { ?>
-            <a href="#language<?php echo $language['language_id']; ?>"><img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /> <?php echo $language['name']; ?></a>
-            <?php } ?>
-        </div>
-        <?php foreach ($languages as $language) { ?>
-        <div id="language<?php echo $language['language_id']; ?>">
-	        <table class="form">
-	          <tr>
-	            <td><span class="required">*</span> <?php echo $entry_title; ?></td>
-	            <td><input type="text" name="title[<?php echo $language['language_id']; ?>]" value="<?php echo $title[$language['language_id']]; ?>" style="width:500px" />
-	              <?php if ($error_title[$language['language_id']]) { ?>
-	              <span class="error"><?php echo $error_title[$language['language_id']]; ?></span>
-	              <?php } ?></td>
-	          </tr>
-	          <tr>
-	            <td><span class="required">*</span> <?php echo $entry_text; ?></td>
-	            <td><textarea name="text[<?php echo $language['language_id']; ?>]" cols="80" rows="6" id="faq-text-<?php echo $language['language_id']; ?>" style="width: 600px"><?php echo $text[$language['language_id']]; ?></textarea>
-	              <?php if ($error_text[$language['language_id']]) { ?>
-	              <span class="error"><?php echo $error_text[$language['language_id']]; ?></span>
-	              <?php } ?></td>
-	          </tr>          
-	          <tr>
-	            <td><?php echo $entry_top; ?></td>
-	            <td><select name="is_top[<?php echo $language['language_id']; ?>]">
-	                <?php if ($is_top[$language['language_id']]) { ?>
-	                <option value="1" selected="selected"><?php echo $text_yes; ?></option>
-	                <option value="0"><?php echo $text_no; ?></option>
-	                <?php } else { ?>
-	                <option value="1"><?php echo $text_yes; ?></option>
-	                <option value="0" selected="selected"><?php echo $text_no; ?></option>
-	                <?php } ?>
-	              </select></td>
-	          </tr>
-	          <tr>
-	            <td><?php echo $entry_status; ?></td>
-	            <td><select name="status[<?php echo $language['language_id']; ?>]">
-	                <option value="1" <?php echo $status[$language['language_id']] ? ' selected="selected"' : ''?> ><?php echo $text_enabled; ?></option>
-	                <option value="0" <?php echo !$status[$language['language_id']] ? ' selected="selected"' : ''?>><?php echo $text_disabled; ?></option>
-	              </select></td>
-	          </tr>
-	          <tr>
-	            <td> Sort Order</td>
-	            <td><input type="text" name="sort_order[<?php echo $language['language_id']; ?>]" value="<?php echo $sort_order[$language['language_id']]; ?>" size="10"/></td>
-	          </tr>
-	        </table>
-        </div>
-        <?php } ?>
+      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form"> 
+        <table class="form">
+          <tr>
+            <td><span class="required">*</span> <?php echo $entry_account; ?></td>
+            <td><input type="text" name="account" value="<?php echo $account; ?>" style="width:500px" />
+              <?php if ($error_account) { ?>
+              <span class="error"><?php echo $error_account; ?></span>
+              <?php } ?></td>
+          </tr>
+          <tr>
+            <td><span class="required">*</span> <?php echo $entry_telephone; ?></td>
+            <td><input type="text" name="telephone" value="<?php echo $telephone; ?>" style="width:500px" />
+              <?php if ($error_telephone) { ?>
+              <span class="error"><?php echo $error_telephone; ?></span>
+              <?php } ?></td>
+          </tr>
+          <tr>
+            <td><span class="required">*</span> <?php echo $entry_text; ?></td>
+            <td><textarea name="text" cols="80" rows="6" id="help-text" style="width: 600px"><?php echo $text; ?></textarea>
+              <?php if ($error_text) { ?>
+              <span class="error"><?php echo $error_text; ?></span>
+              <?php } ?></td>
+          </tr>         
+          <tr>
+            <td><span class="required">*</span> <?php echo $entry_reply; ?></td>
+            <td><textarea name="reply" cols="80" rows="6" id="help-reply" style="width: 600px"><?php echo $reply; ?></textarea>
+              <?php if ($error_reply) { ?>
+              <span class="error"><?php echo $error_reply; ?></span>
+              <?php } ?></td>
+          </tr> 
+          <tr>
+            <td><?php echo $entry_top; ?></td>
+            <td><select name="is_top">
+                <?php if ($is_top) { ?>
+                <option value="1" selected="selected"><?php echo $text_yes; ?></option>
+                <option value="0"><?php echo $text_no; ?></option>
+                <?php } else { ?>
+                <option value="1"><?php echo $text_yes; ?></option>
+                <option value="0" selected="selected"><?php echo $text_no; ?></option>
+                <?php } ?>
+              </select></td>
+          </tr>
+          <tr>
+            <td><?php echo $entry_status; ?></td>
+            <td><select name="status">
+                <option value="1" <?php echo $status ? ' selected="selected"' : ''?> ><?php echo $text_enabled; ?></option>
+                <option value="0" <?php echo !$status ? ' selected="selected"' : ''?>><?php echo $text_disabled; ?></option>
+              </select></td>
+          </tr>
+          <tr>
+            <td><?php echo $entry_sort_order; ?></td>
+            <td><input type="text" name="sort_order" value="<?php echo $sort_order; ?>" size="10"/></td>
+          </tr>
+        </table>
+
       </form>
     </div>
   </div>

@@ -22,20 +22,28 @@
           <thead>
             <tr>            	
               <td width="1" style="text-align: center;"><input type="checkbox" onclick="$('input[name*=\'selected\']').attr('checked', this.checked);" /></td>
-              <td class="left">
-                <a href="javascript:;"><?php echo $column_title; ?></a>
-              </td>
-              <td class="left"><?php if ($sort == 'f.is_top') { ?>
+              <td class="left"><?php if ($sort == 'h.account') { ?>
+                <a href="<?php echo $sort_account; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_account; ?></a>
+                <?php } else { ?>
+                <a href="<?php echo $sort_account; ?>"><?php echo $column_account; ?></a>
+                <?php } ?></td>
+              <td class="left"><?php if ($sort == 'h.telephone') { ?>
+                <a href="<?php echo $sort_telephone; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_telephone; ?></a>
+                <?php } else { ?>
+                <a href="<?php echo $sort_telephone; ?>"><?php echo $column_telephone; ?></a>
+                <?php } ?></td>
+              <td class="left"><?php echo $column_text; ?></td>
+              <td class="left"><?php if ($sort == 'h.date_replied') { ?>
+                <a href="<?php echo $sort_date_replied; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_reply; ?></a>
+                <?php } else { ?>
+                <a href="<?php echo $sort_date_replied; ?>"><?php echo $column_reply; ?></a>
+                <?php } ?></td>
+              <td class="left"><?php if ($sort == 'h.is_top') { ?>
                 <a href="<?php echo $sort_top; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_top; ?></a>
                 <?php } else { ?>
                 <a href="<?php echo $sort_top; ?>"><?php echo $column_top; ?></a>
                 <?php } ?></td>
-              <td class="left"><?php if ($sort == 'f.status') { ?>
-                <a href="<?php echo $sort_status; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_status; ?></a>
-                <?php } else { ?>
-                <a href="<?php echo $sort_status; ?>"><?php echo $column_status; ?></a>
-                <?php } ?></td>
-              <td class="left"><?php if ($sort == 'f.date_added') { ?>
+              <td class="left"><?php if ($sort == 'h.date_added') { ?>
                 <a href="<?php echo $sort_date_added; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_date_added; ?></a>
                 <?php } else { ?>
                 <a href="<?php echo $sort_date_added; ?>"><?php echo $column_date_added; ?></a>
@@ -44,26 +52,28 @@
             </tr>
           </thead>
           <tbody>
-            <?php if ($faqs) { ?>
-            <?php foreach ($faqs as $faq) { ?>
+            <?php if ($helps) { ?>
+            <?php foreach ($helps as $item) { ?>
             <tr>
-              <td style="text-align: center;"><?php if ($faq['selected']) { ?>
-                <input type="checkbox" name="selected[]" value="<?php echo $faq['faq_id']; ?>" checked="checked" />
+              <td style="text-align: center;"><?php if ($item['selected']) { ?>
+                <input type="checkbox" name="selected[]" value="<?php echo $item['help_id']; ?>" checked="checked" />
                 <?php } else { ?>
-                <input type="checkbox" name="selected[]" value="<?php echo $faq['faq_id']; ?>" />
+                <input type="checkbox" name="selected[]" value="<?php echo $item['help_id']; ?>" />
                 <?php } ?></td>
-              <td class="left"><?php echo lively_truncate($faq['title']); ?></td>  
-              <td class="left"><?php echo $faq['is_top'] ? 'Yes':'No'; ?></td>           
-              <td class="left"><?php echo $faq['status']; ?></td>
-              <td class="left"><?php echo $faq['date_added']; ?></td>
-              <td class="right"><?php foreach ($faq['action'] as $action) { ?>
+              <td class="left"><?php echo truncate_string($item['account']); ?></td>  
+              <td class="left"><?php echo $item['telephone'] ; ?></td>           
+              <td class="left"><?php echo truncate_string($item['text'],50) ; ?></td>           
+              <td class="left"><?php echo $item['reply']; ?></td>
+              <td class="left"><?php echo $item['top']; ?></td>
+              <td class="left"><?php echo $item['date_added']; ?></td>
+              <td class="right"><?php foreach ($item['action'] as $action) { ?>
                 [ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
                 <?php } ?></td>
             </tr>
             <?php } ?>
             <?php } else { ?>
             <tr>
-              <td class="center" colspan="6"><?php echo $text_no_results; ?></td>
+              <td class="center" colspan="8"><?php echo $text_no_results; ?></td>
             </tr>
             <?php } ?>
           </tbody>

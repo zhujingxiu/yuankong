@@ -30,7 +30,7 @@ class ModelExtensionNews extends Model {
 			'date_added' => date('Y-m-d H:i:s'),
 		);
 
-		return $this->db->insert("news",array('news_id'=>$id),$fields);
+		return $this->db->update("news",array('news_id'=>$id),$fields);
 	}
 	
 	public function getNews($id) {
