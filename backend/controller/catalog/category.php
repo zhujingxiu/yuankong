@@ -219,6 +219,7 @@ class ControllerCatalogCategory extends Controller {
     	$this->data['text_disabled'] = $this->language->get('text_disabled');
 		$this->data['text_percent'] = $this->language->get('text_percent');
 		$this->data['text_amount'] = $this->language->get('text_amount');
+		$this->data['text_exception'] = $this->language->get('text_exception');
 				
 		$this->data['entry_name'] = $this->language->get('entry_name');
 		$this->data['entry_meta_keyword'] = $this->language->get('entry_meta_keyword');
@@ -416,6 +417,8 @@ class ControllerCatalogCategory extends Controller {
 		$this->load->model('design/layout');
 		
 		$this->data['layouts'] = $this->model_design_layout->getLayouts();
+
+		$this->data['top_categories'] = $this->model_catalog_category->getSelectionCategories(null);
 						
 		$this->template = 'catalog/category_form.tpl';
 		$this->children = array(
@@ -504,5 +507,15 @@ class ControllerCatalogCategory extends Controller {
 
 		$this->response->setOutput(json_encode($json));
 	}		
+
+	public function selection_category(){
+		$this->load->model('catalog/category');
+		$id = isset($this->request->get['cid']) ? (int)$this->request->get['cid'] : null;
+		$json = array('status'=>0);
+		$result = $this->model_catalog_category->getSelectionCategories($id);
+		if(is_array($result) && count($result)){
+			$json = array('status'=>1,'data'=>$result);
+		}		
+		$this->response->setOutput(json_encode($json));
+	}
 }
-?>

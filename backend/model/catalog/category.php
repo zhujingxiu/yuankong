@@ -300,6 +300,20 @@ class ModelCatalogCategory extends Model {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "category_to_layout WHERE layout_id = '" . (int)$layout_id . "'");
 
 		return $query->row['total'];
-	}		
+	}	
+
+	public function getSelectionCategories($parent_id = null) {
+		$sql = "SELECT c.*,cd.name FROM " . DB_PREFIX . "category c  LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) WHERE cd.language_id = '" . (int)$this->config->get('config_language_id') . "' ";
+		if($parent_id === null){
+			$sql.=" AND c.parent_id = '0'";
+		}else{
+			$sql.=" AND c.parent_id = '".$parent_id."'";
+		}
+		$sql .= " ORDER BY c.category_id ,name";
+		
+						
+		$query = $this->db->query($sql);
+		
+		return $query->rows;
+	}	
 }
-?>

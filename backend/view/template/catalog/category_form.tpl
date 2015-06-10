@@ -21,6 +21,30 @@
       </div>
       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
         <div id="tab-general">
+          <table class="form">
+            <tr>
+              <td><?php echo $entry_parent; ?></td>
+              <td>
+                <div class="selection-category">
+                  <select id="top-category" for-entry="second-category">
+                    <?php foreach ($top_categories as $item): ?>
+                    <option value="<?php echo $item['category_id'] ?>"><?php echo $item['name'] ?></option>
+                    <?php endforeach ?>
+                  </select>
+                </div>
+                <div class="selection-category">
+                  <select id="second-category" for-entry="third-category"></select>
+                </div>
+                <div class="selection-category">
+                  <select id="third-category" for-entry="fourth-category"></select>
+                </div>
+                <div class="selection-category">
+                  <select id="fourth-category"></select>
+                </div>
+                <input type="hidden" name="parent_id" value="<?php echo $parent_id; ?>" />
+              </td>
+            </tr>
+          </table>
           <div id="languages" class="htabs">
             <?php foreach ($languages as $language) { ?>
             <a href="#language<?php echo $language['language_id']; ?>">
@@ -28,6 +52,7 @@
             </a>
             <?php } ?>
           </div>
+
           <?php foreach ($languages as $language) { ?>
           <div id="language<?php echo $language['language_id']; ?>">
             <table class="form">
@@ -56,11 +81,13 @@
         </div>
         <div id="tab-data">
           <table class="form">
+            <?php if(false){?>
             <tr>
               <td><?php echo $entry_parent; ?></td>
               <td><input type="text" name="path" value="<?php echo $path; ?>" size="100" />
                 <input type="hidden" name="parent_id" value="<?php echo $parent_id; ?>" /></td>
             </tr>
+            <?php }?>
             <tr>
               <td><?php echo $entry_filter; ?></td>
               <td><input type="text" name="filter" value="" /></td>
@@ -303,9 +330,38 @@ function image_upload(field, thumb) {
 		modal: false
 	});
 };
-//--></script> 
-<script type="text/javascript"><!--
+
 $('#tabs a').tabs(); 
 $('#languages a').tabs();
+
+$('.selection-category select').bind('change',function(){
+  var $cid = $(this).val(),$that = $(this).parent();
+  var $obj = $('.selection-category #'+$(this).attr('for-entry'));
+  
+  $.get('index.php?route=catalog/category/selection_category&token=<?php echo $token ?>&cid='+$cid ,{},function(json){
+    
+    $that.nextAll('.selection-category').hide().children('select').empty();
+    if(json.status==0){
+
+    }else{
+      $obj.append($("<option value='0'><?php echo $text_none ?></option>"));
+      for(var i in json.data){
+        $obj.append($("<option value='" + json.data[i].category_id + "'>" + json.data[i].name + "</option>"));
+      }
+      
+      $obj.parent().show();
+    }
+    $('input[name="parent_id"]').val($cid);
+  },'json');
+  
+});
+$('#top-category').trigger('change')
 //--></script> 
+<style type="text/css">
+  .selection-category{
+    width: 220px;
+    float: left;
+    margin-left: 5px;
+  }
+</style>
 <?php echo $footer; ?>

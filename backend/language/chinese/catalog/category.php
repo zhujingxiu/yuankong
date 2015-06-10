@@ -18,7 +18,7 @@ $_['column_action']              = '编辑分类';
 $_['entry_name']                 = '分类名称：';
 $_['entry_meta_keyword']         = 'Meta标签关键词：';
 $_['entry_meta_description']     = 'Meta标签描述：';
-$_['entry_description']          = '分类描述：<span class="help">输入分组名称前的关键字进入自动匹配</span>';
+$_['entry_description']          = '分类描述：';
 $_['entry_parent']               = '上级分类：';
 $_['entry_filter']           	 = '筛选：';
 $_['entry_store']                = '网店：';
