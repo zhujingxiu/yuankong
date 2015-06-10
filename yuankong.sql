@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.3.12
+-- version 3.5.1
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: 2015-06-09 06:57:32
--- 服务器版本： 5.5.24-log
--- PHP Version: 5.4.3
+-- 主机: localhost
+-- 生成日期: 2015 年 06 月 10 日 09:36
+-- 服务器版本: 5.5.24-log
+-- PHP 版本: 5.4.3
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `yuankong`
+-- 数据库: `yuankong`
 --
 
 -- --------------------------------------------------------
@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `yk_address` (
-  `address_id` int(11) NOT NULL,
+  `address_id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) NOT NULL,
   `firstname` varchar(32) NOT NULL,
   `lastname` varchar(32) NOT NULL,
@@ -39,8 +39,10 @@ CREATE TABLE IF NOT EXISTS `yk_address` (
   `city` varchar(128) NOT NULL,
   `postcode` varchar(10) NOT NULL,
   `country_id` int(11) NOT NULL DEFAULT '0',
-  `zone_id` int(11) NOT NULL DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `zone_id` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`address_id`),
+  KEY `customer_id` (`customer_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -49,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `yk_address` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_affiliate` (
-  `affiliate_id` int(11) NOT NULL,
+  `affiliate_id` int(11) NOT NULL AUTO_INCREMENT,
   `firstname` varchar(32) NOT NULL,
   `lastname` varchar(32) NOT NULL,
   `email` varchar(96) NOT NULL,
@@ -79,8 +81,9 @@ CREATE TABLE IF NOT EXISTS `yk_affiliate` (
   `ip` varchar(40) NOT NULL,
   `status` tinyint(1) NOT NULL,
   `approved` tinyint(1) NOT NULL,
-  `date_added` datetime NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `date_added` datetime NOT NULL,
+  PRIMARY KEY (`affiliate_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -89,13 +92,14 @@ CREATE TABLE IF NOT EXISTS `yk_affiliate` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_affiliate_transaction` (
-  `affiliate_transaction_id` int(11) NOT NULL,
+  `affiliate_transaction_id` int(11) NOT NULL AUTO_INCREMENT,
   `affiliate_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `description` text NOT NULL,
   `amount` decimal(15,4) NOT NULL,
-  `date_added` datetime NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `date_added` datetime NOT NULL,
+  PRIMARY KEY (`affiliate_transaction_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -104,10 +108,11 @@ CREATE TABLE IF NOT EXISTS `yk_affiliate_transaction` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_attribute` (
-  `attribute_id` int(11) NOT NULL,
+  `attribute_id` int(11) NOT NULL AUTO_INCREMENT,
   `attribute_group_id` int(11) NOT NULL,
-  `sort_order` int(3) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+  `sort_order` int(3) NOT NULL,
+  PRIMARY KEY (`attribute_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
 -- 转存表中的数据 `yk_attribute`
@@ -135,7 +140,8 @@ INSERT INTO `yk_attribute` (`attribute_id`, `attribute_group_id`, `sort_order`) 
 CREATE TABLE IF NOT EXISTS `yk_attribute_description` (
   `attribute_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `name` varchar(64) NOT NULL
+  `name` varchar(64) NOT NULL,
+  PRIMARY KEY (`attribute_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -164,7 +170,8 @@ INSERT INTO `yk_attribute_description` (`attribute_id`, `language_id`, `name`) V
 CREATE TABLE IF NOT EXISTS `yk_attribute_group_description` (
   `attribute_group_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `name` varchar(64) NOT NULL
+  `name` varchar(64) NOT NULL,
+  PRIMARY KEY (`attribute_group_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -184,10 +191,11 @@ INSERT INTO `yk_attribute_group_description` (`attribute_group_id`, `language_id
 --
 
 CREATE TABLE IF NOT EXISTS `yk_banner` (
-  `banner_id` int(11) NOT NULL,
+  `banner_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
-  `status` tinyint(1) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+  `status` tinyint(1) NOT NULL,
+  PRIMARY KEY (`banner_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
 -- 转存表中的数据 `yk_banner`
@@ -205,11 +213,12 @@ INSERT INTO `yk_banner` (`banner_id`, `name`, `status`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `yk_banner_image` (
-  `banner_image_id` int(11) NOT NULL,
+  `banner_image_id` int(11) NOT NULL AUTO_INCREMENT,
   `banner_id` int(11) NOT NULL,
   `link` varchar(255) NOT NULL,
-  `image` varchar(255) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=78 DEFAULT CHARSET=utf8;
+  `image` varchar(255) NOT NULL,
+  PRIMARY KEY (`banner_image_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=78 ;
 
 --
 -- 转存表中的数据 `yk_banner_image`
@@ -235,7 +244,8 @@ CREATE TABLE IF NOT EXISTS `yk_banner_image_description` (
   `banner_image_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `banner_id` int(11) NOT NULL,
-  `title` varchar(64) NOT NULL
+  `title` varchar(64) NOT NULL,
+  PRIMARY KEY (`banner_image_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -259,7 +269,7 @@ INSERT INTO `yk_banner_image_description` (`banner_image_id`, `language_id`, `ba
 --
 
 CREATE TABLE IF NOT EXISTS `yk_category` (
-  `category_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL AUTO_INCREMENT,
   `image` varchar(255) DEFAULT NULL,
   `parent_id` int(11) NOT NULL DEFAULT '0',
   `top` tinyint(1) NOT NULL,
@@ -267,52 +277,40 @@ CREATE TABLE IF NOT EXISTS `yk_category` (
   `sort_order` int(3) NOT NULL DEFAULT '0',
   `status` tinyint(1) NOT NULL,
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=MyISAM AUTO_INCREMENT=59 DEFAULT CHARSET=utf8;
+  `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`category_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=84 ;
 
 --
 -- 转存表中的数据 `yk_category`
 --
 
 INSERT INTO `yk_category` (`category_id`, `image`, `parent_id`, `top`, `column`, `sort_order`, `status`, `date_added`, `date_modified`) VALUES
-(25, '', 0, 1, 1, 3, 1, '2009-01-31 01:04:25', '2011-05-30 12:14:55'),
-(27, '', 20, 0, 0, 2, 1, '2009-01-31 01:55:34', '2010-08-22 06:32:15'),
-(20, 'data/demo/compaq_presario.jpg', 0, 1, 1, 1, 1, '2009-01-05 21:49:43', '2011-07-16 02:14:42'),
-(24, '', 0, 1, 1, 5, 1, '2009-01-20 02:36:26', '2011-05-30 12:15:18'),
-(18, 'data/demo/hp_2.jpg', 0, 1, 0, 2, 1, '2009-01-05 21:49:15', '2011-05-30 12:13:55'),
-(17, '', 0, 1, 1, 4, 1, '2009-01-03 21:08:57', '2011-05-30 12:15:11'),
-(28, '', 25, 0, 0, 1, 1, '2009-02-02 13:11:12', '2010-08-22 06:32:46'),
-(26, '', 20, 0, 0, 1, 1, '2009-01-31 01:55:14', '2010-08-22 06:31:45'),
-(29, '', 25, 0, 0, 1, 1, '2009-02-02 13:11:37', '2010-08-22 06:32:39'),
-(30, '', 25, 0, 0, 1, 1, '2009-02-02 13:11:59', '2010-08-22 06:33:00'),
-(31, '', 25, 0, 0, 1, 1, '2009-02-03 14:17:24', '2010-08-22 06:33:06'),
-(32, '', 25, 0, 0, 1, 1, '2009-02-03 14:17:34', '2010-08-22 06:33:12'),
-(33, '', 0, 1, 1, 6, 1, '2009-02-03 14:17:55', '2011-05-30 12:15:25'),
-(34, 'data/demo/ipod_touch_4.jpg', 0, 1, 4, 7, 1, '2009-02-03 14:18:11', '2011-05-30 12:15:31'),
-(35, '', 28, 0, 0, 0, 1, '2010-09-17 10:06:48', '2010-09-18 14:02:42'),
-(36, '', 28, 0, 0, 0, 1, '2010-09-17 10:07:13', '2010-09-18 14:02:55'),
-(37, '', 34, 0, 0, 0, 1, '2010-09-18 14:03:39', '2011-04-22 01:55:08'),
-(38, '', 34, 0, 0, 0, 1, '2010-09-18 14:03:51', '2010-09-18 14:03:51'),
-(39, '', 34, 0, 0, 0, 1, '2010-09-18 14:04:17', '2011-04-22 01:55:20'),
-(40, '', 34, 0, 0, 0, 1, '2010-09-18 14:05:36', '2010-09-18 14:05:36'),
-(41, '', 34, 0, 0, 0, 1, '2010-09-18 14:05:49', '2011-04-22 01:55:30'),
-(42, '', 34, 0, 0, 0, 1, '2010-09-18 14:06:34', '2010-11-07 20:31:04'),
-(43, '', 34, 0, 0, 0, 1, '2010-09-18 14:06:49', '2011-04-22 01:55:40'),
-(44, '', 34, 0, 0, 0, 1, '2010-09-21 15:39:21', '2010-11-07 20:30:55'),
-(45, '', 18, 0, 0, 0, 1, '2010-09-24 18:29:16', '2011-04-26 08:52:11'),
-(46, '', 18, 0, 0, 0, 1, '2010-09-24 18:29:31', '2011-04-26 08:52:23'),
-(47, '', 34, 0, 0, 0, 1, '2010-11-07 11:13:16', '2010-11-07 11:13:16'),
-(48, '', 34, 0, 0, 0, 1, '2010-11-07 11:13:33', '2010-11-07 11:13:33'),
-(49, '', 34, 0, 0, 0, 1, '2010-11-07 11:14:04', '2010-11-07 11:14:04'),
-(50, '', 34, 0, 0, 0, 1, '2010-11-07 11:14:23', '2011-04-22 01:16:01'),
-(51, '', 34, 0, 0, 0, 1, '2010-11-07 11:14:38', '2011-04-22 01:16:13'),
-(52, '', 34, 0, 0, 0, 1, '2010-11-07 11:16:09', '2011-04-22 01:54:57'),
-(53, '', 34, 0, 0, 0, 1, '2010-11-07 11:28:53', '2011-04-22 01:14:36'),
-(54, '', 34, 0, 0, 0, 1, '2010-11-07 11:29:16', '2011-04-22 01:16:50'),
-(55, '', 34, 0, 0, 0, 1, '2010-11-08 10:31:32', '2010-11-08 10:31:32'),
-(56, '', 34, 0, 0, 0, 1, '2010-11-08 10:31:50', '2011-04-22 01:16:37'),
-(57, '', 0, 1, 1, 3, 1, '2011-04-26 08:53:16', '2011-05-30 12:15:05'),
-(58, '', 52, 0, 0, 0, 1, '2011-05-08 13:44:16', '2011-05-08 13:44:16');
+(78, '', 75, 0, 1, 0, 1, '2015-06-10 17:32:09', '2015-06-10 17:32:09'),
+(77, '', 75, 0, 1, 0, 1, '2015-06-10 17:31:33', '2015-06-10 17:31:33'),
+(75, '', 59, 0, 1, 0, 1, '2015-06-10 17:15:02', '2015-06-10 17:15:02'),
+(61, '', 59, 0, 1, 0, 1, '2015-06-10 16:58:03', '2015-06-10 16:58:03'),
+(62, '', 61, 0, 1, 0, 1, '2015-06-10 16:59:08', '2015-06-10 16:59:08'),
+(60, '', 0, 0, 1, 0, 1, '2015-06-10 16:55:53', '2015-06-10 16:55:53'),
+(76, '', 75, 0, 1, 0, 1, '2015-06-10 17:28:06', '2015-06-10 17:28:06'),
+(81, '', 75, 0, 1, 0, 1, '2015-06-10 17:33:14', '2015-06-10 17:33:14'),
+(80, '', 75, 0, 1, 0, 1, '2015-06-10 17:32:58', '2015-06-10 17:32:58'),
+(79, '', 75, 0, 1, 0, 1, '2015-06-10 17:32:41', '2015-06-10 17:32:41'),
+(63, '', 61, 0, 1, 0, 1, '2015-06-10 17:01:18', '2015-06-10 17:01:18'),
+(64, '', 61, 0, 1, 0, 1, '2015-06-10 17:01:44', '2015-06-10 17:01:44'),
+(74, '', 69, 0, 1, 0, 1, '2015-06-10 17:14:27', '2015-06-10 17:14:27'),
+(73, '', 69, 0, 1, 0, 1, '2015-06-10 17:14:02', '2015-06-10 17:14:02'),
+(72, '', 69, 0, 1, 0, 1, '2015-06-10 17:13:14', '2015-06-10 17:13:14'),
+(71, '', 69, 0, 1, 0, 1, '2015-06-10 17:12:46', '2015-06-10 17:12:46'),
+(70, '', 69, 0, 1, 0, 1, '2015-06-10 17:11:49', '2015-06-10 17:11:49'),
+(69, '', 59, 0, 1, 0, 1, '2015-06-10 17:11:04', '2015-06-10 17:11:04'),
+(68, '', 61, 0, 1, 0, 1, '2015-06-10 17:08:04', '2015-06-10 17:10:24'),
+(67, '', 61, 0, 1, 0, 1, '2015-06-10 17:02:58', '2015-06-10 17:02:58'),
+(66, '', 61, 0, 1, 0, 1, '2015-06-10 17:02:39', '2015-06-10 17:02:39'),
+(65, '', 61, 0, 1, 0, 1, '2015-06-10 17:02:21', '2015-06-10 17:02:21'),
+(59, '', 0, 0, 1, 0, 1, '2015-06-10 16:55:33', '2015-06-10 16:55:33'),
+(82, '', 75, 0, 1, 0, 1, '2015-06-10 17:33:47', '2015-06-10 17:33:47'),
+(83, '', 75, 0, 1, 0, 1, '2015-06-10 17:34:34', '2015-06-10 17:34:34');
 
 -- --------------------------------------------------------
 
@@ -326,7 +324,9 @@ CREATE TABLE IF NOT EXISTS `yk_category_description` (
   `name` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `meta_description` varchar(255) NOT NULL,
-  `meta_keyword` varchar(255) NOT NULL
+  `meta_keyword` varchar(255) NOT NULL,
+  PRIMARY KEY (`category_id`,`language_id`),
+  KEY `name` (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -334,44 +334,31 @@ CREATE TABLE IF NOT EXISTS `yk_category_description` (
 --
 
 INSERT INTO `yk_category_description` (`category_id`, `language_id`, `name`, `description`, `meta_description`, `meta_keyword`) VALUES
-(28, 2, 'Monitors', '', '', ''),
-(33, 2, 'Cameras', '', '', ''),
-(32, 2, 'Web Cameras', '', '', ''),
-(31, 2, 'Scanners', '', '', ''),
-(30, 2, 'Printers', '', '', ''),
-(29, 2, 'Mice and Trackballs', '', '', ''),
-(27, 2, 'Mac', '', '', ''),
-(26, 2, 'PC', '', '', ''),
-(17, 2, 'Software', '', '', ''),
-(25, 2, 'Components', '', '', ''),
-(24, 2, 'Phones &amp; PDAs', '', '', ''),
-(20, 2, 'Desktops', '&lt;p&gt;\r\n	Example of category description text&lt;/p&gt;\r\n', 'Example of category description', ''),
-(35, 2, 'test 1', '', '', ''),
-(36, 2, 'test 2', '', '', ''),
-(37, 2, 'test 5', '', '', ''),
-(38, 2, 'test 4', '', '', ''),
-(39, 2, 'test 6', '', '', ''),
-(40, 2, 'test 7', '', '', ''),
-(41, 2, 'test 8', '', '', ''),
-(42, 2, 'test 9', '', '', ''),
-(43, 2, 'test 11', '', '', ''),
-(34, 2, 'MP3 Players', '&lt;p&gt;\r\n	Shop Laptop feature only the best laptop deals on the market. By comparing laptop deals from the likes of PC World, Comet, Dixons, The Link and Carphone Warehouse, Shop Laptop has the most comprehensive selection of laptops on the internet. At Shop Laptop, we pride ourselves on offering customers the very best laptop deals. From refurbished laptops to netbooks, Shop Laptop ensures that every laptop - in every colour, style, size and technical spec - is featured on the site at the lowest possible price.&lt;/p&gt;\r\n', '', ''),
-(18, 2, 'Laptops &amp; Notebooks', '&lt;p&gt;\r\n	Shop Laptop feature only the best laptop deals on the market. By comparing laptop deals from the likes of PC World, Comet, Dixons, The Link and Carphone Warehouse, Shop Laptop has the most comprehensive selection of laptops on the internet. At Shop Laptop, we pride ourselves on offering customers the very best laptop deals. From refurbished laptops to netbooks, Shop Laptop ensures that every laptop - in every colour, style, size and technical spec - is featured on the site at the lowest possible price.&lt;/p&gt;\r\n', '', ''),
-(44, 2, 'test 12', '', '', ''),
-(45, 2, 'Windows', '', '', ''),
-(46, 2, 'Macs', '', '', ''),
-(47, 2, 'test 15', '', '', ''),
-(48, 2, 'test 16', '', '', ''),
-(49, 2, 'test 17', '', '', ''),
-(50, 2, 'test 18', '', '', ''),
-(51, 2, 'test 19', '', '', ''),
-(52, 2, 'test 20', '', '', ''),
-(53, 2, 'test 21', '', '', ''),
-(54, 2, 'test 22', '', '', ''),
-(55, 2, 'test 23', '', '', ''),
-(56, 2, 'test 24', '', '', ''),
-(57, 2, 'Tablets', '', '', ''),
-(58, 2, 'test 25', '', '', '');
+(60, 2, '消防装备', '', '', ''),
+(61, 2, '消火栓系统', '', '', ''),
+(62, 2, '消火栓', '', '', ''),
+(63, 2, '消防水带', '', '', ''),
+(64, 2, '消火栓箱', '', '', ''),
+(65, 2, '消防泵', '', '', ''),
+(66, 2, '消防水炮', '', '', ''),
+(67, 2, '消防水枪', '', '', ''),
+(68, 2, '消防卷盘', '', '', ''),
+(69, 2, '火灾自动报警系统', '', '', ''),
+(70, 2, '火灾探测器', '', '', ''),
+(71, 2, '声光报警器', '', '', ''),
+(72, 2, '应急广播', '', '', ''),
+(73, 2, '消防警铃', '', '', ''),
+(74, 2, '漏电火灾报警系统', '', '', ''),
+(75, 2, '自动灭火系统', '', '', ''),
+(76, 2, '消防泵', '', '', ''),
+(77, 2, '喷淋', '', '', ''),
+(78, 2, '阀门', '', '', ''),
+(79, 2, '灭火器', '', '', ''),
+(80, 2, '水流指示器', '', '', ''),
+(81, 2, '灭火剂', '', '', ''),
+(82, 2, '气体检测仪', '', '', ''),
+(83, 2, '泡沫灭火装置', '', '', ''),
+(59, 2, '消防产品', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -381,7 +368,8 @@ INSERT INTO `yk_category_description` (`category_id`, `language_id`, `name`, `de
 
 CREATE TABLE IF NOT EXISTS `yk_category_filter` (
   `category_id` int(11) NOT NULL,
-  `filter_id` int(11) NOT NULL
+  `filter_id` int(11) NOT NULL,
+  PRIMARY KEY (`category_id`,`filter_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -393,7 +381,8 @@ CREATE TABLE IF NOT EXISTS `yk_category_filter` (
 CREATE TABLE IF NOT EXISTS `yk_category_path` (
   `category_id` int(11) NOT NULL,
   `path_id` int(11) NOT NULL,
-  `level` int(11) NOT NULL
+  `level` int(11) NOT NULL,
+  PRIMARY KEY (`category_id`,`path_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -401,77 +390,74 @@ CREATE TABLE IF NOT EXISTS `yk_category_path` (
 --
 
 INSERT INTO `yk_category_path` (`category_id`, `path_id`, `level`) VALUES
-(25, 25, 0),
-(28, 25, 0),
-(28, 28, 1),
-(35, 25, 0),
-(35, 28, 1),
-(35, 35, 2),
-(36, 25, 0),
-(36, 28, 1),
-(36, 36, 2),
-(29, 25, 0),
-(29, 29, 1),
-(30, 25, 0),
-(30, 30, 1),
-(31, 25, 0),
-(31, 31, 1),
-(32, 25, 0),
-(32, 32, 1),
-(20, 20, 0),
-(27, 20, 0),
-(27, 27, 1),
-(26, 20, 0),
-(26, 26, 1),
-(24, 24, 0),
-(18, 18, 0),
-(45, 18, 0),
-(45, 45, 1),
-(46, 18, 0),
-(46, 46, 1),
-(17, 17, 0),
-(33, 33, 0),
-(34, 34, 0),
-(37, 34, 0),
-(37, 37, 1),
-(38, 34, 0),
-(38, 38, 1),
-(39, 34, 0),
-(39, 39, 1),
-(40, 34, 0),
-(40, 40, 1),
-(41, 34, 0),
-(41, 41, 1),
-(42, 34, 0),
-(42, 42, 1),
-(43, 34, 0),
-(43, 43, 1),
-(44, 34, 0),
-(44, 44, 1),
-(47, 34, 0),
-(47, 47, 1),
-(48, 34, 0),
-(48, 48, 1),
-(49, 34, 0),
-(49, 49, 1),
-(50, 34, 0),
-(50, 50, 1),
-(51, 34, 0),
-(51, 51, 1),
-(52, 34, 0),
-(52, 52, 1),
-(58, 34, 0),
-(58, 52, 1),
-(58, 58, 2),
-(53, 34, 0),
-(53, 53, 1),
-(54, 34, 0),
-(54, 54, 1),
-(55, 34, 0),
-(55, 55, 1),
-(56, 34, 0),
-(56, 56, 1),
-(57, 57, 0);
+(83, 83, 2),
+(83, 75, 1),
+(83, 59, 0),
+(82, 82, 2),
+(82, 75, 1),
+(82, 59, 0),
+(81, 81, 2),
+(81, 75, 1),
+(81, 59, 0),
+(80, 80, 2),
+(80, 75, 1),
+(80, 59, 0),
+(79, 79, 2),
+(79, 75, 1),
+(79, 59, 0),
+(78, 78, 2),
+(78, 75, 1),
+(78, 59, 0),
+(77, 77, 2),
+(77, 75, 1),
+(61, 59, 0),
+(77, 59, 0),
+(76, 76, 2),
+(76, 75, 1),
+(76, 59, 0),
+(75, 75, 1),
+(60, 60, 0),
+(75, 59, 0),
+(74, 74, 2),
+(74, 69, 1),
+(74, 59, 0),
+(73, 73, 2),
+(73, 69, 1),
+(73, 59, 0),
+(72, 72, 2),
+(72, 69, 1),
+(72, 59, 0),
+(71, 71, 2),
+(71, 69, 1),
+(71, 59, 0),
+(70, 70, 2),
+(70, 69, 1),
+(70, 59, 0),
+(69, 69, 1),
+(69, 59, 0),
+(68, 68, 2),
+(68, 59, 0),
+(68, 61, 1),
+(67, 67, 2),
+(67, 61, 1),
+(67, 59, 0),
+(66, 66, 2),
+(66, 61, 1),
+(66, 59, 0),
+(65, 65, 2),
+(65, 61, 1),
+(65, 59, 0),
+(64, 64, 2),
+(64, 61, 1),
+(64, 59, 0),
+(63, 63, 2),
+(63, 61, 1),
+(63, 59, 0),
+(62, 62, 2),
+(62, 61, 1),
+(62, 59, 0),
+(61, 61, 1),
+(59, 59, 0);
 
 -- --------------------------------------------------------
 
@@ -482,7 +468,8 @@ INSERT INTO `yk_category_path` (`category_id`, `path_id`, `level`) VALUES
 CREATE TABLE IF NOT EXISTS `yk_category_to_layout` (
   `category_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
-  `layout_id` int(11) NOT NULL
+  `layout_id` int(11) NOT NULL,
+  PRIMARY KEY (`category_id`,`store_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -493,7 +480,8 @@ CREATE TABLE IF NOT EXISTS `yk_category_to_layout` (
 
 CREATE TABLE IF NOT EXISTS `yk_category_to_store` (
   `category_id` int(11) NOT NULL,
-  `store_id` int(11) NOT NULL
+  `store_id` int(11) NOT NULL,
+  PRIMARY KEY (`category_id`,`store_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -501,44 +489,31 @@ CREATE TABLE IF NOT EXISTS `yk_category_to_store` (
 --
 
 INSERT INTO `yk_category_to_store` (`category_id`, `store_id`) VALUES
-(17, 0),
-(18, 0),
-(20, 0),
-(24, 0),
-(25, 0),
-(26, 0),
-(27, 0),
-(28, 0),
-(29, 0),
-(30, 0),
-(31, 0),
-(32, 0),
-(33, 0),
-(34, 0),
-(35, 0),
-(36, 0),
-(37, 0),
-(38, 0),
-(39, 0),
-(40, 0),
-(41, 0),
-(42, 0),
-(43, 0),
-(44, 0),
-(45, 0),
-(46, 0),
-(47, 0),
-(48, 0),
-(49, 0),
-(50, 0),
-(51, 0),
-(52, 0),
-(53, 0),
-(54, 0),
-(55, 0),
-(56, 0),
-(57, 0),
-(58, 0);
+(59, 0),
+(60, 0),
+(61, 0),
+(62, 0),
+(63, 0),
+(64, 0),
+(65, 0),
+(66, 0),
+(67, 0),
+(68, 0),
+(69, 0),
+(70, 0),
+(71, 0),
+(72, 0),
+(73, 0),
+(74, 0),
+(75, 0),
+(76, 0),
+(77, 0),
+(78, 0),
+(79, 0),
+(80, 0),
+(81, 0),
+(82, 0),
+(83, 0);
 
 -- --------------------------------------------------------
 
@@ -547,14 +522,15 @@ INSERT INTO `yk_category_to_store` (`category_id`, `store_id`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `yk_country` (
-  `country_id` int(11) NOT NULL,
+  `country_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) NOT NULL,
   `iso_code_2` varchar(2) NOT NULL,
   `iso_code_3` varchar(3) NOT NULL,
   `address_format` text NOT NULL,
   `postcode_required` tinyint(1) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=MyISAM AUTO_INCREMENT=252 DEFAULT CHARSET=utf8;
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`country_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=252 ;
 
 --
 -- 转存表中的数据 `yk_country`
@@ -818,7 +794,7 @@ INSERT INTO `yk_country` (`country_id`, `name`, `iso_code_2`, `iso_code_3`, `add
 --
 
 CREATE TABLE IF NOT EXISTS `yk_coupon` (
-  `coupon_id` int(11) NOT NULL,
+  `coupon_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) NOT NULL,
   `code` varchar(10) NOT NULL,
   `type` char(1) NOT NULL,
@@ -831,8 +807,9 @@ CREATE TABLE IF NOT EXISTS `yk_coupon` (
   `uses_total` int(11) NOT NULL,
   `uses_customer` varchar(11) NOT NULL,
   `status` tinyint(1) NOT NULL,
-  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`coupon_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- 转存表中的数据 `yk_coupon`
@@ -851,7 +828,8 @@ INSERT INTO `yk_coupon` (`coupon_id`, `name`, `code`, `type`, `discount`, `logge
 
 CREATE TABLE IF NOT EXISTS `yk_coupon_category` (
   `coupon_id` int(11) NOT NULL,
-  `category_id` int(11) NOT NULL
+  `category_id` int(11) NOT NULL,
+  PRIMARY KEY (`coupon_id`,`category_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -861,13 +839,14 @@ CREATE TABLE IF NOT EXISTS `yk_coupon_category` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_coupon_history` (
-  `coupon_history_id` int(11) NOT NULL,
+  `coupon_history_id` int(11) NOT NULL AUTO_INCREMENT,
   `coupon_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `amount` decimal(15,4) NOT NULL,
-  `date_added` datetime NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `date_added` datetime NOT NULL,
+  PRIMARY KEY (`coupon_history_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -876,10 +855,11 @@ CREATE TABLE IF NOT EXISTS `yk_coupon_history` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_coupon_product` (
-  `coupon_product_id` int(11) NOT NULL,
+  `coupon_product_id` int(11) NOT NULL AUTO_INCREMENT,
   `coupon_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `product_id` int(11) NOT NULL,
+  PRIMARY KEY (`coupon_product_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -888,7 +868,7 @@ CREATE TABLE IF NOT EXISTS `yk_coupon_product` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_currency` (
-  `currency_id` int(11) NOT NULL,
+  `currency_id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(32) NOT NULL,
   `code` varchar(3) NOT NULL,
   `symbol_left` varchar(12) NOT NULL,
@@ -896,8 +876,9 @@ CREATE TABLE IF NOT EXISTS `yk_currency` (
   `decimal_place` char(1) NOT NULL,
   `value` float(15,8) NOT NULL,
   `status` tinyint(1) NOT NULL,
-  `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`currency_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- 转存表中的数据 `yk_currency`
@@ -913,7 +894,7 @@ INSERT INTO `yk_currency` (`currency_id`, `title`, `code`, `symbol_left`, `symbo
 --
 
 CREATE TABLE IF NOT EXISTS `yk_customer` (
-  `customer_id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL AUTO_INCREMENT,
   `store_id` int(11) NOT NULL DEFAULT '0',
   `firstname` varchar(32) NOT NULL,
   `lastname` varchar(32) NOT NULL,
@@ -931,8 +912,9 @@ CREATE TABLE IF NOT EXISTS `yk_customer` (
   `status` tinyint(1) NOT NULL,
   `approved` tinyint(1) NOT NULL,
   `token` varchar(255) NOT NULL,
-  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`customer_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -941,9 +923,11 @@ CREATE TABLE IF NOT EXISTS `yk_customer` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_customer_ban_ip` (
-  `customer_ban_ip_id` int(11) NOT NULL,
-  `ip` varchar(40) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `customer_ban_ip_id` int(11) NOT NULL AUTO_INCREMENT,
+  `ip` varchar(40) NOT NULL,
+  PRIMARY KEY (`customer_ban_ip_id`),
+  KEY `ip` (`ip`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -957,7 +941,8 @@ CREATE TABLE IF NOT EXISTS `yk_customer_field` (
   `custom_field_value_id` int(11) NOT NULL,
   `name` int(128) NOT NULL,
   `value` text NOT NULL,
-  `sort_order` int(3) NOT NULL
+  `sort_order` int(3) NOT NULL,
+  PRIMARY KEY (`customer_id`,`custom_field_id`,`custom_field_value_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -967,14 +952,15 @@ CREATE TABLE IF NOT EXISTS `yk_customer_field` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_customer_group` (
-  `customer_group_id` int(11) NOT NULL,
+  `customer_group_id` int(11) NOT NULL AUTO_INCREMENT,
   `approval` int(1) NOT NULL,
   `company_id_display` int(1) NOT NULL,
   `company_id_required` int(1) NOT NULL,
   `tax_id_display` int(1) NOT NULL,
   `tax_id_required` int(1) NOT NULL,
-  `sort_order` int(3) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `sort_order` int(3) NOT NULL,
+  PRIMARY KEY (`customer_group_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- 转存表中的数据 `yk_customer_group`
@@ -993,7 +979,8 @@ CREATE TABLE IF NOT EXISTS `yk_customer_group_description` (
   `customer_group_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `name` varchar(32) NOT NULL,
-  `description` text NOT NULL
+  `description` text NOT NULL,
+  PRIMARY KEY (`customer_group_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -1010,11 +997,12 @@ INSERT INTO `yk_customer_group_description` (`customer_group_id`, `language_id`,
 --
 
 CREATE TABLE IF NOT EXISTS `yk_customer_history` (
-  `customer_history_id` int(11) NOT NULL,
+  `customer_history_id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) NOT NULL,
   `comment` text NOT NULL,
-  `date_added` datetime NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `date_added` datetime NOT NULL,
+  PRIMARY KEY (`customer_history_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1023,11 +1011,13 @@ CREATE TABLE IF NOT EXISTS `yk_customer_history` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_customer_ip` (
-  `customer_ip_id` int(11) NOT NULL,
+  `customer_ip_id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) NOT NULL,
   `ip` varchar(40) NOT NULL,
-  `date_added` datetime NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `date_added` datetime NOT NULL,
+  PRIMARY KEY (`customer_ip_id`),
+  KEY `ip` (`ip`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1040,7 +1030,8 @@ CREATE TABLE IF NOT EXISTS `yk_customer_online` (
   `customer_id` int(11) NOT NULL,
   `url` text NOT NULL,
   `referer` text NOT NULL,
-  `date_added` datetime NOT NULL
+  `date_added` datetime NOT NULL,
+  PRIMARY KEY (`ip`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1050,13 +1041,14 @@ CREATE TABLE IF NOT EXISTS `yk_customer_online` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_customer_reward` (
-  `customer_reward_id` int(11) NOT NULL,
+  `customer_reward_id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) NOT NULL DEFAULT '0',
   `order_id` int(11) NOT NULL DEFAULT '0',
   `description` text NOT NULL,
   `points` int(8) NOT NULL DEFAULT '0',
-  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`customer_reward_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1065,13 +1057,14 @@ CREATE TABLE IF NOT EXISTS `yk_customer_reward` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_customer_transaction` (
-  `customer_transaction_id` int(11) NOT NULL,
+  `customer_transaction_id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `description` text NOT NULL,
   `amount` decimal(15,4) NOT NULL,
-  `date_added` datetime NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `date_added` datetime NOT NULL,
+  PRIMARY KEY (`customer_transaction_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1080,14 +1073,15 @@ CREATE TABLE IF NOT EXISTS `yk_customer_transaction` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_custom_field` (
-  `custom_field_id` int(11) NOT NULL,
+  `custom_field_id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(32) NOT NULL,
   `value` text NOT NULL,
   `required` tinyint(1) NOT NULL,
   `location` varchar(32) NOT NULL,
   `position` int(3) NOT NULL,
-  `sort_order` int(3) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `sort_order` int(3) NOT NULL,
+  PRIMARY KEY (`custom_field_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1098,7 +1092,8 @@ CREATE TABLE IF NOT EXISTS `yk_custom_field` (
 CREATE TABLE IF NOT EXISTS `yk_custom_field_description` (
   `custom_field_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `name` varchar(128) NOT NULL
+  `name` varchar(128) NOT NULL,
+  PRIMARY KEY (`custom_field_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1109,7 +1104,8 @@ CREATE TABLE IF NOT EXISTS `yk_custom_field_description` (
 
 CREATE TABLE IF NOT EXISTS `yk_custom_field_to_customer_group` (
   `custom_field_id` int(11) NOT NULL,
-  `customer_group_id` int(11) NOT NULL
+  `customer_group_id` int(11) NOT NULL,
+  PRIMARY KEY (`custom_field_id`,`customer_group_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1119,10 +1115,11 @@ CREATE TABLE IF NOT EXISTS `yk_custom_field_to_customer_group` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_custom_field_value` (
-  `custom_field_value_id` int(11) NOT NULL,
+  `custom_field_value_id` int(11) NOT NULL AUTO_INCREMENT,
   `custom_field_id` int(11) NOT NULL,
-  `sort_order` int(3) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `sort_order` int(3) NOT NULL,
+  PRIMARY KEY (`custom_field_value_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1134,7 +1131,8 @@ CREATE TABLE IF NOT EXISTS `yk_custom_field_value_description` (
   `custom_field_value_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `custom_field_id` int(11) NOT NULL,
-  `name` varchar(128) NOT NULL
+  `name` varchar(128) NOT NULL,
+  PRIMARY KEY (`custom_field_value_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1144,12 +1142,13 @@ CREATE TABLE IF NOT EXISTS `yk_custom_field_value_description` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_download` (
-  `download_id` int(11) NOT NULL,
+  `download_id` int(11) NOT NULL AUTO_INCREMENT,
   `filename` varchar(128) NOT NULL,
   `mask` varchar(128) NOT NULL,
   `remaining` int(11) NOT NULL DEFAULT '0',
-  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`download_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1160,7 +1159,8 @@ CREATE TABLE IF NOT EXISTS `yk_download` (
 CREATE TABLE IF NOT EXISTS `yk_download_description` (
   `download_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `name` varchar(64) NOT NULL
+  `name` varchar(64) NOT NULL,
+  PRIMARY KEY (`download_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1170,10 +1170,11 @@ CREATE TABLE IF NOT EXISTS `yk_download_description` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_extension` (
-  `extension_id` int(11) NOT NULL,
+  `extension_id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(32) NOT NULL,
-  `code` varchar(32) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=430 DEFAULT CHARSET=utf8;
+  `code` varchar(32) NOT NULL,
+  PRIMARY KEY (`extension_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=430 ;
 
 --
 -- 转存表中的数据 `yk_extension`
@@ -1209,10 +1210,11 @@ INSERT INTO `yk_extension` (`extension_id`, `type`, `code`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `yk_filter` (
-  `filter_id` int(11) NOT NULL,
+  `filter_id` int(11) NOT NULL AUTO_INCREMENT,
   `filter_group_id` int(11) NOT NULL,
-  `sort_order` int(3) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `sort_order` int(3) NOT NULL,
+  PRIMARY KEY (`filter_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1224,7 +1226,8 @@ CREATE TABLE IF NOT EXISTS `yk_filter_description` (
   `filter_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `filter_group_id` int(11) NOT NULL,
-  `name` varchar(64) NOT NULL
+  `name` varchar(64) NOT NULL,
+  PRIMARY KEY (`filter_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1234,9 +1237,10 @@ CREATE TABLE IF NOT EXISTS `yk_filter_description` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_filter_group` (
-  `filter_group_id` int(11) NOT NULL,
-  `sort_order` int(3) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `filter_group_id` int(11) NOT NULL AUTO_INCREMENT,
+  `sort_order` int(3) NOT NULL,
+  PRIMARY KEY (`filter_group_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1247,7 +1251,8 @@ CREATE TABLE IF NOT EXISTS `yk_filter_group` (
 CREATE TABLE IF NOT EXISTS `yk_filter_group_description` (
   `filter_group_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `name` varchar(64) NOT NULL
+  `name` varchar(64) NOT NULL,
+  PRIMARY KEY (`filter_group_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1257,12 +1262,13 @@ CREATE TABLE IF NOT EXISTS `yk_filter_group_description` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_geo_zone` (
-  `geo_zone_id` int(11) NOT NULL,
+  `geo_zone_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL,
   `description` varchar(255) NOT NULL,
   `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`geo_zone_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- 转存表中的数据 `yk_geo_zone`
@@ -1279,27 +1285,29 @@ INSERT INTO `yk_geo_zone` (`geo_zone_id`, `name`, `description`, `date_modified`
 --
 
 CREATE TABLE IF NOT EXISTS `yk_help` (
-  `help_id` int(11) NOT NULL,
+  `help_id` int(11) NOT NULL AUTO_INCREMENT,
   `group_id` smallint(6) NOT NULL DEFAULT '0',
   `account` varchar(128) NOT NULL,
   `telephone` varchar(16) NOT NULL,
-  `text` text,
-  `status` tinyint(4) DEFAULT NULL,
+  `text` varchar(512) DEFAULT NULL,
   `is_top` tinyint(4) NOT NULL DEFAULT '0',
   `sort_order` smallint(6) NOT NULL DEFAULT '0',
   `reply` text,
   `user_id` int(11) NOT NULL DEFAULT '0',
+  `status` tinyint(4) NOT NULL DEFAULT '1',
   `date_replied` datetime DEFAULT NULL,
-  `date_added` datetime DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `date_added` datetime DEFAULT NULL,
+  PRIMARY KEY (`help_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- 转存表中的数据 `yk_help`
 --
 
-INSERT INTO `yk_help` (`help_id`, `group_id`, `account`, `telephone`, `text`, `status`, `is_top`, `sort_order`, `reply`, `user_id`, `date_replied`, `date_added`) VALUES
-(1, 0, 'asdsad', '12312312', 'asdsadasdasdas', 1, 0, 0, 'asdsadasdsa', 1, '2015-05-25 08:29:28', '2015-05-25 05:16:00'),
-(2, 0, 'asdsafafasdasd', '12321321312', 'adasdasdsadassa', 1, 0, 0, NULL, 0, NULL, '2015-05-25 07:37:26');
+INSERT INTO `yk_help` (`help_id`, `group_id`, `account`, `telephone`, `text`, `is_top`, `sort_order`, `reply`, `user_id`, `status`, `date_replied`, `date_added`) VALUES
+(1, 0, '宝马为740i准备了代号B58的新一代直列六缸涡轮增压汽油发动机', '12312312', 'asdsadasdasdas', 0, 0, 'asdsadasdsa', 1, 1, '2015-06-10 06:14:38', '2015-06-10 06:14:38'),
+(2, 0, 'asdsafafasdasd', '12321321312', 'adasdasdsadassa', 0, 0, NULL, 0, 1, NULL, '2015-05-25 07:37:26'),
+(3, 0, '汉武帝开拓疆域：中国国家雏形形成', '1312434243', '汉代建立起中原王朝的一个初步形态，尤以汉武帝对\r\n\r\n疆域的拓展最具开创意义。[详细]', 1, 2, '在李莎与李立三的后代看来，李莎"为了爱情的远行"\r\n\r\n，虽然为此付出了巨大的代价，但终生无悔。[详', 1, 1, NULL, '2015-06-10 08:25:06');
 
 -- --------------------------------------------------------
 
@@ -1308,11 +1316,12 @@ INSERT INTO `yk_help` (`help_id`, `group_id`, `account`, `telephone`, `text`, `s
 --
 
 CREATE TABLE IF NOT EXISTS `yk_help_group` (
-  `group_id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) DEFAULT NULL,
   `show` tinyint(4) NOT NULL DEFAULT '0',
-  `sort_order` int(3) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+  `sort_order` int(3) NOT NULL,
+  PRIMARY KEY (`group_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- 转存表中的数据 `yk_help_group`
@@ -1331,11 +1340,12 @@ INSERT INTO `yk_help_group` (`group_id`, `name`, `show`, `sort_order`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `yk_information` (
-  `information_id` int(11) NOT NULL,
+  `information_id` int(11) NOT NULL AUTO_INCREMENT,
   `bottom` int(1) NOT NULL DEFAULT '0',
   `sort_order` int(3) NOT NULL DEFAULT '0',
-  `status` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`information_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- 转存表中的数据 `yk_information`
@@ -1357,7 +1367,8 @@ CREATE TABLE IF NOT EXISTS `yk_information_description` (
   `information_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `title` varchar(64) NOT NULL,
-  `description` text NOT NULL
+  `description` text NOT NULL,
+  PRIMARY KEY (`information_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -1379,7 +1390,8 @@ INSERT INTO `yk_information_description` (`information_id`, `language_id`, `titl
 CREATE TABLE IF NOT EXISTS `yk_information_to_layout` (
   `information_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
-  `layout_id` int(11) NOT NULL
+  `layout_id` int(11) NOT NULL,
+  PRIMARY KEY (`information_id`,`store_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1390,7 +1402,8 @@ CREATE TABLE IF NOT EXISTS `yk_information_to_layout` (
 
 CREATE TABLE IF NOT EXISTS `yk_information_to_store` (
   `information_id` int(11) NOT NULL,
-  `store_id` int(11) NOT NULL
+  `store_id` int(11) NOT NULL,
+  PRIMARY KEY (`information_id`,`store_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -1410,7 +1423,7 @@ INSERT INTO `yk_information_to_store` (`information_id`, `store_id`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `yk_language` (
-  `language_id` int(11) NOT NULL,
+  `language_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL,
   `code` varchar(5) NOT NULL,
   `locale` varchar(255) NOT NULL,
@@ -1418,8 +1431,10 @@ CREATE TABLE IF NOT EXISTS `yk_language` (
   `directory` varchar(32) NOT NULL,
   `filename` varchar(64) NOT NULL,
   `sort_order` int(3) NOT NULL DEFAULT '0',
-  `status` tinyint(1) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `status` tinyint(1) NOT NULL,
+  PRIMARY KEY (`language_id`),
+  KEY `name` (`name`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- 转存表中的数据 `yk_language`
@@ -1435,9 +1450,10 @@ INSERT INTO `yk_language` (`language_id`, `name`, `code`, `locale`, `image`, `di
 --
 
 CREATE TABLE IF NOT EXISTS `yk_layout` (
-  `layout_id` int(11) NOT NULL,
-  `name` varchar(64) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+  `layout_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(64) NOT NULL,
+  PRIMARY KEY (`layout_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
 -- 转存表中的数据 `yk_layout`
@@ -1463,11 +1479,12 @@ INSERT INTO `yk_layout` (`layout_id`, `name`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `yk_layout_route` (
-  `layout_route_id` int(11) NOT NULL,
+  `layout_route_id` int(11) NOT NULL AUTO_INCREMENT,
   `layout_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
-  `route` varchar(255) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
+  `route` varchar(255) NOT NULL,
+  PRIMARY KEY (`layout_route_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=33 ;
 
 --
 -- 转存表中的数据 `yk_layout_route`
@@ -1492,9 +1509,10 @@ INSERT INTO `yk_layout_route` (`layout_route_id`, `layout_id`, `store_id`, `rout
 --
 
 CREATE TABLE IF NOT EXISTS `yk_length_class` (
-  `length_class_id` int(11) NOT NULL,
-  `value` decimal(15,8) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  `length_class_id` int(11) NOT NULL AUTO_INCREMENT,
+  `value` decimal(15,8) NOT NULL,
+  PRIMARY KEY (`length_class_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- 转存表中的数据 `yk_length_class`
@@ -1512,11 +1530,12 @@ INSERT INTO `yk_length_class` (`length_class_id`, `value`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `yk_length_class_description` (
-  `length_class_id` int(11) NOT NULL,
+  `length_class_id` int(11) NOT NULL AUTO_INCREMENT,
   `language_id` int(11) NOT NULL,
   `title` varchar(32) NOT NULL,
-  `unit` varchar(4) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  `unit` varchar(4) NOT NULL,
+  PRIMARY KEY (`length_class_id`,`language_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- 转存表中的数据 `yk_length_class_description`
@@ -1530,15 +1549,39 @@ INSERT INTO `yk_length_class_description` (`length_class_id`, `language_id`, `ti
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `yk_link`
+--
+
+CREATE TABLE IF NOT EXISTS `yk_link` (
+  `link_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `url` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
+  `status` tinyint(4) NOT NULL,
+  `sort_order` smallint(6) NOT NULL,
+  PRIMARY KEY (`link_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
+--
+-- 转存表中的数据 `yk_link`
+--
+
+INSERT INTO `yk_link` (`link_id`, `name`, `url`, `status`, `sort_order`) VALUES
+(1, '新浪', 'http://www.sina.com.cn/', 1, 1),
+(2, '百度', 'https://www.baidu.com/', 1, 2);
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `yk_manufacturer`
 --
 
 CREATE TABLE IF NOT EXISTS `yk_manufacturer` (
-  `manufacturer_id` int(11) NOT NULL,
+  `manufacturer_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
   `image` varchar(255) DEFAULT NULL,
-  `sort_order` int(3) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+  `sort_order` int(3) NOT NULL,
+  PRIMARY KEY (`manufacturer_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- 转存表中的数据 `yk_manufacturer`
@@ -1560,7 +1603,8 @@ INSERT INTO `yk_manufacturer` (`manufacturer_id`, `name`, `image`, `sort_order`)
 
 CREATE TABLE IF NOT EXISTS `yk_manufacturer_to_store` (
   `manufacturer_id` int(11) NOT NULL,
-  `store_id` int(11) NOT NULL
+  `store_id` int(11) NOT NULL,
+  PRIMARY KEY (`manufacturer_id`,`store_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -1582,7 +1626,7 @@ INSERT INTO `yk_manufacturer_to_store` (`manufacturer_id`, `store_id`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `yk_news` (
-  `news_id` int(11) NOT NULL,
+  `news_id` int(11) NOT NULL AUTO_INCREMENT,
   `group_id` smallint(4) DEFAULT '0',
   `user_id` int(11) DEFAULT NULL,
   `title` varchar(128) DEFAULT NULL,
@@ -1592,8 +1636,9 @@ CREATE TABLE IF NOT EXISTS `yk_news` (
   `is_top` tinyint(4) NOT NULL DEFAULT '0',
   `from` varchar(512) DEFAULT NULL,
   `sort_order` smallint(6) NOT NULL DEFAULT '0',
-  `date_added` datetime DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  `date_added` datetime DEFAULT NULL,
+  PRIMARY KEY (`news_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- 转存表中的数据 `yk_news`
@@ -1601,7 +1646,8 @@ CREATE TABLE IF NOT EXISTS `yk_news` (
 
 INSERT INTO `yk_news` (`news_id`, `group_id`, `user_id`, `title`, `subtitle`, `text`, `status`, `is_top`, `from`, `sort_order`, `date_added`) VALUES
 (2, 0, 1, '新闻测试数据标题', '新闻测试数据副本标题', '&lt;span style=&quot;font-family:Tahoma, Helvetica, Arial, 宋体, sans-serif;font-size:14px;line-height:30px;&quot;&gt;2015年5月初，美国数字地球公司拍摄的卫星照片显示越南非法建岛行为，在非法侵占我南沙岛礁上大规模填海造地。越南非法建岛激起了中方愤慨，我外交部发言人洪磊表示，中国要求有关国家立即停止一切侵犯中国主权和权益的言行。洪磊还揭露，越南非法建岛，共计侵占20多个岛礁，填海造地的同时还设立了机场、港池，甚至还有导弹阵地，中国外交部严厉指责越南非法建岛行为。&lt;/span&gt;', 1, 0, '腾讯新闻', 0, '2015-05-24 21:37:30'),
-(3, 0, 1, '最新款式灭火器', '5.1日家用汽载灭火器全场5折', '&lt;span style=&quot;color:#CC0000;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;&quot;&gt;齐齐哈尔&lt;/span&gt;&lt;span style=&quot;color:#333333;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;&quot;&gt;警方与绑架案犯发生激烈&lt;/span&gt;&lt;span style=&quot;color:#CC0000;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;&quot;&gt;枪战&lt;/span&gt;&lt;span style=&quot;color:#333333;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;&quot;&gt;&amp;nbsp;一民警头部中弹&lt;/span&gt;', 1, 0, '消防e站', 2, '0000-00-00 00:00:00');
+(3, 0, 1, '最新款式灭火器', '5.1日家用汽载灭火器全场5折', '&lt;span style=&quot;color:#CC0000;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;&quot;&gt;齐齐哈尔&lt;/span&gt;&lt;span style=&quot;color:#333333;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;&quot;&gt;警方与绑架案犯发生激烈&lt;/span&gt;&lt;span style=&quot;color:#CC0000;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;&quot;&gt;枪战&lt;/span&gt;&lt;span style=&quot;color:#333333;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;&quot;&gt;&amp;nbsp;一民警头部中弹&lt;/span&gt;', 1, 0, '消防e站', 2, '0000-00-00 00:00:00'),
+(4, 1, 1, '新一代宝马7系官网曝光 6月10日首发', '新一代宝马7系官网曝光', '<p>车型代号G11的新一代宝马7系的官图和部分信息在宝马奥地利官网曝光，新车将在6月10日正式发布，10月上市销售。新一代7系在奥地利市场的起价为100445欧元(约合人民币69.2万元)。<img alt="" src="http://www.yuankong.com/image/data/demo/apple_logo.jpg" />12321312</p>', 0, 0, '新浪汽车', 0, '2015-06-10 05:20:56');
 
 -- --------------------------------------------------------
 
@@ -1610,11 +1656,12 @@ INSERT INTO `yk_news` (`news_id`, `group_id`, `user_id`, `title`, `subtitle`, `t
 --
 
 CREATE TABLE IF NOT EXISTS `yk_news_group` (
-  `group_id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) DEFAULT NULL,
   `show` tinyint(4) NOT NULL DEFAULT '0',
-  `sort_order` int(3) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+  `sort_order` int(3) NOT NULL,
+  PRIMARY KEY (`group_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- 转存表中的数据 `yk_news_group`
@@ -1634,10 +1681,11 @@ INSERT INTO `yk_news_group` (`group_id`, `name`, `show`, `sort_order`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `yk_option` (
-  `option_id` int(11) NOT NULL,
+  `option_id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(32) NOT NULL,
-  `sort_order` int(3) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+  `sort_order` int(3) NOT NULL,
+  PRIMARY KEY (`option_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 --
 -- 转存表中的数据 `yk_option`
@@ -1665,7 +1713,8 @@ INSERT INTO `yk_option` (`option_id`, `type`, `sort_order`) VALUES
 CREATE TABLE IF NOT EXISTS `yk_option_description` (
   `option_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `name` varchar(128) NOT NULL
+  `name` varchar(128) NOT NULL,
+  PRIMARY KEY (`option_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -1692,11 +1741,12 @@ INSERT INTO `yk_option_description` (`option_id`, `language_id`, `name`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `yk_option_value` (
-  `option_value_id` int(11) NOT NULL,
+  `option_value_id` int(11) NOT NULL AUTO_INCREMENT,
   `option_id` int(11) NOT NULL,
   `image` varchar(255) NOT NULL,
-  `sort_order` int(3) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=49 DEFAULT CHARSET=utf8;
+  `sort_order` int(3) NOT NULL,
+  PRIMARY KEY (`option_value_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=49 ;
 
 --
 -- 转存表中的数据 `yk_option_value`
@@ -1728,7 +1778,8 @@ CREATE TABLE IF NOT EXISTS `yk_option_value_description` (
   `option_value_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `option_id` int(11) NOT NULL,
-  `name` varchar(128) NOT NULL
+  `name` varchar(128) NOT NULL,
+  PRIMARY KEY (`option_value_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -1758,7 +1809,7 @@ INSERT INTO `yk_option_value_description` (`option_value_id`, `language_id`, `op
 --
 
 CREATE TABLE IF NOT EXISTS `yk_order` (
-  `order_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL AUTO_INCREMENT,
   `invoice_no` int(11) NOT NULL DEFAULT '0',
   `invoice_prefix` varchar(26) NOT NULL,
   `store_id` int(11) NOT NULL DEFAULT '0',
@@ -1815,8 +1866,9 @@ CREATE TABLE IF NOT EXISTS `yk_order` (
   `user_agent` varchar(255) NOT NULL,
   `accept_language` varchar(255) NOT NULL,
   `date_added` datetime NOT NULL,
-  `date_modified` datetime NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `date_modified` datetime NOT NULL,
+  PRIMARY KEY (`order_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1825,14 +1877,15 @@ CREATE TABLE IF NOT EXISTS `yk_order` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_order_download` (
-  `order_download_id` int(11) NOT NULL,
+  `order_download_id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
   `order_product_id` int(11) NOT NULL,
   `name` varchar(64) NOT NULL,
   `filename` varchar(128) NOT NULL,
   `mask` varchar(128) NOT NULL,
-  `remaining` int(3) NOT NULL DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `remaining` int(3) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`order_download_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1846,7 +1899,8 @@ CREATE TABLE IF NOT EXISTS `yk_order_field` (
   `custom_field_value_id` int(11) NOT NULL,
   `name` int(128) NOT NULL,
   `value` text NOT NULL,
-  `sort_order` int(3) NOT NULL
+  `sort_order` int(3) NOT NULL,
+  PRIMARY KEY (`order_id`,`custom_field_id`,`custom_field_value_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1908,7 +1962,8 @@ CREATE TABLE IF NOT EXISTS `yk_order_fraud` (
   `queries_remaining` int(11) NOT NULL,
   `maxmind_id` varchar(8) NOT NULL,
   `error` text NOT NULL,
-  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`order_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1918,13 +1973,14 @@ CREATE TABLE IF NOT EXISTS `yk_order_fraud` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_order_history` (
-  `order_history_id` int(11) NOT NULL,
+  `order_history_id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
   `order_status_id` int(5) NOT NULL,
   `notify` tinyint(1) NOT NULL DEFAULT '0',
   `comment` text NOT NULL,
-  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`order_history_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1933,15 +1989,16 @@ CREATE TABLE IF NOT EXISTS `yk_order_history` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_order_option` (
-  `order_option_id` int(11) NOT NULL,
+  `order_option_id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
   `order_product_id` int(11) NOT NULL,
   `product_option_id` int(11) NOT NULL,
   `product_option_value_id` int(11) NOT NULL DEFAULT '0',
   `name` varchar(255) NOT NULL,
   `value` text NOT NULL,
-  `type` varchar(32) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `type` varchar(32) NOT NULL,
+  PRIMARY KEY (`order_option_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1950,7 +2007,7 @@ CREATE TABLE IF NOT EXISTS `yk_order_option` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_order_product` (
-  `order_product_id` int(11) NOT NULL,
+  `order_product_id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -1959,8 +2016,9 @@ CREATE TABLE IF NOT EXISTS `yk_order_product` (
   `price` decimal(15,4) NOT NULL DEFAULT '0.0000',
   `total` decimal(15,4) NOT NULL DEFAULT '0.0000',
   `tax` decimal(15,4) NOT NULL DEFAULT '0.0000',
-  `reward` int(8) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `reward` int(8) NOT NULL,
+  PRIMARY KEY (`order_product_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1969,10 +2027,11 @@ CREATE TABLE IF NOT EXISTS `yk_order_product` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_order_status` (
-  `order_status_id` int(11) NOT NULL,
+  `order_status_id` int(11) NOT NULL AUTO_INCREMENT,
   `language_id` int(11) NOT NULL,
-  `name` varchar(32) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+  `name` varchar(32) NOT NULL,
+  PRIMARY KEY (`order_status_id`,`language_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
 
 --
 -- 转存表中的数据 `yk_order_status`
@@ -2001,14 +2060,16 @@ INSERT INTO `yk_order_status` (`order_status_id`, `language_id`, `name`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `yk_order_total` (
-  `order_total_id` int(10) NOT NULL,
+  `order_total_id` int(10) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
   `code` varchar(32) NOT NULL,
   `title` varchar(255) NOT NULL,
   `text` varchar(255) NOT NULL,
   `value` decimal(15,4) NOT NULL DEFAULT '0.0000',
-  `sort_order` int(3) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `sort_order` int(3) NOT NULL,
+  PRIMARY KEY (`order_total_id`),
+  KEY `idx_orders_total_orders_id` (`order_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2017,7 +2078,7 @@ CREATE TABLE IF NOT EXISTS `yk_order_total` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_order_voucher` (
-  `order_voucher_id` int(11) NOT NULL,
+  `order_voucher_id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
   `voucher_id` int(11) NOT NULL,
   `description` varchar(255) NOT NULL,
@@ -2028,8 +2089,9 @@ CREATE TABLE IF NOT EXISTS `yk_order_voucher` (
   `to_email` varchar(96) NOT NULL,
   `voucher_theme_id` int(11) NOT NULL,
   `message` text NOT NULL,
-  `amount` decimal(15,4) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `amount` decimal(15,4) NOT NULL,
+  PRIMARY KEY (`order_voucher_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2038,7 +2100,7 @@ CREATE TABLE IF NOT EXISTS `yk_order_voucher` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_product` (
-  `product_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL AUTO_INCREMENT,
   `model` varchar(64) NOT NULL,
   `sku` varchar(64) NOT NULL,
   `upc` varchar(12) NOT NULL,
@@ -2068,33 +2130,9 @@ CREATE TABLE IF NOT EXISTS `yk_product` (
   `status` tinyint(1) NOT NULL DEFAULT '0',
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `viewed` int(5) NOT NULL DEFAULT '0'
-) ENGINE=MyISAM AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `yk_product`
---
-
-INSERT INTO `yk_product` (`product_id`, `model`, `sku`, `upc`, `ean`, `jan`, `isbn`, `mpn`, `location`, `quantity`, `stock_status_id`, `image`, `manufacturer_id`, `shipping`, `price`, `points`, `tax_class_id`, `date_available`, `weight`, `weight_class_id`, `length`, `width`, `height`, `length_class_id`, `subtract`, `minimum`, `sort_order`, `status`, `date_added`, `date_modified`, `viewed`) VALUES
-(28, 'Product 1', '', '', '', '', '', '', '', 939, 7, 'data/demo/htc_touch_hd_1.jpg', 5, 1, '100.0000', 200, 9, '2009-02-03', '146.40000000', 2, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 16:06:50', '2011-09-30 01:05:39', 0),
-(29, 'Product 2', '', '', '', '', '', '', '', 999, 6, 'data/demo/palm_treo_pro_1.jpg', 6, 1, '279.9900', 0, 9, '2009-02-03', '133.00000000', 2, '0.00000000', '0.00000000', '0.00000000', 3, 1, 1, 0, 1, '2009-02-03 16:42:17', '2011-09-30 01:06:08', 0),
-(30, 'Product 3', '', '', '', '', '', '', '', 7, 6, 'data/demo/canon_eos_5d_1.jpg', 9, 1, '100.0000', 0, 9, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 16:59:00', '2011-09-30 01:05:23', 0),
-(31, 'Product 4', '', '', '', '', '', '', '', 1000, 6, 'data/demo/nikon_d300_1.jpg', 0, 1, '80.0000', 0, 9, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 3, 1, 1, 0, 1, '2009-02-03 17:00:10', '2011-09-30 01:06:00', 0),
-(32, 'Product 5', '', '', '', '', '', '', '', 999, 6, 'data/demo/ipod_touch_1.jpg', 8, 1, '100.0000', 0, 9, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 17:07:26', '2011-09-30 01:07:22', 0),
-(33, 'Product 6', '', '', '', '', '', '', '', 1000, 6, 'data/demo/samsung_syncmaster_941bw.jpg', 0, 1, '200.0000', 0, 9, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 17:08:31', '2011-09-30 01:06:29', 0),
-(34, 'Product 7', '', '', '', '', '', '', '', 1000, 6, 'data/demo/ipod_shuffle_1.jpg', 8, 1, '100.0000', 0, 9, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 18:07:54', '2011-09-30 01:07:17', 0),
-(35, 'Product 8', '', '', '', '', '', '', '', 1000, 5, '', 0, 0, '100.0000', 0, 9, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 18:08:31', '2011-09-30 01:06:17', 0),
-(36, 'Product 9', '', '', '', '', '', '', '', 994, 6, 'data/demo/ipod_nano_1.jpg', 8, 0, '100.0000', 100, 9, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 18:09:19', '2011-09-30 01:07:12', 0),
-(40, 'product 11', '', '', '', '', '', '', '', 970, 5, 'data/demo/iphone_1.jpg', 8, 1, '101.0000', 0, 9, '2009-02-03', '10.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 21:07:12', '2011-09-30 01:06:53', 0),
-(41, 'Product 14', '', '', '', '', '', '', '', 977, 5, 'data/demo/imac_1.jpg', 8, 1, '100.0000', 0, 9, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 21:07:26', '2011-09-30 01:06:44', 0),
-(42, 'Product 15', '', '', '', '', '', '', '', 990, 5, 'data/demo/apple_cinema_30.jpg', 8, 1, '100.0000', 400, 9, '2009-02-04', '12.50000000', 1, '1.00000000', '2.00000000', '3.00000000', 1, 1, 2, 0, 1, '2009-02-03 21:07:37', '2011-09-30 00:46:19', 0),
-(43, 'Product 16', '', '', '', '', '', '', '', 929, 5, 'data/demo/macbook_1.jpg', 8, 0, '500.0000', 0, 9, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 21:07:49', '2011-09-30 01:05:46', 0),
-(44, 'Product 17', '', '', '', '', '', '', '', 1000, 5, 'data/demo/macbook_air_1.jpg', 8, 1, '1000.0000', 0, 9, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 21:08:00', '2011-09-30 01:05:53', 0),
-(45, 'Product 18', '', '', '', '', '', '', '', 998, 5, 'data/demo/macbook_pro_1.jpg', 8, 1, '2000.0000', 0, 100, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 21:08:17', '2011-09-15 22:22:01', 0),
-(46, 'Product 19', '', '', '', '', '', '', '', 1000, 5, 'data/demo/sony_vaio_1.jpg', 10, 1, '1000.0000', 0, 9, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 21:08:29', '2011-09-30 01:06:39', 0),
-(47, 'Product 21', '', '', '', '', '', '', '', 1000, 5, 'data/demo/hp_1.jpg', 7, 1, '100.0000', 400, 9, '2009-02-03', '1.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 0, 1, 0, 1, '2009-02-03 21:08:40', '2011-09-30 01:05:28', 0),
-(48, 'product 20', 'test 1', '', '', '', '', '', 'test 2', 995, 5, 'data/demo/ipod_classic_1.jpg', 8, 1, '100.0000', 0, 9, '2009-02-08', '1.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-08 17:21:51', '2011-09-30 01:07:06', 0),
-(49, 'SAM1', '', '', '', '', '', '', '', 0, 8, 'data/demo/samsung_tab_1.jpg', 0, 1, '199.9900', 0, 9, '2011-04-25', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 1, 1, '2011-04-26 08:57:34', '2011-09-30 01:06:23', 0);
+  `viewed` int(5) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`product_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=50 ;
 
 -- --------------------------------------------------------
 
@@ -2106,19 +2144,9 @@ CREATE TABLE IF NOT EXISTS `yk_product_attribute` (
   `product_id` int(11) NOT NULL,
   `attribute_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `text` text NOT NULL
+  `text` text NOT NULL,
+  PRIMARY KEY (`product_id`,`attribute_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `yk_product_attribute`
---
-
-INSERT INTO `yk_product_attribute` (`product_id`, `attribute_id`, `language_id`, `text`) VALUES
-(43, 2, 2, '1'),
-(47, 4, 2, '16GB'),
-(43, 4, 2, '8gb'),
-(42, 3, 2, '100mhz'),
-(47, 2, 2, '4');
 
 -- --------------------------------------------------------
 
@@ -2133,33 +2161,10 @@ CREATE TABLE IF NOT EXISTS `yk_product_description` (
   `description` text NOT NULL,
   `meta_description` varchar(255) NOT NULL,
   `meta_keyword` varchar(255) NOT NULL,
-  `tag` text NOT NULL
+  `tag` text NOT NULL,
+  PRIMARY KEY (`product_id`,`language_id`),
+  KEY `name` (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `yk_product_description`
---
-
-INSERT INTO `yk_product_description` (`product_id`, `language_id`, `name`, `description`, `meta_description`, `meta_keyword`, `tag`) VALUES
-(35, 2, 'Product 8', '&lt;p&gt;\r\n	Product 8&lt;/p&gt;\r\n', '', '', ''),
-(48, 2, 'iPod Classic', '&lt;div class=&quot;cpt_product_description &quot;&gt;\r\n	&lt;div&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;More room to move.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			With 80GB or 160GB of storage and up to 40 hours of battery life, the new iPod classic lets you enjoy up to 40,000 songs or up to 200 hours of video or any combination wherever you go.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;Cover Flow.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Browse through your music collection by flipping through album art. Select an album to turn it over and see the track list.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;Enhanced interface.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Experience a whole new way to browse and view your music and video.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;Sleeker design.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Beautiful, durable, and sleeker than ever, iPod classic now features an anodized aluminum and polished stainless steel enclosure with rounded edges.&lt;/p&gt;\r\n	&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;!-- cpt_container_end --&gt;', '', '', ''),
-(40, 2, 'iPhone', '&lt;p class=&quot;intro&quot;&gt;\r\n	iPhone is a revolutionary new mobile phone that allows you to make a call by simply tapping a name or number in your address book, a favorites list, or a call log. It also automatically syncs all your contacts from a PC, Mac, or Internet service. And it lets you select and listen to voicemail messages in whatever order you want just like email.&lt;/p&gt;\r\n', '', '', ''),
-(28, 2, 'HTC Touch HD', '&lt;p&gt;\r\n	HTC Touch - in High Definition. Watch music videos and streaming content in awe-inspiring high definition clarity for a mobile experience you never thought possible. Seductively sleek, the HTC Touch HD provides the next generation of mobile functionality, all at a simple touch. Fully integrated with Windows Mobile Professional 6.1, ultrafast 3.5G, GPS, 5MP camera, plus lots more - all delivered on a breathtakingly crisp 3.8&amp;quot; WVGA touchscreen - you can take control of your mobile world with the HTC Touch HD.&lt;/p&gt;\r\n&lt;p&gt;\r\n	&lt;strong&gt;Features&lt;/strong&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Processor Qualcomm&amp;reg; MSM 7201A&amp;trade; 528 MHz&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Windows Mobile&amp;reg; 6.1 Professional Operating System&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Memory: 512 MB ROM, 288 MB RAM&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Dimensions: 115 mm x 62.8 mm x 12 mm / 146.4 grams&lt;/li&gt;\r\n	&lt;li&gt;\r\n		3.8-inch TFT-LCD flat touch-sensitive screen with 480 x 800 WVGA resolution&lt;/li&gt;\r\n	&lt;li&gt;\r\n		HSDPA/WCDMA: Europe/Asia: 900/2100 MHz; Up to 2 Mbps up-link and 7.2 Mbps down-link speeds&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Quad-band GSM/GPRS/EDGE: Europe/Asia: 850/900/1800/1900 MHz (Band frequency, HSUPA availability, and data speed are operator dependent.)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Device Control via HTC TouchFLO&amp;trade; 3D &amp;amp; Touch-sensitive front panel buttons&lt;/li&gt;\r\n	&lt;li&gt;\r\n		GPS and A-GPS ready&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Bluetooth&amp;reg; 2.0 with Enhanced Data Rate and A2DP for wireless stereo headsets&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Wi-Fi&amp;reg;: IEEE 802.11 b/g&lt;/li&gt;\r\n	&lt;li&gt;\r\n		HTC ExtUSB&amp;trade; (11-pin mini-USB 2.0)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		5 megapixel color camera with auto focus&lt;/li&gt;\r\n	&lt;li&gt;\r\n		VGA CMOS color camera&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Built-in 3.5 mm audio jack, microphone, speaker, and FM radio&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Ring tone formats: AAC, AAC+, eAAC+, AMR-NB, AMR-WB, QCP, MP3, WMA, WAV&lt;/li&gt;\r\n	&lt;li&gt;\r\n		40 polyphonic and standard MIDI format 0 and 1 (SMF)/SP MIDI&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Rechargeable Lithium-ion or Lithium-ion polymer 1350 mAh battery&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Expansion Slot: microSD&amp;trade; memory card (SD 2.0 compatible)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		AC Adapter Voltage range/frequency: 100 ~ 240V AC, 50/60 Hz DC output: 5V and 1A&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Special Features: FM Radio, G-Sensor&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', '', ''),
-(44, 2, 'MacBook Air', '&lt;div&gt;\r\n	MacBook Air is ultrathin, ultraportable, and ultra unlike anything else. But you don&amp;rsquo;t lose inches and pounds overnight. It&amp;rsquo;s the result of rethinking conventions. Of multiple wireless innovations. And of breakthrough design. With MacBook Air, mobile computing suddenly has a new standard.&lt;/div&gt;\r\n', '', '', ''),
-(45, 2, 'MacBook Pro', '&lt;div class=&quot;cpt_product_description &quot;&gt;\r\n	&lt;div&gt;\r\n		&lt;p&gt;\r\n			&lt;b&gt;Latest Intel mobile architecture&lt;/b&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Powered by the most advanced mobile processors from Intel, the new Core 2 Duo MacBook Pro is over 50% faster than the original Core Duo MacBook Pro and now supports up to 4GB of RAM.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;b&gt;Leading-edge graphics&lt;/b&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			The NVIDIA GeForce 8600M GT delivers exceptional graphics processing power. For the ultimate creative canvas, you can even configure the 17-inch model with a 1920-by-1200 resolution display.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;b&gt;Designed for life on the road&lt;/b&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Innovations such as a magnetic power connection and an illuminated keyboard with ambient light sensor put the MacBook Pro in a class by itself.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;b&gt;Connect. Create. Communicate.&lt;/b&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Quickly set up a video conference with the built-in iSight camera. Control presentations and media from up to 30 feet away with the included Apple Remote. Connect to high-bandwidth peripherals with FireWire 800 and DVI.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;b&gt;Next-generation wireless&lt;/b&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Featuring 802.11n wireless technology, the MacBook Pro delivers up to five times the performance and up to twice the range of previous-generation technologies.&lt;/p&gt;\r\n	&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;!-- cpt_container_end --&gt;', '', '', ''),
-(29, 2, 'Palm Treo Pro', '&lt;p&gt;\r\n	Redefine your workday with the Palm Treo Pro smartphone. Perfectly balanced, you can respond to business and personal email, stay on top of appointments and contacts, and use Wi-Fi or GPS when you&amp;rsquo;re out and about. Then watch a video on YouTube, catch up with news and sports on the web, or listen to a few songs. Balance your work and play the way you like it, with the Palm Treo Pro.&lt;/p&gt;\r\n&lt;p&gt;\r\n	&lt;strong&gt;Features&lt;/strong&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Windows Mobile&amp;reg; 6.1 Professional Edition&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Qualcomm&amp;reg; MSM7201 400MHz Processor&lt;/li&gt;\r\n	&lt;li&gt;\r\n		320x320 transflective colour TFT touchscreen&lt;/li&gt;\r\n	&lt;li&gt;\r\n		HSDPA/UMTS/EDGE/GPRS/GSM radio&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Tri-band UMTS &amp;mdash; 850MHz, 1900MHz, 2100MHz&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Quad-band GSM &amp;mdash; 850/900/1800/1900&lt;/li&gt;\r\n	&lt;li&gt;\r\n		802.11b/g with WPA, WPA2, and 801.1x authentication&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Built-in GPS&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Bluetooth Version: 2.0 + Enhanced Data Rate&lt;/li&gt;\r\n	&lt;li&gt;\r\n		256MB storage (100MB user available), 128MB RAM&lt;/li&gt;\r\n	&lt;li&gt;\r\n		2.0 megapixel camera, up to 8x digital zoom and video capture&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Removable, rechargeable 1500mAh lithium-ion battery&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Up to 5.0 hours talk time and up to 250 hours standby&lt;/li&gt;\r\n	&lt;li&gt;\r\n		MicroSDHC card expansion (up to 32GB supported)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		MicroUSB 2.0 for synchronization and charging&lt;/li&gt;\r\n	&lt;li&gt;\r\n		3.5mm stereo headset jack&lt;/li&gt;\r\n	&lt;li&gt;\r\n		60mm (W) x 114mm (L) x 13.5mm (D) / 133g&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', '', ''),
-(36, 2, 'iPod Nano', '&lt;div&gt;\r\n	&lt;p&gt;\r\n		&lt;strong&gt;Video in your pocket.&lt;/strong&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		Its the small iPod with one very big idea: video. The worlds most popular music player now lets you enjoy movies, TV shows, and more on a two-inch display thats 65% brighter than before.&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;strong&gt;Cover Flow.&lt;/strong&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		Browse through your music collection by flipping through album art. Select an album to turn it over and see the track list.&lt;strong&gt;&amp;nbsp;&lt;/strong&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;strong&gt;Enhanced interface.&lt;/strong&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		Experience a whole new way to browse and view your music and video.&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;strong&gt;Sleek and colorful.&lt;/strong&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		With an anodized aluminum and polished stainless steel enclosure and a choice of five colors, iPod nano is dressed to impress.&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;strong&gt;iTunes.&lt;/strong&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		Available as a free download, iTunes makes it easy to browse and buy millions of songs, movies, TV shows, audiobooks, and games and download free podcasts all at the iTunes Store. And you can import your own music, manage your whole media library, and sync your iPod or iPhone with ease.&lt;/p&gt;\r\n&lt;/div&gt;\r\n', '', '', ''),
-(46, 2, 'Sony VAIO', '&lt;div&gt;\r\n	Unprecedented power. The next generation of processing technology has arrived. Built into the newest VAIO notebooks lies Intel&amp;#39;s latest, most powerful innovation yet: Intel&amp;reg; Centrino&amp;reg; 2 processor technology. Boasting incredible speed, expanded wireless connectivity, enhanced multimedia support and greater energy efficiency, all the high-performance essentials are seamlessly combined into a single chip.&lt;/div&gt;\r\n', '', '', ''),
-(47, 2, 'HP LP3065', '&lt;p&gt;\r\n	Stop your co-workers in their tracks with the stunning new 30-inch diagonal HP LP3065 Flat Panel Monitor. This flagship monitor features best-in-class performance and presentation features on a huge wide-aspect screen while letting you work as comfortably as possible - you might even forget you&amp;#39;re at the office&lt;/p&gt;\r\n', '', '', ''),
-(32, 2, 'iPod Touch', '&lt;p&gt;\r\n	&lt;strong&gt;Revolutionary multi-touch interface.&lt;/strong&gt;&lt;br /&gt;\r\n	iPod touch features the same multi-touch screen technology as iPhone. Pinch to zoom in on a photo. Scroll through your songs and videos with a flick. Flip through your library by album artwork with Cover Flow.&lt;/p&gt;\r\n&lt;p&gt;\r\n	&lt;strong&gt;Gorgeous 3.5-inch widescreen display.&lt;/strong&gt;&lt;br /&gt;\r\n	Watch your movies, TV shows, and photos come alive with bright, vivid color on the 320-by-480-pixel display.&lt;/p&gt;\r\n&lt;p&gt;\r\n	&lt;strong&gt;Music downloads straight from iTunes.&lt;/strong&gt;&lt;br /&gt;\r\n	Shop the iTunes Wi-Fi Music Store from anywhere with Wi-Fi.1 Browse or search to find the music youre looking for, preview it, and buy it with just a tap.&lt;/p&gt;\r\n&lt;p&gt;\r\n	&lt;strong&gt;Surf the web with Wi-Fi.&lt;/strong&gt;&lt;br /&gt;\r\n	Browse the web using Safari and watch YouTube videos on the first iPod with Wi-Fi built in&lt;br /&gt;\r\n	&amp;nbsp;&lt;/p&gt;\r\n', '', '', ''),
-(41, 2, 'iMac', '&lt;div&gt;\r\n	Just when you thought iMac had everything, now there&acute;s even more. More powerful Intel Core 2 Duo processors. And more memory standard. Combine this with Mac OS X Leopard and iLife &acute;08, and it&acute;s more all-in-one than ever. iMac packs amazing performance into a stunningly slim space.&lt;/div&gt;\r\n', '', '', ''),
-(33, 2, 'Samsung SyncMaster 941BW', '&lt;div&gt;\r\n	Imagine the advantages of going big without slowing down. The big 19&amp;quot; 941BW monitor combines wide aspect ratio with fast pixel response time, for bigger images, more room to work and crisp motion. In addition, the exclusive MagicBright 2, MagicColor and MagicTune technologies help deliver the ideal image in every situation, while sleek, narrow bezels and adjustable stands deliver style just the way you want it. With the Samsung 941BW widescreen analog/digital LCD monitor, it&amp;#39;s not hard to imagine.&lt;/div&gt;\r\n', '', '', ''),
-(34, 2, 'iPod Shuffle', '&lt;div&gt;\r\n	&lt;strong&gt;Born to be worn.&lt;/strong&gt;\r\n	&lt;p&gt;\r\n		Clip on the worlds most wearable music player and take up to 240 songs with you anywhere. Choose from five colors including four new hues to make your musical fashion statement.&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;strong&gt;Random meets rhythm.&lt;/strong&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		With iTunes autofill, iPod shuffle can deliver a new musical experience every time you sync. For more randomness, you can shuffle songs during playback with the slide of a switch.&lt;/p&gt;\r\n	&lt;strong&gt;Everything is easy.&lt;/strong&gt;\r\n	&lt;p&gt;\r\n		Charge and sync with the included USB dock. Operate the iPod shuffle controls with one hand. Enjoy up to 12 hours straight of skip-free music playback.&lt;/p&gt;\r\n&lt;/div&gt;\r\n', '', '', ''),
-(43, 2, 'MacBook', '&lt;div&gt;\r\n	&lt;p&gt;\r\n		&lt;b&gt;Intel Core 2 Duo processor&lt;/b&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		Powered by an Intel Core 2 Duo processor at speeds up to 2.16GHz, the new MacBook is the fastest ever.&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;b&gt;1GB memory, larger hard drives&lt;/b&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		The new MacBook now comes with 1GB of memory standard and larger hard drives for the entire line perfect for running more of your favorite applications and storing growing media collections.&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;b&gt;Sleek, 1.08-inch-thin design&lt;/b&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		MacBook makes it easy to hit the road thanks to its tough polycarbonate case, built-in wireless technologies, and innovative MagSafe Power Adapter that releases automatically if someone accidentally trips on the cord.&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;b&gt;Built-in iSight camera&lt;/b&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		Right out of the box, you can have a video chat with friends or family,2 record a video at your desk, or take fun pictures with Photo Booth&lt;/p&gt;\r\n&lt;/div&gt;\r\n', '', '', ''),
-(31, 2, 'Nikon D300', '&lt;div class=&quot;cpt_product_description &quot;&gt;\r\n	&lt;div&gt;\r\n		Engineered with pro-level features and performance, the 12.3-effective-megapixel D300 combines brand new technologies with advanced features inherited from Nikon&amp;#39;s newly announced D3 professional digital SLR camera to offer serious photographers remarkable performance combined with agility.&lt;br /&gt;\r\n		&lt;br /&gt;\r\n		Similar to the D3, the D300 features Nikon&amp;#39;s exclusive EXPEED Image Processing System that is central to driving the speed and processing power needed for many of the camera&amp;#39;s new features. The D300 features a new 51-point autofocus system with Nikon&amp;#39;s 3D Focus Tracking feature and two new LiveView shooting modes that allow users to frame a photograph using the camera&amp;#39;s high-resolution LCD monitor. The D300 shares a similar Scene Recognition System as is found in the D3; it promises to greatly enhance the accuracy of autofocus, autoexposure, and auto white balance by recognizing the subject or scene being photographed and applying this information to the calculations for the three functions.&lt;br /&gt;\r\n		&lt;br /&gt;\r\n		The D300 reacts with lightning speed, powering up in a mere 0.13 seconds and shooting with an imperceptible 45-millisecond shutter release lag time. The D300 is capable of shooting at a rapid six frames per second and can go as fast as eight frames per second when using the optional MB-D10 multi-power battery pack. In continuous bursts, the D300 can shoot up to 100 shots at full 12.3-megapixel resolution. (NORMAL-LARGE image setting, using a SanDisk Extreme IV 1GB CompactFlash card.)&lt;br /&gt;\r\n		&lt;br /&gt;\r\n		The D300 incorporates a range of innovative technologies and features that will significantly improve the accuracy, control, and performance photographers can get from their equipment. Its new Scene Recognition System advances the use of Nikon&amp;#39;s acclaimed 1,005-segment sensor to recognize colors and light patterns that help the camera determine the subject and the type of scene being photographed before a picture is taken. This information is used to improve the accuracy of autofocus, autoexposure, and auto white balance functions in the D300. For example, the camera can track moving subjects better and by identifying them, it can also automatically select focus points faster and with greater accuracy. It can also analyze highlights and more accurately determine exposure, as well as infer light sources to deliver more accurate white balance detection.&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;!-- cpt_container_end --&gt;', '', '', ''),
-(49, 2, 'Samsung Galaxy Tab 10.1', '&lt;p&gt;\r\n	Samsung Galaxy Tab 10.1, is the world&amp;rsquo;s thinnest tablet, measuring 8.6 mm thickness, running with Android 3.0 Honeycomb OS on a 1GHz dual-core Tegra 2 processor, similar to its younger brother Samsung Galaxy Tab 8.9.&lt;/p&gt;\r\n&lt;p&gt;\r\n	Samsung Galaxy Tab 10.1 gives pure Android 3.0 experience, adding its new TouchWiz UX or TouchWiz 4.0 &amp;ndash; includes a live panel, which lets you to customize with different content, such as your pictures, bookmarks, and social feeds, sporting a 10.1 inches WXGA capacitive touch screen with 1280 x 800 pixels of resolution, equipped with 3 megapixel rear camera with LED flash and a 2 megapixel front camera, HSPA+ connectivity up to 21Mbps, 720p HD video recording capability, 1080p HD playback, DLNA support, Bluetooth 2.1, USB 2.0, gyroscope, Wi-Fi 802.11 a/b/g/n, micro-SD slot, 3.5mm headphone jack, and SIM slot, including the Samsung Stick &amp;ndash; a Bluetooth microphone that can be carried in a pocket like a pen and sound dock with powered subwoofer.&lt;/p&gt;\r\n&lt;p&gt;\r\n	Samsung Galaxy Tab 10.1 will come in 16GB / 32GB / 64GB verities and pre-loaded with Social Hub, Reader&amp;rsquo;s Hub, Music Hub and Samsung Mini Apps Tray &amp;ndash; which gives you access to more commonly used apps to help ease multitasking and it is capable of Adobe Flash Player 10.2, powered by 6860mAh battery that gives you 10hours of video-playback time.&amp;nbsp;&amp;auml;&amp;ouml;&lt;/p&gt;\r\n', '', '', ''),
-(42, 2, 'Apple Cinema 30&quot;', '&lt;p&gt;\r\n	&lt;font face=&quot;helvetica,geneva,arial&quot; size=&quot;2&quot;&gt;&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;The 30-inch Apple Cinema HD Display delivers an amazing 2560 x 1600 pixel resolution. Designed specifically for the creative professional, this display provides more space for easier access to all the tools and palettes needed to edit, format and composite your work. Combine this display with a Mac Pro, MacBook Pro, or PowerMac G5 and there&amp;#39;s no limit to what you can achieve. &lt;br /&gt;\r\n	&lt;br /&gt;\r\n	&lt;/font&gt;&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;The Cinema HD features an active-matrix liquid crystal display that produces flicker-free images that deliver twice the brightness, twice the sharpness and twice the contrast ratio of a typical CRT display. Unlike other flat panels, it&amp;#39;s designed with a pure digital interface to deliver distortion-free images that never need adjusting. With over 4 million digital pixels, the display is uniquely suited for scientific and technical applications such as visualizing molecular structures or analyzing geological data. &lt;br /&gt;\r\n	&lt;br /&gt;\r\n	&lt;/font&gt;&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;Offering accurate, brilliant color performance, the Cinema HD delivers up to 16.7 million colors across a wide gamut allowing you to see subtle nuances between colors from soft pastels to rich jewel tones. A wide viewing angle ensures uniform color from edge to edge. Apple&amp;#39;s ColorSync technology allows you to create custom profiles to maintain consistent color onscreen and in print. The result: You can confidently use this display in all your color-critical applications. &lt;br /&gt;\r\n	&lt;br /&gt;\r\n	&lt;/font&gt;&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;Housed in a new aluminum design, the display has a very thin bezel that enhances visual accuracy. Each display features two FireWire 400 ports and two USB 2.0 ports, making attachment of desktop peripherals, such as iSight, iPod, digital and still cameras, hard drives, printers and scanners, even more accessible and convenient. Taking advantage of the much thinner and lighter footprint of an LCD, the new displays support the VESA (Video Electronics Standards Association) mounting interface standard. Customers with the optional Cinema Display VESA Mount Adapter kit gain the flexibility to mount their display in locations most appropriate for their work environment. &lt;br /&gt;\r\n	&lt;br /&gt;\r\n	&lt;/font&gt;&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;The Cinema HD features a single cable design with elegant breakout for the USB 2.0, FireWire 400 and a pure digital connection using the industry standard Digital Video Interface (DVI) interface. The DVI connection allows for a direct pure-digital connection.&lt;br /&gt;\r\n	&lt;/font&gt;&lt;/font&gt;&lt;/p&gt;\r\n&lt;h3&gt;\r\n	Features:&lt;/h3&gt;\r\n&lt;p&gt;\r\n	Unrivaled display performance&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		30-inch (viewable) active-matrix liquid crystal display provides breathtaking image quality and vivid, richly saturated color.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Support for 2560-by-1600 pixel resolution for display of high definition still and video imagery.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Wide-format design for simultaneous display of two full pages of text and graphics.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Industry standard DVI connector for direct attachment to Mac- and Windows-based desktops and notebooks&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Incredibly wide (170 degree) horizontal and vertical viewing angle for maximum visibility and color performance.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Lightning-fast pixel response for full-motion digital video playback.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Support for 16.7 million saturated colors, for use in all graphics-intensive applications.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	Simple setup and operation&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Single cable with elegant breakout for connection to DVI, USB and FireWire ports&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Built-in two-port USB 2.0 hub for easy connection of desktop peripheral devices.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Two FireWire 400 ports to support iSight and other desktop peripherals&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	Sleek, elegant design&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Huge virtual workspace, very small footprint.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Narrow Bezel design to minimize visual impact of using dual displays&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Unique hinge design for effortless adjustment&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Support for VESA mounting solutions (Apple Cinema Display VESA Mount Adapter sold separately)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;h3&gt;\r\n	Technical specifications&lt;/h3&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Screen size (diagonal viewable image size)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Apple Cinema HD Display: 30 inches (29.7-inch viewable)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Screen type&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Thin film transistor (TFT) active-matrix liquid crystal display (AMLCD)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Resolutions&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		2560 x 1600 pixels (optimum resolution)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		2048 x 1280&lt;/li&gt;\r\n	&lt;li&gt;\r\n		1920 x 1200&lt;/li&gt;\r\n	&lt;li&gt;\r\n		1280 x 800&lt;/li&gt;\r\n	&lt;li&gt;\r\n		1024 x 640&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Display colors (maximum)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		16.7 million&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Viewing angle (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		170&amp;deg; horizontal; 170&amp;deg; vertical&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Brightness (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		30-inch Cinema HD Display: 400 cd/m2&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Contrast ratio (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		700:1&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Response time (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		16 ms&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Pixel pitch&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		30-inch Cinema HD Display: 0.250 mm&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Screen treatment&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Antiglare hardcoat&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;User controls (hardware and software)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Display Power,&lt;/li&gt;\r\n	&lt;li&gt;\r\n		System sleep, wake&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Brightness&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Monitor tilt&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Connectors and cables&lt;/b&gt;&lt;br /&gt;\r\n	Cable&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		DVI (Digital Visual Interface)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		FireWire 400&lt;/li&gt;\r\n	&lt;li&gt;\r\n		USB 2.0&lt;/li&gt;\r\n	&lt;li&gt;\r\n		DC power (24 V)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	Connectors&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Two-port, self-powered USB 2.0 hub&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Two FireWire 400 ports&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Kensington security port&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;VESA mount adapter&lt;/b&gt;&lt;br /&gt;\r\n	Requires optional Cinema Display VESA Mount Adapter (M9649G/A)&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Compatible with VESA FDMI (MIS-D, 100, C) compliant mounting solutions&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Electrical requirements&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Input voltage: 100-240 VAC 50-60Hz&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Maximum power when operating: 150W&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Energy saver mode: 3W or less&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Environmental requirements&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Operating temperature: 50&amp;deg; to 95&amp;deg; F (10&amp;deg; to 35&amp;deg; C)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Storage temperature: -40&amp;deg; to 116&amp;deg; F (-40&amp;deg; to 47&amp;deg; C)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Operating humidity: 20% to 80% noncondensing&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Maximum operating altitude: 10,000 feet&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Agency approvals&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		FCC Part 15 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		EN55022 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		EN55024&lt;/li&gt;\r\n	&lt;li&gt;\r\n		VCCI Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		AS/NZS 3548 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		CNS 13438 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		ICES-003 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		ISO 13406 part 2&lt;/li&gt;\r\n	&lt;li&gt;\r\n		MPR II&lt;/li&gt;\r\n	&lt;li&gt;\r\n		IEC 60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		UL 60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		CSA 60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		EN60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		ENERGY STAR&lt;/li&gt;\r\n	&lt;li&gt;\r\n		TCO &amp;#39;03&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Size and weight&lt;/b&gt;&lt;br /&gt;\r\n	30-inch Apple Cinema HD Display&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Height: 21.3 inches (54.3 cm)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Width: 27.2 inches (68.8 cm)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Depth: 8.46 inches (21.5 cm)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Weight: 27.5 pounds (12.5 kg)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;System Requirements&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Mac Pro, all graphic options&lt;/li&gt;\r\n	&lt;li&gt;\r\n		MacBook Pro&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Power Mac G5 (PCI-X) with ATI Radeon 9650 or better or NVIDIA GeForce 6800 GT DDL or better&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Power Mac G5 (PCI Express), all graphics options&lt;/li&gt;\r\n	&lt;li&gt;\r\n		PowerBook G4 with dual-link DVI support&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Windows PC and graphics card that supports DVI ports with dual-link digital bandwidth and VESA DDC standard for plug-and-play setup&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', '', ''),
-(30, 2, 'Canon EOS 5D', '&lt;p&gt;\r\n	Canon''s press material for the EOS 5D states that it ''defines (a) new D-SLR category'', while we''re not typically too concerned with marketing talk this particular statement is clearly pretty accurate. The EOS 5D is unlike any previous digital SLR in that it combines a full-frame (35 mm sized) high resolution sensor (12.8 megapixels) with a relatively compact body (slightly larger than the EOS 20D, although in your hand it feels noticeably ''chunkier''). The EOS 5D is aimed to slot in between the EOS 20D and the EOS-1D professional digital SLR''s, an important difference when compared to the latter is that the EOS 5D doesn''t have any environmental seals. While Canon don''t specifically refer to the EOS 5D as a ''professional'' digital SLR it will have obvious appeal to professionals who want a high quality digital SLR in a body lighter than the EOS-1D. It will also no doubt appeal to current EOS 20D owners (although lets hope they''ve not bought too many EF-S lenses...) äë&lt;/p&gt;\r\n', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -2168,24 +2173,17 @@ INSERT INTO `yk_product_description` (`product_id`, `language_id`, `name`, `desc
 --
 
 CREATE TABLE IF NOT EXISTS `yk_product_discount` (
-  `product_discount_id` int(11) NOT NULL,
+  `product_discount_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) NOT NULL,
   `customer_group_id` int(11) NOT NULL,
   `quantity` int(4) NOT NULL DEFAULT '0',
   `priority` int(5) NOT NULL DEFAULT '1',
   `price` decimal(15,4) NOT NULL DEFAULT '0.0000',
   `date_start` date NOT NULL DEFAULT '0000-00-00',
-  `date_end` date NOT NULL DEFAULT '0000-00-00'
-) ENGINE=MyISAM AUTO_INCREMENT=441 DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `yk_product_discount`
---
-
-INSERT INTO `yk_product_discount` (`product_discount_id`, `product_id`, `customer_group_id`, `quantity`, `priority`, `price`, `date_start`, `date_end`) VALUES
-(440, 42, 1, 30, 1, '66.0000', '0000-00-00', '0000-00-00'),
-(439, 42, 1, 20, 1, '77.0000', '0000-00-00', '0000-00-00'),
-(438, 42, 1, 10, 1, '88.0000', '0000-00-00', '0000-00-00');
+  `date_end` date NOT NULL DEFAULT '0000-00-00',
+  PRIMARY KEY (`product_discount_id`),
+  KEY `product_id` (`product_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=441 ;
 
 -- --------------------------------------------------------
 
@@ -2195,7 +2193,8 @@ INSERT INTO `yk_product_discount` (`product_discount_id`, `product_id`, `custome
 
 CREATE TABLE IF NOT EXISTS `yk_product_filter` (
   `product_id` int(11) NOT NULL,
-  `filter_id` int(11) NOT NULL
+  `filter_id` int(11) NOT NULL,
+  PRIMARY KEY (`product_id`,`filter_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -2205,78 +2204,12 @@ CREATE TABLE IF NOT EXISTS `yk_product_filter` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_product_image` (
-  `product_image_id` int(11) NOT NULL,
+  `product_image_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) NOT NULL,
   `image` varchar(255) DEFAULT NULL,
-  `sort_order` int(3) NOT NULL DEFAULT '0'
-) ENGINE=MyISAM AUTO_INCREMENT=2352 DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `yk_product_image`
---
-
-INSERT INTO `yk_product_image` (`product_image_id`, `product_id`, `image`, `sort_order`) VALUES
-(2345, 30, 'data/demo/canon_eos_5d_2.jpg', 0),
-(2321, 47, 'data/demo/hp_3.jpg', 0),
-(2035, 28, 'data/demo/htc_touch_hd_2.jpg', 0),
-(2351, 41, 'data/demo/imac_3.jpg', 0),
-(1982, 40, 'data/demo/iphone_6.jpg', 0),
-(2001, 36, 'data/demo/ipod_nano_5.jpg', 0),
-(2000, 36, 'data/demo/ipod_nano_4.jpg', 0),
-(2005, 34, 'data/demo/ipod_shuffle_5.jpg', 0),
-(2004, 34, 'data/demo/ipod_shuffle_4.jpg', 0),
-(2011, 32, 'data/demo/ipod_touch_7.jpg', 0),
-(2010, 32, 'data/demo/ipod_touch_6.jpg', 0),
-(2009, 32, 'data/demo/ipod_touch_5.jpg', 0),
-(1971, 43, 'data/demo/macbook_5.jpg', 0),
-(1970, 43, 'data/demo/macbook_4.jpg', 0),
-(1974, 44, 'data/demo/macbook_air_4.jpg', 0),
-(1973, 44, 'data/demo/macbook_air_2.jpg', 0),
-(1977, 45, 'data/demo/macbook_pro_2.jpg', 0),
-(1976, 45, 'data/demo/macbook_pro_3.jpg', 0),
-(1986, 31, 'data/demo/nikon_d300_3.jpg', 0),
-(1985, 31, 'data/demo/nikon_d300_2.jpg', 0),
-(1988, 29, 'data/demo/palm_treo_pro_3.jpg', 0),
-(1995, 46, 'data/demo/sony_vaio_5.jpg', 0),
-(1994, 46, 'data/demo/sony_vaio_4.jpg', 0),
-(1991, 48, 'data/demo/ipod_classic_4.jpg', 0),
-(1990, 48, 'data/demo/ipod_classic_3.jpg', 0),
-(1981, 40, 'data/demo/iphone_2.jpg', 0),
-(1980, 40, 'data/demo/iphone_5.jpg', 0),
-(2344, 30, 'data/demo/canon_eos_5d_3.jpg', 0),
-(2320, 47, 'data/demo/hp_2.jpg', 0),
-(2034, 28, 'data/demo/htc_touch_hd_3.jpg', 0),
-(2350, 41, 'data/demo/imac_2.jpg', 0),
-(1979, 40, 'data/demo/iphone_3.jpg', 0),
-(1978, 40, 'data/demo/iphone_4.jpg', 0),
-(1989, 48, 'data/demo/ipod_classic_2.jpg', 0),
-(1999, 36, 'data/demo/ipod_nano_2.jpg', 0),
-(1998, 36, 'data/demo/ipod_nano_3.jpg', 0),
-(2003, 34, 'data/demo/ipod_shuffle_2.jpg', 0),
-(2002, 34, 'data/demo/ipod_shuffle_3.jpg', 0),
-(2008, 32, 'data/demo/ipod_touch_2.jpg', 0),
-(2007, 32, 'data/demo/ipod_touch_3.jpg', 0),
-(2006, 32, 'data/demo/ipod_touch_4.jpg', 0),
-(1969, 43, 'data/demo/macbook_2.jpg', 0),
-(1968, 43, 'data/demo/macbook_3.jpg', 0),
-(1972, 44, 'data/demo/macbook_air_3.jpg', 0),
-(1975, 45, 'data/demo/macbook_pro_4.jpg', 0),
-(1984, 31, 'data/demo/nikon_d300_4.jpg', 0),
-(1983, 31, 'data/demo/nikon_d300_5.jpg', 0),
-(1987, 29, 'data/demo/palm_treo_pro_2.jpg', 0),
-(1993, 46, 'data/demo/sony_vaio_2.jpg', 0),
-(1992, 46, 'data/demo/sony_vaio_3.jpg', 0),
-(2327, 49, 'data/demo/samsung_tab_7.jpg', 0),
-(2326, 49, 'data/demo/samsung_tab_6.jpg', 0),
-(2325, 49, 'data/demo/samsung_tab_5.jpg', 0),
-(2324, 49, 'data/demo/samsung_tab_4.jpg', 0),
-(2323, 49, 'data/demo/samsung_tab_3.jpg', 0),
-(2322, 49, 'data/demo/samsung_tab_2.jpg', 0),
-(2317, 42, 'data/demo/canon_logo.jpg', 0),
-(2316, 42, 'data/demo/hp_1.jpg', 0),
-(2315, 42, 'data/demo/compaq_presario.jpg', 0),
-(2314, 42, 'data/demo/canon_eos_5d_1.jpg', 0),
-(2313, 42, 'data/demo/canon_eos_5d_2.jpg', 0);
+  `sort_order` int(3) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`product_image_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2352 ;
 
 -- --------------------------------------------------------
 
@@ -2285,30 +2218,13 @@ INSERT INTO `yk_product_image` (`product_image_id`, `product_id`, `image`, `sort
 --
 
 CREATE TABLE IF NOT EXISTS `yk_product_option` (
-  `product_option_id` int(11) NOT NULL,
+  `product_option_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) NOT NULL,
   `option_id` int(11) NOT NULL,
   `option_value` text NOT NULL,
-  `required` tinyint(1) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=227 DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `yk_product_option`
---
-
-INSERT INTO `yk_product_option` (`product_option_id`, `product_id`, `option_id`, `option_value`, `required`) VALUES
-(224, 35, 11, '', 1),
-(225, 47, 12, '2011-04-22', 1),
-(223, 42, 2, '', 1),
-(217, 42, 5, '', 1),
-(209, 42, 6, '', 1),
-(218, 42, 1, '', 1),
-(208, 42, 4, 'test', 1),
-(219, 42, 8, '2011-02-20', 1),
-(222, 42, 7, '', 1),
-(221, 42, 9, '22:25', 1),
-(220, 42, 10, '2011-02-20 22:25', 1),
-(226, 30, 5, '', 1);
+  `required` tinyint(1) NOT NULL,
+  PRIMARY KEY (`product_option_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=227 ;
 
 -- --------------------------------------------------------
 
@@ -2317,7 +2233,7 @@ INSERT INTO `yk_product_option` (`product_option_id`, `product_id`, `option_id`,
 --
 
 CREATE TABLE IF NOT EXISTS `yk_product_option_value` (
-  `product_option_value_id` int(11) NOT NULL,
+  `product_option_value_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_option_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `option_id` int(11) NOT NULL,
@@ -2329,30 +2245,9 @@ CREATE TABLE IF NOT EXISTS `yk_product_option_value` (
   `points` int(8) NOT NULL,
   `points_prefix` varchar(1) NOT NULL,
   `weight` decimal(15,8) NOT NULL,
-  `weight_prefix` varchar(1) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `yk_product_option_value`
---
-
-INSERT INTO `yk_product_option_value` (`product_option_value_id`, `product_option_id`, `product_id`, `option_id`, `option_value_id`, `quantity`, `subtract`, `price`, `price_prefix`, `points`, `points_prefix`, `weight`, `weight_prefix`) VALUES
-(1, 217, 42, 5, 41, 100, 0, '1.0000', '+', 0, '+', '1.00000000', '+'),
-(6, 218, 42, 1, 31, 146, 1, '20.0000', '+', 2, '-', '20.00000000', '+'),
-(7, 218, 42, 1, 43, 300, 1, '30.0000', '+', 3, '+', '30.00000000', '+'),
-(5, 218, 42, 1, 32, 96, 1, '10.0000', '+', 1, '+', '10.00000000', '+'),
-(4, 217, 42, 5, 39, 92, 1, '4.0000', '+', 0, '+', '4.00000000', '+'),
-(2, 217, 42, 5, 42, 200, 1, '2.0000', '+', 0, '+', '2.00000000', '+'),
-(3, 217, 42, 5, 40, 300, 0, '3.0000', '+', 0, '+', '3.00000000', '+'),
-(8, 223, 42, 2, 23, 48, 1, '10.0000', '+', 0, '+', '10.00000000', '+'),
-(10, 223, 42, 2, 44, 2696, 1, '30.0000', '+', 0, '+', '30.00000000', '+'),
-(9, 223, 42, 2, 24, 194, 1, '20.0000', '+', 0, '+', '20.00000000', '+'),
-(11, 223, 42, 2, 45, 3998, 1, '40.0000', '+', 0, '+', '40.00000000', '+'),
-(12, 224, 35, 11, 46, 0, 1, '5.0000', '+', 0, '+', '0.00000000', '+'),
-(13, 224, 35, 11, 47, 10, 1, '10.0000', '+', 0, '+', '0.00000000', '+'),
-(14, 224, 35, 11, 48, 15, 1, '15.0000', '+', 0, '+', '0.00000000', '+'),
-(16, 226, 30, 5, 40, 5, 1, '0.0000', '+', 0, '+', '0.00000000', '+'),
-(15, 226, 30, 5, 39, 2, 1, '0.0000', '+', 0, '+', '0.00000000', '+');
+  `weight_prefix` varchar(1) NOT NULL,
+  PRIMARY KEY (`product_option_value_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
 
 -- --------------------------------------------------------
 
@@ -2362,18 +2257,9 @@ INSERT INTO `yk_product_option_value` (`product_option_value_id`, `product_optio
 
 CREATE TABLE IF NOT EXISTS `yk_product_related` (
   `product_id` int(11) NOT NULL,
-  `related_id` int(11) NOT NULL
+  `related_id` int(11) NOT NULL,
+  PRIMARY KEY (`product_id`,`related_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `yk_product_related`
---
-
-INSERT INTO `yk_product_related` (`product_id`, `related_id`) VALUES
-(40, 42),
-(41, 42),
-(42, 40),
-(42, 41);
 
 -- --------------------------------------------------------
 
@@ -2382,36 +2268,12 @@ INSERT INTO `yk_product_related` (`product_id`, `related_id`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `yk_product_reward` (
-  `product_reward_id` int(11) NOT NULL,
+  `product_reward_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) NOT NULL DEFAULT '0',
   `customer_group_id` int(11) NOT NULL DEFAULT '0',
-  `points` int(8) NOT NULL DEFAULT '0'
-) ENGINE=MyISAM AUTO_INCREMENT=546 DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `yk_product_reward`
---
-
-INSERT INTO `yk_product_reward` (`product_reward_id`, `product_id`, `customer_group_id`, `points`) VALUES
-(515, 42, 1, 100),
-(519, 47, 1, 300),
-(379, 28, 1, 400),
-(329, 43, 1, 600),
-(339, 29, 1, 0),
-(343, 48, 1, 0),
-(335, 40, 1, 0),
-(539, 30, 1, 200),
-(331, 44, 1, 700),
-(333, 45, 1, 800),
-(337, 31, 1, 0),
-(425, 35, 1, 0),
-(345, 33, 1, 0),
-(347, 46, 1, 0),
-(545, 41, 1, 0),
-(351, 36, 1, 0),
-(353, 34, 1, 0),
-(355, 32, 1, 0),
-(521, 49, 1, 1000);
+  `points` int(8) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`product_reward_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=546 ;
 
 -- --------------------------------------------------------
 
@@ -2420,23 +2282,16 @@ INSERT INTO `yk_product_reward` (`product_reward_id`, `product_id`, `customer_gr
 --
 
 CREATE TABLE IF NOT EXISTS `yk_product_special` (
-  `product_special_id` int(11) NOT NULL,
+  `product_special_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) NOT NULL,
   `customer_group_id` int(11) NOT NULL,
   `priority` int(5) NOT NULL DEFAULT '1',
   `price` decimal(15,4) NOT NULL DEFAULT '0.0000',
   `date_start` date NOT NULL DEFAULT '0000-00-00',
-  `date_end` date NOT NULL DEFAULT '0000-00-00'
-) ENGINE=MyISAM AUTO_INCREMENT=440 DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `yk_product_special`
---
-
-INSERT INTO `yk_product_special` (`product_special_id`, `product_id`, `customer_group_id`, `priority`, `price`, `date_start`, `date_end`) VALUES
-(419, 42, 1, 1, '90.0000', '0000-00-00', '0000-00-00'),
-(439, 30, 1, 2, '90.0000', '0000-00-00', '0000-00-00'),
-(438, 30, 1, 1, '80.0000', '0000-00-00', '0000-00-00');
+  `date_end` date NOT NULL DEFAULT '0000-00-00',
+  PRIMARY KEY (`product_special_id`),
+  KEY `product_id` (`product_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=440 ;
 
 -- --------------------------------------------------------
 
@@ -2446,44 +2301,9 @@ INSERT INTO `yk_product_special` (`product_special_id`, `product_id`, `customer_
 
 CREATE TABLE IF NOT EXISTS `yk_product_to_category` (
   `product_id` int(11) NOT NULL,
-  `category_id` int(11) NOT NULL
+  `category_id` int(11) NOT NULL,
+  PRIMARY KEY (`product_id`,`category_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `yk_product_to_category`
---
-
-INSERT INTO `yk_product_to_category` (`product_id`, `category_id`) VALUES
-(28, 20),
-(28, 24),
-(29, 20),
-(29, 24),
-(30, 20),
-(30, 33),
-(31, 33),
-(32, 34),
-(33, 20),
-(33, 28),
-(34, 34),
-(35, 20),
-(36, 34),
-(40, 20),
-(40, 24),
-(41, 27),
-(42, 20),
-(42, 28),
-(43, 18),
-(43, 20),
-(44, 18),
-(44, 20),
-(45, 18),
-(46, 18),
-(46, 20),
-(47, 18),
-(47, 20),
-(48, 20),
-(48, 34),
-(49, 57);
 
 -- --------------------------------------------------------
 
@@ -2493,7 +2313,8 @@ INSERT INTO `yk_product_to_category` (`product_id`, `category_id`) VALUES
 
 CREATE TABLE IF NOT EXISTS `yk_product_to_download` (
   `product_id` int(11) NOT NULL,
-  `download_id` int(11) NOT NULL
+  `download_id` int(11) NOT NULL,
+  PRIMARY KEY (`product_id`,`download_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -2505,7 +2326,8 @@ CREATE TABLE IF NOT EXISTS `yk_product_to_download` (
 CREATE TABLE IF NOT EXISTS `yk_product_to_layout` (
   `product_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
-  `layout_id` int(11) NOT NULL
+  `layout_id` int(11) NOT NULL,
+  PRIMARY KEY (`product_id`,`store_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -2516,33 +2338,9 @@ CREATE TABLE IF NOT EXISTS `yk_product_to_layout` (
 
 CREATE TABLE IF NOT EXISTS `yk_product_to_store` (
   `product_id` int(11) NOT NULL,
-  `store_id` int(11) NOT NULL DEFAULT '0'
+  `store_id` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`product_id`,`store_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `yk_product_to_store`
---
-
-INSERT INTO `yk_product_to_store` (`product_id`, `store_id`) VALUES
-(28, 0),
-(29, 0),
-(30, 0),
-(31, 0),
-(32, 0),
-(33, 0),
-(34, 0),
-(35, 0),
-(36, 0),
-(40, 0),
-(41, 0),
-(42, 0),
-(43, 0),
-(44, 0),
-(45, 0),
-(46, 0),
-(47, 0),
-(48, 0),
-(49, 0);
 
 -- --------------------------------------------------------
 
@@ -2551,29 +2349,31 @@ INSERT INTO `yk_product_to_store` (`product_id`, `store_id`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `yk_project` (
-  `project_id` int(11) NOT NULL,
+  `project_id` int(11) NOT NULL AUTO_INCREMENT,
   `project_sn` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `group_id` smallint(6) NOT NULL DEFAULT '0',
   `group` char(4) COLLATE utf8_unicode_ci NOT NULL,
   `account` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `telephone` varchar(16) COLLATE utf8_unicode_ci NOT NULL,
   `status` tinyint(4) NOT NULL DEFAULT '1',
   `date_applied` datetime DEFAULT NULL,
   `user_id` int(11) NOT NULL DEFAULT '0',
-  `date_modified` datetime DEFAULT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `date_modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`project_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
 
 --
 -- 转存表中的数据 `yk_project`
 --
 
-INSERT INTO `yk_project` (`project_id`, `project_sn`, `group`, `account`, `telephone`, `status`, `date_applied`, `user_id`, `date_modified`) VALUES
-(1, 'xf2015121501', 'xfsj', 'sadsadsadsa', '15951997250', 1, '2015-05-27 09:28:30', 1, NULL),
-(2, 'xf2015151301', 'xfwb', 'dasdasdasdas', '15951117250', 2, '2015-05-27 19:28:30', 2, '2015-05-27 19:38:30'),
-(3, 'xf2015128501', 'xfjc', 'assdaq21212', '13351997250', 3, '2015-05-27 09:38:30', 2, '2015-06-03 20:57:39'),
-(4, 'xf2015151301', 'xfwb', 'dasdasdasdas', '15951117250', 2, '2015-05-27 19:48:30', 3, '2015-05-27 19:49:30'),
-(5, 'xf2015058501', 'xfgc', 'assdaq21212', '13351997250', 2, '2015-05-27 09:38:30', 2, '2015-05-27 19:49:30'),
-(6, 'xf2015061301', 'xfgc', '45dasdasdasdas', '18951117250', 3, '2015-05-27 19:48:30', 3, '2015-05-27 19:49:30'),
-(7, 'xf2015151901', 'xfwb', '879dasdasdasdas', '15991117250', 3, '2015-05-27 19:28:30', 2, '2015-05-27 19:38:30');
+INSERT INTO `yk_project` (`project_id`, `project_sn`, `group_id`, `group`, `account`, `telephone`, `status`, `date_applied`, `user_id`, `date_modified`) VALUES
+(1, 'xf2015121501', 1, 'xfsj', 'sadsadsadsa', '15951997250', 1, '2015-05-27 09:28:30', 1, NULL),
+(2, 'xf2015151301', 2, 'xfwb', 'dasdasdasdas', '15951117250', 2, '2015-05-27 19:28:30', 2, '2015-05-27 19:38:30'),
+(3, 'xf2015128501', 3, 'xfjc', 'assdaq21212', '13351997250', 3, '2015-05-27 09:38:30', 2, '2015-06-03 20:57:39'),
+(4, 'xf2015151301', 2, 'xfwb', 'dasdasdasdas', '15951117250', 2, '2015-05-27 19:48:30', 3, '2015-05-27 19:49:30'),
+(5, 'xf2015058501', 4, 'xfgc', 'assdaq21212', '13351997250', 2, '2015-05-27 09:38:30', 2, '2015-05-27 19:49:30'),
+(6, 'xf2015061301', 4, 'xfgc', '45dasdasdasdas', '18951117250', 3, '2015-05-27 19:48:30', 3, '2015-05-27 19:49:30'),
+(7, 'xf2015151901', 2, 'xfwb', '879dasdasdasdas', '15991117250', 3, '2015-05-27 19:28:30', 2, '2015-05-27 19:38:30');
 
 -- --------------------------------------------------------
 
@@ -2582,11 +2382,12 @@ INSERT INTO `yk_project` (`project_id`, `project_sn`, `group`, `account`, `telep
 --
 
 CREATE TABLE IF NOT EXISTS `yk_project_group` (
-  `group_id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) DEFAULT NULL,
   `show` tinyint(4) NOT NULL DEFAULT '0',
-  `sort_order` int(3) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+  `sort_order` int(3) NOT NULL,
+  PRIMARY KEY (`group_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- 转存表中的数据 `yk_project_group`
@@ -2605,7 +2406,7 @@ INSERT INTO `yk_project_group` (`group_id`, `name`, `show`, `sort_order`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `yk_return` (
-  `return_id` int(11) NOT NULL,
+  `return_id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
@@ -2623,8 +2424,9 @@ CREATE TABLE IF NOT EXISTS `yk_return` (
   `comment` text,
   `date_ordered` date NOT NULL,
   `date_added` datetime NOT NULL,
-  `date_modified` datetime NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `date_modified` datetime NOT NULL,
+  PRIMARY KEY (`return_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2633,10 +2435,11 @@ CREATE TABLE IF NOT EXISTS `yk_return` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_return_action` (
-  `return_action_id` int(11) NOT NULL,
+  `return_action_id` int(11) NOT NULL AUTO_INCREMENT,
   `language_id` int(11) NOT NULL DEFAULT '0',
-  `name` varchar(64) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  `name` varchar(64) NOT NULL,
+  PRIMARY KEY (`return_action_id`,`language_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- 转存表中的数据 `yk_return_action`
@@ -2654,13 +2457,14 @@ INSERT INTO `yk_return_action` (`return_action_id`, `language_id`, `name`) VALUE
 --
 
 CREATE TABLE IF NOT EXISTS `yk_return_history` (
-  `return_history_id` int(11) NOT NULL,
+  `return_history_id` int(11) NOT NULL AUTO_INCREMENT,
   `return_id` int(11) NOT NULL,
   `return_status_id` int(11) NOT NULL,
   `notify` tinyint(1) NOT NULL,
   `comment` text NOT NULL,
-  `date_added` datetime NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `date_added` datetime NOT NULL,
+  PRIMARY KEY (`return_history_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2669,10 +2473,11 @@ CREATE TABLE IF NOT EXISTS `yk_return_history` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_return_reason` (
-  `return_reason_id` int(11) NOT NULL,
+  `return_reason_id` int(11) NOT NULL AUTO_INCREMENT,
   `language_id` int(11) NOT NULL DEFAULT '0',
-  `name` varchar(128) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+  `name` varchar(128) NOT NULL,
+  PRIMARY KEY (`return_reason_id`,`language_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- 转存表中的数据 `yk_return_reason`
@@ -2692,10 +2497,11 @@ INSERT INTO `yk_return_reason` (`return_reason_id`, `language_id`, `name`) VALUE
 --
 
 CREATE TABLE IF NOT EXISTS `yk_return_status` (
-  `return_status_id` int(11) NOT NULL,
+  `return_status_id` int(11) NOT NULL AUTO_INCREMENT,
   `language_id` int(11) NOT NULL DEFAULT '0',
-  `name` varchar(32) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  `name` varchar(32) NOT NULL,
+  PRIMARY KEY (`return_status_id`,`language_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- 转存表中的数据 `yk_return_status`
@@ -2713,7 +2519,7 @@ INSERT INTO `yk_return_status` (`return_status_id`, `language_id`, `name`) VALUE
 --
 
 CREATE TABLE IF NOT EXISTS `yk_review` (
-  `review_id` int(11) NOT NULL,
+  `review_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `author` varchar(64) NOT NULL,
@@ -2721,8 +2527,10 @@ CREATE TABLE IF NOT EXISTS `yk_review` (
   `rating` int(1) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0',
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`review_id`),
+  KEY `product_id` (`product_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2731,13 +2539,14 @@ CREATE TABLE IF NOT EXISTS `yk_review` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_setting` (
-  `setting_id` int(11) NOT NULL,
+  `setting_id` int(11) NOT NULL AUTO_INCREMENT,
   `store_id` int(11) NOT NULL DEFAULT '0',
   `group` varchar(32) NOT NULL,
   `key` varchar(64) NOT NULL,
   `value` text NOT NULL,
-  `serialized` tinyint(1) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=443 DEFAULT CHARSET=utf8;
+  `serialized` tinyint(1) NOT NULL,
+  PRIMARY KEY (`setting_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=443 ;
 
 --
 -- 转存表中的数据 `yk_setting`
@@ -2893,10 +2702,11 @@ INSERT INTO `yk_setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `se
 --
 
 CREATE TABLE IF NOT EXISTS `yk_stock_status` (
-  `stock_status_id` int(11) NOT NULL,
+  `stock_status_id` int(11) NOT NULL AUTO_INCREMENT,
   `language_id` int(11) NOT NULL,
-  `name` varchar(32) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+  `name` varchar(32) NOT NULL,
+  PRIMARY KEY (`stock_status_id`,`language_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
 -- 转存表中的数据 `yk_stock_status`
@@ -2915,11 +2725,12 @@ INSERT INTO `yk_stock_status` (`stock_status_id`, `language_id`, `name`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `yk_store` (
-  `store_id` int(11) NOT NULL,
+  `store_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
   `url` varchar(255) NOT NULL,
-  `ssl` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `ssl` varchar(255) NOT NULL,
+  PRIMARY KEY (`store_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2928,12 +2739,13 @@ CREATE TABLE IF NOT EXISTS `yk_store` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_tax_class` (
-  `tax_class_id` int(11) NOT NULL,
+  `tax_class_id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(32) NOT NULL,
   `description` varchar(255) NOT NULL,
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+  `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`tax_class_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- 转存表中的数据 `yk_tax_class`
@@ -2950,14 +2762,15 @@ INSERT INTO `yk_tax_class` (`tax_class_id`, `title`, `description`, `date_added`
 --
 
 CREATE TABLE IF NOT EXISTS `yk_tax_rate` (
-  `tax_rate_id` int(11) NOT NULL,
+  `tax_rate_id` int(11) NOT NULL AUTO_INCREMENT,
   `geo_zone_id` int(11) NOT NULL DEFAULT '0',
   `name` varchar(32) NOT NULL,
   `rate` decimal(15,4) NOT NULL DEFAULT '0.0000',
   `type` char(1) NOT NULL,
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=MyISAM AUTO_INCREMENT=88 DEFAULT CHARSET=utf8;
+  `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`tax_rate_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=88 ;
 
 --
 -- 转存表中的数据 `yk_tax_rate`
@@ -2975,7 +2788,8 @@ INSERT INTO `yk_tax_rate` (`tax_rate_id`, `geo_zone_id`, `name`, `rate`, `type`,
 
 CREATE TABLE IF NOT EXISTS `yk_tax_rate_to_customer_group` (
   `tax_rate_id` int(11) NOT NULL,
-  `customer_group_id` int(11) NOT NULL
+  `customer_group_id` int(11) NOT NULL,
+  PRIMARY KEY (`tax_rate_id`,`customer_group_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -2993,12 +2807,13 @@ INSERT INTO `yk_tax_rate_to_customer_group` (`tax_rate_id`, `customer_group_id`)
 --
 
 CREATE TABLE IF NOT EXISTS `yk_tax_rule` (
-  `tax_rule_id` int(11) NOT NULL,
+  `tax_rule_id` int(11) NOT NULL AUTO_INCREMENT,
   `tax_class_id` int(11) NOT NULL,
   `tax_rate_id` int(11) NOT NULL,
   `based` varchar(10) NOT NULL,
-  `priority` int(5) NOT NULL DEFAULT '1'
-) ENGINE=MyISAM AUTO_INCREMENT=129 DEFAULT CHARSET=utf8;
+  `priority` int(5) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`tax_rule_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=129 ;
 
 --
 -- 转存表中的数据 `yk_tax_rule`
@@ -3017,25 +2832,19 @@ INSERT INTO `yk_tax_rule` (`tax_rule_id`, `tax_class_id`, `tax_rate_id`, `based`
 --
 
 CREATE TABLE IF NOT EXISTS `yk_url_alias` (
-  `url_alias_id` int(11) NOT NULL,
+  `url_alias_id` int(11) NOT NULL AUTO_INCREMENT,
   `query` varchar(255) NOT NULL,
-  `keyword` varchar(255) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=774 DEFAULT CHARSET=utf8;
+  `keyword` varchar(255) NOT NULL,
+  PRIMARY KEY (`url_alias_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=774 ;
 
 --
 -- 转存表中的数据 `yk_url_alias`
 --
 
 INSERT INTO `yk_url_alias` (`url_alias_id`, `query`, `keyword`) VALUES
-(704, 'product_id=48', 'ipod_classic'),
-(773, 'category_id=20', 'desktops'),
-(503, 'category_id=26', 'pc'),
-(505, 'category_id=27', 'mac'),
 (730, 'manufacturer_id=8', 'apple'),
-(772, 'information_id=4', 'about_us'),
-(768, 'product_id=42', 'test'),
-(767, 'category_id=34', 'mp3-players'),
-(536, 'category_id=36', 'Normal');
+(772, 'information_id=4', 'about_us');
 
 -- --------------------------------------------------------
 
@@ -3044,7 +2853,7 @@ INSERT INTO `yk_url_alias` (`url_alias_id`, `query`, `keyword`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `yk_user` (
-  `user_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_group_id` int(11) NOT NULL,
   `username` varchar(20) NOT NULL,
   `password` varchar(40) NOT NULL,
@@ -3055,8 +2864,9 @@ CREATE TABLE IF NOT EXISTS `yk_user` (
   `code` varchar(40) NOT NULL,
   `ip` varchar(40) NOT NULL,
   `status` tinyint(1) NOT NULL,
-  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`user_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- 转存表中的数据 `yk_user`
@@ -3072,10 +2882,11 @@ INSERT INTO `yk_user` (`user_id`, `user_group_id`, `username`, `password`, `salt
 --
 
 CREATE TABLE IF NOT EXISTS `yk_user_group` (
-  `user_group_id` int(11) NOT NULL,
+  `user_group_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
-  `permission` text NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+  `permission` text NOT NULL,
+  PRIMARY KEY (`user_group_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- 转存表中的数据 `yk_user_group`
@@ -3092,7 +2903,7 @@ INSERT INTO `yk_user_group` (`user_group_id`, `name`, `permission`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `yk_voucher` (
-  `voucher_id` int(11) NOT NULL,
+  `voucher_id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
   `code` varchar(10) NOT NULL,
   `from_name` varchar(64) NOT NULL,
@@ -3103,8 +2914,9 @@ CREATE TABLE IF NOT EXISTS `yk_voucher` (
   `message` text NOT NULL,
   `amount` decimal(15,4) NOT NULL,
   `status` tinyint(1) NOT NULL,
-  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`voucher_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3113,12 +2925,13 @@ CREATE TABLE IF NOT EXISTS `yk_voucher` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_voucher_history` (
-  `voucher_history_id` int(11) NOT NULL,
+  `voucher_history_id` int(11) NOT NULL AUTO_INCREMENT,
   `voucher_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `amount` decimal(15,4) NOT NULL,
-  `date_added` datetime NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `date_added` datetime NOT NULL,
+  PRIMARY KEY (`voucher_history_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3127,9 +2940,10 @@ CREATE TABLE IF NOT EXISTS `yk_voucher_history` (
 --
 
 CREATE TABLE IF NOT EXISTS `yk_voucher_theme` (
-  `voucher_theme_id` int(11) NOT NULL,
-  `image` varchar(255) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+  `voucher_theme_id` int(11) NOT NULL AUTO_INCREMENT,
+  `image` varchar(255) NOT NULL,
+  PRIMARY KEY (`voucher_theme_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
 -- 转存表中的数据 `yk_voucher_theme`
@@ -3149,7 +2963,8 @@ INSERT INTO `yk_voucher_theme` (`voucher_theme_id`, `image`) VALUES
 CREATE TABLE IF NOT EXISTS `yk_voucher_theme_description` (
   `voucher_theme_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `name` varchar(32) NOT NULL
+  `name` varchar(32) NOT NULL,
+  PRIMARY KEY (`voucher_theme_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -3168,9 +2983,10 @@ INSERT INTO `yk_voucher_theme_description` (`voucher_theme_id`, `language_id`, `
 --
 
 CREATE TABLE IF NOT EXISTS `yk_weight_class` (
-  `weight_class_id` int(11) NOT NULL,
-  `value` decimal(15,8) NOT NULL DEFAULT '0.00000000'
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+  `weight_class_id` int(11) NOT NULL AUTO_INCREMENT,
+  `value` decimal(15,8) NOT NULL DEFAULT '0.00000000',
+  PRIMARY KEY (`weight_class_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- 转存表中的数据 `yk_weight_class`
@@ -3189,11 +3005,12 @@ INSERT INTO `yk_weight_class` (`weight_class_id`, `value`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `yk_weight_class_description` (
-  `weight_class_id` int(11) NOT NULL,
+  `weight_class_id` int(11) NOT NULL AUTO_INCREMENT,
   `language_id` int(11) NOT NULL,
   `title` varchar(32) NOT NULL,
-  `unit` varchar(4) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+  `unit` varchar(4) NOT NULL,
+  PRIMARY KEY (`weight_class_id`,`language_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- 转存表中的数据 `yk_weight_class_description`
@@ -3212,12 +3029,13 @@ INSERT INTO `yk_weight_class_description` (`weight_class_id`, `language_id`, `ti
 --
 
 CREATE TABLE IF NOT EXISTS `yk_zone` (
-  `zone_id` int(11) NOT NULL,
+  `zone_id` int(11) NOT NULL AUTO_INCREMENT,
   `country_id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL,
   `code` varchar(32) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=MyISAM AUTO_INCREMENT=4033 DEFAULT CHARSET=utf8;
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`zone_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4033 ;
 
 --
 -- 转存表中的数据 `yk_zone`
@@ -4758,9 +4576,9 @@ INSERT INTO `yk_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (1555, 101, 'Bushehr', 'BSH', 1),
 (1556, 101, 'Fars', 'FAR', 1),
 (1557, 101, 'Hormozgan', 'HRM', 1),
-(1558, 101, 'Sistan and Baluchistan', 'SBL', 1),
-(1559, 101, 'Kerman', 'KRB', 1);
+(1558, 101, 'Sistan and Baluchistan', 'SBL', 1);
 INSERT INTO `yk_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
+(1559, 101, 'Kerman', 'KRB', 1),
 (1560, 101, 'Yazd', 'YZD', 1),
 (1561, 101, 'Esfahan', 'EFH', 1),
 (1562, 101, 'Semnan', 'SMN', 1),
@@ -6258,9 +6076,9 @@ INSERT INTO `yk_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (3055, 199, 'Shamal Darfur', 'SDA', 1),
 (3056, 199, 'Shamal Kurdufan', 'SKU', 1),
 (3057, 199, 'Sharq al Istiwa''iyah', 'SIS', 1),
-(3058, 199, 'Sinnar', 'SNR', 1),
-(3059, 199, 'Warab', 'WRB', 1);
+(3058, 199, 'Sinnar', 'SNR', 1);
 INSERT INTO `yk_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
+(3059, 199, 'Warab', 'WRB', 1),
 (3060, 200, 'Brokopondo', 'BR', 1),
 (3061, 200, 'Commewijne', 'CM', 1),
 (3062, 200, 'Coronie', 'CR', 1),
@@ -7219,13 +7037,14 @@ INSERT INTO `yk_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `yk_zone_to_geo_zone` (
-  `zone_to_geo_zone_id` int(11) NOT NULL,
+  `zone_to_geo_zone_id` int(11) NOT NULL AUTO_INCREMENT,
   `country_id` int(11) NOT NULL,
   `zone_id` int(11) NOT NULL DEFAULT '0',
   `geo_zone_id` int(11) NOT NULL,
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=MyISAM AUTO_INCREMENT=66 DEFAULT CHARSET=utf8;
+  `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`zone_to_geo_zone_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=66 ;
 
 --
 -- 转存表中的数据 `yk_zone_to_geo_zone`
@@ -7235,1088 +7054,6 @@ INSERT INTO `yk_zone_to_geo_zone` (`zone_to_geo_zone_id`, `country_id`, `zone_id
 (57, 222, 0, 3, '2010-02-26 22:33:24', '0000-00-00 00:00:00'),
 (65, 222, 0, 4, '2010-12-15 15:18:13', '0000-00-00 00:00:00');
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `yk_address`
---
-ALTER TABLE `yk_address`
-  ADD PRIMARY KEY (`address_id`), ADD KEY `customer_id` (`customer_id`);
-
---
--- Indexes for table `yk_affiliate`
---
-ALTER TABLE `yk_affiliate`
-  ADD PRIMARY KEY (`affiliate_id`);
-
---
--- Indexes for table `yk_affiliate_transaction`
---
-ALTER TABLE `yk_affiliate_transaction`
-  ADD PRIMARY KEY (`affiliate_transaction_id`);
-
---
--- Indexes for table `yk_attribute`
---
-ALTER TABLE `yk_attribute`
-  ADD PRIMARY KEY (`attribute_id`);
-
---
--- Indexes for table `yk_attribute_description`
---
-ALTER TABLE `yk_attribute_description`
-  ADD PRIMARY KEY (`attribute_id`,`language_id`);
-
---
--- Indexes for table `yk_attribute_group_description`
---
-ALTER TABLE `yk_attribute_group_description`
-  ADD PRIMARY KEY (`attribute_group_id`,`language_id`);
-
---
--- Indexes for table `yk_banner`
---
-ALTER TABLE `yk_banner`
-  ADD PRIMARY KEY (`banner_id`);
-
---
--- Indexes for table `yk_banner_image`
---
-ALTER TABLE `yk_banner_image`
-  ADD PRIMARY KEY (`banner_image_id`);
-
---
--- Indexes for table `yk_banner_image_description`
---
-ALTER TABLE `yk_banner_image_description`
-  ADD PRIMARY KEY (`banner_image_id`,`language_id`);
-
---
--- Indexes for table `yk_category`
---
-ALTER TABLE `yk_category`
-  ADD PRIMARY KEY (`category_id`);
-
---
--- Indexes for table `yk_category_description`
---
-ALTER TABLE `yk_category_description`
-  ADD PRIMARY KEY (`category_id`,`language_id`), ADD KEY `name` (`name`);
-
---
--- Indexes for table `yk_category_filter`
---
-ALTER TABLE `yk_category_filter`
-  ADD PRIMARY KEY (`category_id`,`filter_id`);
-
---
--- Indexes for table `yk_category_path`
---
-ALTER TABLE `yk_category_path`
-  ADD PRIMARY KEY (`category_id`,`path_id`);
-
---
--- Indexes for table `yk_category_to_layout`
---
-ALTER TABLE `yk_category_to_layout`
-  ADD PRIMARY KEY (`category_id`,`store_id`);
-
---
--- Indexes for table `yk_category_to_store`
---
-ALTER TABLE `yk_category_to_store`
-  ADD PRIMARY KEY (`category_id`,`store_id`);
-
---
--- Indexes for table `yk_country`
---
-ALTER TABLE `yk_country`
-  ADD PRIMARY KEY (`country_id`);
-
---
--- Indexes for table `yk_coupon`
---
-ALTER TABLE `yk_coupon`
-  ADD PRIMARY KEY (`coupon_id`);
-
---
--- Indexes for table `yk_coupon_category`
---
-ALTER TABLE `yk_coupon_category`
-  ADD PRIMARY KEY (`coupon_id`,`category_id`);
-
---
--- Indexes for table `yk_coupon_history`
---
-ALTER TABLE `yk_coupon_history`
-  ADD PRIMARY KEY (`coupon_history_id`);
-
---
--- Indexes for table `yk_coupon_product`
---
-ALTER TABLE `yk_coupon_product`
-  ADD PRIMARY KEY (`coupon_product_id`);
-
---
--- Indexes for table `yk_currency`
---
-ALTER TABLE `yk_currency`
-  ADD PRIMARY KEY (`currency_id`);
-
---
--- Indexes for table `yk_customer`
---
-ALTER TABLE `yk_customer`
-  ADD PRIMARY KEY (`customer_id`);
-
---
--- Indexes for table `yk_customer_ban_ip`
---
-ALTER TABLE `yk_customer_ban_ip`
-  ADD PRIMARY KEY (`customer_ban_ip_id`), ADD KEY `ip` (`ip`);
-
---
--- Indexes for table `yk_customer_field`
---
-ALTER TABLE `yk_customer_field`
-  ADD PRIMARY KEY (`customer_id`,`custom_field_id`,`custom_field_value_id`);
-
---
--- Indexes for table `yk_customer_group`
---
-ALTER TABLE `yk_customer_group`
-  ADD PRIMARY KEY (`customer_group_id`);
-
---
--- Indexes for table `yk_customer_group_description`
---
-ALTER TABLE `yk_customer_group_description`
-  ADD PRIMARY KEY (`customer_group_id`,`language_id`);
-
---
--- Indexes for table `yk_customer_history`
---
-ALTER TABLE `yk_customer_history`
-  ADD PRIMARY KEY (`customer_history_id`);
-
---
--- Indexes for table `yk_customer_ip`
---
-ALTER TABLE `yk_customer_ip`
-  ADD PRIMARY KEY (`customer_ip_id`), ADD KEY `ip` (`ip`);
-
---
--- Indexes for table `yk_customer_online`
---
-ALTER TABLE `yk_customer_online`
-  ADD PRIMARY KEY (`ip`);
-
---
--- Indexes for table `yk_customer_reward`
---
-ALTER TABLE `yk_customer_reward`
-  ADD PRIMARY KEY (`customer_reward_id`);
-
---
--- Indexes for table `yk_customer_transaction`
---
-ALTER TABLE `yk_customer_transaction`
-  ADD PRIMARY KEY (`customer_transaction_id`);
-
---
--- Indexes for table `yk_custom_field`
---
-ALTER TABLE `yk_custom_field`
-  ADD PRIMARY KEY (`custom_field_id`);
-
---
--- Indexes for table `yk_custom_field_description`
---
-ALTER TABLE `yk_custom_field_description`
-  ADD PRIMARY KEY (`custom_field_id`,`language_id`);
-
---
--- Indexes for table `yk_custom_field_to_customer_group`
---
-ALTER TABLE `yk_custom_field_to_customer_group`
-  ADD PRIMARY KEY (`custom_field_id`,`customer_group_id`);
-
---
--- Indexes for table `yk_custom_field_value`
---
-ALTER TABLE `yk_custom_field_value`
-  ADD PRIMARY KEY (`custom_field_value_id`);
-
---
--- Indexes for table `yk_custom_field_value_description`
---
-ALTER TABLE `yk_custom_field_value_description`
-  ADD PRIMARY KEY (`custom_field_value_id`,`language_id`);
-
---
--- Indexes for table `yk_download`
---
-ALTER TABLE `yk_download`
-  ADD PRIMARY KEY (`download_id`);
-
---
--- Indexes for table `yk_download_description`
---
-ALTER TABLE `yk_download_description`
-  ADD PRIMARY KEY (`download_id`,`language_id`);
-
---
--- Indexes for table `yk_extension`
---
-ALTER TABLE `yk_extension`
-  ADD PRIMARY KEY (`extension_id`);
-
---
--- Indexes for table `yk_filter`
---
-ALTER TABLE `yk_filter`
-  ADD PRIMARY KEY (`filter_id`);
-
---
--- Indexes for table `yk_filter_description`
---
-ALTER TABLE `yk_filter_description`
-  ADD PRIMARY KEY (`filter_id`,`language_id`);
-
---
--- Indexes for table `yk_filter_group`
---
-ALTER TABLE `yk_filter_group`
-  ADD PRIMARY KEY (`filter_group_id`);
-
---
--- Indexes for table `yk_filter_group_description`
---
-ALTER TABLE `yk_filter_group_description`
-  ADD PRIMARY KEY (`filter_group_id`,`language_id`);
-
---
--- Indexes for table `yk_geo_zone`
---
-ALTER TABLE `yk_geo_zone`
-  ADD PRIMARY KEY (`geo_zone_id`);
-
---
--- Indexes for table `yk_help`
---
-ALTER TABLE `yk_help`
-  ADD PRIMARY KEY (`help_id`);
-
---
--- Indexes for table `yk_help_group`
---
-ALTER TABLE `yk_help_group`
-  ADD PRIMARY KEY (`group_id`);
-
---
--- Indexes for table `yk_information`
---
-ALTER TABLE `yk_information`
-  ADD PRIMARY KEY (`information_id`);
-
---
--- Indexes for table `yk_information_description`
---
-ALTER TABLE `yk_information_description`
-  ADD PRIMARY KEY (`information_id`,`language_id`);
-
---
--- Indexes for table `yk_information_to_layout`
---
-ALTER TABLE `yk_information_to_layout`
-  ADD PRIMARY KEY (`information_id`,`store_id`);
-
---
--- Indexes for table `yk_information_to_store`
---
-ALTER TABLE `yk_information_to_store`
-  ADD PRIMARY KEY (`information_id`,`store_id`);
-
---
--- Indexes for table `yk_language`
---
-ALTER TABLE `yk_language`
-  ADD PRIMARY KEY (`language_id`), ADD KEY `name` (`name`);
-
---
--- Indexes for table `yk_layout`
---
-ALTER TABLE `yk_layout`
-  ADD PRIMARY KEY (`layout_id`);
-
---
--- Indexes for table `yk_layout_route`
---
-ALTER TABLE `yk_layout_route`
-  ADD PRIMARY KEY (`layout_route_id`);
-
---
--- Indexes for table `yk_length_class`
---
-ALTER TABLE `yk_length_class`
-  ADD PRIMARY KEY (`length_class_id`);
-
---
--- Indexes for table `yk_length_class_description`
---
-ALTER TABLE `yk_length_class_description`
-  ADD PRIMARY KEY (`length_class_id`,`language_id`);
-
---
--- Indexes for table `yk_manufacturer`
---
-ALTER TABLE `yk_manufacturer`
-  ADD PRIMARY KEY (`manufacturer_id`);
-
---
--- Indexes for table `yk_manufacturer_to_store`
---
-ALTER TABLE `yk_manufacturer_to_store`
-  ADD PRIMARY KEY (`manufacturer_id`,`store_id`);
-
---
--- Indexes for table `yk_news`
---
-ALTER TABLE `yk_news`
-  ADD PRIMARY KEY (`news_id`);
-
---
--- Indexes for table `yk_news_group`
---
-ALTER TABLE `yk_news_group`
-  ADD PRIMARY KEY (`group_id`);
-
---
--- Indexes for table `yk_option`
---
-ALTER TABLE `yk_option`
-  ADD PRIMARY KEY (`option_id`);
-
---
--- Indexes for table `yk_option_description`
---
-ALTER TABLE `yk_option_description`
-  ADD PRIMARY KEY (`option_id`,`language_id`);
-
---
--- Indexes for table `yk_option_value`
---
-ALTER TABLE `yk_option_value`
-  ADD PRIMARY KEY (`option_value_id`);
-
---
--- Indexes for table `yk_option_value_description`
---
-ALTER TABLE `yk_option_value_description`
-  ADD PRIMARY KEY (`option_value_id`,`language_id`);
-
---
--- Indexes for table `yk_order`
---
-ALTER TABLE `yk_order`
-  ADD PRIMARY KEY (`order_id`);
-
---
--- Indexes for table `yk_order_download`
---
-ALTER TABLE `yk_order_download`
-  ADD PRIMARY KEY (`order_download_id`);
-
---
--- Indexes for table `yk_order_field`
---
-ALTER TABLE `yk_order_field`
-  ADD PRIMARY KEY (`order_id`,`custom_field_id`,`custom_field_value_id`);
-
---
--- Indexes for table `yk_order_fraud`
---
-ALTER TABLE `yk_order_fraud`
-  ADD PRIMARY KEY (`order_id`);
-
---
--- Indexes for table `yk_order_history`
---
-ALTER TABLE `yk_order_history`
-  ADD PRIMARY KEY (`order_history_id`);
-
---
--- Indexes for table `yk_order_option`
---
-ALTER TABLE `yk_order_option`
-  ADD PRIMARY KEY (`order_option_id`);
-
---
--- Indexes for table `yk_order_product`
---
-ALTER TABLE `yk_order_product`
-  ADD PRIMARY KEY (`order_product_id`);
-
---
--- Indexes for table `yk_order_status`
---
-ALTER TABLE `yk_order_status`
-  ADD PRIMARY KEY (`order_status_id`,`language_id`);
-
---
--- Indexes for table `yk_order_total`
---
-ALTER TABLE `yk_order_total`
-  ADD PRIMARY KEY (`order_total_id`), ADD KEY `idx_orders_total_orders_id` (`order_id`);
-
---
--- Indexes for table `yk_order_voucher`
---
-ALTER TABLE `yk_order_voucher`
-  ADD PRIMARY KEY (`order_voucher_id`);
-
---
--- Indexes for table `yk_product`
---
-ALTER TABLE `yk_product`
-  ADD PRIMARY KEY (`product_id`);
-
---
--- Indexes for table `yk_product_attribute`
---
-ALTER TABLE `yk_product_attribute`
-  ADD PRIMARY KEY (`product_id`,`attribute_id`,`language_id`);
-
---
--- Indexes for table `yk_product_description`
---
-ALTER TABLE `yk_product_description`
-  ADD PRIMARY KEY (`product_id`,`language_id`), ADD KEY `name` (`name`);
-
---
--- Indexes for table `yk_product_discount`
---
-ALTER TABLE `yk_product_discount`
-  ADD PRIMARY KEY (`product_discount_id`), ADD KEY `product_id` (`product_id`);
-
---
--- Indexes for table `yk_product_filter`
---
-ALTER TABLE `yk_product_filter`
-  ADD PRIMARY KEY (`product_id`,`filter_id`);
-
---
--- Indexes for table `yk_product_image`
---
-ALTER TABLE `yk_product_image`
-  ADD PRIMARY KEY (`product_image_id`);
-
---
--- Indexes for table `yk_product_option`
---
-ALTER TABLE `yk_product_option`
-  ADD PRIMARY KEY (`product_option_id`);
-
---
--- Indexes for table `yk_product_option_value`
---
-ALTER TABLE `yk_product_option_value`
-  ADD PRIMARY KEY (`product_option_value_id`);
-
---
--- Indexes for table `yk_product_related`
---
-ALTER TABLE `yk_product_related`
-  ADD PRIMARY KEY (`product_id`,`related_id`);
-
---
--- Indexes for table `yk_product_reward`
---
-ALTER TABLE `yk_product_reward`
-  ADD PRIMARY KEY (`product_reward_id`);
-
---
--- Indexes for table `yk_product_special`
---
-ALTER TABLE `yk_product_special`
-  ADD PRIMARY KEY (`product_special_id`), ADD KEY `product_id` (`product_id`);
-
---
--- Indexes for table `yk_product_to_category`
---
-ALTER TABLE `yk_product_to_category`
-  ADD PRIMARY KEY (`product_id`,`category_id`);
-
---
--- Indexes for table `yk_product_to_download`
---
-ALTER TABLE `yk_product_to_download`
-  ADD PRIMARY KEY (`product_id`,`download_id`);
-
---
--- Indexes for table `yk_product_to_layout`
---
-ALTER TABLE `yk_product_to_layout`
-  ADD PRIMARY KEY (`product_id`,`store_id`);
-
---
--- Indexes for table `yk_product_to_store`
---
-ALTER TABLE `yk_product_to_store`
-  ADD PRIMARY KEY (`product_id`,`store_id`);
-
---
--- Indexes for table `yk_project`
---
-ALTER TABLE `yk_project`
-  ADD PRIMARY KEY (`project_id`);
-
---
--- Indexes for table `yk_project_group`
---
-ALTER TABLE `yk_project_group`
-  ADD PRIMARY KEY (`group_id`);
-
---
--- Indexes for table `yk_return`
---
-ALTER TABLE `yk_return`
-  ADD PRIMARY KEY (`return_id`);
-
---
--- Indexes for table `yk_return_action`
---
-ALTER TABLE `yk_return_action`
-  ADD PRIMARY KEY (`return_action_id`,`language_id`);
-
---
--- Indexes for table `yk_return_history`
---
-ALTER TABLE `yk_return_history`
-  ADD PRIMARY KEY (`return_history_id`);
-
---
--- Indexes for table `yk_return_reason`
---
-ALTER TABLE `yk_return_reason`
-  ADD PRIMARY KEY (`return_reason_id`,`language_id`);
-
---
--- Indexes for table `yk_return_status`
---
-ALTER TABLE `yk_return_status`
-  ADD PRIMARY KEY (`return_status_id`,`language_id`);
-
---
--- Indexes for table `yk_review`
---
-ALTER TABLE `yk_review`
-  ADD PRIMARY KEY (`review_id`), ADD KEY `product_id` (`product_id`);
-
---
--- Indexes for table `yk_setting`
---
-ALTER TABLE `yk_setting`
-  ADD PRIMARY KEY (`setting_id`);
-
---
--- Indexes for table `yk_stock_status`
---
-ALTER TABLE `yk_stock_status`
-  ADD PRIMARY KEY (`stock_status_id`,`language_id`);
-
---
--- Indexes for table `yk_store`
---
-ALTER TABLE `yk_store`
-  ADD PRIMARY KEY (`store_id`);
-
---
--- Indexes for table `yk_tax_class`
---
-ALTER TABLE `yk_tax_class`
-  ADD PRIMARY KEY (`tax_class_id`);
-
---
--- Indexes for table `yk_tax_rate`
---
-ALTER TABLE `yk_tax_rate`
-  ADD PRIMARY KEY (`tax_rate_id`);
-
---
--- Indexes for table `yk_tax_rate_to_customer_group`
---
-ALTER TABLE `yk_tax_rate_to_customer_group`
-  ADD PRIMARY KEY (`tax_rate_id`,`customer_group_id`);
-
---
--- Indexes for table `yk_tax_rule`
---
-ALTER TABLE `yk_tax_rule`
-  ADD PRIMARY KEY (`tax_rule_id`);
-
---
--- Indexes for table `yk_url_alias`
---
-ALTER TABLE `yk_url_alias`
-  ADD PRIMARY KEY (`url_alias_id`);
-
---
--- Indexes for table `yk_user`
---
-ALTER TABLE `yk_user`
-  ADD PRIMARY KEY (`user_id`);
-
---
--- Indexes for table `yk_user_group`
---
-ALTER TABLE `yk_user_group`
-  ADD PRIMARY KEY (`user_group_id`);
-
---
--- Indexes for table `yk_voucher`
---
-ALTER TABLE `yk_voucher`
-  ADD PRIMARY KEY (`voucher_id`);
-
---
--- Indexes for table `yk_voucher_history`
---
-ALTER TABLE `yk_voucher_history`
-  ADD PRIMARY KEY (`voucher_history_id`);
-
---
--- Indexes for table `yk_voucher_theme`
---
-ALTER TABLE `yk_voucher_theme`
-  ADD PRIMARY KEY (`voucher_theme_id`);
-
---
--- Indexes for table `yk_voucher_theme_description`
---
-ALTER TABLE `yk_voucher_theme_description`
-  ADD PRIMARY KEY (`voucher_theme_id`,`language_id`);
-
---
--- Indexes for table `yk_weight_class`
---
-ALTER TABLE `yk_weight_class`
-  ADD PRIMARY KEY (`weight_class_id`);
-
---
--- Indexes for table `yk_weight_class_description`
---
-ALTER TABLE `yk_weight_class_description`
-  ADD PRIMARY KEY (`weight_class_id`,`language_id`);
-
---
--- Indexes for table `yk_zone`
---
-ALTER TABLE `yk_zone`
-  ADD PRIMARY KEY (`zone_id`);
-
---
--- Indexes for table `yk_zone_to_geo_zone`
---
-ALTER TABLE `yk_zone_to_geo_zone`
-  ADD PRIMARY KEY (`zone_to_geo_zone_id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `yk_address`
---
-ALTER TABLE `yk_address`
-  MODIFY `address_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `yk_affiliate`
---
-ALTER TABLE `yk_affiliate`
-  MODIFY `affiliate_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `yk_affiliate_transaction`
---
-ALTER TABLE `yk_affiliate_transaction`
-  MODIFY `affiliate_transaction_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `yk_attribute`
---
-ALTER TABLE `yk_attribute`
-  MODIFY `attribute_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
---
--- AUTO_INCREMENT for table `yk_banner`
---
-ALTER TABLE `yk_banner`
-  MODIFY `banner_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
---
--- AUTO_INCREMENT for table `yk_banner_image`
---
-ALTER TABLE `yk_banner_image`
-  MODIFY `banner_image_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=78;
---
--- AUTO_INCREMENT for table `yk_category`
---
-ALTER TABLE `yk_category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=59;
---
--- AUTO_INCREMENT for table `yk_country`
---
-ALTER TABLE `yk_country`
-  MODIFY `country_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=252;
---
--- AUTO_INCREMENT for table `yk_coupon`
---
-ALTER TABLE `yk_coupon`
-  MODIFY `coupon_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT for table `yk_coupon_history`
---
-ALTER TABLE `yk_coupon_history`
-  MODIFY `coupon_history_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `yk_coupon_product`
---
-ALTER TABLE `yk_coupon_product`
-  MODIFY `coupon_product_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `yk_currency`
---
-ALTER TABLE `yk_currency`
-  MODIFY `currency_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `yk_customer`
---
-ALTER TABLE `yk_customer`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `yk_customer_ban_ip`
---
-ALTER TABLE `yk_customer_ban_ip`
-  MODIFY `customer_ban_ip_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `yk_customer_group`
---
-ALTER TABLE `yk_customer_group`
-  MODIFY `customer_group_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `yk_customer_history`
---
-ALTER TABLE `yk_customer_history`
-  MODIFY `customer_history_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `yk_customer_ip`
---
-ALTER TABLE `yk_customer_ip`
-  MODIFY `customer_ip_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `yk_customer_reward`
---
-ALTER TABLE `yk_customer_reward`
-  MODIFY `customer_reward_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `yk_customer_transaction`
---
-ALTER TABLE `yk_customer_transaction`
-  MODIFY `customer_transaction_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `yk_custom_field`
---
-ALTER TABLE `yk_custom_field`
-  MODIFY `custom_field_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `yk_custom_field_value`
---
-ALTER TABLE `yk_custom_field_value`
-  MODIFY `custom_field_value_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `yk_download`
---
-ALTER TABLE `yk_download`
-  MODIFY `download_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `yk_extension`
---
-ALTER TABLE `yk_extension`
-  MODIFY `extension_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=430;
---
--- AUTO_INCREMENT for table `yk_filter`
---
-ALTER TABLE `yk_filter`
-  MODIFY `filter_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `yk_filter_group`
---
-ALTER TABLE `yk_filter_group`
-  MODIFY `filter_group_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `yk_geo_zone`
---
-ALTER TABLE `yk_geo_zone`
-  MODIFY `geo_zone_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT for table `yk_help`
---
-ALTER TABLE `yk_help`
-  MODIFY `help_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `yk_help_group`
---
-ALTER TABLE `yk_help_group`
-  MODIFY `group_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT for table `yk_information`
---
-ALTER TABLE `yk_information`
-  MODIFY `information_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT for table `yk_language`
---
-ALTER TABLE `yk_language`
-  MODIFY `language_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `yk_layout`
---
-ALTER TABLE `yk_layout`
-  MODIFY `layout_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
---
--- AUTO_INCREMENT for table `yk_layout_route`
---
-ALTER TABLE `yk_layout_route`
-  MODIFY `layout_route_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=33;
---
--- AUTO_INCREMENT for table `yk_length_class`
---
-ALTER TABLE `yk_length_class`
-  MODIFY `length_class_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `yk_length_class_description`
---
-ALTER TABLE `yk_length_class_description`
-  MODIFY `length_class_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `yk_manufacturer`
---
-ALTER TABLE `yk_manufacturer`
-  MODIFY `manufacturer_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
---
--- AUTO_INCREMENT for table `yk_news`
---
-ALTER TABLE `yk_news`
-  MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `yk_news_group`
---
-ALTER TABLE `yk_news_group`
-  MODIFY `group_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
---
--- AUTO_INCREMENT for table `yk_option`
---
-ALTER TABLE `yk_option`
-  MODIFY `option_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
---
--- AUTO_INCREMENT for table `yk_option_value`
---
-ALTER TABLE `yk_option_value`
-  MODIFY `option_value_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=49;
---
--- AUTO_INCREMENT for table `yk_order`
---
-ALTER TABLE `yk_order`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `yk_order_download`
---
-ALTER TABLE `yk_order_download`
-  MODIFY `order_download_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `yk_order_history`
---
-ALTER TABLE `yk_order_history`
-  MODIFY `order_history_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `yk_order_option`
---
-ALTER TABLE `yk_order_option`
-  MODIFY `order_option_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `yk_order_product`
---
-ALTER TABLE `yk_order_product`
-  MODIFY `order_product_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `yk_order_status`
---
-ALTER TABLE `yk_order_status`
-  MODIFY `order_status_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
---
--- AUTO_INCREMENT for table `yk_order_total`
---
-ALTER TABLE `yk_order_total`
-  MODIFY `order_total_id` int(10) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `yk_order_voucher`
---
-ALTER TABLE `yk_order_voucher`
-  MODIFY `order_voucher_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `yk_product`
---
-ALTER TABLE `yk_product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=50;
---
--- AUTO_INCREMENT for table `yk_product_discount`
---
-ALTER TABLE `yk_product_discount`
-  MODIFY `product_discount_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=441;
---
--- AUTO_INCREMENT for table `yk_product_image`
---
-ALTER TABLE `yk_product_image`
-  MODIFY `product_image_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2352;
---
--- AUTO_INCREMENT for table `yk_product_option`
---
-ALTER TABLE `yk_product_option`
-  MODIFY `product_option_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=227;
---
--- AUTO_INCREMENT for table `yk_product_option_value`
---
-ALTER TABLE `yk_product_option_value`
-  MODIFY `product_option_value_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
---
--- AUTO_INCREMENT for table `yk_product_reward`
---
-ALTER TABLE `yk_product_reward`
-  MODIFY `product_reward_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=546;
---
--- AUTO_INCREMENT for table `yk_product_special`
---
-ALTER TABLE `yk_product_special`
-  MODIFY `product_special_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=440;
---
--- AUTO_INCREMENT for table `yk_project`
---
-ALTER TABLE `yk_project`
-  MODIFY `project_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
---
--- AUTO_INCREMENT for table `yk_project_group`
---
-ALTER TABLE `yk_project_group`
-  MODIFY `group_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT for table `yk_return`
---
-ALTER TABLE `yk_return`
-  MODIFY `return_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `yk_return_action`
---
-ALTER TABLE `yk_return_action`
-  MODIFY `return_action_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `yk_return_history`
---
-ALTER TABLE `yk_return_history`
-  MODIFY `return_history_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `yk_return_reason`
---
-ALTER TABLE `yk_return_reason`
-  MODIFY `return_reason_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT for table `yk_return_status`
---
-ALTER TABLE `yk_return_status`
-  MODIFY `return_status_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `yk_review`
---
-ALTER TABLE `yk_review`
-  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `yk_setting`
---
-ALTER TABLE `yk_setting`
-  MODIFY `setting_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=443;
---
--- AUTO_INCREMENT for table `yk_stock_status`
---
-ALTER TABLE `yk_stock_status`
-  MODIFY `stock_status_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
---
--- AUTO_INCREMENT for table `yk_store`
---
-ALTER TABLE `yk_store`
-  MODIFY `store_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `yk_tax_class`
---
-ALTER TABLE `yk_tax_class`
-  MODIFY `tax_class_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
---
--- AUTO_INCREMENT for table `yk_tax_rate`
---
-ALTER TABLE `yk_tax_rate`
-  MODIFY `tax_rate_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=88;
---
--- AUTO_INCREMENT for table `yk_tax_rule`
---
-ALTER TABLE `yk_tax_rule`
-  MODIFY `tax_rule_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=129;
---
--- AUTO_INCREMENT for table `yk_url_alias`
---
-ALTER TABLE `yk_url_alias`
-  MODIFY `url_alias_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=774;
---
--- AUTO_INCREMENT for table `yk_user`
---
-ALTER TABLE `yk_user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `yk_user_group`
---
-ALTER TABLE `yk_user_group`
-  MODIFY `user_group_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
---
--- AUTO_INCREMENT for table `yk_voucher`
---
-ALTER TABLE `yk_voucher`
-  MODIFY `voucher_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `yk_voucher_history`
---
-ALTER TABLE `yk_voucher_history`
-  MODIFY `voucher_history_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `yk_voucher_theme`
---
-ALTER TABLE `yk_voucher_theme`
-  MODIFY `voucher_theme_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
---
--- AUTO_INCREMENT for table `yk_weight_class`
---
-ALTER TABLE `yk_weight_class`
-  MODIFY `weight_class_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT for table `yk_weight_class_description`
---
-ALTER TABLE `yk_weight_class_description`
-  MODIFY `weight_class_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT for table `yk_zone`
---
-ALTER TABLE `yk_zone`
-  MODIFY `zone_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4033;
---
--- AUTO_INCREMENT for table `yk_zone_to_geo_zone`
---
-ALTER TABLE `yk_zone_to_geo_zone`
-  MODIFY `zone_to_geo_zone_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=66;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

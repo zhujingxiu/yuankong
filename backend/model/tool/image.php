@@ -31,9 +31,9 @@ class ModelToolImage extends Model {
 		}
 	
 		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
-			return HTTPS_CATALOG . 'image/' . $new_image;
+			return HTTPS_CATALOG . TPL_IMG . $new_image;
 		} else {
-			return HTTP_CATALOG . 'image/' . $new_image;
+			return HTTP_CATALOG . TPL_IMG . $new_image;
 		}	
 	}
 }

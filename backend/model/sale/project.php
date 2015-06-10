@@ -4,8 +4,6 @@ class ModelSaleProject extends Model {
 		$this->db->query("INSERT INTO " . DB_PREFIX . "project SET status = '" . (int)$data['status'] . "', user_id = '" . (int)$data['user_id'] . "'");
 
 		$project_id = $this->db->getLastId();
-
-		
 	}
 
 	public function editProject($project_id, $data) {
@@ -21,13 +19,13 @@ class ModelSaleProject extends Model {
 	}
 
 	public function getProject($project_id) {
-		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "project WHERE project_id = '" . (int)$project_id . "'");
+		$query = $this->db->query("SELECT DISTINCT p.*,pg.name group_name FROM " . DB_PREFIX . "project p LEFT JOIN ".DB_PREFIX."project_group pg ON p.group_id = pg.group_id WHERE p.project_id = '" . (int)$project_id . "'");
 
 		return $query->row;
 	}
 
 	public function getProjects($data = array()) {
-		$sql = "SELECT * FROM " . DB_PREFIX . "project p  ";
+		$sql = "SELECT p.*,pg.name group_name FROM " . DB_PREFIX . "project p LEFT JOIN ".DB_PREFIX."project_group pg ON p.group_id = pg.group_id  ";
 		if(isset($data['tab'])){
 			switch ($data['tab']) {
 				case 'undo':

@@ -329,3 +329,36 @@
 2015-06-10 6:13:18 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\extension\help_form.tpl on line 78
 2015-06-10 6:16:40 - PHP Notice:  Undefined index: text in D:\wamp\www\yuankong\backend\view\template\extension\help_list.tpl on line 65
 2015-06-10 6:16:40 - PHP Notice:  Undefined index: text in D:\wamp\www\yuankong\backend\view\template\extension\help_list.tpl on line 65
+2015-06-10 8:23:52 - PHP Notice:  Undefined variable: sort_group in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 39
+2015-06-10 8:23:52 - PHP Notice:  Undefined variable: sort_account in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 44
+2015-06-10 8:23:52 - PHP Notice:  Undefined variable: sort_telephone in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 49
+2015-06-10 8:23:58 - PHP Notice:  Undefined variable: languages in D:\wamp\www\yuankong\backend\view\template\extension\help_form.tpl on line 78
+2015-06-10 8:23:58 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\extension\help_form.tpl on line 78
+2015-06-10 8:42:27 - PHP Notice:  Error: Unknown column 'u.lastname' in 'field list'<br />Error No: 1054<br />SELECT l.*,CONCAT(u.lastname,u.firstname) operator FROM yk_link l WHERE 1  ORDER BY l.date_added ASC LIMIT 0,20 in D:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-06-10 8:42:27 - PHP Notice:  Trying to get property of non-object in D:\wamp\www\yuankong\backend\model\extension\link.php on line 72
+2015-06-10 8:42:27 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\controller\extension\link.php on line 176
+2015-06-10 8:43:27 - PHP Notice:  Error: Unknown column 'l.date_added' in 'order clause'<br />Error No: 1054<br />SELECT l.* FROM yk_link l WHERE 1  ORDER BY l.date_added ASC LIMIT 0,20 in D:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-06-10 8:43:27 - PHP Notice:  Trying to get property of non-object in D:\wamp\www\yuankong\backend\model\extension\link.php on line 72
+2015-06-10 8:43:27 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\controller\extension\link.php on line 176
+2015-06-10 8:46:03 - PHP Notice:  Undefined variable: sort_group in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 39
+2015-06-10 8:46:03 - PHP Notice:  Undefined variable: sort_account in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 44
+2015-06-10 8:46:03 - PHP Notice:  Undefined variable: sort_telephone in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 49
+2015-06-10 8:46:18 - PHP Notice:  Error: Could not load template D:\wamp\www\yuankong/backend/view/template/sale/project_form.tpl! in D:\wamp\www\yuankong\system\engine\controller.php on line 70
+2015-06-10 8:46:25 - PHP Notice:  Undefined variable: sort_group in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 39
+2015-06-10 8:46:25 - PHP Notice:  Undefined variable: sort_account in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 44
+2015-06-10 8:46:25 - PHP Notice:  Undefined variable: sort_telephone in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 49
+2015-06-10 8:51:59 - PHP Notice:  Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'group FROM yk_project p LEFT JOIN yk_project_group pg ON p.group_id = pg.group_i' at line 1<br />Error No: 1064<br />SELECT p.*,pg.name group FROM yk_project p LEFT JOIN yk_project_group pg ON p.group_id = pg.group_id   ORDER BY p.project_sn ASC LIMIT 0,20 in D:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-06-10 8:51:59 - PHP Notice:  Trying to get property of non-object in D:\wamp\www\yuankong\backend\model\sale\project.php on line 75
+2015-06-10 8:51:59 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\controller\sale\project.php on line 174
+2015-06-10 8:51:59 - PHP Notice:  Undefined variable: sort_group in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 39
+2015-06-10 8:51:59 - PHP Notice:  Undefined variable: sort_account in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 44
+2015-06-10 8:51:59 - PHP Notice:  Undefined variable: sort_telephone in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 49
+2015-06-10 8:52:44 - PHP Notice:  Undefined variable: sort_group in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 39
+2015-06-10 8:52:44 - PHP Notice:  Undefined variable: sort_account in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 44
+2015-06-10 8:52:44 - PHP Notice:  Undefined variable: sort_telephone in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 49
+2015-06-10 8:53:07 - PHP Notice:  Undefined variable: sort_group in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 39
+2015-06-10 8:53:07 - PHP Notice:  Undefined variable: sort_account in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 44
+2015-06-10 8:53:07 - PHP Notice:  Undefined variable: sort_telephone in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 49
+2015-06-10 9:09:49 - PHP Notice:  Error: Unknown column 'cp.name' in 'order clause'<br />Error No: 1054<br />SELECT cp.category_id AS category_id, GROUP_CONCAT(cd1.name ORDER BY cp.level SEPARATOR ' &gt; ') AS name, c.parent_id, c.sort_order FROM yk_category_path cp LEFT JOIN yk_category c ON (cp.path_id = c.category_id) LEFT JOIN yk_category_description cd1 ON (c.category_id = cd1.category_id) LEFT JOIN yk_category_description cd2 ON (cp.category_id = cd2.category_id) WHERE cd1.language_id = '2' AND cd2.language_id = '2' GROUP BY cp.category_id ORDER BY cp.category_id ,cp.name LIMIT 0,20 in D:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-06-10 9:09:49 - PHP Notice:  Trying to get property of non-object in D:\wamp\www\yuankong\backend\model\catalog\category.php on line 230
+2015-06-10 9:09:49 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\controller\catalog\category.php on line 149

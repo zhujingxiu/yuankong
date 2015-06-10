@@ -211,7 +211,7 @@ class ModelCatalogCategory extends Model {
 			$sql .= " AND cd2.name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
 		}
 
-		$sql .= " GROUP BY cp.category_id ORDER BY name";
+		$sql .= " GROUP BY cp.category_id ORDER BY cp.category_id ,name";
 		
 		if (isset($data['start']) || isset($data['limit'])) {
 			if ($data['start'] < 0) {

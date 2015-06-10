@@ -157,7 +157,6 @@ class ControllerSaleProject extends Controller {
 		$this->data['done'] = $this->url->link('sale/project', 'tab=done&token=' . $this->session->data['token'] , 'SSL');
 
 		$this->data['delete'] = $this->url->link('sale/project/delete', 'token=' . $this->session->data['token'] . $url, 'SSL');
-		$this->data['groups'] = projectCategory();
 		$this->data['projects'] = array();
 
 		$filter_data = array(
@@ -183,7 +182,7 @@ class ControllerSaleProject extends Controller {
 			$this->data['projects'][] = array(
 				'project_id' => $result['project_id'],
 				'project_sn' => $result['project_sn'] ,
-				'group'      => isset($this->data['groups'][$result['group']]) ? $this->data['groups'][$result['group']] : $this->language->get('text_unknown'),
+				'group'      => $result['group_name'],
 				'telephone'	 => $result['telephone'],
 				'account'	 => $result['account'],
 				'date_applied'=> date('Y-m-d H:i:s',strtotime($result['date_applied'])),
