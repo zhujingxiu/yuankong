@@ -1,0 +1,247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>消防E站系统_动态及新闻</title>
+    <link type="text/css" rel="stylesheet" href="css/basic.css" />
+    <script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="js/timeset/hDate.css" />
+</head>
+<body class="admin-bg">
+<!---- header --->
+<div class="header">
+    <div class="head-logo">
+        <img src="imgs/logo.png" alt="消防E站"/>
+    </div>
+    <div class="head-menu">
+        <ul class="head-menu-ul f12 clearfix">
+            <li class="m-ul-li"><span class="innerw">王慧，欢迎回来！</span></li>
+            <li class="m-ul-li"><a href="#" class="innerw">信息<i class="news-num">12</i></a></li>
+            <li class="m-ul-li"><a href="#" class="innerw">设置</a></li>
+            <li class="m-ul-li"><a href="#" class="innerw">退出</a></li>
+        </ul>
+    </div>
+</div>
+<!-------- menu-nav ------->
+<div class="sidebar">
+    <ul class="s-ul f12">
+        <li class="s-ul-li">
+            <h3 class="sidebar-title f14"><a href="index.html"><i class="icon indexicon"></i>首页</a></h3>
+        </li>
+        <li class="s-ul-li">
+            <h3 class="sidebar-title f14"><a href="工程申请.html"><i class="icon gcicon"></i>工程申请管理</a></h3>
+        </li>
+        <li class="s-ul-li">
+            <h3 class="sidebar-title f14"><i class="icon ordericon"></i>订单管理</h3>
+            <div class="sidebar-dl">
+                <a href="order.html">全部订单</a>
+                <a href="rorder.html">退货/退款</a>
+            </div>
+        </li>
+        <li class="s-ul-li">
+            <h3 class="sidebar-title f14"><a href="indexpage-entry.html"><i class="icon syicon"></i>首页模块录入</a></h3>
+        </li>
+        <li class="s-ul-li">
+            <h3 class="sidebar-title f14" id="showdown"><i class="icon shopicon"></i>商品信息</h3>
+            <div class="sidebar-dl">
+                <a href="shop-search.html">商品查询</a>
+                <a href="shop-entry.html">商品信息录入</a>
+            </div>
+        </li>
+        <li class="s-ul-li active">
+            <h3 class="sidebar-title f14"><a href="news.html"><i class="icon newsicon"></i>动态及新闻录入</a></h3>
+        </li>
+        <li class="s-ul-li">
+            <h3 class="sidebar-title f14"><a href="#"><i class="icon danyicon"></i>单页面录入</a></h3>
+        </li>
+        <li class="s-ul-li">
+            <h3 class="sidebar-title f14"><a href="#"><i class="icon advicon"></i>广告位管理</a></h3>
+        </li>
+        <li class="s-ul-li">
+            <h3 class="sidebar-title f14"><a href="#"><i class="icon uicon"></i>会员管理</a></h3>
+        </li>
+        <li class="s-ul-li">
+            <h3 class="sidebar-title f14"><a href="#"><i class="icon pjicon"></i>评价管理</a></h3>
+        </li>
+        <li class="s-ul-li">
+            <h3 class="sidebar-title f14"><a href="#"><i class="icon wdicon"></i>问答管理</a></h3>
+        </li>
+        <li class="s-ul-li">
+            <h3 class="sidebar-title f14"><a href="#"><i class="icon shicon"></i>商户管理</a></h3>
+        </li>
+        <li class="s-ul-li">
+            <h3 class="sidebar-title f14"><a href="#"><i class="icon yqicon"></i>友情链接</a></h3>
+        </li>
+        <li class="s-ul-li">
+            <h3 class="sidebar-title f14"><a href="#"><i class="icon lficon"></i>来访ip管理</a></h3>
+        </li>
+    </ul>
+</div>
+<!----- right box ------>
+<div class="content">
+    <div class="content-head f12">
+        <!--<em class="padlr7 c8 f-f-s">></em>-->
+        <a href="#" class="content-h-index"><i class="hsicon"></i>首页</a><em class="padlr7 c8 f-f-s">></em>新闻查询
+    </div>
+    <div class="main clearfix">
+        <!----- 管理员设置 ----->
+        <h2 class="main-h">新闻查询</h2>
+        <div class="mart15 over">
+            <table class="table-style f14">
+                <tr>
+                    <td>分类</td>
+                    <td width="150"><input type="text" class="textinput w90" value="" /></td>
+                    <td>标题</td>
+                    <td width="300"><input type="text" class="textinput w90" value="" /></td>
+                    <td>发表日期</td>
+                    <td width="300"><input type="text" class="textinput w32" value="" id="Text1" onClick="calendar.show({ id: this })" /><span class="padlr7">至</span><input type="text" class="textinput w32" value="" id="Text2" onClick="calendar.show({ id: this })" /></td>
+                </tr>
+
+                <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="5"><input type="submit" class="sub-btn3 w25" value="搜索" /><input type="submit" class="sub-btn w25 marl10" value="新增新闻" onclick="window.location='addnews.html'" /></td>
+                </tr>
+            </table>
+        </div>
+        <div class="mart15">
+            <div class="bor1 over bg-f f14">
+                <h4 class="news-t c4"><span class="d-i news-t-bor"><i class="newsicon2"></i></span><b>动态新闻查询</b></h4>
+                <table class="table-style w100 gctable">
+                    <thead>
+                    <tr class="f12 bg-f6">
+                        <th width="5%">ID</th>
+                        <th width="25%">主标题</th>
+                        <th width="25%">副标题</th>
+                        <th>分类</th>
+                        <th>来源</th>
+                        <th>发布日期</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody class="t-c">
+                    <tr>
+                        <td>1</td>
+                        <td>最新款式灭火器</td>
+                        <td>5.1日家用汽载灭火器全场5折</td>
+                        <td>消防动态</td>
+                        <td>消防e站</td>
+                        <td>2015-12-13</td>
+                        <td><a href="#" class="cblue padlr7">修改</a><a href="#" class="red-y padlr7" onclick="opend('mc','tanc','down-ture')">删除</a></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>最新款式灭火器</td>
+                        <td>5.1日家用汽载灭火器全场5折</td>
+                        <td>官方公告</td>
+                        <td>消防e站</td>
+                        <td>2015-12-13</td>
+                        <td><a href="#" class="cblue padlr7">修改</a><a href="#" class="red-y padlr7" onclick="opend('mc','tanc','down-ture')">删除</a></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>最新款式灭火器</td>
+                        <td>5.1日家用汽载灭火器全场5折</td>
+                        <td>专题新闻</td>
+                        <td>消防e站</td>
+                        <td>2015-12-13</td>
+                        <td><a href="#" class="cblue padlr7">修改</a><a href="#" class="red-y padlr7" onclick="opend('mc','tanc','down-ture')">删除</a></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>最新款式灭火器</td>
+                        <td>5.1日家用汽载灭火器全场5折</td>
+                        <td>省内动态</td>
+                        <td>消防e站</td>
+                        <td>2015-12-13</td>
+                        <td><a href="#" class="cblue padlr7">修改</a><a href="#" class="red-y padlr7" onclick="opend('mc','tanc','down-ture')">删除</a></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>最新款式灭火器</td>
+                        <td>5.1日家用汽载灭火器全场5折</td>
+                        <td>专题新闻</td>
+                        <td>消防e站</td>
+                        <td>2015-12-13</td>
+                        <td><a href="#" class="cblue padlr7">修改</a><a href="#" class="red-y padlr7" onclick="opend('mc','tanc','down-ture')">删除</a></td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>最新款式灭火器</td>
+                        <td>5.1日家用汽载灭火器全场5折</td>
+                        <td>专题新闻</td>
+                        <td>消防e站</td>
+                        <td>2015-12-13</td>
+                        <td><a href="#" class="cblue padlr7">修改</a><a href="#" class="red-y padlr7" onclick="opend('mc','tanc','down-ture')">删除</a></td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>最新款式灭火器</td>
+                        <td>5.1日家用汽载灭火器全场5折</td>
+                        <td>专题新闻</td>
+                        <td>消防e站</td>
+                        <td>2015-12-13</td>
+                        <td><a href="#" class="cblue padlr7">修改</a><a href="#" class="red-y padlr7" onclick="opend('mc','tanc','down-ture')">删除</a></td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>最新款式灭火器</td>
+                        <td>5.1日家用汽载灭火器全场5折</td>
+                        <td>专题新闻</td>
+                        <td>消防e站</td>
+                        <td>2015-12-13</td>
+                        <td><a href="#" class="cblue padlr7">修改</a><a href="#" class="red-y padlr7" onclick="opend('mc','tanc','down-ture')">删除</a></td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>最新款式灭火器</td>
+                        <td>5.1日家用汽载灭火器全场5折</td>
+                        <td>专题新闻</td>
+                        <td>消防e站</td>
+                        <td>2015-12-13</td>
+                        <td><a href="#" class="cblue padlr7">修改</a><a href="#" class="red-y padlr7" onclick="opend('mc','tanc','down-ture')">删除</a></td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>最新款式灭火器</td>
+                        <td>5.1日家用汽载灭火器全场5折</td>
+                        <td>专题新闻</td>
+                        <td>消防e站</td>
+                        <td>2015-12-13</td>
+                        <td><a href="#" class="cblue padlr7">修改</a><a href="#" class="red-y padlr7" onclick="opend('mc','tanc','down-ture')">删除</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--------- 翻页 --------->
+            <div class="page mart15">
+                <div class="r-page">
+                    <a class="page-f" href="#"><s></s>上一页</a><a href="#">1</a><a class="current" href="#">2</a><a href="#">3</a><a href="#">4</a><a href="#">5</a><a class="page-l" href="#">下一页<s></s></a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!------ foot ------>
+<div class="admin-foot t-c c9 line30 mart15 f12">2015 @ 消防E站 . Brought to you by Themedesigner.in</div>
+<!------- 蒙版 -------->
+<div class="mengban" id="mc" style="z-index:2; "></div>
+<div class="tanc-fixed" id="tanc">
+    <!----- 下架确认弹窗 ----->
+    <div class="down-ture f14" id="down-ture" style="display: none;">
+        <h4 class="bg-e padlr12 line30  c3">删除确认</h4>
+        <div class="pad10 t-c">
+            <p>您是否确定删除此信息？</p>
+            <p class="mart15">
+                <span class="padlr12"><input type="submit" class="sub-btn" value="确 定" /></span>
+                <span class="padlr12"><input type="submit" class="sub-btn2" value="取 消" onclick="closedd('mc','tanc','down-ture')" /></span>
+            </p>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="js/basic.js"></script>
+<script type="text/javascript" src="js/timeset/jquery.js"></script>
+<script type="text/javascript" src="js/timeset/hDate.js"></script>
+</body>
+</html>

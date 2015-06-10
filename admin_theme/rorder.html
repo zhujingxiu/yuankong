@@ -1,0 +1,204 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>消防E站系统_订单管理</title>
+    <link type="text/css" rel="stylesheet" href="css/basic.css" />
+    <script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="js/timeset/hDate.css" />
+</head>
+<body class="admin-bg">
+    <!---- header --->
+    <div class="header">
+        <div class="head-logo">
+            <img src="imgs/logo.png" alt="消防E站"/>
+        </div>
+        <div class="head-menu">
+            <ul class="head-menu-ul f12 clearfix">
+                <li class="m-ul-li"><span class="innerw">王慧，欢迎回来！</span></li>
+                <li class="m-ul-li"><a href="#" class="innerw">信息<i class="news-num">12</i></a></li>
+                <li class="m-ul-li"><a href="#" class="innerw">设置</a></li>
+                <li class="m-ul-li"><a href="#" class="innerw">退出</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-------- menu-nav ------->
+    <div class="sidebar">
+        <ul class="s-ul f12">
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14"><a href="index.html"><i class="icon indexicon"></i>首页</a></h3>
+            </li>
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14"><a href="工程申请.html"><i class="icon gcicon"></i>工程申请管理</a></h3>
+            </li>
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14"><i class="icon ordericon"></i>订单管理</h3>
+                <div class="sidebar-dl" style="display: block;">
+                    <a href="order.html">全部订单</a>
+                    <a href="rorder.html" class="active2">退货/退款</a>
+                </div>
+            </li>
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14"><a href="indexpage-entry.html"><i class="icon syicon"></i>首页模块录入</a></h3>
+            </li>
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14" id="showdown"><i class="icon shopicon"></i>商品信息</h3>
+                <div class="sidebar-dl">
+                    <a href="shop-search.html">商品查询</a>
+                    <a href="shop-entry.html">商品信息录入</a>
+                </div>
+            </li>
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14"><a href="#"><i class="icon newsicon"></i>动态及新闻录入</a></h3>
+            </li>
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14"><a href="#"><i class="icon danyicon"></i>单页面录入</a></h3>
+            </li>
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14"><a href="#"><i class="icon advicon"></i>广告位管理</a></h3>
+            </li>
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14"><a href="#"><i class="icon uicon"></i>会员管理</a></h3>
+            </li>
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14"><a href="#"><i class="icon pjicon"></i>评价管理</a></h3>
+            </li>
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14"><a href="#"><i class="icon wdicon"></i>问答管理</a></h3>
+            </li>
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14"><a href="#"><i class="icon shicon"></i>商户管理</a></h3>
+            </li>
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14"><a href="#"><i class="icon yqicon"></i>友情链接</a></h3>
+            </li>
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14"><a href="#"><i class="icon lficon"></i>来访ip管理</a></h3>
+            </li>
+        </ul>
+    </div>
+    <!----- right box ------>
+    <div class="content">
+        <div class="content-head f12">
+            <!--<em class="padlr7 c8 f-f-s">></em>-->
+            <a href="#" class="content-h-index"><i class="hsicon"></i>首页</a><em class="padlr7 c8 f-f-s">></em>退款退货
+        </div>
+        <div class="main">
+            <!----- 管理员设置 ----->
+            <h2 class="main-h">退款退货查询</h2>
+            <div class="mart15 over">
+                <table class="table-style f14">
+                    <tr>
+                        <td>订单编号</td>
+                        <td width="150"><input type="text" class="textinput w90" value="" /></td>
+                        <td>手机号</td>
+                        <td><input type="text" class="textinput w90" value="" /></td>
+                        <td>下单日期</td>
+                        <td width="300"><input type="text" class="textinput w32" value="" id="Text1" onClick="calendar.show({ id: this })" /><span class="padlr7">至</span><input type="text" class="textinput w32" value="" id="Text2" onClick="calendar.show({ id: this })" /></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td colspan="5"><input type="submit" class="sub-btn3 w25" value="搜索" /></td>
+                    </tr>
+                </table>
+            </div>
+            <!------ 订单展示 ------>
+            <ul class="gc-style-c mart15 orderul">
+                <li class="tabon">全部订单</li>
+                <li class="taboff">已支付</li>
+                <li class="taboff">待退款</li>
+                <li class="taboff">已退款</li>
+            </ul>
+            <!---------- 订单板块 ------->
+            <div class="over mart15">
+                <!--------- 订单表头 -------->
+                <ul class="order-list-title t-c">
+                    <li class="w10">收货人/手机号</li>
+                    <li class="w30">商品名/型号</li>
+                    <li class="w20">规格/数量*单价(元)</li>
+                    <li class="w10">实付款(元)</li>
+                    <li class="w10">支付方式</li>
+                    <li class="w10">状态</li>
+                    <li class="w10">操作</li>
+                </ul>
+                <!----- 一个订单为一个table ----->
+                <table class="mart10 ordertable">
+                    <thead>
+                    <tr class="t-l">
+                        <th colspan="7"><span class="padlr12">订单号:<em class="red-y">12568792136</em></span><span class="padlr12">下单时间:2015-12-13</span> </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="w10">王慧<br />15898789636</td>
+                        <td class="w50">
+                            <!----- 此处为第一个商品 --->
+                            <div class="over clearfix">
+                                <p class="fr w40 t-c">50公斤-黑色<em class="order-dj"><i class="red-y">3</i>*50.0</em></p>
+                                <p class="orderpic fl"><img src="ls-imgs/adpic1.jpg" /></p>
+                                <div class="order-td-name">
+                                    <h5 class="cblue f14">最新款式灭火器</h5>
+                                    <p class="c8">型号:GT-25361</p>
+                                </div>
+                            </div>
+                            <!----- 此处为第二个商品 --->
+                            <div class="over clearfix mart10">
+                                <p class="fr w40 t-c">50公斤-黑色<em class="order-dj"><i class="red-y">3</i>*50.0</em></p>
+                                <p class="orderpic fl"><img src="ls-imgs/adpic1.jpg" /></p>
+                                <div class="order-td-name">
+                                    <h5 class="cblue f14">最新款式灭火器</h5>
+                                    <p class="c8">型号:GT-25361</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="w10 t-c"><span class="red-y f16">100.0</span><br /><em class="c8 f12">(包含物流0.0元)</em></td>
+                        <td class="w10 t-c">在线支付</td>
+                        <td class="w10 t-c"><em class="red-y">已支付</em></td>
+                        <td class="w10 t-c"><a href="orderDetail.html" class="cblue">详情</a><br /><i class="bgy-bq">退款申请</i></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table class="mart10 ordertable">
+                    <thead>
+                    <tr class="t-l">
+                        <th colspan="7"><span class="padlr12">订单号:<em class="red-y">12568792136</em></span><span class="padlr12">下单时间:2015-12-13</span> </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="w10">王慧<br />15898789636</td>
+                        <td class="w50">
+                            <!----- 此处为第一个商品 --->
+                            <div class="over clearfix">
+                                <p class="fr w40 t-c">50公斤-黑色<em class="order-dj"><i class="red-y">3</i>*50.0</em></p>
+                                <p class="orderpic fl"><img src="ls-imgs/adpic1.jpg" /></p>
+                                <div class="order-td-name">
+                                    <h5 class="cblue f14">最新款式灭火器</h5>
+                                    <p class="c8">型号:GT-25361</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="w10 t-c"><span class="red-y f16">100.0</span><br /><em class="c8 f12">(包含物流0.0元)</em></td>
+                        <td class="w10 t-c">在线支付</td>
+                        <td class="w10 t-c"><em class="red-y">已退款</em></td>
+                        <td class="w10 t-c"><a href="#" class="cblue">详情</a><br /><i class="bgy-bq">退款申请</i></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!--------- 翻页 --------->
+                <div class="page mart15">
+                    <div class="r-page">
+                        <a class="page-f" href="#"><s></s>上一页</a><a href="#">1</a><a class="current" href="#">2</a><a href="#">3</a><a href="#">4</a><a href="#">5</a><a class="page-l" href="#">下一页<s></s></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!------ foot ------>
+    <div class="admin-foot t-c c9 line30 mart15 f12">2015 @ 消防E站 . Brought to you by Themedesigner.in</div>
+    <script type="text/javascript" src="js/basic.js"></script>
+    <script type="text/javascript" src="js/timeset/jquery.js"></script>
+    <script type="text/javascript" src="js/timeset/hDate.js"></script>
+</body>
+</html>

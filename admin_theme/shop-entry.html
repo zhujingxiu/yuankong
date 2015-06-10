@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>消防E站系统_商品查询</title>
+    <link type="text/css" rel="stylesheet" href="css/basic.css" />
+    <link type="text/css" rel="stylesheet" href="js/kindeditor/themes/default/default.css" />
+    <script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+
+</head>
+<body class="admin-bg">
+    <!---- header --->
+    <div class="header">
+        <div class="head-logo">
+            <img src="imgs/logo.png" alt="消防E站"/>
+        </div>
+        <div class="head-menu">
+            <ul class="head-menu-ul f12 clearfix">
+                <li class="m-ul-li"><span class="innerw">王慧，欢迎回来！</span></li>
+                <li class="m-ul-li"><a href="#" class="innerw">信息<i class="news-num">12</i></a></li>
+                <li class="m-ul-li"><a href="#" class="innerw">设置</a></li>
+                <li class="m-ul-li"><a href="#" class="innerw">退出</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-------- menu-nav ------->
+    <div class="sidebar">
+        <ul class="s-ul f12">
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14"><a href="index.html"><i class="icon indexicon"></i>首页</a></h3>
+            </li>
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14"><a href="工程申请.html"><i class="icon gcicon"></i>工程申请管理</a></h3>
+            </li>
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14"><i class="icon ordericon"></i>订单管理</h3>
+                <div class="sidebar-dl">
+                    <a href="order.html">全部订单</a>
+                    <a href="rorder.html">退货/退款</a>
+                </div>
+            </li>
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14"><a href="indexpage-entry.html"><i class="icon syicon"></i>首页模块录入</a></h3>
+            </li>
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14" id="showdown"><i class="icon shopicon"></i>商品信息</h3>
+                <div class="sidebar-dl" style="display: block;">
+                    <a href="shop-search.html">商品查询</a>
+                    <a href="shop-entry.html" class="active2">商品信息录入</a>
+                </div>
+            </li>
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14"><a href="#"><i class="icon newsicon"></i>动态及新闻录入</a></h3>
+            </li>
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14"><a href="#"><i class="icon danyicon"></i>单页面录入</a></h3>
+            </li>
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14"><a href="#"><i class="icon advicon"></i>广告位管理</a></h3>
+            </li>
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14"><a href="#"><i class="icon uicon"></i>会员管理</a></h3>
+            </li>
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14"><a href="#"><i class="icon pjicon"></i>评价管理</a></h3>
+            </li>
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14"><a href="#"><i class="icon wdicon"></i>问答管理</a></h3>
+            </li>
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14"><a href="#"><i class="icon shicon"></i>商户管理</a></h3>
+            </li>
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14"><a href="#"><i class="icon yqicon"></i>友情链接</a></h3>
+            </li>
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14"><a href="#"><i class="icon lficon"></i>来访ip管理</a></h3>
+            </li>
+        </ul>
+    </div>
+    <!----- right box ------>
+    <div class="content">
+        <div class="content-head f12">
+            <!--<em class="padlr7 c8 f-f-s">></em>-->
+            <a href="#" class="content-h-index"><i class="hsicon"></i>首页</a><em class="padlr7 c8 f-f-s">></em><a href="#">商品信息</a><em class="padlr7 c8 f-f-s">></em>商品信息录入
+        </div>
+        <div class="main">
+            <!----- 商品信息录入 ----->
+            <h2 class="main-h">商品信息录入</h2>
+            <p class="line"></p>
+            <table class="w100 f14 table-style">
+                <tbody>
+                <form action="">
+                <tr>
+                    <td width="80">商品分类</td>
+                    <td>
+                        <div class="selectbox fl">
+                            <select class="select-text" id="select1">
+                            </select>
+                        </div>
+                        <div class="selectbox fl marl10">
+                            <select class="select-text" id="select2">
+                            </select>
+                        </div>
+                        <div class="selectbox fl marl10">
+                            <select class="select-text" id="select3">
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>商品名称</td>
+                    <td><input type="text" class="textinput w50" value="请输入正确的商品名" placeholder="" /></td>
+                </tr>
+                <tr>
+                    <td>商品促销名</td>
+                    <td><textarea class="textinput h50 w50"></textarea></td>
+                </tr>
+                <tr>
+                    <td>商品型号</td>
+                    <td><input type="text" class="textinput w20" value=""  /></td>
+                </tr>
+                <tr>
+                    <td>商品规格</td>
+                    <td>
+                        <ul>
+                            <li class="f12 c9">
+                                <span class="padr10">规格名：<input type="text" class="textinput w20" value=""  /></span>
+                                <span class="padr10">市场价：<input type="text" class="textinput w10" value=""  /></span>
+                                <span class="padr10">促销价：<input type="text" class="textinput w10" value=""  /></span>
+                                <span class="padr10">图片上传：<input type="file" value="" class="w10 over" /></span>
+                                <em class="dele-li red">删除</em>
+                            </li>
+                        </ul>
+                        <p class="mart15"><button class="sub-btn2">新增规格</button> </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>商品详情</td>
+                    <td>
+
+                            <textarea class="textinput" name="content" style="width:700px; height:500px;"></textarea>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td><input type="submit" class="login-sub" value="确认保存" /></td>
+                </tr>
+                </form>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!------ foot ------>
+    <div class="admin-foot t-c c9 line30 mart15 f12">2015 @ 消防E站 . Brought to you by Themedesigner.in</div>
+    <!----- 修改弹窗 ------>
+    <div class="reset-pop" id="resetpop" style="display: none;">
+        <div class="popbox">
+            <a href="#">处理中</a>|<a href="#">已完成</a>|<span class="pop-closed" onclick="cosed('resetpop')">X</span>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/basic.js"></script>
+    <script type="text/javascript" src="js/kindeditor/kindeditor-min.js"></script>
+    <script type="text/javascript" src="js/kindeditor/lang/zh_CN.js"></script>
+<script type="text/javascript">
+    stylefunc("select1","select2","select3");
+    var editor;
+    KindEditor.ready(function(K) {
+        editor = K.create('textarea[name="content"]', {
+            allowFileManager : true
+        });
+    });
+</script>
+</body>
+</html>

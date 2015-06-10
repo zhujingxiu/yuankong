@@ -1,0 +1,246 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>消防E站系统_商品查询</title>
+    <link type="text/css" rel="stylesheet" href="css/basic.css" />
+    <link type="text/css" rel="stylesheet" href="js/timeset/hDate.css" />
+    <script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+
+</head>
+<body class="admin-bg">
+    <!---- header --->
+    <div class="header">
+        <div class="head-logo">
+            <img src="imgs/logo.png" alt="消防E站"/>
+        </div>
+        <div class="head-menu">
+            <ul class="head-menu-ul f12 clearfix">
+                <li class="m-ul-li"><span class="innerw">王慧，欢迎回来！</span></li>
+                <li class="m-ul-li"><a href="#" class="innerw">信息<i class="news-num">12</i></a></li>
+                <li class="m-ul-li"><a href="#" class="innerw">设置</a></li>
+                <li class="m-ul-li"><a href="#" class="innerw">退出</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-------- menu-nav ------->
+    <div class="sidebar">
+        <ul class="s-ul f12">
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14"><a href="index.html"><i class="icon indexicon"></i>首页</a></h3>
+            </li>
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14"><a href="工程申请.html"><i class="icon gcicon"></i>工程申请管理</a></h3>
+            </li>
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14"><i class="icon ordericon"></i>订单管理</h3>
+                <div class="sidebar-dl">
+                    <a href="order.html">全部订单</a>
+                    <a href="rorder.html">退货/退款</a>
+                </div>
+            </li>
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14"><a href="indexpage-entry.html"><i class="icon syicon"></i>首页模块录入</a></h3>
+            </li>
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14" id="showdown"><i class="icon shopicon"></i>商品信息</h3>
+                <div class="sidebar-dl" style="display: block;">
+                    <a href="shop-search.html" class="active2">商品查询</a>
+                    <a href="shop-entry.html">商品信息录入</a>
+                </div>
+            </li>
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14"><a href="#"><i class="icon newsicon"></i>动态及新闻录入</a></h3>
+            </li>
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14"><a href="#"><i class="icon danyicon"></i>单页面录入</a></h3>
+            </li>
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14"><a href="#"><i class="icon advicon"></i>广告位管理</a></h3>
+            </li>
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14"><a href="#"><i class="icon uicon"></i>会员管理</a></h3>
+            </li>
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14"><a href="#"><i class="icon pjicon"></i>评价管理</a></h3>
+            </li>
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14"><a href="#"><i class="icon wdicon"></i>问答管理</a></h3>
+            </li>
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14"><a href="#"><i class="icon shicon"></i>商户管理</a></h3>
+            </li>
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14"><a href="#"><i class="icon yqicon"></i>友情链接</a></h3>
+            </li>
+            <li class="s-ul-li">
+                <h3 class="sidebar-title f14"><a href="#"><i class="icon lficon"></i>来访ip管理</a></h3>
+            </li>
+        </ul>
+    </div>
+    <!----- right box ------>
+    <div class="content">
+        <div class="content-head f12">
+            <!--<em class="padlr7 c8 f-f-s">></em>-->
+            <a href="#" class="content-h-index"><i class="hsicon"></i>首页</a><em class="padlr7 c8 f-f-s">></em><a href="#">商品信息</a><em class="padlr7 c8 f-f-s">></em>商品查询
+        </div>
+        <div class="main">
+            <!----- 商品查询 ----->
+            <h2 class="main-h">商品查询</h2>
+            <div class="mart15 over">
+                <table class="table-style f14">
+                    <tr>
+                        <td>商品名称</td>
+                        <td width="300"><input type="text" class="textinput w90" value="" /></td>
+                        <td>产品型号</td>
+                        <td width="150"><input type="text" class="textinput w90" value="" /></td>
+                        <td>录入日期</td>
+                        <td width="200"><input type="text" class="textinput" value="" id="Text1" onClick="calendar.show({ id: this })" /></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td colspan="5"><input type="submit" class="sub-btn3 w25" value="搜索" /></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="gc-box">
+                <div class="padt10 f12">
+                    <table class="table-style w100 bor1 gctable bg-f">
+                        <thead>
+                        <tr>
+                            <th width="8%">商品id</th>
+                            <th width="25%">标题</th>
+                            <th width="25%">副标题</th>
+                            <th width="5%">型号</th>
+                            <th width="12%">规格-价格</th>
+                            <th>日期</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody class="t-c">
+                        <tr>
+                            <td>xf2011221</td>
+                            <td>消防灭火器</td>
+                            <td>5.1大促全场5折</td>
+                            <td>Z20</td>
+                            <td><p>20公斤-50元</p><p>10公斤-25元</p><p>5公斤-10元</p></td>
+                            <td>2015-12-13</td>
+                            <td><a href="#" class="padlr12 red">查看</a><em class="padlr12 cgreen"onclick="opend('mc','tanc','down-ture')">下架</em><a href="#" class="padlr12">修改</a></td>
+                        </tr>
+                        <tr class="bg-f6">
+                            <td>xf2011221</td>
+                            <td>消防灭火器</td>
+                            <td>5.1大促全场5折</td>
+                            <td>Z20</td>
+                            <td><p>20公斤-50元</p><p>10公斤-25元</p><p>5公斤-10元</p></td>
+                            <td>2015-12-13</td>
+                            <td><a href="#" class="padlr12 red">查看</a><em class="padlr12 cgreen">下架</em><a href="#" class="padlr12">修改</a></td>
+                        </tr>
+                        <tr>
+                            <td>xf2011221</td>
+                            <td>消防灭火器</td>
+                            <td>5.1大促全场5折</td>
+                            <td>Z20</td>
+                            <td><p>20公斤-50元</p><p>10公斤-25元</p><p>5公斤-10元</p></td>
+                            <td>2015-12-13</td>
+                            <td><a href="#" class="padlr12 red">查看</a><em class="padlr12 cgreen">下架</em><a href="#" class="padlr12">修改</a></td>
+                        </tr>
+                        <tr class="bg-f6">
+                            <td>xf2011221</td>
+                            <td>消防灭火器</td>
+                            <td>5.1大促全场5折</td>
+                            <td>Z20</td>
+                            <td><p>20公斤-50元</p><p>10公斤-25元</p><p>5公斤-10元</p></td>
+                            <td>2015-12-13</td>
+                            <td><a href="#" class="padlr12 red">查看</a><em class="padlr12 cgreen">下架</em><a href="#" class="padlr12">修改</a></td>
+                        </tr>
+                        <tr>
+                            <td>xf2011221</td>
+                            <td>消防灭火器</td>
+                            <td>5.1大促全场5折</td>
+                            <td>Z20</td>
+                            <td><p>20公斤-50元</p><p>10公斤-25元</p><p>5公斤-10元</p></td>
+                            <td>2015-12-13</td>
+                            <td><a href="#" class="padlr12 red">查看</a><em class="padlr12 cgreen">下架</em><a href="#" class="padlr12">修改</a></td>
+                        </tr>
+                        <tr class="bg-f6">
+                            <td>xf2011221</td>
+                            <td>消防灭火器</td>
+                            <td>5.1大促全场5折</td>
+                            <td>Z20</td>
+                            <td><p>20公斤-50元</p><p>10公斤-25元</p><p>5公斤-10元</p></td>
+                            <td>2015-12-13</td>
+                            <td><a href="#" class="padlr12 red">查看</a><em class="padlr12 cgreen">下架</em><a href="#" class="padlr12">修改</a></td>
+                        </tr>
+                        <tr>
+                            <td>xf2011221</td>
+                            <td>消防灭火器</td>
+                            <td>5.1大促全场5折</td>
+                            <td>Z20</td>
+                            <td><p>20公斤-50元</p><p>10公斤-25元</p><p>5公斤-10元</p></td>
+                            <td>2015-12-13</td>
+                            <td><a href="#" class="padlr12 red">查看</a><em class="padlr12 cgreen">下架</em><a href="#" class="padlr12">修改</a></td>
+                        </tr>
+                        <tr class="bg-f6">
+                            <td>xf2011221</td>
+                            <td>消防灭火器</td>
+                            <td>5.1大促全场5折</td>
+                            <td>Z20</td>
+                            <td><p>20公斤-50元</p><p>10公斤-25元</p><p>5公斤-10元</p></td>
+                            <td>2015-12-13</td>
+                            <td><a href="#" class="padlr12 red">查看</a><em class="padlr12 cgreen">下架</em><a href="#" class="padlr12">修改</a></td>
+                        </tr>
+                        <tr>
+                            <td>xf2011221</td>
+                            <td>消防灭火器</td>
+                            <td>5.1大促全场5折</td>
+                            <td>Z20</td>
+                            <td><p>20公斤-50元</p><p>10公斤-25元</p><p>5公斤-10元</p></td>
+                            <td>2015-12-13</td>
+                            <td><a href="#" class="padlr12 red">查看</a><em class="padlr12 cgreen">下架</em><a href="#" class="padlr12">修改</a></td>
+                        </tr>
+                        <tr class="bg-f6">
+                            <td>xf2011221</td>
+                            <td>消防灭火器</td>
+                            <td>5.1大促全场5折</td>
+                            <td>Z20</td>
+                            <td><p>20公斤-50元</p><p>10公斤-25元</p><p>5公斤-10元</p></td>
+                            <td>2015-12-13</td>
+                            <td><a href="#" class="padlr12 red">查看</a><em class="padlr12 cgreen">下架</em><a href="#" class="padlr12">修改</a></td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                    <!--------- 翻页 --------->
+                    <div class="page mart15">
+                        <div class="r-page">
+                            <a class="page-f" href="#"><s></s>上一页</a><a href="#">1</a><a class="current" href="#">2</a><a href="#">3</a><a href="#">4</a><a href="#">5</a><a class="page-l" href="#">下一页<s></s></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!------ foot ------>
+    <div class="admin-foot t-c c9 line30 mart15 f12">2015 @ 消防E站 . Brought to you by Themedesigner.in</div>
+    <!------- 蒙版 -------->
+    <div class="mengban" id="mc" style="z-index:2; "></div>
+    <div class="tanc-fixed" id="tanc">
+        <!----- 下架确认弹窗 ----->
+        <div class="down-ture f14" id="down-ture" style="display: none;">
+            <h4 class="bg-e padlr12 line30  c3">下架确认</h4>
+            <div class="pad10 t-c">
+                <p>您是否确定下架此商品？</p>
+                <p class="mart15">
+                    <span class="padlr12"><input type="submit" class="sub-btn" value="确 定" /></span>
+                    <span class="padlr12"><input type="submit" class="sub-btn2" value="取 消" onclick="closedd('mc','tanc','down-ture')" /></span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/basic.js"></script>
+    <script type="text/javascript" src="js/timeset/jquery.js"></script>
+    <script type="text/javascript" src="js/timeset/hDate.js"></script>
+</body>
+</html>
