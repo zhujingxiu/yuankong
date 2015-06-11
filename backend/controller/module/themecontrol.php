@@ -1,40 +1,14 @@
 <?php
-/******************************************************
- * @package Pav Opencart Theme Framework for Opencart 1.5.x
- * @version 1.0
- * @author http://www.pavothemes.com
- * @copyright	Copyright (C) Feb 2013 PavoThemes.com <@emai:pavothemes@gmail.com>.All rights reserved.
- * @license		GNU General Public License version 2
-*******************************************************/
-
 class ControllerModuleThemeControl extends Controller {
 
 	private $error = array(); 
-	private $theme = ''; 
+
 	private $moduleName = 'themecontrol';
-	private $theme_path = '';
-	public function setTheme( $theme ){
-		$this->theme = $theme;
-		return $this;
-	}
-	
-	public function getTheme(){
-		return $this->theme;
-	}
-	
+
 	public function index() {   
 		$this->load->model('setting/setting');
 		$this->load->model('tool/image');
-	//	echo '<pre>'.print_r($this,1 );die;	
-		$this->data['module'] = array(	
-						'default_theme' =>'',
-						'skin' 			=> '',
-						'theme_width'   => 'auto',
-						'fontsize'		=>'12',
-						'enable_custom_copyright' =>0,
-						'copyright' => 'Copyright 2013 LeoTheme.Com.',
-						'responsive' => 1,
-						'enable_customfont' => 0,
+		$this->data['module'] = array(
 						'enable_paneltool'  => 1,
 						'enable_footer_center' => 1,
 						'block_showcase'  => '',
@@ -42,32 +16,8 @@ class ControllerModuleThemeControl extends Controller {
 						'block_footer_top'=>'',
 						'block_footer_center' => '',
 						'block_footer_bottom'=>'',
-						'body_pattern' => '',
 						'product_related_column'=> '',
 						
-						'type_fonts1' => array(),
-						'normal_fonts1' => array(),
-						'google_url1' => '',
-						'google_family1' => '',
-						'body_selector1' => '',
-						
-						'type_fonts2' => array(),
-						'normal_fonts2' => array(),
-						'google_url2' => '',
-						'google_family2' => '',
-						'body_selector2' => '',
-						
-						'type_fonts3' => array(),
-						'normal_fonts3' => array(),
-						'google_url3' => '',
-						'google_family3' => '',
-						'body_selector3' => '',
-						'custom_css' =>'',
-						'custom_javascript' =>'',
-						'bg_image'   => '',
-						'use_custombg' => 0,
-						'bg_repeat' => 'repeat'	,
-						'bg_position' => 'left top'	,
 						'cateogry_product_row' => '0',
 						'cateogry_display_mode'=>'grid',
 						'category_saleicon' => 1,
@@ -95,12 +45,10 @@ class ControllerModuleThemeControl extends Controller {
 			$this->data['module'] = $this->request->post[$this->moduleName];
 		} elseif ($this->config->get($this->moduleName)) { 
 			$this->data['module'] = array_merge($this->data['module'],$module);
-		}	
-		
-		
+		}
 	
 		$this->document->addStyle('view/stylesheet/themecontrol.css');
-		$this->document->addScript('view/javascript/jquery/jquerycookie.js');
+		$this->document->addScript('view/javascript/jquery/jquery.cookie.js');
 		$this->language->load('module/'.$this->moduleName);	
 		
 		$this->document->setTitle( strip_tags($this->language->get('heading_title')) );
@@ -124,8 +72,6 @@ class ControllerModuleThemeControl extends Controller {
 				
 		$this->data['heading_title'] = $this->language->get('heading_title');
 		
-		
-		
 		// themes 
 		$directories = glob(DIR_FRONT . 'view/theme/*', GLOB_ONLYDIR);
 		$this->data['templates'] = array();
@@ -141,13 +87,8 @@ class ControllerModuleThemeControl extends Controller {
 	
 		$this->setTheme( $this->data['module']['default_theme']  ); 		
 	
-		$this->data['skins'] = $this->_getSkins();
-		$this->data['theme_url'] =   HTTP_CATALOG."/catalog/view/theme/".$this->getTheme()."/";
+		$this->data['theme_url'] =   HTTP_CATALOG."/market/view/theme/".$this->getTheme()."/";
 		
-		//
-		
-		
-
 		$this->data['text_enabled'] = $this->language->get('text_enabled');
 		$this->data['text_disabled'] = $this->language->get('text_disabled');
 		$this->data['text_content_top'] = $this->language->get('text_content_top');
@@ -165,22 +106,17 @@ class ControllerModuleThemeControl extends Controller {
 		$this->data['entry_sort_order'] = $this->language->get('entry_sort_order');
 		
 		$this->data['button_save'] = $this->language->get('button_save');
-			$this->data['button_save_keep'] = $this->language->get('button_save_keep');
+		$this->data['button_save_keep'] = $this->language->get('button_save_keep');
 		$this->data['button_cancel'] = $this->language->get('button_cancel');
 		$this->data['button_add_module'] = $this->language->get('button_add_module');
 		$this->data['button_remove'] = $this->language->get('button_remove');
 		$this->data['default_theme'] = '';
 		$this->data['text_image_manager'] = $this->language->get('text_image_manager'); 
 		// table
-		$this->data['tab_general'] = $this->language->get( 'tab_general' );
 		$this->data['tab_layout'] = $this->language->get( 'tab_layout' );
-		$this->data['tab_font'] = $this->language->get( 'tab_font' );
 		$this->data['tab_custom'] = $this->language->get( 'tab_custom' );
-		$this->data['yesno'] = array(0=>$this->language->get('text_no'),1=>$this->language->get('text_yes'));
-		$this->data['bg_thumb'] = $this->model_tool_image->resize( $this->data['module']['bg_image'], 150, 150);
-		$this->data['no_image'] =  $this->model_tool_image->resize('no_image.jpg', 180, 180);
-		
-		$this->data['patterns'] = $this->getPattern();
+
+
 		$this->data['product_rows'] = array('0'=> $this->language->get('text_auto'), 2=>2, 3=>3,4=>4,5=>5,6=>6 );
 		$this->data['category_saleicons'] = array(
 			'text_sale' => 'Sale',
@@ -204,47 +140,8 @@ class ControllerModuleThemeControl extends Controller {
 			'round'	=> $this->language->get('text_len_zoom_round'),
 			 
 		);
-		$this->data['type_fonts'] = array(
-								array( 'standard', 'Standard'),
-								array( 'google', 'Google Fonts'),						
-		);
-		
-		$this->data['bg_repeat'] = array('repeat','repeat-x','repeat-y','no-repeat');	
-		$this->data['bg_position'] = array('left top','left center','left bottom','center top','center','center bottom','right top','right center','right bottom');	
-		
-		if( is_dir(DIR_APPLICATION.'model/sample/') && $this->getTheme() ){
-			
-			$this->load->model('sample/module');
-			$this->data['samples'] = $this->model_sample_module->getSamplesByTheme( $this->getTheme() );
-			$this->data['modulesQuery'] = $this->model_sample_module->getModulesQuery( $this->getTheme() );
-			$tmodules = array_merge($this->data['samples'],$this->data['modulesQuery']);
-			$this->data['unexpectedModules'] = $this->getUnexpectedModules( 1, $tmodules );
-			
-			if( isset($this->request->get['export']) ){
-				 $this->model_sample_module->export( $this->getTheme() );
-			}
-			
-		}
-		
-		$this->data['normal_fonts'] = array(
-			array( 'Verdana, Geneva, sans-serif', 'Verdana'),
-			array( 'Georgia, "Times New Roman", Times, serif', 'Georgia'),
-			array( 'Arial, Helvetica, sans-serif', 'Arial'),
-			array( 'Impact, Arial, Helvetica, sans-serif', 'Impact'),
-			array( 'Tahoma, Geneva, sans-serif', 'Tahoma'),
-			array( '"Trebuchet MS", Arial, Helvetica, sans-serif', 'Trebuchet MS'),
-			array( '"Arial Black", Gadget, sans-serif', 'Arial Black'),
-			array( 'Times, "Times New Roman", serif', 'Times'),
-			array( '"Palatino Linotype", "Book Antiqua", Palatino, serif', 'Palatino Linotype'),
-			array( '"Lucida Sans Unicode", "Lucida Grande", sans-serif', 'Lucida Sans Unicode'),
-			array( '"MS Serif", "New York", serif', 'MS Serif'),
-			array( '"Comic Sans MS", cursive', 'Comic Sans MS'),
-			array( '"Courier New", Courier, monospace', 'Courier New'),
-			array( '"Lucida Console", Monaco, monospace', 'Lucida Console')
-		);
-							
+
 		 //general 
-		$this->data['fontsizes'] = array(9,10,11,12,13,14,15,16);
 		$this->data['cateogry_display_modes'] = array( 'grid'=> $this->language->get('text_grid') , 'list' => $this->language->get('text_list') );
  		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
@@ -348,28 +245,6 @@ class ControllerModuleThemeControl extends Controller {
 		return $module_data;
 	}
 	
-	public function _getSkins(){
-		$output = array();
-		if( $this->getTheme()  ) {
-			$directories = glob(DIR_FRONT . 'view/theme/'.$this->getTheme().'/skins/*', GLOB_ONLYDIR);
-			foreach( $directories as $dir ){
-				$output[] = basename( $dir );
-			}			
-		}
-		return $output;
-	}
-	
-	public function getPattern(){
-		$output = array();
-		if( $this->getTheme() && is_dir(DIR_FRONT . 'view/theme/'.$this->getTheme().'/image/pattern/') ) {
-			$files = glob(DIR_FRONT . 'view/theme/'.$this->getTheme().'/image/pattern/*.png');
-			foreach( $files as $dir ){
-				$output[] = str_replace("","",basename( $dir ) );
-			}			
-		}
-		return $output;
-	}
-	
 	public function tabModules() {
 		$this->data['elayout_default'] = 1;
 		if( isset($this->request->get['elayout_id']) ){
@@ -410,10 +285,7 @@ class ControllerModuleThemeControl extends Controller {
 			}
 			array_multisort($sort_order, SORT_ASC, $module_data[$position]);
 		}
-	//	 echo '<pre>'.print_r( $module_data, 1 ); die;
 		return $module_data;
-		
-		//
 	}
 	
 	/**
@@ -444,36 +316,6 @@ class ControllerModuleThemeControl extends Controller {
 		}	
 	}
 	
-	public function installsample(){
-
-		if (!$this->user->hasPermission('modify', 'module/'.$this->moduleName)) {
-			$this->error['warning'] = $this->language->get('error_permission');
-			die(  $this->error['warning'] );
-		}	
-		
-		if( is_dir(DIR_APPLICATION.'model/sample/') ){
-			$this->load->model('sample/module');
-			if( isset($this->request->get['type']) && $this->request->get['type']== 'query' ){
-				$this->model_sample_module->installSampleQuery( $this->request->get['theme'] , $this->request->get['module'] );
-			}else {
-				$this->model_sample_module->installSample( $this->request->get['theme'] , $this->request->get['module'] );
-			}
-		}
-		die( "done" );
-	}
-	
-	
-	public function storesample(){
-		if (!$this->user->hasPermission('modify', 'module/'.$this->moduleName)) {
-			$this->error['warning'] = $this->language->get('error_permission');
-			die(  $this->error['warning'] );
-		}	
-
-		if( is_dir(DIR_APPLICATION.'model/sample/') ){
-			$this->load->model('sample/module');
-			$this->model_sample_module->installStoreSample( $this->request->get['theme']  );
-		}	
-	}
 	
 	/**
 	 * Ajax Save Content
@@ -491,7 +333,6 @@ class ControllerModuleThemeControl extends Controller {
 			$modules = $this->request->post['modules'];
 			
 			foreach( $modules  as $position => $mods ){	
-				 echo $position."<br>";
 				foreach( $mods as $index => $module ){
 					$tmp = explode("-",$module);
 					if( count($tmp)== 2 ){

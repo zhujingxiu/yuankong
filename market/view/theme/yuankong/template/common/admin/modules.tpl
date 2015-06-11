@@ -1,25 +1,6 @@
 <?php 
 	$d = array(
-		'custom_top_module' => '
-			<div class="item first">
-				<div class="payment">
-					<h3>secured payment</h3>
-					<p>Proin gravida nibh vel</p>
-					</div>
-				</div>
-				<div class="item col">
-					<div class="return">
-					<h3>free return</h3>
-					<p>Aenean solltudin lorem</p>
-				</div>
-				</div>
-				<div class="item last">
-					<div class="shipping">
-					<h3>free shipping</h3>
-					<p>Quis bibendum auctor</p>
-				</div>
-			</div>
-		'
+		'custom_top_module' => ''
 	);
 	$module = array_merge( $d, $module );
 ?>

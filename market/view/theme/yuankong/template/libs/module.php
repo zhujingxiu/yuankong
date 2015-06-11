@@ -60,20 +60,19 @@
 		 */
 		public function __construct( $registry, $theme ){
 		
-			$this->positions = array( 'mainmenu',
-									  'slideshow',
-									  'promotion',
-									  'showcase',
-									  'content_top',
-									  'column_left',
-									  'column_right',
-									  'content_bottom',
-									  'mass_bottom',
-									  'footer_top',
-									
-									  'footer_center',
-									  'footer_bottom'
-										
+			$this->positions = array( 
+				'mainmenu',
+			  	'slideshow',
+			  	'promotion',
+			  	'showcase',
+			  	'content_top',
+			  	'column_left',
+			  	'column_right',
+			  	'content_bottom',
+			  	'mass_bottom',
+			  	'footer_top',
+			  	'footer_center',
+			  	'footer_bottom'				
 			);
 		
 			parent::__construct( $registry );
@@ -86,8 +85,7 @@
 			
 			$this->addParam( 'skin', $config['skin'] );
 			$this->addParam( 'body_pattern', $config['body_pattern'] );
-	//		echo 'tienhc';
-		// 	$this->addParam( 'body_pattern', $config['body_pattern'] );
+
 			if( 1 ){
 				$this->triggerUserParams(  $params );
 			}
@@ -302,4 +300,3 @@
 			return $spans;
 		}
 	}
-?>

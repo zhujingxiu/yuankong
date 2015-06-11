@@ -435,3 +435,7 @@
 2015-06-11 9:38:09 - PHP Notice:  Error: Could not load model setting/themecontrol! in D:\wamp\www\yuankong\system\engine\loader.php on line 48
 2015-06-11 9:39:06 - PHP Notice:  Error: Could not load model setting/themecontrol! in D:\wamp\www\yuankong\system\engine\loader.php on line 48
 2015-06-11 9:41:21 - PHP Notice:  Error: Could not load language module/themecontrol! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-06-11 12:41:43 - PHP Notice:  Error: Could not load language module/themecontrol! in E:\wamp\www\yuankong\system\library\language.php on line 39
+2015-06-11 12:42:16 - PHP Notice:  Error: Could not load language module/themecontrol! in E:\wamp\www\yuankong\system\library\language.php on line 39
+2015-06-11 13:33:37 - PHP Notice:  Error: Could not load language module/themecontrol! in E:\wamp\www\yuankong\system\library\language.php on line 39
+2015-06-11 13:59:21 - PHP Notice:  Error: Could not load language module/themecontrol! in E:\wamp\www\yuankong\system\library\language.php on line 39
