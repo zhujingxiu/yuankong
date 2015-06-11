@@ -1,0 +1,103 @@
+#footer .column a:hover ,
+#powered  a,.footer-center .information p.email,
+.box-product .name a,.product-info .product-shop h1,
+#footer .column h3,.breadcrumb a:hover,.product-info .review a:hover,
+.product-info .review a:hover,.htabs a.selected,
+#currency a:hover,#currency a b,#header #welcome  a,
+.informations li a:hover,.product-grid .name a,
+.product-list .wishlist a:hover,.product-list .compare a:hover,
+a:hover, a:focus {color:#ffa913}
+
+.product-compare,#header .header,
+.box.category .box-content,#mainmenu,
+a.button, input.button,.box-product input.button,
+.wrap-infor .action .wishlist a,
+.wrap-infor .action .compare a{background-color:#ffa913}
+a.button:hover, input.button:hover,
+.product-compare:hover,
+.wrap-infor .action  a:hover {background-color:#ffba42}
+
+.product_block:hover .product-inner{border:1px solid #ffa913;}
+.product-compare,
+a.button, input.button {border:1px solid #ee9700}
+
+.pavcontentslider .price,
+.box-product .price,.product-info .price,
+.product-grid .price {color:#94c906}
+/*category*/
+ul.box-category > li ul > li > a,
+.dropdown-menu a,.dropdown-menu > li > a,
+ul.box-category > li > a{color:#ffe2af}
+ul.box-category > li ul > li {border-top:1px solid #ffbd49}
+ul.box-category > li {border-bottom:1px solid #ffbd49}
+.box.category .box-content {border-top:1px solid #ffbd49}
+.box.category:after,
+.category .box-heading{background-color:#ee9700}
+
+/**header**/
+#header .header {border-top:1px solid #d99010; border-bottom:1px solid #ffbe4e}
+#header #search { border: 4px solid #ffba42}
+#header .button-search {background: url('../image/button-search.png') center center no-repeat;}
+#header #cart .content,
+#header #cart{background-color:#ee9700}
+#mainmenu {border-top:1px solid #ee9700}
+.dropdown-menu {border:1px solid #ffba42}
+.dropdown-menu,
+.navbar .nav > li:hover > a, 
+.navbar .nav li.dropdown.open > .dropdown-toggle, 
+.navbar .nav li.dropdown.active > .dropdown-toggle, 
+.navbar .nav li.dropdown.open.active > .dropdown-toggle, 
+.navbar .nav > li.home > a, .navbar .nav > li > a:focus, 
+.navbar .nav > li > a:hover{background-color:#ffba42}
+
+
+.navbar .nav > li > .dropdown-menu > li, .dropdown-mega > li, .dropdown-menu > li {
+    border-bottom: 1px solid #EE9700;
+
+}
+.megamenu .dropdown-menu .caret{   border-bottom-color: #FFF;  border-top-color: #FFF; }
+.megamenu li.mega-group > a,.megamenu li.mega-group > a:hover { background: #EE9700; color: #FFF; display: block; }
+
+
+
+.custom-top .payment{background:url(../image/top-payment.png) left bottom no-repeat}
+.custom-top .return{background:url(../image/top-return.png) left bottom no-repeat}
+.custom-top .shipping{background:url(../image/top-shipping.png) left bottom no-repeat}
+
+ul.box-category > li > a {
+	background:url(../image/list-category.png) 15px center no-repeat;
+}
+.dropdown-menu  li > a {background: url(../image/list-category.png) left center no-repeat;}
+.dropdown-submenu > .dropdown-menu {box-shadow:0 0 4px #ffe2af}
+
+.productcarousel  .carousel-controls a.left{background:url(../image/pcarousel_move.png) top left no-repeat;  }
+.productcarousel  .carousel-controls a.right{background:url(../image/pcarousel_move.png) bottom right no-repeat; }
+
+.pav-category-products  .carousel-controls a.left,
+.sidebar .productcarousel  .carousel-controls a.left{background:url(../image/pcarousel_moves.png) top left no-repeat;  }
+.pav-category-products  .carousel-controls a.right,
+.sidebar .productcarousel  .carousel-controls a.right{background:url(../image/pcarousel_moves.png) bottom right no-repeat; }
+
+
+.jcarousel-skin-opencart .jcarousel-next-horizontal {
+	background:url(../image/carousel_move.png) top right no-repeat;
+}
+.jcarousel-skin-opencart .jcarousel-direction-rtl .jcarousel-next-horizontal {
+	background:url(../image/carousel_move.png) top left no-repeat; 
+}
+.jcarousel-skin-opencart .jcarousel-prev-horizontal {
+	background:url(../image/carousel_move.png) top left no-repeat; 
+}
+.jcarousel-skin-opencart .jcarousel-direction-rtl .jcarousel-prev-horizontal {
+	background:url(../image/carousel_move.png) top right no-repeat;
+}
+
+#footer .column a {
+	background:url(../image/list-footer.png) left center no-repeat;
+}
+.footer-center .information p.address {padding-left:24px; background:url(../image/ft-in-add.png) left center no-repeat}
+.footer-center .information p.phone {padding-left:24px; background:url(../image/ft-in-phone.png) left center no-repeat}
+.footer-center .information p.email {padding-left:24px; background:url(../image/ft-in-email.png) left center no-repeat;}	
+
+.pavcontentslider .carousel-indicators li{
+ background:url(../image/icon-nav.png) top left; }

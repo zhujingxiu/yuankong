@@ -1,12 +1,12 @@
 <?php echo $header; ?>
 <?php if ($attention) { ?>
-<div class="attention"><?php echo $attention; ?><img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>
+<div class="attention"><?php echo $attention; ?><img src="market/view/theme/default/image/close.png" alt="" class="close" /></div>
 <?php } ?>
 <?php if ($success) { ?>
-<div class="success"><?php echo $success; ?><img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>
+<div class="success"><?php echo $success; ?><img src="market/view/theme/default/image/close.png" alt="" class="close" /></div>
 <?php } ?>
 <?php if ($error_warning) { ?>
-<div class="warning"><?php echo $error_warning; ?><img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>
+<div class="warning"><?php echo $error_warning; ?><img src="market/view/theme/default/image/close.png" alt="" class="close" /></div>
 <?php } ?>
 <?php echo $column_left; ?><?php echo $column_right; ?>
 <div id="content"><?php echo $content_top; ?>
@@ -35,6 +35,14 @@
         </thead>
         <tbody>
           <?php foreach ($products as $product) { ?>
+            <?php if($product['recurring']): ?>
+              <tr>
+                  <td colspan="6" style="border:none;"><image src="market/view/theme/default/image/reorder.png" alt="" title="" style="float:left;" /><span style="float:left;line-height:18px; margin-left:10px;"> 
+                      <strong><?php echo $text_recurring_item ?></strong>
+                      <?php echo $product['profile_description'] ?>
+                  </td>
+                </tr>
+            <?php endif; ?>
           <tr>
             <td class="image"><?php if ($product['thumb']) { ?>
               <a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" title="<?php echo $product['name']; ?>" /></a>
@@ -47,6 +55,9 @@
                 <?php foreach ($product['option'] as $option) { ?>
                 - <small><?php echo $option['name']; ?>: <?php echo $option['value']; ?></small><br />
                 <?php } ?>
+                <?php if($product['recurring']): ?>
+                - <small><?php echo $text_payment_profile ?>: <?php echo $product['profile_name'] ?></small>
+                <?php endif; ?>
               </div>
               <?php if ($product['reward']) { ?>
               <small><?php echo $product['reward']; ?></small>
@@ -54,8 +65,8 @@
             <td class="model"><?php echo $product['model']; ?></td>
             <td class="quantity"><input type="text" name="quantity[<?php echo $product['key']; ?>]" value="<?php echo $product['quantity']; ?>" size="1" />
               &nbsp;
-              <input type="image" src="catalog/view/theme/default/image/update.png" alt="<?php echo $button_update; ?>" title="<?php echo $button_update; ?>" />
-              &nbsp;<a href="<?php echo $product['remove']; ?>"><img src="catalog/view/theme/default/image/remove.png" alt="<?php echo $button_remove; ?>" title="<?php echo $button_remove; ?>" /></a></td>
+              <input type="image" src="market/view/theme/default/image/update.png" alt="<?php echo $button_update; ?>" title="<?php echo $button_update; ?>" />
+              &nbsp;<a href="<?php echo $product['remove']; ?>"><img src="market/view/theme/default/image/remove.png" alt="<?php echo $button_remove; ?>" title="<?php echo $button_remove; ?>" /></a></td>
             <td class="price"><?php echo $product['price']; ?></td>
             <td class="total"><?php echo $product['total']; ?></td>
           </tr>
@@ -66,7 +77,7 @@
             <td class="name"><?php echo $vouchers['description']; ?></td>
             <td class="model"></td>
             <td class="quantity"><input type="text" name="" value="1" size="1" disabled="disabled" />
-              &nbsp;<a href="<?php echo $vouchers['remove']; ?>"><img src="catalog/view/theme/default/image/remove.png" alt="<?php echo $button_remove; ?>" title="<?php echo $button_remove; ?>" /></a></td>
+              &nbsp;<a href="<?php echo $vouchers['remove']; ?>"><img src="market/view/theme/default/image/remove.png" alt="<?php echo $button_remove; ?>" title="<?php echo $button_remove; ?>" /></a></td>
             <td class="price"><?php echo $vouchers['amount']; ?></td>
             <td class="total"><?php echo $vouchers['amount']; ?></td>
           </tr>
@@ -212,7 +223,7 @@ $('#button-quote').live('click', function() {
 		dataType: 'json',		
 		beforeSend: function() {
 			$('#button-quote').attr('disabled', true);
-			$('#button-quote').after('<span class="wait">&nbsp;<img src="catalog/view/theme/default/image/loading.gif" alt="" /></span>');
+			$('#button-quote').after('<span class="wait">&nbsp;<img src="market/view/theme/default/image/loading.gif" alt="" /></span>');
 		},
 		complete: function() {
 			$('#button-quote').attr('disabled', false);
@@ -223,7 +234,7 @@ $('#button-quote').live('click', function() {
 						
 			if (json['error']) {
 				if (json['error']['warning']) {
-					$('#notification').html('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
+					$('#notification').html('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="market/view/theme/default/image/close.png" alt="" class="close" /></div>');
 					
 					$('.warning').fadeIn('slow');
 					
@@ -309,7 +320,7 @@ $('select[name=\'country_id\']').bind('change', function() {
 		url: 'index.php?route=checkout/cart/country&country_id=' + this.value,
 		dataType: 'json',
 		beforeSend: function() {
-			$('select[name=\'country_id\']').after('<span class="wait">&nbsp;<img src="catalog/view/theme/default/image/loading.gif" alt="" /></span>');
+			$('select[name=\'country_id\']').after('<span class="wait">&nbsp;<img src="market/view/theme/default/image/loading.gif" alt="" /></span>');
 		},
 		complete: function() {
 			$('.wait').remove();

@@ -34,4 +34,5 @@ $_['entry_layout']               = '布局覆盖：';
 $_['error_warning']              = '警告： 相关数据未输入！';
 $_['error_permission']           = '警告： 您没有权限更改商品分类！';
 $_['error_name']                 = '分类名称必须在3到32个字符之间！';
-?>
+
+$_['tab_design']                 = '布局设计';

@@ -14,12 +14,57 @@
       <div class="buttons"><a onclick="$('#form').submit();" class="button"><?php echo $button_save; ?></a><a href="<?php echo $cancel; ?>" class="button"><?php echo $button_cancel; ?></a></div>
     </div>
     <div class="content">
-      <div id="tabs" class="htabs"><a href="#tab-general"><?php echo $tab_general; ?></a><a href="#tab-data"><?php echo $tab_data; ?></a><a href="#tab-links"><?php echo $tab_links; ?></a><a href="#tab-attribute"><?php echo $tab_attribute; ?></a><a href="#tab-option"><?php echo $tab_option; ?></a><a href="#tab-discount"><?php echo $tab_discount; ?></a><a href="#tab-special"><?php echo $tab_special; ?></a><a href="#tab-image"><?php echo $tab_image; ?></a><a href="#tab-reward"><?php echo $tab_reward; ?></a><a href="#tab-design"><?php echo $tab_design; ?></a></div>
+      <div id="tabs" class="htabs">
+        <a href="#tab-data"><?php echo $tab_data; ?></a>
+        <a href="#tab-links"><?php echo $tab_links; ?></a>
+        <a href="#tab-attribute"><?php echo $tab_attribute; ?></a>
+        <a href="#tab-option"><?php echo $tab_option; ?></a>
+        <?php if(false){?>
+        <a href="#tab-discount"><?php echo $tab_discount; ?></a>
+        <?php }?>
+        <a href="#tab-special"><?php echo $tab_special; ?></a>
+        <a href="#tab-image"><?php echo $tab_image; ?></a>
+        <?php if(false){?>
+        <a href="#tab-reward"><?php echo $tab_reward; ?></a>
+        <?php }?>
+        <a href="#tab-design"><?php echo $tab_design; ?></a>
+        
+      </div>
       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
-        <div id="tab-general">
+        <div id="tab-data">
+          <table class="form">
+            <tr>
+              <td><?php echo $entry_category; ?></td>
+              <td><input type="text" name="category" value="" /></td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td><div id="product-category" class="scrollbox">
+                  <?php $class = 'odd'; ?>
+                  <?php foreach ($product_categories as $product_category) { ?>
+                  <?php $class = ($class == 'even' ? 'odd' : 'even'); ?>
+                  <div id="product-category<?php echo $product_category['category_id']; ?>" class="<?php echo $class; ?>"><?php echo $product_category['name']; ?><img src="view/image/delete.png" alt="" />
+                    <input type="hidden" name="product_category[]" value="<?php echo $product_category['category_id']; ?>" />
+                  </div>
+                  <?php } ?>
+                </div></td>
+            </tr> 
+
+            <tr>
+              <td><span class="required">*</span> <?php echo $entry_model; ?></td>
+              <td><input type="text" name="model" value="<?php echo $model; ?>" />
+                <?php if ($error_model) { ?>
+                <span class="error"><?php echo $error_model; ?></span>
+                <?php } ?></td>
+            </tr>
+            <tr>
+              <td><span class="required">*</span><?php echo $entry_price; ?></td>
+              <td><input type="text" name="price" value="<?php echo $price; ?>" /></td>
+            </tr>
+          </table>
           <div id="languages" class="htabs">
             <?php foreach ($languages as $language) { ?>
-            <a href="#language<?php echo $language['language_id']; ?>"><img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /> <?php echo $language['name']; ?></a>
+            <a href="#language<?php echo $language['language_id']; ?>"><img src="<?php echo TPL_IMG?>flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /> <?php echo $language['name']; ?></a>
             <?php } ?>
           </div>
           <?php foreach ($languages as $language) { ?>
@@ -34,11 +79,11 @@
               </tr>
               <tr>
                 <td><?php echo $entry_meta_description; ?></td>
-                <td><textarea name="product_description[<?php echo $language['language_id']; ?>][meta_description]" cols="40" rows="5"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['meta_description'] : ''; ?></textarea></td>
+                <td><textarea name="product_description[<?php echo $language['language_id']; ?>][meta_description]" cols="80" rows="2"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['meta_description'] : ''; ?></textarea></td>
               </tr>
               <tr>
                 <td><?php echo $entry_meta_keyword; ?></td>
-                <td><textarea name="product_description[<?php echo $language['language_id']; ?>][meta_keyword]" cols="40" rows="5"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['meta_keyword'] : ''; ?></textarea></td>
+                <td><textarea name="product_description[<?php echo $language['language_id']; ?>][meta_keyword]" cols="80" rows="2"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['meta_keyword'] : ''; ?></textarea></td>
               </tr>
               <tr>
                 <td><?php echo $entry_description; ?></td>
@@ -51,49 +96,42 @@
             </table>
           </div>
           <?php } ?>
-        </div>
-        <div id="tab-data">
+
           <table class="form">
             <tr>
-              <td><span class="required">*</span> <?php echo $entry_model; ?></td>
-              <td><input type="text" name="model" value="<?php echo $model; ?>" />
-                <?php if ($error_model) { ?>
-                <span class="error"><?php echo $error_model; ?></span>
-                <?php } ?></td>
+              <td><?php echo $entry_keyword; ?></td>
+              <td><input type="text" name="keyword" value="<?php echo $keyword; ?>" /></td>
             </tr>
-            <tr>
+            <tr class="hide-item">
               <td><?php echo $entry_sku; ?></td>
               <td><input type="text" name="sku" value="<?php echo $sku; ?>" /></td>
             </tr>
-            <tr>
+            <tr class="hide-item">
               <td><?php echo $entry_upc; ?></td>
               <td><input type="text" name="upc" value="<?php echo $upc; ?>" /></td>
             </tr>
-            <tr>
+            <tr class="hide-item">
               <td><?php echo $entry_ean; ?></td>
               <td><input type="text" name="ean" value="<?php echo $ean; ?>" /></td>
             </tr>
-            <tr>
+            <tr class="hide-item">
               <td><?php echo $entry_jan; ?></td>
               <td><input type="text" name="jan" value="<?php echo $jan; ?>" /></td>
             </tr>
-            <tr>
+            <tr class="hide-item">
               <td><?php echo $entry_isbn; ?></td>
               <td><input type="text" name="isbn" value="<?php echo $isbn; ?>" /></td>
             </tr>
-            <tr>
+            <tr class="hide-item">
               <td><?php echo $entry_mpn; ?></td>
               <td><input type="text" name="mpn" value="<?php echo $mpn; ?>" /></td>
             </tr>
-            <tr>
+            <tr class="hide-item">
               <td><?php echo $entry_location; ?></td>
               <td><input type="text" name="location" value="<?php echo $location; ?>" /></td>
             </tr>
-            <tr>
-              <td><?php echo $entry_price; ?></td>
-              <td><input type="text" name="price" value="<?php echo $price; ?>" /></td>
-            </tr>
-            <tr>
+
+            <tr class="hide-item">
               <td><?php echo $entry_tax_class; ?></td>
               <td><select name="tax_class_id">
                   <option value="0"><?php echo $text_none; ?></option>
@@ -106,7 +144,7 @@
                   <?php } ?>
                 </select></td>
             </tr>
-            <tr>
+            <tr class="hide-item">
               <td><?php echo $entry_quantity; ?></td>
               <td><input type="text" name="quantity" value="<?php echo $quantity; ?>" size="2" /></td>
             </tr>
@@ -114,7 +152,7 @@
               <td><?php echo $entry_minimum; ?></td>
               <td><input type="text" name="minimum" value="<?php echo $minimum; ?>" size="2" /></td>
             </tr>
-            <tr>
+            <tr class="hide-item">
               <td><?php echo $entry_subtract; ?></td>
               <td><select name="subtract">
                   <?php if ($subtract) { ?>
@@ -126,7 +164,7 @@
                   <?php } ?>
                 </select></td>
             </tr>
-            <tr>
+            <tr class="hide-item">
               <td><?php echo $entry_stock_status; ?></td>
               <td><select name="stock_status_id">
                   <?php foreach ($stock_statuses as $stock_status) { ?>
@@ -152,10 +190,7 @@
                 <?php echo $text_no; ?>
                 <?php } ?></td>
             </tr>
-            <tr>
-              <td><?php echo $entry_keyword; ?></td>
-              <td><input type="text" name="keyword" value="<?php echo $keyword; ?>" /></td>
-            </tr>
+            
             <tr>
               <td><?php echo $entry_image; ?></td>
               <td><div class="image"><img src="<?php echo $thumb; ?>" alt="" id="thumb" /><br />
@@ -224,22 +259,7 @@
               <td><?php echo $entry_manufacturer; ?></td>
               <td><input type="text" name="manufacturer" value="<?php echo $manufacturer ?>" /><input type="hidden" name="manufacturer_id" value="<?php echo $manufacturer_id; ?>" /></td>
             </tr>
-            <tr>
-              <td><?php echo $entry_category; ?></td>
-              <td><input type="text" name="category" value="" /></td>
-            </tr>
-            <tr>
-              <td>&nbsp;</td>
-              <td><div id="product-category" class="scrollbox">
-                  <?php $class = 'odd'; ?>
-                  <?php foreach ($product_categories as $product_category) { ?>
-                  <?php $class = ($class == 'even' ? 'odd' : 'even'); ?>
-                  <div id="product-category<?php echo $product_category['category_id']; ?>" class="<?php echo $class; ?>"><?php echo $product_category['name']; ?><img src="view/image/delete.png" alt="" />
-                    <input type="hidden" name="product_category[]" value="<?php echo $product_category['category_id']; ?>" />
-                  </div>
-                  <?php } ?>
-                </div></td>
-            </tr> 
+
             <tr>
               <td><?php echo $entry_filter; ?></td>
               <td><input type="text" name="filter" value="" /></td>
@@ -256,7 +276,7 @@
                   <?php } ?>
                 </div></td>
             </tr>                       
-            <tr>
+            <tr class="hide-item">
               <td><?php echo $entry_store; ?></td>
               <td><div class="scrollbox">
                   <?php $class = 'even'; ?>
@@ -283,11 +303,11 @@
                   <?php } ?>
                 </div></td>
             </tr>
-            <tr>
+            <tr class="hide-item">
               <td><?php echo $entry_download; ?></td>
               <td><input type="text" name="download" value="" /></td>
             </tr>			
-            <tr>
+            <tr class="hide-item">
               <td>&nbsp;</td>
               <td><div id="product-download" class="scrollbox">
                   <?php $class = 'odd'; ?>
@@ -334,7 +354,7 @@
                   <input type="hidden" name="product_attribute[<?php echo $attribute_row; ?>][attribute_id]" value="<?php echo $product_attribute['attribute_id']; ?>" /></td>
                 <td class="left"><?php foreach ($languages as $language) { ?>
                   <textarea name="product_attribute[<?php echo $attribute_row; ?>][product_attribute_description][<?php echo $language['language_id']; ?>][text]" cols="40" rows="5"><?php echo isset($product_attribute['product_attribute_description'][$language['language_id']]) ? $product_attribute['product_attribute_description'][$language['language_id']]['text'] : ''; ?></textarea>
-                  <img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" align="top" /><br />
+                  <img src="<?php echo TPL_IMG?>flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" align="top" /><br />
                   <?php } ?></td>
                 <td class="left"><a onclick="$('#attribute-row<?php echo $attribute_row; ?>').remove();" class="button"><?php echo $button_remove; ?></a></td>
               </tr>
@@ -518,6 +538,7 @@
           <?php $option_row++; ?>
           <?php } ?>
         </div>
+        <?php if(false){?>
         <div id="tab-discount">
           <table id="discount" class="list">
             <thead>
@@ -562,6 +583,7 @@
             </tfoot>
           </table>
         </div>
+        <?php }?>
         <div id="tab-special">
           <table id="special" class="list">
             <thead>
@@ -635,6 +657,7 @@
             </tfoot>
           </table>
         </div>
+        <?php if(false){?>
         <div id="tab-reward">
           <table class="form">
             <tr>
@@ -659,6 +682,7 @@
             <?php } ?>
           </table>
         </div>
+        <?php }?>
         <div id="tab-design">
           <table class="list">
             <thead>
@@ -701,6 +725,7 @@
             <?php } ?>
           </table>
         </div>
+        
       </form>
     </div>
   </div>
@@ -928,7 +953,7 @@ function addAttribute() {
 	html += '    <td class="left"><input type="text" name="product_attribute[' + attribute_row + '][name]" value="" /><input type="hidden" name="product_attribute[' + attribute_row + '][attribute_id]" value="" /></td>';
 	html += '    <td class="left">';
 	<?php foreach ($languages as $language) { ?>
-	html += '<textarea name="product_attribute[' + attribute_row + '][product_attribute_description][<?php echo $language['language_id']; ?>][text]" cols="40" rows="5"></textarea><img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" align="top" /><br />';
+	html += '<textarea name="product_attribute[' + attribute_row + '][product_attribute_description][<?php echo $language['language_id']; ?>][text]" cols="40" rows="5"></textarea><img src="<?php echo TPL_IMG?>flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" align="top" /><br />';
     <?php } ?>
 	html += '    </td>';
 	html += '    <td class="left"><a onclick="$(\'#attribute-row' + attribute_row + '\').remove();" class="button"><?php echo $button_remove; ?></a></td>';
@@ -1261,4 +1286,7 @@ $('#tabs a').tabs();
 $('#languages a').tabs(); 
 $('#vtab-option a').tabs();
 //--></script> 
+<style type="text/css">
+  .hide-item{display: none;}
+</style>
 <?php echo $footer; ?>

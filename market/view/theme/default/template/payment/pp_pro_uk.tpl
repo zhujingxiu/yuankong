@@ -2,10 +2,6 @@
 <div class="content" id="payment">
   <table class="form">
     <tr>
-      <td><?php echo $entry_cc_owner; ?></td>
-      <td><input type="text" name="cc_owner" value="" /></td>
-    </tr>
-    <tr>
       <td><?php echo $entry_cc_type; ?></td>
       <td><select name="cc_type">
           <?php foreach ($cards as $card) { ?>
@@ -71,7 +67,7 @@ $('#button-confirm').bind('click', function() {
 		dataType: 'json',		
 		beforeSend: function() {
 			$('#button-confirm').attr('disabled', true);
-			$('#payment').before('<div class="attention"><img src="catalog/view/theme/default/image/loading.gif" alt="" /> <?php echo $text_wait; ?></div>');
+			$('#payment').before('<div class="attention"><img src="market/view/theme/default/image/loading.gif" alt="" /> <?php echo $text_wait; ?></div>');
 		},
 		complete: function() {
 			$('#button-confirm').attr('disabled', false);

@@ -84,3 +84,15 @@ $_['text_project']                     = '工程项目';
 $_['text_project_group']               = '工程类别';
 $_['text_news_group']                  = '新闻类别';
 $_['text_help_group']                  = '帮助类别';
+
+
+$_['text_pavblog_blog']               = 'Pav Blogs';
+$_['text_pavblog_category']               = 'Pav Category';
+$_['text_pavblog_manage_comment']               = 'Comments';
+$_['text_pavblog_manage_cate']               = 'Categories';
+$_['text_pavblog_manage_blog']               = 'Blogs';
+$_['text_pavblog_add_blog']         = 'Add Blog';
+$_['text_pavblog_general_setting']               = 'General Settings';
+$_['text_pavblog_front_mods']               = 'Frontend Modules';
+$_['text_pavblog_comment']               = 'Pav Latest Comment';
+$_['text_pavblog_latest']               = 'Pav Latest';

@@ -71,7 +71,7 @@
         <td class="right"><?php echo $product['quantity']; ?></td>
         <td class="right"><?php echo $product['price']; ?></td>
         <td class="right"><?php echo $product['total']; ?></td>
-        <td class="right"><a href="<?php echo $product['return']; ?>"><img src="catalog/view/theme/default/image/return.png" alt="<?php echo $button_return; ?>" title="<?php echo $button_return; ?>" /></a></td>
+        <td class="right"><a href="<?php echo $product['return']; ?>"><img src="market/view/theme/default/image/return.png" alt="<?php echo $button_return; ?>" title="<?php echo $button_return; ?>" /></a></td>
       </tr>
       <?php } ?>
       <?php foreach ($vouchers as $voucher) { ?>

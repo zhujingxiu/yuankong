@@ -213,6 +213,24 @@ $(document).ready(function(){
           <li><a href="<?php echo $feed; ?>"><?php echo $text_feed; ?></a></li>
         </ul>
       </li>
+      <?php if($pavblog_installed): ?>
+        <li id="pavblogs"><a class="top"><?php echo $text_pavblog_blog; ?></a>
+          <ul>
+            <li><a href="<?php echo $pavblogs_category; ?>"><?php echo $text_pavblog_manage_cate; ?></a></li>
+            <li><a href="<?php echo $pavblogs_blogs; ?>"><?php echo $text_pavblog_manage_blog; ?></a></li>
+            <li><a href="<?php echo $pavblogs_add_blog; ?>"><?php echo $text_pavblog_add_blog; ?></a></li>
+            <li><a href="<?php echo $pavblogs_comments; ?>"><?php echo $text_pavblog_manage_comment; ?></a></li>
+            <li><a href="<?php echo $pavblogs_general; ?>"><?php echo $text_pavblog_general_setting; ?></a></li>
+            <li><a class="parent"><?php echo $text_pavblog_front_mods; ?></a>
+              <ul>
+                <li><a href="<?php echo $pavblogs_category_mod; ?>"><?php echo $text_pavblog_category; ?></a></li>
+                <li><a href="<?php echo $pavblogs_latest_comment_mod; ?>"><?php echo $text_pavblog_comment; ?></a></li>
+                <li><a href="<?php echo $pavblogs_latest_mod; ?>"><?php echo $text_pavblog_latest; ?></a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <?php endif; ?>
     </ul>
   </div>
   <?php } ?>

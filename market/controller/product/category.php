@@ -95,7 +95,7 @@ class ControllerProductCategory extends Controller {
 	  		$this->document->setTitle($category_info['name']);
 			$this->document->setDescription($category_info['meta_description']);
 			$this->document->setKeywords($category_info['meta_keyword']);
-			$this->document->addScript('catalog/view/javascript/jquery/jquery.total-storage.min.js');
+			$this->document->addScript('market/view/javascript/jquery/jquery.total-storage.min.js');
 			
 			$this->data['heading_title'] = $category_info['name'];
 			

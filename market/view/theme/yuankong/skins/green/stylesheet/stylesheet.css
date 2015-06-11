@@ -1,0 +1,98 @@
+#footer .column a:hover ,
+#powered  a,.footer-center .information p.email,
+.box-product .name a,.product-info .product-shop h1,
+#footer .column h3,.breadcrumb a:hover,.product-info .review a:hover,
+.product-info .review a:hover,.htabs a.selected,
+#currency a:hover,#currency a b,#header #welcome  a,
+.informations li a:hover,.product-grid .name a,
+.product-list .wishlist a:hover,.product-list .compare a:hover,
+a:hover, a:focus {color:#8dbd4c}
+
+.product-compare,#header .header,
+.box.category .box-content,#mainmenu,
+a.button, input.button,.box-product input.button,
+.wrap-infor .action .wishlist a,
+.wrap-infor .action .compare a{background-color:#8dbd4c}
+a.button:hover, input.button:hover,
+.product-compare:hover,
+.wrap-infor .action  a:hover {background-color:#9cd154}
+
+.product_block:hover .product-inner{border:1px solid #8dbd4c;}
+.product-compare,
+a.button, input.button {border:1px solid #86a923}
+
+/*category*/
+.nav-collapse .nav > li > a, .nav-collapse .dropdown-menu a,
+ul.box-category > li ul > li > a,
+.dropdown-menu a,.dropdown-menu > li > a,
+ul.box-category > li > a{color:#eaf2d1}
+ul.box-category > li ul > li {border-top:1px solid #9ccf58}
+ul.box-category > li {border-bottom:1px solid #9ccf58}
+.box.category .box-content {border-top:1px solid #9ccf58}
+.box.category:after,
+.category .box-heading{background-color:#7aa73d}
+
+/**header**/
+#header .header {border-top:1px solid #78a141; border-bottom:1px solid #9bcb59}
+#header #search { border: 4px solid #a2c96c}
+#header #cart .content,
+#header #cart{background-color:#6d923a}
+#mainmenu {border-top:1px solid #7ca545}
+.dropdown-menu {border:1px solid #7eab41}
+.dropdown-menu,
+.navbar .nav > li:hover > a, 
+.navbar .nav li.dropdown.open > .dropdown-toggle, 
+.navbar .nav li.dropdown.active > .dropdown-toggle, 
+.navbar .nav li.dropdown.open.active > .dropdown-toggle, 
+.navbar .nav > li.home > a, .navbar .nav > li > a:focus, 
+.navbar .nav > li > a:hover{background-color:#7eab41}
+
+.navbar .nav > li > .dropdown-menu > li, .dropdown-mega > li, .dropdown-menu > li {
+    border-bottom: 1px solid #7ca545;
+
+}
+.megamenu .dropdown-menu .caret{   border-bottom-color: #FFF;  border-top-color: #FFF; }
+.megamenu li.mega-group > a,.megamenu li.mega-group > a:hover { background: #8bbc48; color: #FFF; display: block; }
+
+
+.custom-top .payment{background:url(../image/top-payment.png) left bottom no-repeat}
+.custom-top .return{background:url(../image/top-return.png) left bottom no-repeat}
+.custom-top .shipping{background:url(../image/top-shipping.png) left bottom no-repeat}
+
+ul.box-category > li > a {
+	background:url(../image/list-category.png) 15px center no-repeat;
+}
+.dropdown-menu  li > a {background: url(../image/list-category.png) left center no-repeat;}
+.dropdown-submenu > .dropdown-menu {box-shadow:0 0 4px #dbf491}
+
+.productcarousel  .carousel-controls a.left{background:url(../image/pcarousel_move.png) top left no-repeat;  }
+.productcarousel  .carousel-controls a.right{background:url(../image/pcarousel_move.png) bottom right no-repeat; }
+
+.pav-category-products  .carousel-controls a.left,
+.sidebar .productcarousel  .carousel-controls a.left{background:url(../image/pcarousel_moves.png) top left no-repeat;  }
+.pav-category-products  .carousel-controls a.right,
+.sidebar .productcarousel  .carousel-controls a.right{background:url(../image/pcarousel_moves.png) bottom right no-repeat; }
+
+
+.jcarousel-skin-opencart .jcarousel-next-horizontal {
+	background:url(../image/carousel_move.png) top right no-repeat;
+}
+.jcarousel-skin-opencart .jcarousel-direction-rtl .jcarousel-next-horizontal {
+	background:url(../image/carousel_move.png) top left no-repeat; 
+}
+.jcarousel-skin-opencart .jcarousel-prev-horizontal {
+	background:url(../image/carousel_move.png) top left no-repeat; 
+}
+.jcarousel-skin-opencart .jcarousel-direction-rtl .jcarousel-prev-horizontal {
+	background:url(../image/carousel_move.png) top right no-repeat;
+}
+
+#footer .column a {
+	background:url(../image/list-footer.png) left center no-repeat;
+}
+.footer-center .information p.address {padding-left:24px; background:url(../image/ft-in-add.png) left center no-repeat}
+.footer-center .information p.phone {padding-left:24px; background:url(../image/ft-in-phone.png) left center no-repeat}
+.footer-center .information p.email {padding-left:24px; background:url(../image/ft-in-email.png) left center no-repeat;}	
+
+.pavcontentslider .carousel-indicators li{
+ background:url(../image/icon-nav.png) top left; }

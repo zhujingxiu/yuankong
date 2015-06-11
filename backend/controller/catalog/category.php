@@ -268,14 +268,26 @@ class ControllerCatalogCategory extends Controller {
 			'href'      => $this->url->link('catalog/category', 'token=' . $this->session->data['token'], 'SSL'),
       		'separator' => ' :: '
    		);
-		
-		if (!isset($this->request->get['category_id'])) {
-			$this->data['action'] = $this->url->link('catalog/category/insert', 'token=' . $this->session->data['token'], 'SSL');
+
+   		if (isset($this->request->get['page'])) {
+			$page = $this->request->get['page'];
 		} else {
-			$this->data['action'] = $this->url->link('catalog/category/update', 'token=' . $this->session->data['token'] . '&category_id=' . $this->request->get['category_id'], 'SSL');
+			$page = 1;
 		}
 		
-		$this->data['cancel'] = $this->url->link('catalog/category', 'token=' . $this->session->data['token'], 'SSL');
+		$url = '';
+		
+		if (isset($this->request->get['page'])) {
+			$url .= '&page=' . $this->request->get['page'];
+		}
+		
+		if (!isset($this->request->get['category_id'])) {
+			$this->data['action'] = $this->url->link('catalog/category/insert', 'token=' . $this->session->data['token'].$url, 'SSL');
+		} else {
+			$this->data['action'] = $this->url->link('catalog/category/update', 'token=' . $this->session->data['token'] . '&category_id=' . $this->request->get['category_id'].$url, 'SSL');
+		}
+		
+		$this->data['cancel'] = $this->url->link('catalog/category', 'token=' . $this->session->data['token'].$url, 'SSL');
 
 		if (isset($this->request->get['category_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
       		$category_info = $this->model_catalog_category->getCategory($this->request->get['category_id']);

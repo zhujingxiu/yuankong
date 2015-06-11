@@ -577,3 +577,8 @@ table.form > tbody > tr > td {
 	position: relative;
 	top: 3px;
 }
+  .selection-category{
+    width: 220px;
+    float: left;
+    margin-left: 5px;
+  }

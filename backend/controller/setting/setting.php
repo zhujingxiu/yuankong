@@ -410,7 +410,7 @@ class ControllerSettingSetting extends Controller {
 		
 		$this->data['templates'] = array();
 
-		$directories = glob(DIR_CATALOG . 'view/theme/*', GLOB_ONLYDIR);
+		$directories = glob(DIR_FRONT . 'view/theme/*', GLOB_ONLYDIR);
 		
 		foreach ($directories as $directory) {
 			$this->data['templates'][] = basename($directory);

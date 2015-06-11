@@ -26,8 +26,8 @@ class ControllerCheckoutCheckout extends Controller {
 		$this->language->load('checkout/checkout');
 		
 		$this->document->setTitle($this->language->get('heading_title')); 
-		$this->document->addScript('catalog/view/javascript/jquery/colorbox/jquery.colorbox-min.js');
-		$this->document->addStyle('catalog/view/javascript/jquery/colorbox/colorbox.css');
+		$this->document->addScript('market/view/javascript/jquery/colorbox/jquery.colorbox-min.js');
+		$this->document->addStyle('market/view/javascript/jquery/colorbox/colorbox.css');
 					
 		$this->data['breadcrumbs'] = array();
 
@@ -77,6 +77,10 @@ class ControllerCheckoutCheckout extends Controller {
 			'common/footer',
 			'common/header'	
 		);
+        
+        if (isset($this->request->get['quickconfirm'])) {
+            $this->data['quickconfirm'] = $this->request->get['quickconfirm'];
+        }
 				
 		$this->response->setOutput($this->render());
   	}

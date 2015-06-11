@@ -55,6 +55,23 @@
         <?php } ?>
       </div>
       <?php } ?>
+      <?php if ($profiles): ?>
+      <div class="option">
+          <h2><span class="required">*</span><?php echo $text_payment_profile ?></h2>
+          <br />
+          <select name="profile_id">
+              <option value=""><?php echo $text_select; ?></option>
+              <?php foreach ($profiles as $profile): ?>
+              <option value="<?php echo $profile['profile_id'] ?>"><?php echo $profile['name'] ?></option>
+              <?php endforeach; ?>
+          </select>
+          <br />
+          <br />
+          <span id="profile-description"></span>
+          <br />
+          <br />
+      </div>
+      <?php endif; ?>
       <?php if ($options) { ?>
       <div class="options">
         <h2><?php echo $text_option; ?></h2>
@@ -217,7 +234,7 @@
       </div>
       <?php if ($review_status) { ?>
       <div class="review">
-        <div><img src="catalog/view/theme/default/image/stars-<?php echo $rating; ?>.png" alt="<?php echo $reviews; ?>" />&nbsp;&nbsp;<a onclick="$('a[href=\'#tab-review\']').trigger('click');"><?php echo $reviews; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$('a[href=\'#tab-review\']').trigger('click');"><?php echo $text_write; ?></a></div>
+        <div><img src="market/view/theme/default/image/stars-<?php echo $rating; ?>.png" alt="<?php echo $reviews; ?>" />&nbsp;&nbsp;<a onclick="$('a[href=\'#tab-review\']').trigger('click');"><?php echo $reviews; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$('a[href=\'#tab-review\']').trigger('click');"><?php echo $text_write; ?></a></div>
         <div class="share"><!-- AddThis Button BEGIN -->
           <div class="addthis_default_style"><a class="addthis_button_compact"><?php echo $text_share; ?></a> <a class="addthis_button_email"></a><a class="addthis_button_print"></a> <a class="addthis_button_facebook"></a> <a class="addthis_button_twitter"></a></div>
           <script type="text/javascript" src="//s7.addthis.com/js/250/addthis_widget.js"></script> 
@@ -313,7 +330,7 @@
         </div>
         <?php } ?>
         <?php if ($product['rating']) { ?>
-        <div class="rating"><img src="catalog/view/theme/default/image/stars-<?php echo $product['rating']; ?>.png" alt="<?php echo $product['reviews']; ?>" /></div>
+        <div class="rating"><img src="market/view/theme/default/image/stars-<?php echo $product['rating']; ?>.png" alt="<?php echo $product['reviews']; ?>" /></div>
         <?php } ?>
         <a onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button"><?php echo $button_cart; ?></a></div>
       <?php } ?>
@@ -342,6 +359,26 @@ $(document).ready(function() {
 });
 //--></script> 
 <script type="text/javascript"><!--
+
+$('select[name="profile_id"], input[name="quantity"]').change(function(){
+    $.ajax({
+		url: 'index.php?route=product/product/getRecurringDescription',
+		type: 'post',
+		data: $('input[name="product_id"], input[name="quantity"], select[name="profile_id"]'),
+		dataType: 'json',
+        beforeSend: function() {
+            $('#profile-description').html('');
+        },
+		success: function(json) {
+			$('.success, .warning, .attention, information, .error').remove();
+            
+			if (json['success']) {
+                $('#profile-description').html(json['success']);
+			}	
+		}
+	});
+});
+    
 $('#button-cart').bind('click', function() {
 	$.ajax({
 		url: 'index.php?route=checkout/cart/add',
@@ -357,10 +394,14 @@ $('#button-cart').bind('click', function() {
 						$('#option-' + i).after('<span class="error">' + json['error']['option'][i] + '</span>');
 					}
 				}
+                
+                if (json['error']['profile']) {
+                    $('select[name="profile_id"]').after('<span class="error">' + json['error']['profile'] + '</span>');
+                }
 			} 
 			
 			if (json['success']) {
-				$('#notification').html('<div class="success" style="display: none;">' + json['success'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
+				$('#notification').html('<div class="success" style="display: none;">' + json['success'] + '<img src="market/view/theme/default/image/close.png" alt="" class="close" /></div>');
 					
 				$('.success').fadeIn('slow');
 					
@@ -373,7 +414,7 @@ $('#button-cart').bind('click', function() {
 });
 //--></script>
 <?php if ($options) { ?>
-<script type="text/javascript" src="catalog/view/javascript/jquery/ajaxupload.js"></script>
+<script type="text/javascript" src="market/view/javascript/jquery/ajaxupload.js"></script>
 <?php foreach ($options as $option) { ?>
 <?php if ($option['type'] == 'file') { ?>
 <script type="text/javascript"><!--
@@ -383,7 +424,7 @@ new AjaxUpload('#button-option-<?php echo $option['product_option_id']; ?>', {
 	autoSubmit: true,
 	responseType: 'json',
 	onSubmit: function(file, extension) {
-		$('#button-option-<?php echo $option['product_option_id']; ?>').after('<img src="catalog/view/theme/default/image/loading.gif" class="loading" style="padding-left: 5px;" />');
+		$('#button-option-<?php echo $option['product_option_id']; ?>').after('<img src="market/view/theme/default/image/loading.gif" class="loading" style="padding-left: 5px;" />');
 		$('#button-option-<?php echo $option['product_option_id']; ?>').attr('disabled', true);
 	},
 	onComplete: function(file, json) {
@@ -430,7 +471,7 @@ $('#button-review').bind('click', function() {
 		beforeSend: function() {
 			$('.success, .warning').remove();
 			$('#button-review').attr('disabled', true);
-			$('#review-title').after('<div class="attention"><img src="catalog/view/theme/default/image/loading.gif" alt="" /> <?php echo $text_wait; ?></div>');
+			$('#review-title').after('<div class="attention"><img src="market/view/theme/default/image/loading.gif" alt="" /> <?php echo $text_wait; ?></div>');
 		},
 		complete: function() {
 			$('#button-review').attr('disabled', false);
@@ -456,7 +497,7 @@ $('#button-review').bind('click', function() {
 <script type="text/javascript"><!--
 $('#tabs a').tabs();
 //--></script> 
-<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-timepicker-addon.js"></script> 
+<script type="text/javascript" src="market/view/javascript/jquery/ui/jquery-ui-timepicker-addon.js"></script> 
 <script type="text/javascript"><!--
 $(document).ready(function() {
 	if ($.browser.msie && $.browser.version == 6) {

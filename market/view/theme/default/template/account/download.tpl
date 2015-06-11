@@ -16,7 +16,7 @@
       <div><b><?php echo $text_remaining; ?></b> <?php echo $download['remaining']; ?></div>
       <div class="download-info">
         <?php if ($download['remaining'] > 0) { ?>
-        <a href="<?php echo $download['href']; ?>"><img src="catalog/view/theme/default/image/download.png" alt="<?php echo $button_download; ?>" title="<?php echo $button_download; ?>" /></a>
+        <a href="<?php echo $download['href']; ?>"><img src="market/view/theme/default/image/download.png" alt="<?php echo $button_download; ?>" title="<?php echo $button_download; ?>" /></a>
         <?php } ?>
       </div>
     </div>

@@ -17,4 +17,4 @@ define('DIR_CONFIG', DIR_SYSTEM.'config/');
 
 define('DIR_LOGS', DIR_SYSTEM.'logs/');
 
-define('DIR_FRONT', APP_PATH.'member/');
+define('DIR_FRONT', APP_PATH.'market/');

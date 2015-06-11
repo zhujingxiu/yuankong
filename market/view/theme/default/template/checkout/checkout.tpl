@@ -58,33 +58,42 @@ $('.checkout-heading a').live('click', function() {
 });
 <?php if (!$logged) { ?> 
 $(document).ready(function() {
-	$.ajax({
-		url: 'index.php?route=checkout/login',
-		dataType: 'html',
-		success: function(html) {
-			$('#checkout .checkout-content').html(html);
-				
-			$('#checkout .checkout-content').slideDown('slow');
-		},
-		error: function(xhr, ajaxOptions, thrownError) {
-			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-		}
-	});	
+	<?php if(isset($quickconfirm)) { ?>
+		quickConfirm();
+	<?php }else{ ?>
+		$.ajax({
+			url: 'index.php?route=checkout/login',
+			dataType: 'html',
+			success: function(html) {
+				$('#checkout .checkout-content').html(html);
+					
+				$('#checkout .checkout-content').slideDown('slow');
+			},
+			error: function(xhr, ajaxOptions, thrownError) {
+				alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+			}
+		});	
+	<?php } ?>
 });		
 <?php } else { ?>
 $(document).ready(function() {
-	$.ajax({
-		url: 'index.php?route=checkout/payment_address',
-		dataType: 'html',
-		success: function(html) {
-			$('#payment-address .checkout-content').html(html);
-				
-			$('#payment-address .checkout-content').slideDown('slow');
-		},
-		error: function(xhr, ajaxOptions, thrownError) {
-			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-		}
-	});	
+
+	<?php if(isset($quickconfirm)) { ?>
+		quickConfirm();
+	<?php }else{ ?>
+		$.ajax({
+			url: 'index.php?route=checkout/payment_address',
+			dataType: 'html',
+			success: function(html) {
+				$('#payment-address .checkout-content').html(html);
+					
+				$('#payment-address .checkout-content').slideDown('slow');
+			},
+			error: function(xhr, ajaxOptions, thrownError) {
+				alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+			}
+		});	
+	<?php } ?>
 });
 <?php } ?>
 
@@ -95,7 +104,7 @@ $('#button-account').live('click', function() {
 		dataType: 'html',
 		beforeSend: function() {
 			$('#button-account').attr('disabled', true);
-			$('#button-account').after('<span class="wait">&nbsp;<img src="catalog/view/theme/default/image/loading.gif" alt="" /></span>');
+			$('#button-account').after('<span class="wait">&nbsp;<img src="market/view/theme/default/image/loading.gif" alt="" /></span>');
 		},		
 		complete: function() {
 			$('#button-account').attr('disabled', false);
@@ -129,7 +138,7 @@ $('#button-login').live('click', function() {
 		dataType: 'json',
 		beforeSend: function() {
 			$('#button-login').attr('disabled', true);
-			$('#button-login').after('<span class="wait">&nbsp;<img src="catalog/view/theme/default/image/loading.gif" alt="" /></span>');
+			$('#button-login').after('<span class="wait">&nbsp;<img src="market/view/theme/default/image/loading.gif" alt="" /></span>');
 		},	
 		complete: function() {
 			$('#button-login').attr('disabled', false);
@@ -161,7 +170,7 @@ $('#button-register').live('click', function() {
 		dataType: 'json',
 		beforeSend: function() {
 			$('#button-register').attr('disabled', true);
-			$('#button-register').after('<span class="wait">&nbsp;<img src="catalog/view/theme/default/image/loading.gif" alt="" /></span>');
+			$('#button-register').after('<span class="wait">&nbsp;<img src="market/view/theme/default/image/loading.gif" alt="" /></span>');
 		},	
 		complete: function() {
 			$('#button-register').attr('disabled', false); 
@@ -174,7 +183,7 @@ $('#button-register').live('click', function() {
 				location = json['redirect'];				
 			} else if (json['error']) {
 				if (json['error']['warning']) {
-					$('#payment-address .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
+					$('#payment-address .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="market/view/theme/default/image/close.png" alt="" class="close" /></div>');
 					
 					$('.warning').fadeIn('slow');
 				}
@@ -345,7 +354,7 @@ $('#button-payment-address').live('click', function() {
 		dataType: 'json',
 		beforeSend: function() {
 			$('#button-payment-address').attr('disabled', true);
-			$('#button-payment-address').after('<span class="wait">&nbsp;<img src="catalog/view/theme/default/image/loading.gif" alt="" /></span>');
+			$('#button-payment-address').after('<span class="wait">&nbsp;<img src="market/view/theme/default/image/loading.gif" alt="" /></span>');
 		},	
 		complete: function() {
 			$('#button-payment-address').attr('disabled', false);
@@ -358,7 +367,7 @@ $('#button-payment-address').live('click', function() {
 				location = json['redirect'];
 			} else if (json['error']) {
 				if (json['error']['warning']) {
-					$('#payment-address .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
+					$('#payment-address .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="market/view/theme/default/image/close.png" alt="" class="close" /></div>');
 					
 					$('.warning').fadeIn('slow');
 				}
@@ -474,7 +483,7 @@ $('#button-shipping-address').live('click', function() {
 		dataType: 'json',
 		beforeSend: function() {
 			$('#button-shipping-address').attr('disabled', true);
-			$('#button-shipping-address').after('<span class="wait">&nbsp;<img src="catalog/view/theme/default/image/loading.gif" alt="" /></span>');
+			$('#button-shipping-address').after('<span class="wait">&nbsp;<img src="market/view/theme/default/image/loading.gif" alt="" /></span>');
 		},	
 		complete: function() {
 			$('#button-shipping-address').attr('disabled', false);
@@ -487,7 +496,7 @@ $('#button-shipping-address').live('click', function() {
 				location = json['redirect'];
 			} else if (json['error']) {
 				if (json['error']['warning']) {
-					$('#shipping-address .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
+					$('#shipping-address .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="market/view/theme/default/image/close.png" alt="" class="close" /></div>');
 					
 					$('.warning').fadeIn('slow');
 				}
@@ -587,7 +596,7 @@ $('#button-guest').live('click', function() {
 		dataType: 'json',
 		beforeSend: function() {
 			$('#button-guest').attr('disabled', true);
-			$('#button-guest').after('<span class="wait">&nbsp;<img src="catalog/view/theme/default/image/loading.gif" alt="" /></span>');
+			$('#button-guest').after('<span class="wait">&nbsp;<img src="market/view/theme/default/image/loading.gif" alt="" /></span>');
 		},	
 		complete: function() {
 			$('#button-guest').attr('disabled', false); 
@@ -600,7 +609,7 @@ $('#button-guest').live('click', function() {
 				location = json['redirect'];
 			} else if (json['error']) {
 				if (json['error']['warning']) {
-					$('#payment-address .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
+					$('#payment-address .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="market/view/theme/default/image/close.png" alt="" class="close" /></div>');
 					
 					$('.warning').fadeIn('slow');
 				}
@@ -747,7 +756,7 @@ $('#button-guest-shipping').live('click', function() {
 		dataType: 'json',
 		beforeSend: function() {
 			$('#button-guest-shipping').attr('disabled', true);
-			$('#button-guest-shipping').after('<span class="wait">&nbsp;<img src="catalog/view/theme/default/image/loading.gif" alt="" /></span>');
+			$('#button-guest-shipping').after('<span class="wait">&nbsp;<img src="market/view/theme/default/image/loading.gif" alt="" /></span>');
 		},	
 		complete: function() {
 			$('#button-guest-shipping').attr('disabled', false); 
@@ -760,7 +769,7 @@ $('#button-guest-shipping').live('click', function() {
 				location = json['redirect'];
 			} else if (json['error']) {
 				if (json['error']['warning']) {
-					$('#shipping-address .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
+					$('#shipping-address .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="market/view/theme/default/image/close.png" alt="" class="close" /></div>');
 					
 					$('.warning').fadeIn('slow');
 				}
@@ -829,7 +838,7 @@ $('#button-shipping-method').live('click', function() {
 		dataType: 'json',
 		beforeSend: function() {
 			$('#button-shipping-method').attr('disabled', true);
-			$('#button-shipping-method').after('<span class="wait">&nbsp;<img src="catalog/view/theme/default/image/loading.gif" alt="" /></span>');
+			$('#button-shipping-method').after('<span class="wait">&nbsp;<img src="market/view/theme/default/image/loading.gif" alt="" /></span>');
 		},	
 		complete: function() {
 			$('#button-shipping-method').attr('disabled', false);
@@ -842,7 +851,7 @@ $('#button-shipping-method').live('click', function() {
 				location = json['redirect'];
 			} else if (json['error']) {
 				if (json['error']['warning']) {
-					$('#shipping-method .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
+					$('#shipping-method .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="market/view/theme/default/image/close.png" alt="" class="close" /></div>');
 					
 					$('.warning').fadeIn('slow');
 				}			
@@ -882,7 +891,7 @@ $('#button-payment-method').live('click', function() {
 		dataType: 'json',
 		beforeSend: function() {
 			$('#button-payment-method').attr('disabled', true);
-			$('#button-payment-method').after('<span class="wait">&nbsp;<img src="catalog/view/theme/default/image/loading.gif" alt="" /></span>');
+			$('#button-payment-method').after('<span class="wait">&nbsp;<img src="market/view/theme/default/image/loading.gif" alt="" /></span>');
 		},	
 		complete: function() {
 			$('#button-payment-method').attr('disabled', false);
@@ -895,7 +904,7 @@ $('#button-payment-method').live('click', function() {
 				location = json['redirect'];
 			} else if (json['error']) {
 				if (json['error']['warning']) {
-					$('#payment-method .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
+					$('#payment-method .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="market/view/theme/default/image/close.png" alt="" class="close" /></div>');
 					
 					$('.warning').fadeIn('slow');
 				}			
@@ -925,5 +934,38 @@ $('#button-payment-method').live('click', function() {
 		}
 	});	
 });
+
+function quickConfirm(module){
+	$.ajax({
+		url: 'index.php?route=checkout/confirm',
+		dataType: 'html',
+		success: function(html) {
+			$('#confirm .checkout-content').html(html);
+			$('#confirm .checkout-content').slideDown('slow');
+			
+				
+			$('.checkout-heading a').remove();
+				
+			$('#checkout .checkout-heading a').remove();
+			$('#checkout .checkout-heading').append('<a><?php echo $text_modify; ?></a>');
+			
+			$('#shipping-address .checkout-heading a').remove();
+			$('#shipping-address .checkout-heading').append('<a><?php echo $text_modify; ?></a>');	
+			
+			$('#shipping-method .checkout-heading a').remove();
+			$('#shipping-method .checkout-heading').append('<a><?php echo $text_modify; ?></a>');	
+			
+			$('#payment-address .checkout-heading a').remove();			
+			$('#payment-address .checkout-heading').append('<a><?php echo $text_modify; ?></a>');	
+							
+			$('#payment-method .checkout-heading a').remove();
+			$('#payment-method .checkout-heading').append('<a><?php echo $text_modify; ?></a>');	
+
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});	
+}
 //--></script> 
 <?php echo $footer; ?>

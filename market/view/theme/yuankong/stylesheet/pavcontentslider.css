@@ -1,0 +1,49 @@
+.pavcontentslider {
+	position:relative;
+	margin:0px 0 20px;
+	border:1px solid #dcdcdc;
+}
+.pavcontentslider .carousel-inner{
+	position:relative;
+}
+.pavcontentslider .price{font-size:24px; color:#ff9400; line-height:30px; margin:10px 0px ; font-weight:bold}
+.pavcontentslider .banner-info{
+	position:absolute;
+	top:40px;
+	right:20px;
+	z-index:4;
+	width:300px;
+	padding:12px;
+	min-height:40px;
+	opacity:0.7;
+  filter: alpha(opacity=70);
+  font-size:14px; line-height:18px
+}
+.pavcontentslider .banner-info h4{
+	font-size:30px; color:#383838;line-height:30px;
+}
+.pavcontentslider .banner-info h4 span{
+	color:#dd7953; font-size:42px;
+}
+.pavcontentslider .banner-info p{margin:0px; font-size:14px; color:#555}
+
+.pavcontentslider .carousel-indicators{
+	position:absolute;
+	top:auto;
+	bottom:0px;
+	right:0px;
+	margin:0px; padding:5px;
+}
+.pavcontentslider .carousel-control{
+	z-index:9999; bottom:20%; border-radius:0px; top: auto;
+	display: none;
+}
+.pavcontentslider .carousel-control.right {right:0px}
+.pavcontentslider .carousel-control.left {left:0px}
+.pavcontentslider .carousel-indicators li{ display:block;float:left;	z-index:20;
+	padding:5px; cursor: pointer;width:4px; height:4px;border-radius:0;
+	margin:3px; background:url(../image/icon-nav.png) top left; }
+	
+.pavcontentslider .carousel-indicators li:hover,
+.pavcontentslider .carousel-indicators li.active{ background-position:bottom left !important }	
+

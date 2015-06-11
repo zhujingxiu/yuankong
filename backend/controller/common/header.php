@@ -107,7 +107,23 @@ class ControllerCommonHeader extends Controller {
 		$this->data['text_zone'] = $this->language->get('text_zone');
 		$this->data['text_project'] = $this->language->get('text_project');
 		$this->data['text_project_group'] = $this->language->get('text_project_group');
-		
+		$this->load->model('setting/extension');
+		$extensions = $this->model_setting_extension->getInstalled('module');
+		$this->data['pavblog_installed'] = false;
+		if(in_array("pavblog", $extensions)){
+			$this->data['pavblog_installed'] = true;
+		}
+
+		$this->data['text_pavblog_manage_cate'] = $this->language->get('text_pavblog_manage_cate');
+		$this->data['text_pavblog_manage_blog'] = $this->language->get('text_pavblog_manage_blog');
+		$this->data['text_pavblog_add_blog'] = $this->language->get('text_pavblog_add_blog');
+		$this->data['text_pavblog_manage_comment'] = $this->language->get('text_pavblog_manage_comment');
+		$this->data['text_pavblog_general_setting'] = $this->language->get('text_pavblog_general_setting');
+		$this->data['text_pavblog_front_mods'] = $this->language->get('text_pavblog_front_mods');
+		$this->data['text_pavblog_blog'] = $this->language->get('text_pavblog_blog');
+		$this->data['text_pavblog_category'] = $this->language->get('text_pavblog_category');
+		$this->data['text_pavblog_comment'] = $this->language->get('text_pavblog_comment');
+		$this->data['text_pavblog_latest'] = $this->language->get('text_pavblog_latest');
 		if (!$this->user->isLogged() || !isset($this->request->get['token']) || !isset($this->session->data['token']) || ($this->request->get['token'] != $this->session->data['token'])) {
 			$this->data['logged'] = '';
 			
@@ -198,7 +214,16 @@ class ControllerCommonHeader extends Controller {
 					'name' => $result['name'],
 					'href' => $result['url']
 				);
-			}			
+			}	
+
+			$this->data['pavblogs_category_mod'] = $this->url->link('module/pavblogcategory', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['pavblogs_latest_comment_mod'] = $this->url->link('module/pavblogcomment', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['pavblogs_latest_mod'] = $this->url->link('module/pavbloglatest', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['pavblogs_category'] = $this->url->link('module/pavblog/category', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['pavblogs_blogs'] = $this->url->link('module/pavblog/blogs', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['pavblogs_add_blog'] = $this->url->link('module/pavblog/blog', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['pavblogs_comments'] = $this->url->link('module/pavblog/comments', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['pavblogs_general'] = $this->url->link('module/pavblog/modules', 'token=' . $this->session->data['token'], 'SSL');		
 		}
 		
 		$this->template = 'common/header.tpl';

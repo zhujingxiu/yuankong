@@ -8,6 +8,14 @@ class ControllerCommonHeader extends Controller {
 		} else {
 			$server = $this->config->get('config_url');
 		}
+        
+        if (isset($this->session->data['error']) && !empty($this->session->data['error'])) {
+            $this->data['error'] = $this->session->data['error'];
+            
+            unset($this->session->data['error']);
+        } else {
+            $this->data['error'] = '';
+        }
 
 		$this->data['base'] = $server;
 		$this->data['description'] = $this->document->getDescription();
@@ -71,12 +79,12 @@ class ControllerCommonHeader extends Controller {
 		$this->data['stores'] = array();
 		
 		if ($this->config->get('config_shared') && $status) {
-			$this->data['stores'][] = $server . 'catalog/view/javascript/crossdomain.php?session_id=' . $this->session->getId();
+			$this->data['stores'][] = $server . 'market/view/javascript/crossdomain.php?session_id=' . $this->session->getId();
 			
 			$stores = $this->model_setting_store->getStores();
 					
 			foreach ($stores as $store) {
-				$this->data['stores'][] = $store['url'] . 'catalog/view/javascript/crossdomain.php?session_id=' . $this->session->getId();
+				$this->data['stores'][] = $store['url'] . 'market/view/javascript/crossdomain.php?session_id=' . $this->session->getId();
 			}
 		}
 				

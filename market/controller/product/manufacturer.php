@@ -128,7 +128,7 @@ class ControllerProductManufacturer extends Controller {
 	
 		if ($manufacturer_info) {
 			$this->document->setTitle($manufacturer_info['name']);
-			$this->document->addScript('catalog/view/javascript/jquery/jquery.total-storage.min.js');
+			$this->document->addScript('market/view/javascript/jquery/jquery.total-storage.min.js');
 			
 			$url = '';
 			

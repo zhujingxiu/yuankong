@@ -393,3 +393,45 @@
 2015-06-10 14:04:41 - PHP Notice:  Error: Unknown column 'cd' in 'field list'<br />Error No: 1054<br />SELECT c.*,cd name FROM yk_category c  LEFT JOIN yk_category_description cd ON (c.category_id = cd.category_id) WHERE cd.language_id = '2'  AND c.parent_id = '0' ORDER BY c.category_id ,name in E:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
 2015-06-10 14:04:41 - PHP Notice:  Trying to get property of non-object in E:\wamp\www\yuankong\backend\model\catalog\category.php on line 317
 2015-06-10 14:04:41 - PHP Warning:  Invalid argument supplied for foreach() in E:\wamp\www\yuankong\backend\view\template\catalog\category_form.tpl on line 30
+2015-06-11 5:19:38 - PHP Notice:  Use of undefined constant DIR_CATALOG - assumed 'DIR_CATALOG' in D:\wamp\www\yuankong\backend\controller\setting\setting.php on line 413
+2015-06-11 7:13:57 - PHP Notice:  Undefined variable: discount_row in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 1174
+2015-06-11 7:15:29 - PHP Notice:  Undefined variable: discount_row in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 1174
+2015-06-11 7:24:00 - PHP Notice:  Undefined variable: discount_row in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 1174
+2015-06-11 7:28:20 - PHP Notice:  Undefined variable: discount_row in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 1177
+2015-06-11 7:30:29 - PHP Notice:  Undefined variable: discount_row in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 1178
+2015-06-11 7:31:20 - PHP Notice:  Undefined variable: discount_row in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 1179
+2015-06-11 7:32:42 - PHP Notice:  Undefined variable: discount_row in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 1175
+2015-06-11 7:33:32 - PHP Notice:  Undefined variable: discount_row in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 1176
+2015-06-11 7:34:06 - PHP Notice:  Undefined variable: discount_row in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 1176
+2015-06-11 7:35:18 - PHP Notice:  Undefined variable: discount_row in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 1177
+2015-06-11 7:49:49 - PHP Notice:  Undefined variable: discount_row in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 1179
+2015-06-11 7:50:51 - PHP Notice:  Undefined variable: discount_row in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 1179
+2015-06-11 7:51:37 - PHP Notice:  Undefined variable: languages in D:\wamp\www\yuankong\backend\view\template\extension\help_form.tpl on line 78
+2015-06-11 7:51:37 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\extension\help_form.tpl on line 78
+2015-06-11 7:54:48 - PHP Notice:  Undefined variable: sort_group in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 39
+2015-06-11 7:54:48 - PHP Notice:  Undefined variable: sort_account in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 44
+2015-06-11 7:54:48 - PHP Notice:  Undefined variable: sort_telephone in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 49
+2015-06-11 8:44:20 - PHP Notice:  Undefined variable: button_go_shopping in D:\wamp\www\yuankong\market\view\theme\yuankong\template\module\cart.tpl on line 52
+2015-06-11 8:44:20 - PHP Notice:  Undefined variable: title_load_balance in D:\wamp\www\yuankong\market\view\theme\yuankong\template\common\header.tpl on line 90
+2015-06-11 8:44:20 - PHP Notice:  Undefined variable: button_continue in D:\wamp\www\yuankong\market\view\theme\yuankong\template\common\header.tpl on line 96
+2015-06-11 8:44:20 - PHP Notice:  Undefined variable: text_balance in D:\wamp\www\yuankong\market\view\theme\yuankong\template\common\header.tpl on line 195
+2015-06-11 8:44:20 - PHP Notice:  Undefined variable: customer_balance in D:\wamp\www\yuankong\market\view\theme\yuankong\template\common\header.tpl on line 195
+2015-06-11 8:44:20 - PHP Notice:  Undefined variable: vip_level in D:\wamp\www\yuankong\market\view\theme\yuankong\template\common\header.tpl on line 195
+2015-06-11 8:44:20 - PHP Notice:  Undefined variable: title_load_balance in D:\wamp\www\yuankong\market\view\theme\yuankong\template\common\header.tpl on line 197
+2015-06-11 8:56:57 - PHP Notice:  Error: Could not load language module/themecontrol! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-06-11 8:56:57 - PHP Notice:  Error: Could not load language module/themecontrol! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-06-11 8:56:57 - PHP Notice:  Error: Could not load language module/themecontrol! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-06-11 8:56:57 - PHP Notice:  Undefined variable: error in D:\wamp\www\yuankong\market\view\theme\yuankong\template\common\header.tpl on line 289
+2015-06-11 8:58:17 - PHP Notice:  Error: Could not load language module/themecontrol! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-06-11 8:58:17 - PHP Notice:  Error: Could not load language module/themecontrol! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-06-11 8:58:17 - PHP Notice:  Error: Could not load language module/themecontrol! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-06-11 8:58:17 - PHP Notice:  Undefined variable: error in D:\wamp\www\yuankong\market\view\theme\yuankong\template\common\header.tpl on line 289
+2015-06-11 9:15:20 - PHP Notice:  Error: Could not load language module/themecontrol! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-06-11 9:16:28 - PHP Notice:  Error: Could not load language module/themecontrol! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-06-11 9:17:20 - PHP Notice:  Error: Could not load language module/themecontrol! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-06-11 9:17:36 - PHP Notice:  Error: Could not load language module/themecontrol! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-06-11 9:38:09 - PHP Notice:  Use of undefined constant DIR_CATALOG - assumed 'DIR_CATALOG' in D:\wamp\www\yuankong\backend\controller\module\themecontrol.php on line 130
+2015-06-11 9:38:09 - PHP Notice:  Use of undefined constant DIR_CATALOG - assumed 'DIR_CATALOG' in D:\wamp\www\yuankong\backend\controller\module\themecontrol.php on line 291
+2015-06-11 9:38:09 - PHP Notice:  Error: Could not load model setting/themecontrol! in D:\wamp\www\yuankong\system\engine\loader.php on line 48
+2015-06-11 9:39:06 - PHP Notice:  Error: Could not load model setting/themecontrol! in D:\wamp\www\yuankong\system\engine\loader.php on line 48
+2015-06-11 9:41:21 - PHP Notice:  Error: Could not load language module/themecontrol! in D:\wamp\www\yuankong\system\library\language.php on line 39

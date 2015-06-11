@@ -4,8 +4,9 @@ $_['heading_title']              = '商品管理';
 
 // Tab
 $_['tab_shipping']               = '配送';
-$_['tab_links']                  = '关联';
-
+$_['tab_links']                  = '关联设置';
+$_['tab_design']                 = '布局设计';
+$_['tab_option']                 = '售价选项';
 // Text  
 $_['text_success']               = '成功： 您已成功更新商品管理！';
 $_['text_plus']                  = '+';
@@ -57,7 +58,7 @@ $_['entry_subtract']             = '&nbsp;&nbsp;扣减库存：';
 $_['entry_weight_class']         = '&nbsp;&nbsp;重量单位：';
 $_['entry_weight']               = '&nbsp;&nbsp;重&nbsp;&nbsp;量：';
 $_['entry_length']               = '&nbsp;&nbsp;尺寸单位：';
-$_['entry_dimension']            = '&nbsp;&nbsp;尺寸 (L x W x H)：';
+$_['entry_dimension']            = '&nbsp;&nbsp;尺寸 (长 x 宽 x 高)：';
 $_['entry_image']                = '&nbsp;&nbsp;商品图片：';
 $_['entry_customer_group']       = '&nbsp;&nbsp;用户群组：';
 $_['entry_date_start']           = '&nbsp;&nbsp;开始日期：';
@@ -71,11 +72,11 @@ $_['entry_option_value']         = '&nbsp;&nbsp;选项数值：';
 $_['entry_required']             = 'Required：';
 $_['entry_status']               = '&nbsp;&nbsp;商品状态：';
 $_['entry_sort_order']           = '&nbsp;&nbsp;选项排序：';
-$_['entry_category']             = '&nbsp;&nbsp;商品分类：';
+$_['entry_category']             = '&nbsp;&nbsp;所属分类：';
 $_['entry_filter']           	 = '&nbsp;&nbsp;筛选：';
 $_['entry_download']             = '&nbsp;&nbsp;下载商品：';
 $_['entry_related']              = '&nbsp;&nbsp;相关商品：';
-$_['entry_tag']          	 = '产品标签：<br /><span class="help">使用逗号分开</span>';
+$_['entry_tag']          	      = '产品标签：<br /><span class="help">使用逗号分开</span>';
 $_['entry_reward']               = '积分：';
 $_['entry_layout']               = '布局覆盖：';
 
@@ -84,4 +85,3 @@ $_['error_warning']              = '警告： 相关数据未键入！';
 $_['error_permission']           = '警告： 您没有权限更改产品！';
 $_['error_name']                 = '商品名称长度必须在3至255个字符之间！';
 $_['error_model']                = '商品型号必须在3至24个字符之间！';
-?>

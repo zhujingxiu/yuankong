@@ -862,7 +862,7 @@ class ControllerCatalogProduct extends Controller {
     	} elseif (!empty($product_info)) {
       		$this->data['quantity'] = $product_info['quantity'];
     	} else {
-			$this->data['quantity'] = 1;
+			$this->data['quantity'] = 1000;
 		}
 		
 		if (isset($this->request->post['minimum'])) {
@@ -878,7 +878,7 @@ class ControllerCatalogProduct extends Controller {
     	} elseif (!empty($product_info)) {
       		$this->data['subtract'] = $product_info['subtract'];
     	} else {
-			$this->data['subtract'] = 1;
+			$this->data['subtract'] = 0;
 		}
 		
 		if (isset($this->request->post['sort_order'])) {

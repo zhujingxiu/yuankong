@@ -24,9 +24,10 @@
           <table class="form">
             <tr>
               <td><?php echo $entry_parent; ?></td>
-              <td>
+              <td><span><?php echo $path ?></span>
                 <div class="selection-category">
                   <select id="top-category" for-entry="second-category">
+                    <option value="0"><?php echo $text_none ?></option>
                     <?php foreach ($top_categories as $item): ?>
                     <option value="<?php echo $item['category_id'] ?>"><?php echo $item['name'] ?></option>
                     <?php endforeach ?>
@@ -358,10 +359,6 @@ $('.selection-category select').bind('change',function(){
 $('#top-category').trigger('change')
 //--></script> 
 <style type="text/css">
-  .selection-category{
-    width: 220px;
-    float: left;
-    margin-left: 5px;
-  }
+
 </style>
 <?php echo $footer; ?>
