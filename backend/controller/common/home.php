@@ -349,6 +349,7 @@ class ControllerCommonHome extends Controller {
 				'common/logout',
 				'common/forgotten',
 				'common/reset',
+				'common/profile',
 				'error/not_found',
 				'error/permission'
 			);
@@ -391,6 +392,7 @@ class ControllerCommonHome extends Controller {
 				'common/logout',
 				'common/forgotten',
 				'common/reset',
+				'common/profile',
 				'error/not_found',
 				'error/permission'		
 			);			
@@ -401,4 +403,3 @@ class ControllerCommonHome extends Controller {
 		}
 	}	
 }
-?>

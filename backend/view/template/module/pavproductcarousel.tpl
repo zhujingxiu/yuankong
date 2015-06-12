@@ -42,7 +42,7 @@ echo $header; ?>
         <div id="tab-module-<?php echo $module_row; ?>" class="vtabs-content">
           <div id="language-<?php echo $module_row; ?>" class="htabs">
             <?php foreach ($languages as $language) { ?>
-            <a href="#tab-language-<?php echo $module_row; ?>-<?php echo $language['language_id']; ?>"><img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /> <?php echo $language['name']; ?></a>
+            <a href="#tab-language-<?php echo $module_row; ?>-<?php echo $language['language_id']; ?>"><img src="<?php echo TPL_IMG ?>flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /> <?php echo $language['name']; ?></a>
             <?php } ?>
           </div>
           <?php foreach ($languages as $language) { ?>
@@ -182,7 +182,7 @@ function addModule() {
 	html  = '<div id="tab-module-' + module_row + '" class="vtabs-content">';
 	html += '  <div id="language-' + module_row + '" class="htabs">';
     <?php foreach ($languages as $language) { ?>
-    html += '    <a href="#tab-language-'+ module_row + '-<?php echo $language['language_id']; ?>"><img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /> <?php echo $language['name']; ?></a>';
+    html += '    <a href="#tab-language-'+ module_row + '-<?php echo $language['language_id']; ?>"><img src="<?php echo TPL_IMG ?>flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /> <?php echo $language['name']; ?></a>';
     <?php } ?>
 	html += '  </div>';
 

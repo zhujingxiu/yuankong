@@ -2,7 +2,8 @@
 class User {
 	private $user_id;
 	private $user_group_id;
-	private $username;
+    private $username;
+    private $fullname;
   	private $permission = array();
 
   	public function __construct($registry) {
@@ -15,14 +16,15 @@ class User {
 			
 			if ($user_query->num_rows) {
 				$this->user_id = $user_query->row['user_id'];
-				$this->username = $user_query->row['username'];
+                $this->username = $user_query->row['username'];
+				$this->fullname = $user_query->row['lastname'].$user_query->row['firstname'];
 				$this->user_group_id = $user_query->row['user_group_id'];
 				
       			$this->db->query("UPDATE " . DB_PREFIX . "user SET ip = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "' WHERE user_id = '" . (int)$this->session->data['user_id'] . "'");
 
       			$user_group_query = $this->db->query("SELECT permission FROM " . DB_PREFIX . "user_group WHERE user_group_id = '" . (int)$user_query->row['user_group_id'] . "'");
 				
-	  			$permissions = unserialize($user_group_query->row['permission']);
+	  			$permissions = !empty($user_group_query->row['permission']) ? unserialize($user_group_query->row['permission']) : array();
 
 				if (is_array($permissions)) {
 	  				foreach ($permissions as $key => $value) {
@@ -43,6 +45,7 @@ class User {
 			
 			$this->user_id = $user_query->row['user_id'];
 			$this->username = $user_query->row['username'];
+            $this->fullname = $user_query->row['lastname'].$user_query->row['firstname'];
 			$this->user_group_id = $user_query->row['user_group_id'];			
 
       		$user_group_query = $this->db->query("SELECT permission FROM " . DB_PREFIX . "user_group WHERE user_group_id = '" . (int)$user_query->row['user_group_id'] . "'");
@@ -64,8 +67,10 @@ class User {
   	public function logout() {
 		unset($this->session->data['user_id']);
 	
-		$this->user_id = '';
-		$this->username = '';
+        $this->user_id = '';
+		$this->user_group_id = '';
+        $this->username = '';
+		$this->fullname = '';
 		
 		session_destroy();
   	}
@@ -90,6 +95,9 @@ class User {
   	public function getUserName() {
     	return $this->username;
   	}	
+    public function getFullName() {
+        return $this->fullname;
+    }
   	public function getUserGroupId(){
   		return $this->user_group_id;
   	}

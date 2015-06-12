@@ -1,16 +1,16 @@
 <?php
 // Heading
-$_['heading_title']       = '<b style="font-size:18	px;color:#E8481B">Pavo Theme Control Panel</b>';
+$_['heading_title']       = '<b style="font-size:18	px;color:#E8481B">前台模板控制面板</b>';
 
 // Text
 $_['text_module']         = 'Modules';
-$_['text_default_theme']         = 'Configure Option for Template ';
+$_['text_default_theme']  = 'Configure Option for Template ';
 $_['text_success']        = 'Success: You have modified module slideshow!';
 $_['text_content_top']    = 'Content Top';
 $_['text_content_bottom'] = 'Content Bottom';
 $_['text_column_left']    = 'Column Left';
 $_['text_column_right']   = 'Column Right';
-$_['text_column_right3']   = 'Column Center Center';
+$_['text_column_right3']  = 'Column Center Center';
 
 $_['text_explain_footer_cols'] = 'This positions will automatic be splited many columns. Numbers of columns are equal number of pushed modules';
 $_['text_explain_footer_center'] = 'if put any modules in this position, all modules in default footer such as information, Customer Service, Extras, My Account are disabled. Automatic split columns';
@@ -114,4 +114,3 @@ $_['text_auto'] = 'Auto';
 $_['text_support'] = '';
 
 $_['text_product_related_column'] = '<b>Product Related Columns<b>';
-?>

@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']       = 'Pav Product Carousel';
+$_['heading_title']       = 'Pav 产品传送带模块';
 
 // Text
 $_['text_module']         = 'Modules';

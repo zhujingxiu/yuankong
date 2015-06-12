@@ -3,7 +3,7 @@
 $_['heading_title']                    = '功能菜单';
 
 // Text
-$_['text_affiliate']                   = '加盟会员';
+$_['text_affiliate']                   = '商户管理';
 $_['text_attribute']                   = '属性';
 $_['text_attribute_group']             = '属性组';
 $_['text_backup']                      = '数据维护';
@@ -31,10 +31,10 @@ $_['text_information']                 = '文章管理';
 $_['text_language']                    = '语言设置';
 $_['text_layout']                      = '布局设计';
 $_['text_localisation']                = '参数设置';
-$_['text_logged']                      = '您已登录为 <span>%s</span>';
+$_['text_logged']                      = ' <span><a href="%s">%s</a></span>，欢迎回来！';
 $_['text_logout']                      = '退出系统';
 $_['text_contact']                     = '邮件通知';
-$_['text_manufacturer']                = '商户管理';
+$_['text_manufacturer']                = '厂商管理';
 $_['text_module']                      = '模块配置';
 $_['text_option']                      = '选项';
 $_['text_order']                       = '订单管理';
@@ -84,15 +84,7 @@ $_['text_project']                     = '工程项目';
 $_['text_project_group']               = '工程类别';
 $_['text_news_group']                  = '新闻类别';
 $_['text_help_group']                  = '帮助类别';
-
-
-$_['text_pavblog_blog']               = 'Pav Blogs';
-$_['text_pavblog_category']               = 'Pav Category';
-$_['text_pavblog_manage_comment']               = 'Comments';
-$_['text_pavblog_manage_cate']               = 'Categories';
-$_['text_pavblog_manage_blog']               = 'Blogs';
-$_['text_pavblog_add_blog']         = 'Add Blog';
-$_['text_pavblog_general_setting']               = 'General Settings';
-$_['text_pavblog_front_mods']               = 'Frontend Modules';
-$_['text_pavblog_comment']               = 'Pav Latest Comment';
-$_['text_pavblog_latest']               = 'Pav Latest';
+$_['text_messages']                    = '通知消息 （%s）';
+$_['text_new_orders']                  = '最新订单（%s）';
+$_['text_new_projects']                = '最新申请（%s）';
+$_['text_new_helps']                  = '最新提问（%s）';

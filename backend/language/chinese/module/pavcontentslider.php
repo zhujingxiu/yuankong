@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']       = 'Pav Content Slider';
+$_['heading_title']       = 'Pav 内容页滚动广告';
 
 // Text
 $_['text_module']         = 'Modules';
@@ -9,7 +9,7 @@ $_['text_content_top']    = 'Content Top';
 $_['text_content_bottom'] = 'Content Bottom';
 $_['text_column_left']    = 'Column Left';
 $_['text_column_right']   = 'Column Right';
-$_['text_mainmenu']   = 'Main Menu';
+$_['text_mainmenu']       = 'Main Menu';
 $_['text_slideshow']   = 'Slideshow';
 $_['text_promotion']   = 'Promotion';
 $_['text_mass_bottom'] = 'Mass Bottom';
@@ -46,4 +46,3 @@ $_['add_module_banner'] = 'Add Banner';
 // Error
 $_['error_permission']    = 'Warning: You do not have permission to modify module slideshow!';
 $_['error_dimension']     = 'Width &amp; Height dimensions required!';
-?>

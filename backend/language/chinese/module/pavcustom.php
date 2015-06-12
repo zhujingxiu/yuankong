@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']       = 'Pav Custom Module';
+$_['heading_title']       = 'Pav 自定义模块';
 
 // Text
 $_['text_module']         = 'Modules';

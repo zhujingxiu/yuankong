@@ -107,29 +107,15 @@ class ControllerCommonHeader extends Controller {
 		$this->data['text_zone'] = $this->language->get('text_zone');
 		$this->data['text_project'] = $this->language->get('text_project');
 		$this->data['text_project_group'] = $this->language->get('text_project_group');
-		$this->load->model('setting/extension');
-		$extensions = $this->model_setting_extension->getInstalled('module');
-		$this->data['pavblog_installed'] = false;
-		if(in_array("pavblog", $extensions)){
-			$this->data['pavblog_installed'] = true;
-		}
+		
 
-		$this->data['text_pavblog_manage_cate'] = $this->language->get('text_pavblog_manage_cate');
-		$this->data['text_pavblog_manage_blog'] = $this->language->get('text_pavblog_manage_blog');
-		$this->data['text_pavblog_add_blog'] = $this->language->get('text_pavblog_add_blog');
-		$this->data['text_pavblog_manage_comment'] = $this->language->get('text_pavblog_manage_comment');
-		$this->data['text_pavblog_general_setting'] = $this->language->get('text_pavblog_general_setting');
-		$this->data['text_pavblog_front_mods'] = $this->language->get('text_pavblog_front_mods');
-		$this->data['text_pavblog_blog'] = $this->language->get('text_pavblog_blog');
-		$this->data['text_pavblog_category'] = $this->language->get('text_pavblog_category');
-		$this->data['text_pavblog_comment'] = $this->language->get('text_pavblog_comment');
-		$this->data['text_pavblog_latest'] = $this->language->get('text_pavblog_latest');
 		if (!$this->user->isLogged() || !isset($this->request->get['token']) || !isset($this->session->data['token']) || ($this->request->get['token'] != $this->session->data['token'])) {
 			$this->data['logged'] = '';
 			
 			$this->data['home'] = $this->url->link('common/login', '', 'SSL');
 		} else {
-			$this->data['logged'] = sprintf($this->language->get('text_logged'), $this->user->getUserName());
+			$profile = $this->url->link('common/profile','token=' . $this->session->data['token'], 'SSL');
+			$this->data['logged'] = sprintf($this->language->get('text_logged'), $profile,$this->user->getFullName());
 	
 			$this->data['home'] = $this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['affiliate'] = $this->url->link('sale/affiliate', 'token=' . $this->session->data['token'], 'SSL');
@@ -216,14 +202,16 @@ class ControllerCommonHeader extends Controller {
 				);
 			}	
 
-			$this->data['pavblogs_category_mod'] = $this->url->link('module/pavblogcategory', 'token=' . $this->session->data['token'], 'SSL');
-			$this->data['pavblogs_latest_comment_mod'] = $this->url->link('module/pavblogcomment', 'token=' . $this->session->data['token'], 'SSL');
-			$this->data['pavblogs_latest_mod'] = $this->url->link('module/pavbloglatest', 'token=' . $this->session->data['token'], 'SSL');
-			$this->data['pavblogs_category'] = $this->url->link('module/pavblog/category', 'token=' . $this->session->data['token'], 'SSL');
-			$this->data['pavblogs_blogs'] = $this->url->link('module/pavblog/blogs', 'token=' . $this->session->data['token'], 'SSL');
-			$this->data['pavblogs_add_blog'] = $this->url->link('module/pavblog/blog', 'token=' . $this->session->data['token'], 'SSL');
-			$this->data['pavblogs_comments'] = $this->url->link('module/pavblog/comments', 'token=' . $this->session->data['token'], 'SSL');
-			$this->data['pavblogs_general'] = $this->url->link('module/pavblog/modules', 'token=' . $this->session->data['token'], 'SSL');		
+
+			$this->data['text_messages'] = sprintf($this->language->get('text_messages'),0);
+			$this->data['text_new_orders'] = sprintf($this->language->get('text_new_orders'),0);
+			$this->data['text_new_projects'] = sprintf($this->language->get('text_new_projects'),0);
+			$this->data['text_new_helps'] = sprintf($this->language->get('text_new_helps'),0);
+
+			$this->data['new_orders'] = $this->url->link('sale/order', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['new_projects'] = $this->url->link('sale/project', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['new_helps'] = $this->url->link('extension/help', 'token=' . $this->session->data['token'], 'SSL');
+
 		}
 		
 		$this->template = 'common/header.tpl';

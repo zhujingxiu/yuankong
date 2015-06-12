@@ -37,7 +37,7 @@
         <div id="tab-module-<?php echo $module_row; ?>" class="vtabs-content">
           <div id="language-<?php echo $module_row; ?>" class="htabs">
             <?php foreach ($languages as $language) { ?>
-            <a href="#tab-language-<?php echo $module_row; ?>-<?php echo $language['language_id']; ?>"><img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /> <?php echo $language['name']; ?></a>
+            <a href="#tab-language-<?php echo $module_row; ?>-<?php echo $language['language_id']; ?>"><img src="<?php echo TPL_IMG ?>flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /> <?php echo $language['name']; ?></a>
             <?php } ?>
           </div>
           <?php foreach ($languages as $language) { ?>
@@ -130,7 +130,7 @@
              <table class="form category-tab" id="category-tab-wrapper<?php echo $idx+1;?>">
                 <tr>
                   <td><?php echo $this->language->get('entry_category');?></td>
-                  <td>
+                  <td colspan="4">
                     <select name="pavproducts_module[<?php echo $module_row;?>][category_tabs][]">
                      <?php foreach( $product_categories as $category){ ?>
                      <option <?php if( $module['category_tabs'][$idx] == $category['category_id'] ) {?>selected="selected"<?php } ?> value="<?php echo $category['category_id'];?>"><?php echo addslashes($category['name']);?> [ID:<?php echo $category['category_id'];?>]</option>
@@ -138,6 +138,9 @@
                      </select>
                   </td>
                   <td> <?php echo $this->language->get( 'entry_icon_image' );?> </td>
+                </tr>
+                <tr>
+                  <td></td>
                   <td> 
                      <?php 
                       $imgidx = $module_row."-".$idx;
@@ -186,14 +189,14 @@
      html = '<table class="form category-tab '+_class+'" id="category-tab-wrapper'+index+'">';
      html +=     '<tr>';
      html +=      '<td><?php echo $this->language->get("entry_category");?></td>';
-     html +=       ' <td>';
+     html +=       ' <td  colspan="4">';
 
      html += '<select name="pavproducts_module['+mid+'][category_tabs][]">';
      <?php foreach( $product_categories as $category){ ?>
       html +='<option value="<?php echo $category['category_id'];?>"><?php echo addslashes($category['name']);?> [ID:<?php echo $category['category_id'];?>]</option>';
      <?php } ?>
      html += '</select>';
-     html += '</td>';
+     html += '</td></tr><tr><td></td>';
      html += '<td>  <?php echo $this->language->get( 'entry_icon_image' );?> </td>';
       html += '<td> ';
      html += '<div class="image"><img src="<?php echo $no_image; ?>" alt="" id="thumb' + banner_row + '" /><input type="hidden" name="pavproducts_module[' + mid + '][image][]" value="" id="image' + banner_row + '" /><br /><a onclick="image_upload(\'image' + banner_row + '\', \'thumb' + banner_row + '\');"><?php echo $text_browse; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$(\'#thumb' + banner_row + '\').attr(\'src\', \'<?php echo $no_image; ?>\'); $(\'#image' + banner_row + '\').attr(\'value\', \'\');"><?php echo $text_clear; ?></a></div>';
@@ -232,7 +235,7 @@ function addModule() {
 	html  = '<div id="tab-module-' + module_row + '" class="vtabs-content">';
 	html += '  <div id="language-' + module_row + '" class="htabs">';
     <?php foreach ($languages as $language) { ?>
-    html += '    <a href="#tab-language-'+ module_row + '-<?php echo $language['language_id']; ?>"><img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /> <?php echo $language['name']; ?></a>';
+    html += '    <a href="#tab-language-'+ module_row + '-<?php echo $language['language_id']; ?>"><img src="<?php echo TPL_IMG ?>flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /> <?php echo $language['name']; ?></a>';
     <?php } ?>
 	html += '  </div>';
 

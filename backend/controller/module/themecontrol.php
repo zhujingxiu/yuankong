@@ -9,29 +9,27 @@ class ControllerModuleThemeControl extends Controller {
 		$this->load->model('setting/setting');
 		$this->load->model('tool/image');
 		$this->data['module'] = array(
-						'enable_paneltool'  => 1,
-						'enable_footer_center' => 1,
-						'block_showcase'  => '',
-						'block_promotion' => '',
-						'block_footer_top'=>'',
-						'block_footer_center' => '',
-						'block_footer_bottom'=>'',
-						'product_related_column'=> '',
-						
-						'cateogry_product_row' => '0',
-						'cateogry_display_mode'=>'grid',
-						'category_saleicon' => 1,
-						'category_pzoom' => 1,	
-						'product_enablezoom' => 1,
-						'product_zoommode' => 'basic',
-						'product_zoomeasing' => 1,		
-						'product_zoomlenssize' => 150,
-						'product_zoomlensshape' => 'normal',		
-						'product_zoomgallery' => 0,		
-						'contact_customhtml' => ''
-											
+			
+			'enable_footer_center' => 1,
+			'block_showcase'  => '',
+			'block_promotion' => '',
+			'block_footer_top'=>'',
+			'block_footer_center' => '',
+			'block_footer_bottom'=>'',
+			'product_related_column'=> '',
+			
+			'cateogry_product_row' => '0',
+			'cateogry_display_mode'=>'grid',
+			'category_saleicon' => 1,
+			'category_pzoom' => 1,	
+			'product_enablezoom' => 1,
+			'product_zoommode' => 'basic',
+			'product_zoomeasing' => 1,		
+			'product_zoomlenssize' => 150,
+			'product_zoomlensshape' => 'normal',		
+			'product_zoomgallery' => 0,		
+			'contact_customhtml' => ''
 		);
-
 	
 		$module = $this->config->get($this->moduleName);
 		if( empty($module) ) {
@@ -83,11 +81,7 @@ class ControllerModuleThemeControl extends Controller {
 		if( count($this->data['templates']) && empty($this->data['module']['default_theme'])  ){ 
 			$this->data['module']['default_theme'] = $this->data['templates'][0];
 			
-		}	
-	
-		$this->setTheme( $this->data['module']['default_theme']  ); 		
-	
-		$this->data['theme_url'] =   HTTP_CATALOG."/market/view/theme/".$this->getTheme()."/";
+		}
 		
 		$this->data['text_enabled'] = $this->language->get('text_enabled');
 		$this->data['text_disabled'] = $this->language->get('text_disabled');
@@ -185,7 +179,7 @@ class ControllerModuleThemeControl extends Controller {
 		$this->load->model('design/layout');
 		
 		
-		$t = DIR_FRONT . 'view/theme/'.$this->getTheme().'/template/common/admin/modules.tpl';
+		$t = DIR_FRONT . 'view/theme/yuankong/template/common/admin/modules.tpl';
 		
 		if( file_exists($t) ){
 			$this->data['admin_modules'] = $t;

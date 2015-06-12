@@ -439,3 +439,28 @@
 2015-06-11 12:42:16 - PHP Notice:  Error: Could not load language module/themecontrol! in E:\wamp\www\yuankong\system\library\language.php on line 39
 2015-06-11 13:33:37 - PHP Notice:  Error: Could not load language module/themecontrol! in E:\wamp\www\yuankong\system\library\language.php on line 39
 2015-06-11 13:59:21 - PHP Notice:  Error: Could not load language module/themecontrol! in E:\wamp\www\yuankong\system\library\language.php on line 39
+2015-06-12 2:05:14 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 82
+2015-06-12 2:05:14 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 82
+2015-06-12 2:05:14 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 98
+2015-06-12 2:05:14 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 98
+2015-06-12 2:05:14 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 134
+2015-06-12 2:05:14 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 134
+2015-06-12 2:30:47 - PHP Notice:  Error: Could not load language module/themecontrol! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-06-12 2:42:13 - PHP Notice:  Error: Could not load language module/pavcustom! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-06-12 2:42:13 - PHP Notice:  Error: Could not load language module/themecontrol! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-06-12 2:47:42 - PHP Notice:  Error: Could not load language module/pavcustom! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-06-12 2:47:42 - PHP Notice:  Error: Could not load language module/themecontrol! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-06-12 2:48:22 - PHP Notice:  Error: Could not load language module/pavcustom! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-06-12 2:48:23 - PHP Notice:  Error: Could not load language module/themecontrol! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-06-12 3:57:28 - PHP Warning:  sprintf(): Too few arguments in D:\wamp\www\yuankong\backend\controller\common\header.php on line 118
+2015-06-12 9:24:41 - PHP Notice:  Undefined index: user_group_id in D:\wamp\www\yuankong\backend\model\user\user.php on line 8
+2015-06-12 9:24:41 - PHP Notice:  Undefined index: permission in D:\wamp\www\yuankong\system\library\user.php on line 27
+2015-06-12 9:25:17 - PHP Notice:  Undefined index: permission in D:\wamp\www\yuankong\system\library\user.php on line 27
+2015-06-12 9:25:20 - PHP Notice:  Undefined index: permission in D:\wamp\www\yuankong\system\library\user.php on line 27
+2015-06-12 9:25:23 - PHP Notice:  Undefined index: permission in D:\wamp\www\yuankong\system\library\user.php on line 27
+2015-06-12 9:25:26 - PHP Notice:  Undefined index: permission in D:\wamp\www\yuankong\system\library\user.php on line 27
+2015-06-12 9:26:56 - PHP Notice:  Undefined index: permission in D:\wamp\www\yuankong\system\library\user.php on line 27
+2015-06-12 9:27:14 - PHP Notice:  Undefined index: permission in D:\wamp\www\yuankong\system\library\user.php on line 27
+2015-06-12 9:28:36 - PHP Notice:  Undefined index: user_group_id in D:\wamp\www\yuankong\backend\model\user\user.php on line 8
+2015-06-12 9:28:59 - PHP Notice:  Undefined index: user_group_id in D:\wamp\www\yuankong\backend\model\user\user.php on line 8
+2015-06-12 9:35:32 - PHP Notice:  Undefined variable: discount_row in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 1179

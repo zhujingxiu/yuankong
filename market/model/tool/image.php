@@ -48,10 +48,9 @@ class ModelToolImage extends Model {
 		}
 		
 		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
-			return $this->config->get('config_ssl') . 'image/' . $new_image;
+			return $this->config->get('config_ssl') . TPL_IMG . $new_image;
 		} else {
-			return $this->config->get('config_url') . 'image/' . $new_image;
+			return $this->config->get('config_url') . TPL_IMG . $new_image;
 		}	
 	}
 }
-?>

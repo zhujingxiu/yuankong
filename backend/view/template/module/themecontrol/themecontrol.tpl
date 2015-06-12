@@ -1,18 +1,4 @@
 <?php echo $header; ?>
-
-<?php 
-	$modules_tpl = '';
-	$modules_tpl2 = dirname(__FILE__).'/modules_'.trim($this->getTheme()).'.tpl';
-	$modules_tpl1 = DIR_TEMPLATE.'module/themecontrol/modules.tpl';
-	$modules_tpl3 = DIR_FRONT.'view/theme/'.$this->getTheme().'/template/common/admin/modules.tpl';
-	if( file_exists($modules_tpl3) ){
-		 $modules_tpl = $modules_tpl3;
-	} else if( file_exists($modules_tpl2) ){
-		$modules_tpl = $modules_tpl2;
-	}elseif( file_exists($modules_tpl1) ){
-		$modules_tpl = $modules_tpl1;
-	} 
-?>
 <div id="content">
 <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="sform">
   <div class="breadcrumb">
@@ -45,11 +31,7 @@
 		<div class="ibox">
 		 	<div id="tabs" class="htabs">
 				<a href="#tab-pages-layout"><?php echo $this->language->get('tab_modules_pages');?></a>
-				<?php if(  $modules_tpl ){ ?>
-				<a href="#tab-imodules"><?php echo $this->language->get('tab_internal_modules');?></a>
-				<?php } ?>
 				<a href="#tab-modules"><?php echo $this->language->get('tab_modules_layouts');?></a>
-				<a href="#tab-customcode"><?php echo $this->language->get('tab_customcode');?></a>
 			</div>
 		 	<input type="hidden" name="themecontrol[layout_id]" value="1">
 		  	<input type="hidden" name="themecontrol[position]" value="1">
@@ -172,52 +154,15 @@
 		  					</div>
 		  			 	</div>
 
-		  			 	<div id="tab-pcontact">
-		  			 		<div class="tab-inner">
-		  			 		<table class="form">
-		  			 			<tr>
-		  			 				<td class="" colspan="2">
-		  			 					<h4><?php echo $this->language->get('text_contact_html'); ?></h4>
-		  			 				</td>
-		  			 			</tr>
-		  			 			<?php foreach( $languages as $language ) {  ?>
-		  			 			<tr>
-		  			 				<td>
-		  			 				<?php 
-		  			 					$contact_customhtml = isset($module['contact_customhtml'][$language['language_id']])?
-		  			 					$module['contact_customhtml'][$language['language_id']]:""; 
-		  			 				?>
-		  			 					<img src="<?php echo TPL_IMG ?>flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" />
-		  			 					<?php echo $language['name'];?> 
-		  			 				</td>
-		  			 				<td>
-		  			 					<textarea style="width:90%; height:300px" name="themecontrol[contact_customhtml][<?php echo $language['language_id'];?>]"><?php echo $contact_customhtml;?></textarea>
-		  			 				</td>
-		  			 			<tr>
-		  			 			<?php } ?>	
-		  			 		</table>	
-		  			 		</div>	
-		  			 	</div>
+
 		  			</div>  
 		  			<div class="clear clearfix"></div>
 				</div>  				
-				<?php if(  $modules_tpl ){ ?>
-				<div id="tab-imodules">
-					<?php require( $modules_tpl );?>
-				</div>
-				<?php } ?>
 				<div id="tab-modules">
 					<?php include( "layout.tpl" ); ?>
 				</div>
 				<input type="hidden" name="action_type" id="action_type" value="new">
-				<div id="tab-customcode">
-					<h4><?php echo $this->language->get('text_customcss'); ?></h4>
-					<p><i><?php echo $this->language->get('text_explain_custom_css')?></i></p>
-					<textarea name="themecontrol[custom_css]" rows="16" cols="80"><?php echo $module['custom_css'];?></textarea>
-					<h4><?php echo $this->language->get('text_customjavascript'); ?></h4>
-					<p><i><?php echo $this->language->get('text_explain_custom_js')?></i></p>
-					<textarea name="themecontrol[custom_javascript]" rows="16" cols="80"><?php echo $module['custom_javascript'];?></textarea>
-				</div>
+
 	   		</div>
     	</div>
     </div>
@@ -277,34 +222,8 @@ $(document).ready( function(){
 	});
 });
 
-$(".group-change").each( function(){
-	var $this = this;
-	$(".items-group-change",$this).hide();  //  alert( $(".type-fonts",this).val() );
-	$(".group-"+$(".type-fonts",$this).val(), this).show();
-	
-	$(".type-fonts", this).change( function(){
-		$(".items-group-change",$this).hide();
-		$(".group-"+$(this).val(), $this).show();
-	} );
-});
 
 
-$("#btn-guide").click( function(){
-	$('#dialog').remove();
-	
-	$('#content').prepend('<div id="dialog" style="padding: 3px 0px 0px 0px;"><iframe src="'+$(this).attr('href')+'" style="padding:0; margin: 0; display: block; width: 100%; height: 100%;" frameborder="no" scrolling="auto"></iframe></div>');
-	
-	$('#dialog').dialog({
-		title: 'Guide For Theme: <?php echo $module["default_theme"]; ?>',
-		close: function (event, ui) {},	
-		bgiframe: false,
-		width: 980,
-		height: 560,
-		resizable: false,
-		modal: true
-	});
-	return false;
-} );
 //--></script> 
 <script type="text/javascript"><!--
 function image_upload(field, thumb) {

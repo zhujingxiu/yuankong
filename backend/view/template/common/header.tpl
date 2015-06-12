@@ -89,20 +89,13 @@ $(document).ready(function(){
             </ul>
           </li>
           <li><a href="<?php echo $option; ?>"><?php echo $text_option; ?></a></li>
-          
-          <li><a href="<?php echo $download; ?>"><?php echo $text_download; ?></a></li>
-          
-          <li><a href="<?php echo $information; ?>"><?php echo $text_information; ?></a></li>
+          <li style="display:none;"><a href="<?php echo $download; ?>"><?php echo $text_download; ?></a></li>
+          <li><a href="<?php echo $manufacturer; ?>"><?php echo $text_manufacturer; ?></a></li>
         </ul>
       </li>
       
       <li id="news"><a href="<?php echo $news ?>" class="top"><?php echo $text_news; ?></a></li>
-      <li><a class="top"><?php echo $text_design; ?></a>
-        <ul>
-          <li><a href="<?php echo $banner; ?>"><?php echo $text_banner; ?></a></li>
-          <li><a href="<?php echo $layout; ?>"><?php echo $text_layout; ?></a></li>
-        </ul>
-      </li>
+
       <li id="customer"><a class="top"><?php echo $text_customer; ?></a>
         <ul>
           <li><a href="<?php echo $customer; ?>"><?php echo $text_customer; ?></a></li>
@@ -112,22 +105,11 @@ $(document).ready(function(){
       </li>
       <li id="review"><a href="<?php echo $review; ?>" class="top"><?php echo $text_review; ?></a></li>
       <li id="help"><a href="<?php echo $help ?>" class="top"><?php echo $text_help; ?></a></li>
-      <li id="manufacturer"><a href="<?php echo $manufacturer; ?>" class="top"><?php echo $text_manufacturer; ?></a></li>
-      <li id="link"><a href="<?php echo $link; ?>" class="top"><?php echo $text_link; ?></a></li>
-      <li id="sale"><a class="top"><?php echo $text_sale; ?></a>
-        <ul>
-          <li><a href="<?php echo $affiliate; ?>"><?php echo $text_affiliate; ?></a></li>
-          <li><a href="<?php echo $coupon; ?>"><?php echo $text_coupon; ?></a></li>
-          <li><a class="parent"><?php echo $text_voucher; ?></a>
-            <ul>
-              <li><a href="<?php echo $voucher; ?>"><?php echo $text_voucher; ?></a></li>
-              <li><a href="<?php echo $voucher_theme; ?>"><?php echo $text_voucher_theme; ?></a></li>
-            </ul>
-          </li>
-          <li><a href="<?php echo $contact; ?>"><?php echo $text_contact; ?></a></li>
-        </ul>
+      <li id="affiliate">
+        <a href="<?php echo $affiliate; ?>" class="top"><?php echo $text_affiliate; ?></a>
       </li>
-
+      <li id="link"><a href="<?php echo $link; ?>" class="top"><?php echo $text_link; ?></a></li>
+      <?php if(false){?>
       <li id="reports"><a class="top"><?php echo $text_reports; ?></a>
         <ul>
           <li><a class="parent"><?php echo $text_sale; ?></a>
@@ -160,9 +142,16 @@ $(document).ready(function(){
           </li>
         </ul>
       </li>
+      <?php }?>
     </ul>
     <ul class="right" style="display: none;">
-
+      <li id="messages"><a class="top"><?php echo $text_messages; ?></a>
+        <ul>
+          <li><a href="<?php echo $new_orders; ?>"><?php echo $text_new_orders; ?></a></li>
+          <li><a href="<?php echo $new_projects; ?>"><?php echo $text_new_projects; ?></a></li>
+          <li><a href="<?php echo $new_helps; ?>"><?php echo $text_new_helps; ?></a></li>
+        </ul>
+      </li>
       <li id="system"><a class="top"><?php echo $text_system; ?></a>
         <ul>
           <li><a href="<?php echo $setting; ?>"><?php echo $text_setting; ?></a></li>
@@ -201,6 +190,13 @@ $(document).ready(function(){
               <li><a href="<?php echo $project_group; ?>"><?php echo $text_project_group; ?></a></li>
             </ul>
           </li>
+          <li><a href="<?php echo $information; ?>"><?php echo $text_information; ?></a></li>
+          <li><a class="parent"><?php echo $text_design; ?></a>
+            <ul>
+              <li><a href="<?php echo $banner; ?>"><?php echo $text_banner; ?></a></li>
+              <li><a href="<?php echo $layout; ?>"><?php echo $text_layout; ?></a></li>
+            </ul>
+          </li>
           <li><a href="<?php echo $error_log; ?>"><?php echo $text_error_log; ?></a></li>
           <li><a href="<?php echo $backup; ?>"><?php echo $text_backup; ?></a></li>
         </ul>
@@ -211,26 +207,16 @@ $(document).ready(function(){
           <li><a href="<?php echo $payment; ?>"><?php echo $text_payment; ?></a></li>
           <li><a href="<?php echo $total; ?>"><?php echo $text_total; ?></a></li>
           <li><a href="<?php echo $feed; ?>"><?php echo $text_feed; ?></a></li>
+          <li><a href="<?php echo $coupon; ?>"><?php echo $text_coupon; ?></a></li>
+          <li><a class="parent"><?php echo $text_voucher; ?></a>
+            <ul>
+              <li><a href="<?php echo $voucher; ?>"><?php echo $text_voucher; ?></a></li>
+              <li><a href="<?php echo $voucher_theme; ?>"><?php echo $text_voucher_theme; ?></a></li>
+            </ul>
+          </li>
+          <li><a href="<?php echo $contact; ?>"><?php echo $text_contact; ?></a></li>
         </ul>
       </li>
-      <?php if($pavblog_installed): ?>
-        <li id="pavblogs"><a class="top"><?php echo $text_pavblog_blog; ?></a>
-          <ul>
-            <li><a href="<?php echo $pavblogs_category; ?>"><?php echo $text_pavblog_manage_cate; ?></a></li>
-            <li><a href="<?php echo $pavblogs_blogs; ?>"><?php echo $text_pavblog_manage_blog; ?></a></li>
-            <li><a href="<?php echo $pavblogs_add_blog; ?>"><?php echo $text_pavblog_add_blog; ?></a></li>
-            <li><a href="<?php echo $pavblogs_comments; ?>"><?php echo $text_pavblog_manage_comment; ?></a></li>
-            <li><a href="<?php echo $pavblogs_general; ?>"><?php echo $text_pavblog_general_setting; ?></a></li>
-            <li><a class="parent"><?php echo $text_pavblog_front_mods; ?></a>
-              <ul>
-                <li><a href="<?php echo $pavblogs_category_mod; ?>"><?php echo $text_pavblog_category; ?></a></li>
-                <li><a href="<?php echo $pavblogs_latest_comment_mod; ?>"><?php echo $text_pavblog_comment; ?></a></li>
-                <li><a href="<?php echo $pavblogs_latest_mod; ?>"><?php echo $text_pavblog_latest; ?></a></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <?php endif; ?>
     </ul>
   </div>
   <?php } ?>

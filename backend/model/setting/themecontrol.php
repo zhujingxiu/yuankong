@@ -6,4 +6,3 @@ class ModelSettingThemecontrol extends Model {
 		return $query->rows;
 	}
 }
-?>

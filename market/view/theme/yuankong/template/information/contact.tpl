@@ -11,16 +11,7 @@
 
 <div id="content" class="page"><?php echo $content_top; ?>
 
-  <h1 class="page-title"><?php echo $heading_title; ?></h1>
-
-    <?php  if(  isset($themeConfig['contact_customhtml']) && isset($themeConfig['contact_customhtml'][$this->config->get('config_language_id')]) && trim($themeConfig['contact_customhtml'][$this->config->get('config_language_id')]) ){ ?>
-    <div class="contact-customhtml">
-        <?php echo ($themeConfig['contact_customhtml'][$this->config->get('config_language_id')]); ?>
-    </div>
-    <?php } ?> 
-
-
-        
+  <h1 class="page-title"><?php echo $heading_title; ?></h1>        
   <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
     <h2><?php echo $text_location; ?></h2>
     <div class="contact-info">

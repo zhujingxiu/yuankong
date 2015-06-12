@@ -124,5 +124,4 @@ class ControllerCommonLogin extends Controller {
 			return false;
 		}
 	}
-}  
-?>
+}

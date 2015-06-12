@@ -17,102 +17,100 @@
       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
 		<div>
 			<table class="form">
-						<tr>
-						  <td><?php echo $entry_layout; ?></td>
-						  <td><select name="pavcontentslider_module[<?php echo $module_row; ?>][layout_id]">
-							 <?php foreach ($layouts as $layout) { ?>
-							  <?php if ($layout['layout_id'] == $module['layout_id']) { ?>
-							  <option value="<?php echo $layout['layout_id']; ?>" selected="selected"><?php echo $layout['name']; ?></option>
-							  <?php } else { ?>
-							  <option value="<?php echo $layout['layout_id']; ?>"><?php echo $layout['name']; ?></option>
-							  <?php } ?>
-							  <?php } ?>
-							</select></td>
-						</tr>
-						<tr>
-						  <td><?php echo $entry_position; ?></td>
-						  <td><select name="pavcontentslider_module[<?php echo $module_row; ?>][position]">
-							  <?php foreach( $positions as $pos ) { ?>
-							  <?php if ($module['position'] == $pos) { ?>
-							  <option value="<?php echo $pos;?>" selected="selected"><?php echo $this->language->get('text_'.$pos); ?></option>
-							  <?php } else { ?>
-							  <option value="<?php echo $pos;?>"><?php echo $this->language->get('text_'.$pos); ?></option>
-							  <?php } ?>
-							  <?php } ?> 
-							</select></td>
-						</tr>
-						<tr>
-						  <td><?php echo $entry_status; ?></td>
-						  <td><select name="pavcontentslider_module[<?php echo $module_row; ?>][status]">
-							  <?php if ($module['status']) { ?>
-							  <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
-							  <option value="0"><?php echo $text_disabled; ?></option>
-							  <?php } else { ?>
-							  <option value="1"><?php echo $text_enabled; ?></option>
-							  <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
-							  <?php } ?>
-							</select></td>
-						</tr>
-						<tr>
-						  <td><?php echo $entry_sort_order; ?></td>
-						  <td><input type="text" name="pavcontentslider_module[<?php echo $module_row; ?>][sort_order]" value="<?php echo $module['sort_order']; ?>" size="3" /></td>
-						</tr>
-						
-						<tr>
-						  <td><?php echo $this->language->get('text_auto_play'); ?></td>
-						  <td><select name="pavcontentslider_module[<?php echo $module_row; ?>][auto_play]">
-							  <?php if ( isset($module['auto_play']) && $module['auto_play'] ) { ?>
-							  <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
-							  <option value="0"><?php echo $text_disabled; ?></option>
-							  <?php } else { ?>
-							  <option value="1"><?php echo $text_enabled; ?></option>
-							  <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
-							  <?php } ?>
-							</select></td>
-						</tr>
-						<tr>
-						  <td><?php echo $this->language->get('text_interval'); ?></td>
-						  <td><input type="text" name="pavcontentslider_module[<?php echo $module_row; ?>][text_interval]" value="<?php echo $module['text_interval']; ?>" size="3" /></td>
-						</tr>
-						
+				<tr>
+				  <td><?php echo $entry_layout; ?></td>
+				  <td><select name="pavcontentslider_module[<?php echo $module_row; ?>][layout_id]">
+					 <?php foreach ($layouts as $layout) { ?>
+					  <?php if ($layout['layout_id'] == $module['layout_id']) { ?>
+					  <option value="<?php echo $layout['layout_id']; ?>" selected="selected"><?php echo $layout['name']; ?></option>
+					  <?php } else { ?>
+					  <option value="<?php echo $layout['layout_id']; ?>"><?php echo $layout['name']; ?></option>
+					  <?php } ?>
+					  <?php } ?>
+					</select></td>
+				</tr>
+				<tr>
+				  <td><?php echo $entry_position; ?></td>
+				  <td><select name="pavcontentslider_module[<?php echo $module_row; ?>][position]">
+					  <?php foreach( $positions as $pos ) { ?>
+					  <?php if ($module['position'] == $pos) { ?>
+					  <option value="<?php echo $pos;?>" selected="selected"><?php echo $this->language->get('text_'.$pos); ?></option>
+					  <?php } else { ?>
+					  <option value="<?php echo $pos;?>"><?php echo $this->language->get('text_'.$pos); ?></option>
+					  <?php } ?>
+					  <?php } ?> 
+					</select></td>
+				</tr>
+				<tr>
+				  <td><?php echo $entry_status; ?></td>
+				  <td><select name="pavcontentslider_module[<?php echo $module_row; ?>][status]">
+					  <?php if ($module['status']) { ?>
+					  <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
+					  <option value="0"><?php echo $text_disabled; ?></option>
+					  <?php } else { ?>
+					  <option value="1"><?php echo $text_enabled; ?></option>
+					  <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
+					  <?php } ?>
+					</select></td>
+				</tr>
+				<tr>
+				  <td><?php echo $entry_sort_order; ?></td>
+				  <td><input type="text" name="pavcontentslider_module[<?php echo $module_row; ?>][sort_order]" value="<?php echo $module['sort_order']; ?>" size="3" /></td>
+				</tr>
+				
+				<tr>
+				  <td><?php echo $this->language->get('text_auto_play'); ?></td>
+				  <td><select name="pavcontentslider_module[<?php echo $module_row; ?>][auto_play]">
+					  <?php if ( isset($module['auto_play']) && $module['auto_play'] ) { ?>
+					  <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
+					  <option value="0"><?php echo $text_disabled; ?></option>
+					  <?php } else { ?>
+					  <option value="1"><?php echo $text_enabled; ?></option>
+					  <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
+					  <?php } ?>
+					</select></td>
+				</tr>
+				<tr>
+				  <td><?php echo $this->language->get('text_interval'); ?></td>
+				  <td><input type="text" name="pavcontentslider_module[<?php echo $module_row; ?>][text_interval]" value="<?php echo $module['text_interval']; ?>" size="3" /></td>
+				</tr>
+				
 
-						<tr>
-						  <td><?php echo $entry_width; ?></td>
-						  <td><input type="text" name="pavcontentslider_module[<?php echo $module_row; ?>][width]" value="<?php echo $module['width']; ?>" size="8" /></td>
-						</tr>
-						<tr>
-						  <td><?php echo $entry_height; ?></td>
-						  <td><input type="text" name="pavcontentslider_module[<?php echo $module_row; ?>][height]" value="<?php echo $module['height']; ?>" size="8" /></td>
-						</tr>
-						
-						<tr>
-						  <td><?php echo $entry_image_navigator; ?></td>
-						  <td><select name="pavcontentslider_module[<?php echo $module_row; ?>][image_navigator]">
-							  <?php if ( isset($module['image_navigator']) && $module['image_navigator'] ) { ?>
-							  <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
-							  <option value="0"><?php echo $text_disabled; ?></option>
-							  <?php } else { ?>
-							  <option value="1"><?php echo $text_enabled; ?></option>
-							  <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
-							  <?php } ?>
-							</select></td>
-						</tr>
-						<tr>
-						  <td><?php echo $entry_navigator_width; ?></td>
-						  <td><input type="text" name="pavcontentslider_module[<?php echo $module_row; ?>][navimg_weight]" value="<?php echo $module['navimg_weight']; ?>" size="8" /></td>
-						</tr>
-						<tr>
-						  <td><?php echo $entry_navigator_height; ?></td>
-						  <td><input type="text" name="pavcontentslider_module[<?php echo $module_row; ?>][navimg_height]" value="<?php echo $module['navimg_height']; ?>" size="8" /></td>
-						</tr>
-						</table>
+				<tr>
+				  <td><?php echo $entry_width; ?></td>
+				  <td><input type="text" name="pavcontentslider_module[<?php echo $module_row; ?>][width]" value="<?php echo $module['width']; ?>" size="8" /></td>
+				</tr>
+				<tr>
+				  <td><?php echo $entry_height; ?></td>
+				  <td><input type="text" name="pavcontentslider_module[<?php echo $module_row; ?>][height]" value="<?php echo $module['height']; ?>" size="8" /></td>
+				</tr>
+				
+				<tr>
+				  <td><?php echo $entry_image_navigator; ?></td>
+				  <td><select name="pavcontentslider_module[<?php echo $module_row; ?>][image_navigator]">
+					  <?php if ( isset($module['image_navigator']) && $module['image_navigator'] ) { ?>
+					  <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
+					  <option value="0"><?php echo $text_disabled; ?></option>
+					  <?php } else { ?>
+					  <option value="1"><?php echo $text_enabled; ?></option>
+					  <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
+					  <?php } ?>
+					</select></td>
+				</tr>
+				<tr>
+				  <td><?php echo $entry_navigator_width; ?></td>
+				  <td><input type="text" name="pavcontentslider_module[<?php echo $module_row; ?>][navimg_weight]" value="<?php echo $module['navimg_weight']; ?>" size="8" /></td>
+				</tr>
+				<tr>
+				  <td><?php echo $entry_navigator_height; ?></td>
+				  <td><input type="text" name="pavcontentslider_module[<?php echo $module_row; ?>][navimg_height]" value="<?php echo $module['navimg_height']; ?>" size="8" /></td>
+				</tr>
+			</table>
 		</div>
 		<h3>List of Banner Images</h3>
         <div class="vtabs">
 	
           <?php 
-		  
-	// 	  echo '<pre>'.print_r( $banner_image,1 ); die; 
 		  $banner_row=1;
 		  
 		  foreach ($banner_image as $banner_row=> $banner) { ?>
@@ -142,7 +140,7 @@
 		  
           <div id="language-<?php echo $banner_row; ?>" class="htabs">
             <?php foreach ($languages as $language) { ?>
-            <a href="#tab-language-<?php echo $banner_row; ?>-<?php echo $language['language_id']; ?>"><img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /> <?php echo $language['name']; ?></a>
+            <a href="#tab-language-<?php echo $banner_row; ?>-<?php echo $language['language_id']; ?>"><img src="<?php echo TPL_IMG ?>flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /> <?php echo $language['name']; ?></a>
             <?php } ?>
           </div>
 
@@ -197,7 +195,7 @@ function addModule() {
 	html  = '<div id="tab-module-' + banner_row + '" class="vtabs-content">';
 	html += '  <div id="language-' + banner_row + '" class="htabs">';
     <?php foreach ($languages as $language) { ?>
-    html += '    <a href="#tab-language-'+ banner_row + '-<?php echo $language['language_id']; ?>"><img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /> <?php echo $language['name']; ?></a>';
+    html += '    <a href="#tab-language-'+ banner_row + '-<?php echo $language['language_id']; ?>"><img src="<?php echo TPL_IMG ?>flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /> <?php echo $language['name']; ?></a>';
     <?php } ?>
 	html += '  </div>';
 	
