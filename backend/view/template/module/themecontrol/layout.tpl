@@ -42,6 +42,34 @@
 		<?php } ?>
 		<?php } ?>
 	</div>
+
+	<div class="promotion  edit-container" data-position="promotion" >
+		<div class="explain">
+			<?php echo $this->getLang('text_entry_columns_first') ;	?> 
+			<select name="themecontrol[block_promotion]">
+				<option value="">Default</option>
+				<?php for( $i=1; $i<=6; $i++ )  {?>
+					<option value="<?php echo $i;?>" <?php if( $i==$module['block_promotion']) { ?> selected="selected" <?php }?>><?php echo $i; ?></option>
+				<?php } ?>
+			</select> 
+			<?php echo $this->getLang('text_entry_columns_last') ;?> 
+		</div>
+		
+		<div class="pos">Promotion</div>
+		<?php if( isset($layout_modules['promotion']) ){  
+		foreach( $layout_modules['promotion'] as $modulepos ) { ?>
+		<div class="module-pos <?php if( !$modulepos['status']){ ?>mod-disable<?php } ?>" data-position="promotion" data-id="<?php echo $modulepos['code']."-".$modulepos['index'];?>">
+			<div class="edit-module">
+				<a target="_blank" href="<?php echo $this->url->link('module/'.$modulepos['code'],'token='.$token);?>">
+					<b><?php echo $modulepos['title']; ?></b>
+				</a>
+				<i>[[index:<?php echo $modulepos['index'];?>]</i>
+			</div>
+		</div>
+		<?php } ?>
+		<?php } ?>
+	</div>
+
 	<div class="slideshow  edit-container clearfix"  data-position="slideshow">
 		<div class="pos">Slideshow</div>
 		<?php if( isset($layout_modules['slideshow']) ){  
@@ -78,32 +106,6 @@
 			</div>
 		</div>
 		<?php } }?>
-	</div>
-	<div class="promotion  edit-container" data-position="promotion" >
-		<div class="explain">
-			<?php echo $this->getLang('text_entry_columns_first') ;	?> 
-			<select name="themecontrol[block_promotion]">
-				<option value="">Default</option>
-				<?php for( $i=1; $i<=6; $i++ )  {?>
-					<option value="<?php echo $i;?>" <?php if( $i==$module['block_promotion']) { ?> selected="selected" <?php }?>><?php echo $i; ?></option>
-				<?php } ?>
-			</select> 
-			<?php echo $this->getLang('text_entry_columns_last') ;?> 
-		</div>
-		
-		<div class="pos">Promotion</div>
-		<?php if( isset($layout_modules['promotion']) ){  
-		foreach( $layout_modules['promotion'] as $modulepos ) { ?>
-		<div class="module-pos <?php if( !$modulepos['status']){ ?>mod-disable<?php } ?>" data-position="promotion" data-id="<?php echo $modulepos['code']."-".$modulepos['index'];?>">
-			<div class="edit-module">
-				<a target="_blank" href="<?php echo $this->url->link('module/'.$modulepos['code'],'token='.$token);?>">
-					<b><?php echo $modulepos['title']; ?></b>
-				</a>
-				<i>[[index:<?php echo $modulepos['index'];?>]</i>
-			</div>
-		</div>
-		<?php } ?>
-		<?php } ?>
 	</div>
 	
 	<div class="columns clearfix">

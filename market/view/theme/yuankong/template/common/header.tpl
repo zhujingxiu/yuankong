@@ -3,22 +3,14 @@
 	$themeName =  $this->config->get('config_template');
 	require_once( DIR_TEMPLATE.$this->config->get('config_template')."/template/libs/module.php" );
 	$helper = ThemeControlHelper::getInstance( $this->registry, $themeName );
-
-	/* Add scripts files */
-	$helper->addScript( 'market/view/javascript/jquery/jquery-1.7.1.min.js' );
-	$helper->addScript( 'market/view/javascript/jquery/ui/jquery-ui-1.8.16.custom.min.js' );
-	$helper->addScript( 'market/view/javascript/jquery/ui/external/jquery.cookie.js' );
-	$helper->addScript( 'market/view/javascript/common.js' );
-	$helper->addScript( 'market/view/theme/'.$themeName.'/javascript/common.js' );
-	$helper->addScript( 'market/view/javascript/jquery/bootstrap/bootstrap.min.js' );
-
 ?>
 <!DOCTYPE html>
 <html dir="<?php echo $direction; ?>" lang="<?php echo $lang; ?>">
 <head>
- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+ 
 <!-- Mobile viewport optimized: h5bp.com/viewport -->
 <meta name="viewport" content="width=device-width">
+<meta http-equiv="X-UA-Compatible"content="IE=9; IE=8; IE=7; IE=EDGE">
 <meta charset="UTF-8" />
 <title><?php echo $title; ?></title>
 <base href="<?php echo $base; ?>" />
@@ -34,22 +26,13 @@
 <?php foreach ($links as $link) { ?>
 <link href="<?php echo $link['href']; ?>" rel="<?php echo $link['rel']; ?>" />
 <?php } ?>
-<link rel="stylesheet" type="text/css" href="market/view/theme/<?php echo $themeName;?>/stylesheet/bootstrap.css" />
-<link rel="stylesheet" type="text/css" href="market/view/theme/<?php echo $themeName;?>/stylesheet/stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="market/view/theme/<?php echo $themeName;?>/stylesheet/yk_basic.css" />
+
 
 <?php foreach ($styles as $style) { ?>
 <link rel="<?php echo $style['rel']; ?>" type="text/css" href="<?php echo $style['href']; ?>" media="<?php echo $style['media']; ?>" />
 <?php } ?>
-<link rel="stylesheet" type="text/css" href="market/view/javascript/jquery/ui/themes/ui-lightness/jquery-ui-1.8.16.custom.css" />
-<?php if( $helper->getParam('skin') &&  $helper->getParam('skin') != 'default' ){ ?>
-<link rel="stylesheet" type="text/css" href="market/view/theme/<?php echo $themeName;?>/skins/<?php echo  $helper->getParam('skin');?>/stylesheet/stylesheet.css" />
-<?php } ?>
-<link rel="stylesheet" type="text/css" href="market/view/theme/<?php echo $themeName;?>/stylesheet/font-awesome.min.css" />
 
-<?php if( $direction == 'rtl' ) { ?>
-<link rel="stylesheet" type="text/css" href="market/view/theme/<?php echo $themeName;?>/stylesheet/bootstrap-rtl.css" />
-<link rel="stylesheet" type="text/css" href="market/view/theme/<?php echo $themeName;?>/stylesheet/theme-rtl.css" />
-<?php } ?>
 
 <?php foreach( $helper->getScriptFiles() as $script )  { ?>
 <script type="text/javascript" src="<?php echo $script; ?>"></script>
@@ -62,7 +45,8 @@
 <!--[if lt IE 9]>
 <script src="market/view/javascript/html5.js"></script>
 <![endif]-->
-
+<script type="text/javascript" src="market/view/theme/<?php echo $themeName;?>/javascript/lib/jquery-1.9.0.min.js"></script>
+<script type="text/javascript" src="market/view/theme/<?php echo $themeName;?>/javascript/index.js"></script>
 
 <?php if ( isset($stores) && $stores ) { ?>
 <script type="text/javascript"><!--
@@ -73,66 +57,70 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
 });
 //--></script>
 <?php } ?>
-<?php echo $google_analytics; ?>
+<?php //echo $google_analytics; ?>
 </head>
-<body class="fs<?php echo $themeConfig['fontsize'];?> <?php echo $helper->getPageClass();?> <?php echo $helper->getParam('body_pattern','');?>">
-<section id="page-container">
-<section id="header">
-	<div class="header-top">
-		<div class="container">
-			<div class="row-fluid">
-				<div class="span5">
-					<div id="welcome">
-						<?php if (!$logged) { ?>
-						<?php echo $text_welcome; ?>
-						<?php } else { ?>
-						<?php echo $text_logged; ?>
-						<?php } ?>
-					</div>
-					<div class="top-links">
-					<a href="<?php echo $wishlist; ?>" id="wishlist-total"><?php echo $text_wishlist; ?></a>
-					<a href="<?php echo $account; ?>"><?php echo $text_account; ?></a>
-					<a href="<?php echo $shopping_cart; ?>"><?php echo $text_shopping_cart; ?></a>
-					<!--a href="<?php //echo $checkout; ?>"><?php //echo $text_checkout; ?></a-->
-					<?php echo $currency; ?>
-					<?php echo $language; ?>					
-					</div>
-					
-				</div>
-				<div class="span7 custom-top">
-				<?php if( isset($themeConfig['custom_top_module']) )  { ?>
-					echo html_entity_decode($themeConfig['custom_top_module'], ENT_QUOTES, 'UTF-8'); 
-				<?php } ?>	
-				</div>
-			</div>
+<body class="b_fa">
+
+<div class="header f_s">
+	<div class="w">
+
+		<div class="l">
+			<div class="h-weix l rel">
+                <i class="icon2 wxtub"></i><em class="icon2 h-down"></em>
+                <div class="wxbox"><img src="imgs/adimg/ewm2.jpg" /><p class="c8">打开微信，点击“发现”，使用“扫一扫”即可关注爱游戏官方微信</p></div>
+            </div>
+			
+		</div>
+		<div class="r">
+			<ul class="head-ul">
+				<li id="welcome">
+					<?php if (!$logged) { ?>
+					<?php echo $text_welcome; ?>
+					<?php } else { ?>
+					<?php echo $text_logged; ?>
+					<?php } ?>
+				</li>
+				<li class="top-links">
+				<a href="<?php echo $wishlist; ?>" id="wishlist-total"><?php echo $text_wishlist; ?></a>
+				<a href="<?php echo $account; ?>"><?php echo $text_account; ?></a>
+				<a href="<?php echo $shopping_cart; ?>"><?php echo $text_shopping_cart; ?></a>
+				<!--a href="<?php //echo $checkout; ?>"><?php //echo $text_checkout; ?></a-->
+				<?php //echo $currency; ?>
+				<?php //echo $language; ?>					
+				</li>
+			</ul>
 		</div>
 	</div>
+</div>
+<?php if( isset($themeConfig['custom_top_module']) )  { 
+	echo html_entity_decode($themeConfig['custom_top_module'], ENT_QUOTES, 'UTF-8'); 
+} ?>
+<div class="w">
+	<div class="logobox fix">
+		<?php if ($logo) { ?>
+			<a href="<?php echo $home; ?>" class="l">
+				<img src="<?php echo $logo; ?>" title="<?php echo $name; ?>" alt="<?php echo $name; ?>" />
+			</a>
+		<?php } ?>
+		<div class="logo-search">
 
-	<div class="header">
-	<div class="container">
-		<div class="row-fluid">
-			<div class="span3">
-				<?php if ($logo) { ?>
-				<div id="logo">
-					<a href="<?php echo $home; ?>">
-						<img src="<?php echo $logo; ?>" title="<?php echo $name; ?>" alt="<?php echo $name; ?>" />
-					</a>
-				</div>
-				<?php } ?>
+			<div class="rel l-s-box b_f">
+				<dl class="s-select">
+                    <dt class="search-dt"><span>消防产品</span><em class="icon2 h-down"></em></dt>
+                    <dd class="search-dd">
+                        <span class="db" val="1">消防产品</span>
+                        <span class="db" val="2">消防资讯</span>
+                    </dd>
+                </dl>
+				<input type="text" name="search" placeholder="<?php echo $text_search; ?>" value="<?php echo $search ?>" class="l s-text"/>
+				<input type="submit" class="l s-sub" value="<?php echo $text_search; ?>" />
 			</div>
-			<div class="span9 pull-right">
-				<div id="search">
-					<input type="text" name="search" placeholder="<?php echo $text_search; ?>" value="<?php echo $search; ?>" />
-					<div class="button-search"></div>
-				</div>	
-				<?php echo $cart; ?> 
-			</div>
+			<p class="pt5 f_s"></p>
 		</div>
+		<?php echo $cart; ?>
 	</div>
-	</div>
-</section>
-
-<section id="mainnav">
+</div>
+<div class="navbox">
 <?php 
 /**
  * Main Menu modules
@@ -145,22 +133,18 @@ if( count($modules) ){ ?>
 <?php } ?>
 
 <?php } elseif ($categories) { ?>
-<nav id="mainmenu"><div class="container navbar">
-	<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-	  <span class="icon-bar"></span>
-	  <span class="icon-bar"></span>
-	  <span class="icon-bar"></span>
-	</a>
-	<div class="navbar-inner">
 
-	<div class="nav-collapse collapse">
-			
-		  <ul class="nav">
+	
+
+	<div class="w rel fix">
+		<div class="l ovh">	
+		<ul class="nav">
 			<?php foreach ($categories as $category) { ?>
 			
 			<?php if ($category['children']) { ?>			
-			<li class="parent dropdown deeper "><a href="<?php echo $category['href'];?>" class="dropdown-toggle" data-toggle="dropdown"><?php echo $category['name']; ?>
-			<b class="caret"></b>
+			<li class="parent dropdown deeper ">
+				<a href="<?php echo $category['href'];?>" class="dropdown-toggle" data-toggle="dropdown"><?php echo $category['name']; ?>
+				<b class="caret"></b>
 			</a>
 			<?php } else { ?>
 			<li ><a href="<?php echo $category['href']; ?>"><?php echo $category['name']; ?></a>
@@ -181,11 +165,41 @@ if( count($modules) ){ ?>
 			  <?php } ?>
 			</li>
 			<?php } ?>
-		  </ul>
-	</div>	</div>		  
-</div></nav>
+		</ul>
+		</div>
+	</div>	  
+
 <?php } ?>
+</div>
+<section id="sys-notification">
+	<div class="container">
+		<?php if ($error) { ?>    
+	    <div class="warning"><?php echo $error ?>
+	    	<img src="market/view/theme/default/image/close.png" class="close" />
+	    </div>    
+		<?php } ?>
+		<div id="notification"></div>
+	</div>
 </section>
+<?php
+
+$modules = $helper->getModulesByPosition( 'promotion' ); 
+$ospans = array();
+
+if( count($modules) ){
+$cols = isset($config['block_promotion'])&& $config['block_promotion']?(int)$config['block_promotion']:count($modules);	
+$class = $helper->calculateSpans( $ospans, $cols );
+?>
+<div class="pav-promotion w fix mt10" id="pav-promotion">
+
+	<?php foreach ($modules as $i =>  $module) {  ?>
+			<?php if( $i++%$cols == 0 || count($modules)==1 ){ ?><?php } ?>	
+			<?php echo $module; ?>
+			<?php if( $i%$cols == 0 || $i==count($modules) ){ ?><?php } ?>	
+	<?php } ?>	
+
+</div>
+<?php } ?>
 <?php
 /**
  * Slideshow modules
@@ -193,13 +207,13 @@ if( count($modules) ){ ?>
 $modules = $helper->getModulesByPosition( 'slideshow' ); 
 if( $modules ){
 ?>
-<section id="slideshow" class="pav-slideshow">
-	<div class="container">
-		<?php foreach ($modules as $module) { ?>
-			<?php echo $module; ?>
-		<?php } ?>
-	</div>
-</section>
+<div id="slideshow" class="pav-slideshow w mt10">
+	
+	<?php foreach ($modules as $module) { ?>
+		<?php echo $module; ?>
+	<?php } ?>
+	
+</div>
 <?php } ?>
 
 <?php
@@ -211,45 +225,14 @@ if( count($modules) ){
 $cols = isset($config['block_showcase'])&& $config['block_showcase']?(int)$config['block_showcase']:count($modules);	
 $class = $helper->calculateSpans( $ospans, $cols );
 ?>
-<section class="pav-showcase" id="pavo-showcase">
-			<div class="container">
-				<?php $j=1;foreach ($modules as $i =>  $module) {  ?>
-			<?php if( $i++%$cols == 0 || count($modules)==1  ){  $j=1;?><div class="row-fluid"><?php } ?>	
-			<div class="<?php echo $class[$j];?>"><?php echo $module; ?></div>
-				<?php if( $i%$cols == 0 || $i==count($modules) ){ ?></div><?php } ?>
-				<?php  $j++;  } ?>
-			</div>
-		</section>
-<?php } ?>
-<?php
+<div class="pav-showcase w mt15 ovh" id="pavo-showcase">
 
-$modules = $helper->getModulesByPosition( 'promotion' ); 
-$ospans = array();
-
-if( count($modules) ){
-$cols = isset($config['block_promotion'])&& $config['block_promotion']?(int)$config['block_promotion']:count($modules);	
-$class = $helper->calculateSpans( $ospans, $cols );
-?>
-<section class="pav-promotion" id="pav-promotion">
-	<div class="container">
-	<?php $j=1;foreach ($modules as $i =>  $module) {  ?>
-			<?php if( $i++%$cols == 0 || count($modules)==1 ){  $j=1;?><div class="row-fluid"><?php } ?>	
-			<div class="<?php echo $class[$j];?>"><?php echo $module; ?></div>
-			<?php if( $i%$cols == 0 || $i==count($modules) ){ ?></div><?php } ?>	
-	<?php  $j++;  } ?>	
-		</div>
-</section>
-<?php } ?>
-<section id="sys-notification"><div class="container">
-
-	<?php if ($error) { ?>    
-    <div class="warning"><?php echo $error ?><img src="market/view/theme/default/image/close.png" alt="" class="close" /></div>    
+	<?php foreach ($modules as $i =>  $module) {  ?>
+	<?php if( $i++%$cols == 0 || count($modules)==1  ){  ?><?php } ?>	
+	<?php echo $module; ?>
+	<?php if( $i%$cols == 0 || $i==count($modules) ){ ?><?php } ?>
 	<?php } ?>
+</div>
+<?php } ?>
 
-
-	<div id="notification"></div>
-</div></section>
 <section id="columns">
-<div class="container">
-
-<div class="row-fluid">

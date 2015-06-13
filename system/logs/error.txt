@@ -464,3 +464,81 @@
 2015-06-12 9:28:36 - PHP Notice:  Undefined index: user_group_id in D:\wamp\www\yuankong\backend\model\user\user.php on line 8
 2015-06-12 9:28:59 - PHP Notice:  Undefined index: user_group_id in D:\wamp\www\yuankong\backend\model\user\user.php on line 8
 2015-06-12 9:35:32 - PHP Notice:  Undefined variable: discount_row in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 1179
+2015-06-13 5:17:44 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 74
+2015-06-13 5:17:44 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 74
+2015-06-13 5:17:44 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 90
+2015-06-13 5:17:44 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 90
+2015-06-13 5:17:44 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 126
+2015-06-13 5:17:44 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 126
+2015-06-13 5:34:51 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 74
+2015-06-13 5:34:51 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 74
+2015-06-13 5:34:51 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 90
+2015-06-13 5:34:51 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 90
+2015-06-13 5:34:51 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 126
+2015-06-13 5:34:51 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 126
+2015-06-13 5:35:11 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 74
+2015-06-13 5:35:11 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 74
+2015-06-13 5:35:11 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 90
+2015-06-13 5:35:11 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 90
+2015-06-13 5:35:11 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 126
+2015-06-13 5:35:11 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 126
+2015-06-13 5:36:32 - PHP Notice:  Undefined index: skin in D:\wamp\www\yuankong\market\view\theme\yuankong\template\libs\module.php on line 86
+2015-06-13 5:36:32 - PHP Notice:  Undefined index: body_pattern in D:\wamp\www\yuankong\market\view\theme\yuankong\template\libs\module.php on line 87
+2015-06-13 6:47:54 - PHP Notice:  Undefined index: banner_image in D:\wamp\www\yuankong\backend\controller\module\yknews.php on line 15
+2015-06-13 6:48:00 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 116
+2015-06-13 6:48:00 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 122
+2015-06-13 6:48:00 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 177
+2015-06-13 6:48:00 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 252
+2015-06-13 6:48:15 - PHP Notice:  Undefined index: banner_image in D:\wamp\www\yuankong\backend\controller\module\yknews.php on line 15
+2015-06-13 6:48:33 - PHP Notice:  Undefined index: layout_id in D:\wamp\www\yuankong\backend\controller\module\themecontrol.php on line 260
+2015-06-13 6:48:33 - PHP Notice:  Undefined index: layout_id in D:\wamp\www\yuankong\backend\controller\module\themecontrol.php on line 260
+2015-06-13 6:48:33 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 74
+2015-06-13 6:48:33 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 74
+2015-06-13 6:48:33 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 90
+2015-06-13 6:48:33 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 90
+2015-06-13 6:48:33 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 126
+2015-06-13 6:48:33 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 126
+2015-06-13 6:53:05 - PHP Notice:  Undefined index: layout_id in D:\wamp\www\yuankong\backend\controller\module\themecontrol.php on line 260
+2015-06-13 6:53:05 - PHP Notice:  Undefined index: layout_id in D:\wamp\www\yuankong\backend\controller\module\themecontrol.php on line 260
+2015-06-13 6:53:05 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 74
+2015-06-13 6:53:05 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 74
+2015-06-13 6:53:05 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 90
+2015-06-13 6:53:05 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 90
+2015-06-13 6:53:05 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 126
+2015-06-13 6:53:05 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 126
+2015-06-13 6:53:36 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 74
+2015-06-13 6:53:36 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 74
+2015-06-13 6:53:36 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 90
+2015-06-13 6:53:36 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 90
+2015-06-13 6:53:36 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 126
+2015-06-13 6:53:36 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 126
+2015-06-13 6:54:05 - PHP Notice:  Undefined index: banner_image in D:\wamp\www\yuankong\backend\controller\module\yknews.php on line 15
+2015-06-13 6:54:22 - PHP Notice:  Undefined index: banner_image in D:\wamp\www\yuankong\backend\controller\module\ykproject.php on line 15
+2015-06-13 6:54:30 - PHP Notice:  Undefined index: layout_id in D:\wamp\www\yuankong\backend\controller\module\themecontrol.php on line 260
+2015-06-13 6:54:30 - PHP Notice:  Undefined index: layout_id in D:\wamp\www\yuankong\backend\controller\module\themecontrol.php on line 260
+2015-06-13 6:54:30 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 74
+2015-06-13 6:54:30 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 74
+2015-06-13 6:54:30 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 90
+2015-06-13 6:54:30 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 90
+2015-06-13 6:54:30 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 126
+2015-06-13 6:54:30 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 126
+2015-06-13 6:54:43 - PHP Notice:  Undefined index: layout_id in D:\wamp\www\yuankong\market\controller\common\column_left.php on line 50
+2015-06-13 6:54:43 - PHP Notice:  Undefined index: layout_id in D:\wamp\www\yuankong\market\controller\common\column_right.php on line 50
+2015-06-13 6:54:43 - PHP Notice:  Undefined index: layout_id in D:\wamp\www\yuankong\market\controller\common\content_top.php on line 50
+2015-06-13 6:54:43 - PHP Notice:  Undefined index: layout_id in D:\wamp\www\yuankong\market\controller\common\content_bottom.php on line 50
+2015-06-13 6:54:43 - PHP Notice:  Undefined index: layout_id in D:\wamp\www\yuankong\market\view\theme\yuankong\template\libs\module.php on line 225
+2015-06-13 6:54:43 - PHP Notice:  Undefined index: layout_id in D:\wamp\www\yuankong\market\view\theme\yuankong\template\libs\module.php on line 225
+2015-06-13 6:54:43 - PHP Notice:  Undefined variable: news in D:\wamp\www\yuankong\market\view\theme\yuankong\template\module\yknews.tpl on line 2
+2015-06-13 6:58:50 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 74
+2015-06-13 6:58:50 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 74
+2015-06-13 6:58:50 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 90
+2015-06-13 6:58:50 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 90
+2015-06-13 6:58:50 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 126
+2015-06-13 6:58:50 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 126
+2015-06-13 6:59:09 - PHP Notice:  Undefined variable: news in D:\wamp\www\yuankong\market\view\theme\yuankong\template\module\yknews.tpl on line 2
+2015-06-13 6:59:09 - PHP Notice:  Undefined variable: news in D:\wamp\www\yuankong\market\view\theme\yuankong\template\module\yknews.tpl on line 2
+2015-06-13 7:00:28 - PHP Notice:  Undefined variable: news in D:\wamp\www\yuankong\market\view\theme\yuankong\template\module\yknews.tpl on line 2
+2015-06-13 7:31:43 - PHP Notice:  Array to string conversion in D:\wamp\www\yuankong\market\view\theme\yuankong\template\module\cart.tpl on line 3
+2015-06-13 7:32:15 - PHP Notice:  Undefined variable: total in D:\wamp\www\yuankong\market\view\theme\yuankong\template\module\cart.tpl on line 3
+2015-06-13 7:45:32 - PHP Notice:  Undefined variable: discount_row in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 1179
+2015-06-13 9:03:40 - PHP Notice:  Undefined index: banner_image in D:\wamp\www\yuankong\backend\controller\module\ykshowcase.php on line 15

@@ -46,6 +46,7 @@ class ControllerModuleCart extends Controller {
 		}
 		
 		$this->data['totals'] = $total_data;
+		$this->data['total'] = $this->cart->countProducts();
 		
 		$this->data['heading_title'] = $this->language->get('heading_title');
 		

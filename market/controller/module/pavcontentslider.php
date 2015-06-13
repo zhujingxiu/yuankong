@@ -1,16 +1,13 @@
 <?php  
-class ControllermodulePavcontentslider extends Controller {
+class ControllerModulePavcontentslider extends Controller {
 	protected function index( $setting ) {
 	
 		static $module = 0;
 		
 		$this->load->model('design/banner');
 		$this->load->model('tool/image');	
-		if (file_exists('market/view/theme/' . $this->config->get('config_template') . '/stylesheet/pavcontentslider.css')) {
-			$this->document->addStyle('market/view/theme/' . $this->config->get('config_template') . '/stylesheet/pavcontentslider.css');
-		} else {
-			$this->document->addStyle('market/view/theme/default/stylesheet/pavcontentslider.css');
-		}
+		
+
 		$a = array('interval'=> 8000,'auto_play'=>0 );
 		$setting = array_merge( $a, $setting );
 
@@ -49,4 +46,3 @@ class ControllermodulePavcontentslider extends Controller {
 		$this->render();
 	}
 }
-?>

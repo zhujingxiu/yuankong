@@ -29,13 +29,13 @@ class ControllerCommonHeader extends Controller {
 		$this->data['name'] = $this->config->get('config_name');
 		
 		if ($this->config->get('config_icon') && file_exists(DIR_IMAGE . $this->config->get('config_icon'))) {
-			$this->data['icon'] = $server . 'image/' . $this->config->get('config_icon');
+			$this->data['icon'] = $server . TPL_IMG . $this->config->get('config_icon');
 		} else {
 			$this->data['icon'] = '';
 		}
 		
 		if ($this->config->get('config_logo') && file_exists(DIR_IMAGE . $this->config->get('config_logo'))) {
-			$this->data['logo'] = $server . 'image/' . $this->config->get('config_logo');
+			$this->data['logo'] = $server . TPL_IMG . $this->config->get('config_logo');
 		} else {
 			$this->data['logo'] = '';
 		}		

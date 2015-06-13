@@ -20,11 +20,6 @@ class ControllerModulePavmegamenu extends Controller {
 		$this->language->load('module/pavmegamenu');
 		
 		$this->data['button_cart'] = $this->language->get('button_cart');
-		if (file_exists('market/view/theme/' . $this->config->get('config_template') . '/stylesheet/pavmegamenu.css')) {
-			$this->document->addStyle('market/view/theme/' . $this->config->get('config_template') . '/stylesheet/pavmegamenu.css');
-		} else {
-			$this->document->addStyle('market/view/theme/default/stylesheet/pavmegamenu.css');
-		}
 		
 	 
 		$this->data['module'] = $module++;
@@ -45,4 +40,3 @@ class ControllerModulePavmegamenu extends Controller {
 		$this->render();
 	}
 }
-?>

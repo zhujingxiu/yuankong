@@ -83,9 +83,6 @@
 			$config = $this->config->get( 'themecontrol' );
 		
 			
-			$this->addParam( 'skin', $config['skin'] );
-			$this->addParam( 'body_pattern', $config['body_pattern'] );
-
 			if( 1 ){
 				$this->triggerUserParams(  $params );
 			}

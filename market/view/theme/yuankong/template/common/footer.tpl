@@ -14,7 +14,7 @@
 	$LANGUAGE_ID = $this->config->get( 'config_language_id' );  
 
 ?>
-</div></div></section>
+</section>
 <?php
 	/**
 	 * Footer Top Position
@@ -25,42 +25,35 @@
 	$cols   = 1;
 	if( count($modules) ) { 
 ?>
-<section id="pav-mass-bottom">
-	<div class="container">
-		<?php $j=1;foreach ($modules as $i =>  $module) {   ?>
-			<?php if( $i++%$cols == 0 || count($modules)==1 ){  $j=1;?><div class="row-fluid"><?php } ?>	
-			<div class="span<?php echo floor(12/$cols);?>"><?php echo $module; ?></div>
-			<?php if( $i%$cols == 0 || $i==count($modules) ){ ?></div><?php } ?>	
-		<?php  $j++;  } ?>
-	</div>	
-</section>
+<div id="pav-mass-bottom" class="w mt15">
+
+		<?php foreach ($modules as $i =>  $module) {   ?>
+			<?php if( $i++%$cols == 0 || count($modules)==1 ){  ?><?php } ?>	
+			<?php echo $module; ?>
+			<?php if( $i%$cols == 0 || $i==count($modules) ){ ?><?php } ?>	
+		<?php } ?>
+
+</div>
 <?php } ?>
+<?php
 
-<section id="footer">
-	<?php
-	/**
-	 * Footer Top Position
-	 * $ospans allow overrides width of columns base on thiers indexs. format array( 1=> 3 )[value from 1->12]
-	 */
-	$modules = $helper->getModulesByPosition( 'footer_top' ); 
-	$ospans = array( 1=>5 );
-	
-	if( count($modules) ){
-	$cols = isset($themeConfig['block_footer_top'])&& $themeConfig['block_footer_top']?(int)$themeConfig['block_footer_top']:count($modules);
-	//if( $cols < count($modules) ){ $cols = count($modules); }
-	$class = $helper->calculateSpans( $ospans, $cols );
-	?>
-	<div class="footer-top">
-		<div class="container">
-			<div class="wrap-ft">
+$modules = $helper->getModulesByPosition( 'footer_top' ); 
+$ospans = array( 1=>5 );
 
-			<?php foreach ($modules as $i =>  $module):?>
-				<?php echo $module; ?>
-			<?php endforeach; ?>
-			</div>
-		</div>
-	</div>
-	<?php } ?>
+if( count($modules) ){
+$cols = isset($themeConfig['block_footer_top'])&& $themeConfig['block_footer_top']?(int)$themeConfig['block_footer_top']:count($modules);
+$class = $helper->calculateSpans( $ospans, $cols );
+?>
+<div class="linkf mt20">
+
+	<?php foreach ($modules as $i =>  $module):?>
+		<?php echo $module; ?>
+	<?php endforeach; ?>
+
+</div>
+<?php } ?>
+<div class="w mt20">
+
 	<?php
 
 	$modules = $helper->getModulesByPosition( 'footer_center' ); 
@@ -100,14 +93,14 @@
 		</div>
 	</div>
 	<?php } ?>
-</section>
-
+</div>
+<?php if(false){?>
 <div id="powered"><div class="container">
 <div class="pull-left">
 	<?php echo $powered; ?>. 
 </div>
 <div class="pull-right"></div>
 </div></div>
+<?php }?>
 
-</section>
 </body></html>

@@ -139,4 +139,3 @@ class ControllerModulePavproductcarousel extends Controller {
 		return $products;
 	}
 }
-?>

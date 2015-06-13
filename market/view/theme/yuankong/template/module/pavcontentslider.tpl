@@ -1,42 +1,44 @@
+<div class="l sliderbox">
 <?php if( count($banners) ) { ?>
 	<?php $id = rand(1,10)+rand(0, time());?>
-   <div id="pavcontentslider<?php echo $id;?>" class="carousel slide pavcontentslider hidden-phone">
+   <div class="focus" id="focus">
 	
-		<div class="carousel-inner">
+		<div class="bd">
+			<ul class="fix">
 			 <?php foreach ($banners as $i => $banner) {  ?>
-				<div class="item <?php if($i==0) {?>active<?php } ?>">
+				<li>
 					<?php if ($banner['link']) { ?>
 					<a href="<?php echo $banner['link']; ?>"><img src="<?php echo $banner['thumb']; ?>" alt="<?php echo $banner['title']; ?>" /></a>
 					<?php } else { ?>
 					<img src="<?php echo $banner['thumb']; ?>" alt="<?php echo $banner['title']; ?>" />
 					<?php } ?>
-							<?php if( $banner['title']  || $banner['description'] ) { ?>
-							<div class="banner-info">
-								<h4><?php echo $banner['title']; ?></h4>
-								<div><?php echo $banner['description']; ?></div>
-							</div>
-							<?php } ?>
-		
-				</div>
+
+				</li>
 			<?php } ?>
-		</div>
-		<?php if( count($banners) > 1 ){ ?>	
-		<a class="carousel-control left" href="#pavcontentslider<?php echo $id;?>" data-slide="prev">&lsaquo;</a>
-		<a class="carousel-control right" href="#pavcontentslider<?php echo $id;?>" data-slide="next">&rsaquo;</a>
-		<?php } ?>
-		<?php if( count($banners)  > 1 ) { ?>
-		<ol class="carousel-indicators">
-		<?php foreach ( $banners as $j=>$item )  : ?>
-			<li data-target="#pavcontentslider<?php echo $id;?>" data-slide-to="<?php echo $j;?>" class="<?php if($j==0) {?>active<?php } ?>"></li>
-		<?php endforeach ?>
-		</ol>
-		<?php } ?>
+			</ul>
+        </div>
+        <div class="hd">
+            <ul>
+                <?php foreach ($banners as $i => $banner) {  ?>
+                <li <?php echo !$i ? 'class="on"' : '' ?>></li>
+                <?php } ?>
+            </ul>
+        </div>
+        <a class="prev icon2" href="javascript:void(0)"></a>
+        <a class="next icon2" href="javascript:void(0)"></a>
+    </div>
+	<div class="ovh mt10 fix">
+            <a class="l db" href=""><img src="market/view/theme/<?php echo $this->config->get('config_template') ?>/yk_img/adimg/ztpic1.jpg"></a>
+            <a class="l db ml15" href=""><img src="market/view/theme/<?php echo $this->config->get('config_template') ?>/yk_img/adimg/ztpic2.jpg"></a>
+            <a class="r db" href=""><img src="market/view/theme/<?php echo $this->config->get('config_template') ?>/yk_img/adimg/ztpic3.jpg"></a>
     </div>
 <?php if( count($banners) > 1 ){ ?>
 <script type="text/javascript">
-	<!--
-		$('#pavcontentslider<?php echo $id;?>').carousel({interval:<?php echo ( $auto_play_mode?$interval:'false') ;?>,auto:<?php echo $auto_play;?>,pause:'hover'});
-	-->
-	</script>
+	$(function(){
+        o.slider.init(".focus");
+        
+    });
+</script>
 <?php } ?>
 <?php } ?>
+</div>

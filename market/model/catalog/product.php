@@ -615,4 +615,3 @@ class ModelCatalogProduct extends Model {
 		}
 	}
 }
-?>

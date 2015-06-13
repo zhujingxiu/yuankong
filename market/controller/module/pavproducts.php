@@ -115,4 +115,3 @@ class ControllerModulepavproducts extends Controller {
 		return $products;
 	}
 }
-?>
