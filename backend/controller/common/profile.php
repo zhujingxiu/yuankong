@@ -218,11 +218,9 @@ class ControllerCommonProfile extends Controller {
         
         $user_info = $this->model_user_user->getUserByUsername($this->request->post['username']);
         
-
         if ($user_info && ($this->user->getId() != $user_info['user_id'])) {
             $this->error['warning'] = $this->language->get('error_exists');
         }
-
         
         if ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32)) {
             $this->error['firstname'] = $this->language->get('error_firstname');
