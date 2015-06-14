@@ -1,14 +1,14 @@
 <div class="r b_f">
 
    <div class="e-news">
-        <h3 class="e-title"><a href="#" class="more r">更多</a>e站快报</h3>
+        <h3 class="e-title"><a href="<?php echo $news ?>" class="more r"><?php echo $text_more ?></a><?php echo $title ?></h3>
         <div class="ovh p10">
             <ul class="f_s lh30">
-            <?php if( count($news) ) { ?>
-             <?php foreach ($news as $i => $item) {  ?>
+            <?php if( count($newses) ) { ?>
+             <?php foreach ($newses as $i => $item) {  ?>
                 <li class="txt_clip">
-                    <em>[公告]</em>
-                    <a href="<?php echo $item['link']; ?>"><?php echo $item['title']; ?></a>
+                    <em>[<?php echo $item['group_name'] ?>]</em>
+                    <a href="<?php echo $item['link']; ?>" <?php echo !$i ? 'class="'.$first_class.'"' : '' ?>><?php echo $item['title']; ?></a>
                 </li>
             <?php } ?>
             <?php } ?>

@@ -20,4 +20,3 @@ class ControllerModulePavcustom extends Controller {
 		$this->render();
 	}
 }
-?>

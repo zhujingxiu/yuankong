@@ -87,11 +87,7 @@
 				$this->triggerUserParams(  $params );
 			}
 			$this->language->load( 	'module/themecontrol' );
-			$this->document->addScript('market/view/javascript/jquery/colorbox/jquery.colorbox-min.js');
-			$this->document->addScript('market/view/javascript/jquery/tabs.js');
-			
-			
-			$this->document->addStyle('market/view/javascript/jquery/colorbox/colorbox.css');
+
 		}
 		
 		public function setConfig( $theme){

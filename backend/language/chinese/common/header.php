@@ -80,6 +80,7 @@ $_['text_voucher_theme']               = '礼品券主题';
 $_['text_weight_class']                = '重量单位';
 $_['text_length_class']                = '长度单位';
 $_['text_zone']                        = '国家地区';
+$_['text_case']                        = '客户案例';
 $_['text_project']                     = '工程项目';
 $_['text_project_group']               = '工程类别';
 $_['text_news_group']                  = '新闻类别';

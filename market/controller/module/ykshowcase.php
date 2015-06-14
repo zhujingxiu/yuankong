@@ -1,43 +1,24 @@
 <?php  
-class ControllerModuleYkshowcase extends Controller {
+class ControllerModuleYkcase extends Controller {
     protected function index( $setting ) {
-    
+        $this->load->model('module/ykmodule');
         static $module = 0;
-        
-        $this->load->model('design/banner');
-        $this->load->model('tool/image');   
-        
 
-        $a = array('interval'=> 8000,'auto_play'=>0 );
-        $setting = array_merge( $a, $setting );
-
-        $this->data['cases'] = array();
-        $this->data['setting'] = $setting;
-        $this->data['auto_play'] = $setting['auto_play']?"true":"false";
-        $this->data['auto_play_mode'] = $setting['auto_play'];
-        $this->data['interval'] = (int)$setting['interval'];
-        
-        if( isset($setting['banner_image'])){
-            foreach( $setting['banner_image'] as $banner ){
-                $banner['thumb'] = $this->model_tool_image->resize($banner['image'], $setting['width'], $setting['height']);
-            
-                
-                $title = isset( $banner['title'][$this->config->get('config_language_id')] ) ? $banner['title'][$this->config->get('config_language_id')]:"";
-                $description = isset( $banner['description'][$this->config->get('config_language_id')] ) ? $banner['description'][$this->config->get('config_language_id')]:"";
-                $banner['title'] =  html_entity_decode( $title, ENT_QUOTES, 'UTF-8');
-                $banner['description'] =  html_entity_decode( $description, ENT_QUOTES, 'UTF-8');
-                
-                if( isset($setting['image_navigator']) && $setting['image_navigator'] ){ 
-                    $banner['image_navigator'] =  $this->model_tool_image->resize($banner['image'], $setting['navimg_weight'], $setting['navimg_height'], 'w' );
-                }else {
-                    $banner['image_navigator'] = '';
-                }
-                $this->data['cases'][] = $banner;
+        $this->data['setting'] = $setting;       
+        $this->data['title'] = $setting['title'];
+        $this->data['first_class'] = $setting['first_class'];
+        $case = $this->model_module_ykmodule->getCases($setting['limit']);
+        foreach ($case as $k => $value) {
+            if(!empty($value['case_id'])){
+                $case[$k]['link'] = $this->url->link('catelog/case','case_id='.$value['case_id'],'SSL');
             }
         }
+        $this->data['casees'] = $case;
         $this->data['module'] = $module++;
-                        
-        $this->template = $this->config->get('config_template') . '/template/module/ykshowcase.tpl';
+        $this->data['text_more'] = $this->language->get('text_more');
+        $this->data['text_more'] = $this->language->get('text_more');
+        $this->data['case'] = $this->url->link('catelog/case','','SSL');
+        $this->template = $this->config->get('config_template') . '/template/module/ykcase.tpl';
         
         $this->render();
     }

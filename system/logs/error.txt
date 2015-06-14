@@ -542,3 +542,118 @@
 2015-06-13 7:32:15 - PHP Notice:  Undefined variable: total in D:\wamp\www\yuankong\market\view\theme\yuankong\template\module\cart.tpl on line 3
 2015-06-13 7:45:32 - PHP Notice:  Undefined variable: discount_row in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 1179
 2015-06-13 9:03:40 - PHP Notice:  Undefined index: banner_image in D:\wamp\www\yuankong\backend\controller\module\ykshowcase.php on line 15
+2015-06-14 10:57:33 - PHP Warning:  Invalid argument supplied for foreach() in E:\wamp\www\yuankong\backend\view\template\module\ykshowcase.tpl on line 116
+2015-06-14 10:57:33 - PHP Warning:  Invalid argument supplied for foreach() in E:\wamp\www\yuankong\backend\view\template\module\ykshowcase.tpl on line 122
+2015-06-14 10:57:33 - PHP Warning:  Invalid argument supplied for foreach() in E:\wamp\www\yuankong\backend\view\template\module\ykshowcase.tpl on line 177
+2015-06-14 10:57:33 - PHP Warning:  Invalid argument supplied for foreach() in E:\wamp\www\yuankong\backend\view\template\module\ykshowcase.tpl on line 252
+2015-06-14 11:07:43 - PHP Notice:  Undefined variable: layouts in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 33
+2015-06-14 11:07:43 - PHP Warning:  Invalid argument supplied for foreach() in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 33
+2015-06-14 11:07:43 - PHP Notice:  Undefined variable: layouts in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 96
+2015-06-14 11:07:43 - PHP Warning:  Invalid argument supplied for foreach() in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 96
+2015-06-14 11:39:07 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 56
+2015-06-14 11:39:07 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 56
+2015-06-14 11:39:07 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 56
+2015-06-14 11:39:07 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 56
+2015-06-14 11:39:07 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 56
+2015-06-14 11:39:07 - PHP Notice:  Undefined index: title in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 63
+2015-06-14 11:39:07 - PHP Notice:  Undefined index: limit in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 64
+2015-06-14 11:46:44 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 57
+2015-06-14 11:46:44 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 57
+2015-06-14 11:46:44 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 57
+2015-06-14 11:46:44 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 57
+2015-06-14 11:46:44 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 57
+2015-06-14 11:46:44 - PHP Notice:  Undefined index: title in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 64
+2015-06-14 11:46:44 - PHP Notice:  Undefined index: limit in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 65
+2015-06-14 11:46:44 - PHP Notice:  Undefined index: first_class in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 66
+2015-06-14 11:47:17 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 57
+2015-06-14 11:47:17 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 57
+2015-06-14 11:47:17 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 57
+2015-06-14 11:47:17 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 57
+2015-06-14 11:47:17 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 57
+2015-06-14 11:47:17 - PHP Notice:  Undefined index: title in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 64
+2015-06-14 11:47:17 - PHP Notice:  Undefined index: limit in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 65
+2015-06-14 11:47:17 - PHP Notice:  Undefined index: first_class in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 66
+2015-06-14 11:48:27 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 58
+2015-06-14 11:48:27 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 58
+2015-06-14 11:48:27 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 58
+2015-06-14 11:48:27 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 58
+2015-06-14 11:48:27 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 58
+2015-06-14 11:48:27 - PHP Notice:  Undefined index: title in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 65
+2015-06-14 11:48:27 - PHP Notice:  Undefined index: limit in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 66
+2015-06-14 11:48:27 - PHP Notice:  Undefined index: first_class in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 67
+2015-06-14 11:50:04 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 58
+2015-06-14 11:50:04 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 58
+2015-06-14 11:50:04 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 58
+2015-06-14 11:50:04 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 58
+2015-06-14 11:50:04 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 58
+2015-06-14 11:50:04 - PHP Notice:  Undefined index: title in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 65
+2015-06-14 11:50:04 - PHP Notice:  Undefined index: limit in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 66
+2015-06-14 11:50:04 - PHP Notice:  Undefined index: first_class in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 67
+2015-06-14 11:50:26 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 58
+2015-06-14 11:50:26 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 58
+2015-06-14 11:50:26 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 58
+2015-06-14 11:50:26 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 58
+2015-06-14 11:50:26 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 58
+2015-06-14 11:50:26 - PHP Notice:  Undefined index: title in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 65
+2015-06-14 11:50:26 - PHP Notice:  Undefined index: limit in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 66
+2015-06-14 11:50:26 - PHP Notice:  Undefined index: first_class in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 67
+2015-06-14 12:27:45 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 58
+2015-06-14 12:27:45 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 58
+2015-06-14 12:27:45 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 58
+2015-06-14 12:27:45 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 58
+2015-06-14 12:27:45 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 58
+2015-06-14 12:27:45 - PHP Notice:  Undefined index: title in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 65
+2015-06-14 12:27:45 - PHP Notice:  Undefined index: limit in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 66
+2015-06-14 12:27:45 - PHP Notice:  Undefined index: first_class in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 67
+2015-06-14 12:30:03 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 58
+2015-06-14 12:30:03 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 58
+2015-06-14 12:30:03 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 58
+2015-06-14 12:30:03 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 58
+2015-06-14 12:30:03 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 58
+2015-06-14 12:34:36 - PHP Notice:  Error: Could not load model extension/news! in E:\wamp\www\yuankong\system\engine\loader.php on line 48
+2015-06-14 12:43:24 - PHP Notice:  Undefined index: auto_play in E:\wamp\www\yuankong\market\controller\module\yknews.php on line 10
+2015-06-14 12:43:24 - PHP Notice:  Undefined index: auto_play in E:\wamp\www\yuankong\market\controller\module\yknews.php on line 11
+2015-06-14 12:43:24 - PHP Notice:  Undefined index: interval in E:\wamp\www\yuankong\market\controller\module\yknews.php on line 12
+2015-06-14 12:43:24 - PHP Notice:  Undefined variable: text_more in E:\wamp\www\yuankong\market\view\theme\yuankong\template\module\yknews.tpl on line 4
+2015-06-14 12:43:24 - PHP Notice:  Undefined variable: title in E:\wamp\www\yuankong\market\view\theme\yuankong\template\module\yknews.tpl on line 4
+2015-06-14 12:44:39 - PHP Notice:  Undefined index: auto_play in E:\wamp\www\yuankong\market\controller\module\yknews.php on line 10
+2015-06-14 12:44:39 - PHP Notice:  Undefined index: auto_play in E:\wamp\www\yuankong\market\controller\module\yknews.php on line 11
+2015-06-14 12:44:39 - PHP Notice:  Undefined index: interval in E:\wamp\www\yuankong\market\controller\module\yknews.php on line 12
+2015-06-14 12:44:39 - PHP Notice:  Undefined variable: title in E:\wamp\www\yuankong\market\view\theme\yuankong\template\module\yknews.tpl on line 4
+2015-06-14 12:45:07 - PHP Notice:  Undefined index: auto_play in E:\wamp\www\yuankong\market\controller\module\yknews.php on line 10
+2015-06-14 12:45:07 - PHP Notice:  Undefined index: auto_play in E:\wamp\www\yuankong\market\controller\module\yknews.php on line 11
+2015-06-14 12:50:24 - PHP Notice:  Undefined index: group_id in E:\wamp\www\yuankong\market\controller\module\yknews.php on line 10
+2015-06-14 12:51:24 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 58
+2015-06-14 12:51:24 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 58
+2015-06-14 12:51:24 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 58
+2015-06-14 12:51:24 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 58
+2015-06-14 12:51:24 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 58
+2015-06-14 12:51:55 - PHP Notice:  Undefined index: group_id in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 58
+2015-06-14 12:51:55 - PHP Notice:  Undefined index: group_id in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 58
+2015-06-14 12:51:55 - PHP Notice:  Undefined index: group_id in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 58
+2015-06-14 12:51:55 - PHP Notice:  Undefined index: group_id in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 58
+2015-06-14 12:51:55 - PHP Notice:  Undefined index: group_id in E:\wamp\www\yuankong\backend\view\template\module\yknews.tpl on line 58
+2015-06-14 12:53:47 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\market\view\theme\yuankong\template\module\yknews.tpl on line 10
+2015-06-14 12:53:47 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\module\yknews.tpl on line 11
+2015-06-14 12:53:47 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\market\view\theme\yuankong\template\module\yknews.tpl on line 10
+2015-06-14 12:53:47 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\module\yknews.tpl on line 11
+2015-06-14 12:53:47 - PHP Notice:  Undefined index: group in E:\wamp\www\yuankong\market\view\theme\yuankong\template\module\yknews.tpl on line 10
+2015-06-14 12:53:47 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\module\yknews.tpl on line 11
+2015-06-14 12:55:13 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\module\yknews.tpl on line 11
+2015-06-14 12:55:13 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\module\yknews.tpl on line 11
+2015-06-14 12:55:13 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\module\yknews.tpl on line 11
+2015-06-14 13:08:31 - PHP Notice:  Undefined index: first_class in E:\wamp\www\yuankong\market\view\theme\yuankong\template\module\yknews.tpl on line 11
+2015-06-14 13:09:22 - PHP Notice:  Undefined index: first_class in E:\wamp\www\yuankong\market\view\theme\yuankong\template\module\yknews.tpl on line 11
+2015-06-14 13:09:35 - PHP Notice:  Undefined index: first_class in E:\wamp\www\yuankong\market\view\theme\yuankong\template\module\yknews.tpl on line 11
+2015-06-14 13:10:54 - PHP Notice:  Undefined index: first_class in E:\wamp\www\yuankong\market\view\theme\yuankong\template\module\yknews.tpl on line 11
+2015-06-14 13:46:17 - PHP Notice:  Undefined variable: manufacturer_store in E:\wamp\www\yuankong\backend\view\template\extension\case_form.tpl on line 33
+2015-06-14 13:46:17 - PHP Warning:  in_array() expects parameter 2 to be array, null given in E:\wamp\www\yuankong\backend\view\template\extension\case_form.tpl on line 33
+2015-06-14 13:55:47 - PHP Notice:  Undefined variable: entry_image in E:\wamp\www\yuankong\backend\view\template\extension\case_form.tpl on line 34
+2015-06-14 13:55:47 - PHP Notice:  Undefined variable: image in E:\wamp\www\yuankong\backend\view\template\extension\case_form.tpl on line 36
+2015-06-14 14:00:56 - PHP Notice:  Undefined index: desc in E:\wamp\www\yuankong\backend\model\extension\case.php on line 4
+2015-06-14 14:00:56 - PHP Notice:  Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'desc = '', sort_order = '1'' at line 1<br />Error No: 1064<br />INSERT INTO yk_case SET name = '沃尔玛',desc = '', sort_order = '1' in E:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-06-14 14:05:10 - PHP Notice:  Undefined variable: entry_desc in E:\wamp\www\yuankong\backend\view\template\extension\case_form.tpl on line 29
+2015-06-14 14:15:35 - PHP Notice:  Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'desc = '&lt;p&gt;asdsadsadsdas&lt;/p&gt;\r\n', sort_order = '0'' at line 1<br />Error No: 1064<br />INSERT INTO yk_case SET name = '沃尔玛',desc = '&lt;p&gt;asdsadsadsdas&lt;/p&gt;\r\n', sort_order = '0' in E:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-06-14 14:17:20 - PHP Notice:  Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'desc = '&lt;p&gt;dsadsa&lt;/p&gt;\r\n', sort_order = '0'' at line 1<br />Error No: 1064<br />INSERT INTO yk_case SET name = '沃尔玛',desc = '&lt;p&gt;dsadsa&lt;/p&gt;\r\n', sort_order = '0' in E:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-06-14 14:19:28 - PHP Notice:  Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'desc = '&lt;p&gt;dsadsa&lt;/p&gt;\r\n', sort_order = '0'' at line 1<br />Error No: 1064<br />INSERT INTO yk_case SET name = '沃尔玛', desc = '&lt;p&gt;dsadsa&lt;/p&gt;\r\n', sort_order = '0' in E:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-06-14 14:26:20 - PHP Notice:  Undefined variable: add_img in E:\wamp\www\yuankong\backend\view\template\extension\case_form.tpl on line 45

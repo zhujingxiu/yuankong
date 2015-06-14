@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2015 年 06 月 13 日 09:33
+-- 生成日期: 2015 年 06 月 14 日 14:34
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.4.3
 
@@ -4555,6 +4555,44 @@ INSERT INTO `yk_bk_yk_zone_to_geo_zone` (`zone_to_geo_zone_id`, `country_id`, `z
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `yk_case`
+--
+
+CREATE TABLE IF NOT EXISTS `yk_case` (
+  `case_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(64) NOT NULL,
+  `desc` text,
+  `cover` varchar(255) DEFAULT NULL,
+  `sort_order` smallint(6) NOT NULL,
+  PRIMARY KEY (`case_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- 转存表中的数据 `yk_case`
+--
+
+INSERT INTO `yk_case` (`case_id`, `name`, `desc`, `cover`, `sort_order`) VALUES
+(1, '沃尔玛', '&lt;p&gt;dsadsa&lt;/p&gt;\r\n', 'data/case/logopic5.jpg', 0);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `yk_case_imgae`
+--
+
+CREATE TABLE IF NOT EXISTS `yk_case_imgae` (
+  `image_id` int(11) NOT NULL AUTO_INCREMENT,
+  `case_id` int(11) NOT NULL,
+  `name` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `path` varchar(512) COLLATE utf8_unicode_ci NOT NULL,
+  `sort_order` int(11) NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`image_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `yk_category`
 --
 
@@ -6173,8 +6211,8 @@ CREATE TABLE IF NOT EXISTS `yk_news` (
 --
 
 INSERT INTO `yk_news` (`news_id`, `group_id`, `user_id`, `title`, `subtitle`, `text`, `status`, `is_top`, `from`, `sort_order`, `date_added`) VALUES
-(2, 0, 1, '新闻测试数据标题', '新闻测试数据副本标题', '&lt;span style=&quot;font-family:Tahoma, Helvetica, Arial, 宋体, sans-serif;font-size:14px;line-height:30px;&quot;&gt;2015年5月初，美国数字地球公司拍摄的卫星照片显示越南非法建岛行为，在非法侵占我南沙岛礁上大规模填海造地。越南非法建岛激起了中方愤慨，我外交部发言人洪磊表示，中国要求有关国家立即停止一切侵犯中国主权和权益的言行。洪磊还揭露，越南非法建岛，共计侵占20多个岛礁，填海造地的同时还设立了机场、港池，甚至还有导弹阵地，中国外交部严厉指责越南非法建岛行为。&lt;/span&gt;', 1, 0, '腾讯新闻', 0, '2015-05-24 21:37:30'),
-(3, 0, 1, '最新款式灭火器', '5.1日家用汽载灭火器全场5折', '&lt;span style=&quot;color:#CC0000;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;&quot;&gt;齐齐哈尔&lt;/span&gt;&lt;span style=&quot;color:#333333;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;&quot;&gt;警方与绑架案犯发生激烈&lt;/span&gt;&lt;span style=&quot;color:#CC0000;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;&quot;&gt;枪战&lt;/span&gt;&lt;span style=&quot;color:#333333;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;&quot;&gt;&amp;nbsp;一民警头部中弹&lt;/span&gt;', 1, 0, '消防e站', 2, '0000-00-00 00:00:00'),
+(2, 2, 1, '新闻测试数据标题', '新闻测试数据副本标题', '&lt;span style=&quot;font-family:Tahoma, Helvetica, Arial, 宋体, sans-serif;font-size:14px;line-height:30px;&quot;&gt;2015年5月初，美国数字地球公司拍摄的卫星照片显示越南非法建岛行为，在非法侵占我南沙岛礁上大规模填海造地。越南非法建岛激起了中方愤慨，我外交部发言人洪磊表示，中国要求有关国家立即停止一切侵犯中国主权和权益的言行。洪磊还揭露，越南非法建岛，共计侵占20多个岛礁，填海造地的同时还设立了机场、港池，甚至还有导弹阵地，中国外交部严厉指责越南非法建岛行为。&lt;/span&gt;', 1, 0, '腾讯新闻', 0, '2015-05-24 21:37:30'),
+(3, 3, 1, '最新款式灭火器', '5.1日家用汽载灭火器全场5折', '&lt;span style=&quot;color:#CC0000;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;&quot;&gt;齐齐哈尔&lt;/span&gt;&lt;span style=&quot;color:#333333;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;&quot;&gt;警方与绑架案犯发生激烈&lt;/span&gt;&lt;span style=&quot;color:#CC0000;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;&quot;&gt;枪战&lt;/span&gt;&lt;span style=&quot;color:#333333;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;&quot;&gt;&amp;nbsp;一民警头部中弹&lt;/span&gt;', 1, 0, '消防e站', 2, '0000-00-00 00:00:00'),
 (4, 1, 1, '新一代宝马7系官网曝光 6月10日首发', '新一代宝马7系官网曝光', '<p>车型代号G11的新一代宝马7系的官图和部分信息在宝马奥地利官网曝光，新车将在6月10日正式发布，10月上市销售。新一代7系在奥地利市场的起价为100445欧元(约合人民币69.2万元)。<img alt="" src="http://www.yuankong.com/image/data/demo/apple_logo.jpg" />12321312</p>', 0, 0, '新浪汽车', 0, '2015-06-10 05:20:56');
 
 -- --------------------------------------------------------
@@ -7068,7 +7106,7 @@ CREATE TABLE IF NOT EXISTS `yk_setting` (
   `value` text NOT NULL,
   `serialized` tinyint(1) NOT NULL,
   PRIMARY KEY (`setting_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=703 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=705 ;
 
 --
 -- 转存表中的数据 `yk_setting`
@@ -7208,7 +7246,7 @@ INSERT INTO `yk_setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `se
 (555, 0, 'config', 'config_name', '源控智能', 0),
 (696, 0, 'themecontrol', 'themecontrol', 'a:15:{s:13:"default_theme";s:8:"yuankong";s:9:"layout_id";s:1:"1";s:8:"position";s:1:"1";s:21:"cateogry_display_mode";s:4:"grid";s:20:"cateogry_product_row";s:1:"0";s:19:"product_zoomgallery";s:6:"slider";s:16:"product_zoommode";s:5:"basic";s:20:"product_zoomlenssize";s:3:"150";s:21:"product_zoomlensshape";s:5:"basic";s:22:"product_related_column";s:1:"0";s:14:"block_showcase";s:0:"";s:15:"block_promotion";s:0:"";s:16:"block_footer_top";s:0:"";s:19:"block_footer_center";s:0:"";s:19:"block_footer_bottom";s:0:"";}', 1),
 (697, 0, 'pavmegamenu', 'pavmegamenu_module', 'a:1:{i:0;a:4:{s:9:"layout_id";s:5:"99999";s:8:"position";s:8:"mainmenu";s:6:"status";s:1:"1";s:10:"sort_order";s:0:"";}}', 1),
-(689, 0, 'yknews', 'yknews_module', 'a:1:{i:0;a:11:{s:9:"layout_id";s:1:"1";s:8:"position";s:9:"promotion";s:6:"status";s:1:"1";s:10:"sort_order";i:3;s:9:"auto_play";s:1:"0";s:13:"text_interval";s:4:"8000";s:5:"width";s:3:"940";s:6:"height";s:3:"350";s:15:"image_navigator";s:1:"0";s:13:"navimg_weight";s:3:"177";s:13:"navimg_height";s:2:"97";}}', 1),
+(704, 0, 'yknews', 'yknews_module', 'a:1:{i:0;a:8:{s:9:"layout_id";s:1:"1";s:8:"position";s:9:"promotion";s:8:"group_id";s:1:"0";s:5:"title";s:10:"e站快报";s:5:"limit";s:1:"5";s:11:"first_class";s:3:"cff";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"3";}}', 1),
 (688, 0, 'pavcontentslider', 'pavcontentslider_module', 'a:1:{i:0;a:12:{s:9:"layout_id";s:1:"1";s:8:"position";s:9:"promotion";s:6:"status";s:1:"1";s:10:"sort_order";i:2;s:9:"auto_play";s:1:"1";s:13:"text_interval";s:4:"8000";s:5:"width";s:3:"940";s:6:"height";s:3:"350";s:15:"image_navigator";s:1:"1";s:13:"navimg_weight";s:3:"177";s:13:"navimg_height";s:2:"97";s:12:"banner_image";a:3:{i:1;a:4:{s:5:"image";s:16:"data/banner1.jpg";s:4:"link";s:0:"";s:5:"title";a:1:{i:2;s:0:"";}s:11:"description";a:1:{i:2;s:0:"";}}i:2;a:4:{s:5:"image";s:16:"data/banner2.jpg";s:4:"link";s:0:"";s:5:"title";a:1:{i:2;s:0:"";}s:11:"description";a:1:{i:2;s:0:"";}}i:3;a:4:{s:5:"image";s:16:"data/banner3.jpg";s:4:"link";s:0:"";s:5:"title";a:1:{i:2;s:0:"";}s:11:"description";a:1:{i:2;s:0:"";}}}}}', 1),
 (687, 0, 'ykproject', 'ykproject_module', 'a:1:{i:0;a:12:{s:9:"layout_id";s:1:"1";s:8:"position";s:9:"promotion";s:6:"status";s:1:"1";s:10:"sort_order";i:1;s:9:"auto_play";s:1:"0";s:13:"text_interval";s:4:"8000";s:5:"width";s:3:"940";s:6:"height";s:3:"350";s:15:"image_navigator";s:1:"0";s:13:"navimg_weight";s:3:"177";s:13:"navimg_height";s:2:"97";s:12:"banner_image";N;}}', 1),
 (702, 0, 'pavcustom', 'pavcustom_module', 'a:4:{i:1;a:7:{s:12:"module_title";a:1:{i:2;s:12:"页底导航";}s:11:"description";a:1:{i:2;s:816:"&lt;div class=&quot;foot tc&quot;&gt;\r\n&lt;p class=&quot;lh30&quot;&gt;&lt;a href=&quot;#&quot;&gt;关于我们&lt;/a&gt; &lt;b&gt;|&lt;/b&gt; &lt;a href=&quot;#&quot;&gt;项目工程&lt;/a&gt; &lt;b&gt;|&lt;/b&gt; &lt;a href=&quot;#&quot;&gt;入驻消防e站&lt;/a&gt; &lt;b&gt;|&lt;/b&gt; &lt;a href=&quot;#&quot;&gt;诚聘英才&lt;/a&gt; &lt;b&gt;|&lt;/b&gt; &lt;a href=&quot;#&quot;&gt;联系我们&lt;/a&gt; &lt;b&gt;|&lt;/b&gt; &lt;a href=&quot;#&quot;&gt;网站地图&lt;/a&gt;&lt;/p&gt;\r\n\r\n&lt;p class=&quot;pt5 c8&quot;&gt;消防e站 版权所有Copyright ? 2015-2025 www.yk119.com.cn www.yk119.cn All rights reserved&lt;br /&gt;\r\n苏ICP备15012632号 组织机构代码证：320585000221760&lt;br /&gt;\r\n中国互联网协会信用评价中心网信认证 网信编码:1664391091&lt;/p&gt;\r\n&lt;/div&gt;\r\n";}s:9:"layout_id";s:5:"99999";s:8:"position";s:13:"footer_bottom";s:6:"status";s:1:"1";s:12:"module_class";s:0:"";s:10:"sort_order";s:1:"1";}i:2;a:7:{s:12:"module_title";a:1:{i:2;s:12:"消防流程";}s:11:"description";a:1:{i:2;s:1544:"&lt;div class=&quot;rel htitle&quot;&gt;\r\n&lt;h3 class=&quot;lc-title&quot;&gt;消防流程&lt;/h3&gt;\r\n\r\n&lt;div class=&quot;line-r&quot;&gt;&amp;nbsp;&lt;/div&gt;\r\n&lt;/div&gt;\r\n\r\n&lt;div class=&quot;ovh&quot;&gt;\r\n&lt;ul class=&quot;lc-ul fix&quot;&gt;\r\n	&lt;li class=&quot;lc-li&quot;&gt;&lt;br /&gt;\r\n	&lt;a class=&quot;lc-lia&quot; href=&quot;#&quot;&gt;消防设计&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;lc-li&quot;&gt;&lt;br /&gt;\r\n	&lt;a class=&quot;lc-lia&quot; href=&quot;#&quot;&gt;消防施工&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;lc-li&quot;&gt;&lt;br /&gt;\r\n	&lt;a class=&quot;lc-lia&quot; href=&quot;#&quot;&gt;装修材料检测&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;lc-li&quot;&gt;&lt;br /&gt;\r\n	&lt;a class=&quot;lc-lia&quot; href=&quot;#&quot;&gt;消防设施检测&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;lc-li&quot;&gt;&lt;br /&gt;\r\n	&lt;a class=&quot;lc-lia&quot; href=&quot;#&quot;&gt;消防审核验收&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;lc-li&quot;&gt;&lt;br /&gt;\r\n	&lt;a class=&quot;lc-lia&quot; href=&quot;#&quot;&gt;消防维保&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;lc-li&quot;&gt;&lt;br /&gt;\r\n	&lt;a class=&quot;lc-lia&quot; href=&quot;#&quot;&gt;消防托管&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;lc-li&quot;&gt;&lt;br /&gt;\r\n	&lt;a class=&quot;lc-lia&quot; href=&quot;#&quot;&gt;消防培训&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;lc-li&quot;&gt;&lt;br /&gt;\r\n	&lt;a class=&quot;lc-lia&quot; href=&quot;#&quot;&gt;消防保障&lt;/a&gt;&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;/div&gt;\r\n";}s:9:"layout_id";s:1:"1";s:8:"position";s:9:"slideshow";s:6:"status";s:1:"1";s:12:"module_class";s:0:"";s:10:"sort_order";s:0:"";}i:3;a:7:{s:12:"module_title";a:1:{i:2;s:13:"e站直通车";}s:11:"description";a:1:{i:2;s:2349:"&lt;div class=&quot;rel pb10&quot;&gt;\r\n&lt;h3 class=&quot;index-t l-fens&quot;&gt;e站直通车&lt;/h3&gt;\r\n&lt;/div&gt;\r\n\r\n&lt;div class=&quot;ovh fix b_f btb3 bd2 p10&quot;&gt;&lt;span class=&quot;ztc-pic&quot;&gt;&lt;img src=&quot;imgs/adimg/bkpic7.jpg&quot; /&gt;&lt;/span&gt;\r\n\r\n&lt;ul class=&quot;l ztc-ul fix&quot;&gt;\r\n	&lt;li class=&quot;ztc-li&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;建设工程&lt;br /&gt;\r\n	消防备案&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor3&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;消防技术&lt;br /&gt;\r\n	服务&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor1&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;消防产品装修&lt;br /&gt;\r\n	材料检验&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor2&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;生产企业消防&lt;br /&gt;\r\n	产品抽封样&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor4&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;消防产品市场&lt;br /&gt;\r\n	准入查询&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor5&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;建筑施工资质&lt;br /&gt;\r\n	证书查询&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor6&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;社会单位消防安全&lt;br /&gt;\r\n	户籍化管理系统&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;灭火器维修技术&lt;br /&gt;\r\n	服务管理&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor1&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;建设工程消防&lt;br /&gt;\r\n	检查信息管理&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor3&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;灭火器维修技术&lt;br /&gt;\r\n	服务机构查询&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor5&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;建筑消防设施维修保养&lt;br /&gt;\r\n	技术服务机构查询&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor4&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;建筑消防设施检测&lt;br /&gt;\r\n	技术服务机构查询&lt;/a&gt;&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;/div&gt;\r\n";}s:9:"layout_id";s:1:"1";s:8:"position";s:11:"mass_bottom";s:6:"status";s:1:"1";s:12:"module_class";s:0:"";s:10:"sort_order";s:0:"";}i:4;a:7:{s:12:"module_title";a:1:{i:2;s:12:"友情链接";}s:11:"description";a:1:{i:2;s:810:"\r\n    &lt;div class=&quot;w&quot;&gt;\r\n        &lt;a href=&quot;#&quot;&gt;阿里巴巴集团&lt;/a&gt;|&lt;a href=&quot;#&quot;&gt;淘宝网&lt;/a&gt;|&lt;a href=&quot;#&quot;&gt;天猫&lt;/a&gt;|&lt;a href=&quot;#&quot;&gt;聚划算&lt;/a&gt;|&lt;a href=&quot;#&quot;&gt;全球速卖通&lt;/a&gt;|&lt;a href=&quot;#&quot;&gt;阿里巴巴国际交易市场&lt;/a&gt;|&lt;a href=&quot;#&quot;&gt;1688&lt;/a&gt;|&lt;a href=&quot;#&quot;&gt;阿里妈妈&lt;/a&gt;|&lt;a href=&quot;#&quot;&gt;阿里云计算&lt;/a&gt;|&lt;a href=&quot;#&quot;&gt;YunOS&lt;/a&gt;|&lt;a href=&quot;#&quot;&gt;阿里通信&lt;/a&gt;|&lt;a href=&quot;#&quot;&gt;万网&lt;/a&gt;|&lt;a href=&quot;#&quot;&gt;高德&lt;/a&gt;|&lt;a href=&quot;#&quot;&gt;优视&lt;/a&gt;|&lt;a href=&quot;#&quot;&gt;友盟&lt;/a&gt;\r\n    &lt;/div&gt;\r\n";}s:9:"layout_id";s:5:"99999";s:8:"position";s:10:"footer_top";s:6:"status";s:1:"1";s:12:"module_class";s:0:"";s:10:"sort_order";s:0:"";}}', 1),

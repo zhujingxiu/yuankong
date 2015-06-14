@@ -107,6 +107,7 @@ class ControllerCommonHeader extends Controller {
 		$this->data['text_zone'] = $this->language->get('text_zone');
 		$this->data['text_project'] = $this->language->get('text_project');
 		$this->data['text_project_group'] = $this->language->get('text_project_group');
+		$this->data['text_case'] = $this->language->get('text_case');
 		
 
 		if (!$this->user->isLogged() || !isset($this->request->get['token']) || !isset($this->session->data['token']) || ($this->request->get['token'] != $this->session->data['token'])) {
@@ -188,6 +189,7 @@ class ControllerCommonHeader extends Controller {
 			$this->data['news'] = $this->url->link('extension/news', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['news_group'] = $this->url->link('extension/news_group', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['link'] = $this->url->link('extension/link', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['case'] = $this->url->link('extension/case', 'token=' . $this->session->data['token'], 'SSL');
 			
 			$this->data['stores'] = array();
 			

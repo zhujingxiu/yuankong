@@ -185,12 +185,13 @@ $(document).ready(function(){
               </li>
               <li><a href="<?php echo $length_class; ?>"><?php echo $text_length_class; ?></a></li>
               <li><a href="<?php echo $weight_class; ?>"><?php echo $text_weight_class; ?></a></li>
-              <li><a href="<?php echo $news_group; ?>"><?php echo $text_news_group; ?></a></li>
-              <li><a href="<?php echo $help_group; ?>"><?php echo $text_help_group; ?></a></li>
-              <li><a href="<?php echo $project_group; ?>"><?php echo $text_project_group; ?></a></li>
             </ul>
           </li>
+
           <li><a href="<?php echo $information; ?>"><?php echo $text_information; ?></a></li>
+          <li><a href="<?php echo $news_group; ?>"><?php echo $text_news_group; ?></a></li>
+          <li class="_hide"><a href="<?php echo $help_group; ?>"><?php echo $text_help_group; ?></a></li>
+          <li><a href="<?php echo $project_group; ?>"><?php echo $text_project_group; ?></a></li>
           <li><a class="parent"><?php echo $text_design; ?></a>
             <ul>
               <li><a href="<?php echo $banner; ?>"><?php echo $text_banner; ?></a></li>
@@ -207,6 +208,7 @@ $(document).ready(function(){
           <li><a href="<?php echo $payment; ?>"><?php echo $text_payment; ?></a></li>
           <li><a href="<?php echo $total; ?>"><?php echo $text_total; ?></a></li>
           <li><a href="<?php echo $feed; ?>"><?php echo $text_feed; ?></a></li>
+          <li><a href="<?php echo $case; ?>"><?php echo $text_case; ?></a></li>
           <li><a href="<?php echo $coupon; ?>"><?php echo $text_coupon; ?></a></li>
           <li><a class="parent"><?php echo $text_voucher; ?></a>
             <ul>

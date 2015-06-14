@@ -582,3 +582,7 @@ table.form > tbody > tr > td {
     float: left;
     margin-left: 5px;
   }
+
+._hide{
+	display: none;
+}

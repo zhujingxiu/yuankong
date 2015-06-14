@@ -29,7 +29,29 @@ $_['text_separator']          = ' &gt; ';
 $_['text_edit']               = '编辑';
 $_['text_view']               = '查看';
 $_['text_home']               = '首页';
+$_['text_content_top']    	  = '内容顶部';
+$_['text_content_bottom'] 	  = '内容底部';
+$_['text_column_left']    	  = '左列显示';
+$_['text_column_right']   	  = '右列显示';
 
+$_['text_mainmenu']       = '主菜单';
+$_['text_showcase']       = '案例块';
+$_['text_slideshow']   	  = '幻灯片轮播块';
+$_['text_promotion']   	  = '促销块';
+$_['text_mass_bottom']    = '焦点底部块';
+$_['text_bottom1']   	  = 'Bottom 1';
+$_['text_bottom2']   	  = 'Bottom 2';
+$_['text_bottom3']   	  = 'Bottom 3';
+$_['text_footer_top']     = '页脚顶部';
+$_['text_footer_center']   = '页脚中部';
+$_['text_footer_bottom']   = '页脚底部';
+// Entry
+$_['entry_layout']        	  = '布局：';
+$_['entry_position']      	  = '显示位置：';
+$_['entry_status']        	  = '状态：';
+$_['entry_sort_order']    	  = '排序：';
+$_['entry_title']        	  = '标题:';
+$_['entry_description']       = '描述:';
 // Button
 $_['button_insert']           = '新增';
 $_['button_delete']           = '删除';
@@ -119,4 +141,3 @@ $_['error_upload_6']          = '警告： 找不到临时文件夾！';
 $_['error_upload_7']          = '警告： 无法写入文件！';
 $_['error_upload_8']          = '警告： 文件上传终止！';
 $_['error_upload_999']        = '警告： 无错误代码！';
-?>

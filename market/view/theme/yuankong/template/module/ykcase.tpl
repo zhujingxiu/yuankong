@@ -1,5 +1,5 @@
 <div class="rel pb10">
-    <h3 class="index-t"><?php echo $title ?></h3>
+    <h3 class="index-t">案列精选</h3>
 </div>
 <div class="bd2 rel anbox btb3">
     <span class="l-rline icon2"></span>

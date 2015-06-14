@@ -1,6 +1,6 @@
 <?php
 class Language {
-	private $default = 'english';
+	private $default = 'chinese';
 	private $directory;
 	private $data = array();
  
@@ -41,4 +41,3 @@ class Language {
 		}
   	}
 }
-?>
