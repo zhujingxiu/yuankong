@@ -10,6 +10,7 @@ define('DIR_UPLOAD', DIR_ASSET.'upload/');
 
 define('TPL_JS', 'asset/javascript/');
 define('TPL_IMG', 'asset/image/');
+define('TPL_UPLOAD', 'asset/upload/');
 
 define('DIR_SYSTEM', APP_PATH.'system/');
 define('DIR_CACHE', DIR_SYSTEM.'cache/');

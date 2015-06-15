@@ -28,12 +28,10 @@ class ControllerModuleYkcase extends Controller {
         $this->data['text_column_right'] = $this->language->get('text_column_right');
 
         $this->data['entry_title'] = $this->language->get('entry_title');
-        $this->data['entry_group'] = $this->language->get('entry_group');
         $this->data['entry_layout'] = $this->language->get('entry_layout');
         $this->data['entry_position'] = $this->language->get('entry_position');
         $this->data['entry_status'] = $this->language->get('entry_status');
         $this->data['entry_limit'] = $this->language->get('entry_limit');
-        $this->data['entry_first_class'] = $this->language->get('entry_first_class');
         $this->data['entry_sort_order'] = $this->language->get('entry_sort_order');
         
         $this->data['button_save'] = $this->language->get('button_save');
@@ -74,7 +72,7 @@ class ControllerModuleYkcase extends Controller {
         $this->data['positions'] = array( 
             'mainmenu',
             'slideshow',
-            'case',
+            'showcase',
             'promotion',
             'content_top',
             'column_left',
@@ -90,11 +88,9 @@ class ControllerModuleYkcase extends Controller {
             'layout_id'=>'',
             'position'=>'',
             'title'=>'',
-            'group_id'=>'',
             'status'=>'',
             'sort_order'=>'1',
             'limit'=>6,
-            'first_class'=>'ss',
         );
 
         $this->data['modules'] = array();
@@ -114,10 +110,7 @@ class ControllerModuleYkcase extends Controller {
         
         $this->data['layouts'] = array_merge($this->data['layouts'],$this->model_design_layout->getLayouts());
 
-        $this->load->model('extension/news_group');
-
-        $this->data['groups'] = $this->model_extension_news_group->getNewsGroups();
-               
+        
         $this->template = 'module/ykcase.tpl';
         $this->children = array(
             'common/header',
@@ -143,19 +136,16 @@ class ControllerModuleYkcase extends Controller {
         $sql = "CREATE TABLE IF NOT EXISTS `".DB_PREFIX."case` (
   `case_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
-  `image` varchar(255) DEFAULT NULL,
+  `desc` TEXT NULL,
+  `cover` varchar(255) DEFAULT NULL,
   `sort_order` int(3) NOT NULL,
   PRIMARY KEY (`case_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;";
     $this->db->query($sql);
         $sql = "CREATE TABLE IF NOT EXISTS `".DB_PREFIX."case_imgae` (
-  `image_id` int(11) NOT NULL AUTO_INCREMENT,
   `case_id` int(11) NOT NULL,
   `name` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
-  `path` varchar(512) COLLATE utf8_unicode_ci NOT NULL,
-  `sort_order` int(11) NOT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`image_id`)
+  `path` varchar(512) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;";
     $this->db->query($sql);
 

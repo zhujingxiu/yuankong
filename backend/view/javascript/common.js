@@ -65,3 +65,14 @@ $(document).ready(function() {
 		$(this).removeClass('hover');
 	});	
 });
+
+function getImgURL(fileName){
+	var url='';
+	var ext=fileName.substring(fileName.lastIndexOf(".")+1);
+	if(ext=='jpg'||ext=='jpeg'||ext=='gif'||ext=='png'){
+		url=fileName;
+	}else{
+		url="/asset/image/icons/"+ext+".png";
+	}
+	return url;
+}

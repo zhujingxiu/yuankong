@@ -32,7 +32,7 @@ class ControllerCommonFileManager extends Controller {
 		
 		$this->data['token'] = $this->session->data['token'];
 		
-		$this->data['directory'] = HTTP_CATALOG . 'image/data/';
+		$this->data['directory'] = HTTP_CATALOG .substr(TPL_IMG,strpos(TPL_IMG,'/')+1).'data/';
 				
 		$this->load->model('tool/image');
 
@@ -487,4 +487,3 @@ class ControllerCommonFileManager extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 } 
-?>

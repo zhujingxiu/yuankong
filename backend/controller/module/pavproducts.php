@@ -192,4 +192,3 @@ class ControllerModulepavproducts extends Controller {
 		}	
 	}
 }
-?>

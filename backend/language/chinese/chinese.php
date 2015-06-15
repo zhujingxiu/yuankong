@@ -27,6 +27,7 @@ $_['text_pagination']         = '显示 {start} - {end} / {total} (总 {pages} �
 $_['text_no_results']         = '没有结果！';
 $_['text_separator']          = ' &gt; ';
 $_['text_edit']               = '编辑';
+$_['text_delete']             = '删除';
 $_['text_view']               = '查看';
 $_['text_home']               = '首页';
 $_['text_content_top']    	  = '内容顶部';

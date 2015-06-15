@@ -586,3 +586,33 @@ table.form > tbody > tr > td {
 ._hide{
 	display: none;
 }
+
+.uploads{margin-right: 15px;clear: both}
+
+.attach{float: left;border:1px dashed #CCC;padding: 5px;position: relative;}
+.attach a.fancy-img{
+    bottom: 0;
+    cursor: pointer;
+    display: block;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+}
+.attach img{width: 100px;height: 100px;}
+.attach a.img-remove{
+	position: absolute;
+	left: 0; 
+	bottom: 3px;
+	background: #eee;
+	width: 98%;
+	margin:0;
+	opacity:0;
+	text-align: center;
+	overflow: hidden;
+}
+.attach a.img-remove:hover{
+	opacity:0.8;
+	cursor: pointer;
+	text-decoration: underline;
+}

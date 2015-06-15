@@ -21,10 +21,8 @@
               <td class="left"><?php echo $entry_layout; ?></td>
               <td class="left"><?php echo $entry_position; ?></td>
               
-              <td class="left"><?php echo $entry_group; ?></td>
               <td class="left"><?php echo $entry_title; ?></td>
               <td class="left"><?php echo $entry_limit; ?></td>
-              <td class="left"><?php echo $entry_first_class; ?></td>
               <td class="left"><?php echo $entry_status; ?></td>
               <td class="right"><?php echo $entry_sort_order; ?></td>
               <td></td>
@@ -52,19 +50,8 @@
                       <?php } ?>
                       <?php } ?> 
                     </select></td>
-              <td class="left"><select name="ykcase_module[<?php echo $module_row; ?>][group_id]">
-                      <option value="0"><?php echo $text_none; ?></option>
-                      <?php foreach( $groups as $item ) { ?>
-                      <?php if ($module['group_id'] == $item) { ?>
-                      <option value="<?php echo $item['group_id'];?>" selected="selected"><?php echo $item['name']; ?></option>
-                      <?php } else { ?>
-                      <option value="<?php echo $item['group_id'];?>"><?php echo $item['name']; ?></option>
-                      <?php } ?>
-                      <?php } ?> 
-                    </select></td>
               <td class="left"><input type="text" name="ykcase_module[<?php echo $module_row; ?>][title]" value="<?php echo $module['title']; ?>" /></td>
               <td class="left"><input type="text" name="ykcase_module[<?php echo $module_row; ?>][limit]" value="<?php echo $module['limit']; ?>" size="3"/></td>
-              <td class="left"><input type="text" name="ykcase_module[<?php echo $module_row; ?>][first_class]" value="<?php echo $module['first_class']; ?>" /></td>
               <td class="left"><select name="ykcase_module[<?php echo $module_row; ?>][status]">
                   <?php if ($module['status']) { ?>
                   <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
@@ -82,7 +69,7 @@
           <?php } ?>
           <tfoot>
             <tr>
-              <td colspan="8"></td>
+              <td colspan="6"></td>
               <td class="left"><a onclick="addModule();" class="button"><?php echo $button_add_module; ?></a></td>
             </tr>
           </tfoot>
@@ -107,15 +94,10 @@ function addModule() {
             html += '<option value="<?php echo $pos;?>"><?php echo $this->language->get('text_'.$pos); ?></option>';      
   <?php } ?>        
   html += '    </select></td>';
-  html += '    <td class="left"><select name="ykcase_module[' + module_row + '][group_id]">';
-  html += ' <option value="0"><?php echo $text_none; ?></option>';
-   <?php foreach( $groups as $item ) { ?>
-            html += '<option value="<?php echo $item['group_id'];?>"><?php echo $item['name']; ?></option>';      
-  <?php } ?>        
-  html += '    </select></td>';
+
     html += '    <td class="left"><input type="text" name="ykcase_module[' + module_row + '][title]" value="" /></td>';
       html += '    <td class="left"><input type="text" name="ykcase_module[' + module_row + '][limit]" value="" size="3" /></td>';
-        html += '    <td class="left"><input type="text" name="ykcase_module[' + module_row + '][first_class]" value="" /></td>';
+
   html += '    <td class="left"><select name="ykcase_module[' + module_row + '][status]">';
     html += '      <option value="1" selected="selected"><?php echo $text_enabled; ?></option>';
     html += '      <option value="0"><?php echo $text_disabled; ?></option>';

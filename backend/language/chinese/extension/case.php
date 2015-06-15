@@ -1,6 +1,7 @@
 <?php
 // Heading
 $_['heading_title']              = '客户案例';
+$_['tab_images']                 = '图片详情';
 
 // Text
 $_['text_success']               = '成功： 您已成功更新客户案例！';
@@ -14,6 +15,7 @@ $_['text_amount']                = '固定数额';
 // Column
 $_['column_name']                = '品牌名称';
 $_['column_cover']               = '封面图片';
+$_['column_images']               = '图片数';
 $_['column_sort_order']          = '排序';
 $_['column_action']              = '管理';
 
@@ -24,7 +26,7 @@ $_['entry_keyword']              = '&nbsp;&nbsp;SEO关键词：<br /><span class
 $_['entry_cover']                = '&nbsp;&nbsp;品牌图片：';
 $_['entry_sort_order']           = '&nbsp;&nbsp;品牌排序：';
 $_['entry_type']                 = '&nbsp;&nbsp;品牌类型：';
-$_['entry_add_img']                 = '&nbsp;&nbsp;添加图片：';
+$_['entry_add_img']                 = '&nbsp;&nbsp;添加更多图片：';
 
 // Error
 $_['error_permission']           = '警告： 您没有权限更改品牌商！';

@@ -8,9 +8,9 @@ class Response {
 		$this->headers[] = $header;
 	}
 
-	public function redirect($url) {
-		header('Location: ' . $url);
-		exit;
+	public function redirect($url, $status = 302) {
+		header('Location: ' . str_replace(array('&amp;', "\n", "\r"), array('&', '', ''), $url), true, $status);
+		exit();
 	}
 	
 	public function setCompression($level) {
@@ -69,4 +69,3 @@ class Response {
 		}
 	}
 }
-?>

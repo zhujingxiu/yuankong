@@ -175,13 +175,6 @@ class ControllerExtensionCase extends Controller {
 		$results = $this->model_extension_case->getCases($data);
  		$this->load->model('tool/image');
 
-		if (isset($this->request->post['image']) && file_exists(DIR_IMAGE . $this->request->post['image'])) {
-			$this->data['thumb'] = $this->model_tool_image->resize($this->request->post['image'], 100, 100);
-		} elseif (!empty($case_info) && $case_info['image'] && file_exists(DIR_IMAGE . $case_info['image'])) {
-			$this->data['thumb'] = $this->model_tool_image->resize($case_info['image'], 100, 100);
-		} else {
-			$this->data['thumb'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
-		}
     	foreach ($results as $result) {
 			$action = array();
 			
@@ -198,6 +191,7 @@ class ControllerExtensionCase extends Controller {
 				'case_id' 	=> $result['case_id'],
 				'name'      => $result['name'],
 				'cover' 	=> $this->model_tool_image->resize($image, 100, 100),
+				'images' 	=> $this->model_extension_case->getTotalCaseImages($result['case_id']),
 				'sort_order' => $result['sort_order'],
 				'selected'        => isset($this->request->post['selected']) && in_array($result['case_id'], $this->request->post['selected']),
 				'action'          => $action
@@ -210,6 +204,7 @@ class ControllerExtensionCase extends Controller {
 
 		$this->data['column_name'] = $this->language->get('column_name');
 		$this->data['column_cover'] = $this->language->get('column_cover');
+		$this->data['column_images'] = $this->language->get('column_images');
 		$this->data['column_sort_order'] = $this->language->get('column_sort_order');
 		$this->data['column_action'] = $this->language->get('column_action');		
 		
@@ -279,14 +274,22 @@ class ControllerExtensionCase extends Controller {
   	protected function getForm() {
     	$this->data['heading_title'] = $this->language->get('heading_title');
     	$this->document->addScript('view/javascript/jquery/ajaxupload.js');
+    	$this->document->addScript('view/javascript/ckeditor/ckeditor.js');
+    	$this->document->addScript(TPL_JS.'jquery.json.min.js');
+    	$this->document->addStyle(TPL_JS.'fancybox/jquery.fancybox.css?v=2.1.5');
+        $this->document->addScript(TPL_JS.'fancybox/jquery.fancybox.pack.js?v=2.1.5');
+        $this->document->addStyle(TPL_JS.'fancybox/helpers/jquery.fancybox-buttons.css?v=2.1.5');
+        $this->document->addScript(TPL_JS.'fancybox/helpers/jquery.fancybox-buttons.js?v=2.1.5');
+        $this->document->addStyle(TPL_JS.'fancybox/helpers/jquery.fancybox-thumbs?v=2.1.5');
+        $this->document->addScript(TPL_JS.'fancybox/helpers/jquery.fancybox-thumbs.js?v=2.1.5');
     	$this->data['text_enabled'] = $this->language->get('text_enabled');
     	$this->data['text_disabled'] = $this->language->get('text_disabled');
 		$this->data['text_default'] = $this->language->get('text_default');
     	$this->data['text_image_manager'] = $this->language->get('text_image_manager');
 		$this->data['text_browse'] = $this->language->get('text_browse');
 		$this->data['text_clear'] = $this->language->get('text_clear');			
-		$this->data['text_percent'] = $this->language->get('text_percent');
-		$this->data['text_amount'] = $this->language->get('text_amount');
+		$this->data['tab_images'] = $this->language->get('tab_images');
+		$this->data['text_delete'] = $this->language->get('text_delete');
 				
 		$this->data['entry_name'] = $this->language->get('entry_name');
 		$this->data['entry_desc'] = $this->language->get('entry_desc');
@@ -345,11 +348,21 @@ class ControllerExtensionCase extends Controller {
 		} else {
 			$this->data['action'] = $this->url->link('extension/case/update', 'token=' . $this->session->data['token'] . '&case_id=' . $this->request->get['case_id'] . $url, 'SSL');
 		}
-		
+		$this->load->model('tool/image');
 		$this->data['cancel'] = $this->url->link('extension/case', 'token=' . $this->session->data['token'] . $url, 'SSL');
-
+		$file = array();
     	if (isset($this->request->get['case_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
       		$case_info = $this->model_extension_case->getCase($this->request->get['case_id']);
+      		$case_images = $this->model_extension_case->getCaseImages($this->request->get['case_id']);
+      		foreach ($case_images as $attch) {
+      			if ($attch['path'] && file_exists($attch['path'])) {
+	                $file[] = array(
+	                	'realpath' => HTTP_CATALOG.substr($attch['path'],strpos($attch['path'],'/')+1),
+	                	'name' => $attch['name'],
+	                	'image' => $this->model_tool_image->resize($attch['path'], 100, 100,true),
+	                );
+	            }
+      		}
     	}
 
 		$this->data['token'] = $this->session->data['token'];
@@ -386,7 +399,7 @@ class ControllerExtensionCase extends Controller {
 			$this->data['cover'] = '';
 		}
 		
-		$this->load->model('tool/image');
+		
 
 		if (isset($this->request->post['cover']) && file_exists(DIR_IMAGE . $this->request->post['cover'])) {
 			$this->data['thumb'] = $this->model_tool_image->resize($this->request->post['cover'], 100, 100);
@@ -405,6 +418,8 @@ class ControllerExtensionCase extends Controller {
 		} else {
       		$this->data['sort_order'] = '';
     	}
+
+    	$this->data['case_images'] = $file;
 		
 		$this->template = 'extension/case_form.tpl';
 		$this->children = array(

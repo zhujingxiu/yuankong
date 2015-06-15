@@ -7,13 +7,26 @@ class ModelModuleYkmodule extends Model {
 			$sql .= " WHERE group_id = '".$group."'";
 		}
 		
-		if ($limit < 1) {
-			$sql .= " LLIMIT ".$limit;
-		}	
+		if ($limit) {
+			$sql .= " LIMIT ".$limit;
+		}else{
+			$sql .= " LIMIT 5";
+		}
 
 		$query = $this->db->query($sql);
 	
 		return $query->rows;
 	}
+	public function getCases( $limit = 5) {
+		$sql = "SELECT * FROM ".DB_PREFIX."case ";
+
+		if ($limit) {
+			$sql .= " LIMIT ".$limit;
+		}else{
+			$sql .= " LIMIT 16";
+		}	
+		$query = $this->db->query($sql);
 	
+		return $query->rows;
+	}
 }
