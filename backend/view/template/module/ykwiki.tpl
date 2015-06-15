@@ -43,10 +43,6 @@
                 <td><?php echo $entry_title; ?></td>
                 <td><input name="ykwiki_module[<?php echo $module_row; ?>][title][<?php echo $language['language_id']; ?>]" value="<?php echo isset($module['title'][$language['language_id']]) ? $module['title'][$language['language_id']] : ''; ?>" /></td>
               </tr>
-              <tr>
-                <td><?php echo $entry_description; ?></td>
-                <td><textarea name="ykwiki_module[<?php echo $module_row; ?>][description][<?php echo $language['language_id']; ?>]" id="description-<?php echo $module_row; ?>-<?php echo $language['language_id']; ?>"><?php echo isset($module['description'][$language['language_id']]) ? $module['description'][$language['language_id']] : ''; ?></textarea></td>
-              </tr>
             </table>
           </div>
           <?php } ?>
@@ -229,10 +225,6 @@ function addModule() {
     html += '        <tr>';
   html += '          <td><?php echo $entry_title; ?></td>';
   html += '          <td><input name="ykwiki_module[' + module_row + '][title][<?php echo $language['language_id']; ?>]" /></td>';
-  html += '        </tr>';
-  html += '        <tr>';
-  html += '          <td><?php echo $entry_description; ?></td>';
-  html += '          <td><textarea name="ykwiki_module[' + module_row + '][description][<?php echo $language['language_id']; ?>]" id="description-' + module_row + '-<?php echo $language['language_id']; ?>"></textarea></td>';
   html += '        </tr>';
   html += '      </table>';
   html += '    </div>';

@@ -16,25 +16,12 @@
 ?>
 </section>
 <?php
-	/**
-	 * Footer Top Position
-	 * $ospans allow overrides width of columns base on thiers indexs. format array( 1=> 3 )[value from 1->12]
-	 */
 	$modules = $helper->getModulesByPosition( 'mass_bottom' ); 
-	$ospans = array( );
-	$cols   = 1;
-	if( count($modules) ) { 
-?>
-<div id="pav-mass-bottom" class="w mt15">
-
+	if( count($modules) ) { ?>
 		<?php foreach ($modules as $i =>  $module) {   ?>
-			<?php if( $i++%$cols == 0 || count($modules)==1 ){  ?><?php } ?>	
-			<?php echo $module; ?>
-			<?php if( $i%$cols == 0 || $i==count($modules) ){ ?><?php } ?>	
+		<div class="w mt15"><?php echo $module; ?></div>	
 		<?php } ?>
-
-</div>
-<?php } ?>
+	<?php } ?>
 <?php
 
 $modules = $helper->getModulesByPosition( 'footer_top' ); 
@@ -84,23 +71,16 @@ $class = $helper->calculateSpans( $ospans, $cols );
 	$class = $helper->calculateSpans( $ospans, $cols );
 	?>
 	<div class="footer-bottom">
-		<div class="container">
-		<?php $j=1;foreach ($modules as $i =>  $module) { $i=$i+1; ?>
-				<?php if( $i%$cols == 1 || count($modules)==1 ){  $j=1;?><div class="row-fluid"><?php } ?>	
-				<div class="<?php echo $class[$j];?>"><?php echo $module; ?></div>
-				<?php if( $i%$cols == 0 || $i==count($modules) ){ ?></div><?php } ?>	
-		<?php  $j++;  } ?>	
-		</div>
+		
+		<?php foreach ($modules as $i =>  $module) { $i=$i+1; ?>
+				<?php if( $i%$cols == 1 || count($modules)==1 ){  ?><?php } ?>	
+				<?php echo $module; ?>
+				<?php if( $i%$cols == 0 || $i==count($modules) ){ ?><?php } ?>	
+		<?php } ?>	
+		
 	</div>
 	<?php } ?>
 </div>
-<?php if(false){?>
-<div id="powered"><div class="container">
-<div class="pull-left">
-	<?php echo $powered; ?>. 
-</div>
-<div class="pull-right"></div>
-</div></div>
-<?php }?>
+
 
 </body></html>

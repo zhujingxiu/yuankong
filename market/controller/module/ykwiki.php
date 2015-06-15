@@ -5,28 +5,58 @@ class ControllerModuleYkwiki extends Controller {
         static $module = 0;
 
         $this->data['setting'] = $setting;  
- 
-        $this->data['title'] = $setting['title'];
+
+        $this->data['title'] = $setting['title'][$this->config->get('config_language_id')];
         $this->data['wiki'] = array();
         if(isset($setting['category_tabs'])){
+            if(isset($setting['sort'])){
+                sort($setting['sort']);
+                $groups = array();
+                foreach ($setting['sort'] as $key => $value) {
+                    $groups[] = $setting['category_tabs'][$key];
+                }
+            }else{
+                $groups = $setting['category_tabs'];
+            }
+            foreach ($groups as $key => $gid) {
 
-            foreach ($setting['category_tabs'] as $key => $value) {
+                if($gid){
+                    $group = $this->model_module_ykmodule->getGroup($gid);
+
+                    $title = !empty($group['name']) ? $group['name'] : $this->language->get('text_unknown');
+                    
+                }else{
+                    $title = $this->language->get('text_wiki_help');
+                    
+                }
                 $config =  array(
-                    'group_id' => $value,
+                    'group_id' => $gid,
                     'limit'     => isset($setting['limit'][$key]) ? $setting['limit'][$key] : 5,
-                )
+                );
                 $_wiki = $this->model_module_ykmodule->getWiki($config);
+                foreach ($_wiki as $i => $item) {
+                    if($gid){
+                        $_wiki[$i]['link'] = $this->url->link('catalog/news','news_id='.$item['news_id'],'SSL');
+                    }else{
+                        $_wiki[$i]['link'] = $this->url->link('catalog/help','help_id='.$item['help_id'],'SSL');
+                    }
+                }
+                $offset = isset($setting['sort'][$key]) ? (int)$setting['sort'][$key] : 0;
+                $data = array(
+                    'data' => $_wiki,
+                    'icon' => isset($setting['image'][$key]) ? $setting['image'][$key] : '',
+                    'title' => $title,
+                );
+                if(isset($this->data['wiki']['top']) && count($this->data['wiki']['top'])>2){
+                    $this->data['wiki']['bottom'][] = $data;
+                }else{
+                    $this->data['wiki']['top'][] = $data;
+                }
             }
         }
-        
-        $this->load->model('tool/image');
 
-
-        
         $this->data['module'] = $module++;
         $this->data['text_more'] = $this->language->get('text_more');
-        $this->data['text_more'] = $this->language->get('text_more');
-        $this->data['case'] = $this->url->link('catelog/case','','SSL');
         $this->template = $this->config->get('config_template') . '/template/module/ykwiki.tpl';
         
         $this->render();
