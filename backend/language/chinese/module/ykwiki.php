@@ -6,7 +6,7 @@ $_['heading_title']       = '信息块';
 $_['text_module']         = 'Modules';
 $_['text_success']        = '成功：您已修改成功';
 
-$_['all_page']   = 'All Page';
+$_['all_page']   = '所有页面';
 
 $_['entry_icon_image'] = '图标';
 $_['text_image_manager'] = '图片管理';

@@ -42,6 +42,9 @@ i,em,cite {
 }
 
 /*---- 公共设置 ---*/
+.fa_s {
+    font-family:"宋体";
+}
 .dn {
     display: none;
 }
@@ -265,6 +268,9 @@ i,em,cite {
 }
 .cff {
     color: #be1025;
+}
+.c_red {
+    color: #C30D23;
 }
 .f_0 {
     font-size: 0;
