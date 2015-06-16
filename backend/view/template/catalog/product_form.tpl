@@ -33,13 +33,33 @@
       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
         <div id="tab-data">
           <table class="form">
+
             <tr>
               <td><?php echo $entry_category; ?></td>
-              <td><input type="text" name="category" value="" /></td>
+              <td>
+                <div class="selection-category">
+                  <select id="top-category" for-entry="second-category">
+                    <option value="0"><?php echo $text_none ?></option>
+                    <?php foreach ($top_categories as $item): ?>
+                    <option value="<?php echo $item['category_id'] ?>"><?php echo $item['name'] ?></option>
+                    <?php endforeach ?>
+                  </select>
+                </div>
+                <div class="selection-category">
+                  <select id="second-category" for-entry="third-category"></select>
+                </div>
+                <div class="selection-category">
+                  <select id="third-category" for-entry="fourth-category"></select>
+                </div>
+                <div class="selection-category">
+                  <select id="fourth-category"></select>
+                </div>
+                <a class="btn" id="add-category"><?php echo $button_add ?></a>
+              </td>
             </tr>
             <tr>
               <td>&nbsp;</td>
-              <td><div id="product-category" class="scrollbox">
+              <td><div id="product-category" class="scrollbox" style="width:390px;">
                   <?php $class = 'odd'; ?>
                   <?php foreach ($product_categories as $product_category) { ?>
                   <?php $class = ($class == 'even' ? 'odd' : 'even'); ?>
@@ -76,6 +96,11 @@
                   <?php if (isset($error_name[$language['language_id']])) { ?>
                   <span class="error"><?php echo $error_name[$language['language_id']]; ?></span>
                   <?php } ?></td>
+              </tr>
+              <tr>
+                <td> <?php echo $entry_subtitle; ?></td>
+                <td><input type="text" name="product_description[<?php echo $language['language_id']; ?>][subtitle]" size="100" value="<?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['subtitle'] : ''; ?>" />
+                  </td>
               </tr>
               <tr>
                 <td><?php echo $entry_meta_description; ?></td>
@@ -819,6 +844,39 @@ $('input[name=\'category\']').autocomplete({
       return false;
    }
 });
+$('.selection-category select').bind('change',function(){
+  var $cid = $(this).val(),
+  $obj = $('.selection-category #'+$(this).attr('for-entry'));
+  $(this).parent().nextAll('.selection-category').hide().children('select').empty();
+  if($cid > 0 ){
+    $.get('index.php?route=catalog/category/selection_category&token=<?php echo $token ?>&cid='+$cid ,{},function(json){
+      if(json.status==1){
+        $obj.append($("<option value='*'><?php echo $text_none ?></option>"));
+        for(var i in json.data){
+          $obj.append($("<option value='" + json.data[i].category_id + "'>" + json.data[i].name + "</option>"));
+        }
+        $obj.parent().show();
+      }
+    },'json');
+  }
+});
+$('#top-category').trigger('change');
+$('#add-category').bind('click',function(){
+    var category_id = 0,name = [];
+    $.each($('.selection-category select'),function(){
+      if($.isNumeric($(this).val()) && $(this).val() > 0){
+        category_id = $(this).val();
+        name.push($(this).find("option:selected").text()); 
+      }
+    })
+    if(category_id > 0){
+      var html = '<div id="product-category' + category_id + '">' + name.join(' &gt; ') + '<img src="view/image/delete.png" alt="" /><input type="hidden" name="product_category[]" value="' + category_id + '" /></div>';
+      $('#product-category').append(html);
+      $('#product-category div:odd').attr('class', 'odd');
+      $('#product-category div:even').attr('class', 'even');
+    }
+})
+
 
 $('#product-category div img').live('click', function() {
 	$(this).parent().remove();
@@ -1175,6 +1233,7 @@ function addOptionValue(option_row) {
 	option_value_row++;
 }
 //--></script> 
+<?php if(false){?>
 <script type="text/javascript"><!--
 var discount_row = <?php echo $discount_row; ?>;
 
@@ -1202,6 +1261,7 @@ function addDiscount() {
 	discount_row++;
 }
 //--></script> 
+<?php }?>
 <script type="text/javascript"><!--
 var special_row = <?php echo $special_row; ?>;
 

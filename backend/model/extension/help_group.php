@@ -10,39 +10,39 @@ class ModelExtensionHelpGroup extends Model {
         return $this->db->insert("help_group",$fields);
     }
 
-    public function editHelpGroup($help_group_id, $data) {
+    public function editHelpGroup($group_id, $data) {
         $fields = array(
             'name' => isset($data['name']) ? strip_tags(trim($data['name'])) : 0,
             'show' => isset($data['show']) ? (int)$data['show'] : 0,
             'sort_order' => isset($data['sort_order']) ? (int)$data['sort_order'] : 0
         );
 
-        return $this->db->update("help_group",array('group_id'=>$help_group_id),$fields);
+        return $this->db->update("help_group",array('group_id'=>$group_id),$fields);
     }
     
-    public function deleteHelpGroup($help_group_id) {
-        $this->db->delete("help_group",array('help_group_id' => (int)$help_group_id));
+    public function deleteHelpGroup($group_id) {
+        $this->db->delete("help_group",array('group_id' => (int)$group_id));
     }
         
-    public function getHelpGroup($help_group_id) {
-        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "help_group WHERE group_id = '" . (int)$help_group_id . "'");
+    public function getHelpGroup($group_id) {
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "help_group WHERE group_id = '" . (int)$group_id . "'");
         
         return $query->row;
     }
         
     public function getHelpGroups($data = array()) {
-        $sql = "SELECT * FROM " . DB_PREFIX . "help_group ng  ";
+        $sql = "SELECT * FROM " . DB_PREFIX . "help_group ";
             
         $sort_data = array(
-            'ng.name',
-            'ng.show',
-            'ng.sort_order'
+            'name',
+            'show',
+            'sort_order'
         );  
         
         if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
             $sql .= " ORDER BY " . $data['sort'];   
         } else {
-            $sql .= " ORDER BY ng.group_id";    
+            $sql .= " ORDER BY group_id";    
         }   
             
         if (isset($data['order']) && ($data['order'] == 'DESC')) {

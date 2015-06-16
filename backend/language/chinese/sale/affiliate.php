@@ -1,18 +1,20 @@
 <?php
 // Heading
-$_['heading_title']             = '加盟会员';
+$_['heading_title']             = '加盟商户';
 
 // Text
-$_['text_success']              = '成功： 您已成功更新加盟会员！';
-$_['text_approved']             = '您已有%s 个审核会员！';
+$_['text_success']              = '成功： 您已成功更新加盟商户！';
+$_['text_approved']             = '您已有%s 个审核商户！';
 $_['text_wait']                 = '请耐心等待！';
 $_['text_balance']              = '余额：';
 $_['text_cheque']               = '支票';
 $_['text_paypal']               = 'PayPal';
 $_['text_bank']                 = '银行转账';
+$_['text_group']                 = '商户类别';
 
 // Column
-$_['column_name']               = '会员名称';
+$_['column_name']               = '商户名称';
+$_['column_group']              = '类别';
 $_['column_email']              = 'E-Mail';
 $_['column_code']               = '跟踪号';
 $_['column_balance']            = '余额';
@@ -54,7 +56,7 @@ $_['entry_amount']              = '金额：';
 $_['entry_description']         = '描述：';
 
 // Error
-$_['error_permission']          = '警告： 您没有权限更改加盟会员！';
+$_['error_permission']          = '警告： 您没有权限更改加盟商户！';
 $_['error_exists']              = '警告： 此E-Mail地址已注册！';
 $_['error_firstname']           = '名字必须在1至32个字符之间！';
 $_['error_lastname']            = '姓氏必须在1至32个字符之间！';

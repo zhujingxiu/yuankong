@@ -241,6 +241,12 @@ class ControllerSaleAffiliate extends Controller {
 			$filter_name = null;
 		}
 
+		if (isset($this->request->get['filter_group_id'])) {
+			$filter_group_id = $this->request->get['filter_group_id'];
+		} else {
+			$filter_group_id = null;
+		}
+
 		if (isset($this->request->get['filter_email'])) {
 			$filter_email = $this->request->get['filter_email'];
 		} else {
@@ -296,6 +302,10 @@ class ControllerSaleAffiliate extends Controller {
 		if (isset($this->request->get['filter_status'])) {
 			$url .= '&filter_status=' . $this->request->get['filter_status'];
 		}
+
+		if (isset($this->request->get['filter_group_id'])) {
+			$url .= '&filter_group_id=' . $this->request->get['filter_group_id'];
+		}
 		
 		if (isset($this->request->get['filter_approved'])) {
 			$url .= '&filter_approved=' . $this->request->get['filter_approved'];
@@ -341,6 +351,7 @@ class ControllerSaleAffiliate extends Controller {
 			'filter_name'       => $filter_name, 
 			'filter_email'      => $filter_email, 
 			'filter_status'     => $filter_status, 
+			'filter_group_id'   => $filter_group_id, 
 			'filter_approved'   => $filter_approved, 
 			'filter_date_added' => $filter_date_added,
 			'sort'              => $sort,
@@ -364,6 +375,7 @@ class ControllerSaleAffiliate extends Controller {
 			$this->data['affiliates'][] = array(
 				'affiliate_id' => $result['affiliate_id'],
 				'name'         => $result['name'],
+				'group'        => $result['group_name'],
 				'email'        => $result['email'],
 				'balance'      => $this->currency->format($result['balance'], $this->config->get('config_currency')),
 				'status'       => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),
@@ -383,6 +395,7 @@ class ControllerSaleAffiliate extends Controller {
 		$this->data['text_no_results'] = $this->language->get('text_no_results');
 
 		$this->data['column_name'] = $this->language->get('column_name');
+		$this->data['column_group'] = $this->language->get('column_group');
 		$this->data['column_email'] = $this->language->get('column_email');
 		$this->data['column_balance'] = $this->language->get('column_balance');
 		$this->data['column_status'] = $this->language->get('column_status');
@@ -424,7 +437,9 @@ class ControllerSaleAffiliate extends Controller {
 		if (isset($this->request->get['filter_status'])) {
 			$url .= '&filter_status=' . $this->request->get['filter_status'];
 		}
-		
+		if (isset($this->request->get['filter_group_id'])) {
+			$url .= '&filter_group_id=' . $this->request->get['filter_group_id'];
+		}
 		if (isset($this->request->get['filter_approved'])) {
 			$url .= '&filter_approved=' . $this->request->get['filter_approved'];
 		}	
@@ -444,6 +459,7 @@ class ControllerSaleAffiliate extends Controller {
 		}
 		
 		$this->data['sort_name'] = $this->url->link('sale/affiliate', 'token=' . $this->session->data['token'] . '&sort=name' . $url, 'SSL');
+		$this->data['sort_group'] = $this->url->link('sale/affiliate', 'token=' . $this->session->data['token'] . '&sort=a.group_id' . $url, 'SSL');
 		$this->data['sort_email'] = $this->url->link('sale/affiliate', 'token=' . $this->session->data['token'] . '&sort=a.email' . $url, 'SSL');
 		$this->data['sort_status'] = $this->url->link('sale/affiliate', 'token=' . $this->session->data['token'] . '&sort=a.status' . $url, 'SSL');
 		$this->data['sort_approved'] = $this->url->link('sale/affiliate', 'token=' . $this->session->data['token'] . '&sort=a.approved' . $url, 'SSL');
@@ -462,7 +478,9 @@ class ControllerSaleAffiliate extends Controller {
 		if (isset($this->request->get['filter_status'])) {
 			$url .= '&filter_status=' . $this->request->get['filter_status'];
 		}
-		
+		if (isset($this->request->get['filter_group_id'])) {
+			$url .= '&filter_group_id=' . $this->request->get['filter_group_id'];
+		}
 		if (isset($this->request->get['filter_approved'])) {
 			$url .= '&filter_approved=' . $this->request->get['filter_approved'];
 		}
@@ -489,10 +507,14 @@ class ControllerSaleAffiliate extends Controller {
 		$this->data['pagination'] = $pagination->render();
 
 		$this->data['filter_name'] = $filter_name;
+		$this->data['filter_group_id'] = $filter_group_id;
 		$this->data['filter_email'] = $filter_email;
 		$this->data['filter_status'] = $filter_status;
 		$this->data['filter_approved'] = $filter_approved;
 		$this->data['filter_date_added'] = $filter_date_added;
+
+		$this->load->model('extension/affiliate_group');
+		$this->data['groups'] = $this->model_extension_affiliate_group->getAffiliateGroups();
 		
 		$this->data['sort'] = $sort;
 		$this->data['order'] = $order;
@@ -517,6 +539,7 @@ class ControllerSaleAffiliate extends Controller {
 		$this->data['text_cheque'] = $this->language->get('text_cheque');
 		$this->data['text_paypal'] = $this->language->get('text_paypal');
 		$this->data['text_bank'] = $this->language->get('text_bank');
+		$this->data['text_group'] = $this->language->get('text_group');
 				
     	$this->data['entry_firstname'] = $this->language->get('entry_firstname');
     	$this->data['entry_lastname'] = $this->language->get('entry_lastname');
@@ -718,6 +741,14 @@ class ControllerSaleAffiliate extends Controller {
       		$this->data['lastname'] = '';
     	}
 
+    	if (isset($this->request->post['group_id'])) {
+      		$this->data['group_id'] = $this->request->post['group_id'];
+    	} elseif (!empty($affiliate_info)) { 
+			$this->data['group_id'] = $affiliate_info['group_id'];
+		} else {
+      		$this->data['group_id'] = '';
+    	}
+
     	if (isset($this->request->post['email'])) {
       		$this->data['email'] = $this->request->post['email'];
     	} elseif (!empty($affiliate_info)) { 
@@ -909,7 +940,9 @@ class ControllerSaleAffiliate extends Controller {
 		} else {
 			$this->data['confirm'] = '';
 		}
-
+        $this->load->model('extension/affiliate_group');
+        $this->data['groups'] = $this->model_extension_affiliate_group->getAffiliateGroups();
+     
 		$this->template = 'sale/affiliate_form.tpl';
 		$this->children = array(
 			'common/header',

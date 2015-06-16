@@ -4,6 +4,7 @@ $_['heading_title']                    = '功能菜单';
 
 // Text
 $_['text_affiliate']                   = '商户管理';
+$_['text_affiliate_group']             = '商户类别';
 $_['text_attribute']                   = '属性';
 $_['text_attribute_group']             = '属性组';
 $_['text_backup']                      = '数据维护';

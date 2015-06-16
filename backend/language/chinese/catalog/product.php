@@ -8,7 +8,7 @@ $_['tab_links']                  = '关联设置';
 $_['tab_design']                 = '布局设计';
 $_['tab_option']                 = '售价选项';
 // Text  
-$_['text_success']               = '成功： 您已成功更新商品管理！';
+$_['text_success']               = '成功： 您已成功更新商品信息！';
 $_['text_plus']                  = '+';
 $_['text_minus']                 = '-';
 $_['text_default']               = '默认';
@@ -19,9 +19,11 @@ $_['text_option']                = '选项';
 $_['text_option_value']          = '选项值';
 $_['text_percent']               = '百分比';
 $_['text_amount']                = '固定数额';
+$_['button_add']                = '添加分类';
 
 // Column
 $_['column_name']                = '商品名称';
+$_['column_category']            = '商品分类';
 $_['column_model']               = '商品型号';
 $_['column_image']               = '图片';
 $_['column_price']               = '价格';
@@ -31,6 +33,7 @@ $_['column_action']              = '管理';
 
 // Entry
 $_['entry_name']                 = '商品名称：';
+$_['entry_subtitle']             = '副标题：';
 $_['entry_meta_keyword']         = 'Meta标签关键词：';
 $_['entry_meta_description']     = '&nbsp;&nbsp;Meta标签描述：';
 $_['entry_description']          = '&nbsp;&nbsp;详细介绍：';
@@ -72,7 +75,7 @@ $_['entry_option_value']         = '&nbsp;&nbsp;选项数值：';
 $_['entry_required']             = 'Required：';
 $_['entry_status']               = '&nbsp;&nbsp;商品状态：';
 $_['entry_sort_order']           = '&nbsp;&nbsp;选项排序：';
-$_['entry_category']             = '&nbsp;&nbsp;所属分类：';
+$_['entry_category']             = '&nbsp;&nbsp;所属分类：<br /><span class="help">可多个分类</span>';
 $_['entry_filter']           	 = '&nbsp;&nbsp;筛选：';
 $_['entry_download']             = '&nbsp;&nbsp;下载商品：';
 $_['entry_related']              = '&nbsp;&nbsp;相关商品：';

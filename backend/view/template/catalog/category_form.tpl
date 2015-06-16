@@ -336,29 +336,24 @@ $('#tabs a').tabs();
 $('#languages a').tabs();
 
 $('.selection-category select').bind('change',function(){
-  var $cid = $(this).val(),$that = $(this).parent();
-  var $obj = $('.selection-category #'+$(this).attr('for-entry'));
-  
-  $.get('index.php?route=catalog/category/selection_category&token=<?php echo $token ?>&cid='+$cid ,{},function(json){
-    
-    $that.nextAll('.selection-category').hide().children('select').empty();
-    if(json.status==0){
-
-    }else{
-      $obj.append($("<option value='0'><?php echo $text_none ?></option>"));
-      for(var i in json.data){
-        $obj.append($("<option value='" + json.data[i].category_id + "'>" + json.data[i].name + "</option>"));
-      }
+  var $cid = $(this).val(),
+  $obj = $('.selection-category #'+$(this).attr('for-entry'));
+  $(this).parent().nextAll('.selection-category').hide().children('select').empty();
+  if($cid > 0){
+    $.get('index.php?route=catalog/category/selection_category&token=<?php echo $token ?>&cid='+$cid ,{},function(json){
       
-      $obj.parent().show();
-    }
-    $('input[name="parent_id"]').val($cid);
-  },'json');
-  
+      if(json.status==1){
+        $obj.append($("<option value='*'><?php echo $text_none ?></option>"));
+        for(var i in json.data){
+          $obj.append($("<option value='" + json.data[i].category_id + "'>" + json.data[i].name + "</option>"));
+        }
+        $obj.parent().show();
+      }
+      $('input[name="parent_id"]').val($cid);
+    },'json');
+  }
 });
 $('#top-category').trigger('change')
 //--></script> 
-<style type="text/css">
 
-</style>
 <?php echo $footer; ?>

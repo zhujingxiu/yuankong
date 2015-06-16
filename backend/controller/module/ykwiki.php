@@ -132,10 +132,6 @@ class ControllerModuleYkwiki extends Controller {
         
         $this->data['layouts'] = array_merge($this->data['layouts'],$this->model_design_layout->getLayouts());
 
-        $this->load->model('design/banner');
-        
-        $this->data['banners'] = $this->model_design_banner->getBanners();
-
         $this->template = 'module/ykwiki.tpl';
         $this->children = array(
             'common/header',

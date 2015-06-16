@@ -30,8 +30,8 @@ class ModelModuleYkmodule extends Model {
 		return $query->rows;
 	}
 
-	public function getGroup($group_id=0){
-		return $this->db->fetch('news_group',array('one'=>true,'condition'=>array('group_id'=>$group_id)));
+	public function getGroup($group_id=0,$model='news_group'){
+		return $this->db->fetch(strtolower($model),array('one'=>true,'condition'=>array('group_id'=>$group_id)));
 
 	}
 
@@ -40,6 +40,23 @@ class ModelModuleYkmodule extends Model {
 			$sql = "SELECT * FROM ".DB_PREFIX."news WHERE group_id = '".(int)$data['group_id']."'";
 		}else{
 			$sql = "SELECT * FROM ".DB_PREFIX."help ";
+		}
+		$sql .= " ORDER BY date_added DESC ";
+		if(!empty($data['limit'])){
+			$sql .=" LIMIT ".$data['limit'];
+		}else{
+			$sql .= "LIMIT 5";
+		}
+
+		$query = $this->db->query($sql);
+		return $query->rows;
+	}
+
+	public function getAffiliates($data=array()){
+		
+		$sql = "SELECT * FROM ".DB_PREFIX."affiliate ";
+		if(isset($data['group_id'])){
+			$sql .=" WHERE group_id = '".(int)$data['group_id']."'";
 		}
 		$sql .= " ORDER BY date_added DESC ";
 		if(!empty($data['limit'])){

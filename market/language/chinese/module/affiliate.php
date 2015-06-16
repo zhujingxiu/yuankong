@@ -13,4 +13,3 @@ $_['text_password']    = '密码';
 $_['text_payment']     = '支付方式';
 $_['text_tracking']    = '加盟跟踪';
 $_['text_transaction'] = '交易';
-?>

@@ -229,9 +229,9 @@ class ControllerExtensionNewsGroup extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 		
-		$this->data['sort_name'] = $this->url->link('extension/news_group', 'token=' . $this->session->data['token'] . '&sort=ng.name' . $url, 'SSL');
-		$this->data['sort_show'] = $this->url->link('extension/news_group', 'token=' . $this->session->data['token'] . '&sort=ng.show' . $url, 'SSL');
-		$this->data['sort_sort_order'] = $this->url->link('extension/news_group', 'token=' . $this->session->data['token'] . '&sort=ng.sort_order' . $url, 'SSL');
+		$this->data['sort_name'] = $this->url->link('extension/news_group', 'token=' . $this->session->data['token'] . '&sort=name' . $url, 'SSL');
+		$this->data['sort_show'] = $this->url->link('extension/news_group', 'token=' . $this->session->data['token'] . '&sort=show' . $url, 'SSL');
+		$this->data['sort_sort_order'] = $this->url->link('extension/news_group', 'token=' . $this->session->data['token'] . '&sort=sort_order' . $url, 'SSL');
 		
 		$url = '';
 

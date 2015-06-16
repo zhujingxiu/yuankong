@@ -27,6 +27,11 @@
                 <?php } else { ?>
                 <a href="<?php echo $sort_name; ?>"><?php echo $column_name; ?></a>
                 <?php } ?></td>
+              <td class="left"><?php if ($sort == 'a.group_id') { ?>
+                <a href="<?php echo $sort_group; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_group; ?></a>
+                <?php } else { ?>
+                <a href="<?php echo $sort_group; ?>"><?php echo $column_group; ?></a>
+                <?php } ?></td>
               <td class="left"><?php if ($sort == 'c.email') { ?>
                 <a href="<?php echo $sort_email; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_email; ?></a>
                 <?php } else { ?>
@@ -55,6 +60,17 @@
             <tr class="filter">
               <td></td>
               <td><input type="text" name="filter_name" value="<?php echo $filter_name; ?>" /></td>
+              <td><select name="filter_group_id">
+                  <option value="*"></option>
+                  <?php foreach ($groups as $item): ?>
+                  <?php if ($filter_group_id == $item['group_id']) { ?>
+                  <option value="<?php echo $item['group_id'] ?>" selected="selected"><?php echo $item['name']; ?></option>
+                  <?php } else { ?>
+                  <option value="<?php echo $item['group_id'] ?>"><?php echo $item['name']; ?></option>
+                  <?php } ?>
+                  <?php endforeach ?>
+                  
+                </select></td>
               <td><input type="text" name="filter_email" value="<?php echo $filter_email; ?>" /></td>
               <td>&nbsp;</td>
               <td><select name="filter_status">
@@ -87,27 +103,28 @@
               <td align="right"><a onclick="filter();" class="button"><?php echo $button_filter; ?></a></td>
             </tr>
             <?php if ($affiliates) { ?>
-            <?php foreach ($affiliates as $affiliate) { ?>
+            <?php foreach ($affiliates as $item) { ?>
             <tr>
-              <td style="text-align: center;"><?php if ($affiliate['selected']) { ?>
-                <input type="checkbox" name="selected[]" value="<?php echo $affiliate['affiliate_id']; ?>" checked="checked" />
+              <td style="text-align: center;"><?php if ($item['selected']) { ?>
+                <input type="checkbox" name="selected[]" value="<?php echo $item['affiliate_id']; ?>" checked="checked" />
                 <?php } else { ?>
-                <input type="checkbox" name="selected[]" value="<?php echo $affiliate['affiliate_id']; ?>" />
+                <input type="checkbox" name="selected[]" value="<?php echo $item['affiliate_id']; ?>" />
                 <?php } ?></td>
-              <td class="left"><?php echo $affiliate['name']; ?></td>
-              <td class="left"><?php echo $affiliate['email']; ?></td>
-              <td class="right"><?php echo $affiliate['balance']; ?></td>
-              <td class="left"><?php echo $affiliate['status']; ?></td>
-              <td class="left"><?php echo $affiliate['approved']; ?></td>
-              <td class="left"><?php echo $affiliate['date_added']; ?></td>
-              <td class="right"><?php foreach ($affiliate['action'] as $action) { ?>
+              <td class="left"><?php echo $item['name']; ?></td>
+              <td class="left"><?php echo $item['group']; ?></td>
+              <td class="left"><?php echo $item['email']; ?></td>
+              <td class="right"><?php echo $item['balance']; ?></td>
+              <td class="left"><?php echo $item['status']; ?></td>
+              <td class="left"><?php echo $item['approved']; ?></td>
+              <td class="left"><?php echo $item['date_added']; ?></td>
+              <td class="right"><?php foreach ($item['action'] as $action) { ?>
                 [ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
                 <?php } ?></td>
             </tr>
             <?php } ?>
             <?php } else { ?>
             <tr>
-              <td class="center" colspan="8"><?php echo $text_no_results; ?></td>
+              <td class="center" colspan="9"><?php echo $text_no_results; ?></td>
             </tr>
             <?php } ?>
           </tbody>
@@ -133,10 +150,10 @@ function filter() {
 		url += '&filter_email=' + encodeURIComponent(filter_email);
 	}
 	
-	var filter_affiliate_group_id = $('select[name=\'filter_affiliate_group_id\']').attr('value');
+	var filter_group_id = $('select[name=\'filter_group_id\']').attr('value');
 	
-	if (filter_affiliate_group_id != '*') {
-		url += '&filter_affiliate_group_id=' + encodeURIComponent(filter_affiliate_group_id);
+	if (filter_group_id != '*') {
+		url += '&filter_group_id=' + encodeURIComponent(filter_group_id);
 	}	
 	
 	var filter_status = $('select[name=\'filter_status\']').attr('value');

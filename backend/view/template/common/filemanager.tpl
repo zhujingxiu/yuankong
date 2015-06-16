@@ -211,7 +211,9 @@ $(document).ready(function() {
 		},
 		callback: {
 			beforedata: function(NODE, TREE_OBJ) { 
+				console.info(NODE);
 				if (NODE == false) {
+					
 					TREE_OBJ.settings.data.opts.static = [ 
 						{
 							data: 'image',
@@ -222,8 +224,7 @@ $(document).ready(function() {
 							state: 'closed'
 						}
 					];
-					
-					return { 'directory': '' } 
+					return { 'directory': '' } ;
 				} else {
 					TREE_OBJ.settings.data.opts.static = false;  
 					

@@ -23,6 +23,16 @@
         <div id="tab-general">
           <table class="form">
             <tr>
+                <td class="left"><?php echo $text_group; ?></td>
+                <td>
+                    <select name="group_id">
+                        <?php foreach ($groups as $item): ?>
+                        <option value="<?php echo $item['group_id'] ?>" <?php echo $group_id == $item['group_id'] ? 'selected' : '' ?>><?php echo $item['name'] ?></option>
+                        <?php endforeach ?>
+                    </select>
+                </td>
+            </tr>
+            <tr>
               <td><span class="required">*</span> <?php echo $entry_firstname; ?></td>
               <td><input type="text" name="firstname" value="<?php echo $firstname; ?>" />
                 <?php if ($error_firstname) { ?>

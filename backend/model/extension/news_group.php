@@ -21,7 +21,7 @@ class ModelExtensionNewsGroup extends Model {
 	}
 	
 	public function deleteNewsGroup($news_group_id) {
-		$this->db->delete("news_group",array('news_group_id' => (int)$news_group_id));
+		$this->db->delete("news_group",array('group_id' => (int)$news_group_id));
 	}
 		
 	public function getNewsGroup($news_group_id) {
@@ -31,18 +31,18 @@ class ModelExtensionNewsGroup extends Model {
 	}
 		
 	public function getNewsGroups($data = array()) {
-		$sql = "SELECT * FROM " . DB_PREFIX . "news_group ng  ";
+		$sql = "SELECT * FROM " . DB_PREFIX . "news_group ";
 			
 		$sort_data = array(
-			'ng.name',
-			'ng.show',
-			'ng.sort_order'
+			'name',
+			'show',
+			'sort_order'
 		);	
 		
 		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
 			$sql .= " ORDER BY " . $data['sort'];	
 		} else {
-			$sql .= " ORDER BY ng.group_id";	
+			$sql .= " ORDER BY group_id";	
 		}	
 			
 		if (isset($data['order']) && ($data['order'] == 'DESC')) {

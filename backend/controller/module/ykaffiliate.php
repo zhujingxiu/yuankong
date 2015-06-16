@@ -1,18 +1,10 @@
 <?php
-/******************************************************
- * @package Pav Product Tabs module for Opencart 1.5.x
- * @version 1.0
- * @author http://www.pavothemes.com
- * @copyright   Copyright (C) Feb 2012 PavoThemes.com <@emai:pavothemes@gmail.com>.All rights reserved.
- * @license     GNU General Public License version 2
-*******************************************************/
-
-class ControllerModuleYkproducts extends Controller {
+class ControllerModuleYkaffiliate extends Controller {
     private $error = array(); 
     
     public function index() {   
         
-        $this->language->load('module/ykproducts');
+        $this->language->load('module/ykaffiliate');
         
         $this->document->setTitle($this->language->get('heading_title'));
         
@@ -20,17 +12,13 @@ class ControllerModuleYkproducts extends Controller {
         $this->load->model('tool/image');
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-            $mode = $this->request->post['action_mode'] ;
-            unset(  $this->request->post['action_mode']  );
 
-            $this->model_setting_setting->editSetting('ykproducts', $this->request->post);     
+            $this->model_setting_setting->editSetting('ykaffiliate', $this->request->post);     
                     
             $this->session->data['success'] = $this->language->get('text_success');
-            if( $mode ) {
 
-            }else { 
-                $this->redirect($this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL'));
-            }
+            $this->redirect($this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL'));
+
         }
                 
         $this->data['heading_title'] = $this->language->get('heading_title');
@@ -46,9 +34,10 @@ class ControllerModuleYkproducts extends Controller {
         $this->data['text_column_left'] = $this->language->get('text_column_left');
         $this->data['text_column_right'] = $this->language->get('text_column_right');
         $this->data['entry_description'] = $this->language->get('entry_description');
+        $this->data['entry_title'] = $this->language->get('entry_title');
         $this->data['entry_tabs'] = $this->language->get('entry_tabs');
         $this->data['entry_banner'] = $this->language->get('entry_banner');
-        $this->data['entry_dimension'] = $this->language->get('entry_dimension'); 
+        $this->data['entry_limit'] = $this->language->get('entry_limit'); 
         $this->data['entry_carousel'] = $this->language->get('entry_carousel'); 
         
         $this->data['entry_layout'] = $this->language->get('entry_layout');
@@ -56,7 +45,7 @@ class ControllerModuleYkproducts extends Controller {
         $this->data['entry_status'] = $this->language->get('entry_status');
         $this->data['entry_sort_order'] = $this->language->get('entry_sort_order');
         $this->data['entry_category'] = $this->language->get( 'entry_category' );
-
+        $this->data['entry_lateast_limit'] = $this->language->get( 'entry_lateast_limit' );
 
         $this->data['button_save'] = $this->language->get('button_save');
         $this->data['button_cancel'] = $this->language->get('button_cancel');
@@ -70,18 +59,19 @@ class ControllerModuleYkproducts extends Controller {
         $this->data['token'] = $this->session->data['token'];
         
         
-        $this->data['positions'] = array( 'mainmenu',
-                                          'slideshow',
-                                          'promotion',
-                                          'showcase',
-                                          'content_top',
-                                          'column_left',
-                                          'column_right',
-                                          'content_bottom',
-                                          'mass_bottom',
-                                          'footer_top',
-                                          'footer_center',
-                                          'footer_bottom'
+        $this->data['positions'] = array( 
+              'mainmenu',
+              'slideshow',
+              'promotion',
+              'showcase',
+              'content_top',
+              'column_left',
+              'column_right',
+              'content_bottom',
+              'mass_bottom',
+              'footer_top',
+              'footer_center',
+              'footer_bottom'
         );
         
         if (isset($this->error['warning'])) {
@@ -112,29 +102,27 @@ class ControllerModuleYkproducts extends Controller {
         
         $this->data['breadcrumbs'][] = array(
             'text'      => $this->language->get('heading_title'),
-            'href'      => $this->url->link('module/ykproducts', 'token=' . $this->session->data['token'], 'SSL'),
+            'href'      => $this->url->link('module/ykaffiliate', 'token=' . $this->session->data['token'], 'SSL'),
             'separator' => ' :: '
         );
         
-        $this->data['action'] = $this->url->link('module/ykproducts', 'token=' . $this->session->data['token'], 'SSL');
+        $this->data['action'] = $this->url->link('module/ykaffiliate', 'token=' . $this->session->data['token'], 'SSL');
         
         $this->data['cancel'] = $this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL');
         
         $this->data['modules'] = array();
         
-        if (isset($this->request->post['ykproducts_module'])) {
-            $this->data['modules'] = $this->request->post['ykproducts_module'];
-        } elseif ($this->config->get('ykproducts_module')) { 
-            $this->data['modules'] = $this->config->get('ykproducts_module');
+        if (isset($this->request->post['ykaffiliate_module'])) {
+            $this->data['modules'] = $this->request->post['ykaffiliate_module'];
+        } elseif ($this->config->get('ykaffiliate_module')) { 
+            $this->data['modules'] = $this->config->get('ykaffiliate_module');
         }   
-
-
-        $this->load->model('catalog/category');
-        $results = $this->model_catalog_category->getCategories( array('limit' => 100 , 'start'=>0 ) );
-
-
-        $this->data['product_categories'] = $results; 
-
+        $this->load->model('extension/affiliate_group');
+        $affiliate_group = $this->model_extension_affiliate_group->getAffiliateGroups();
+        foreach ($affiliate_group as $key => $value) {
+            $affiliate_group[$key]['name'] = $this->language->get('text_affiliate').' -> '.$value['name'];
+        }
+        $this->data['affiliate_groups'] = $affiliate_group;
 
         $this->load->model('design/layout');
         
@@ -143,19 +131,7 @@ class ControllerModuleYkproducts extends Controller {
         
         $this->data['layouts'] = array_merge($this->data['layouts'],$this->model_design_layout->getLayouts());
 
-        $this->load->model('design/banner');
-        
-        $this->data['banners'] = $this->model_design_banner->getBanners();
-        $tabs = array(
-            'latest'     => $this->language->get('text_latest'),
-            'featured'   => $this->language->get('text_featured'),
-            'bestseller' => $this->language->get('text_bestseller'),
-            'special'   => $this->language->get('text_special'),
-            'mostviewed' => $this->language->get('text_mostviewed')
-        );  
-        
-        $this->data['tabs'] = $tabs;
-        $this->template = 'module/ykproducts.tpl';
+        $this->template = 'module/ykaffiliate.tpl';
         $this->children = array(
             'common/header',
             'common/footer'
@@ -165,25 +141,10 @@ class ControllerModuleYkproducts extends Controller {
     }
     
     protected function validate() {
-        if (!$this->user->hasPermission('modify', 'module/ykproducts')) {
+        if (!$this->user->hasPermission('modify', 'module/ykaffiliate')) {
             $this->error['warning'] = $this->language->get('error_permission');
         }
-        
-        if (isset($this->request->post['ykproducts_module'])) {
-            foreach ($this->request->post['ykproducts_module'] as $key => $value) {
-                if (!$value['width'] || !$value['height']) {
-                    $this->error['dimension'][$key] = $this->language->get('error_dimension');
-                }
-
-                if( !isset($value['category_tabs']) ){
-                    $this->error['dimension'][$key] = $this->language->get('error_category_tabs');
-
-                }           
-                if (!$value['limit'] || !$value['cols'] || !$value['itemsperpage'] ) {
-                    $this->error['dimension'][$key] = $this->language->get('error_carousel');
-                }           
-            }
-        }   
+          
                         
         if (!$this->error) {
             return true;

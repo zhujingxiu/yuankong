@@ -192,6 +192,7 @@ $(document).ready(function(){
           <li><a href="<?php echo $news_group; ?>"><?php echo $text_news_group; ?></a></li>
           <li class="_hide"><a href="<?php echo $help_group; ?>"><?php echo $text_help_group; ?></a></li>
           <li><a href="<?php echo $project_group; ?>"><?php echo $text_project_group; ?></a></li>
+          <li><a href="<?php echo $affiliate_group; ?>"><?php echo $text_affiliate_group; ?></a></li>
           <li><a class="parent"><?php echo $text_design; ?></a>
             <ul>
               <li><a href="<?php echo $banner; ?>"><?php echo $text_banner; ?></a></li>

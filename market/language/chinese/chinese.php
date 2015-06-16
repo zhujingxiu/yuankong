@@ -20,7 +20,7 @@ $_['text_select']           = ' --- 请选择 --- ';
 $_['text_all_zones']        = '所有区域';
 $_['text_pagination']       = '显示 {start} - {end} / {total} (共计 {pages} 页)';
 $_['text_separator']        = ' &raquo; ';
-$_['text_more']        		= ' 更多 ';
+$_['text_more']        		= ' 更多  ';
 $_['text_unknown']        	= ' 未知 ';
 $_['text_wiki_help']        = ' 消防问答 ';
 

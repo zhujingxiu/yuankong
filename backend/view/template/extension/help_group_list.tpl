@@ -22,17 +22,17 @@
           <thead>
             <tr>
               <td width="1" style="text-align: center;"><input type="checkbox" onclick="$('input[name*=\'selected\']').attr('checked', this.checked);" /></td>
-              <td class="left"><?php if ($sort == 'ng.name') { ?>
+              <td class="left"><?php if ($sort == 'name') { ?>
                 <a href="<?php echo $sort_name; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_name; ?></a>
                 <?php } else { ?>
                 <a href="<?php echo $sort_name; ?>"><?php echo $column_name; ?></a>
                 <?php } ?></td>
-              <td class="left"><?php if ($sort == 'ng.show') { ?>
+              <td class="left"><?php if ($sort == 'show') { ?>
                 <a href="<?php echo $sort_show; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_show; ?></a>
                 <?php } else { ?>
                 <a href="<?php echo $sort_show; ?>"><?php echo $column_show; ?></a>
                 <?php } ?></td>
-              <td class="right"><?php if ($sort == 'ng.sort_order') { ?>
+              <td class="right"><?php if ($sort == 'sort_order') { ?>
                 <a href="<?php echo $sort_sort_order; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_sort_order; ?></a>
                 <?php } else { ?>
                 <a href="<?php echo $sort_sort_order; ?>"><?php echo $column_sort_order; ?></a>

@@ -370,7 +370,15 @@ class ControllerCatalogProduct extends Controller {
 					break;
 				}					
 			}
-	
+			$product_category_data = array();
+			$categories = $this->model_catalog_product->getProductCategories($result['product_id']);
+			foreach ($categories as $_category_id) {
+				$_category = $this->model_catalog_product->getCategoryName($_category_id);
+				if(!empty($_category['category_name'])){
+					$product_category_data[] = $_category['category_name'];
+				}
+			}
+			 
       		$this->data['products'][] = array(
 				'product_id' => $result['product_id'],
 				'name'       => $result['name'],
@@ -379,6 +387,7 @@ class ControllerCatalogProduct extends Controller {
 				'special'    => $special,
 				'image'      => $image,
 				'quantity'   => $result['quantity'],
+				'category'	 => implode('<br>', $product_category_data),
 				'status'     => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),
 				'selected'   => isset($this->request->post['selected']) && in_array($result['product_id'], $this->request->post['selected']),
 				'action'     => $action
@@ -397,6 +406,7 @@ class ControllerCatalogProduct extends Controller {
 		$this->data['column_model'] = $this->language->get('column_model');		
 		$this->data['column_price'] = $this->language->get('column_price');		
 		$this->data['column_quantity'] = $this->language->get('column_quantity');		
+		$this->data['column_category'] = $this->language->get('column_category');		
 		$this->data['column_status'] = $this->language->get('column_status');		
 		$this->data['column_action'] = $this->language->get('column_action');		
 				
@@ -539,6 +549,7 @@ class ControllerCatalogProduct extends Controller {
 		$this->data['text_amount'] = $this->language->get('text_amount');
 
 		$this->data['entry_name'] = $this->language->get('entry_name');
+		$this->data['entry_subtitle'] = $this->language->get('entry_subtitle');
 		$this->data['entry_meta_description'] = $this->language->get('entry_meta_description');
 		$this->data['entry_meta_keyword'] = $this->language->get('entry_meta_keyword');
 		$this->data['entry_description'] = $this->language->get('entry_description');
@@ -597,6 +608,7 @@ class ControllerCatalogProduct extends Controller {
 		$this->data['button_add_special'] = $this->language->get('button_add_special');
 		$this->data['button_add_image'] = $this->language->get('button_add_image');
 		$this->data['button_remove'] = $this->language->get('button_remove');
+		$this->data['button_add'] = $this->language->get('button_add');
 		
     	$this->data['tab_general'] = $this->language->get('tab_general');
     	$this->data['tab_data'] = $this->language->get('tab_data');
@@ -718,7 +730,7 @@ class ControllerCatalogProduct extends Controller {
 		} else {
 			$this->data['product_description'] = array();
 		}
-		
+
 		if (isset($this->request->post['model'])) {
       		$this->data['model'] = $this->request->post['model'];
     	} elseif (!empty($product_info)) {
@@ -1012,7 +1024,7 @@ class ControllerCatalogProduct extends Controller {
 				);
 			}
 		}
-		
+		$this->data['top_categories'] = $this->model_catalog_category->getSelectionCategories(null);
 		// Filters
 		$this->load->model('catalog/filter');
 		
