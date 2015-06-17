@@ -616,3 +616,5 @@ table.form > tbody > tr > td {
 	cursor: pointer;
 	text-decoration: underline;
 }
+
+._clearfix{clear:both;}

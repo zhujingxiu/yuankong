@@ -1321,31 +1321,21 @@ class ControllerCatalogProduct extends Controller {
 		if (isset($this->request->get['filter_name']) || isset($this->request->get['filter_model']) || isset($this->request->get['filter_category_id'])) {
 			$this->load->model('catalog/product');
 			$this->load->model('catalog/option');
+			$data = array();
+			if (trim($this->request->get['filter_name']) && !empty($this->request->get['filter_name'])) {
+				$data['filter_name'] = $this->request->get['filter_name'];
+			} 
 			
-			if (isset($this->request->get['filter_name'])) {
-				$filter_name = $this->request->get['filter_name'];
-			} else {
-				$filter_name = '';
-			}
-			
-			if (isset($this->request->get['filter_model'])) {
-				$filter_model = $this->request->get['filter_model'];
-			} else {
-				$filter_model = '';
-			}
+			if (!empty($this->request->get['filter_model'])) {
+				$data['filter_model'] = $this->request->get['filter_model'];
+			} 
 			
 			if (isset($this->request->get['limit'])) {
-				$limit = $this->request->get['limit'];	
+				$data['limit'] = $this->request->get['limit'];	
 			} else {
-				$limit = 20;	
+				$data['limit'] = 20;	
 			}			
-						
-			$data = array(
-				'filter_name'  => $filter_name,
-				'filter_model' => $filter_model,
-				'start'        => 0,
-				'limit'        => $limit
-			);
+			$data['start'] = 0;				
 			
 			$results = $this->model_catalog_product->getProducts($data);
 			

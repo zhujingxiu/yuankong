@@ -54,6 +54,7 @@ $_['entry_sort_order']    	  = '排序：';
 $_['entry_title']        	  = '标题:';
 $_['entry_description']       = '描述:';
 // Button
+$_['button_add']           = '添加';
 $_['button_insert']           = '新增';
 $_['button_delete']           = '删除';
 $_['button_save']             = '保存';

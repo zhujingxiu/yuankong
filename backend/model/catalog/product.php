@@ -466,7 +466,7 @@ class ModelCatalogProduct extends Model {
 		}	
 		
 		$query = $this->db->query($sql);
-	
+
 		return $query->rows;
 	}
 	

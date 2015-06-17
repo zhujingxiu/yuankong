@@ -90,56 +90,208 @@
                 </select></td>
             </tr>
             <tr>
+              <td><?php echo $entry_title_class; ?></td>
+              <td><input type="text" name="ykproduct_module[<?php echo $module_row; ?>][title_class]" value="<?php echo $module['title_class']; ?>" /></td>
+            </tr>
+            <tr>
               <td><?php echo $entry_sort_order; ?></td>
               <td><input type="text" name="ykproduct_module[<?php echo $module_row; ?>][sort_order]" value="<?php echo $module['sort_order']; ?>" size="3" /></td>
             </tr>
           </table>
-          <div class="category-tabs">
+          <div class="category-tabs module-block">
              <?php if (isset($error_category_tabs[$module_row])) { ?>
             <span class="error"><?php echo $error_category_tabs[$module_row]; ?></span>
             <?php } ?>
-            <div class="box-head">
-              <a class="button" id="add-cattab" onclick="addCategoryTab('category-tabs<?php echo $module_row; ?>',<?php echo $module_row;?>)"><?php echo $text_add_category;?></a>
-            </div>
-            <div id='category-tabs<?php echo $module_row; ?>'>
-              <?php if( isset($module['category_tabs']) && $module['category_tabs'] ) {  ?>
+            <table class="box-head">
+              <tr>
+                <td class="header-title"><h3><?php echo $text_add_category;?></h3></td>
+                <td class="header-body">
 
-                <?php foreach( $module['category_tabs'] as $idx => $category ) { ?>
+                  <div class="selection-category">
+                    <?php echo $entry_category ?> &nbsp; &nbsp; 
+                    <select id="top-category-<?php echo $module_row ?>" for-category="second-category-<?php echo $module_row ?>">
+                      <option value="0"><?php echo $text_none ?></option>
+                      <?php foreach ($top_categories as $item): ?>
+                      <option value="<?php echo $item['category_id'] ?>"><?php echo $item['name'] ?></option>
+                      <?php endforeach ?>
+                    </select>
+                  </div>
+                  <div class="selection-category" style="display:none">
+                    <select id="second-category-<?php echo $module_row ?>" for-category="third-category-<?php echo $module_row ?>"></select>
+                  </div>
+                  <div class="selection-category" style="display:none">
+                    <select id="third-category-<?php echo $module_row ?>" for-category="fourth-category-<?php echo $module_row ?>"></select>
+                  </div>
+                  <div class="selection-category" style="display:none">
+                    <select id="fourth-category-<?php echo $module_row ?>"></select>
+                  </div>
+                </td>
+                <td class="header-action">
+                  <a class="btn" onclick="addCategoryTab('category-tabs<?php echo $module_row; ?>',<?php echo $module_row;?>)"><?php echo $button_add ?></a>
+                </td>
+              </tr>
+            </table>
+            <script type="text/javascript">
+              $('#top-category-<?php echo $module_row;?>').trigger('change');
+            </script>
+            <div id='category-tabs<?php echo $module_row; ?>'>
+              <?php if( isset($module['category_tabs']['data']) && $module['category_tabs']['data'] ) {  ?>
+
+                <?php foreach( $module['category_tabs']['data'] as $idx => $category ) { ?>
+                
                  <table class="form category-tab" id="category-tab-wrapper<?php echo $idx+1;?>">
                     <tr>
-                      <td><?php echo $this->language->get('entry_category');?></td>
-                      <td colspan="2">
-                        <select name="ykproduct_module[<?php echo $module_row;?>][category_tabs][]">
-                         <?php foreach( $top_categories as $item){ ?>
-                         <option <?php if( $module['category_tabs'][$idx] == $item['category_id'] ) {?>selected="selected"<?php } ?> value="<?php echo $item['category_id'];?>"><?php echo addslashes($item['name']);?> [ID:<?php echo $item['category_id'];?>]</option>
-                         <?php } ?>
-                         </select>
+                      <td></td>
+                      <td style="width:36%;">
+                         <b><?php echo $category['name'] ?>[<?php echo $category['category_id'] ?>]</b>
+                         <input type="hidden" name="ykproduct_module[<?php echo $module_row;?>][category_tabs][category][]" value="<?php echo $category['category_id'] ?>">
                       </td>
                       <td><?php echo $entry_limit;?></td>
                       <td>
-                          <input type="text" name="ykproduct_module[<?php echo $module_row;?>][limit][]" value="<?php echo $module['limit'][$idx];?>" size="3">
+                          <input type="text" name="ykproduct_module[<?php echo $module_row;?>][category_tabs][limit][]" value="<?php echo $category['limit']?>" size="3">
                       </td>
-                      <td><?php echo $entry_icon_image;?></td>
-                      <td> 
-                         <?php 
-                          $imgidx = $module_row."-".$idx;
-                        $thumb = isset( $module['image'][$idx]) ?  $this->model_tool_image->resize( $module['image'][$idx], 50, 50) :"";
-                        $image = isset($module['image'][$idx])?$module['image'][$idx]:"";  
-                           
-                         ?> 
-                      <img src="<?php echo $thumb; ?>" alt="" id="thumb<?php echo $imgidx; ?>" />
-                      <input type="hidden" name="ykproduct_module[<?php echo $module_row; ?>][image][]" value="<?php echo $image; ?>" id="image<?php echo $imgidx; ?>"  />
-                      <br />
-
-                      <a onclick="image_upload('image<?php echo $imgidx; ?>', 'thumb<?php echo $imgidx; ?>');"><?php echo $text_browse; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$('#thumb<?php echo $imgidx; ?>').attr('src', '<?php echo $no_image; ?>'); $('#image<?php echo $imgidx; ?>').attr('value', '');"><?php echo $text_clear; ?></a>
-                      </td>   
                       <td><?php echo $entry_sort_order;?></td>
                       <td>
-                          <input type="text" name="ykproduct_module[<?php echo $module_row;?>][sort][]" value="<?php echo $module['sort'][$idx];?>" size="3">
+                          <input type="text" name="ykproduct_module[<?php echo $module_row;?>][category_tabs][sort][]" value="<?php echo $category['sort'];?>" size="3">
                       </td>
                       <td size="4"><img src="view/image/delete.png" alt="" onclick="$('#category-tab-wrapper<?php echo $idx+1;?>').remove(); return false;" /></td>             
                     </tr>
                   </table>  
+                  
+                 <?php }  ?> 
+               <?php } ?>   
+             </div> 
+          </div>
+          <!--Product-->
+          <div class="product-tabs module-block">
+             <?php if (isset($error_product_tabs[$module_row])) { ?>
+            <span class="error"><?php echo $error_product_tabs[$module_row]; ?></span>
+            <?php } ?>
+            <table class="box-head">
+              <tr>
+                <td class="header-title"><h3><?php echo $text_add_product;?></h3></td>
+                <td class="header-body">
+                  <div class="_clearfix" >
+                    <div class="selection-product">
+                      <?php echo $entry_category ?> &nbsp; &nbsp;
+                      <select id="top-product-<?php echo $module_row ?>" for-category="second-product-<?php echo $module_row ?>" for-product="selection-product-<?php echo $module_row ?>">
+                        <option value="0"><?php echo $text_none ?></option>
+                        <?php foreach ($top_categories as $item): ?>
+                        <option value="<?php echo $item['category_id'] ?>"><?php echo $item['name'] ?></option>
+                        <?php endforeach ?>
+                      </select>
+                    </div>
+                    <div class="selection-product" style="display:none">
+                      <select id="second-product-<?php echo $module_row ?>" for-category="third-product-<?php echo $module_row ?>" for-product="selection-product-<?php echo $module_row ?>"></select>
+                    </div>
+                    <div class="selection-product" style="display:none">
+                      <select id="third-product-<?php echo $module_row ?>" for-category="fourth-product-<?php echo $module_row ?>" for-product="selection-product-<?php echo $module_row ?>"></select>
+                    </div>
+                    <div class="selection-product" style="display:none">
+                      <select id="fourth-product-<?php echo $module_row ?>" for-product="selection-product-<?php echo $module_row ?>"></select>
+                    </div>
+                  </div>
+                  <br><br>
+                  <div class="_clearfix">
+                   &nbsp;<?php echo $entry_product ?> &nbsp; &nbsp;
+                  <select id="selection-product-<?php echo $module_row ?>" ></select>
+                  </div>
+                </td>
+                <td class="header-action"><a class="btn" onclick="addProductTab('product-tabs<?php echo $module_row; ?>',<?php echo $module_row;?>)"><?php echo $button_add ?></a></td>
+              </tr>
+            </table>
+
+            <div id='product-tabs<?php echo $module_row; ?>'>
+              <?php if( isset($module['product_tabs']['data']) && $module['product_tabs']['data'] ) {  ?>
+
+                <?php foreach( $module['product_tabs']['data'] as $idx => $product ) { ?>
+                
+                 <table class="form product-tab" id="product-tab-wrapper<?php echo $idx+1;?>">
+                    <tr>
+                      <td></td>
+                      <td style="width:36%;">
+                         <b><?php echo $product['name'] ?>[<?php echo $product['product_id'] ?>]</b>
+                         <input type="hidden" name="ykproduct_module[<?php echo $module_row;?>][product_tabs][product][]" value="<?php echo $product['product_id'] ?>">
+                      </td>
+                      <td> 
+                        <div class="image">
+                           <?php 
+                            $imgidx = "product-".$module_row."-".$idx;
+                          $thumb = isset( $product['image']) ?  $this->model_tool_image->resize( $product['image'], 100, 100) :"";
+                          $image = isset($product['image'])?$product['image']:"";  
+                             
+                           ?> 
+                        <img src="<?php echo $thumb; ?>" alt="" id="thumb<?php echo $imgidx; ?>" />
+                        <input type="hidden" name="ykproduct_module[<?php echo $module_row; ?>][product_tabs][image][]" value="<?php echo $image; ?>" id="image<?php echo $imgidx; ?>"  />
+                        <br />
+
+                        <a onclick="image_upload('image<?php echo $imgidx; ?>', 'thumb<?php echo $imgidx; ?>');"><?php echo $text_browse; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$('#thumb<?php echo $imgidx; ?>').attr('src', '<?php echo $no_image; ?>'); $('#image<?php echo $imgidx; ?>').attr('value', '');"><?php echo $text_clear; ?></a>
+                      </div>
+                      </td> 
+                      <td><?php echo $entry_price;?> &nbsp; <span><?php echo $product['price']?></span>
+                      </td>
+                      <td><?php echo $entry_subtitle;?> &nbsp; <span><?php echo truncate_string($product['subtitle'],20)?></span>
+                      </td>
+                      <td><?php echo $entry_sort_order;?></td>
+                      <td>
+                          <input type="text" name="ykproduct_module[<?php echo $module_row;?>][product_tabs][sort][]" value="<?php echo $product['sort'];?>" size="3">
+                      </td>
+                      <td size="4"><img src="view/image/delete.png" alt="" onclick="$('#product-tab-wrapper<?php echo $idx+1;?>').remove(); return false;" /></td>             
+                    </tr>
+                  </table>  
+                  
+                 <?php }  ?> 
+               <?php } ?>   
+             </div> 
+          </div>
+
+          <!--Banner -->
+            <div class="banner-tabs module-block">
+             <?php if (isset($error_banner_tabs[$module_row])) { ?>
+            <span class="error"><?php echo $error_banner_tabs[$module_row]; ?></span>
+            <?php } ?>
+            <table class="box-head">
+              <tr>
+                <td class="header-title"><h3><?php echo $text_add_banner;?></h3></td>
+                <td class="header-body"></td>
+                <td class="header-action"><a class="btn" onclick="addBannerTab('banner-tabs<?php echo $module_row; ?>',<?php echo $module_row;?>)"><?php echo $button_add ?></a></td>
+              </tr>
+            </table>
+
+            <div id='banner-tabs<?php echo $module_row; ?>'>
+              <?php if( isset($module['banner_tabs']['data']) && $module['banner_tabs']['data'] ) {  ?>
+
+                <?php foreach( $module['banner_tabs']['data'] as $idx => $banner ) { ?>
+                
+                 <table class="form banner-tab" id="banner-tab-wrapper<?php echo $idx+1;?>">
+                    <tr>
+                      <td><?php echo $entry_banner ?></td>
+                      <td colspan="2"> 
+                        <div class="image">
+                           <?php 
+                            $imgidx = "banner-".$module_row."-".$idx;
+                          $thumb = isset( $banner['image']) ?  $this->model_tool_image->resize( $banner['image'], 100, 100) :"";
+                          $image = isset($banner['image'])?$banner['image']:"";  
+                             
+                           ?> 
+                        <img src="<?php echo $thumb; ?>" alt="" id="thumb<?php echo $imgidx; ?>" />
+                        <input type="hidden" name="ykproduct_module[<?php echo $module_row; ?>][banner_tabs][image][]" value="<?php echo $image; ?>" id="image<?php echo $imgidx; ?>"  />
+                        <br />
+
+                        <a onclick="image_upload('image<?php echo $imgidx; ?>', 'thumb<?php echo $imgidx; ?>');"><?php echo $text_browse; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$('#thumb<?php echo $imgidx; ?>').attr('src', '<?php echo $no_image; ?>'); $('#image<?php echo $imgidx; ?>').attr('value', '');"><?php echo $text_clear; ?></a>
+                      </div>
+                      </td> 
+                      <td colspan="2"><?php echo $entry_link;?> &nbsp; <input name="ykproduct_module[<?php echo $module_row;?>]['banner_tabs'][link][]" value="<?php echo $banner['link']?>" size="50">
+                      </td>
+
+                      <td><?php echo $entry_sort_order;?></td>
+                      <td>
+                          <input type="text" name="ykproduct_module[<?php echo $module_row;?>]['banner_tabs'][sort][]" value="<?php echo $banner['sort'];?>" size="3">
+                      </td>
+                      <td size="4"><img src="view/image/delete.png" alt="" onclick="$('#banner-tab-wrapper<?php echo $idx+1;?>').remove(); return false;" /></td>             
+                    </tr>
+                  </table>  
+                  
                  <?php }  ?> 
                <?php } ?>   
              </div> 
@@ -153,31 +305,35 @@
 </div>
 
 <script type="text/javascript">
-  
+  var TPL_IMG = '<?php echo TPL_IMG ?>';
   function addCategoryTab( wrapper,mid ){
     var index =  $("#"+wrapper+" table").length; 
     var _class= (index%2==0 ? "odd":"eve");
     var banner_row = mid+ '-'+index;
-    var html  = '';
-     html = '<table class="form category-tab '+_class+'" id="category-tab-wrapper'+index+'">';
-     html +=     '<tr>';
-     html +=      '<td><?php echo $entry_category;?></td>';
-     html +=       ' <td colspan="2">';
-     html += '<select name="ykproduct_module['+mid+'][category_tabs][category][]">';
-     <?php foreach( $top_categories as $item){ ?>
-      html +='<option value="<?php echo $item['category_id'];?>"><?php echo addslashes($item['name']);?> [ID:<?php echo $item['category_id'];?>]</option>';
-     <?php } ?>
-     html += '</select>';
-     html += '</td>';
-     html += '<td><?php echo $entry_limit;?></td>';
-     html += '<td><input type="text" name="ykproduct_module['+mid+'][category_tabs][limit][]" size="3"></td>';
+    var _category_id = 0,_name = [];
+    $.each($('#tab-module-'+mid+' .selection-category select'),function(){
+      if($.isNumeric($(this).val()) && $(this).val() > 0){
+        _category_id = $(this).val();
+        _name.push($(this).find("option:selected").text()); 
+      }
+    });
+    if(_category_id > 0){
 
-     html += '<td><?php echo $entry_sort_order;?></td>';
-     html += '<td><input type="text" name="ykproduct_module['+mid+'][category_tabs][sort][]" size="3"></td>';
-     html += '<td size="4"><img src="view/image/delete.png" alt="" onclick="$(\'#category-tab-wrapper'+index+'\').remove(); return false;" /></td>'; 
-     html +=     '</tr>'
-     html +=    '</table> ';
-    $('#'+wrapper).append( html );
+      var html  = '';
+       html = '<table class="form category-tab '+_class+'" id="category-tab-wrapper'+index+'">';
+       html +=     '<tr><td></td>';
+       html +=       ' <td style="width:36%;">';
+       html += '<b>' + _name.join(' &gt; ')+'['+ _category_id +']' + '</b><input type="hidden" name="ykproduct_module['+mid+'][category_tabs][category][]" value="' + _category_id + '" />';
+       html += '</td>';
+       html += '<td><?php echo $entry_limit;?></td>';
+       html += '<td><input type="text" name="ykproduct_module['+mid+'][category_tabs][limit][]" size="3" value="5"></td>';
+       html += '<td><?php echo $entry_sort_order;?></td>';
+       html += '<td><input type="text" name="ykproduct_module['+mid+'][category_tabs][sort][]" size="3" value="0"></td>';
+       html += '<td size="4"><img src="view/image/delete.png" alt="" onclick="$(\'#category-tab-wrapper'+index+'\').remove(); return false;" /></td>'; 
+       html +=     '</tr>'
+       html +=    '</table> ';
+      $('#'+wrapper).append( html );
+    }
   }
 
 </script>
@@ -188,30 +344,39 @@
     var index =  $("#"+wrapper+" table").length; 
     var _class= (index%2==0 ? "odd":"eve");
     var banner_row = mid+ '-'+index;
-    var html  = '';
-     html = '<table class="form product-tab '+_class+'" id="product-tab-wrapper'+index+'">';
-     html +=     '<tr>';
-     html +=      '<td><?php echo $entry_product;?></td>';
-     html +=       ' <td colspan="2">';
-     html += '<select name="ykproduct_module['+mid+'][product_tabs][product][]">';
-     <?php foreach( $top_categories as $item){ ?>
-      html +='<option value="<?php echo $item['product_id'];?>"><?php echo addslashes($item['name']);?> [ID:<?php echo $item['product_id'];?>]</option>';
-     <?php } ?>
-     html += '</select>';
-     html += '</td>';
-
-     html += '<td>  <?php echo $entry_icon_image;?> </td>';
-     html += '<td colspan="3"> ';
-     html += '<div class="image"><img src="<?php echo $no_image; ?>" alt="" id="thumb' + banner_row + '" /><input type="hidden" name="ykproduct_module[' + mid + '][product_tabs][image][]" value="" id="image' + banner_row + '" /><br /><a onclick="image_upload(\'image' + banner_row + '\', \'thumb' + banner_row + '\');"><?php echo $text_browse; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$(\'#thumb' + banner_row + '\').attr(\'src\', \'<?php echo $no_image; ?>\'); $(\'#image' + banner_row + '\').attr(\'value\', \'\');"><?php echo $text_clear; ?></a></div>';
+    var _category_id = 0,_catname = [];
+    $.each($('#tab-module-'+mid+' .selection-product select'),function(){
+      if($.isNumeric($(this).val()) && $(this).val() > 0){
+        _category_id = $(this).val();
+        _catname.push($(this).find("option:selected").text()); 
+      }
+    });
+    var _product_id = $('#tab-module-'+mid+' #selection-product-'+mid).val(),
+    _name = $('#tab-module-'+mid+' #selection-product-'+mid).find("option:selected").text(),
+    _price = $('#tab-module-'+mid+' #selection-product-'+mid).find("option:selected").attr('data-price'),
+    _image = $('#tab-module-'+mid+' #selection-product-'+mid).find("option:selected").attr('data-img'),
+    _subtitle = $('#tab-module-'+mid+' #selection-product-'+mid).find("option:selected").attr('data-subtitle');
     
-     html += ' </td>'; 
-
-     html += '<td><?php echo $entry_sort_order;?></td>';
-     html += '<td><input type="text" name="ykproduct_module['+mid+'][product_tabs][sort][]" size="3"></td>';
-     html += '<td size="4"><img src="view/image/delete.png" alt="" onclick="$(\'#product-tab-wrapper'+index+'\').remove(); return false;" /></td>'; 
-     html +=     '</tr>'
-     html +=    '</table> ';
-    $('#'+wrapper).append( html );
+    if(_product_id > 0){
+      var html  = '';
+       html = '<table class="form product-tab '+_class+'" id="product-tab-wrapper'+index+'">';
+       html +=     '<tr>';
+       html +=      '<td></td>';
+       html +=      '<td style="width:36%">';
+       html += '<b>' + _catname.join(' &gt; ')+'<br>'+_name+'['+_product_id+']' + '</b><input type="hidden" name="ykproduct_module['+mid+'][product_tabs][product][]" value="' + _product_id + '" />';
+       html += '</td>';       
+       html += '<td> ';
+       html += '<div class="image"><img src="'+TPL_IMG+_image+'" alt="" id="thumb' + banner_row + '" /><input type="hidden" name="ykproduct_module[' + mid + '][product_tabs][image][]" value="'+_image+'" id="image' + banner_row + '" /><br /><a onclick="image_upload(\'image' + banner_row + '\', \'thumb' + banner_row + '\');"><?php echo $text_browse; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$(\'#thumb' + banner_row + '\').attr(\'src\', \'<?php echo $no_image; ?>\'); $(\'#image' + banner_row + '\').attr(\'value\', \'\');"><?php echo $text_clear; ?></a></div>';
+       html += ' </td>'; 
+       html += '<td>  <?php echo $entry_price;?> <span>'+_price+'</span></td>';      
+        html += '<td>  <?php echo $entry_subtitle;?> <span>'+_subtitle+'</span></td>';  
+       html += '<td><?php echo $entry_sort_order;?></td>';
+       html += '<td><input type="text" name="ykproduct_module['+mid+'][product_tabs][sort][]" size="3" value="0"></td>';
+       html += '<td size="4"><img src="view/image/delete.png" alt="" onclick="$(\'#product-tab-wrapper'+index+'\').remove(); return false;" /></td>'; 
+       html +=     '</tr>'
+       html +=    '</table> ';
+      $('#'+wrapper).append( html );
+    }
   }
 
 </script>
@@ -224,7 +389,7 @@
     var html  = '';
      html = '<table class="form banner-tab '+_class+'" id="banner-tab-wrapper'+index+'">';
      html += '<tr>';
-     html += '<td><?php echo $entry_icon_image;?> </td>';
+     html += '<td><?php echo $entry_banner;?> </td>';
      html += '<td colspan="3"> ';
      html += '<div class="image"><img src="<?php echo $no_image; ?>" alt="" id="thumb' + banner_row + '" /><input type="hidden" name="ykproduct_module[' + mid + '][banner_tabs][image][]" value="" id="image' + banner_row + '" /><br /><a onclick="image_upload(\'image' + banner_row + '\', \'thumb' + banner_row + '\');"><?php echo $text_browse; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$(\'#thumb' + banner_row + '\').attr(\'src\', \'<?php echo $no_image; ?>\'); $(\'#image' + banner_row + '\').attr(\'value\', \'\');"><?php echo $text_clear; ?></a></div>';
     
@@ -276,7 +441,8 @@ function addModule() {
   html += '      <td><select name="ykproduct_module[' + module_row + '][position]">';
   <?php foreach( $positions as $pos ) { ?>
   html += '<option value="<?php echo $pos;?>"><?php echo $this->language->get('text_'.$pos); ?></option>';      
-  <?php } ?>    html += '      </select></td>';
+  <?php } ?>    
+  html += '      </select></td>';
   html += '    </tr>';
   html += '    <tr>';
   html += '      <td><?php echo $entry_status; ?></td>';
@@ -286,33 +452,74 @@ function addModule() {
   html += '      </select></td>';
   html += '    </tr>';
   html += '    <tr>';
+  html += '      <td><?php echo $entry_title_class; ?></td>';
+  html += '      <td><input type="text" name="ykproduct_module[' + module_row + '][title_class]" value="" /></td>';
+  html += '    </tr>';  
+  html += '    <tr>';
   html += '      <td><?php echo $entry_sort_order; ?></td>';
-  html += '      <td><input type="text" name="ykproduct_module[' + module_row + '][sort_order]" value="" size="3" /></td>';
+  html += '      <td><input type="text" name="ykproduct_module[' + module_row + '][sort_order]" value="0" size="3" /></td>';
   html += '    </tr>';
   html += '  </table>'; 
-
-  html += '<div class="category-tabs">';
-  html +=   '<div class="box-head">';
-  html +=       '<a class="button" id="add-cattab" onclick="addCategoryTab(\'category-tabs'+module_row+'\','+module_row+')"><?php echo $text_add_category;?></a>';
-  html += '   </div>';
+  html += '<div class="category-tabs module-block">';
+  html += ' <table class="box-head"><tr>'
+  html +='    <td class="header-title"><h3><?php echo $text_add_category;?></h3></td>';
+  html += '   <td class="header-body">';
+  html += '     <div class="selection-category"> <?php echo $entry_category ?> &nbsp; &nbsp; ';
+  html += '       <select id="top-category-' + module_row + '" for-category="second-category-' + module_row + '">';
+  html += '         <option><?php echo $text_none ?></option>';
+  <?php foreach ($top_categories as $item) { ?>
+  html += '         <option value="<?php echo $item['category_id'] ?>"> <?php echo $item['name'] ?></option>';
+  <?php }?>
+  html +='        </select>';
+  html +='      </div>';
+  html += '     <div class="selection-category"><select id="second-category-' + module_row + '" for-category="third-category-' + module_row + '"></select></div>';
+  html += '     <div class="selection-category"><select id="third-category-' + module_row + '" for-category="fourth-category-' + module_row + '"></select></div>';
+  html += '     <div class="selection-category"><select id="fourth-category-' + module_row + '"></select></div>';
+  html +='    </td><td class="header-action">';
+  html +='      <a class="btn" onclick="addCategoryTab(\'category-tabs'+module_row+'\','+module_row+')"><?php echo $button_add ?></a>';
+  html += '   </td>';
+  html += ' </tr></table>';
   html += ' <div id="category-tabs'+module_row+'"></div>'; 
 
-  html += '</div><hr>';
-  html += '<div class="product-tabs">';
-  html +=   '<div class="box-head">';
-  html +=       '<a class="button" id="add-protab" onclick="addProductTab(\'product-tabs'+module_row+'\','+module_row+')"><?php echo $text_add_product;?></a>';
-  html += '   </div>';
+  html += '</div>';
+
+  html += '<div class="product-tabs module-block">';
+  html += ' <table class="box-head"><tr>'
+  html +='    <td class="header-title"><h3><?php echo $text_add_product;?></h3></td>';
+  html += '   <td class="header-body">';
+  html += '     <div class="_clearfix"><?php echo $entry_product ?> &nbsp; &nbsp;';
+  html += '     <div class="selection-product"> <?php echo $entry_product ?> &nbsp; &nbsp; ';
+  html += '       <select id="top-product-' + module_row + '" for-category="second-product-' + module_row + '">';
+  html += '         <option><?php echo $text_none ?></option>';
+  <?php foreach ($top_categories as $item) { ?>
+  html += '         <option value="<?php echo $item['category_id'] ?>"> <?php echo $item['name'] ?></option>';
+  <?php }?>
+  html +='        </select>';
+  html +='      </div>';
+  html += '     <div class="selection-product"><select id="second-product-' + module_row + '" for-category="third-product-' + module_row + '"></select></div>';
+  html += '     <div class="selection-product"><select id="third-product-' + module_row + '" for-category="fourth-product-' + module_row + '"></select></div>';
+  html += '     <div class="selection-product"><select id="fourth-product-' + module_row + '"></select></div></div>';
+  html += '<div class="_clearfix">&nbsp;<?php echo $entry_product ?> &nbsp; &nbsp;';
+  html += '   <select id="selection-product-'+module_row+'"></select></div>';
+  html +='    </td><td class="header-action">';
+  html +='      <a class="btn" onclick="addProductTab(\'product-tabs'+module_row+'\','+module_row+')"><?php echo $button_add ?></a>';
+  html += '   </td>';
+  html += ' </tr></table>';
   html += ' <div id="product-tabs'+module_row+'"></div>'; 
 
-  html += '</div><hr>';
+  html += '</div>';
 
-  html += '<div class="banner-tabs">';
-  html +=   '<div class="box-head">';
-  html +=       '<a class="button" id="add-bantab" onclick="addBannerTab(\'banner-tabs'+module_row+'\','+module_row+')"><?php echo $text_add_banner;?></a>';
-  html += '   </div>';
+  html += '<div class="banner-tabs module-block">';
+  html += ' <table class="box-head"><tr>'
+  html +='    <td class="header-title"><h3><?php echo $text_add_banner;?></h3></td>';
+  html += '   <td class="header-body"></td>';
+  html +='    <td class="header-action">';
+  html +='      <a class="btn" onclick="addBannerTab(\'banner-tabs'+module_row+'\','+module_row+')"><?php echo $button_add ?></a>';
+  html += '   </td>';
+  html += ' </tr></table>';
   html += ' <div id="banner-tabs'+module_row+'"></div>'; 
 
-  html += '</div>';  
+  html += '</div>';
 
   html += '</div>';
 
@@ -328,14 +535,75 @@ function addModule() {
   $('.vtabs a').tabs();
   
   $('#module-' + module_row).trigger('click');
+
+
+  $('#top-category-'+ module_row).trigger('change');
   
   module_row++;
 }
-//--></script> 
-<script type="text/javascript"><!--
+
+  $(document).delegate('.selection-category select','change',function(){
+
+    var $cid = $(this).val(), $obj = $('.selection-category #'+$(this).attr('for-category'));
+
+    $(this).parent().nextAll('.selection-category').hide().children('select').empty();
+
+    if($cid > 0 ){
+
+      $.get('index.php?route=catalog/category/selection_category&token=<?php echo $token ?>&cid='+$cid ,{},function(json){
+
+        if(json.status==1){
+          $obj.append($("<option value='*'><?php echo $text_none ?></option>"));
+
+          for(var i in json.data){
+            $obj.append($("<option value='" + json.data[i].category_id + "'>" + json.data[i].name + "</option>"));
+          }
+
+          $obj.parent().show();
+
+        }
+      },'json');
+
+    }
+  });
+  $(document).delegate('.selection-product select','change',function(){
+    var $cid = $(this).val(), $obj_category = $('.selection-product #'+$(this).attr('for-category')),$obj_product =  $('#'+$(this).attr('for-product'));
+
+    $(this).parent().nextAll('.selection-product').hide().children('select').empty();
+
+    if($cid > 0 ){
+
+      $.get('index.php?route=module/ykproduct/selections&token=<?php echo $token ?>&cid='+$cid ,{},function(json){
+        $obj_product.empty();
+        if(json.status==1){
+          
+          if(json.category.length>0){
+            $obj_category.append($("<option value='*'><?php echo $text_none ?></option>"));
+
+            for(var i in json.category){
+              $obj_category.append($("<option value='" + json.category[i].category_id + "'>" + json.category[i].name + "</option>"));
+            }
+
+            $obj_category.parent().show();
+          }
+
+          if(json.product.length>0){
+            $obj_product.append($("<option value='*'><?php echo $text_none ?></option>"));
+
+            for(var i in json.product){
+              $obj_product.append($("<option value='" + json.product[i].product_id + "' data-name='" + json.product[i].name +"' data-subtitle='" + (json.product[i].subtitle ? json.product[i].subtitle : '' )+"' data-img='" + json.product[i].image +"' data-price='" + json.product[i].price +"'>" + json.product[i].name + "</option>"));
+            }
+          }
+        }
+      },'json');
+
+    }
+
+  })
+
+
 $('.vtabs a').tabs();
-//--></script> 
-<script type="text/javascript"><!--
+
 <?php $module_row = 1; ?>
 <?php foreach ($modules as $module) { ?>
 $('#language-<?php echo $module_row; ?> a').tabs();
@@ -370,6 +638,15 @@ function image_upload(field, thumb) {
 };
 //--></script> 
 <style type="text/css">
-  .category-tab > tbody > tr > td:first-child {width:auto !important;}
+  .form.category-tab td,.form.product-tab td,.form.banner-tab td{padding: 1px;}
+  .category-tab > tbody > tr > td:first-child ,.product-tab > tbody > tr > td:first-child,
+  .banner-tab > tbody > tr > td:first-child {width:auto !important;}
+  .box-head{clear: both;width: 100%;background: #eeeeee;}
+  .box-head .header-title{width: 32%}
+  .box-head .header-body {width: 62%;}
+  .box-head .header-action {width: 5%;}
+  .module-block{border-bottom: 1px solid #999;}
+  .product-tabs .image img{width: 100px;height: 100px;}
+  .selection-category,.selection-product{float: left;margin: 0 5px;}
 </style>
 <?php echo $footer; ?>
