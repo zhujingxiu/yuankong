@@ -25,7 +25,7 @@ class ControllerModuleYkproduct extends Controller {
         $this->data['text_image_manager'] = $this->language->get('text_image_manager');
         $this->data['text_browse'] = $this->language->get('text_browse');
         $this->data['text_clear'] = $this->language->get('text_clear'); 
-        $this->data['no_image'] = '';
+        $this->data['no_image'] = TPL_IMG.'no_image.jpg';
 
         $this->data['text_enabled'] = $this->language->get('text_enabled');
         $this->data['text_disabled'] = $this->language->get('text_disabled');
@@ -40,6 +40,7 @@ class ControllerModuleYkproduct extends Controller {
 
         $this->data['entry_title'] = $this->language->get('entry_title');
         $this->data['entry_title_class'] = $this->language->get('entry_title_class');
+        $this->data['entry_additional_class'] = $this->language->get('entry_additional_class');
         $this->data['entry_tabs'] = $this->language->get('entry_tabs');
         $this->data['entry_banner'] = $this->language->get('entry_banner');
         $this->data['entry_product'] = $this->language->get('entry_product');
@@ -172,9 +173,7 @@ class ControllerModuleYkproduct extends Controller {
             }
         }
         $this->load->model('design/layout');
-echo "<pre>";
-print_r( $this->data['modules']);
-echo "</pre>";
+
         $this->data['layouts'] = array();
         $this->data['layouts'][] = array('layout_id'=>99999, 'name' => $this->language->get('all_page') );
         

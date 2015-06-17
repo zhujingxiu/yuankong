@@ -26,6 +26,7 @@ $_['entry_price']       = '价格:';
 $_['entry_subtitle']    = '副标题:';
 $_['entry_description'] = '描述';
 $_['entry_title_class'] = '标题样式';
+$_['entry_additional_class'] = '附加样式';
 
 // Error
 $_['error_permission']  = '警告：您无权限！';

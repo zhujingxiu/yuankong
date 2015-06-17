@@ -94,6 +94,10 @@
               <td><input type="text" name="ykproduct_module[<?php echo $module_row; ?>][title_class]" value="<?php echo $module['title_class']; ?>" /></td>
             </tr>
             <tr>
+              <td><?php echo $entry_additional_class; ?></td>
+              <td><input type="text" name="ykproduct_module[<?php echo $module_row; ?>][additional_class]" value="<?php echo $module['additional_class']; ?>" /></td>
+            </tr>
+            <tr>
               <td><?php echo $entry_sort_order; ?></td>
               <td><input type="text" name="ykproduct_module[<?php echo $module_row; ?>][sort_order]" value="<?php echo $module['sort_order']; ?>" size="3" /></td>
             </tr>
@@ -200,7 +204,9 @@
                 <td class="header-action"><a class="btn" onclick="addProductTab('product-tabs<?php echo $module_row; ?>',<?php echo $module_row;?>)"><?php echo $button_add ?></a></td>
               </tr>
             </table>
-
+            <script type="text/javascript">
+              $('#top-product-<?php echo $module_row;?>').trigger('change');
+            </script>
             <div id='product-tabs<?php echo $module_row; ?>'>
               <?php if( isset($module['product_tabs']['data']) && $module['product_tabs']['data'] ) {  ?>
 
@@ -281,12 +287,12 @@
                         <a onclick="image_upload('image<?php echo $imgidx; ?>', 'thumb<?php echo $imgidx; ?>');"><?php echo $text_browse; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$('#thumb<?php echo $imgidx; ?>').attr('src', '<?php echo $no_image; ?>'); $('#image<?php echo $imgidx; ?>').attr('value', '');"><?php echo $text_clear; ?></a>
                       </div>
                       </td> 
-                      <td colspan="2"><?php echo $entry_link;?> &nbsp; <input name="ykproduct_module[<?php echo $module_row;?>]['banner_tabs'][link][]" value="<?php echo $banner['link']?>" size="50">
+                      <td colspan="2"><?php echo $entry_link;?> &nbsp; <input name="ykproduct_module[<?php echo $module_row;?>][banner_tabs][link][]" value="<?php echo $banner['link']?>" size="50">
                       </td>
 
                       <td><?php echo $entry_sort_order;?></td>
                       <td>
-                          <input type="text" name="ykproduct_module[<?php echo $module_row;?>]['banner_tabs'][sort][]" value="<?php echo $banner['sort'];?>" size="3">
+                          <input type="text" name="ykproduct_module[<?php echo $module_row;?>][banner_tabs][sort][]" value="<?php echo $banner['sort'];?>" size="3">
                       </td>
                       <td size="4"><img src="view/image/delete.png" alt="" onclick="$('#banner-tab-wrapper<?php echo $idx+1;?>').remove(); return false;" /></td>             
                     </tr>
@@ -309,7 +315,7 @@
   function addCategoryTab( wrapper,mid ){
     var index =  $("#"+wrapper+" table").length; 
     var _class= (index%2==0 ? "odd":"eve");
-    var banner_row = mid+ '-'+index;
+    
     var _category_id = 0,_name = [];
     $.each($('#tab-module-'+mid+' .selection-category select'),function(){
       if($.isNumeric($(this).val()) && $(this).val() > 0){
@@ -343,7 +349,7 @@
   function addProductTab( wrapper,mid ){
     var index =  $("#"+wrapper+" table").length; 
     var _class= (index%2==0 ? "odd":"eve");
-    var banner_row = mid+ '-'+index;
+    var banner_row = 'product-'+mid+ '-'+index;
     var _category_id = 0,_catname = [];
     $.each($('#tab-module-'+mid+' .selection-product select'),function(){
       if($.isNumeric($(this).val()) && $(this).val() > 0){
@@ -385,7 +391,7 @@
   function addBannerTab( wrapper,mid ){
     var index =  $("#"+wrapper+" table").length; 
     var _class= (index%2==0 ? "odd":"eve");
-    var banner_row = mid+ '-'+index;
+    var banner_row = 'banner-'+ mid+ '-'+index;
     var html  = '';
      html = '<table class="form banner-tab '+_class+'" id="banner-tab-wrapper'+index+'">';
      html += '<tr>';
@@ -456,6 +462,10 @@ function addModule() {
   html += '      <td><input type="text" name="ykproduct_module[' + module_row + '][title_class]" value="" /></td>';
   html += '    </tr>';  
   html += '    <tr>';
+  html += '      <td><?php echo $entry_additional_class; ?></td>';
+  html += '      <td><input type="text" name="ykproduct_module[' + module_row + '][additional_class]" value="" /></td>';
+  html += '    </tr>';    
+  html += '    <tr>';
   html += '      <td><?php echo $entry_sort_order; ?></td>';
   html += '      <td><input type="text" name="ykproduct_module[' + module_row + '][sort_order]" value="0" size="3" /></td>';
   html += '    </tr>';
@@ -487,18 +497,18 @@ function addModule() {
   html += ' <table class="box-head"><tr>'
   html +='    <td class="header-title"><h3><?php echo $text_add_product;?></h3></td>';
   html += '   <td class="header-body">';
-  html += '     <div class="_clearfix"><?php echo $entry_product ?> &nbsp; &nbsp;';
-  html += '     <div class="selection-product"> <?php echo $entry_product ?> &nbsp; &nbsp; ';
-  html += '       <select id="top-product-' + module_row + '" for-category="second-product-' + module_row + '">';
+  html += '     <div class="_clearfix">';
+  html += '     <div class="selection-product"><?php echo $entry_category ?> &nbsp; &nbsp;';
+  html += '       <select id="top-product-' + module_row + '" for-category="second-product-' + module_row + '" for-product="selection-product-'+module_row+'">';
   html += '         <option><?php echo $text_none ?></option>';
   <?php foreach ($top_categories as $item) { ?>
   html += '         <option value="<?php echo $item['category_id'] ?>"> <?php echo $item['name'] ?></option>';
   <?php }?>
   html +='        </select>';
   html +='      </div>';
-  html += '     <div class="selection-product"><select id="second-product-' + module_row + '" for-category="third-product-' + module_row + '"></select></div>';
-  html += '     <div class="selection-product"><select id="third-product-' + module_row + '" for-category="fourth-product-' + module_row + '"></select></div>';
-  html += '     <div class="selection-product"><select id="fourth-product-' + module_row + '"></select></div></div>';
+  html += '     <div class="selection-product"><select id="second-product-' + module_row + '" for-category="third-product-' + module_row + '" for-product="selection-product-'+module_row+'"></select></div>';
+  html += '     <div class="selection-product"><select id="third-product-' + module_row + '" for-category="fourth-product-' + module_row + '" for-product="selection-product-'+module_row+'"></select></div>';
+  html += '     <div class="selection-product"><select id="fourth-product-' + module_row + '" for-product="selection-product-'+module_row+'"></select></div></div>';
   html += '<div class="_clearfix">&nbsp;<?php echo $entry_product ?> &nbsp; &nbsp;';
   html += '   <select id="selection-product-'+module_row+'"></select></div>';
   html +='    </td><td class="header-action">';
@@ -538,6 +548,7 @@ function addModule() {
 
 
   $('#top-category-'+ module_row).trigger('change');
+  $('#top-product-'+ module_row).trigger('change');
   
   module_row++;
 }

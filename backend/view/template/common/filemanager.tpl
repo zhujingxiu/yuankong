@@ -211,7 +211,6 @@ $(document).ready(function() {
 		},
 		callback: {
 			beforedata: function(NODE, TREE_OBJ) { 
-				console.info(NODE);
 				if (NODE == false) {
 					
 					TREE_OBJ.settings.data.opts.static = [ 
