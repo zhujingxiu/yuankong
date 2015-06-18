@@ -72,5 +72,6 @@
         </div>
     </div>
 <script type="text/javascript">
+    o.mous.init(".shop-style","hover");
     o.slider.init(".inslider-<?php echo $rand  ?>");
 </script>

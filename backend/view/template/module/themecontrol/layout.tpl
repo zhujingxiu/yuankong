@@ -6,7 +6,7 @@
 <div class="clearfix">
 	<table class="form">
 		<tr>
-			<td><b>Show modules on Layout</b></td>
+			<td><b><?php echo $this->getLang("text_show_modules");?></b></td>
 			<td>
 				<select name="elayout_id" onchange="window.location.href='<?php echo preg_replace("#elayout_id\s*=\s*\d+#","",$action); ?>&elayout_id='+this.value">
 					<?php foreach( $layouts as $layout ) { 

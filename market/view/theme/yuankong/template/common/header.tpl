@@ -65,11 +65,9 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
 	<div class="w">
 
 		<div class="l">
-			<div class="h-weix l rel">
-                <i class="icon2 wxtub"></i><em class="icon2 h-down"></em>
-                <div class="wxbox"><img src="imgs/adimg/ewm2.jpg" /><p class="c8">打开微信，点击“发现”，使用“扫一扫”即可关注爱游戏官方微信</p></div>
-            </div>
-			
+			<?php if( isset($themeConfig['topleft_customhtml'][$this->config->get('config_language_id')]) )  { 
+				echo html_entity_decode($themeConfig['topleft_customhtml'][$this->config->get('config_language_id')], ENT_QUOTES, 'UTF-8'); 
+			} ?>
 		</div>
 		<div class="r">
 			<ul class="head-ul">
@@ -127,15 +125,11 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
  */
 $modules = $helper->getModulesByPosition( 'mainmenu' ); 
 if( count($modules) ){ ?>
-
 <?php foreach ($modules as $module) { ?>
 	<?php echo $module; ?>
 <?php } ?>
 
 <?php } elseif ($categories) { ?>
-
-	
-
 	<div class="w rel fix">
 		<div class="l ovh">	
 		<ul class="nav">

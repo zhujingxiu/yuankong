@@ -1,14 +1,14 @@
 <?php require( DIR_TEMPLATE.$this->config->get('config_template')."/template/common/config.tpl" ); ?>
 <?php echo $header; ?>
 <?php require( DIR_TEMPLATE.$this->config->get('config_template')."/template/common/breadcrumb.tpl" ); ?>
-<div class="row-fluid">
+<div class="w mt10 fix">
 
 <?php if( $SPAN[0] ): ?>
-	<div class="span<?php echo $SPAN[0];?>">
+	<div class="<?php echo $SPAN[0];?>">
 		<?php echo $column_left; ?>
 	</div>
 <?php endif; ?> 
-<div class="span<?php echo $SPAN[1];?> category">
+<div class="<?php echo $SPAN[1];?> category ">
 	
 	<div id="content"><?php echo $content_top; ?>
 
@@ -34,7 +34,7 @@
 
 </div> 
 <?php if( $SPAN[2] ): ?>
-<div class="span<?php echo $SPAN[2];?>">	
+<div class="<?php echo $SPAN[2];?>">	
 	<?php echo $column_right; ?>
 </div>
 <?php endif; ?>

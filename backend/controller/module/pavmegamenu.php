@@ -368,4 +368,3 @@ class ControllerModulePavmegamenu extends Controller {
 		}	
 	}
 }
-?>

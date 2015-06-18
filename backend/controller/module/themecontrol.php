@@ -94,8 +94,6 @@ class ControllerModuleThemeControl extends Controller {
 		$this->data['entry_dimension'] = $this->language->get('entry_dimension'); 
 		$this->data['entry_layout'] = $this->language->get('entry_layout');
 		$this->data['entry_position'] = $this->language->get('entry_position');
-		
-
 		$this->data['entry_status'] = $this->language->get('entry_status');
 		$this->data['entry_sort_order'] = $this->language->get('entry_sort_order');
 		
@@ -109,7 +107,10 @@ class ControllerModuleThemeControl extends Controller {
 		// table
 		$this->data['tab_layout'] = $this->language->get( 'tab_layout' );
 		$this->data['tab_custom'] = $this->language->get( 'tab_custom' );
-
+		$this->data['yesno'] = array(0=>$this->language->get('text_no'),1=>$this->language->get('text_yes'));
+		//$this->data['bg_thumb'] = $this->model_tool_image->resize( $this->data['module']['bg_image'], 150, 150);
+		$this->data['no_image'] =  $this->model_tool_image->resize('no_image.jpg', 180, 180);
+	
 
 		$this->data['product_rows'] = array('0'=> $this->language->get('text_auto'), 2=>2, 3=>3,4=>4,5=>5,6=>6 );
 		$this->data['category_saleicons'] = array(
@@ -192,17 +193,26 @@ class ControllerModuleThemeControl extends Controller {
 		
 		$this->data['banners'] = $this->model_design_banner->getBanners();
 		
-	 	
-		
+	 	$this->data['search_option'] = array(
+	 		'product' 	=> $this->language->get('text_search_product'),
+	 		'news' 		=> $this->language->get('text_search_news'),
+	 		'category' 	=> $this->language->get('text_search_category'),
+	 		'affiliate' => $this->language->get('text_search_affiliate'),
+	 		'wiki' 		=> $this->language->get('text_search_wiki'),
+	 	);
+
+		if(!isset($module['search'])){
+			$this->data['module']['search'] = array('option'=> array(),'placeholder'=>'','keyword'=> array());
+		}
 		$this->tabModules();
 		$this->load->model('localisation/language');
 		$this->data['languages'] = $this->model_localisation_language->getLanguages();
-		$this->data['logo_types'] = array(
-			'' => $this->language->get('logo_system'),
-			'logo-text' => $this->language->get('logo_text'),
-			'logo-image' =>  $this->language->get('logo_image'),
-		);
-	 
+	    $this->data['entry_title'] = $this->language->get('entry_title');
+        $this->data['entry_selected'] = $this->language->get('entry_selected');
+        $this->data['entry_link'] = $this->language->get('entry_link');
+        $this->data['entry_status'] = $this->language->get('entry_status');
+        $this->data['entry_additional_class'] = $this->language->get('entry_additional_class');
+        $this->data['entry_sort_order'] = $this->language->get('entry_sort_order');
 		/* */
 		$this->template = 'module/themecontrol/'.$this->moduleName.'.tpl';
 		$this->children = array(

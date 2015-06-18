@@ -55,3 +55,6 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+        o.moushov.init("#taber li",".gsbox");
+    </script>

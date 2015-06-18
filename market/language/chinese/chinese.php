@@ -24,6 +24,12 @@ $_['text_more']        		= ' 更多  ';
 $_['text_unknown']        	= ' 未知 ';
 $_['text_wiki_help']        = ' 消防问答 ';
 
+$_['text_search_product']   = '消防产品';
+$_['text_search_news']      = '消防资讯';
+$_['text_search_category']  = '商品分类';
+$_['text_search_affiliate'] = '消防公司';
+$_['text_search_wiki']      = '消防百科';
+
 // Buttons
 $_['button_add_address']    = '添加地址';
 $_['button_back']           = '返回';

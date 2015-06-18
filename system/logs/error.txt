@@ -923,3 +923,377 @@
 2015-06-17 14:34:56 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\module\ykproduct.tpl on line 37
 2015-06-17 14:34:56 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\module\ykproduct.tpl on line 37
 2015-06-17 14:34:56 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\module\ykproduct.tpl on line 37
+2015-06-18 1:57:31 - PHP Notice:  Undefined index: additional_class in D:\wamp\www\yuankong\market\controller\module\ykproduct.php on line 15
+2015-06-18 1:57:31 - PHP Warning:  sort() expects parameter 1 to be array, null given in D:\wamp\www\yuankong\market\controller\module\ykproduct.php on line 18
+2015-06-18 1:57:31 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\market\controller\module\ykproduct.php on line 49
+2015-06-18 1:57:32 - PHP Notice:  Undefined index: additional_class in D:\wamp\www\yuankong\market\controller\module\ykproduct.php on line 15
+2015-06-18 1:57:32 - PHP Warning:  sort() expects parameter 1 to be array, null given in D:\wamp\www\yuankong\market\controller\module\ykproduct.php on line 18
+2015-06-18 1:57:32 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\market\controller\module\ykproduct.php on line 49
+2015-06-18 2:05:00 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 74
+2015-06-18 2:05:00 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 74
+2015-06-18 2:05:00 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 90
+2015-06-18 2:05:00 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 90
+2015-06-18 2:05:00 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 126
+2015-06-18 2:05:00 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 126
+2015-06-18 2:06:54 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 74
+2015-06-18 2:06:54 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 74
+2015-06-18 2:06:54 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 90
+2015-06-18 2:06:54 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 90
+2015-06-18 2:06:54 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 126
+2015-06-18 2:06:54 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 126
+2015-06-18 2:07:44 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 74
+2015-06-18 2:07:44 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 74
+2015-06-18 2:07:44 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 90
+2015-06-18 2:07:44 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 90
+2015-06-18 2:07:44 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 126
+2015-06-18 2:07:44 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 126
+2015-06-18 2:08:03 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 74
+2015-06-18 2:08:03 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 74
+2015-06-18 2:08:03 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 90
+2015-06-18 2:08:03 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 90
+2015-06-18 2:08:03 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 126
+2015-06-18 2:08:03 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 126
+2015-06-18 2:44:41 - PHP Notice:  Error: Could not load language module/yknavigation! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-06-18 2:48:21 - PHP Notice:  Error: Could not load language module/yknavigation! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-06-18 3:02:32 - PHP Notice:  Undefined variable: entry_group in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 24
+2015-06-18 3:02:32 - PHP Notice:  Undefined variable: entry_limit in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 26
+2015-06-18 3:02:32 - PHP Notice:  Undefined variable: entry_first_class in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 27
+2015-06-18 3:18:54 - PHP Notice:  Undefined variable: module_row in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 21
+2015-06-18 3:18:54 - PHP Notice:  Undefined variable: module_row in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 33
+2015-06-18 3:18:54 - PHP Notice:  Undefined variable: module_row in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 45
+2015-06-18 3:18:54 - PHP Notice:  Undefined variable: module_row in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 57
+2015-06-18 3:18:54 - PHP Notice:  Undefined index: sort_order in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 57
+2015-06-18 3:21:45 - PHP Notice:  Undefined variable: module_row in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 21
+2015-06-18 3:21:45 - PHP Notice:  Undefined variable: module_row in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 33
+2015-06-18 3:21:45 - PHP Notice:  Undefined variable: module_row in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 45
+2015-06-18 3:21:45 - PHP Notice:  Undefined variable: module_row in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 57
+2015-06-18 3:21:45 - PHP Notice:  Undefined index: sort_order in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 57
+2015-06-18 3:29:12 - PHP Warning:  Illegal string offset 'title' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 77
+2015-06-18 3:29:12 - PHP Warning:  Illegal string offset 'route' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 78
+2015-06-18 3:29:12 - PHP Warning:  Illegal string offset 'param' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 79
+2015-06-18 3:29:12 - PHP Warning:  Illegal string offset 'additional_class' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 80
+2015-06-18 3:29:12 - PHP Warning:  Illegal string offset 'status' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 82
+2015-06-18 3:29:12 - PHP Warning:  Illegal string offset 'selected' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 91
+2015-06-18 3:29:12 - PHP Warning:  Illegal string offset 'sort' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 99
+2015-06-18 3:29:12 - PHP Warning:  Illegal string offset 'title' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 77
+2015-06-18 3:29:12 - PHP Warning:  Illegal string offset 'route' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 78
+2015-06-18 3:29:12 - PHP Warning:  Illegal string offset 'param' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 79
+2015-06-18 3:29:12 - PHP Warning:  Illegal string offset 'additional_class' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 80
+2015-06-18 3:29:12 - PHP Warning:  Illegal string offset 'status' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 82
+2015-06-18 3:29:12 - PHP Warning:  Illegal string offset 'selected' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 91
+2015-06-18 3:29:12 - PHP Warning:  Illegal string offset 'sort' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 99
+2015-06-18 3:29:12 - PHP Warning:  Illegal string offset 'title' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 77
+2015-06-18 3:29:12 - PHP Warning:  Illegal string offset 'route' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 78
+2015-06-18 3:29:12 - PHP Warning:  Illegal string offset 'param' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 79
+2015-06-18 3:29:12 - PHP Warning:  Illegal string offset 'additional_class' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 80
+2015-06-18 3:29:12 - PHP Warning:  Illegal string offset 'status' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 82
+2015-06-18 3:29:12 - PHP Warning:  Illegal string offset 'selected' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 91
+2015-06-18 3:29:12 - PHP Warning:  Illegal string offset 'sort' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 99
+2015-06-18 3:29:12 - PHP Warning:  Illegal string offset 'title' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 77
+2015-06-18 3:29:12 - PHP Warning:  Illegal string offset 'route' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 78
+2015-06-18 3:29:12 - PHP Warning:  Illegal string offset 'param' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 79
+2015-06-18 3:29:12 - PHP Warning:  Illegal string offset 'additional_class' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 80
+2015-06-18 3:29:12 - PHP Warning:  Illegal string offset 'status' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 82
+2015-06-18 3:29:12 - PHP Warning:  Illegal string offset 'selected' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 91
+2015-06-18 3:29:12 - PHP Warning:  Illegal string offset 'sort' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 99
+2015-06-18 3:29:12 - PHP Notice:  Undefined index: sort in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 99
+2015-06-18 3:29:12 - PHP Notice:  Undefined index: sort in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 99
+2015-06-18 3:29:12 - PHP Notice:  Undefined index: sort in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 99
+2015-06-18 3:29:12 - PHP Notice:  Undefined index: sort in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 99
+2015-06-18 3:29:12 - PHP Notice:  Undefined index: sort in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 99
+2015-06-18 3:29:12 - PHP Notice:  Undefined index: sort in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 99
+2015-06-18 3:32:01 - PHP Warning:  Illegal string offset 'title' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 78
+2015-06-18 3:32:01 - PHP Warning:  Illegal string offset 'route' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 79
+2015-06-18 3:32:01 - PHP Warning:  Illegal string offset 'param' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 80
+2015-06-18 3:32:01 - PHP Warning:  Illegal string offset 'additional_class' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 81
+2015-06-18 3:32:01 - PHP Warning:  Illegal string offset 'icon' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 82
+2015-06-18 3:32:01 - PHP Warning:  Illegal string offset 'status' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 84
+2015-06-18 3:32:01 - PHP Warning:  Illegal string offset 'selected' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 93
+2015-06-18 3:32:01 - PHP Warning:  Illegal string offset 'sort' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 101
+2015-06-18 3:32:01 - PHP Warning:  Illegal string offset 'title' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 78
+2015-06-18 3:32:01 - PHP Warning:  Illegal string offset 'route' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 79
+2015-06-18 3:32:01 - PHP Warning:  Illegal string offset 'param' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 80
+2015-06-18 3:32:01 - PHP Warning:  Illegal string offset 'additional_class' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 81
+2015-06-18 3:32:01 - PHP Warning:  Illegal string offset 'icon' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 82
+2015-06-18 3:32:01 - PHP Warning:  Illegal string offset 'status' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 84
+2015-06-18 3:32:01 - PHP Warning:  Illegal string offset 'selected' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 93
+2015-06-18 3:32:01 - PHP Warning:  Illegal string offset 'sort' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 101
+2015-06-18 3:32:01 - PHP Warning:  Illegal string offset 'title' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 78
+2015-06-18 3:32:01 - PHP Warning:  Illegal string offset 'route' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 79
+2015-06-18 3:32:01 - PHP Warning:  Illegal string offset 'param' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 80
+2015-06-18 3:32:01 - PHP Warning:  Illegal string offset 'additional_class' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 81
+2015-06-18 3:32:01 - PHP Warning:  Illegal string offset 'icon' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 82
+2015-06-18 3:32:01 - PHP Warning:  Illegal string offset 'status' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 84
+2015-06-18 3:32:01 - PHP Warning:  Illegal string offset 'selected' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 93
+2015-06-18 3:32:01 - PHP Warning:  Illegal string offset 'sort' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 101
+2015-06-18 3:32:01 - PHP Warning:  Illegal string offset 'title' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 78
+2015-06-18 3:32:01 - PHP Warning:  Illegal string offset 'route' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 79
+2015-06-18 3:32:01 - PHP Warning:  Illegal string offset 'param' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 80
+2015-06-18 3:32:01 - PHP Warning:  Illegal string offset 'additional_class' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 81
+2015-06-18 3:32:01 - PHP Warning:  Illegal string offset 'icon' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 82
+2015-06-18 3:32:01 - PHP Warning:  Illegal string offset 'status' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 84
+2015-06-18 3:32:01 - PHP Warning:  Illegal string offset 'selected' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 93
+2015-06-18 3:32:01 - PHP Warning:  Illegal string offset 'sort' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 101
+2015-06-18 3:32:01 - PHP Notice:  Undefined index: icon in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 82
+2015-06-18 3:32:01 - PHP Notice:  Undefined index: sort in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 101
+2015-06-18 3:32:01 - PHP Notice:  Undefined index: icon in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 82
+2015-06-18 3:32:01 - PHP Notice:  Undefined index: sort in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 101
+2015-06-18 3:32:01 - PHP Notice:  Undefined index: icon in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 82
+2015-06-18 3:32:01 - PHP Notice:  Undefined index: sort in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 101
+2015-06-18 3:32:01 - PHP Notice:  Undefined index: icon in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 82
+2015-06-18 3:32:01 - PHP Notice:  Undefined index: sort in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 101
+2015-06-18 3:32:01 - PHP Notice:  Undefined index: icon in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 82
+2015-06-18 3:32:01 - PHP Notice:  Undefined index: sort in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 101
+2015-06-18 3:32:01 - PHP Notice:  Undefined index: icon in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 82
+2015-06-18 3:32:01 - PHP Notice:  Undefined index: sort in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 101
+2015-06-18 3:32:43 - PHP Warning:  Illegal string offset 'title' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 78
+2015-06-18 3:32:43 - PHP Warning:  Illegal string offset 'route' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 79
+2015-06-18 3:32:43 - PHP Warning:  Illegal string offset 'param' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 80
+2015-06-18 3:32:43 - PHP Warning:  Illegal string offset 'additional_class' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 81
+2015-06-18 3:32:43 - PHP Warning:  Illegal string offset 'icon' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 82
+2015-06-18 3:32:43 - PHP Warning:  Illegal string offset 'status' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 84
+2015-06-18 3:32:43 - PHP Warning:  Illegal string offset 'selected' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 93
+2015-06-18 3:32:43 - PHP Warning:  Illegal string offset 'sort' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 101
+2015-06-18 3:32:43 - PHP Warning:  Illegal string offset 'title' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 78
+2015-06-18 3:32:43 - PHP Warning:  Illegal string offset 'route' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 79
+2015-06-18 3:32:43 - PHP Warning:  Illegal string offset 'param' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 80
+2015-06-18 3:32:43 - PHP Warning:  Illegal string offset 'additional_class' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 81
+2015-06-18 3:32:43 - PHP Warning:  Illegal string offset 'icon' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 82
+2015-06-18 3:32:43 - PHP Warning:  Illegal string offset 'status' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 84
+2015-06-18 3:32:43 - PHP Warning:  Illegal string offset 'selected' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 93
+2015-06-18 3:32:43 - PHP Warning:  Illegal string offset 'sort' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 101
+2015-06-18 3:32:43 - PHP Warning:  Illegal string offset 'title' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 78
+2015-06-18 3:32:43 - PHP Warning:  Illegal string offset 'route' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 79
+2015-06-18 3:32:43 - PHP Warning:  Illegal string offset 'param' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 80
+2015-06-18 3:32:43 - PHP Warning:  Illegal string offset 'additional_class' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 81
+2015-06-18 3:32:43 - PHP Warning:  Illegal string offset 'icon' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 82
+2015-06-18 3:32:43 - PHP Warning:  Illegal string offset 'status' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 84
+2015-06-18 3:32:43 - PHP Warning:  Illegal string offset 'selected' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 93
+2015-06-18 3:32:43 - PHP Warning:  Illegal string offset 'sort' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 101
+2015-06-18 3:32:43 - PHP Warning:  Illegal string offset 'title' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 78
+2015-06-18 3:32:43 - PHP Warning:  Illegal string offset 'route' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 79
+2015-06-18 3:32:43 - PHP Warning:  Illegal string offset 'param' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 80
+2015-06-18 3:32:43 - PHP Warning:  Illegal string offset 'additional_class' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 81
+2015-06-18 3:32:43 - PHP Warning:  Illegal string offset 'icon' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 82
+2015-06-18 3:32:43 - PHP Warning:  Illegal string offset 'status' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 84
+2015-06-18 3:32:43 - PHP Warning:  Illegal string offset 'selected' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 93
+2015-06-18 3:32:43 - PHP Warning:  Illegal string offset 'sort' in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 101
+2015-06-18 3:32:43 - PHP Notice:  Undefined index: icon in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 82
+2015-06-18 3:32:43 - PHP Notice:  Undefined index: sort in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 101
+2015-06-18 3:32:43 - PHP Notice:  Undefined index: icon in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 82
+2015-06-18 3:32:43 - PHP Notice:  Undefined index: sort in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 101
+2015-06-18 3:32:43 - PHP Notice:  Undefined index: icon in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 82
+2015-06-18 3:32:43 - PHP Notice:  Undefined index: sort in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 101
+2015-06-18 3:32:43 - PHP Notice:  Undefined index: icon in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 82
+2015-06-18 3:32:43 - PHP Notice:  Undefined index: sort in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 101
+2015-06-18 3:32:43 - PHP Notice:  Undefined index: icon in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 82
+2015-06-18 3:32:43 - PHP Notice:  Undefined index: sort in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 101
+2015-06-18 3:32:43 - PHP Notice:  Undefined index: icon in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 82
+2015-06-18 3:32:43 - PHP Notice:  Undefined index: sort in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 101
+2015-06-18 3:43:18 - PHP Notice:  Undefined index: navigator in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 75
+2015-06-18 3:43:18 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 75
+2015-06-18 3:43:27 - PHP Notice:  Undefined index: navigator in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 75
+2015-06-18 3:43:27 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 75
+2015-06-18 3:46:40 - PHP Notice:  Undefined index: navigator in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 75
+2015-06-18 3:46:40 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 75
+2015-06-18 3:47:44 - PHP Notice:  Undefined index: navigator in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 75
+2015-06-18 3:47:44 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 75
+2015-06-18 3:52:18 - PHP Notice:  Undefined index: sort in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 101
+2015-06-18 3:52:18 - PHP Notice:  Undefined index: sort in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 101
+2015-06-18 3:52:18 - PHP Notice:  Undefined index: sort in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 101
+2015-06-18 3:52:18 - PHP Notice:  Undefined index: sort in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 101
+2015-06-18 3:52:18 - PHP Notice:  Undefined index: sort in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 101
+2015-06-18 3:52:18 - PHP Notice:  Undefined index: sort in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 101
+2015-06-18 3:55:00 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\column_left.php on line 50
+2015-06-18 3:55:00 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\column_left.php on line 50
+2015-06-18 3:55:00 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\column_left.php on line 50
+2015-06-18 3:55:00 - PHP Warning:  Illegal string offset 'position' in D:\wamp\www\yuankong\market\controller\common\column_left.php on line 50
+2015-06-18 3:55:00 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\column_left.php on line 50
+2015-06-18 3:55:00 - PHP Warning:  Illegal string offset 'position' in D:\wamp\www\yuankong\market\controller\common\column_left.php on line 50
+2015-06-18 3:55:00 - PHP Notice:  Undefined index: layout_id in D:\wamp\www\yuankong\market\controller\common\column_left.php on line 50
+2015-06-18 3:55:00 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\column_right.php on line 50
+2015-06-18 3:55:00 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\column_right.php on line 50
+2015-06-18 3:55:00 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\column_right.php on line 50
+2015-06-18 3:55:00 - PHP Warning:  Illegal string offset 'position' in D:\wamp\www\yuankong\market\controller\common\column_right.php on line 50
+2015-06-18 3:55:00 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\column_right.php on line 50
+2015-06-18 3:55:00 - PHP Warning:  Illegal string offset 'position' in D:\wamp\www\yuankong\market\controller\common\column_right.php on line 50
+2015-06-18 3:55:00 - PHP Notice:  Undefined index: layout_id in D:\wamp\www\yuankong\market\controller\common\column_right.php on line 50
+2015-06-18 3:55:00 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\content_top.php on line 50
+2015-06-18 3:55:00 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\content_top.php on line 50
+2015-06-18 3:55:00 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\content_top.php on line 50
+2015-06-18 3:55:00 - PHP Warning:  Illegal string offset 'position' in D:\wamp\www\yuankong\market\controller\common\content_top.php on line 50
+2015-06-18 3:55:00 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\content_top.php on line 50
+2015-06-18 3:55:00 - PHP Warning:  Illegal string offset 'position' in D:\wamp\www\yuankong\market\controller\common\content_top.php on line 50
+2015-06-18 3:55:00 - PHP Notice:  Undefined index: layout_id in D:\wamp\www\yuankong\market\controller\common\content_top.php on line 50
+2015-06-18 3:55:00 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\content_bottom.php on line 50
+2015-06-18 3:55:00 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\content_bottom.php on line 50
+2015-06-18 3:55:00 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\content_bottom.php on line 50
+2015-06-18 3:55:00 - PHP Warning:  Illegal string offset 'position' in D:\wamp\www\yuankong\market\controller\common\content_bottom.php on line 50
+2015-06-18 3:55:00 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\content_bottom.php on line 50
+2015-06-18 3:55:00 - PHP Warning:  Illegal string offset 'position' in D:\wamp\www\yuankong\market\controller\common\content_bottom.php on line 50
+2015-06-18 3:55:00 - PHP Notice:  Undefined index: layout_id in D:\wamp\www\yuankong\market\controller\common\content_bottom.php on line 50
+2015-06-18 3:55:00 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\view\theme\yuankong\template\libs\module.php on line 221
+2015-06-18 3:55:00 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\view\theme\yuankong\template\libs\module.php on line 221
+2015-06-18 3:55:00 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\view\theme\yuankong\template\libs\module.php on line 221
+2015-06-18 3:55:00 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\view\theme\yuankong\template\libs\module.php on line 221
+2015-06-18 3:55:00 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\view\theme\yuankong\template\libs\module.php on line 221
+2015-06-18 3:55:00 - PHP Warning:  Illegal string offset 'position' in D:\wamp\www\yuankong\market\view\theme\yuankong\template\libs\module.php on line 221
+2015-06-18 3:55:00 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\view\theme\yuankong\template\libs\module.php on line 221
+2015-06-18 3:55:00 - PHP Warning:  Illegal string offset 'position' in D:\wamp\www\yuankong\market\view\theme\yuankong\template\libs\module.php on line 221
+2015-06-18 3:55:00 - PHP Notice:  Undefined index: layout_id in D:\wamp\www\yuankong\market\view\theme\yuankong\template\libs\module.php on line 221
+2015-06-18 3:55:00 - PHP Notice:  Undefined index: layout_id in D:\wamp\www\yuankong\market\view\theme\yuankong\template\libs\module.php on line 221
+2015-06-18 3:58:31 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\column_left.php on line 51
+2015-06-18 3:58:31 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\column_left.php on line 51
+2015-06-18 3:58:31 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\column_left.php on line 51
+2015-06-18 3:58:31 - PHP Warning:  Illegal string offset 'position' in D:\wamp\www\yuankong\market\controller\common\column_left.php on line 51
+2015-06-18 3:58:31 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\column_left.php on line 51
+2015-06-18 3:58:31 - PHP Warning:  Illegal string offset 'position' in D:\wamp\www\yuankong\market\controller\common\column_left.php on line 51
+2015-06-18 3:58:31 - PHP Notice:  Undefined index: layout_id in D:\wamp\www\yuankong\market\controller\common\column_left.php on line 51
+2015-06-18 3:58:31 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\column_right.php on line 50
+2015-06-18 3:58:31 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\column_right.php on line 50
+2015-06-18 3:58:31 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\column_right.php on line 50
+2015-06-18 3:58:31 - PHP Warning:  Illegal string offset 'position' in D:\wamp\www\yuankong\market\controller\common\column_right.php on line 50
+2015-06-18 3:58:31 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\column_right.php on line 50
+2015-06-18 3:58:31 - PHP Warning:  Illegal string offset 'position' in D:\wamp\www\yuankong\market\controller\common\column_right.php on line 50
+2015-06-18 3:58:31 - PHP Notice:  Undefined index: layout_id in D:\wamp\www\yuankong\market\controller\common\column_right.php on line 50
+2015-06-18 3:58:31 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\content_top.php on line 50
+2015-06-18 3:58:31 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\content_top.php on line 50
+2015-06-18 3:58:31 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\content_top.php on line 50
+2015-06-18 3:58:31 - PHP Warning:  Illegal string offset 'position' in D:\wamp\www\yuankong\market\controller\common\content_top.php on line 50
+2015-06-18 3:58:31 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\content_top.php on line 50
+2015-06-18 3:58:31 - PHP Warning:  Illegal string offset 'position' in D:\wamp\www\yuankong\market\controller\common\content_top.php on line 50
+2015-06-18 3:58:31 - PHP Notice:  Undefined index: layout_id in D:\wamp\www\yuankong\market\controller\common\content_top.php on line 50
+2015-06-18 3:58:31 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\content_bottom.php on line 50
+2015-06-18 3:58:31 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\content_bottom.php on line 50
+2015-06-18 3:58:31 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\content_bottom.php on line 50
+2015-06-18 3:58:31 - PHP Warning:  Illegal string offset 'position' in D:\wamp\www\yuankong\market\controller\common\content_bottom.php on line 50
+2015-06-18 3:58:31 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\content_bottom.php on line 50
+2015-06-18 3:58:31 - PHP Warning:  Illegal string offset 'position' in D:\wamp\www\yuankong\market\controller\common\content_bottom.php on line 50
+2015-06-18 3:58:31 - PHP Notice:  Undefined index: layout_id in D:\wamp\www\yuankong\market\controller\common\content_bottom.php on line 50
+2015-06-18 3:58:31 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\view\theme\yuankong\template\libs\module.php on line 221
+2015-06-18 3:58:31 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\view\theme\yuankong\template\libs\module.php on line 221
+2015-06-18 3:58:31 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\view\theme\yuankong\template\libs\module.php on line 221
+2015-06-18 3:58:31 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\view\theme\yuankong\template\libs\module.php on line 221
+2015-06-18 3:58:31 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\view\theme\yuankong\template\libs\module.php on line 221
+2015-06-18 3:58:31 - PHP Warning:  Illegal string offset 'position' in D:\wamp\www\yuankong\market\view\theme\yuankong\template\libs\module.php on line 221
+2015-06-18 3:58:31 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\view\theme\yuankong\template\libs\module.php on line 221
+2015-06-18 3:58:31 - PHP Warning:  Illegal string offset 'position' in D:\wamp\www\yuankong\market\view\theme\yuankong\template\libs\module.php on line 221
+2015-06-18 3:58:31 - PHP Notice:  Undefined index: layout_id in D:\wamp\www\yuankong\market\view\theme\yuankong\template\libs\module.php on line 221
+2015-06-18 3:58:31 - PHP Notice:  Undefined index: layout_id in D:\wamp\www\yuankong\market\view\theme\yuankong\template\libs\module.php on line 221
+2015-06-18 4:01:53 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\column_left.php on line 52
+2015-06-18 4:01:53 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\column_left.php on line 52
+2015-06-18 4:01:53 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\column_left.php on line 52
+2015-06-18 4:01:53 - PHP Warning:  Illegal string offset 'position' in D:\wamp\www\yuankong\market\controller\common\column_left.php on line 52
+2015-06-18 4:01:53 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\column_left.php on line 52
+2015-06-18 4:01:53 - PHP Warning:  Illegal string offset 'position' in D:\wamp\www\yuankong\market\controller\common\column_left.php on line 52
+2015-06-18 4:01:53 - PHP Notice:  Undefined index: layout_id in D:\wamp\www\yuankong\market\controller\common\column_left.php on line 52
+2015-06-18 4:01:53 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\column_right.php on line 50
+2015-06-18 4:01:53 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\column_right.php on line 50
+2015-06-18 4:01:53 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\column_right.php on line 50
+2015-06-18 4:01:53 - PHP Warning:  Illegal string offset 'position' in D:\wamp\www\yuankong\market\controller\common\column_right.php on line 50
+2015-06-18 4:01:53 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\column_right.php on line 50
+2015-06-18 4:01:53 - PHP Warning:  Illegal string offset 'position' in D:\wamp\www\yuankong\market\controller\common\column_right.php on line 50
+2015-06-18 4:01:53 - PHP Notice:  Undefined index: layout_id in D:\wamp\www\yuankong\market\controller\common\column_right.php on line 50
+2015-06-18 4:01:53 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\content_top.php on line 50
+2015-06-18 4:01:53 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\content_top.php on line 50
+2015-06-18 4:01:53 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\content_top.php on line 50
+2015-06-18 4:01:53 - PHP Warning:  Illegal string offset 'position' in D:\wamp\www\yuankong\market\controller\common\content_top.php on line 50
+2015-06-18 4:01:53 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\content_top.php on line 50
+2015-06-18 4:01:53 - PHP Warning:  Illegal string offset 'position' in D:\wamp\www\yuankong\market\controller\common\content_top.php on line 50
+2015-06-18 4:01:53 - PHP Notice:  Undefined index: layout_id in D:\wamp\www\yuankong\market\controller\common\content_top.php on line 50
+2015-06-18 4:01:53 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\content_bottom.php on line 50
+2015-06-18 4:01:53 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\content_bottom.php on line 50
+2015-06-18 4:01:53 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\content_bottom.php on line 50
+2015-06-18 4:01:53 - PHP Warning:  Illegal string offset 'position' in D:\wamp\www\yuankong\market\controller\common\content_bottom.php on line 50
+2015-06-18 4:01:53 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\controller\common\content_bottom.php on line 50
+2015-06-18 4:01:53 - PHP Warning:  Illegal string offset 'position' in D:\wamp\www\yuankong\market\controller\common\content_bottom.php on line 50
+2015-06-18 4:01:53 - PHP Notice:  Undefined index: layout_id in D:\wamp\www\yuankong\market\controller\common\content_bottom.php on line 50
+2015-06-18 4:01:53 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\view\theme\yuankong\template\libs\module.php on line 221
+2015-06-18 4:01:53 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\view\theme\yuankong\template\libs\module.php on line 221
+2015-06-18 4:01:53 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\view\theme\yuankong\template\libs\module.php on line 221
+2015-06-18 4:01:53 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\view\theme\yuankong\template\libs\module.php on line 221
+2015-06-18 4:01:53 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\view\theme\yuankong\template\libs\module.php on line 221
+2015-06-18 4:01:53 - PHP Warning:  Illegal string offset 'position' in D:\wamp\www\yuankong\market\view\theme\yuankong\template\libs\module.php on line 221
+2015-06-18 4:01:53 - PHP Warning:  Illegal string offset 'layout_id' in D:\wamp\www\yuankong\market\view\theme\yuankong\template\libs\module.php on line 221
+2015-06-18 4:01:53 - PHP Warning:  Illegal string offset 'position' in D:\wamp\www\yuankong\market\view\theme\yuankong\template\libs\module.php on line 221
+2015-06-18 4:01:53 - PHP Notice:  Undefined index: layout_id in D:\wamp\www\yuankong\market\view\theme\yuankong\template\libs\module.php on line 221
+2015-06-18 4:01:53 - PHP Notice:  Undefined index: layout_id in D:\wamp\www\yuankong\market\view\theme\yuankong\template\libs\module.php on line 221
+2015-06-18 4:08:56 - PHP Notice:  Undefined index: navigator in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 75
+2015-06-18 4:08:56 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\yknavigation.tpl on line 75
+2015-06-18 4:09:25 - PHP Notice:  Undefined index: sort_order in D:\wamp\www\yuankong\market\view\theme\yuankong\template\libs\module.php on line 225
+2015-06-18 4:09:25 - PHP Notice:  Undefined index: navgatiors in D:\wamp\www\yuankong\market\controller\module\yknavigation.php on line 14
+2015-06-18 4:09:25 - PHP Notice:  Undefined index: adbox_img in D:\wamp\www\yuankong\market\controller\module\yknavigation.php on line 15
+2015-06-18 4:09:25 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\market\view\theme\yuankong\template\module\yknavigation.tpl on line 4
+2015-06-18 4:09:47 - PHP Notice:  Undefined index: sort_order in D:\wamp\www\yuankong\market\view\theme\yuankong\template\libs\module.php on line 225
+2015-06-18 4:09:47 - PHP Notice:  Undefined index: navgatiors in D:\wamp\www\yuankong\market\controller\module\yknavigation.php on line 14
+2015-06-18 4:09:47 - PHP Notice:  Undefined index: adbox_img in D:\wamp\www\yuankong\market\controller\module\yknavigation.php on line 15
+2015-06-18 4:09:47 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\market\view\theme\yuankong\template\module\yknavigation.tpl on line 4
+2015-06-18 4:10:43 - PHP Notice:  Undefined index: sort_order in D:\wamp\www\yuankong\market\view\theme\yuankong\template\libs\module.php on line 225
+2015-06-18 4:10:43 - PHP Notice:  Undefined index: navgatior in D:\wamp\www\yuankong\market\controller\module\yknavigation.php on line 14
+2015-06-18 4:10:43 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\market\view\theme\yuankong\template\module\yknavigation.tpl on line 4
+2015-06-18 5:10:54 - PHP Notice:  Undefined index: sort_order in D:\wamp\www\yuankong\market\view\theme\yuankong\template\libs\module.php on line 225
+2015-06-18 5:10:55 - PHP Notice:  Undefined index: navgatior in D:\wamp\www\yuankong\market\controller\module\yknavigation.php on line 14
+2015-06-18 5:10:55 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\market\view\theme\yuankong\template\module\yknavigation.tpl on line 4
+2015-06-18 5:14:41 - PHP Notice:  Undefined index: sort_order in D:\wamp\www\yuankong\market\view\theme\yuankong\template\libs\module.php on line 225
+2015-06-18 5:14:41 - PHP Notice:  Undefined index: navgatior in D:\wamp\www\yuankong\market\controller\module\yknavigation.php on line 14
+2015-06-18 5:14:41 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\market\view\theme\yuankong\template\module\yknavigation.tpl on line 4
+2015-06-18 5:15:50 - PHP Notice:  Undefined index: navgatior in D:\wamp\www\yuankong\market\controller\module\yknavigation.php on line 14
+2015-06-18 5:15:50 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\market\view\theme\yuankong\template\module\yknavigation.tpl on line 4
+2015-06-18 5:16:30 - PHP Notice:  Undefined index: link in D:\wamp\www\yuankong\market\view\theme\yuankong\template\module\yknavigation.tpl on line 6
+2015-06-18 5:16:30 - PHP Notice:  Undefined index: link in D:\wamp\www\yuankong\market\view\theme\yuankong\template\module\yknavigation.tpl on line 6
+2015-06-18 5:16:30 - PHP Notice:  Undefined index: link in D:\wamp\www\yuankong\market\view\theme\yuankong\template\module\yknavigation.tpl on line 6
+2015-06-18 5:16:30 - PHP Notice:  Undefined index: link in D:\wamp\www\yuankong\market\view\theme\yuankong\template\module\yknavigation.tpl on line 6
+2015-06-18 5:16:30 - PHP Notice:  Undefined index: link in D:\wamp\www\yuankong\market\view\theme\yuankong\template\module\yknavigation.tpl on line 6
+2015-06-18 5:16:30 - PHP Notice:  Undefined index: link in D:\wamp\www\yuankong\market\view\theme\yuankong\template\module\yknavigation.tpl on line 6
+2015-06-18 7:00:03 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 74
+2015-06-18 7:00:03 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 74
+2015-06-18 7:00:03 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 90
+2015-06-18 7:00:03 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 90
+2015-06-18 7:00:03 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 126
+2015-06-18 7:00:03 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 126
+2015-06-18 7:08:10 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 74
+2015-06-18 7:08:10 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 74
+2015-06-18 7:08:10 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 90
+2015-06-18 7:08:10 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 90
+2015-06-18 7:08:10 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 126
+2015-06-18 7:08:10 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 126
+2015-06-18 7:09:25 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 74
+2015-06-18 7:09:25 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 74
+2015-06-18 7:09:25 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 90
+2015-06-18 7:09:25 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 90
+2015-06-18 7:09:25 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 126
+2015-06-18 7:09:25 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 126
+2015-06-18 7:09:50 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 74
+2015-06-18 7:09:50 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 74
+2015-06-18 7:09:50 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 90
+2015-06-18 7:09:51 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 90
+2015-06-18 7:09:51 - PHP Notice:  Undefined variable: yesno in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 126
+2015-06-18 7:09:51 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 126
+2015-06-18 7:11:39 - PHP Notice:  Undefined index: bg_image in D:\wamp\www\yuankong\backend\controller\module\themecontrol.php on line 111
+2015-06-18 8:44:51 - PHP Notice:  Undefined index: search in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 175
+2015-06-18 8:44:51 - PHP Notice:  Undefined index: search in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 192
+2015-06-18 8:44:51 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 192
+2015-06-18 8:44:51 - PHP Notice:  Undefined variable: text_keyword_add in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 216
+2015-06-18 8:45:38 - PHP Notice:  Undefined index: search in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 175
+2015-06-18 8:45:38 - PHP Notice:  Undefined index: search in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 192
+2015-06-18 8:45:38 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 192
+2015-06-18 8:45:38 - PHP Notice:  Undefined variable: text_keyword_add in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 216
+2015-06-18 8:48:12 - PHP Notice:  Undefined index: search in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 175
+2015-06-18 8:48:12 - PHP Notice:  Undefined index: search in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 192
+2015-06-18 8:48:12 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 192
+2015-06-18 8:48:12 - PHP Notice:  Undefined variable: text_keyword_add in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 216
+2015-06-18 8:49:41 - PHP Notice:  Undefined variable: text_keyword_add in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 216
+2015-06-18 8:50:38 - PHP Notice:  Undefined variable: text_keyword_add in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 216
+2015-06-18 8:55:29 - PHP Notice:  Undefined variable: text_keyword_add in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 195
+2015-06-18 9:19:30 - PHP Warning:  in_array() expects parameter 2 to be array, string given in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 166
+2015-06-18 9:19:30 - PHP Warning:  in_array() expects parameter 2 to be array, string given in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 166
+2015-06-18 9:19:30 - PHP Warning:  in_array() expects parameter 2 to be array, string given in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 166
+2015-06-18 9:19:30 - PHP Warning:  in_array() expects parameter 2 to be array, string given in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 166
+2015-06-18 9:19:30 - PHP Warning:  in_array() expects parameter 2 to be array, string given in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 166
+2015-06-18 9:20:05 - PHP Warning:  in_array() expects parameter 2 to be array, string given in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 166
+2015-06-18 9:20:05 - PHP Warning:  in_array() expects parameter 2 to be array, string given in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 166
+2015-06-18 9:20:05 - PHP Warning:  in_array() expects parameter 2 to be array, string given in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 166
+2015-06-18 9:20:05 - PHP Warning:  in_array() expects parameter 2 to be array, string given in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 166
+2015-06-18 9:20:05 - PHP Warning:  in_array() expects parameter 2 to be array, string given in D:\wamp\www\yuankong\backend\view\template\module\themecontrol\themecontrol.tpl on line 166
+2015-06-18 9:30:41 - PHP Warning:  html_entity_decode() expects parameter 1 to be string, array given in D:\wamp\www\yuankong\market\view\theme\yuankong\template\common\header.tpl on line 69
+2015-06-18 9:31:14 - PHP Warning:  htmlspecialchars_decode() expects parameter 1 to be string, array given in D:\wamp\www\yuankong\market\view\theme\yuankong\template\common\header.tpl on line 69

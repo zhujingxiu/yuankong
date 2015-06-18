@@ -171,13 +171,81 @@ o.slider = {
         atuoplay();
     }
 };
+o.lrclick={
+    init:function(select,dom){
+        var cli=function(sel,obj){
+            var that=this;
+            var objs= $.extend({},that.defalut,obj);
+            var box=$(sel),
+                jprev=box.find(objs.jprev),
+                jnext=box.find(objs.jnext),
+                sbox=box.find(objs.sbox),
+                sul=sbox.find(objs.sul),
+                sli=sul.find(objs.sli),
+                len=parseInt(sli.length);
+            var num= 5,cuI=0;
+            var gos=null,wdh=sli.outerWidth()+12;
 
-$(function(){
-    o.mous.init(".h-weix","hov");
-    o.mous.init(".nav-adbox","hov");
-    o.mous.init(".my-ezhan","hov");
-    o.mous.init(".shop-style","hover");
-    o.dlist.init(".s-select",".search-dt",".search-dd");
-    o.moushov.init("#tab li",".gc-b-detail");
-    o.moushov.init("#taber li",".gsbox");
-});
+            gos=function(index){
+                var ml=-(index)*wdh;
+                sul.stop().animate({marginLeft:ml+"px"},objs.times);
+            };
+            jprev.bind("click",function(){
+                var index=cuI-1;
+                if(index<0){
+                    return false;
+                }
+                gos(index);
+                cuI--;
+            });
+            jnext.bind("click",function(){
+                var index=cuI+1;
+                if(index>len-num){
+                    return false;
+                }
+                gos(index);
+                cuI++;
+            });
+        };
+        cli.prototype.defalut={
+            //jq元素
+//            左右箭头包裹元素
+            jprev:".oncl",
+            jnext:".oncr",
+//            滚动包裹元素
+            sbox:"#spec-list",
+            sul:".list-h",
+            sli:"li",
+            times:500
+        }
+        return new cli(select,dom);
+    }
+};
+o.add={
+    init:function(select){
+        var sel=$(select),
+            add=sel.find(".addnum"),
+            jan=sel.find(".jiannum"),
+            snum=sel.find(".snum");
+        add.bind("click",function(){
+            var v=parseInt(snum.val());
+            isNaN(v)?v=1:v;
+            snum.val(v+=1)
+        });
+        jan.bind("click",function(){
+            var v=parseInt(snum.val());
+            isNaN(v)?v=1:v;
+            if(v<=1){
+                return false;
+            }else{
+                snum.val(v-=1)
+            }
+        });
+
+        snum.bind("keyup",function(){
+            var v=parseInt(snum.val());
+            isNaN(v)?v="":v;
+            snum.val(v);
+        });
+    }
+}

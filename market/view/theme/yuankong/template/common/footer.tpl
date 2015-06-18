@@ -82,5 +82,10 @@ $class = $helper->calculateSpans( $ospans, $cols );
 	<?php } ?>
 </div>
 
-
+<script type="text/javascript">
+	o.mous.init(".h-weix","hov");
+    o.mous.init(".my-ezhan","hov");
+    o.dlist.init(".s-select",".search-dt",".search-dd");
+    
+</script>
 </body></html>

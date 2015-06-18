@@ -23,7 +23,6 @@ class ControllerModuleYkcase extends Controller {
         $this->data['cases'] = $case;
         $this->data['module'] = $module++;
         $this->data['text_more'] = $this->language->get('text_more');
-        $this->data['text_more'] = $this->language->get('text_more');
         $this->data['case'] = $this->url->link('catelog/case','','SSL');
         $this->template = $this->config->get('config_template') . '/template/module/ykcase.tpl';
         

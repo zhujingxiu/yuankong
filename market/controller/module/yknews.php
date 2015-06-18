@@ -16,7 +16,6 @@ class ControllerModuleYknews extends Controller {
         $this->data['newses'] = $news;
         $this->data['module'] = $module++;
         $this->data['text_more'] = $this->language->get('text_more');
-        $this->data['text_more'] = $this->language->get('text_more');
         $this->data['news'] = $this->url->link('catelog/news','','SSL');
         $this->template = $this->config->get('config_template') . '/template/module/yknews.tpl';
         

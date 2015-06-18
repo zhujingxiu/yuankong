@@ -1,29 +1,49 @@
-<div class="box category">
-  <div class="box-heading"><h2><?php echo $heading_title; ?></h2></div>
-  <div class="box-content">
-    <ul class="box-category">
+<div class="xg-style">
+  <h3 class="title f_l"><?php echo $heading_title; ?></h3>
+  <div class="fix p10">
       <?php foreach ($categories as $category) { ?>
-      <li>
-        <?php if ($category['category_id'] == $category_id) { ?>
-        <a href="<?php echo $category['href']; ?>" class="active"><?php echo $category['name']; ?></a>
-        <?php } else { ?>
-        <a href="<?php echo $category['href']; ?>"><?php echo $category['name']; ?></a>
-        <?php } ?>
+      <div class="shopsty-box">
+        
+        <h3 class="s-show f_m <?php echo ($category['category_id'] == $category_id) ? 'phover' : '' ?>">
+          <i class="icon2 sshow"></i>
+          <?php echo $category['name']; ?>
+        </h3>
         <?php if ($category['children']) { ?>
-        <ul>
+        <div class="shopstylebox">
           <?php foreach ($category['children'] as $child) { ?>
-          <li>
-            <?php if ($child['category_id'] == $child_id) { ?>
-            <a href="<?php echo $child['href']; ?>" class="active"> - <?php echo $child['name']; ?></a>
-            <?php } else { ?>
-            <a href="<?php echo $child['href']; ?>"> - <?php echo $child['name']; ?></a>
-            <?php } ?>
-          </li>
+          <dl <?php echo ($child['category_id'] == $child_id) ? 'class="chover"' : ''  ?>>
+            
+            <dt><i class="icon2 sshow"></i><?php echo $child['name'] ?></dt>
+            <?php if(isset($child['children']) && is_array($child['children'])){?>
+            <dd class="c-dd-box">
+            <?php foreach ($child['children'] as $item): ?>
+            <a href="<?php echo $item['href'] ?>"><?php echo $item['name'] ?></a>
+            <?php endforeach ?>
+            </dd>
+            <?php }?>
+          </dl>
           <?php } ?>
-        </ul>
+        </div>
         <?php } ?>
-      </li>
+      </div>
       <?php } ?>
-    </ul>
+
   </div>
 </div>
+<script type="text/javascript">
+
+    $(".shopsty-box h3").click(function(){
+        if($(this).parent().hasClass("phover")){
+            $(this).parent().removeClass("phover");
+        }else{
+        $(this).parent().siblings().removeClass("phover");
+        $(this).parent().addClass("phover");}
+    });
+    $(".shopstylebox dl dt").click(function(){
+        if($(this).parent().hasClass("chover")){
+            $(this).parent().removeClass("chover");
+        }else{
+        $(this).parent().siblings().removeClass("chover");
+        $(this).parent().addClass("chover");}
+    });
+</script>
