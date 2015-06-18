@@ -24,7 +24,7 @@ class User {
 
       			$user_group_query = $this->db->query("SELECT permission FROM " . DB_PREFIX . "user_group WHERE user_group_id = '" . (int)$user_query->row['user_group_id'] . "'");
 				
-	  			$permissions = !empty($user_group_query->row['permission']) ? unserialize($user_group_query->row['permission']) : array();
+	  			$permissions = !empty($user_group_query->row['permission']) ? mb_unserialize($user_group_query->row['permission']) : array();
 
 				if (is_array($permissions)) {
 	  				foreach ($permissions as $key => $value) {
@@ -50,7 +50,7 @@ class User {
 
       		$user_group_query = $this->db->query("SELECT permission FROM " . DB_PREFIX . "user_group WHERE user_group_id = '" . (int)$user_query->row['user_group_id'] . "'");
 
-	  		$permissions = unserialize($user_group_query->row['permission']);
+	  		$permissions = mb_unserialize($user_group_query->row['permission']);
 
 			if (is_array($permissions)) {
 				foreach ($permissions as $key => $value) {

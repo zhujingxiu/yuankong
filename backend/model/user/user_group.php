@@ -19,7 +19,7 @@ class ModelUserUserGroup extends Model {
 			$user_group_query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "user_group WHERE user_group_id = '" . (int)$user_query->row['user_group_id'] . "'");
 		
 			if ($user_group_query->num_rows) {
-				$data = unserialize($user_group_query->row['permission']);
+				$data = mb_unserialize($user_group_query->row['permission']);
 		
 				$data[$type][] = $page;
 		
@@ -33,7 +33,7 @@ class ModelUserUserGroup extends Model {
 		
 		$user_group = array(
 			'name'       => $query->row['name'],
-			'permission' => unserialize($query->row['permission'])
+			'permission' => mb_unserialize($query->row['permission'])
 		);
 		
 		return $user_group;
@@ -73,4 +73,3 @@ class ModelUserUserGroup extends Model {
 		return $query->row['total'];
 	}	
 }
-?>

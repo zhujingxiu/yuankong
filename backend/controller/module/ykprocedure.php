@@ -1,16 +1,16 @@
 <?php
-class ControllerModuleYkproject extends Controller {
+class ControllerModuleYkprocedure extends Controller {
     private $error = array(); 
     
     public function index() {   
-        $this->language->load('module/ykproject');
+        $this->language->load('module/ykprocedure');
 
         $this->document->setTitle($this->language->get('heading_title'));
         
         $this->load->model('setting/setting');
                 
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-            $this->model_setting_setting->editSetting('ykproject', $this->request->post);     
+            $this->model_setting_setting->editSetting('ykprocedure', $this->request->post);     
                     
             $this->session->data['success'] = $this->language->get('text_success');
                         
@@ -58,20 +58,20 @@ class ControllerModuleYkproject extends Controller {
         
         $this->data['breadcrumbs'][] = array(
             'text'      => $this->language->get('heading_title'),
-            'href'      => $this->url->link('module/ykproject', 'token=' . $this->session->data['token'], 'SSL'),
+            'href'      => $this->url->link('module/ykprocedure', 'token=' . $this->session->data['token'], 'SSL'),
             'separator' => ' :: '
         );
         
-        $this->data['action'] = $this->url->link('module/ykproject', 'token=' . $this->session->data['token'], 'SSL');
+        $this->data['action'] = $this->url->link('module/ykprocedure', 'token=' . $this->session->data['token'], 'SSL');
         
         $this->data['cancel'] = $this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL');
 
         $this->data['modules'] = array();
         
-        if (isset($this->request->post['ykproject_module'])) {
-            $this->data['modules'] = $this->request->post['ykproject_module'];
-        } elseif ($this->config->get('ykproject_module')) { 
-            $this->data['modules'] = $this->config->get('ykproject_module');
+        if (isset($this->request->post['ykprocedure_module'])) {
+            $this->data['modules'] = $this->request->post['ykprocedure_module'];
+        } elseif ($this->config->get('ykprocedure_module')) { 
+            $this->data['modules'] = $this->config->get('ykprocedure_module');
         }   
         $this->data['positions'] = array( 
               'mainmenu',
@@ -94,7 +94,7 @@ class ControllerModuleYkproject extends Controller {
         
         $this->data['layouts'] = array_merge($this->data['layouts'],$this->model_design_layout->getLayouts());
                 
-        $this->template = 'module/ykproject.tpl';
+        $this->template = 'module/ykprocedure.tpl';
         $this->children = array(
             'common/header',
             'common/footer'
@@ -104,7 +104,7 @@ class ControllerModuleYkproject extends Controller {
     }
     
     protected function validate() {
-        if (!$this->user->hasPermission('modify', 'module/ykproject')) {
+        if (!$this->user->hasPermission('modify', 'module/ykprocedure')) {
             $this->error['warning'] = $this->language->get('error_permission');
         }
         

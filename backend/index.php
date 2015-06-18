@@ -40,7 +40,7 @@ foreach ($query->rows as $setting) {
 	if (!$setting['serialized']) {
 		$config->set($setting['key'], $setting['value']);
 	} else {
-		$config->set($setting['key'], unserialize($setting['value']));
+		$config->set($setting['key'], mb_unserialize($setting['value']));
 	}
 }
 

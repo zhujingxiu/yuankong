@@ -9,11 +9,10 @@ class ModelSettingSetting extends Model {
 			if (!$result['serialized']) {
 				$data[$result['key']] = $result['value'];
 			} else {
-				$data[$result['key']] = unserialize($result['value']);
+				$data[$result['key']] = mb_unserialize($result['value']);
 			}
 		}
 
 		return $data;
 	}
 }
-?>

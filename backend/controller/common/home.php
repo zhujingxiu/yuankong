@@ -357,7 +357,7 @@ class ControllerCommonHome extends Controller {
 			$config_ignore = array();
 			
 			if ($this->config->get('config_token_ignore')) {
-				$config_ignore = unserialize($this->config->get('config_token_ignore'));
+				$config_ignore = mb_unserialize($this->config->get('config_token_ignore'));
 			}
 				
 			$ignore = array_merge($ignore, $config_ignore);

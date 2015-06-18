@@ -29,7 +29,7 @@
           <?php foreach ($modules as $module) { ?>
           <tbody id="module-row<?php echo $module_row; ?>">
             <tr>
-              <td class="left"><select name="ykproject_module[<?php echo $module_row; ?>][layout_id]">
+              <td class="left"><select name="ykprocedure_module[<?php echo $module_row; ?>][layout_id]">
                   <?php foreach ($layouts as $layout) { ?>
                   <?php if ($layout['layout_id'] == $module['layout_id']) { ?>
                   <option value="<?php echo $layout['layout_id']; ?>" selected="selected"><?php echo $layout['name']; ?></option>
@@ -38,7 +38,7 @@
                   <?php } ?>
                   <?php } ?>
                 </select></td>
-              <td class="left"><select name="ykproject_module[<?php echo $module_row; ?>][position]">
+              <td class="left"><select name="ykprocedure_module[<?php echo $module_row; ?>][position]">
               <?php foreach( $positions as $pos ) { ?>
               <?php if ($module['position'] == $pos) { ?>
               <option value="<?php echo $pos;?>" selected="selected"><?php echo $this->language->get('text_'.$pos); ?></option>
@@ -47,7 +47,7 @@
               <?php } ?>
               <?php } ?> 
                 </select></td>
-              <td class="left"><select name="ykproject_module[<?php echo $module_row; ?>][status]">
+              <td class="left"><select name="ykprocedure_module[<?php echo $module_row; ?>][status]">
                   <?php if ($module['status']) { ?>
                   <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
                   <option value="0"><?php echo $text_disabled; ?></option>
@@ -56,7 +56,7 @@
                   <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
                   <?php } ?>
                 </select></td>
-              <td class="right"><input type="text" name="ykproject_module[<?php echo $module_row; ?>][sort_order]" value="<?php echo $module['sort_order']; ?>" size="3" /></td>
+              <td class="right"><input type="text" name="ykprocedure_module[<?php echo $module_row; ?>][sort_order]" value="<?php echo $module['sort_order']; ?>" size="3" /></td>
               <td class="left"><a onclick="$('#module-row<?php echo $module_row; ?>').remove();" class="button"><?php echo $button_remove; ?></a></td>
             </tr>
           </tbody>
@@ -79,7 +79,7 @@ var module_row = <?php echo $module_row; ?>;
 function addModule() {  
   html  = '<tbody id="module-row' + module_row + '">';
   html += '  <tr>';
-  html += '    <td class="left"><select name="ykproject_module[' + module_row + '][layout_id]">';
+  html += '    <td class="left"><select name="ykprocedure_module[' + module_row + '][layout_id]">';
   <?php foreach ($layouts as $layout) { ?>
   html += '      <option value="<?php echo $layout['layout_id']; ?>"><?php echo addslashes($layout['name']); ?></option>';
   <?php } ?>
@@ -88,11 +88,11 @@ function addModule() {
   <?php foreach( $positions as $pos ) { ?>
   html += '<option value="<?php echo $pos;?>"><?php echo $this->language->get('text_'.$pos); ?></option>';      
   <?php } ?>    html += '      </select></td>';
-  html += '    <td class="left"><select name="ykproject_module[' + module_row + '][status]">';
+  html += '    <td class="left"><select name="ykprocedure_module[' + module_row + '][status]">';
     html += '      <option value="1" selected="selected"><?php echo $text_enabled; ?></option>';
     html += '      <option value="0"><?php echo $text_disabled; ?></option>';
     html += '    </select></td>';
-  html += '    <td class="right"><input type="text" name="ykproject_module[' + module_row + '][sort_order]" value="" size="3" /></td>';
+  html += '    <td class="right"><input type="text" name="ykprocedure_module[' + module_row + '][sort_order]" value="" size="3" /></td>';
   html += '    <td class="left"><a onclick="$(\'#module-row' + module_row + '\').remove();" class="button"><?php echo $button_remove; ?></a></td>';
   html += '  </tr>';
   html += '</tbody>';

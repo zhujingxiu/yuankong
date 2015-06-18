@@ -54,7 +54,7 @@ class Customer {
 			$this->session->data['customer_id'] = $customer_query->row['customer_id'];	
 		    
 			if ($customer_query->row['cart'] && is_string($customer_query->row['cart'])) {
-				$cart = unserialize($customer_query->row['cart']);
+				$cart = mb_unserialize($customer_query->row['cart']);
 				
 				foreach ($cart as $key => $value) {
 					if (!array_key_exists($key, $this->session->data['cart'])) {
@@ -70,7 +70,7 @@ class Customer {
 					$this->session->data['wishlist'] = array();
 				}
 								
-				$wishlist = unserialize($customer_query->row['wishlist']);
+				$wishlist = mb_unserialize($customer_query->row['wishlist']);
 			
 				foreach ($wishlist as $product_id) {
 					if (!in_array($product_id, $this->session->data['wishlist'])) {
@@ -165,4 +165,3 @@ class Customer {
 		return $query->row['total'];	
   	}	
 }
-?>

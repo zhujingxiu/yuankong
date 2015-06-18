@@ -46,6 +46,15 @@
 <script src="market/view/javascript/html5.js"></script>
 <![endif]-->
 <script type="text/javascript" src="market/view/theme/<?php echo $themeName;?>/javascript/lib/jquery-1.9.0.min.js"></script>
+<!--[if IE ]>
+<script type="text/javascript" src="market/view/theme/<?php echo $themeName;?>/javascript/lib/jquery.placeholder.js"></script>
+<script type="text/javascript">
+$(function(){ $('input, textarea').placeholder(); });
+</script>
+<style type="text/css">
+	.placeholder{color:#999999;}
+</style>
+<![endif]-->
 <script type="text/javascript" src="market/view/theme/<?php echo $themeName;?>/javascript/index.js"></script>
 
 <?php if ( isset($stores) && $stores ) { ?>
@@ -71,20 +80,50 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
 		</div>
 		<div class="r">
 			<ul class="head-ul">
-				<li id="welcome">
+				<li>
 					<?php if (!$logged) { ?>
-					<?php echo $text_welcome; ?>
+					<a class="plr" href="<?php echo $login ?>"><?php echo $text_login; ?></a>
+					|
+					<a class="plr" href="<?php echo $register ?>"><?php echo $text_register; ?></a>
 					<?php } else { ?>
 					<?php echo $text_logged; ?>
 					<?php } ?>
 				</li>
+				<li class="my-ezhan rel">
+					<div class="hd">
+						<a href="<?php echo $account; ?>"><?php echo $text_account; ?></a>
+						<em class="icon2 h-down"></em>
+					</div>
+					<div class="bd">
+						<a href="<?php echo $order ?>"><?php echo $text_order ?></a>
+						<a href="<?php echo $profile ?>"><?php echo $text_profile ?></a>
+						<a href="<?php echo $message ?>"><?php echo $text_message ?></a>
+					</div>
+				</li>
+				<li>|</li>
+				<li class="my-ezhan rel">
+					<div class="hd">
+						<a href="<?php echo $affiliate; ?>"><?php echo $text_affiliate; ?></a>
+						<em class="icon2 h-down"></em>
+					</div>
+					<div class="bd">
+						<a href="<?php echo $upload ?>"><?php echo $text_upload ?></a>
+						<a href="<?php echo $perfact ?>"><?php echo $text_perfact ?></a>
+					</div>
+				</li>
+				<li>|</li>
+				<li class="plr"><a href="<?php echo $help ?>"><?php echo $text_help ?></a></li>
+				<li>|</li>
+				<li class="pl10 cff"><?php echo $text_hotline ?></li>
+				<?php if(false){?>
 				<li class="top-links">
 				<a href="<?php echo $wishlist; ?>" id="wishlist-total"><?php echo $text_wishlist; ?></a>
-				<a href="<?php echo $account; ?>"><?php echo $text_account; ?></a>
+				
 				<a href="<?php echo $shopping_cart; ?>"><?php echo $text_shopping_cart; ?></a>
 				<!--a href="<?php //echo $checkout; ?>"><?php //echo $text_checkout; ?></a-->
 				<?php //echo $currency; ?>
 				<?php //echo $language; ?>					
+				<?php } ?>					
 				</li>
 			</ul>
 		</div>
@@ -92,7 +131,7 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
 </div>
 <?php if( isset($themeConfig['custom_top_module']) )  { 
 	echo html_entity_decode($themeConfig['custom_top_module'], ENT_QUOTES, 'UTF-8'); 
-} ?>
+}?>
 <div class="w">
 	<div class="logobox fix">
 		<?php if ($logo) { ?>
@@ -104,16 +143,37 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
 
 			<div class="rel l-s-box b_f">
 				<dl class="s-select">
-                    <dt class="search-dt"><span>消防产品</span><em class="icon2 h-down"></em></dt>
+					<?php if (isset($themeConfig['search']['option'][0])): ?>
+					<dt class="search-dt">
+                    	<span>
+                    		<?php echo $this->language->get('text_search_'.strtolower($themeConfig['search']['option'][0])) ?>
+                    	</span>
+                    	<input type="hidden" name="search_model" value="<?php echo $themeConfig['search']['option'][0] ?>">
+                    	<em class="icon2 h-down"></em>
+                    </dt>	
+					<?php endif ?>
+                    <?php if (isset($themeConfig['search']['option']) && is_array($themeConfig['search']['option'])): ?>
                     <dd class="search-dd">
-                        <span class="db" val="1">消防产品</span>
-                        <span class="db" val="2">消防资讯</span>
-                    </dd>
+						<?php foreach ($themeConfig['search']['option'] as $key => $search_option): ?>
+						<span class="db" val="<?php echo $search_option ?>"><?php echo $this->language->get('text_search_'.strtolower($search_option)) ?></span>
+						<?php endforeach ?>
+                    </dd>	
+                    <?php endif ?>
+                    
                 </dl>
-				<input type="text" name="search" placeholder="<?php echo $text_search; ?>" value="<?php echo $search ?>" class="l s-text"/>
+				<input type="text" name="search" placeholder="<?php echo isset($themeConfig['search']['placeholder']) ? trim($themeConfig['search']['placeholder']) : $text_search; ?>" value="<?php echo $search ?>" class="l s-text"/>
 				<input type="submit" class="l s-sub" value="<?php echo $text_search; ?>" />
 			</div>
-			<p class="pt5 f_s"></p>
+			<?php if (isset($themeConfig['search']['keyword']) && is_array($themeConfig['search']['keyword'])): ?>
+			<p class="pt5 f_s">
+				<?php foreach ($themeConfig['search']['keyword'] as $item): ?>
+				<a href="<?php echo $item['link'] ?>" class="plr c8 <?php echo empty($item['additional_class']) ? '' : trim($item['additional_class']) ?>">
+					<?php echo $item['title'] ?>
+				</a>
+				<?php endforeach ?>
+			</p>	
+			<?php endif ?>
+			
 		</div>
 		<?php echo $cart; ?>
 	</div>
@@ -199,6 +259,7 @@ $class = $helper->calculateSpans( $ospans, $cols );
  * Slideshow modules
  */
 $modules = $helper->getModulesByPosition( 'slideshow' ); 
+
 if( $modules ){
 ?>
 <div id="slideshow" class="pav-slideshow w mt10">

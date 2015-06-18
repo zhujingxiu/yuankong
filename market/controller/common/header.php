@@ -44,12 +44,21 @@ class ControllerCommonHeader extends Controller {
 		
 		$this->data['text_home'] = $this->language->get('text_home');
 		$this->data['text_wishlist'] = sprintf($this->language->get('text_wishlist'), (isset($this->session->data['wishlist']) ? count($this->session->data['wishlist']) : 0));
-		$this->data['text_shopping_cart'] = $this->language->get('text_shopping_cart');
+		$this->data['text_help'] = $this->language->get('text_help');
     	$this->data['text_search'] = $this->language->get('text_search');
 		$this->data['text_welcome'] = sprintf($this->language->get('text_welcome'), $this->url->link('account/login', '', 'SSL'), $this->url->link('account/register', '', 'SSL'));
 		$this->data['text_logged'] = sprintf($this->language->get('text_logged'), $this->url->link('account/account', '', 'SSL'), $this->customer->getFirstName(), $this->url->link('account/logout', '', 'SSL'));
 		$this->data['text_account'] = $this->language->get('text_account');
     	$this->data['text_checkout'] = $this->language->get('text_checkout');
+    	$this->data['text_login'] = $this->language->get('text_login');
+    	$this->data['text_register'] = $this->language->get('text_register');
+    	$this->data['text_order'] = $this->language->get('text_order');
+    	$this->data['text_profile'] = $this->language->get('text_profile');
+    	$this->data['text_message'] = $this->language->get('text_message');
+    	$this->data['text_affiliate'] = $this->language->get('text_affiliate');
+    	$this->data['text_upload'] = $this->language->get('text_upload');
+    	$this->data['text_perfact'] = $this->language->get('text_perfact');
+    	$this->data['text_hotline'] = $this->language->get('text_hotline');
 				
 		$this->data['home'] = $this->url->link('common/home');
 		$this->data['wishlist'] = $this->url->link('account/wishlist', '', 'SSL');
@@ -57,10 +66,18 @@ class ControllerCommonHeader extends Controller {
 		$this->data['account'] = $this->url->link('account/account', '', 'SSL');
 		$this->data['shopping_cart'] = $this->url->link('checkout/cart');
 		$this->data['checkout'] = $this->url->link('checkout/checkout', '', 'SSL');
-		
+		$this->data['login'] = $this->url->link('account/login', '', 'SSL');
+		$this->data['register'] = $this->url->link('account/register', '', 'SSL');
+		$this->data['order'] = $this->url->link('account/order', '', 'SSL');
+		$this->data['profile'] = $this->url->link('account/edit', '', 'SSL');
+		$this->data['message'] = $this->url->link('account/message', '', 'SSL');
+		$this->data['help'] = $this->url->link('information/help', '', 'SSL');
+		$this->data['affiliate'] = $this->url->link('affiliate/affiliate', '', 'SSL');
+    	$this->data['upload'] = $this->url->link('affiliate/account', '', 'SSL');
+    	$this->data['perfact'] = $this->url->link('affiliate/edit', '', 'SSL');
 		// Daniel's robot detector
 		$status = true;
-		
+		/*
 		if (isset($this->request->server['HTTP_USER_AGENT'])) {
 			$robots = explode("\n", trim($this->config->get('config_robots')));
 
@@ -72,7 +89,7 @@ class ControllerCommonHeader extends Controller {
 				}
 			}
 		}
-		
+		*/
 		// A dirty hack to try to set a cookie for the multi-store feature
 		$this->load->model('setting/store');
 		

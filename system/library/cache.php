@@ -8,7 +8,7 @@ class Cache {
 		if ($files) {
 			$cache = file_get_contents($files[0]);
 			
-			$data = unserialize($cache);
+			$data = mb_unserialize($cache);
 			
 			foreach ($files as $file) {
 				$time = substr(strrchr($file, '.'), 1);
@@ -48,4 +48,3 @@ class Cache {
 		}
   	}
 }
-?>

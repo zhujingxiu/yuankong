@@ -57,9 +57,12 @@ function JEncrypt($string,$operation='E'){
         return str_replace('=','',base64_encode($result)); 
     } 
 }
-
+function mb_unserialize($serial_str) {
+    $out = preg_replace('!s:(\d+):"(.*?)";!se', "'s:'.strlen('$2').':\"$2\";'", $serial_str );
+    return unserialize($out);
+}
 function dayList($begin,$end){
-      $data = array();
+    $data = array();
     $begin = strtotime($begin);
     $end = strtotime($end);
     for($i=$begin; $i<=$end;$i+=(24*3600)){

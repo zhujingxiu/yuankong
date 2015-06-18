@@ -83,7 +83,8 @@ o.dlist={
         dom2.find("span").click(function(){
             var self = $(this);
             var t = self.attr("val");
-            dom1.find("span").text(self.text());
+            dom1.find("span").html(self.text());
+            dom1.find("input[name='search_model']").val(self.attr('val'));
             sel.removeClass("hov");
         }).hover(function(){
             $(this).addClass("on");
