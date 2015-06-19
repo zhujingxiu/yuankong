@@ -98,7 +98,12 @@ class Customer {
   	}
   	
 	public function logout() {
-		$this->db->query("UPDATE " . DB_PREFIX . "customer SET cart = '" . $this->db->escape(isset($this->session->data['cart']) ? serialize($this->session->data['cart']) : '') . "', wishlist = '" . $this->db->escape(isset($this->session->data['wishlist']) ? serialize($this->session->data['wishlist']) : '') . "' WHERE customer_id = '" . (int)$this->customer_id . "'");
+		$fields = array(
+			'cart' 		=> isset($this->session->data['cart']) ? serialize($this->session->data['cart']) : '',
+			'wishlist' 	=> isset($this->session->data['wishlist']) ? serialize($this->session->data['wishlist']) : '',
+			'viewed' 	=> isset($this->session->data['viewed']) ? serialize($this->session->data['viewed']) : '',
+		);
+		$this->db->update("customer" ,  array('customer_id' => (int)$this->customer_id),$fields);
 		
 		unset($this->session->data['customer_id']);
 

@@ -372,12 +372,10 @@ class ControllerProductCategory extends Controller {
 		$pagination->total = $product_total;
 		$pagination->page = $page;
 		$pagination->limit = $limit;
-		$pagination->style_results = 'page';
-		$pagination->style_page = 'page_num';
 		$pagination->text = $this->language->get('text_pagination');
 		$pagination->url = $this->url->link('product/category',  $url . '&page={page}');
 	
-		$this->data['pagination'] = $pagination->render();
+		$this->data['pagination'] = $pagination->render_page();
 	
 		$this->data['sort'] = $sort;
 		$this->data['order'] = $order;

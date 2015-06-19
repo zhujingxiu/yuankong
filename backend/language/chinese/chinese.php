@@ -34,7 +34,7 @@ $_['text_content_top']    	  = '内容顶部';
 $_['text_content_bottom'] 	  = '内容底部';
 $_['text_column_left']    	  = '左列显示';
 $_['text_column_right']   	  = '右列显示';
-
+$_['all_page']   			= '所有页面';
 $_['text_mainmenu']       = '主菜单';
 $_['text_showcase']       = '案例块';
 $_['text_slideshow']   	  = '幻灯片轮播块';
@@ -53,6 +53,7 @@ $_['entry_status']        	  = '状态：';
 $_['entry_sort_order']    	  = '排序：';
 $_['entry_title']        	  = '标题:';
 $_['entry_description']       = '描述:';
+$_['entry_additional_class']  = '附加样式:';
 // Button
 $_['button_add']           = '添加';
 $_['button_insert']           = '新增';

@@ -12,7 +12,7 @@ class ControllerProductProduct extends Controller {
 			'href'      => $this->url->link('common/home'),			
 			'separator' => false
 		);
-		
+
 		$this->load->model('catalog/category');	
 		
 		if (isset($this->request->get['path'])) {
@@ -225,9 +225,6 @@ class ControllerProductProduct extends Controller {
 			$this->document->setDescription($product_info['meta_description']);
 			$this->document->setKeywords($product_info['meta_keyword']);
 			$this->document->addLink($this->url->link('product/product', 'product_id=' . $this->request->get['product_id']), 'canonical');
-			$this->document->addScript('market/view/javascript/jquery/tabs.js');
-			$this->document->addScript('market/view/javascript/jquery/colorbox/jquery.colorbox-min.js');
-			$this->document->addStyle('market/view/javascript/jquery/colorbox/colorbox.css');
 			
 			$this->data['heading_title'] = $product_info['name'];
 			
@@ -451,11 +448,11 @@ class ControllerProductProduct extends Controller {
 				}
 			}
             
-            $this->data['text_payment_profile'] = $this->language->get('text_payment_profile');
-            $this->data['profiles'] = $this->model_catalog_product->getProfiles($product_info['product_id']);
+            //$this->data['text_payment_profile'] = $this->language->get('text_payment_profile');
+            //$this->data['profiles'] = $this->model_catalog_product->getProfiles($product_info['product_id']);
 			
 			$this->model_catalog_product->updateViewed($this->request->get['product_id']);
-			
+			$this->add_viewed($this->request->get['product_id']);
 			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/product/product.tpl')) {
 				$this->template = $this->config->get('config_template') . '/template/product/product.tpl';
 			} else {
@@ -768,5 +765,22 @@ class ControllerProductProduct extends Controller {
 		
 		$this->response->setOutput(json_encode($json));		
 	}
+
+	public function add_viewed($product_id) {
+		if((int)$product_id){
+			if (!isset($this->session->data['viewed'])) {
+				$this->session->data['viewed'] = array();
+			}
+			
+			$this->load->model('catalog/product');
+			
+			$product_info = $this->model_catalog_product->getProduct($product_id);
+			
+			if ($product_info) {
+				if (!in_array($product_id, $this->session->data['viewed'])) {	
+					$this->session->data['viewed'][] = $product_id;
+				}
+			}	
+		}
+	}
 }
-?>
