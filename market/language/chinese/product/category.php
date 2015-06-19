@@ -26,4 +26,9 @@ $_['text_rating_desc']  = '最高评分';
 $_['text_model_asc']    = '型号 A - Z';
 $_['text_model_desc']   = '型号 Z - A';
 $_['text_limit']        = '显示：';
-?>
+$_['text_store']        = '消防商城';
+$_['text_sales']        = '已售:';
+$_['text_sort_default'] = '默认';
+$_['text_sort_price']   = '价格';
+$_['text_sort_sales'] = '销量';
+$_['text_categories'] = '所有分类';

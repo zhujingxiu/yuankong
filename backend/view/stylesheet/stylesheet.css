@@ -10,7 +10,7 @@ body {
 	background: #FFFFFF;
 }
 body, td, th, input, select, textarea, option, optgroup {
-	font-family:"微软雅黑",Arial, Helvetica, sans-serif;
+	font-family:"Microsoft YaHei",Arial, Helvetica, sans-serif;
 	font-size: 1em;
 	color: #666;
 	word-break: break-all;

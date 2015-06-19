@@ -1,11 +1,11 @@
-  <div class="product-filter">
-    <div class="display">
-		<b><?php echo $text_display; ?></b> 
-		<?php echo $text_list; ?> 
-		<b>/</b> 
-		<a onclick="display('grid');"><?php echo $text_grid; ?></a>
-	</div>
-    <div class="limit"><b><?php echo $text_limit; ?></b>
+<div class="chose-style mt10 f_m">
+
+    <p class="paix-chose">
+      <span class="paix-li"><?php echo $text_sort_default; ?></span> 
+      <span class="paix-li"><?php echo $text_sort_price; ?></span> 
+  		<span class="paix-li"><?php echo $text_sort_sales; ?></span> 
+  	</p>
+    <p class="jg-shaix"><b><?php echo $text_limit; ?></b>
       <select onchange="location = this.value;">
         <?php foreach ($limits as $limits) { ?>
         <?php if ($limits['value'] == $limit) { ?>
@@ -15,8 +15,9 @@
         <?php } ?>
         <?php } ?>
       </select>
-    </div>
-    <div class="sort"><b><?php echo $text_sort; ?></b>
+      <input type="button" value="<?php echo $button_submit ?>" class="price-sub">
+    </p>
+    <p class="top-page"><b><?php echo $text_sort; ?></b>
       <select onchange="location = this.value;">
         <?php foreach ($sorts as $sorts) { ?>
         <?php if ($sorts['value'] == $sort . '-' . $order) { ?>
@@ -26,6 +27,5 @@
         <?php } ?>
         <?php } ?>
       </select>
-    </div>
-	
-  </div>
+    </p>
+</div>

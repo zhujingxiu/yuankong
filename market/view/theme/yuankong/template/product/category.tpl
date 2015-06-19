@@ -10,19 +10,25 @@
 <?php endif; ?> 
 <div class="<?php echo $SPAN[1];?> category ">
 	
-	<div id="content"><?php echo $content_top; ?>
-
+	<div class="ovh"><?php echo $content_top; ?></div>
+    <?php if(false){?>
 	<div class="title">
-		<h1 class="category-title"><?php echo $heading_title; ?><span><?php echo ' | There are '.count($products).' products'; ?></span></h1>
-		<div class="product-compare"><a href="<?php echo $compare; ?>" id="compare-total"><?php echo $text_compare; ?></a></div>
+		<h1 class="category-title">
+            <?php echo $heading_title; ?>
+            <span><?php echo ' | There are '.count($products).' products'; ?></span>
+        </h1>
+		<div class="product-compare">
+            <a href="<?php echo $compare; ?>" id="compare-total">
+                <?php echo $text_compare; ?>
+            </a>
+        </div>
 	</div>
 	<?php require( DIR_TEMPLATE.$this->config->get('config_template')."/template/product/category-info.tpl" ); ?>
-  
+    <?php }?>
 	<?php if ($products) { ?>
 		<?php require( DIR_TEMPLATE.$this->config->get('config_template')."/template/product/product-filter.tpl" ); ?>
 		<?php require( DIR_TEMPLATE.$this->config->get('config_template')."/template/product/product-list.tpl" ); ?>
-
-		<div class="pagination"><?php echo $pagination; ?></div>
+		
 	<?php } ?>
   <?php if (!$categories && !$products) { ?>
   <div class="content"><?php echo $text_empty; ?></div>

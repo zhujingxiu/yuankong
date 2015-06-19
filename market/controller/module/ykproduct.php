@@ -82,9 +82,9 @@ class ControllerModuleYkproduct extends Controller {
             $link = empty($setting['banner_tabs']['link'][$i]) ? "" : $setting['banner_tabs']['link'][$i];
             $image = empty($setting['banner_tabs']['image'][$i]) ? false : $setting['banner_tabs']['image'][$i];
             if(file_exists(TPL_IMG.$image)){
-                $image = $this->model_tool_image->resize($image,198,418);
+                $image = TPL_IMG.$image;
             }else{
-                $image = $this->model_tool_image->resize("no_image.jpg",198,418);
+                $image = $this->model_tool_image->resize("no_image.jpg",198,420);
             }
             $banner = array(
                 'link'      => $link,

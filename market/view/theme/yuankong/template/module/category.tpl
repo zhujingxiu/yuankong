@@ -2,9 +2,9 @@
   <h3 class="title f_l"><?php echo $heading_title; ?></h3>
   <div class="fix p10">
       <?php foreach ($categories as $category) { ?>
-      <div class="shopsty-box">
+      <div class="shopsty-box <?php echo ($category['category_id'] == $category_id) ? 'phover' : '' ?>">
         
-        <h3 class="s-show f_m <?php echo ($category['category_id'] == $category_id) ? 'phover' : '' ?>">
+        <h3 class="s-show f_m ">
           <i class="icon2 sshow"></i>
           <?php echo $category['name']; ?>
         </h3>
@@ -17,7 +17,9 @@
             <?php if(isset($child['children']) && is_array($child['children'])){?>
             <dd class="c-dd-box">
             <?php foreach ($child['children'] as $item): ?>
-            <a href="<?php echo $item['href'] ?>"><?php echo $item['name'] ?></a>
+            <a <?php echo ($item['category_id'] == $last_id) ? 'class="c_red"' : ''  ?> href="<?php echo $item['href'] ?>">
+              <?php echo $item['name'] ?>
+            </a>
             <?php endforeach ?>
             </dd>
             <?php }?>
@@ -29,7 +31,7 @@
       <?php } ?>
 
   </div>
-</div>
+
 <script type="text/javascript">
 
     $(".shopsty-box h3").click(function(){
@@ -47,3 +49,4 @@
         $(this).parent().addClass("chover");}
     });
 </script>
+</div>

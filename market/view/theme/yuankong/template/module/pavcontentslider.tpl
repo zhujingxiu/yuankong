@@ -36,7 +36,6 @@
 <script type="text/javascript">
 	$(function(){
         o.slider.init(".focus");
-        
     });
 </script>
 <?php } ?>

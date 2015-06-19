@@ -40,7 +40,6 @@
 	  					<a href="#tab-pcategory" onclick="return false;"><?php echo $this->getLang("text_page_category");?></a>
 	  					<a href="#tab-pproduct" onclick="return false;"><?php echo $this->getLang("text_page_product");?></a>
 	  					<a href="#tab-psearch" onclick="return false;"><?php echo $this->getLang("text_page_search");?></a>
-	  					<a href="#tab-pcopyright" onclick="return false;"><?php echo $this->getLang("text_page_copyright");?></a>
 	  					<a href="#tab-ptopleft" onclick="return false;"><?php echo $this->getLang("text_page_topleft");?></a>
 	  					<a href="#tab-pcontact" onclick="return false;"><?php echo $this->getLang("text_page_contact");?></a>
   				 	</div> 
@@ -209,35 +208,12 @@
 		  					</table>
 		  					</div>
 		  			 	</div>
-		  			 	<div id="tab-pcopyright">
-			  			 	<div class="tab-inner">
-			  			 		<table class="form">
-			  			 			<tr>
-			  			 				<td class="" colspan="2"><h4><?php echo $this->language->get('text_copyright_html'); ?></h4></td>
-			  			 			</tr>
-			  			 			<?php foreach( $languages as $language ) {  ?>
-			  			 			<tr>
-			  			 				<td>
-			  			 					<?php 
-			  			 						$copyright_customhtml = isset($module['copyright_customhtml'][$language['language_id']])?
-			  			 						$module['copyright_customhtml'][$language['language_id']]:""; 
-			  			 					 ?>
-			  			 					 <img src="<?php echo TPL_IMG ?>flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" />
-			  			 					 <?php echo $language['name'];?> 
-			  			 				</td>
-			  			 				<td>
-			  			 					<textarea id="copyright-<?php echo $language['language_id'];?>" name="themecontrol[copyright_customhtml][<?php echo $language['language_id'];?>]"><?php echo $copyright_customhtml;?></textarea>
-			  			 				</td>
-			  			 			<tr>
-			  			 			<?php } ?>	
-			  			 		</table>	
-			  			 	</div>	
-			  			</div>
+
 		  			 	<div id="tab-ptopleft">
 			  			 	<div class="tab-inner">
 			  			 		<table class="form">
 			  			 			<tr>
-			  			 				<td class="" colspan="2"><h4><?php echo $this->language->get('text_topleft_html'); ?></h4></td>
+			  			 				<td colspan="2"><h4><?php echo $this->language->get('text_topleft_html'); ?></h4></td>
 			  			 			</tr>
 			  			 			<?php foreach( $languages as $language ) {  ?>
 			  			 			<tr>

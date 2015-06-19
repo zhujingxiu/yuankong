@@ -13,13 +13,14 @@ $_['thousand_point']        = ',';
 
 // Text
 $_['text_home']             = '首页';
+
 $_['text_yes']              = '是';
 $_['text_no']               = '否';
 $_['text_none']             = ' --- 无 --- ';
 $_['text_select']           = ' --- 请选择 --- ';
 $_['text_all_zones']        = '所有区域';
 $_['text_pagination']       = '显示 {start} - {end} / {total} (共计 {pages} 页)';
-$_['text_separator']        = ' &raquo; ';
+$_['text_separator']        = ' <em class="plr fa_s">&gt;</em> ';
 $_['text_more']        		= ' 更多  ';
 $_['text_unknown']        	= ' 未知 ';
 $_['text_wiki_help']        = ' 消防问答 ';
@@ -57,6 +58,7 @@ $_['button_return']         = '退换商品';
 $_['button_shopping']       = '继续购物';
 $_['button_search']         = '搜索';
 $_['button_shipping']       = '配送方式';
+$_['button_submit']         = '确定';
 $_['button_guest']          = '直接购买';
 $_['button_view']           = '查看';
 $_['button_voucher']        = '使用礼品券';
@@ -73,4 +75,3 @@ $_['error_upload_6']        = '警告: 找不到临时文件夹！';
 $_['error_upload_7']        = '警告: 无法写入文件！';
 $_['error_upload_8']        = '警告: 上传文件错误！';
 $_['error_upload_999']      = '警告: 无错误代码！';
-?>

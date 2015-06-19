@@ -22,6 +22,12 @@ class ControllerModuleCategory extends Controller {
 		} else {
 			$this->data['child_id'] = 0;
 		}
+
+		if (isset($parts[2])) {
+			$this->data['last_id'] = $parts[2];
+		} else {
+			$this->data['last_id'] = 0;
+		}
 							
 		$this->load->model('catalog/category');
 
@@ -63,7 +69,7 @@ class ControllerModuleCategory extends Controller {
 					$_children_data[] = array(
 						'category_id' => $_child['category_id'],
 						'name'        => $_child['name']. ($this->config->get('config_product_count') ? ' <em class="shopnum">(' . $_product_total . ')</em>' : ''),
-						'href'        => $this->url->link('product/category', 'path=' . $_child['category_id'] . '_' . $_child['category_id'])	
+						'href'        => $this->url->link('product/category', 'path=' . $category['category_id'] . '_' .$child['category_id'] . '_' . $_child['category_id'])	
 					);
 				}
 

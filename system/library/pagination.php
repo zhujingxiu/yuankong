@@ -10,6 +10,7 @@ class Pagination {
 	public $text_last = '&gt;|';
 	public $text_next = '&gt;';
 	public $text_prev = '&lt;';
+	public $style_page = '';
 	public $style_links = 'links';
 	public $style_results = 'results';
 	 
@@ -64,7 +65,7 @@ class Pagination {
 				if ($page == $i) {
 					$output .= ' <b>' . $i . '</b> ';
 				} else {
-					$output .= ' <a href="' . str_replace('{page}', $i, $this->url) . '">' . $i . '</a> ';
+					$output .= ' <a '.(empty($this->style_page) ? '' : 'class="'.$this->style_page.'"').' href="' . str_replace('{page}', $i, $this->url) . '">' . $i . '</a> ';
 				}	
 			}
 							
@@ -94,4 +95,3 @@ class Pagination {
 		return ($output ? '<div class="' . $this->style_links . '">' . $output . '</div>' : '') . '<div class="' . $this->style_results . '">' . str_replace($find, $replace, $this->text) . '</div>';
 	}
 }
-?>

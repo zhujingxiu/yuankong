@@ -42,7 +42,21 @@
 		<?php } ?>
 		<?php } ?>
 	</div>
-
+	<div class="slideshow  edit-container clearfix"  data-position="slideshow">
+		<div class="pos">Slideshow</div>
+		<?php if( isset($layout_modules['slideshow']) ){  
+		foreach( $layout_modules['slideshow'] as $modulepos ) {?>
+		<div class="module-pos <?php if( !$modulepos['status']){ ?>mod-disable<?php } ?>" data-position="slideshow" data-id="<?php echo $modulepos['code']."-".$modulepos['index'];?>">
+			<div class="edit-module">
+				<a target="_blank" href="<?php echo $this->url->link('module/'.$modulepos['code'],'token='.$token);?>">
+					<b><?php echo $modulepos['title']; ?></b>
+				</a>
+				<i>[[index:<?php echo $modulepos['index'];?>]</i>
+			</div>
+		</div>
+		<?php } ?>
+		<?php } ?>
+	</div>
 	<div class="promotion  edit-container" data-position="promotion" >
 		<div class="explain">
 			<?php echo $this->getLang('text_entry_columns_first') ;	?> 
@@ -69,23 +83,6 @@
 		<?php } ?>
 		<?php } ?>
 	</div>
-
-	<div class="slideshow  edit-container clearfix"  data-position="slideshow">
-		<div class="pos">Slideshow</div>
-		<?php if( isset($layout_modules['slideshow']) ){  
-		foreach( $layout_modules['slideshow'] as $modulepos ) {?>
-		<div class="module-pos <?php if( !$modulepos['status']){ ?>mod-disable<?php } ?>" data-position="slideshow" data-id="<?php echo $modulepos['code']."-".$modulepos['index'];?>">
-			<div class="edit-module">
-				<a target="_blank" href="<?php echo $this->url->link('module/'.$modulepos['code'],'token='.$token);?>">
-					<b><?php echo $modulepos['title']; ?></b>
-				</a>
-				<i>[[index:<?php echo $modulepos['index'];?>]</i>
-			</div>
-		</div>
-		<?php } ?>
-		<?php } ?>
-	</div>
-	
 	<div class="promotion  edit-container" data-position="showcase" >
 		<div class="explain">
 			<?php echo $this->getLang('text_entry_columns_first') ;	?> 

@@ -36,8 +36,11 @@
         </div>
         <div class="gc-f-cn"></div>
     </div>
-    <p class="e-cnuo"><em class="c46">郑重承诺:</em>所有与e站签约客户消防服务项目均实行先办理后付费，同时免费享有一年消防后续服务；若未在约定时间内办理，e站将双倍退款。</p>
-</div>
+    <p class="e-cnuo">
+        <em class="c46">郑重承诺:</em>所有与e站签约客户消防服务项目均实行先办理后付费，同时免费享有一年消防后续服务；若未在约定时间内办理，e站将双倍退款。
+    </p>
+
 <script type="text/javascript">
     o.moushov.init("#tab li",".gc-b-detail");
 </script>
+</div>

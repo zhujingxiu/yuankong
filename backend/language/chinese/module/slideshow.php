@@ -21,4 +21,3 @@ $_['entry_sort_order']     = '排序：';
 // Error
 $_['error_permission']     = '警告：您没有权限修改幻灯片模块！';
 $_['error_dimension']      = '宽度&amp; 高度必填！';
-?>

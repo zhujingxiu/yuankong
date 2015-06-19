@@ -17,4 +17,17 @@
     </div>
 <script type="text/javascript">
     o.mous.init(".nav-adbox","hov");
+    $(function(){
+        var rt = getQueryString('route');
+        if(rt == ''){
+            $('ul.nav > li.nav-li:first').removeClass('on').addClass('on');
+        }else{
+            $.each($('ul.nav > li.nav-li'),function(){
+                if($(this).find('a').attr('href').indexOf(rt)!=-1){
+                    $('ul.nav > li.nav-li.on').removeClass('on');
+                    $(this).addClass('on');
+                }
+            })
+        }
+    });
 </script>

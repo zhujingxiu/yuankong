@@ -32,7 +32,8 @@
 <?php foreach ($styles as $style) { ?>
 <link rel="<?php echo $style['rel']; ?>" type="text/css" href="<?php echo $style['href']; ?>" media="<?php echo $style['media']; ?>" />
 <?php } ?>
-
+<script type="text/javascript" src="market/view/theme/<?php echo $themeName;?>/javascript/lib/jquery-1.9.0.min.js"></script>
+<script type="text/javascript" src="market/view/theme/<?php echo $themeName;?>/javascript/common.js"></script>
 
 <?php foreach( $helper->getScriptFiles() as $script )  { ?>
 <script type="text/javascript" src="<?php echo $script; ?>"></script>
@@ -45,7 +46,7 @@
 <!--[if lt IE 9]>
 <script src="market/view/javascript/html5.js"></script>
 <![endif]-->
-<script type="text/javascript" src="market/view/theme/<?php echo $themeName;?>/javascript/lib/jquery-1.9.0.min.js"></script>
+
 <!--[if IE ]>
 <script type="text/javascript" src="market/view/theme/<?php echo $themeName;?>/javascript/lib/jquery.placeholder.js"></script>
 <script type="text/javascript">
@@ -225,6 +226,7 @@ if( count($modules) ){ ?>
 
 <?php } ?>
 </div>
+<?php if (false): ?>
 <section id="sys-notification">
 	<div class="container">
 		<?php if ($error) { ?>    
@@ -235,59 +237,61 @@ if( count($modules) ){ ?>
 		<div id="notification"></div>
 	</div>
 </section>
+<?php endif ?>
+
+
+<?php
+
+$modules = $helper->getModulesByPosition( 'slideshow' ); 
+
+if( $modules ){ ?>
+
+<div id="slideshow" class="w fix mt10">
+	
+	<?php foreach ($modules as $module) { ?>
+
+		<?php echo $module; ?>
+
+	<?php } ?>
+
+</div>
+
+<?php } ?>
+
 <?php
 
 $modules = $helper->getModulesByPosition( 'promotion' ); 
-$ospans = array();
 
-if( count($modules) ){
-$cols = isset($config['block_promotion'])&& $config['block_promotion']?(int)$config['block_promotion']:count($modules);	
-$class = $helper->calculateSpans( $ospans, $cols );
-?>
-<div class="pav-promotion w fix mt10" id="pav-promotion">
+if( $modules ){ ?>
 
-	<?php foreach ($modules as $i =>  $module) {  ?>
-			<?php if( $i++%$cols == 0 || count($modules)==1 ){ ?><?php } ?>	
-			<?php echo $module; ?>
-			<?php if( $i%$cols == 0 || $i==count($modules) ){ ?><?php } ?>	
-	<?php } ?>	
+<div id="promotion" class="w mt10" >
 
-</div>
-<?php } ?>
-<?php
-/**
- * Slideshow modules
- */
-$modules = $helper->getModulesByPosition( 'slideshow' ); 
+	<?php foreach ($modules as $module) {  ?>
 
-if( $modules ){
-?>
-<div id="slideshow" class="pav-slideshow w mt10">
-	
-	<?php foreach ($modules as $module) { ?>
-		<?php echo $module; ?>
+	<?php echo $module; ?>
+
 	<?php } ?>
-	
+
 </div>
+
 <?php } ?>
 
 <?php
 
 $modules = $helper->getModulesByPosition( 'showcase' ); 
-$ospans = array();
 
-if( count($modules) ){
-$cols = isset($config['block_showcase'])&& $config['block_showcase']?(int)$config['block_showcase']:count($modules);	
-$class = $helper->calculateSpans( $ospans, $cols );
-?>
-<div class="pav-showcase w mt15 ovh" id="pavo-showcase">
+if( $modules ){ ?>
 
-	<?php foreach ($modules as $i =>  $module) {  ?>
-	<?php if( $i++%$cols == 0 || count($modules)==1  ){  ?><?php } ?>	
+<div id="showcase" class="w mt15 ovh">
+
+	<?php foreach ($modules as $module) {  ?>
+
 	<?php echo $module; ?>
-	<?php if( $i%$cols == 0 || $i==count($modules) ){ ?><?php } ?>
+
 	<?php } ?>
+
 </div>
+
 <?php } ?>
 
 <section id="columns">
