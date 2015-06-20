@@ -29,6 +29,7 @@ class ModelCatalogProduct extends Model {
 			'status' 		=> $data['status'],
 			'tax_class_id' 	=> isset($data['tax_class_id']) ? $data['tax_class_id'] : 0,
 			'sort_order' 	=> $data['sort_order'],
+			'category_related' 	=> $data['category_related'],
 			'date_added' 	=> date('Y-m-d H:i:s')
 		);
 		$product_id = $this->db->insert('product',$fields);
@@ -183,6 +184,7 @@ class ModelCatalogProduct extends Model {
 			'status' 		=> $data['status'],
 			'tax_class_id' 	=> isset($data['tax_class_id']) ? $data['tax_class_id'] : 0,
 			'sort_order' 	=> $data['sort_order'],
+			'category_related' 	=> $data['category_related'],
 			'date_added' 	=> date('Y-m-d H:i:s')
 		);
 		$this->db->update('product',array('product_id'=>$product_id),$fields);
@@ -411,7 +413,7 @@ class ModelCatalogProduct extends Model {
 		$sql .= " WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "'"; 
 		
 		if (!empty($data['filter_name'])) {
-			$sql .= " AND pd.name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
+			$sql .= " AND pd.name LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
 		}
 
 		if (!empty($data['filter_model'])) {

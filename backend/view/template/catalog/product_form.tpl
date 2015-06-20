@@ -273,6 +273,18 @@
                 </select></td>
             </tr>
             <tr>
+              <td><?php echo $entry_category_related; ?></td>
+              <td><select name="category_related">
+                  <?php if ($category_related) { ?>
+                  <option value="1" selected="selected"><?php echo $text_yes; ?></option>
+                  <option value="0"><?php echo $text_no; ?></option>
+                  <?php } else { ?>
+                  <option value="1"><?php echo $text_yes; ?></option>
+                  <option value="0" selected="selected"><?php echo $text_no; ?></option>
+                  <?php } ?>
+                </select></td>
+            </tr>
+            <tr>
               <td><?php echo $entry_sort_order; ?></td>
               <td><input type="text" name="sort_order" value="<?php echo $sort_order; ?>" size="2" /></td>
             </tr>

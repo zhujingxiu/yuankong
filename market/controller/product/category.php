@@ -264,7 +264,15 @@ class ControllerProductCategory extends Controller {
 			} else {
 				$rating = false;
 			}
-							
+			
+			$parent_id = $this->model_catalog_product->getProductCategories($result['product_id']);
+			
+			$path = $this->model_catalog_product->getCategoryPath($parent_id);
+			
+			$path_param = empty($path) ? '' : '&path='.$path;
+			
+			
+
 			$this->data['products'][] = array(
 				'product_id'  => $result['product_id'],
 				'thumb'       => $image,
@@ -275,7 +283,7 @@ class ControllerProductCategory extends Controller {
 				'tax'         => $tax,
 				'rating'      => $result['rating'],
 				'reviews'     => sprintf($this->language->get('text_reviews'), (int)$result['reviews']),
-				'href'        => $this->url->link('product/product', '&product_id=' . $result['product_id'] )
+				'href'        => $this->url->link('product/product', $path_param.'&product_id=' . $result['product_id'] )
 			);
 		}
 		

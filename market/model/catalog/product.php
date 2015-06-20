@@ -615,4 +615,18 @@ class ModelCatalogProduct extends Model {
 			return 0;	
 		}
 	}
+
+	public function getProductCategories($product_id) {
+	
+		$query = $this->db->query("SELECT category_id FROM " . DB_PREFIX . "product_to_category WHERE product_id = '" . (int)$product_id . "'");
+		
+		return $query->num_rows ? $query->row['category_id'] : false;
+
+	}
+
+	public function getCategoryPath($category_id) {
+		$query = $this->db->query("SELECT GROUP_CONCAT(cd.category_id ORDER BY level SEPARATOR '_') AS path FROM " . DB_PREFIX . "category_path cp LEFT JOIN " . DB_PREFIX . "category_description cd ON (cp.path_id = cd.category_id ) WHERE cp.category_id = '".$category_id."' AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "' GROUP BY cp.category_id");
+		
+		return $query->num_rows ? $query->row['path'] : false;
+	} 
 }

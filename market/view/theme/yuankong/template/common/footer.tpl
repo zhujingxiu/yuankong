@@ -9,6 +9,7 @@
 </section>
 <?php
 	$modules = $helper->getModulesByPosition( 'mass_bottom' ); 
+	
 	if( count($modules) ) { ?>
 		<?php foreach ($modules as $i =>  $module) {   ?>
 		<div class="w mt15"><?php echo $module; ?></div>	

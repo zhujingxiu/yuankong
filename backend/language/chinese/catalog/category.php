@@ -29,7 +29,7 @@ $_['entry_column']               = '列排显示：<br/><span class="help">在�
 $_['entry_sort_order']           = '分类顺序：';
 $_['entry_status']               = '分类状态：';
 $_['entry_layout']               = '布局覆盖：';
-
+$_['entry_related']              = '&nbsp;&nbsp;相关分类：';
 // Error 
 $_['error_warning']              = '警告： 相关数据未输入！';
 $_['error_permission']           = '警告： 您没有权限更改商品分类！';

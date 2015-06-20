@@ -8,10 +8,10 @@
 				<?php if ($product['thumb']) { ?>
 				<a href="<?php echo $product['href']; ?>" class="tjpic">
 					<img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" />
+					<h5><?php echo $product['name']; ?></h5>
 				</a>
 				<?php } ?>
 				<p class="tc pt5">
-					
 					<?php if ($product['price']) { ?>
 					
 					  <?php if (!$product['special']) { ?>

@@ -82,6 +82,7 @@ $_['entry_related']              = '&nbsp;&nbsp;相关商品：';
 $_['entry_tag']          	      = '产品标签：<br /><span class="help">使用逗号分开</span>';
 $_['entry_reward']               = '积分：';
 $_['entry_layout']               = '布局覆盖：';
+$_['entry_category_related']     = '启用相关分类：<br /><span class="help">在详情页显示上级分类中设置的相关分类</span>';
 
 // Error
 $_['error_warning']              = '警告： 相关数据未键入！';

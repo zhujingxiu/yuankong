@@ -46,6 +46,15 @@ class ModelCatalogCategory extends Model {
 				}
 			}
 		}
+//category related
+		if (isset($data['category_related'])) {
+			foreach ($data['category_related'] as $related_id) {
+				$this->db->query("DELETE FROM " . DB_PREFIX . "category_related WHERE category_id = '" . (int)$category_id . "' AND related_id = '" . (int)$related_id . "'");
+				$this->db->query("INSERT INTO " . DB_PREFIX . "category_related SET category_id = '" . (int)$category_id . "', related_id = '" . (int)$related_id . "'");
+				$this->db->query("DELETE FROM " . DB_PREFIX . "category_related WHERE category_id = '" . (int)$related_id . "' AND related_id = '" . (int)$category_id . "'");
+				$this->db->query("INSERT INTO " . DB_PREFIX . "category_related SET category_id = '" . (int)$related_id . "', related_id = '" . (int)$category_id . "'");
+			}
+		}
 						
 		if ($data['keyword']) {
 			$this->db->query("INSERT INTO " . DB_PREFIX . "url_alias SET query = 'category_id=" . (int)$category_id . "', keyword = '" . $this->db->escape($data['keyword']) . "'");
@@ -143,7 +152,18 @@ class ModelCatalogCategory extends Model {
 				}
 			}
 		}
-						
+		//category related
+		$this->db->query("DELETE FROM " . DB_PREFIX . "category_related WHERE category_id = '" . (int)$category_id . "'");
+		$this->db->query("DELETE FROM " . DB_PREFIX . "category_related WHERE related_id = '" . (int)$category_id . "'");
+
+		if (isset($data['category_related'])) {
+			foreach ($data['category_related'] as $related_id) {
+				$this->db->query("DELETE FROM " . DB_PREFIX . "category_related WHERE category_id = '" . (int)$category_id . "' AND related_id = '" . (int)$related_id . "'");
+				$this->db->query("INSERT INTO " . DB_PREFIX . "category_related SET category_id = '" . (int)$category_id . "', related_id = '" . (int)$related_id . "'");
+				$this->db->query("DELETE FROM " . DB_PREFIX . "category_related WHERE category_id = '" . (int)$related_id . "' AND related_id = '" . (int)$category_id . "'");
+				$this->db->query("INSERT INTO " . DB_PREFIX . "category_related SET category_id = '" . (int)$related_id . "', related_id = '" . (int)$category_id . "'");
+			}
+		}				
 		$this->db->query("DELETE FROM " . DB_PREFIX . "url_alias WHERE query = 'category_id=" . (int)$category_id. "'");
 		
 		if ($data['keyword']) {
@@ -168,6 +188,8 @@ class ModelCatalogCategory extends Model {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "category_to_store WHERE category_id = '" . (int)$category_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "category_to_layout WHERE category_id = '" . (int)$category_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "product_to_category WHERE category_id = '" . (int)$category_id . "'");
+		$this->db->query("DELETE FROM " . DB_PREFIX . "category_related WHERE category_id = '" . (int)$category_id . "'");
+		$this->db->query("DELETE FROM " . DB_PREFIX . "category_related WHERE related_id = '" . (int)$category_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "url_alias WHERE query = 'category_id=" . (int)$category_id . "'");
 		
 		$this->cache->delete('category');
@@ -208,7 +230,7 @@ class ModelCatalogCategory extends Model {
 		$sql = "SELECT cp.category_id AS category_id, GROUP_CONCAT(cd1.name ORDER BY cp.level SEPARATOR ' &gt; ') AS name, c.parent_id, c.sort_order FROM " . DB_PREFIX . "category_path cp LEFT JOIN " . DB_PREFIX . "category c ON (cp.path_id = c.category_id) LEFT JOIN " . DB_PREFIX . "category_description cd1 ON (c.category_id = cd1.category_id) LEFT JOIN " . DB_PREFIX . "category_description cd2 ON (cp.category_id = cd2.category_id) WHERE cd1.language_id = '" . (int)$this->config->get('config_language_id') . "' AND cd2.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 		
 		if (!empty($data['filter_name'])) {
-			$sql .= " AND cd2.name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
+			$sql .= " AND cd2.name LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
 		}
 
 		$sql .= " GROUP BY cp.category_id ORDER BY cp.category_id ,name";
@@ -224,7 +246,6 @@ class ModelCatalogCategory extends Model {
 		 
 			$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
 		}
-						
 		$query = $this->db->query($sql);
 		
 		return $query->rows;
@@ -322,4 +343,16 @@ class ModelCatalogCategory extends Model {
 								  
 		return $query->rows;
 	} 
+
+	public function getCategoryRelated($category_id) {
+		$category_related_data = array();
+		
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "category_related WHERE category_id = '" . (int)$category_id . "'");
+		
+		foreach ($query->rows as $result) {
+			$category_related_data[] = $result['related_id'];
+		}
+		
+		return $category_related_data;
+	}
 }

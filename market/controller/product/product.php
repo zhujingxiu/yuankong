@@ -12,7 +12,11 @@ class ControllerProductProduct extends Controller {
 			'href'      => $this->url->link('common/home'),			
 			'separator' => false
 		);
-
+		$this->data['breadcrumbs'][] = array(
+			'text'      => $this->language->get('text_store'),
+			'href'      => $this->url->link('product/category', ''),
+			'separator' => $this->language->get('text_separator')
+		);
 		$this->load->model('catalog/category');	
 		
 		if (isset($this->request->get['path'])) {
@@ -165,6 +169,8 @@ class ControllerProductProduct extends Controller {
 		$product_info = $this->model_catalog_product->getProduct($product_id);
 		
 		if ($product_info) {
+
+			$this->document->addScript('market/view/theme/yuankong/javascript/lib/fdj.js');
 			$url = '';
 			
 			if (isset($this->request->get['path'])) {
@@ -256,6 +262,7 @@ class ControllerProductProduct extends Controller {
 			$this->data['entry_captcha'] = $this->language->get('entry_captcha');
 			
 			$this->data['button_cart'] = $this->language->get('button_cart');
+			$this->data['button_buynow'] = $this->language->get('button_buynow');
 			$this->data['button_wishlist'] = $this->language->get('button_wishlist');
 			$this->data['button_compare'] = $this->language->get('button_compare');			
 			$this->data['button_upload'] = $this->language->get('button_upload');
@@ -269,6 +276,7 @@ class ControllerProductProduct extends Controller {
 			$this->data['tab_related'] = $this->language->get('tab_related');
 			
 			$this->data['product_id'] = $this->request->get['product_id'];
+			$this->data['subtitle'] = $product_info['subtitle'];
 			$this->data['manufacturer'] = $product_info['manufacturer'];
 			$this->data['manufacturers'] = $this->url->link('product/manufacturer/info', 'manufacturer_id=' . $product_info['manufacturer_id']);
 			$this->data['model'] = $product_info['model'];
@@ -393,7 +401,12 @@ class ControllerProductProduct extends Controller {
 			$this->data['rating'] = (int)$product_info['rating'];
 			$this->data['description'] = html_entity_decode($product_info['description'], ENT_QUOTES, 'UTF-8');
 			$this->data['attribute_groups'] = $this->model_catalog_product->getProductAttributes($this->request->get['product_id']);
-			
+			$this->data['categories'] = array();
+			$results = $this->model_catalog_product->getProductRelated($product_info['category_id']);
+			foreach ($results as $result) {
+
+			}
+
 			$this->data['products'] = array();
 			
 			$results = $this->model_catalog_product->getProductRelated($this->request->get['product_id']);

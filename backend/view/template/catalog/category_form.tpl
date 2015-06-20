@@ -171,6 +171,22 @@
                   <?php } ?>
                 </select></td>
             </tr>
+            <tr>
+              <td><?php echo $entry_related; ?></td>
+              <td><input type="text" name="related" value="" /></td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td><div id="category-related" class="scrollbox">
+                  <?php $class = 'odd'; ?>
+                  <?php foreach ($category_related as $category_related) { ?>
+                  <?php $class = ($class == 'even' ? 'odd' : 'even'); ?>
+                  <div id="category-related<?php echo $category_related['category_id']; ?>" class="<?php echo $class; ?>"> <?php echo $category_related['name']; ?><img src="view/image/delete.png" alt="" />
+                    <input type="hidden" name="category_related[]" value="<?php echo $category_related['category_id']; ?>" />
+                  </div>
+                  <?php } ?>
+                </div></td>
+            </tr>
           </table>
         </div>
         <div id="tab-design">
@@ -355,5 +371,44 @@ $('.selection-category select').bind('change',function(){
 });
 $('#top-category').trigger('change')
 //--></script> 
+<script type="text/javascript"><!--
+  // Related
+$('input[name=\'related\']').autocomplete({
+  delay: 500,
+  source: function(request, response) {
+    $.ajax({
+      url: 'index.php?route=catalog/category/autocomplete&token=<?php echo $token; ?>&filter_name=' +  encodeURIComponent(request.term),
+      dataType: 'json',
+      success: function(json) {   
+        response($.map(json, function(item) {
+          return {
+            label: item.name,
+            value: item.category_id
+          }
+        }));
+      }
+    });
+  }, 
+  select: function(event, ui) {
+    $('#category-related' + ui.item.value).remove();
+    
+    $('#category-related').append('<div id="category-related' + ui.item.value + '">' + ui.item.label + '<img src="view/image/delete.png" alt="" /><input type="hidden" name="category_related[]" value="' + ui.item.value + '" /></div>');
 
+    $('#category-related div:odd').attr('class', 'odd');
+    $('#category-related div:even').attr('class', 'even');
+        
+    return false;
+  },
+  focus: function(event, ui) {
+      return false;
+   }
+});
+
+$('#category-related div img').live('click', function() {
+  $(this).parent().remove();
+  
+  $('#category-related div:odd').attr('class', 'odd');
+  $('#category-related div:even').attr('class', 'even'); 
+});
+//--></script>
 <?php echo $footer; ?>
