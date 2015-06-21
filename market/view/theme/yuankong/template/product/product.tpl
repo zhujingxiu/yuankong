@@ -280,6 +280,7 @@
 <div class="w mt10 fix">
 	<?php if( $SPAN[0] ): ?>
 	<div class="<?php echo $SPAN[0];?>">
+		<?php require( DIR_TEMPLATE.$this->config->get('config_template')."/template/product/category-related.tpl" ); ?>
 		<?php echo $column_left; ?>
 	</div>
 	<?php endif; ?> 

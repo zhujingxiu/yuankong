@@ -29,6 +29,7 @@ $_['text_wait']           = '请稍候！';
 $_['text_tags']           = '标签：';
 $_['text_error']          = '此商品不存在！';
 $_['text_store']          = '消防商城';
+$_['text_category_related']= '相关分类';
 // Entry
 $_['entry_name']          = '您的姓名：';
 $_['entry_review']        = '您的评价：';

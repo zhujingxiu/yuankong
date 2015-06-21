@@ -401,10 +401,19 @@ class ControllerProductProduct extends Controller {
 			$this->data['rating'] = (int)$product_info['rating'];
 			$this->data['description'] = html_entity_decode($product_info['description'], ENT_QUOTES, 'UTF-8');
 			$this->data['attribute_groups'] = $this->model_catalog_product->getProductAttributes($this->request->get['product_id']);
+			
+			$this->data['text_category_related'] = $this->language->get('text_category_related');
 			$this->data['categories'] = array();
-			$results = $this->model_catalog_product->getProductRelated($product_info['category_id']);
-			foreach ($results as $result) {
-
+			$_categories = $this->model_catalog_product->getCategories($product_info['product_id']);
+			foreach ($_categories as $key => $item) {
+				$results = $this->model_catalog_product->getCategoryRelated($item['category_id']);
+				foreach ($results as $result) {
+					$this->data['categories'][] = array(
+						'category_id' => $result['category_id'],
+						'name'			=> $result['name'],
+						'link'			=> $this->url->link('product/category',$result['path'],'SSL')
+					);
+				}
 			}
 
 			$this->data['products'] = array();

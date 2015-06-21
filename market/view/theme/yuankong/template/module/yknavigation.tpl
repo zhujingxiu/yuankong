@@ -22,8 +22,12 @@
         if(rt == ''){
             $('ul.nav > li.nav-li:first').removeClass('on').addClass('on');
         }else{
+            var keyword = rt;
+            if(rt=='product/product'){
+                keyword = 'product/category';
+            }
             $.each($('ul.nav > li.nav-li'),function(){
-                if($(this).find('a').attr('href').indexOf(rt)!=-1){
+                if($(this).find('a').attr('href').indexOf(keyword)!=-1){
                     $('ul.nav > li.nav-li.on').removeClass('on');
                     $(this).addClass('on');
                 }

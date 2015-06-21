@@ -446,6 +446,23 @@ class ModelCatalogProduct extends Model {
 		
 		return $product_data;
 	}
+
+	public function getCategoryRelated($category_id) {
+
+		$category_data = array();
+		$sql = "SELECT * FROM " . DB_PREFIX . "category_related cr LEFT JOIN " . DB_PREFIX . "category c ON (cr.related_id = c.category_id) LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) LEFT JOIN " . DB_PREFIX . "category_description cd ON (cd.category_id = c.category_id) WHERE cr.category_id = '" . (int)$category_id . "' AND c.status = '1' AND c2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
+		$query = $this->db->query($sql);
+		foreach ($query->rows as $result) { 
+			$path = $this->getCategoryPath($result['category_id']);
+			$category_data[$result['related_id']] = array(
+				'category_id'	=> $result['category_id'],
+				'name'			=> $result['name'],
+				'path' 			=> $path ? '&path='.$path : ''
+			);
+		}
+		
+		return $category_data;
+	}
 		
 	public function getProductLayoutId($product_id) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_to_layout WHERE product_id = '" . (int)$product_id . "' AND store_id = '" . (int)$this->config->get('config_store_id') . "'");

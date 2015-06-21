@@ -69,7 +69,7 @@ $("div.jqZoomPup").remove();}
 $("div.zoomdiv").remove();});
 count=0;
 if(settings.preload){
-$('body').append("<div style='display:none;' class='jqPreload"+count+"'>360buy</div>");
+$('body').append("<div style='display:none;' class='jqPreload"+count+"'></div>");
 $(this).each(function(){
 var imagetopreload=$(this).children("img").attr("jqimg");
 var content=jQuery('div.jqPreload'+count+'').html();
