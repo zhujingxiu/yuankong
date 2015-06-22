@@ -17,10 +17,8 @@
                     <tr>
                         <td style="width:80%"><div class="tree" id="menu-tree"></div></td>
                         <td valign ="top">
-                            <br/><br/><br/><br/>
-                            <a id="root-node" class="button">Create root menu</a>
                             <br/><br/>
-                            <a data-rel="menu-tree" class="button toggle">Expand / Collapse</a>
+                            <a data-rel="menu-tree" class="button toggle">展开 / 收缩</a>
                         </td>
                     </tr>
                 </table>
@@ -30,20 +28,19 @@
 <div id="menu-dialog" style="display:none">
     <table class="form">
         <tr>
-            <td>Parent:</td>
+            <td>上级:</td>
             <td>
                 <input type="hidden" name="area_id">
-                <input type="hidden" name="parent_id">
-                <input type="hidden" name="level">
+                <input type="hidden" name="pid">
                 <span id="parent-name">/</span>
             </td>
         </tr>
         <tr>
-            <td>Title:</td>
-            <td><input type="text" name="title" ></td>
+            <td>名称:</td>
+            <td><input type="text" name="name" ></td>
         </tr>
         <tr>
-            <td>Status:</td>
+            <td>激活:</td>
             <td>
                 <select name="status" >
                   <option value="1"><?php echo $text_yes;?></option>
@@ -52,7 +49,7 @@
             </td>
         </tr>
         <tr>
-            <td>Sort Order:</td>
+            <td>排序:</td>
             <td><input type="text" name="sort"></td>
         </tr>
     </table>
@@ -62,7 +59,7 @@
     $(function () { 
         $("#menu-tree").tree({
             types : {"file" :{icon : {image : "view/image/file.png"}}},
-            ui : {theme_name : "apple"},
+            ui : {theme_name : "default"},
             data : { 
                 async : true,
                 type : "json",
@@ -73,7 +70,7 @@
             },
             callback : { 
                 beforedelete : function(n,t,r){
-                    if(confirm("Do you want to delete?")) {
+                    if(confirm("确认删除吗")) {
                         $.post('index.php?route=localisation/area/delete&token=<?php echo $token; ?>',{area_id:$(n).attr('area_id')},function(json){
                             data = JSON.parse(json);
                             if(data.status==1){
@@ -86,33 +83,13 @@
                     }else{
                         return false;
                     }
-                },
-                beforemove : function(n,r,tp,t,rb){
-                    if(confirm('Move '+t.get_text(n) +' '+tp+' '+t.get_text(r)+' ?')){
-                        $.ajax({
-                            url:'index.php?route=localisation/area/save&token=<?php echo $token; ?>',
-                            type:'post',
-                            data:{drag:1,area_id:$(n).attr('area_id'),target_id:$(r).attr('area_id'),type:tp},
-                            dataType:'json',
-                            success:function(json){
-                                if(json.status==1){
-                                    alert(json.msg);
-                                }else{
-                                    return false;
-                                }
-                            }
-                        });
-                        return true;
-                    }else{
-                        return false;
-                    }
                 }
             },
             plugins : {
                 contextmenu:{
                     items : {
                         create :{
-                            label: "Create",
+                            label: "新增",
                             icon : "create",
                             visible : function(n,t){
                                 if(n.length != 1) return 0;
@@ -123,7 +100,7 @@
                             }
                         },
                         rename : {
-                            label: "Edit",
+                            label: "编辑",
                             icon : "rename",
                             visible : function(n,t){
                                 if(n.length != 1) return 0;
@@ -132,6 +109,9 @@
                             action  : function(n,t){
                                 render_dialog(n,'edit',t.get_text(n));
                             }
+                        },
+                        remove:{
+                            label:"删除"
                         }
                     }
                 }
@@ -144,19 +124,17 @@
         var title = '';
         var that = this;
         if(node && mode=='edit'){
-            title = 'Edit menu node ['+text+']';
-            $('#parent-name').html(node.attr('p_name')=='' ? '/' : node.attr('p_name'));
+            title = '编辑 ['+text+']';
+            $('#parent-name').html(node.attr('p_name'));
             $('#menu-dialog input[name="area_id"]').val(node.attr('area_id'));
-            $('#menu-dialog input[name="parent_id"]').val(node.attr('p_id'));
+            $('#menu-dialog input[name="pid"]').val(node.attr('pid'));
             $('#menu-dialog input[name="name"]').val(text);
             $('#menu-dialog select[name="status"]').val(node.attr('status'));
             $('#menu-dialog input[name="sort"]').val(node.attr('sort'));
-            $('#menu-dialog input[name="level"]').val(node.attr('level')); 
         }else{
-            title = 'Create new menu node ';
+            title = '新建 ';
             $('#parent-name').html(node ? node.attr('p_name')+'/'+text :'/');
-            $('#menu-dialog input[name="parent_id"]').val(node ? node.attr('area_id') : 0); 
-            $('#menu-dialog input[name="level"]').val(node ? parseInt(node.attr('level'))+1 : 1); 
+            $('#menu-dialog input[name="pid"]').val(node ? node.attr('area_id') : 0); 
         }
         $('#menu-dialog input[name="mode"]').val('menu');
         $('#menu-dialog').dialog({
@@ -200,5 +178,8 @@
     $('.htabs a').tabs();
 </script>
 
-<style type="text/css">   .tree{margin:0 auto;width:90%;padding: 20px;border:1px dashed #dedede;}</style>
+<style type="text/css">
+   .tree{margin:0 auto;width:90%;padding: 20px;border:1px dashed #dedede;}
+   .tree li[pid="0"] > a {font-weight: bold}
+</style>
 <?php echo $footer; ?> 

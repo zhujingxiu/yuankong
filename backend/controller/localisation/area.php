@@ -62,8 +62,11 @@ class ControllerLocalisationArea extends Controller {
 
 		$this->data['token'] = $this->session->data['token'];
 		if(!empty($this->request->get['ajax'])){
-
-            $area = $this->render_tree($this->model_localisation_area->getAreaTree(null),true);
+			$area = $this->cache->get('area');
+			if(!$area){
+				$area = $this->render_tree($this->model_localisation_area->getAreaTree(null));
+				$this->cache->set('area',$area);
+			}            
             $this->response->setOutput(json_encode($area));
         }else{
 			$this->template = 'localisation/area.tpl';
@@ -85,13 +88,15 @@ class ControllerLocalisationArea extends Controller {
                 $tmp['data'] = $item['name'];
                 if($open){
                     $tmp['state'] = 'open';
+                }else{
+                	$tmp['state'] = 'closed';
                 }
+                $parent_area = $this->model_localisation_area->getParentArea($item['area_id']);
                 $tmp['attributes'] = array(
                     'area_id'   => $item['area_id'],
                     'title'     => $item['name'],
-                    'level'     => $item['level'],
-                    'p_id'      => $item['p_id'],
-                    'p_name'    => trim($item['p_name']),
+                    'pid'      => $item['pid'],
+                    'p_name'	=> empty($parent_area['name']) ? '' : $parent_area['name'],
                     'status'    => $item['status'],
                     'sort'      => $item['sort'],
                 );
@@ -140,183 +145,36 @@ class ControllerLocalisationArea extends Controller {
 		$this->getForm();
 	}
 
-	public function update() {
-		$this->language->load('localisation/area');
+    public function save() {
+        $this->language->load('localisation/area');
 
-		$this->document->setTitle($this->language->get('heading_title'));
-		
-		$this->load->model('localisation/area');
-		
-		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_localisation_area->editArea($this->request->get['area_id'], $this->request->post);			
-			
-			$this->session->data['success'] = $this->language->get('text_success');
-			
-			$url = '';
-			
-			if (isset($this->request->get['sort'])) {
-				$url .= '&sort=' . $this->request->get['sort'];
-			}
+        $this->document->setTitle($this->language->get('heading_title'));
+    
+        $this->load->model('localisation/area');
+    
+        if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm('localisation/area/save')) {
+            if($this->model_user_permission_node->saveArea($this->request->post)){
+                $data = array('status'=>1,'msg'=>$this->language->get('text_success'));
+            }else{              
+                $data = array('status'=>0,'msg'=>$this->language->get('text_error'));
+            }
+            $this->response->setOutput(json_encode($data)); 
+        }
+    }
 
-			if (isset($this->request->get['order'])) {
-				$url .= '&order=' . $this->request->get['order'];
-			}
+    public function delete() { 
+        $this->language->load('localisation/area');
 
-			if (isset($this->request->get['page'])) {
-				$url .= '&page=' . $this->request->get['page'];
-			}
-			
-			$this->redirect($this->url->link('localisation/area', 'token=' . $this->session->data['token'] . $url, 'SSL'));
-		}
-
-		$this->getForm();
-	}
-
-	public function delete() {
-		$this->language->load('localisation/area');
-
-		$this->document->setTitle($this->language->get('heading_title'));
-		
-		$this->load->model('localisation/area');
-		
-		if (isset($this->request->post['selected']) && $this->validateDelete()) {
-			foreach ($this->request->post['selected'] as $area_id) {
-				$this->model_localisation_area->deleteArea($area_id);
-			}			
-			
-			$this->session->data['success'] = $this->language->get('text_success');
-			
-			$url = '';
-			
-			if (isset($this->request->get['sort'])) {
-				$url .= '&sort=' . $this->request->get['sort'];
-			}
-
-			if (isset($this->request->get['order'])) {
-				$url .= '&order=' . $this->request->get['order'];
-			}
-
-			if (isset($this->request->get['page'])) {
-				$url .= '&page=' . $this->request->get['page'];
-			}
-
-			$this->redirect($this->url->link('localisation/area', 'token=' . $this->session->data['token'] . $url, 'SSL'));
-		}
-
-		$this->getList();
-	}
-
-
-	protected function getForm() {
-		$this->data['heading_title'] = $this->language->get('heading_title');
-
-		$this->data['entry_status'] = $this->language->get('entry_status');
-		$this->data['entry_name'] = $this->language->get('entry_name');
-		$this->data['entry_code'] = $this->language->get('entry_code');
-		$this->data['entry_country'] = $this->language->get('entry_country');
-
-		$this->data['text_enabled'] = $this->language->get('text_enabled');
-		$this->data['text_disabled'] = $this->language->get('text_disabled');
-		
-		$this->data['button_save'] = $this->language->get('button_save');
-		$this->data['button_cancel'] = $this->language->get('button_cancel');
-
- 		if (isset($this->error['warning'])) {
-			$this->data['error_warning'] = $this->error['warning'];
-		} else {
-			$this->data['error_warning'] = '';
-		}
-		
- 		if (isset($this->error['name'])) {
-			$this->data['error_name'] = $this->error['name'];
-		} else {
-			$this->data['error_name'] = '';
-		}
-		
-		$url = '';
-			
-		if (isset($this->request->get['sort'])) {
-			$url .= '&sort=' . $this->request->get['sort'];
-		}
-
-		if (isset($this->request->get['order'])) {
-			$url .= '&order=' . $this->request->get['order'];
-		}
-		
-		if (isset($this->request->get['page'])) {
-			$url .= '&page=' . $this->request->get['page'];
-		}
-
-  		$this->data['breadcrumbs'] = array();
-
-   		$this->data['breadcrumbs'][] = array(
-       		'text'      => $this->language->get('text_home'),
-			'href'      => $this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL'),  		
-      		'separator' => false
-   		);
-
-   		$this->data['breadcrumbs'][] = array(
-       		'text'      => $this->language->get('heading_title'),
-			'href'      => $this->url->link('localisation/area', 'token=' . $this->session->data['token'] . $url, 'SSL'),
-      		'separator' => ' :: '
-   		);
-							
-		if (!isset($this->request->get['area_id'])) {
-			$this->data['action'] = $this->url->link('localisation/area/insert', 'token=' . $this->session->data['token'] . $url, 'SSL');
-		} else {
-			$this->data['action'] = $this->url->link('localisation/area/update', 'token=' . $this->session->data['token'] . '&area_id=' . $this->request->get['area_id'] . $url, 'SSL');
-		}
-		 
-		$this->data['cancel'] = $this->url->link('localisation/area', 'token=' . $this->session->data['token'] . $url, 'SSL');
-
-		if (isset($this->request->get['area_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
-			$area_info = $this->model_localisation_area->getArea($this->request->get['area_id']);
-		}
-
-		if (isset($this->request->post['status'])) {
-			$this->data['status'] = $this->request->post['status'];
-		} elseif (!empty($area_info)) {
-			$this->data['status'] = $area_info['status'];
-		} else {
-			$this->data['status'] = '1';
-		}
-		
-		if (isset($this->request->post['name'])) {
-			$this->data['name'] = $this->request->post['name'];
-		} elseif (!empty($area_info)) {
-			$this->data['name'] = $area_info['name'];
-		} else {
-			$this->data['name'] = '';
-		}
-
-		if (isset($this->request->post['code'])) {
-			$this->data['code'] = $this->request->post['code'];
-		} elseif (!empty($area_info)) {
-			$this->data['code'] = $area_info['code'];
-		} else {
-			$this->data['code'] = '';
-		}
-
-		if (isset($this->request->post['country_id'])) {
-			$this->data['country_id'] = $this->request->post['country_id'];
-		} elseif (!empty($area_info)) {
-			$this->data['country_id'] = $area_info['country_id'];
-		} else {
-			$this->data['country_id'] = '';
-		}
-		
-		$this->load->model('localisation/country');
-		
-		$this->data['countries'] = $this->model_localisation_country->getCountries();
-
-		$this->template = 'localisation/area_form.tpl';
-		$this->children = array(
-			'common/header',
-			'common/footer'
-		);
-				
-		$this->response->setOutput($this->render());
-	}
+        $this->document->setTitle($this->language->get('heading_title'));
+    
+        $this->load->model('localisation/area');
+    
+        if (isset($this->request->post['area_id']) && $this->validateDelete('localisation/area/delete')) {
+            if($this->model_user_permission_node->deleteNode($this->request->post['area_id'])){
+                $this->response->setOutput(json_encode(array('status'=>1,'msg'=>'Deleted!')));  
+            }
+        }   
+    }
 
 	protected function validateForm() {
 		if (!$this->user->hasPermission('modify', 'localisation/area')) {
@@ -334,50 +192,17 @@ class ControllerLocalisationArea extends Controller {
 		}
 	}
 
-	protected function validateDelete() {
-		if (!$this->user->hasPermission('modify', 'localisation/area')) {
-			$this->error['warning'] = $this->language->get('error_permission');
-		}
-		
-		$this->load->model('setting/store');
-		$this->load->model('sale/customer');
-		$this->load->model('sale/affiliate');
-		$this->load->model('localisation/geo_area');
-		
-		foreach ($this->request->post['selected'] as $area_id) {
-			if ($this->config->get('config_area_id') == $area_id) {
-				$this->error['warning'] = $this->language->get('error_default');
-			}
-			
-			$store_total = $this->model_setting_store->getTotalStoresByAreaId($area_id);
-
-			if ($store_total) {
-				$this->error['warning'] = sprintf($this->language->get('error_store'), $store_total);
-			}
-		
-			$address_total = $this->model_sale_customer->getTotalAddressesByAreaId($area_id);
-
-			if ($address_total) {
-				$this->error['warning'] = sprintf($this->language->get('error_address'), $address_total);
-			}
-
-			$affiliate_total = $this->model_sale_affiliate->getTotalAffiliatesByAreaId($area_id);
-
-			if ($affiliate_total) {
-				$this->error['warning'] = sprintf($this->language->get('error_affiliate'), $affiliate_total);
-			}
-					
-			$area_to_geo_area_total = $this->model_localisation_geo_area->getTotalAreaToGeoAreaByAreaId($area_id);
-		
-			if ($area_to_geo_area_total) {
-				$this->error['warning'] = sprintf($this->language->get('error_area_to_geo_area'), $area_to_geo_area_total);
-			}
-		}
-		
-		if (!$this->error) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+    protected function validateDelete($route) { 
+        if (!$this->user->hasPermission('modify', $route)) {
+            $this->error['warning'] = $this->language->get('error_permission');
+        } 
+        if (!isset($this->request->post['area_id'])) {
+            $this->error['warning'] = $this->language->get('text_error');
+        }
+        if (!$this->error) {
+            return true;
+        } else { 
+            return false;
+        }
+    }
 }
