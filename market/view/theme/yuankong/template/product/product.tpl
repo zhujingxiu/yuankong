@@ -242,10 +242,13 @@
                 </li>
                 <li class="fix">
                     <span class="label-n">配送至:</span>
-                    <div class="rel l">
-                        <div class="defalt-adtree">
-                        	<span class="adtress-text">江苏省-苏州市</span><i class="icon2 h-down"></i>
+                    <div class="rel l" id="location-delivery">
+                        <div class="defalt-adtree area-text">
+                        	<span class="adtress-text">江苏省-苏州市</span><b></b>
                         </div>
+                        <div class="area-content"></div>
+                        <div onclick="$('#location-delivery').removeClass('hover')" class="close"></div>
+                        <div id="location-prompt"></div>
                     </div>
                     <span class="l pl20 mt5">
                     	<img style="CURSOR: pointer" onclick="javascript:window.open('http://b.qq.com/webc.htm?new=0&amp;sid=3197104626&amp;o=yk119.cn&amp;q=7', '_blank', 'height=502, width=644,toolbar=no,scrollbars=no,menubar=no,status=no');" border="0" src="<?php echo TPL_IMG ?>data/yuankong/qq.png" alt="点击这里给我发消息">
