@@ -171,6 +171,8 @@ class ControllerProductProduct extends Controller {
 		if ($product_info) {
 
 			$this->document->addScript('market/view/theme/yuankong/javascript/lib/fdj.js');
+			$this->document->addStyle('market/view/theme/yuankong/javascript/location/location.css');
+			$this->document->addScript('market/view/theme/yuankong/javascript/location/location.js');
 			$url = '';
 			
 			if (isset($this->request->get['path'])) {
@@ -231,7 +233,7 @@ class ControllerProductProduct extends Controller {
 			$this->document->setDescription($product_info['meta_description']);
 			$this->document->setKeywords($product_info['meta_keyword']);
 			$this->document->addLink($this->url->link('product/product', 'product_id=' . $this->request->get['product_id']), 'canonical');
-			
+
 			$this->data['heading_title'] = $product_info['name'];
 			
 			$this->data['text_select'] = $this->language->get('text_select');

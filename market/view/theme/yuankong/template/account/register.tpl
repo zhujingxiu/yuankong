@@ -1,304 +1,232 @@
-<?php require( DIR_TEMPLATE.$this->config->get('config_template')."/template/common/config.tpl" ); ?>
-<?php echo $header; ?>
+<?php 
+	$themeConfig = $this->config->get( 'themecontrol' );
+	$themeName =  $this->config->get('config_template');
+	require_once( DIR_TEMPLATE.$this->config->get('config_template')."/template/libs/module.php" );
+	$helper = ThemeControlHelper::getInstance( $this->registry, $themeName );
+?>
+<!DOCTYPE html>
+<html dir="<?php echo $direction; ?>" lang="<?php echo $lang; ?>">
+<head> 
+<meta name="viewport" content="width=device-width">
+<meta http-equiv="X-UA-Compatible"content="IE=9; IE=8; IE=7; IE=EDGE">
+<meta charset="UTF-8" />
+<title><?php echo $title; ?></title>
+<base href="<?php echo $base; ?>" />
+<?php if ($description) { ?>
+<meta name="description" content="<?php echo $description; ?>" />
+<?php } ?>
+<?php if ($keywords) { ?>
+<meta name="keywords" content="<?php echo $keywords; ?>" />
+<?php } ?>
+<?php if ($icon) { ?>
+<link href="<?php echo $icon; ?>" rel="icon" />
+<?php } ?>
+<link rel="stylesheet" type="text/css" href="market/view/theme/yuankong/stylesheet/yk_basic.css" />
+
+<script type="text/javascript" src="market/view/theme/yuankong/javascript/lib/jquery-1.9.0.min.js"></script>
+<script type="text/javascript" src="market/view/theme/yuankong/javascript/common.js"></script>
+<!--[if lt IE 9]>
+<script src="market/view/javascript/html5.js"></script>
+<![endif]-->
+
+<!--[if IE ]>
+<script type="text/javascript" src="market/view/theme/yuankong/javascript/lib/jquery.placeholder.js"></script>
+<script type="text/javascript">
+$(function(){ $('input, textarea').placeholder(); });
+</script>
+<style type="text/css">
+	.placeholder{color:#999999;}
+</style>
+<![endif]-->
+<script type="text/javascript" src="market/view/theme/yuankong/javascript/index.js"></script>
+
+</head>
+<body class="b_fa">
+<div class="header f_s">
+	<div class="w">
+
+		<div class="l">
+			<?php if( isset($themeConfig['topleft_customhtml'][$this->config->get('config_language_id')]) )  { 
+				echo html_entity_decode($themeConfig['topleft_customhtml'][$this->config->get('config_language_id')], ENT_QUOTES, 'UTF-8'); 
+			} ?>
+		</div>
+		<div class="r">
+			<ul class="head-ul">
+				<li>
+					<?php if (!$logged) { ?>
+					<a class="plr" href="<?php echo $login ?>"><?php echo $text_login; ?></a>
+					|
+					<a class="plr" href="<?php echo $register ?>"><?php echo $text_register; ?></a>
+					<?php } else { ?>
+					<?php echo $text_logged; ?>
+					<?php } ?>
+				</li>
+				<li class="my-ezhan rel">
+					<div class="hd">
+						<a href="<?php echo $account; ?>"><?php echo $text_account; ?></a>
+						<em class="icon2 h-down"></em>
+					</div>
+					<div class="bd">
+						<a href="<?php echo $order ?>"><?php echo $text_order ?></a>
+						<a href="<?php echo $profile ?>"><?php echo $text_profile ?></a>
+						<a href="<?php echo $message ?>"><?php echo $text_message ?></a>
+					</div>
+				</li>
+				<li>|</li>
+				<li class="my-ezhan rel">
+					<div class="hd">
+						<a href="<?php echo $affiliate; ?>"><?php echo $text_affiliate; ?></a>
+						<em class="icon2 h-down"></em>
+					</div>
+					<div class="bd">
+						<a href="<?php echo $upload ?>"><?php echo $text_upload ?></a>
+						<a href="<?php echo $perfact ?>"><?php echo $text_perfact ?></a>
+					</div>
+				</li>
+				<li>|</li>
+				<li class="plr"><a href="<?php echo $help ?>"><?php echo $text_help ?></a></li>
+				<li>|</li>
+				<li class="pl10 cff"><?php echo $text_hotline ?></li>
+				<?php if(false){?>
+				<li class="top-links">
+				<a href="<?php echo $wishlist; ?>" id="wishlist-total"><?php echo $text_wishlist; ?></a>
+				
+				<a href="<?php echo $shopping_cart; ?>"><?php echo $text_shopping_cart; ?></a>
+				<!--a href="<?php //echo $checkout; ?>"><?php //echo $text_checkout; ?></a-->
+				<?php //echo $currency; ?>
+				<?php //echo $language; ?>					
+				<?php } ?>					
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<?php if( isset($themeConfig['custom_top_module']) )  { 
+	echo html_entity_decode($themeConfig['custom_top_module'], ENT_QUOTES, 'UTF-8'); 
+}?>
+
 <?php if ($error_warning) { ?>
 <div class="warning"><?php echo $error_warning; ?></div>
 <?php } ?>
-<?php require( DIR_TEMPLATE.$this->config->get('config_template')."/template/common/breadcrumb.tpl" ); ?>
-<div>
-<?php if( $SPAN[0] ): ?>
-	<div class="span<?php echo $SPAN[0];?>">
-		<?php echo $column_left; ?>
+<section id="columns">
+<div class="login-logo register-w">
+    <a class="pr10" href="<?php echo $home; ?>">
+    	<img src="<?php echo $logo; ?>" title="<?php echo $name; ?>" alt="<?php echo $name; ?>" />
+    </a>
+    <span class="pl20 logospan"><?php echo $heading_title ?></span>
+
+	<div class="fix">
+        <ul class="l regis-tab">
+            <li class="regis-li tabon">个人用户</li>
+            <li class="regis-li">企业用户</li>
+        </ul>
+        <span class="r"></span>
+    </div>
+
+	<div class="regis-box fix">
+	  	<div class="r">
+            <p class="f_m c46">手机微信扫描二维码，关注e站</p>
+            <p><img src="asset/image/data/yuankong/ewm2.jpg" alt=""/></p>
+        </div>
+	  	<form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
+			<div class="regis">
+			  	<table class="registable">
+					<tr>
+					  <td class="tr" width="90"><em class="c_r">*</em> <?php echo $entry_telephone; ?></td>
+					  <td><input type="text" name="telephone" value="<?php echo $telephone; ?>" class="regis-text"/>
+						<?php if ($error_telephone) { ?>
+						<span class="error"><?php echo $error_telephone; ?></span>
+						<?php } ?></td>
+					</tr>
+					<tr>
+					  <td class="tr" width="90"><em class="c_r">*</em> <?php echo $entry_password; ?></td>
+					  <td><input type="password" name="password" value="<?php echo $password; ?>" class="regis-text"/>
+						<?php if ($error_password) { ?>
+						<span class="error"><?php echo $error_password; ?></span>
+						<?php } ?></td>
+					</tr>
+					<tr>
+					  <td class="tr" width="90"><em class="c_r">*</em> <?php echo $entry_confirm; ?></td>
+					  <td><input type="password" name="confirm" value="<?php echo $confirm; ?>" class="regis-text"/>
+						<?php if ($error_confirm) { ?>
+						<span class="error"><?php echo $error_confirm; ?></span>
+						<?php } ?></td>
+					</tr>
+					<tr>
+		                <td class="tr"><em class="c_r">*</em> 短信验证码:</td>
+		                <td><input type="password" class="regis-text w100" value=""  /><a href="javascript:viod(0)" class="hq-yzm">获取验证码</a> </td>
+		            </tr>
+		            <tr>
+		                <td class="tr"><em class="c_r">*</em> 验证码:</td>
+		                <td><input type="password" class="regis-text w100" value=""  /><span class="pl10"><img src="imgs/adimg/yzm.jpg" /><a href="#" class="pl10 c_g">换一张</a></span></td>
+		            </tr>
+		            <tr>
+		                <td>&nbsp;</td>
+		                <td><input type="checkbox" name="c" checked="checked" /><?php echo $text_agree; ?> </td>
+		            </tr>
+		            <tr>
+		                <td>&nbsp;</td>
+		                <td><p class="w210"><input type="submit" class="gc-tab-sub" value="<?php echo $button_register; ?>" /></p></td>
+		            </tr>
+			  	</table>
+			</div>
+			<div class="regis" style="display: none;">
+	            <table class="registable">
+	            	<tr>
+	                    <td class="tr" width="90">注册邮箱:</td>
+	                    <td><input type="text" class="regis-text" value="" placeholder="填写企业邮箱" /></td>
+	                </tr>
+	                <tr>
+	                    <td class="tr">设置密码:</td>
+	                    <td><input type="password" class="regis-text" value=""  /></td>
+	                </tr>
+	                <tr>
+	                    <td class="tr">确认密码:</td>
+	                    <td><input type="password" class="regis-text" value=""  /></td>
+	                </tr>
+	                <tr>
+	                    <td class="tr">单位名称:</td>
+	                    <td><input type="text" class="regis-text" value="" placeholder="请填写营业执照上的单位名称" /></td>
+	                </tr>
+	                <tr>
+	                    <td class="tr">公司项目:</td>
+	                    <td><select class="regis-text"><option>设计公司</option><option>工程公司</option><option>检测公司</option><option>维保公司</option></select></td>
+	                </tr>
+	                <tr>
+	                    <td class="tr">单位地址:</td>
+	                    <td><input type="text" class="regis-text" value=""  /></td>
+	                </tr>
+	                <tr>
+	                    <td class="tr">联系人姓名:</td>
+	                    <td><input type="text" class="regis-text" value=""  /></td>
+	                </tr>
+	                <tr>
+	                    <td class="tr">手机号码:</td>
+	                    <td><input type="text" class="regis-text" value=""  /></td>
+	                </tr>
+	                <tr>
+	                    <td class="tr">短信验证码:</td>
+	                    <td><input type="password" class="regis-text w100" value=""  /><a href="javascript:viod(0)" class="hq-yzm">获取验证码</a> </td>
+	                </tr>
+	                <tr>
+	                    <td class="tr"><em class="c_r">*</em> 验证码:</td>
+	                    <td><input type="password" class="regis-text w100" value=""  /><span class="pl10"><img src="imgs/adimg/yzm.jpg" /><a href="#" class="pl10 c_g">换一张</a></span></td>
+	                </tr>
+	                <tr>
+		                <td>&nbsp;</td>
+		                <td><input type="checkbox" name="c" checked="checked" /><?php echo $text_agree; ?> </td>
+		            </tr>
+	                <tr>
+	                    <td>&nbsp;</td>
+	                    <td><p class="w210"><input type="submit" class="gc-tab-sub" value="<?php echo $button_register; ?>" /></p></td>
+	                </tr>
+	            </table>
+	        </div>
+	  	</form>
 	</div>
-<?php endif; ?> 
-<div class="span<?php echo $SPAN[1];?>">
-
-<div id="content" class="page"><?php echo $content_top; ?>
-
-	  <h1 class="page-title"><?php echo $heading_title; ?></h1>
-	  <div class="page-content">
-	  <p><?php echo $text_account_already; ?></p>
-	  <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
-		<h2><?php echo $text_your_details; ?></h2>
-		<div class="content">
-		  <table class="form">
-			<tr>
-			  <td><span class="required">*</span> <?php echo $entry_firstname; ?></td>
-			  <td><input type="text" name="firstname" value="<?php echo $firstname; ?>" />
-				<?php if ($error_firstname) { ?>
-				<span class="error"><?php echo $error_firstname; ?></span>
-				<?php } ?></td>
-			</tr>
-			<tr>
-			  <td><span class="required">*</span> <?php echo $entry_lastname; ?></td>
-			  <td><input type="text" name="lastname" value="<?php echo $lastname; ?>" />
-				<?php if ($error_lastname) { ?>
-				<span class="error"><?php echo $error_lastname; ?></span>
-				<?php } ?></td>
-			</tr>
-			<tr>
-			  <td><span class="required">*</span> <?php echo $entry_email; ?></td>
-			  <td><input type="text" name="email" value="<?php echo $email; ?>" />
-				<?php if ($error_email) { ?>
-				<span class="error"><?php echo $error_email; ?></span>
-				<?php } ?></td>
-			</tr>
-			<tr>
-			  <td><span class="required">*</span> <?php echo $entry_telephone; ?></td>
-			  <td><input type="text" name="telephone" value="<?php echo $telephone; ?>" />
-				<?php if ($error_telephone) { ?>
-				<span class="error"><?php echo $error_telephone; ?></span>
-				<?php } ?></td>
-			</tr>
-			<tr>
-			  <td><?php echo $entry_fax; ?></td>
-			  <td><input type="text" name="fax" value="<?php echo $fax; ?>" /></td>
-			</tr>
-		  </table>
-		</div>
-		<h2><?php echo $text_your_address; ?></h2>
-		<div class="content">
-		  <table class="form">
-			<tr>
-			  <td><?php echo $entry_company; ?></td>
-			  <td><input type="text" name="company" value="<?php echo $company; ?>" /></td>
-			</tr>        
-			<tr style="display: <?php echo (count($customer_groups) > 1 ? 'table-row' : 'none'); ?>;">
-			  <td><?php echo $entry_customer_group; ?></td>
-			  <td><?php foreach ($customer_groups as $customer_group) { ?>
-				<?php if ($customer_group['customer_group_id'] == $customer_group_id) { ?>
-				<input type="radio" name="customer_group_id" value="<?php echo $customer_group['customer_group_id']; ?>" id="customer_group_id<?php echo $customer_group['customer_group_id']; ?>" checked="checked" />
-				<label for="customer_group_id<?php echo $customer_group['customer_group_id']; ?>"><?php echo $customer_group['name']; ?></label>
-				<br />
-				<?php } else { ?>
-				<input type="radio" name="customer_group_id" value="<?php echo $customer_group['customer_group_id']; ?>" id="customer_group_id<?php echo $customer_group['customer_group_id']; ?>" />
-				<label for="customer_group_id<?php echo $customer_group['customer_group_id']; ?>"><?php echo $customer_group['name']; ?></label>
-				<br />
-				<?php } ?>
-				<?php } ?></td>
-			</tr>      
-			<tr id="company-id-display">
-			  <td><span id="company-id-required" class="required">*</span> <?php echo $entry_company_id; ?></td>
-			  <td><input type="text" name="company_id" value="<?php echo $company_id; ?>" />
-				<?php if ($error_company_id) { ?>
-				<span class="error"><?php echo $error_company_id; ?></span>
-				<?php } ?></td>
-			</tr>
-			<tr id="tax-id-display">
-			  <td><span id="tax-id-required" class="required">*</span> <?php echo $entry_tax_id; ?></td>
-			  <td><input type="text" name="tax_id" value="<?php echo $tax_id; ?>" />
-				<?php if ($error_tax_id) { ?>
-				<span class="error"><?php echo $error_tax_id; ?></span>
-				<?php } ?></td>
-			</tr>
-			<tr>
-			  <td><span class="required">*</span> <?php echo $entry_address_1; ?></td>
-			  <td><input type="text" name="address_1" value="<?php echo $address_1; ?>" />
-				<?php if ($error_address_1) { ?>
-				<span class="error"><?php echo $error_address_1; ?></span>
-				<?php } ?></td>
-			</tr>
-			<tr>
-			  <td><?php echo $entry_address_2; ?></td>
-			  <td><input type="text" name="address_2" value="<?php echo $address_2; ?>" /></td>
-			</tr>
-			<tr>
-			  <td><span class="required">*</span> <?php echo $entry_city; ?></td>
-			  <td><input type="text" name="city" value="<?php echo $city; ?>" />
-				<?php if ($error_city) { ?>
-				<span class="error"><?php echo $error_city; ?></span>
-				<?php } ?></td>
-			</tr>
-			<tr>
-			  <td><span id="postcode-required" class="required">*</span> <?php echo $entry_postcode; ?></td>
-			  <td><input type="text" name="postcode" value="<?php echo $postcode; ?>" />
-				<?php if ($error_postcode) { ?>
-				<span class="error"><?php echo $error_postcode; ?></span>
-				<?php } ?></td>
-			</tr>
-			<tr>
-			  <td><span class="required">*</span> <?php echo $entry_country; ?></td>
-			  <td><select name="country_id">
-				  <option value=""><?php echo $text_select; ?></option>
-				  <?php foreach ($countries as $country) { ?>
-				  <?php if ($country['country_id'] == $country_id) { ?>
-				  <option value="<?php echo $country['country_id']; ?>" selected="selected"><?php echo $country['name']; ?></option>
-				  <?php } else { ?>
-				  <option value="<?php echo $country['country_id']; ?>"><?php echo $country['name']; ?></option>
-				  <?php } ?>
-				  <?php } ?>
-				</select>
-				<?php if ($error_country) { ?>
-				<span class="error"><?php echo $error_country; ?></span>
-				<?php } ?></td>
-			</tr>
-			<tr>
-			  <td><span class="required">*</span> <?php echo $entry_zone; ?></td>
-			  <td><select name="zone_id">
-				</select>
-				<?php if ($error_zone) { ?>
-				<span class="error"><?php echo $error_zone; ?></span>
-				<?php } ?></td>
-			</tr>
-		  </table>
-		</div>
-		<h2><?php echo $text_your_password; ?></h2>
-		<div class="content">
-		  <table class="form">
-			<tr>
-			  <td><span class="required">*</span> <?php echo $entry_password; ?></td>
-			  <td><input type="password" name="password" value="<?php echo $password; ?>" />
-				<?php if ($error_password) { ?>
-				<span class="error"><?php echo $error_password; ?></span>
-				<?php } ?></td>
-			</tr>
-			<tr>
-			  <td><span class="required">*</span> <?php echo $entry_confirm; ?></td>
-			  <td><input type="password" name="confirm" value="<?php echo $confirm; ?>" />
-				<?php if ($error_confirm) { ?>
-				<span class="error"><?php echo $error_confirm; ?></span>
-				<?php } ?></td>
-			</tr>
-		  </table>
-		</div>
-		<h2><?php echo $text_newsletter; ?></h2>
-		<div class="content">
-		  <table class="form">
-			<tr>
-			  <td><?php echo $entry_newsletter; ?></td>
-			  <td><?php if ($newsletter) { ?>
-				<input type="radio" name="newsletter" value="1" checked="checked" />
-				<?php echo $text_yes; ?>
-				<input type="radio" name="newsletter" value="0" />
-				<?php echo $text_no; ?>
-				<?php } else { ?>
-				<input type="radio" name="newsletter" value="1" />
-				<?php echo $text_yes; ?>
-				<input type="radio" name="newsletter" value="0" checked="checked" />
-				<?php echo $text_no; ?>
-				<?php } ?></td>
-			</tr>
-		  </table>
-		</div>
-		<?php if ($text_agree) { ?>
-		<div class="buttons">
-		  <div class="right"><?php echo $text_agree; ?>
-			<?php if ($agree) { ?>
-			<input type="checkbox" name="agree" value="1" checked="checked" />
-			<?php } else { ?>
-			<input type="checkbox" name="agree" value="1" />
-			<?php } ?>
-			<input type="submit" value="<?php echo $button_continue; ?>" class="button" />
-		  </div>
-		</div>
-		<?php } else { ?>
-		<div class="buttons">
-		  <div class="right">
-			<input type="submit" value="<?php echo $button_continue; ?>" class="button" />
-		  </div>
-		</div>
-		<?php } ?>
-	  </form>
-	  </div>
-	  <?php echo $content_bottom; ?></div>
-	<script type="text/javascript"><!--
-	$('input[name=\'customer_group_id\']:checked').live('change', function() {
-		var customer_group = [];
-		
-	<?php foreach ($customer_groups as $customer_group) { ?>
-		customer_group[<?php echo $customer_group['customer_group_id']; ?>] = [];
-		customer_group[<?php echo $customer_group['customer_group_id']; ?>]['company_id_display'] = '<?php echo $customer_group['company_id_display']; ?>';
-		customer_group[<?php echo $customer_group['customer_group_id']; ?>]['company_id_required'] = '<?php echo $customer_group['company_id_required']; ?>';
-		customer_group[<?php echo $customer_group['customer_group_id']; ?>]['tax_id_display'] = '<?php echo $customer_group['tax_id_display']; ?>';
-		customer_group[<?php echo $customer_group['customer_group_id']; ?>]['tax_id_required'] = '<?php echo $customer_group['tax_id_required']; ?>';
-	<?php } ?>	
-
-		if (customer_group[this.value]) {
-			if (customer_group[this.value]['company_id_display'] == '1') {
-				$('#company-id-display').show();
-			} else {
-				$('#company-id-display').hide();
-			}
-			
-			if (customer_group[this.value]['company_id_required'] == '1') {
-				$('#company-id-required').show();
-			} else {
-				$('#company-id-required').hide();
-			}
-			
-			if (customer_group[this.value]['tax_id_display'] == '1') {
-				$('#tax-id-display').show();
-			} else {
-				$('#tax-id-display').hide();
-			}
-			
-			if (customer_group[this.value]['tax_id_required'] == '1') {
-				$('#tax-id-required').show();
-			} else {
-				$('#tax-id-required').hide();
-			}	
-		}
-	});
-
-	$('input[name=\'customer_group_id\']:checked').trigger('change');
-	//--></script> 
-	<script type="text/javascript"><!--
-	$('select[name=\'country_id\']').bind('change', function() {
-		$.ajax({
-			url: 'index.php?route=account/register/country&country_id=' + this.value,
-			dataType: 'json',
-			beforeSend: function() {
-				$('select[name=\'country_id\']').after('<span class="wait">&nbsp;<img src="market/view/theme/default/image/loading.gif" alt="" /></span>');
-			},
-			complete: function() {
-				$('.wait').remove();
-			},			
-			success: function(json) {
-				if (json['postcode_required'] == '1') {
-					$('#postcode-required').show();
-				} else {
-					$('#postcode-required').hide();
-				}
-				
-				html = '<option value=""><?php echo $text_select; ?></option>';
-				
-				if (json['zone'] != '') {
-					for (i = 0; i < json['zone'].length; i++) {
-						html += '<option value="' + json['zone'][i]['zone_id'] + '"';
-						
-						if (json['zone'][i]['zone_id'] == '<?php echo $zone_id; ?>') {
-							html += ' selected="selected"';
-						}
-		
-						html += '>' + json['zone'][i]['name'] + '</option>';
-					}
-				} else {
-					html += '<option value="0" selected="selected"><?php echo $text_none; ?></option>';
-				}
-				
-				$('select[name=\'zone_id\']').html(html);
-			},
-			error: function(xhr, ajaxOptions, thrownError) {
-				alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-			}
-		});
-	});
-
-	$('select[name=\'country_id\']').trigger('change');
-	//--></script> 
-	<script type="text/javascript"><!--
-	$(document).ready(function() {
-		$('.colorbox').colorbox({
-			width: 640,
-			height: 480
-		});
-	});
-	//--></script> 
 </div>	
 
-		<?php if( $SPAN[2] ): ?>
-		<div class="span<?php echo $SPAN[2];?>">	
-			<?php echo $column_right; ?>
-		</div>
-		<?php endif; ?>
-	</div>
+<script type="text/javascript">
+    o.moushov.init(".regis-tab li",".regis-box .regis");
+</script>
 <?php echo $footer; ?>

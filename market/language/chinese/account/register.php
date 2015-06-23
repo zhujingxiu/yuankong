@@ -2,7 +2,7 @@
 
 // Heading 
 $_['heading_title']        = '用户注册';
-
+$_['title_register']       = '注册_商户注册_消防网上商城【消防E站官网】';
 // Text
 $_['text_account']         = '我的账户';
 $_['text_register']        = '用户注册';
@@ -11,7 +11,7 @@ $_['text_your_details']    = '您的个人资料';
 $_['text_your_address']    = '您的详细地址';
 $_['text_newsletter']      = '选择订阅方式';
 $_['text_your_password']   = '您的账户密码';
-$_['text_agree']           = '我已经阅读并同意 <a class="colorbox" href="%s" alt="%s"><b>%s</b></a>条款';
+$_['text_agree']           = '<em class="pl5">我已经阅读并同意</em> <a class="colorbox c_r" href="%s" alt="%s"><b>%s</b></a>条款';
 
 // Entry
 $_['entry_firstname']      = '您的名字：';
@@ -34,6 +34,8 @@ $_['entry_newsletter']     = '订阅信息：';
 $_['entry_password']       = '输入密码：';
 $_['entry_confirm']        = '确认密码：';
 
+$_['button_register']      = '立即注册';
+
 // Error
 $_['error_exists']         = '警告： 该邮箱地址已被注册、请换一个电子邮箱！';
 $_['error_firstname']      = '名字必须在1到32字符之间！';
@@ -51,4 +53,14 @@ $_['error_postcode']       = '邮编必须在2到10字符之间！';
 $_['error_country']        = '请选择一个国家！';
 $_['error_zone']           = '请选择地区/省份！';
 $_['error_agree']          = '警告： 您未同意条款 %s！';
-?>
+
+$_['text_login'] 			= '登录';
+$_['text_register'] 		= '注册';
+$_['text_help']  			= '帮助中心';
+$_['text_order'] 			= '我的订单';
+$_['text_profile'] 			= '我的信息';
+$_['text_message'] 			= '我的消息';
+$_['text_affiliate'] 		= '商户中心';
+$_['text_upload'] 			= '上传信息';
+$_['text_perfact'] 			= '完善资料';
+$_['text_hotline'] 			= '咨询热线:400-883-4119';

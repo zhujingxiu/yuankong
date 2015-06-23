@@ -1,60 +1,77 @@
-<?php require( DIR_TEMPLATE.$this->config->get('config_template')."/template/common/config.tpl" ); ?>
-<?php echo $header; ?>
-<?php require( DIR_TEMPLATE.$this->config->get('config_template')."/template/common/breadcrumb.tpl" ); ?>
-<?php if ($success) { ?>
-<div class="success"><?php echo $success; ?></div>
+<!DOCTYPE html>
+<html dir="<?php echo $direction; ?>" lang="<?php echo $lang; ?>">
+<head> 
+<meta name="viewport" content="width=device-width">
+<meta http-equiv="X-UA-Compatible"content="IE=9; IE=8; IE=7; IE=EDGE">
+<meta charset="UTF-8" />
+<title><?php echo $title; ?></title>
+<base href="<?php echo $base; ?>" />
+<?php if ($description) { ?>
+<meta name="description" content="<?php echo $description; ?>" />
 <?php } ?>
-<?php if ($error_warning) { ?>
-<div class="warning"><?php echo $error_warning; ?></div>
+<?php if ($keywords) { ?>
+<meta name="keywords" content="<?php echo $keywords; ?>" />
 <?php } ?>
-<div>
-<?php if( $SPAN[0] ): ?>
-	<div class="span<?php echo $SPAN[0];?>">
-		<?php echo $column_left; ?>
-	</div>
-<?php endif; ?> 
-<div class="span<?php echo $SPAN[1];?>">
+<?php if ($icon) { ?>
+<link href="<?php echo $icon; ?>" rel="icon" />
+<?php } ?>
+<link rel="stylesheet" type="text/css" href="market/view/theme/yuankong/stylesheet/yk_basic.css" />
+<script type="text/javascript" src="market/view/theme/yuankong/javascript/lib/jquery-1.9.0.min.js"></script>
+<script type="text/javascript" src="market/view/theme/yuankong/javascript/common.js"></script>
+<!--[if lt IE 9]>
+<script src="market/view/javascript/html5.js"></script>
+<![endif]-->
 
-<div id="content" class="login page"><?php echo $content_top; ?>
+<!--[if IE ]>
+<script type="text/javascript" src="market/view/theme/yuankong/javascript/lib/jquery.placeholder.js"></script>
+<script type="text/javascript">
+$(function(){ $('input, textarea').placeholder(); });
+</script>
+<style type="text/css">
+	.placeholder{color:#999999;}
+</style>
+<![endif]-->
+<script type="text/javascript" src="market/view/theme/yuankong/javascript/index.js"></script>
+</head>
+<body>
 
-  <h2 class="page-title" ><?php echo $heading_title; ?></h2>
-  <div class="login-content page-content">
-		<div class="row-fluid">
-			<div class="span6">
-				<div class="inner">
-				  <h2><?php echo $text_new_customer; ?></h2>
-				  <div class="content">
-					<p><b><?php echo $text_register; ?></b></p>
-					<p><?php echo $text_register_account; ?></p>
-					<a href="<?php echo $register; ?>" class="button"><?php echo $button_continue; ?></a></div>
-				</div>
+<div class="login-logo w">
+    <a class="pr10" href="<?php echo $home; ?>">
+    	<img src="<?php echo $logo; ?>" title="<?php echo $name; ?>" alt="<?php echo $name; ?>" />
+    </a>
+    <span class="pl20 logospan"><?php echo $heading_title ?></span>
+</div>
+<section id="columns">
+<div class="w">
+  	<div class="loginbox fix">
+  		<div class="loginbox-l l"><img src="asset/image/loginpic.jpg" /></div>
+		<div class="loginbox-r r">
+			<div class="login-b-top">
+			  <a class="l-zhuce" href="<?php echo $register ?>"><?php echo $text_register; ?></a>
+			  <span class="f_xl c2"><?php echo $text_customer; ?></span>
 			</div>
-			<div class="span6">
-				<div class="inner">
-				  <h2><?php echo $text_returning_customer; ?></h2>
-				  <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
-					<div class="content">
-					  <p><?php echo $text_i_am_returning_customer; ?></p>
-					  <b><?php echo $entry_email; ?></b><br />
-					  <input type="text" name="email" value="<?php echo $email; ?>" />
-					  <br />
-					  <br />
-					  <b><?php echo $entry_password; ?></b><br />
-					  <input type="password" name="password" value="<?php echo $password; ?>" />
-					  <br />
-					  <a href="<?php echo $forgotten; ?>"><?php echo $text_forgotten; ?></a><br />
-					  <br />
-					  <input type="submit" value="<?php echo $button_login; ?>" class="button" />
-					  <?php if ($redirect) { ?>
-					  <input type="hidden" name="redirect" value="<?php echo $redirect; ?>" />
-					  <?php } ?>
-					</div>
-				</form>
-				</div>
-			</div>	
-		</div>	
-  </div>
-  <?php echo $content_bottom; ?></div>
+			<form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
+				<div class="logintext">
+	                <i class="icon2 person"></i><input type="text" name="email" value="<?php echo $email; ?>" class="login-t" placeholder="<?php echo $entry_email; ?>"/>
+	            </div>
+	            <div class="logintext">
+	                <i class="icon2 passwd"></i><input type="password" name="password" value="<?php echo $password; ?>" class="login-t" placeholder="<?php echo $entry_password; ?>"/>
+	            </div>
+	            <div class="loginb-yz">
+	                <a href="<?php echo $forgotten; ?>" class="r"><?php echo $text_forgotten; ?></a>
+	                <input type="checkbox" name="c" /><em class="pl5">自动登录</em>
+	            </div>
+	            <div class="mt15">
+	                <input type="submit" class="gc-tab-sub" value="<?php echo $button_login; ?>" />
+	            </div>
+	            <?php if ($redirect) { ?>
+				  <input type="hidden" name="redirect" value="<?php echo $redirect; ?>" />
+				<?php } ?>
+			</form>
+			</div>
+		</div>
+	</div>
+</div> 
 <script type="text/javascript"><!--
 $('#login input').keydown(function(e) {
 	if (e.keyCode == 13) {
@@ -62,11 +79,4 @@ $('#login input').keydown(function(e) {
 	}
 });
 //--></script> 
-</div> 
-<?php if( $SPAN[2] ): ?>
-<div class="span<?php echo $SPAN[2];?>">	
-	<?php echo $column_right; ?>
-</div>
-<?php endif; ?>
-</div>
 <?php echo $footer; ?>

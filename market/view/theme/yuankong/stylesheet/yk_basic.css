@@ -309,3 +309,35 @@
 .next-page {display: inline-block; height: 28px; padding: 0 15px; border: 1px solid #e4e4e4; margin-left: 5px;}
 .next-page i { font-family:"宋体"; font-size: 14px; padding-left: 5px;}
 .page .pon { background: #c30d23; border: 1px solid #c30d23; color: #fff;}
+
+/* 百科新闻 */
+.bkbox { padding: 20px 45px 15px; border: 1px solid #e4e4e4;}
+.bkbox-title { padding-bottom: 5px; line-height: 35px; border-bottom: 1px solid #eee;}
+.bkbox-title h2 { color: #333; text-align: center;}
+.newsdetail { line-height: 28px; font-size: 15px;}
+.newsdetail p { padding-bottom: 10px; color: #333;}
+
+/* 登录 */
+.login-logo { padding-top: 30px;}
+.logospan { font-size: 20px; color: #333; line-height: 40px; vertical-align: middle;}
+.loginbox { position: relative; margin: 70px 150px 0; min-height: 500px; *height: 500px;}
+.loginbox-r { border: 2px solid #dedede; border-top-color:#c30d23; width: 256px; padding: 10px 25px 20px; }
+.login-b-top { line-height: 30px; font-size: 14px; }
+.l-zhuce { float: right; color: #c30d23;}
+.logintext { background: #fff; height: 35px; line-height: 35px; border: 1px solid #e4e4e4; width: 254px; margin-top: 20px;}
+.logintext .icon2 { display: inline-block; vertical-align: middle; margin: 8px 0 0 8px;}
+.person { background-position: -123px -88px; width: 14px; height: 18px;}
+.login-t { height: 35px; *line-height: 35px; line-height: 34px\9; height: 34px\9; width: 222px; padding-left: 10px; vertical-align: top; margin-bottom: 1px;}
+.passwd {background-position: -140px -88px; width: 14px; height:20px; }
+.loginb-yz { margin-top: 10px; line-height: 30px; font-size: 12px;}
+.register-w { width: 990px; margin-left: auto; margin-right: auto;}
+.regis-tab { padding-left: 100px; height: 35px; margin-top: 40px;}
+.regis-li { border: 1px solid #dedede; background: #fff; border-bottom: none; line-height: 34px; width: 120px; text-align: center; float: left; margin-left: 15px; font-size: 14px;}
+.regis-tab .tabon { border-top: 2px solid #c30d23; position: relative; margin-bottom: -1px; color: #c30d23; font-weight: bold;}
+.regis-box { background: #fff; border: 1px solid #dedede; padding: 30px 40px;}
+.regis  { width: 500px; min-height:400px;}
+.registable { width: 100%; font-size: 14px;}
+.registable td { padding:10px 5px 12px; line-height: 34px; }
+.regis-text { height:32px; width:260px; border: 1px solid #e4e4e4; padding: 0 5px; *line-height:32px;line-height:32px\9;}
+.w100 { width: 100px;}
+.hq-yzm { background: #f2f2f2; border: 1px solid #e3e3e3; height: 32px; width: 100px; text-align: center; margin-left: 10px; display: inline-block; vertical-align: middle; font-size: 12px; color: #222;}

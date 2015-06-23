@@ -3,8 +3,37 @@ class ControllerAccountLogin extends Controller {
 	private $error = array();
 	
 	public function index() {
-		$this->load->model('account/customer');
 		
+		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
+			$server = $this->config->get('config_ssl');
+		} else {
+			$server = $this->config->get('config_url');
+		}
+
+		$this->data['base'] = $server;
+		$this->data['description'] = $this->document->getDescription();
+		$this->data['keywords'] = $this->document->getKeywords();
+		$this->data['links'] = $this->document->getLinks();	 
+		$this->data['styles'] = $this->document->getStyles();
+		$this->data['scripts'] = $this->document->getScripts();
+		$this->data['lang'] = $this->language->get('code');
+		$this->data['direction'] = $this->language->get('direction');
+		$this->data['google_analytics'] = html_entity_decode($this->config->get('config_google_analytics'), ENT_QUOTES, 'UTF-8');
+		$this->data['name'] = $this->config->get('config_name');
+		
+		if ($this->config->get('config_icon') && file_exists(DIR_IMAGE . $this->config->get('config_icon'))) {
+			$this->data['icon'] = $server . TPL_IMG . $this->config->get('config_icon');
+		} else {
+			$this->data['icon'] = '';
+		}
+		
+		if ($this->config->get('config_logo') && file_exists(DIR_IMAGE . $this->config->get('config_logo'))) {
+			$this->data['logo'] = $server . TPL_IMG . $this->config->get('config_logo');
+		} else {
+			$this->data['logo'] = '';
+		}
+
+		$this->load->model('account/customer');
 		// Login override for admin users
 		if (!empty($this->request->get['token'])) {
 			$this->customer->logout();
@@ -66,7 +95,7 @@ class ControllerAccountLogin extends Controller {
 	
     	$this->language->load('account/login');
 
-    	$this->document->setTitle($this->language->get('heading_title'));
+    	$this->data['title'] = $this->language->get('title_login');
 								
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			unset($this->session->data['guest']);
@@ -126,6 +155,7 @@ class ControllerAccountLogin extends Controller {
     	$this->data['heading_title'] = $this->language->get('heading_title');
 
     	$this->data['text_new_customer'] = $this->language->get('text_new_customer');
+    	$this->data['text_customer'] = $this->language->get('text_customer');
     	$this->data['text_register'] = $this->language->get('text_register');
     	$this->data['text_register_account'] = $this->language->get('text_register_account');
 		$this->data['text_returning_customer'] = $this->language->get('text_returning_customer');
@@ -186,12 +216,7 @@ class ControllerAccountLogin extends Controller {
 		}
 		
 		$this->children = array(
-			'common/column_left',
-			'common/column_right',
-			'common/content_top',
-			'common/content_bottom',
-			'common/footer',
-			'common/header'	
+			'common/footer'
 		);
 						
 		$this->response->setOutput($this->render());
@@ -215,4 +240,3 @@ class ControllerAccountLogin extends Controller {
     	}  	
   	}
 }
-?>

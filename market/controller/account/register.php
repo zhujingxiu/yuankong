@@ -6,13 +6,39 @@ class ControllerAccountRegister extends Controller {
 		if ($this->customer->isLogged()) {
 	  		$this->redirect($this->url->link('account/account', '', 'SSL'));
     	}
+		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
+			$server = $this->config->get('config_ssl');
+		} else {
+			$server = $this->config->get('config_url');
+		}
+
+		$this->data['base'] = $server;
+		$this->data['description'] = $this->document->getDescription();
+		$this->data['keywords'] = $this->document->getKeywords();
+		$this->data['links'] = $this->document->getLinks();	 
+		$this->data['styles'] = $this->document->getStyles();
+		$this->data['scripts'] = $this->document->getScripts();
+		$this->data['lang'] = $this->language->get('code');
+		$this->data['direction'] = $this->language->get('direction');
+		$this->data['google_analytics'] = html_entity_decode($this->config->get('config_google_analytics'), ENT_QUOTES, 'UTF-8');
+		$this->data['name'] = $this->config->get('config_name');
+		
+		if ($this->config->get('config_icon') && file_exists(DIR_IMAGE . $this->config->get('config_icon'))) {
+			$this->data['icon'] = $server . TPL_IMG . $this->config->get('config_icon');
+		} else {
+			$this->data['icon'] = '';
+		}
+		
+		if ($this->config->get('config_logo') && file_exists(DIR_IMAGE . $this->config->get('config_logo'))) {
+			$this->data['logo'] = $server . TPL_IMG . $this->config->get('config_logo');
+		} else {
+			$this->data['logo'] = '';
+		}
 
     	$this->language->load('account/register');
-		
+		$this->data['title'] = $this->language->get('title_register');
 		$this->document->setTitle($this->language->get('heading_title'));
-		$this->document->addScript('market/view/javascript/jquery/colorbox/jquery.colorbox-min.js');
-		$this->document->addStyle('market/view/javascript/jquery/colorbox/colorbox.css');
-					
+				
 		$this->load->model('account/customer');
 		
     	if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
@@ -59,6 +85,34 @@ class ControllerAccountRegister extends Controller {
       	);
 		
     	$this->data['heading_title'] = $this->language->get('heading_title');
+
+    	$this->data['text_home'] = $this->language->get('text_home');
+		$this->data['text_help'] = $this->language->get('text_help');
+		$this->data['text_logged'] = sprintf($this->language->get('text_logged'), $this->url->link('account/account', '', 'SSL'), $this->customer->getFirstName(), $this->url->link('account/logout', '', 'SSL'));
+		$this->data['text_account'] = $this->language->get('text_account');
+    	$this->data['text_login'] = $this->language->get('text_login');
+    	$this->data['text_register'] = $this->language->get('text_register');
+    	$this->data['text_order'] = $this->language->get('text_order');
+    	$this->data['text_profile'] = $this->language->get('text_profile');
+    	$this->data['text_message'] = $this->language->get('text_message');
+    	$this->data['text_affiliate'] = $this->language->get('text_affiliate');
+    	$this->data['text_upload'] = $this->language->get('text_upload');
+    	$this->data['text_perfact'] = $this->language->get('text_perfact');
+    	$this->data['text_hotline'] = $this->language->get('text_hotline');
+
+    	$this->data['home'] = $this->url->link('common/home');
+		$this->data['logged'] = $this->customer->isLogged();
+		$this->data['account'] = $this->url->link('account/account', '', 'SSL');
+		$this->data['checkout'] = $this->url->link('checkout/checkout', '', 'SSL');
+		$this->data['login'] = $this->url->link('account/login', '', 'SSL');
+		$this->data['register'] = $this->url->link('account/register', '', 'SSL');
+		$this->data['order'] = $this->url->link('account/order', '', 'SSL');
+		$this->data['profile'] = $this->url->link('account/edit', '', 'SSL');
+		$this->data['message'] = $this->url->link('account/message', '', 'SSL');
+		$this->data['help'] = $this->url->link('information/help', '', 'SSL');
+		$this->data['affiliate'] = $this->url->link('affiliate/affiliate', '', 'SSL');
+    	$this->data['upload'] = $this->url->link('affiliate/account', '', 'SSL');
+    	$this->data['perfact'] = $this->url->link('affiliate/edit', '', 'SSL');
 		
 		$this->data['text_account_already'] = sprintf($this->language->get('text_account_already'), $this->url->link('account/login', '', 'SSL'));
 		$this->data['text_your_details'] = $this->language->get('text_your_details');
@@ -90,6 +144,7 @@ class ControllerAccountRegister extends Controller {
     	$this->data['entry_confirm'] = $this->language->get('entry_confirm');
 
 		$this->data['button_continue'] = $this->language->get('button_continue');
+		$this->data['button_register'] = $this->language->get('button_register');
     
 		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
@@ -476,4 +531,3 @@ class ControllerAccountRegister extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}	
 }
-?>

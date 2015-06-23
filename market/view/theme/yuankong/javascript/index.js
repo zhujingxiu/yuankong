@@ -68,7 +68,7 @@ o.moushov={
             var index=$(this).index();
             sel.removeClass("tabon");
             $(this).addClass("tabon");
-            $(this).parent().next().children(dom).hide().eq(index).show();
+            $(dom).hide().eq(index).show();
         },function(){
             return false;
         });
