@@ -40,8 +40,8 @@ class ControllerCommonHeader extends Controller {
 		$this->data['text_custom_field'] = $this->language->get('text_custom_field');
 		$this->data['text_sale'] = $this->language->get('text_sale');
 		$this->data['text_design'] = $this->language->get('text_design');
-		$this->data['text_news'] = $this->language->get('text_news');
-		$this->data['text_news_group'] = $this->language->get('text_news_group');
+		$this->data['text_wiki'] = $this->language->get('text_wiki');
+		$this->data['text_wiki_group'] = $this->language->get('text_wiki_group');
 		$this->data['text_download'] = $this->language->get('text_download');
 		$this->data['text_error_log'] = $this->language->get('text_error_log');
 		$this->data['text_extension'] = $this->language->get('text_extension');
@@ -188,8 +188,8 @@ class ControllerCommonHeader extends Controller {
 			$this->data['zone'] = $this->url->link('localisation/zone', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['project'] = $this->url->link('sale/project', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['project_group'] = $this->url->link('sale/project_group', 'token=' . $this->session->data['token'], 'SSL');
-			$this->data['news'] = $this->url->link('extension/news', 'token=' . $this->session->data['token'], 'SSL');
-			$this->data['news_group'] = $this->url->link('extension/news_group', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['wiki'] = $this->url->link('extension/wiki', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['wiki_group'] = $this->url->link('extension/wiki_group', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['link'] = $this->url->link('extension/link', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['case'] = $this->url->link('extension/case', 'token=' . $this->session->data['token'], 'SSL');
 			

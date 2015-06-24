@@ -114,9 +114,9 @@ class ControllerModuleYknews extends Controller {
         
         $this->data['layouts'] = array_merge($this->data['layouts'],$this->model_design_layout->getLayouts());
 
-        $this->load->model('extension/news_group');
+        $this->load->model('extension/wiki_group');
 
-        $this->data['groups'] = $this->model_extension_news_group->getNewsGroups();
+        $this->data['groups'] = $this->model_extension_wiki_group->getWikiGroups();
                
         $this->template = 'module/yknews.tpl';
         $this->children = array(

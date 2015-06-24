@@ -113,4 +113,3 @@ class ControllerInformationSitemap extends Controller {
  		$this->response->setOutput($this->render());		
 	}
 }
-?>

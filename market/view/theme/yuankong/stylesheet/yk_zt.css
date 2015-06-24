@@ -1,5 +1,5 @@
 @charset "utf-8";
-@import "reset.css";
+@import "yk_reset.css";
 .w1000 { width: 1000px; margin-left: auto; margin-right: auto;}
 .zt-bannerbox { background: #003760; padding: 50px 0 0;}
 .zt-gcsq-dj { width: 340px; background: #fff; margin-top:35px; padding:40px 0 20px; box-shadow: 3px 3px 4px #111;-webkit-box-shadow: 3px 3px 4px #111;-moz-box-shadow: 3px 3px 4px #111;}

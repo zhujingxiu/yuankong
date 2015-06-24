@@ -2,9 +2,9 @@
 class ModelModuleYkmodule extends Model {
 
 	public function getNewses($group = 0, $limit = 5) {
-		$sql = "SELECT n.*,ng.name group_name FROM ".DB_PREFIX."news n LEFT JOIN ".DB_PREFIX."news_group ng ON n.group_id = ng.group_id";
+		$sql = "SELECT w.*,wg.name group_name FROM ".DB_PREFIX."wiki w LEFT JOIN ".DB_PREFIX."wiki_group wg ON w.group_id = wg.group_id";
 		if ($group) {
-			$sql .= " WHERE group_id = '".$group."'";
+			$sql .= " WHERE w.group_id = '".$group."'";
 		}
 		
 		if ($limit) {
@@ -12,7 +12,6 @@ class ModelModuleYkmodule extends Model {
 		}else{
 			$sql .= " LIMIT 5";
 		}
-
 		$query = $this->db->query($sql);
 	
 		return $query->rows;
@@ -30,14 +29,14 @@ class ModelModuleYkmodule extends Model {
 		return $query->rows;
 	}
 
-	public function getGroup($group_id=0,$model='news_group'){
+	public function getGroup($group_id=0,$model='wiki_group'){
 		return $this->db->fetch(strtolower($model),array('one'=>true,'condition'=>array('group_id'=>$group_id)));
 
 	}
 
 	public function getWiki($data){
 		if(!empty($data['group_id'])){
-			$sql = "SELECT * FROM ".DB_PREFIX."news WHERE group_id = '".(int)$data['group_id']."'";
+			$sql = "SELECT * FROM ".DB_PREFIX."wiki WHERE group_id = '".(int)$data['group_id']."'";
 		}else{
 			$sql = "SELECT * FROM ".DB_PREFIX."help ";
 		}

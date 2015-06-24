@@ -94,7 +94,7 @@ $(document).ready(function(){
         </ul>
       </li>
       
-      <li id="news"><a href="<?php echo $news ?>" class="top"><?php echo $text_news; ?></a></li>
+      <li id="wiki"><a href="<?php echo $wiki ?>" class="top"><?php echo $text_wiki; ?></a></li>
 
       <li id="customer"><a class="top"><?php echo $text_customer; ?></a>
         <ul>
@@ -189,7 +189,7 @@ $(document).ready(function(){
           </li>
 
           <li><a href="<?php echo $information; ?>"><?php echo $text_information; ?></a></li>
-          <li><a href="<?php echo $news_group; ?>"><?php echo $text_news_group; ?></a></li>
+          <li><a href="<?php echo $wiki_group; ?>"><?php echo $text_wiki_group; ?></a></li>
           <li class="_hide"><a href="<?php echo $help_group; ?>"><?php echo $text_help_group; ?></a></li>
           <li><a href="<?php echo $project_group; ?>"><?php echo $text_project_group; ?></a></li>
           <li><a href="<?php echo $affiliate_group; ?>"><?php echo $text_affiliate_group; ?></a></li>
