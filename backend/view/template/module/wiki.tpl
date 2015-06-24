@@ -21,6 +21,8 @@
               <td class="left"><?php echo $entry_layout; ?></td>
               <td class="left"><?php echo $entry_position; ?></td>
               <td class="left"><?php echo $entry_status; ?></td>
+              <td class="left"><?php echo $entry_title; ?></td>
+              <td class="left"><?php echo $entry_additional_class; ?></td>
               <td class="right"><?php echo $entry_sort_order; ?></td>
               <td></td>
             </tr>
@@ -69,6 +71,8 @@
                   <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
                   <?php } ?>
                 </select></td>
+              <td class="left"><input type="text" name="wiki_module[<?php echo $module_row; ?>][title]" value="<?php echo $module['title']; ?>" /></td>
+              <td class="left"><input type="text" name="wiki_module[<?php echo $module_row; ?>][additional_class]" value="<?php echo $module['additional_class']; ?>" /></td>
               <td class="right"><input type="text" name="wiki_module[<?php echo $module_row; ?>][sort_order]" value="<?php echo $module['sort_order']; ?>" size="3" /></td>
               <td class="left"><a onclick="$('#module-row<?php echo $module_row; ?>').remove();" class="button"><?php echo $button_remove; ?></a></td>
             </tr>
@@ -77,7 +81,7 @@
           <?php } ?>
           <tfoot>
             <tr>
-              <td colspan="4"></td>
+              <td colspan="6"></td>
               <td class="left"><a onclick="addModule();" class="button"><?php echo $button_add_module; ?></a></td>
             </tr>
           </tfoot>
@@ -107,7 +111,9 @@ function addModule() {
     html += '      <option value="1" selected="selected"><?php echo $text_enabled; ?></option>';
     html += '      <option value="0"><?php echo $text_disabled; ?></option>';
     html += '    </select></td>';
-    html += '    <td class="right"><input type="text" name="wiki_module[' + module_row + '][sort_order]" value="" size="3" /></td>';
+    html += '    <td class="left"><input type="text" name="wiki_module[' + module_row + '][title]" value="" size="3" /></td>';
+    html += '    <td class="left"><input type="text" name="wiki_module[' + module_row + '][additional_class]" value="" /></td>';
+    html += '    <td class="right"><input type="text" name="wiki_module[' + module_row + '][sort_order]" value="" /></td>';
     html += '    <td class="left"><a onclick="$(\'#module-row' + module_row + '\').remove();" class="button"><?php echo $button_remove; ?></a></td>';
     html += '  </tr>';
     html += '</tbody>';

@@ -2,9 +2,9 @@
 class ModelModuleYkmodule extends Model {
 
 	public function getNewses($group = 0, $limit = 5) {
-		$sql = "SELECT w.*,wg.name group_name FROM ".DB_PREFIX."wiki w LEFT JOIN ".DB_PREFIX."wiki_group wg ON w.group_id = wg.group_id";
+		$sql = "SELECT w.*,wg.name group_name FROM ".DB_PREFIX."wiki w LEFT JOIN ".DB_PREFIX."wiki_group wg ON w.group_id = wg.group_id WHERE is_top = '1' ";
 		if ($group) {
-			$sql .= " WHERE w.group_id = '".$group."'";
+			$sql .= " AND w.group_id = '".$group."'";
 		}
 		
 		if ($limit) {
@@ -31,6 +31,11 @@ class ModelModuleYkmodule extends Model {
 
 	public function getGroup($group_id=0,$model='wiki_group'){
 		return $this->db->fetch(strtolower($model),array('one'=>true,'condition'=>array('group_id'=>$group_id)));
+
+	}
+
+	public function getWikiGroups($data=array()){
+		return $this->db->fetch('wiki_group',array('condition'=>$data));
 
 	}
 

@@ -27,15 +27,15 @@
               </td>
           </tr>
           <tr>
-            <td><?php echo $entry_show; ?></td>
+            <td><?php echo $entry_tag; ?></td>
             <td>
-              <select name="show">
-                <?php if($show){ ?>
-                <option value="1" selected><?php echo $text_yes ?></option>
-                <option value="0"><?php echo $text_no ?></option>
+              <select name="tag">
+                <?php if($tag==1){ ?>
+                <option value="1" selected><?php echo $text_tag_information ?></option>
+                <option value="2"><?php echo $text_tag_school ?></option>
                 <?php }else{ ?>
-                <option value="0" selected><?php echo $text_no ?></option>
-                <option value="1"><?php echo $text_yes ?></option>
+                <option value="2" selected><?php echo $text_tag_school ?></option>
+                <option value="1"><?php echo $text_tag_information ?></option>
                 <?php }?>
                 <option>
               </select>  

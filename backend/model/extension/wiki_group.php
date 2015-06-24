@@ -3,7 +3,7 @@ class ModelExtensionWikiGroup extends Model {
 	public function addWikiGroup($data) {
 		$fields = array(
 			'name' => isset($data['name']) ? strip_tags(trim($data['name'])) : '',
-			'show' => isset($data['show']) ? (int)$data['show'] : 0,
+			'tag' => isset($data['tag']) ? (int)$data['tag'] : 1,
 			'sort_order' => isset($data['sort_order']) ? (int)$data['sort_order'] : 0
 		);
 
@@ -13,7 +13,7 @@ class ModelExtensionWikiGroup extends Model {
 	public function editWikiGroup($wiki_group_id, $data) {
 		$fields = array(
 			'name' => isset($data['name']) ? strip_tags(trim($data['name'])) : 0,
-			'show' => isset($data['show']) ? (int)$data['show'] : 0,
+			'tag' => isset($data['tag']) ? (int)$data['tag'] : 1,
 			'sort_order' => isset($data['sort_order']) ? (int)$data['sort_order'] : 0
 		);
 
@@ -35,7 +35,7 @@ class ModelExtensionWikiGroup extends Model {
 			
 		$sort_data = array(
 			'name',
-			'show',
+			'tag',
 			'sort_order'
 		);	
 		

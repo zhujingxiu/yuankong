@@ -29,6 +29,8 @@ class ControllerModuleWiki extends Controller {
         $this->data['entry_layout'] = $this->language->get('entry_layout');
         $this->data['entry_position'] = $this->language->get('entry_position');
         $this->data['entry_status'] = $this->language->get('entry_status');
+        $this->data['entry_title'] = $this->language->get('entry_title');
+        $this->data['entry_additional_class'] = $this->language->get('entry_additional_class');
         $this->data['entry_sort_order'] = $this->language->get('entry_sort_order');
         
         $this->data['button_save'] = $this->language->get('button_save');

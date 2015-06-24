@@ -13,7 +13,8 @@ $_['text_column_right']   = '右列显示';
 // Entry
 $_['entry_layout']        = '布局：';
 $_['entry_position']      = '显示位置：';
-$_['entry_count']         = '商品计数：';
+$_['entry_addition_class']= '附加样式：';
+$_['entry_title']         = '标题：';
 $_['entry_status']        = '状态：';
 $_['entry_sort_order']    = '排序：';
 

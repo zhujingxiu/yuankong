@@ -114,7 +114,7 @@ class ControllerExtensionWikiGroup extends Controller {
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
-			$sort = 'name';
+			$sort = 'group_id';
 		}
 		
 		if (isset($this->request->get['order'])) {
@@ -184,7 +184,7 @@ class ControllerExtensionWikiGroup extends Controller {
 			$this->data['wiki_groups'][] = array(
 				'group_id' 			 => $result['group_id'],
 				'name'               => $result['name'],
-				'show'               => $result['show'] ? $this->language->get('text_yes') : $this->language->get('text_no'),
+				'tag'                => $result['tag']==1 ? $this->language->get('text_tag_information') : $this->language->get('text_tag_school'),
 				'sort_order'         => $result['sort_order'],
 				'selected'           => isset($this->request->post['selected']) && in_array($result['group_id'], $this->request->post['selected']),
 				'action'             => $action
@@ -196,7 +196,7 @@ class ControllerExtensionWikiGroup extends Controller {
 		$this->data['text_no_results'] = $this->language->get('text_no_results');
 
 		$this->data['column_name'] = $this->language->get('column_name');
-		$this->data['column_show'] = $this->language->get('column_show');
+		$this->data['column_tag'] = $this->language->get('column_tag');
 		$this->data['column_sort_order'] = $this->language->get('column_sort_order');
 		$this->data['column_action'] = $this->language->get('column_action');		
 		
@@ -230,7 +230,7 @@ class ControllerExtensionWikiGroup extends Controller {
 		}
 		
 		$this->data['sort_name'] = $this->url->link('extension/wiki_group', 'token=' . $this->session->data['token'] . '&sort=name' . $url, 'SSL');
-		$this->data['sort_show'] = $this->url->link('extension/wiki_group', 'token=' . $this->session->data['token'] . '&sort=show' . $url, 'SSL');
+		$this->data['sort_tag'] = $this->url->link('extension/wiki_group', 'token=' . $this->session->data['token'] . '&sort=tag' . $url, 'SSL');
 		$this->data['sort_sort_order'] = $this->url->link('extension/wiki_group', 'token=' . $this->session->data['token'] . '&sort=sort_order' . $url, 'SSL');
 		
 		$url = '';
@@ -268,11 +268,13 @@ class ControllerExtensionWikiGroup extends Controller {
      	$this->data['heading_title'] = $this->language->get('heading_title');
 
     	$this->data['entry_name'] = $this->language->get('entry_name');
-    	$this->data['entry_show'] = $this->language->get('entry_show');
+    	$this->data['entry_tag'] = $this->language->get('entry_tag');
 		$this->data['entry_sort_order'] = $this->language->get('entry_sort_order');
 
 		$this->data['text_yes'] = $this->language->get('text_yes');
     	$this->data['text_no'] = $this->language->get('text_no');
+    	$this->data['text_tag_information'] = $this->language->get('text_tag_information');
+    	$this->data['text_tag_school'] = $this->language->get('text_tag_school');
 
     	$this->data['button_save'] = $this->language->get('button_save');
     	$this->data['button_cancel'] = $this->language->get('button_cancel');
@@ -338,12 +340,12 @@ class ControllerExtensionWikiGroup extends Controller {
 			$this->data['name'] = '';
 		}
 
-		if (isset($this->request->post['show'])) {
-			$this->data['show'] = $this->request->post['show'];
+		if (isset($this->request->post['tag'])) {
+			$this->data['tag'] = $this->request->post['tag'];
 		} elseif (!empty($wiki_group_info)) {
-			$this->data['show'] = $wiki_group_info['show'];
+			$this->data['tag'] = $wiki_group_info['tag'];
 		} else {
-			$this->data['show'] = '';
+			$this->data['tag'] = '';
 		}
 
 		if (isset($this->request->post['sort_order'])) {

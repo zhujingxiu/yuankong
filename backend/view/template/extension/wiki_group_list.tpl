@@ -27,10 +27,10 @@
                 <?php } else { ?>
                 <a href="<?php echo $sort_name; ?>"><?php echo $column_name; ?></a>
                 <?php } ?></td>
-              <td class="left"><?php if ($sort == 'show') { ?>
-                <a href="<?php echo $sort_show; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_show; ?></a>
+              <td class="left"><?php if ($sort == 'tag') { ?>
+                <a href="<?php echo $sort_tag; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_tag; ?></a>
                 <?php } else { ?>
-                <a href="<?php echo $sort_show; ?>"><?php echo $column_show; ?></a>
+                <a href="<?php echo $sort_tag; ?>"><?php echo $column_tag; ?></a>
                 <?php } ?></td>
               <td class="right"><?php if ($sort == 'sort_order') { ?>
                 <a href="<?php echo $sort_sort_order; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_sort_order; ?></a>
@@ -53,7 +53,7 @@
                 <input type="checkbox" name="selected[]" value="<?php echo $item['group_id']; ?>" />
                 <?php } ?></td>
               <td class="left"><?php echo $item['name']; ?></td>
-              <td class="left"><?php echo $item['show']; ?></td>
+              <td class="left"><?php echo $item['tag']; ?></td>
               <td class="right"><?php echo $item['sort_order']; ?></td>
               <td class="right"><?php foreach ($item['action'] as $action) { ?>
                 [ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]

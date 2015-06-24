@@ -21,5 +21,16 @@ class ModelCatalogInformation extends Model {
 			return $this->config->get('config_layout_information');
 		}
 	}	
+
+	public function getWiki($wiki_id) {
+		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "wiki w  LEFT JOIN " . DB_PREFIX . "wiki_group wg ON (w.group_id = wg.group_id) WHERE w.wiki_id = '" . (int)$wiki_id . "' AND w.status = '1'");
+	
+		return $query->row;
+	}
+
+	public function getWikiGroup($group_id) {
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "wiki_group  WHERE group_id = '" . (int)$group_id . "'");
+	
+		return $query->row;
+	}
 }
-?>
