@@ -6,7 +6,7 @@ $_['heading_title']       = '<b style="font-size:18	px;color:#E8481B">前台模�
 $_['text_module']         = 'Modules';
 
 $_['text_success']        = '成功修改模板控制面板设置信息';
-$_['text_default_theme']  = 'Configure Option for Template ';
+$_['text_default_theme']  = '设定模板 ';
 $_['text_column_right3']  = 'Column Center Center';
 
 $_['text_explain_footer_cols'] = 'This positions will automatic be splited many columns. Numbers of columns are equal number of pushed modules';

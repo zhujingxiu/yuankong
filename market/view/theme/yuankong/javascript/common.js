@@ -1,4 +1,11 @@
+$(function(){
+    $('span.xh-pic').bind('click',function(){
+        $('span.xh-pic').removeClass('hov').find('input[name^=option]').removeAttr('checked');
+        $(this).addClass('hov').find('input[name^=option]').attr('checked','checked');
+        $('.option-fix-price').trigger('change');
+    });   
 
+});
 function getURLVar(key) {
     var value = [];
     

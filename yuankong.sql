@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2015 年 06 月 24 日 14:41
+-- 生成日期: 2015 年 06 月 25 日 15:18
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.4.3
 
@@ -1696,7 +1696,7 @@ INSERT INTO `yk_layout_route` (`layout_route_id`, `layout_id`, `store_id`, `rout
 
 CREATE TABLE IF NOT EXISTS `yk_length_class` (
   `length_class_id` int(11) NOT NULL AUTO_INCREMENT,
-  `value` decimal(15,8) NOT NULL,
+  `value` decimal(12,3) NOT NULL,
   PRIMARY KEY (`length_class_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
@@ -1705,9 +1705,9 @@ CREATE TABLE IF NOT EXISTS `yk_length_class` (
 --
 
 INSERT INTO `yk_length_class` (`length_class_id`, `value`) VALUES
-(1, '1.00000000'),
-(2, '10.00000000'),
-(3, '0.39370000');
+(1, '1.000'),
+(2, '10.000'),
+(3, '0.394');
 
 -- --------------------------------------------------------
 
@@ -1959,24 +1959,14 @@ CREATE TABLE IF NOT EXISTS `yk_option` (
   `type` varchar(32) NOT NULL,
   `sort_order` int(3) NOT NULL,
   PRIMARY KEY (`option_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
 --
 -- 转存表中的数据 `yk_option`
 --
 
 INSERT INTO `yk_option` (`option_id`, `type`, `sort_order`) VALUES
-(1, 'radio', 2),
-(2, 'checkbox', 3),
-(4, 'text', 4),
-(5, 'select', 1),
-(6, 'textarea', 5),
-(7, 'file', 6),
-(8, 'date', 7),
-(9, 'time', 8),
-(10, 'datetime', 9),
-(11, 'select', 1),
-(12, 'date', 1);
+(13, 'image', 1);
 
 -- --------------------------------------------------------
 
@@ -1996,17 +1986,7 @@ CREATE TABLE IF NOT EXISTS `yk_option_description` (
 --
 
 INSERT INTO `yk_option_description` (`option_id`, `language_id`, `name`) VALUES
-(1, 2, 'Radio'),
-(2, 2, 'Checkbox'),
-(4, 2, 'Text'),
-(6, 2, 'Textarea'),
-(8, 2, 'Date'),
-(7, 2, 'File'),
-(5, 2, 'Select'),
-(9, 2, 'Time'),
-(10, 2, 'Date &amp; Time'),
-(12, 2, 'Delivery Date'),
-(11, 2, 'Size');
+(13, 2, '规格型号');
 
 -- --------------------------------------------------------
 
@@ -2020,27 +2000,18 @@ CREATE TABLE IF NOT EXISTS `yk_option_value` (
   `image` varchar(255) NOT NULL,
   `sort_order` int(3) NOT NULL,
   PRIMARY KEY (`option_value_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=49 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=54 ;
 
 --
 -- 转存表中的数据 `yk_option_value`
 --
 
 INSERT INTO `yk_option_value` (`option_value_id`, `option_id`, `image`, `sort_order`) VALUES
-(43, 1, '', 3),
-(32, 1, '', 1),
-(45, 2, '', 4),
-(44, 2, '', 3),
-(42, 5, '', 4),
-(41, 5, '', 3),
-(39, 5, '', 1),
-(40, 5, '', 2),
-(31, 1, '', 2),
-(23, 2, '', 1),
-(24, 2, '', 2),
-(46, 11, '', 1),
-(47, 11, '', 2),
-(48, 11, '', 3);
+(52, 13, 'data/case/logopic5.jpg', 4),
+(51, 13, 'data/case/logopic6.jpg', 3),
+(50, 13, 'data/case/logopic2.jpg', 2),
+(49, 13, 'data/case/logopic1.jpg', 1),
+(53, 13, 'data/case/logopic3.jpg', 0);
 
 -- --------------------------------------------------------
 
@@ -2061,20 +2032,11 @@ CREATE TABLE IF NOT EXISTS `yk_option_value_description` (
 --
 
 INSERT INTO `yk_option_value_description` (`option_value_id`, `language_id`, `option_id`, `name`) VALUES
-(43, 2, 1, 'Large'),
-(32, 2, 1, 'Small'),
-(45, 2, 2, 'Checkbox 4'),
-(44, 2, 2, 'Checkbox 3'),
-(31, 2, 1, 'Medium'),
-(42, 2, 5, 'Yellow'),
-(41, 2, 5, 'Green'),
-(39, 2, 5, 'Red'),
-(40, 2, 5, 'Blue'),
-(23, 2, 2, 'Checkbox 1'),
-(24, 2, 2, 'Checkbox 2'),
-(48, 2, 11, 'Large'),
-(47, 2, 11, 'Medium'),
-(46, 2, 11, 'Small');
+(53, 2, 13, 'Model-5-7XT'),
+(52, 2, 13, 'Model-4-WEM'),
+(51, 2, 13, 'Model-3-DRF'),
+(50, 2, 13, 'Model-2-SUBWAY'),
+(49, 2, 13, 'Model-1-KFC');
 
 -- --------------------------------------------------------
 
@@ -2134,7 +2096,7 @@ CREATE TABLE IF NOT EXISTS `yk_order` (
   `language_id` int(11) NOT NULL,
   `currency_id` int(11) NOT NULL,
   `currency_code` varchar(3) NOT NULL,
-  `currency_value` decimal(15,8) NOT NULL DEFAULT '1.00000000',
+  `currency_value` decimal(12,4) NOT NULL DEFAULT '1.0000',
   `ip` varchar(40) NOT NULL,
   `forwarded_ip` varchar(40) NOT NULL,
   `user_agent` varchar(255) NOT NULL,
@@ -2377,7 +2339,7 @@ CREATE TABLE IF NOT EXISTS `yk_product` (
   `isbn` varchar(13) NOT NULL,
   `mpn` varchar(64) NOT NULL,
   `location` varchar(128) NOT NULL,
-  `quantity` int(4) NOT NULL DEFAULT '0',
+  `quantity` smallint(6) NOT NULL DEFAULT '0',
   `stock_status_id` int(11) NOT NULL,
   `image` varchar(255) DEFAULT NULL,
   `manufacturer_id` int(11) NOT NULL,
@@ -2386,20 +2348,20 @@ CREATE TABLE IF NOT EXISTS `yk_product` (
   `points` int(8) NOT NULL DEFAULT '0',
   `tax_class_id` int(11) NOT NULL,
   `date_available` date NOT NULL,
-  `weight` decimal(15,8) NOT NULL DEFAULT '0.00000000',
+  `weight` decimal(12,3) NOT NULL DEFAULT '0.000',
   `weight_class_id` int(11) NOT NULL DEFAULT '0',
-  `length` decimal(15,8) NOT NULL DEFAULT '0.00000000',
-  `width` decimal(15,8) NOT NULL DEFAULT '0.00000000',
-  `height` decimal(15,8) NOT NULL DEFAULT '0.00000000',
+  `length` decimal(12,3) NOT NULL DEFAULT '0.000',
+  `width` decimal(12,3) NOT NULL DEFAULT '0.000',
+  `height` decimal(12,3) NOT NULL DEFAULT '0.000',
   `length_class_id` int(11) NOT NULL DEFAULT '0',
   `subtract` tinyint(1) NOT NULL DEFAULT '1',
-  `minimum` int(11) NOT NULL DEFAULT '1',
-  `sort_order` int(11) NOT NULL DEFAULT '0',
+  `minimum` tinyint(4) NOT NULL DEFAULT '1',
+  `sort_order` smallint(6) NOT NULL DEFAULT '0',
   `category_related` tinyint(4) NOT NULL DEFAULT '1',
   `status` tinyint(1) NOT NULL DEFAULT '0',
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `viewed` int(5) NOT NULL DEFAULT '0',
+  `viewed` smallint(6) NOT NULL DEFAULT '0',
   PRIMARY KEY (`product_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=56 ;
 
@@ -2408,12 +2370,12 @@ CREATE TABLE IF NOT EXISTS `yk_product` (
 --
 
 INSERT INTO `yk_product` (`product_id`, `model`, `sku`, `upc`, `ean`, `jan`, `isbn`, `mpn`, `location`, `quantity`, `stock_status_id`, `image`, `manufacturer_id`, `shipping`, `price`, `points`, `tax_class_id`, `date_available`, `weight`, `weight_class_id`, `length`, `width`, `height`, `length_class_id`, `subtract`, `minimum`, `sort_order`, `category_related`, `status`, `date_added`, `date_modified`, `viewed`) VALUES
-(50, '132143', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic1.jpg', 0, 1, '126.0000', 0, 0, '2015-06-15', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 0, 1, 1, 1, 1, '2015-06-16 14:52:22', '2015-06-16 16:23:34', 62),
-(51, 'ae123213', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic2.jpg', 0, 1, '123.0000', 0, 0, '2015-06-15', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 0, 1, 1, 1, 1, '2015-06-23 07:23:47', '0000-00-00 00:00:00', 19),
-(52, '123123', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic4.jpg', 0, 1, '123.0000', 0, 0, '2015-06-15', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 0, 1, 1, 1, 1, '2015-06-16 16:29:23', '0000-00-00 00:00:00', 7),
-(53, '231414', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic3.jpg', 0, 1, '125.0000', 0, 0, '2015-06-15', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 0, 1, 1, 1, 1, '2015-06-16 09:02:14', '0000-00-00 00:00:00', 47),
-(54, '2144232', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic5.jpg', 0, 1, '128.0000', 0, 0, '2015-06-15', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 0, 1, 1, 1, 1, '2015-06-16 09:03:38', '0000-00-00 00:00:00', 6),
-(55, 'xf1325324', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic6.jpg', 0, 1, '158.0000', 0, 0, '2015-06-15', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 0, 1, 1, 1, 1, '2015-06-16 09:05:42', '0000-00-00 00:00:00', 1);
+(50, '132143', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic1.jpg', 0, 1, '126.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, 1, '2015-06-16 14:52:22', '2015-06-16 16:23:34', 62),
+(51, 'ae123213', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic2.jpg', 0, 1, '123.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, 1, '2015-06-23 07:23:47', '0000-00-00 00:00:00', 19),
+(52, '123123', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic4.jpg', 0, 1, '123.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, 1, '2015-06-16 16:29:23', '0000-00-00 00:00:00', 7),
+(53, '231414', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic3.jpg', 0, 1, '125.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, 1, '2015-06-25 13:24:47', '0000-00-00 00:00:00', 84),
+(54, '2144232', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic5.jpg', 0, 1, '128.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, 1, '2015-06-16 09:03:38', '0000-00-00 00:00:00', 6),
+(55, 'xf1325324', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic6.jpg', 0, 1, '158.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, 1, '2015-06-16 09:05:42', '0000-00-00 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -2528,7 +2490,14 @@ CREATE TABLE IF NOT EXISTS `yk_product_option` (
   `option_value` text NOT NULL,
   `required` tinyint(1) NOT NULL,
   PRIMARY KEY (`product_option_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=227 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=228 ;
+
+--
+-- 转存表中的数据 `yk_product_option`
+--
+
+INSERT INTO `yk_product_option` (`product_option_id`, `product_id`, `option_id`, `option_value`, `required`) VALUES
+(227, 53, 13, '', 1);
 
 -- --------------------------------------------------------
 
@@ -2548,10 +2517,21 @@ CREATE TABLE IF NOT EXISTS `yk_product_option_value` (
   `price_prefix` varchar(1) NOT NULL,
   `points` int(8) NOT NULL,
   `points_prefix` varchar(1) NOT NULL,
-  `weight` decimal(15,8) NOT NULL,
+  `weight` decimal(12,3) NOT NULL,
   `weight_prefix` varchar(1) NOT NULL,
   PRIMARY KEY (`product_option_value_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
+
+--
+-- 转存表中的数据 `yk_product_option_value`
+--
+
+INSERT INTO `yk_product_option_value` (`product_option_value_id`, `product_option_id`, `product_id`, `option_id`, `option_value_id`, `quantity`, `subtract`, `price`, `price_prefix`, `points`, `points_prefix`, `weight`, `weight_prefix`) VALUES
+(17, 227, 53, 13, 49, 100, 0, '10.0000', '+', 0, '+', '0.000', '+'),
+(18, 227, 53, 13, 50, 100, 0, '15.0000', '+', 0, '+', '0.000', '+'),
+(19, 227, 53, 13, 51, 100, 0, '5.0000', '+', 0, '+', '0.000', '+'),
+(20, 227, 53, 13, 52, 100, 1, '5.0000', '-', 0, '+', '0.000', '+'),
+(21, 227, 53, 13, 53, 100, 1, '10.0000', '-', 0, '+', '0.000', '+');
 
 -- --------------------------------------------------------
 
@@ -3318,7 +3298,7 @@ INSERT INTO `yk_voucher_theme_description` (`voucher_theme_id`, `language_id`, `
 
 CREATE TABLE IF NOT EXISTS `yk_weight_class` (
   `weight_class_id` int(11) NOT NULL AUTO_INCREMENT,
-  `value` decimal(15,8) NOT NULL DEFAULT '0.00000000',
+  `value` decimal(12,3) NOT NULL DEFAULT '0.000',
   PRIMARY KEY (`weight_class_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
@@ -3327,10 +3307,10 @@ CREATE TABLE IF NOT EXISTS `yk_weight_class` (
 --
 
 INSERT INTO `yk_weight_class` (`weight_class_id`, `value`) VALUES
-(1, '1.00000000'),
-(2, '1000.00000000'),
-(5, '2.20460000'),
-(6, '35.27400000');
+(1, '1.000'),
+(2, '1000.000'),
+(5, '2.205'),
+(6, '35.274');
 
 -- --------------------------------------------------------
 

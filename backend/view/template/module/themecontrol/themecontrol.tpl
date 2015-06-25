@@ -37,123 +37,11 @@
 			<div id="tab-contents">
 				<div id="tab-pages-layout">
   				 	<div id="my-tab-pageslayout" class="vtabs">
-	  					<a href="#tab-pcategory" onclick="return false;"><?php echo $this->getLang("text_page_category");?></a>
-	  					<a href="#tab-pproduct" onclick="return false;"><?php echo $this->getLang("text_page_product");?></a>
 	  					<a href="#tab-psearch" onclick="return false;"><?php echo $this->getLang("text_page_search");?></a>
 	  					<a href="#tab-ptopleft" onclick="return false;"><?php echo $this->getLang("text_page_topleft");?></a>
 	  					<a href="#tab-pcontact" onclick="return false;"><?php echo $this->getLang("text_page_contact");?></a>
   				 	</div> 
   				 	<div class="page-tabs-wrap">
-		  			 	<div class="clearfix" id="tab-pcategory">
-		  			 		<div class="tab-inner">
-		  			 		<table class="form">
-		  			 			<tr>
-		  			 				<td><?php echo $this->language->get('text_product_display_mode'); ?></td>
-		  			 				<td>
-		  			 					<select name="themecontrol[cateogry_display_mode]">
-		  			 						<?php foreach( $cateogry_display_modes as $k=>$v ) { ?>
-		  			 					 	<option value="<?php echo $k;?>"  <?php if( $k==$module['cateogry_display_mode']){ ?> selected="selected" <?php } ?>><?php echo $v;?></option>
-		  			 						<?php }  ?>	
-		  			 					</select>
-		  			 				</td>
-		  			 			</tr>	
-		  			 			<tr>
-		  			 				<td><?php echo $this->language->get('text_max_product_row'); ?></td>
-		  			 				<td>
-
-		  			 					<select name="themecontrol[cateogry_product_row]">
-		  			 						<?php foreach( $product_rows as $k=>$v ) { ?>
-		  			 					 	<option value="<?php echo $k;?>"  <?php if( $k==$module['cateogry_product_row']){ ?> selected="selected" <?php } ?>><?php echo $v;?></option>
-		  			 						<?php }  ?>	
-		  			 					</select>
-		  			 				</td>
-		  			 			</tr>	
-		  			 			<tr>
-		  			 				<td><?php echo $this->language->get('text_show_product_zoom');?></td>
-		  			 				<td>
-		  			 					<select name="themecontrol[category_pzoom]">
-		  			 						<?php foreach( $yesno  as $k=>$v ) { ?>
-		  			 					 	<option value="<?php echo $k;?>"  <?php if( $k==$module['category_pzoom']){ ?> selected="selected" <?php } ?>><?php echo $v;?></option>
-		  			 						<?php }  ?>	
-		  			 					</select>
-		  			 				</td>
-		  			 			</tr>	 
-		  			 		</table>
-		  			 		</div>
-		  			 	</div>
-		  			  	<div class="clearfix" id="tab-pproduct">
-		  					<div class="tab-inner">
-		  					<table class="form">
-		  						<tr>
-		  							<td><?php echo $this->language->get('text_enable_productzoom'); ?></td>
-		  							<td>
-		  								<select name="themecontrol[product_enablezoom]">
-		  									<?php foreach( $yesno  as $k=>$v ) { ?>
-		  			 					 	<option value="<?php echo $k;?>"  <?php if( $k==$module['product_enablezoom']){ ?> selected="selected" <?php } ?>><?php echo $v;?></option>
-		  			 						<?php }  ?>	
-		  								</select>
-		  							</td>
-		  						</tr>
-		  						<tr>
-		  							<td><?php echo $this->language->get('text_product_zoomgallery'); ?></td>
-		  							<td>
-		  								<select name="themecontrol[product_zoomgallery]">
-		  									<?php foreach( $product_zoomgallery  as $k=>$v ) { ?>
-		  			 					 	<option value="<?php echo $k;?>"  <?php if( $k==$module['product_zoomgallery']){ ?> selected="selected" <?php } ?>><?php echo $v;?></option>
-		  			 						<?php }  ?>	
-		  								</select>
-		  							</td>
-		  						</tr>	
-		  						<tr>
-		  							<td><?php echo $this->language->get('text_product_zoommode'); ?></td>
-		  							<td>
-		  								<select name="themecontrol[product_zoommode]">
-		  									<?php foreach( $product_zoom_modes  as $k=>$v ) { ?>
-		  			 					 	<option value="<?php echo $k;?>"  <?php if( $k==$module['product_zoommode']){ ?> selected="selected" <?php } ?>><?php echo $v;?></option>
-		  			 						<?php }  ?>	
-		  								</select>
-		  							</td>
-		  						</tr>
-		  						<tr>
-		  							<td><?php echo $this->language->get('text_product_zoomlenssize'); ?></td>
-		  							<td>
-		  								<input value=<?php echo $module['product_zoomlenssize'];?> name="themecontrol[product_zoomlenssize]"/> 
-		  							</td>
-		  						</tr>
-		  						<tr>
-		  							<td><?php echo $this->language->get('text_product_zoomeasing'); ?></td>
-		  							<td>
-		  								<select name="themecontrol[product_zoomeasing]">
-		  									<?php foreach( $yesno  as $k=>$v ) { ?>
-		  			 					 	<option value="<?php echo $k;?>"  <?php if( $k==$module['product_zoomeasing']){ ?> selected="selected" <?php } ?>><?php echo $v;?></option>
-		  			 						<?php }  ?>	
-		  								</select>
-		  							</td>
-		  						</tr>
-		  						<tr>
-		  							<td><?php echo $this->language->get('text_product_zoomlensshapes'); ?></td>
-		  							<td>
-		  								<select name="themecontrol[product_zoomlensshape]">
-		  									<?php foreach( $product_zoomlensshapes  as $k=>$v ) { ?>
-		  			 					 	<option value="<?php echo $k;?>"  <?php if( $k==$module['product_zoomlensshape']){ ?> selected="selected" <?php } ?>><?php echo $v;?></option>
-		  			 						<?php }  ?>	
-		  								</select>
-		  							</td>
-		  						</tr>
-
-		  						<tr>
-		  			 				<td><?php echo $this->language->get('text_product_related_column'); ?></td>
-		  			 				<td>
-		  			 					<select name="themecontrol[product_related_column]">
-		  			 						<?php foreach( $product_rows as $k=>$v ) { ?>
-		  			 					 	<option value="<?php echo $k;?>"  <?php if( $k==$module['product_related_column']){ ?> selected="selected" <?php } ?>><?php echo $v;?></option>
-		  			 						<?php }  ?>	
-		  			 					</select>
-		  			 				</td>
-		  			 			</tr>	
-		  					</table>
-		  					</div>
-		  			 	</div>
 		  			 	<div class="clearfix" id="tab-psearch">
 		  					<div class="tab-inner">
 		  					<table class="form">
@@ -278,14 +166,7 @@
 <script type="text/javascript" src="view/javascript/ckeditor/ckeditor.js"></script>
 <script type="text/javascript"><!--
 <?php foreach( $languages as $language ) {  ?>
-CKEDITOR.replace('copyright-<?php echo $language['language_id'];?>', {
-	filebrowserBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
-	filebrowserImageBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
-	filebrowserFlashBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
-	filebrowserUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
-	filebrowserImageUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
-	filebrowserFlashUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>'
-});
+
 CKEDITOR.replace('topleft-<?php echo $language['language_id'];?>', {
 	filebrowserBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
 	filebrowserImageBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',

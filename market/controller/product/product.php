@@ -171,8 +171,6 @@ class ControllerProductProduct extends Controller {
 		if ($product_info) {
 
 			$this->document->addScript('market/view/theme/yuankong/javascript/lib/fdj.js');
-			$this->document->addStyle('market/view/theme/yuankong/javascript/location/location.css');
-			$this->document->addScript('market/view/theme/yuankong/javascript/location/location.js');
 			$url = '';
 			
 			if (isset($this->request->get['path'])) {
