@@ -223,7 +223,7 @@ o.lrclick={
     }
 };
 o.add={
-    init:function(select){
+    init:function(select,callback){
         var sel=$(select),
             add=sel.find(".addnum"),
             jan=sel.find(".jiannum"),
@@ -231,7 +231,8 @@ o.add={
         add.bind("click",function(){
             var v=parseInt(snum.val());
             isNaN(v)?v=1:v;
-            snum.val(v+=1)
+            snum.val(v+=1);
+            //live_price();
         });
         jan.bind("click",function(){
             var v=parseInt(snum.val());
@@ -239,15 +240,18 @@ o.add={
             if(v<=1){
                 return false;
             }else{
-                snum.val(v-=1)
+                snum.val(v-=1);
             }
+            //live_price();
         });
 
         snum.bind("keyup",function(){
             var v=parseInt(snum.val());
             isNaN(v)?v="":v;
             snum.val(v);
+            //live_price();
         });
+
     }
 };
 o.scroll={

@@ -2,10 +2,33 @@ $(function(){
     $('span.xh-pic').bind('click',function(){
         $('span.xh-pic').removeClass('hov').find('input[name^=option]').removeAttr('checked');
         $(this).addClass('hov').find('input[name^=option]').attr('checked','checked');
-        $('.option-fix-price').trigger('change');
-    });   
-
+    });
+    $('#product :input[name^="option"]').change(function(){live_price();});
 });
+
+
+function live_price() {
+    $.ajax({
+        type: 'post',
+        url: 'index.php?route=product/product/live_price',
+        dataType: 'json',
+        data: $('input[name^="option"][checked], select[name^="option"], input[type="hidden"], input[name="quantity"]'),
+        success: function (json) {  
+            $('#price-special').fadeOut(150, function() {$(this).html(json.new_price.special
+).fadeIn(50);});
+            $('#price-tax').fadeOut(150, function() {$(this).html(json.new_price.tax).fadeIn
+(50);});
+            $('#price-now').fadeOut(150, function() {$(this).html(json.new_price.price).fadeIn
+(50);});
+            
+            //$('.discount-item').fadeOut(90).delay(20).queue(function(nx) {    $(this).html(data.discount_item);nx();}).fadeIn(90);
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+}
+
 function getURLVar(key) {
     var value = [];
     

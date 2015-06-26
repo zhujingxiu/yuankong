@@ -1,7 +1,7 @@
 <?php require( DIR_TEMPLATE.$this->config->get('config_template')."/template/common/config.tpl" );?>
 <?php echo $header; ?>
 <?php require( DIR_TEMPLATE.$this->config->get('config_template')."/template/common/breadcrumb.tpl" ); ?>
-<div class="w mt10">
+<div class="w mt10 product-info" id="product">
 	<div class="shopdetail-box fix">
         <div class="l shoppic-box">
             <div class="jqzoom" id="spec-n1">
@@ -22,7 +22,7 @@
                 </div>
             </div>
         </div>
-        <div class="shopd-news c3">
+        <div class="shopd-news c3" id="price-block">
             <div class="shopd-name">
                 <h2><b><?php echo $heading_title; ?></b></h2>
                 <p><?php echo $subtitle ?></p>
@@ -36,12 +36,14 @@
 				<p class="reward"><small><?php echo $text_points; ?> <?php echo $points; ?></small></p>
 				<?php } ?>
 				<?php if (!$special) { ?>
-			    <p><?php echo $text_price; ?><b class="price c_red pl10"><?php echo $price; ?></b> </p>
-                <p class="pt5">市场价:<em class="pl10 c8">￥123456.00</em> </p>
+			    <p><?php echo $text_price; ?>
+                    <b id="price-now" class="price c_red pl10"><?php echo $price; ?></b> 
+                </p>
 				<?php } else { ?>
-				<p class="price-old"><?php echo $price; ?></p> 
-				<p class="price-new"><?php echo $special; ?></p>
+				<p id="price-old" class="price-old"><?php echo $price; ?></p> 
+				<p id="price-special" class="price-new"><?php echo $special; ?></p>
 				<?php } ?>
+                <p class="pt5">市场价:<em class="pl10 c8">￥123456.00</em> </p>
 				<?php if ($discounts) { ?>
 
 				<p class="discount">
@@ -108,12 +110,12 @@
 						<?php } ?>
 					<?php } ?>
 					<?php if ($option['type'] == 'image') { ?>
-						<?php foreach ($option['option_value'] as $option_value) { ?>
-						<span class="xh-pic" title="<?php echo $option_value['name'] . ($option_value['price'] ? ' ' . $option_value['price_prefix'] . $option_value['price'] : ''); ?>">
+						<?php foreach ($option['option_value'] as $ovkey => $option_value) { ?>
+						<span class="xh-pic <?php echo $ovkey ? '' : 'hov'; ?>" title="<?php echo $option_value['name'] . ($option_value['price'] ? ' ' . $option_value['price_prefix'] . $option_value['price'] : ''); ?>">
 							<label for="option-value-<?php echo $option_value['product_option_value_id']; ?>">
 								<img src="<?php echo $option_value['image']; ?>" alt="<?php echo $option_value['name'] . ($option_value['price'] ? ' ' . $option_value['price_prefix'] . $option_value['price'] : ''); ?>" />
 							</label>
-							<input type="radio" name="option[<?php echo $option['product_option_id']; ?>]" value="<?php echo $option_value['product_option_value_id']; ?>" id="option-value-<?php echo $option_value['product_option_value_id']; ?>" style="display:none" class="option-fix-price"/>
+							<input type="radio" name="option[<?php echo $option['product_option_id']; ?>]" value="<?php echo $option_value['product_option_value_id']; ?>" id="option-value-<?php echo $option_value['product_option_value_id']; ?>" style="display:none" class="option-fix-price" <?php echo $ovkey ? '' : 'checked="checked"'; ?>/>
 						</span>
 						<?php } ?>
 					<?php } ?>
@@ -153,7 +155,7 @@
                         <a href="javascript:void(0)" class="addnum">+</a>
                         <a href="javascript:void(0)" class="jiannum">-</a>
                         <input type="text" name="quantity" value="1" class="snum">
-						<input type="hidden" name="product_id" size="2" value="<?php echo $product_id; ?>" />
+						<input type="hidden" name="product_id" value="<?php echo $product_id; ?>" />
                     </div>
                 </li>
                 <li class="fix">
@@ -171,7 +173,7 @@
                     </span>
                 </li>
                 <li class="fix">
-                    <input type="button" id="button-cart"  class="gc-tab-sub w150"value="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product['product_id']; ?>');">
+                    <input type="button" id="button-cart"  class="gc-tab-sub w150"value="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product_id; ?>');">
                     <input type="button" id="button-buynow" class="gc-tab-sub2 w150 ml20" value="<?php echo $button_buynow ?>">
                     <?php if ($minimum > 1) { ?>
 					<div class="minimum clearfix"><?php echo $text_minimum; ?></div>
@@ -262,47 +264,6 @@
 	</div>
 </div>
 <script type="text/javascript"><!--
-	$('.option-fix-price').eq(0).trigger('click');
-	$('.option-fix-price').bind('change', function() {
-		var $ele_tag = $(this).attr('type'),$opt_val = 0;
-		if($ele_tag == 'radio' || $ele_tag == 'checkbox'){
-			$opt_val = $(this).prop('checked').val();
-		}else{
-			$opt_val = $(this).val();
-		}
-		console.info($opt_val);
-		/*
-		$.ajax({
-			url: 'index.php?route=checkout/cart/add',
-			type: 'post',
-			data: $('.product-info input[type=\'text\'], .product-info input[type=\'hidden\'], .product-info input[type=\'radio\']:checked, .product-info input[type=\'checkbox\']:checked, .product-info select, .product-info textarea'),
-			dataType: 'json',
-			success: function(json) {
-				$('.success, .warning, .attention, information, .error').remove();
-				
-				if (json['error']) {
-					if (json['error']['option']) {
-						for (i in json['error']['option']) {
-							$('#option-' + i).after('<span class="error">' + json['error']['option'][i] + '</span>');
-						}
-					}
-				} 
-				
-				if (json['success']) {
-					$('#notification').html('<div class="success" style="display: none;">' + json['success'] + '<img src="market/view/theme/default/image/close.png" alt="" class="close" /></div>');
-						
-					$('.success').fadeIn('slow');
-						
-					$('#cart-total').html(json['total']);
-					
-					$('html, body').animate({ scrollTop: 0 }, 'slow'); 
-				}	
-			}
-		});
-		*/
-	});
-//--></script>
-<script type="text/javascript"><!--
 	
 	$('#button-cart').bind('click', function() {
 		$.ajax({
@@ -335,8 +296,7 @@
 	});
 //--></script>
 
-<script type="text/javascript"><!--
-	
+<script type="text/javascript"><!--    
     $(function(){
         o.moushov.init(".detail-n-title li",".d-boxes");
         o.add.init(".s-buy-num");
@@ -358,7 +318,8 @@
         },function(){
             $(this).parent().removeClass("on");
         });
-        o.lrclick.init("#spec-n5")
+        o.lrclick.init("#spec-n5");
+        live_price();
     });
 
 //--></script>
