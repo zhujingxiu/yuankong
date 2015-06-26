@@ -14,6 +14,9 @@ $(document).ready(function() {
 	});
 	
 	$('#menu > ul').css('display', 'block');
+	if($('#languages.htabs > a').length <=1){
+		$('#languages.htabs').hide();
+	}
 });
  
 function getURLVar(key) {

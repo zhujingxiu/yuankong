@@ -1,5 +1,7 @@
 <?php
 class ModelCatalogCategory extends Model {
+
+	protected $_categories = array();
 	public function addCategory($data) {
 		$this->db->query("INSERT INTO " . DB_PREFIX . "category SET parent_id = '" . (int)$data['parent_id'] . "', `top` = '" . (isset($data['top']) ? (int)$data['top'] : 0) . "', `column` = '" . (int)$data['column'] . "', sort_order = '" . (int)$data['sort_order'] . "', status = '" . (int)$data['status'] . "', date_modified = NOW(), date_added = NOW()");
 
@@ -355,4 +357,53 @@ class ModelCatalogCategory extends Model {
 		
 		return $category_related_data;
 	}
+
+    private function getChildren($category_id=null){
+        $sql = "SELECT c.category_id, cd.name,c.status, c.parent_id, c.sort_order FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) WHERE cd.language_id = '" . (int)$this->config->get('config_language_id') . "' ";
+        if( $category_id != null ) {           
+            $sql .= ' AND c.parent_id='.(int)$category_id;           
+        }
+        $sql .= ' ORDER BY c.`parent_id` ,c.`sort_order` ';
+        $query = $this->db->query( $sql );            
+        return $query->rows;
+    }
+
+    private function hasChildren($category_id){
+        return isset($this->_categories[$category_id]);
+    } 
+    
+    private function getNodes($category_id){
+        return $this->_categories[$category_id];
+    }
+
+    private function nodesFormat($parent_id=0){
+        $nodes = array(); 
+        if($this->hasChildren($parent_id)){
+            $results = $this->getNodes($parent_id);                     
+            foreach( $results as $result ){
+                $tmp = array(
+                    'category_id'   => $result['category_id'],
+                    'parent_id'     => $result['parent_id'],
+                    'name'      	=> $result['name'],
+                    'status'    	=> $result['status'],
+                    'sort_order'    => isset($result['sort_order']) ? (int)$result['sort_order'] : 0
+                );
+                if($this->hasChildren($result['category_id'])){
+                    $tmp['is_parent'] = 1;
+                    $tmp['children'] = $this->nodesFormat( $result['category_id'] );
+                } 
+                $nodes[] = ($tmp);           
+            }           
+            return $nodes;
+        }
+        return ;
+    }
+
+    public function getNodeTree($category_id=null ){
+        $children = $this->getChildren( $category_id );
+        foreach($children as $child ){
+            $this->_categories[$child['parent_id']][] = $child;
+        }
+        return $this->nodesFormat(0);
+    }
 }

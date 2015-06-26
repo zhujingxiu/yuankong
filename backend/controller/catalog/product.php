@@ -258,13 +258,13 @@ class ControllerCatalogProduct extends Controller {
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
-			$sort = 'pd.name';
+			$sort = 'p.date_added';
 		}
 		
 		if (isset($this->request->get['order'])) {
 			$order = $this->request->get['order'];
 		} else {
-			$order = 'ASC';
+			$order = 'DESC';
 		}
 		
 		if (isset($this->request->get['page'])) {
@@ -570,6 +570,7 @@ class ControllerCatalogProduct extends Controller {
     	$this->data['entry_quantity'] = $this->language->get('entry_quantity');
 		$this->data['entry_stock_status'] = $this->language->get('entry_stock_status');
     	$this->data['entry_price'] = $this->language->get('entry_price');
+    	$this->data['entry_market'] = $this->language->get('entry_market');
 		$this->data['entry_tax_class'] = $this->language->get('entry_tax_class');
 		$this->data['entry_points'] = $this->language->get('entry_points');
 		$this->data['entry_option_points'] = $this->language->get('entry_option_points');
@@ -848,6 +849,14 @@ class ControllerCatalogProduct extends Controller {
 			$this->data['price'] = $product_info['price'];
 		} else {
       		$this->data['price'] = '';
+    	}
+
+    	if (isset($this->request->post['market'])) {
+      		$this->data['market'] = $this->request->post['market'];
+    	} elseif (!empty($product_info)) {
+			$this->data['market'] = $product_info['market'];
+		} else {
+      		$this->data['market'] = '';
     	}
 		
 		$this->load->model('localisation/tax_class');
@@ -1284,11 +1293,11 @@ class ControllerCatalogProduct extends Controller {
         		$this->error['name'][$language_id] = $this->language->get('error_name');
       		}
     	}
-		
+		/*
     	if ((utf8_strlen($this->request->post['model']) < 1) || (utf8_strlen($this->request->post['model']) > 64)) {
       		$this->error['model'] = $this->language->get('error_model');
     	}
-		
+		*/
 		if ($this->error && !isset($this->error['warning'])) {
 			$this->error['warning'] = $this->language->get('error_warning');
 		}

@@ -1,6 +1,8 @@
 <?php
 // Heading
 $_['heading_title']              = '商品分类';
+$_['button_mode_list']           = '分类列表显示';
+$_['button_mode_tree']           = '分类树形显示';
 
 // Text
 $_['text_success']               = '成功： 您已成功更新商品分类！';

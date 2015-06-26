@@ -70,16 +70,21 @@
                 </div></td>
             </tr> 
 
+            
             <tr>
-              <td><span class="required">*</span> <?php echo $entry_model; ?></td>
+              <td><span class="required">*</span><?php echo $entry_price; ?></td>
+              <td><input type="text" name="price" value="<?php echo $price; ?>" /></td>
+            </tr>
+            <tr>
+              <td> <?php echo $entry_market; ?></td>
+              <td><input type="text" name="market" value="<?php echo $market; ?>" /></td>
+            </tr>
+            <tr>
+              <td> <?php echo $entry_model; ?></td>
               <td><input type="text" name="model" value="<?php echo $model; ?>" />
                 <?php if ($error_model) { ?>
                 <span class="error"><?php echo $error_model; ?></span>
                 <?php } ?></td>
-            </tr>
-            <tr>
-              <td><span class="required">*</span><?php echo $entry_price; ?></td>
-              <td><input type="text" name="price" value="<?php echo $price; ?>" /></td>
             </tr>
           </table>
           <div id="languages" class="htabs">
@@ -114,7 +119,7 @@
                 <td><?php echo $entry_description; ?></td>
                 <td><textarea name="product_description[<?php echo $language['language_id']; ?>][description]" id="description<?php echo $language['language_id']; ?>"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['description'] : ''; ?></textarea></td>
               </tr>
-              <tr>
+              <tr class="hide-item">
                 <td><?php echo $entry_tag; ?></td>
                 <td><input type="text" name="product_description[<?php echo $language['language_id']; ?>][tag]" value="<?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['tag'] : ''; ?>" size="80" /></td>
               </tr>
@@ -173,7 +178,7 @@
               <td><?php echo $entry_quantity; ?></td>
               <td><input type="text" name="quantity" value="<?php echo $quantity; ?>" size="2" /></td>
             </tr>
-            <tr>
+            <tr class="hide-item">
               <td><?php echo $entry_minimum; ?></td>
               <td><input type="text" name="minimum" value="<?php echo $minimum; ?>" size="2" /></td>
             </tr>

@@ -10,7 +10,43 @@ class ControllerCatalogCategory extends Controller {
 		$this->load->model('catalog/category');
 		 
 		$this->getList();
+		if(!empty($this->request->get['tree'])){
+			$nodes = $this->tree($this->model_catalog_category->getNodeTree(null),true);
+            $this->response->setOutput(json_encode($nodes));
+		}else{
+			$this->getList();
+		}
 	}
+
+    private function tree($nodes,$open=false){
+
+        if(is_array($nodes)){
+            $data = array();
+            foreach ($nodes as $key => $item) {
+                $tmp = array();
+                $tmp['data'] = $item['name'];
+                if($open){
+                	$tmp['state'] = 'open';
+                }
+                $tmp['attributes'] = array(
+                    'category_id'   => $item['category_id'],
+                    'name'      => $item['name'],
+                    'parent_id' => $item['parent_id'],
+                    'status'    => $item['status'],
+                    'sort_order'=> $item['sort_order'],
+                    'link'   	=> $this->url->link('catalog/category/update','token='.$this->session->data['token'].'&category_id='.$item['category_id'],'SSL')
+                );
+                if(isset($item['children']) && is_array($item['children'])){
+                    $tmp['children'] = $this->tree($item['children']);
+                }else{
+                    $tmp['attributes']['rel'] = "file";
+                }
+                $data[] = $tmp;
+            }
+            return $data;
+        }
+        return false;
+    }
 
 	public function insert() {
 		$this->language->load('catalog/category');
@@ -116,7 +152,9 @@ class ControllerCatalogCategory extends Controller {
 		if (isset($this->request->get['page'])) {
 			$url .= '&page=' . $this->request->get['page'];
 		}
-						
+		$this->document->addScript('view/javascript/jquery/jstree/jquery.tree.min.js');
+        $this->document->addScript('view/javascript/jquery/jstree/plugins/jquery.tree.contextmenu.js'); 
+				
    		$this->data['breadcrumbs'] = array();
 
    		$this->data['breadcrumbs'][] = array(
@@ -131,38 +169,11 @@ class ControllerCatalogCategory extends Controller {
       		'separator' => ' :: '
    		);
 									
+		
 		$this->data['insert'] = $this->url->link('catalog/category/insert', 'token=' . $this->session->data['token'] . $url, 'SSL');
 		$this->data['delete'] = $this->url->link('catalog/category/delete', 'token=' . $this->session->data['token'] . $url, 'SSL');
 		$this->data['repair'] = $this->url->link('catalog/category/repair', 'token=' . $this->session->data['token'] . $url, 'SSL');
-		
-		$this->data['categories'] = array();
-		
-		$data = array(
-			'start' => ($page - 1) * $this->config->get('config_admin_limit'),
-			'limit' => $this->config->get('config_admin_limit')
-		);
-				
-		$category_total = $this->model_catalog_category->getTotalCategories();
-		
-		$results = $this->model_catalog_category->getCategories($data);
 
-		foreach ($results as $result) {
-			$action = array();
-						
-			$action[] = array(
-				'text' => $this->language->get('text_edit'),
-				'href' => $this->url->link('catalog/category/update', 'token=' . $this->session->data['token'] . '&category_id=' . $result['category_id'] . $url, 'SSL')
-			);
-
-			$this->data['categories'][] = array(
-				'category_id' => $result['category_id'],
-				'name'        => $result['name'],
-				'sort_order'  => $result['sort_order'],
-				'selected'    => isset($this->request->post['selected']) && in_array($result['category_id'], $this->request->post['selected']),
-				'action'      => $action
-			);
-		}
-		
 		$this->data['heading_title'] = $this->language->get('heading_title');
 
 		$this->data['text_no_results'] = $this->language->get('text_no_results');
@@ -174,7 +185,7 @@ class ControllerCatalogCategory extends Controller {
 		$this->data['button_insert'] = $this->language->get('button_insert');
 		$this->data['button_delete'] = $this->language->get('button_delete');
  		$this->data['button_repair'] = $this->language->get('button_repair');
- 
+ 		$this->data['token'] = $this->session->data['token'];
  		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
 		} else {
@@ -188,17 +199,59 @@ class ControllerCatalogCategory extends Controller {
 		} else {
 			$this->data['success'] = '';
 		}
-		
-		$pagination = new Pagination();
-		$pagination->total = $category_total;
-		$pagination->page = $page;
-		$pagination->limit = $this->config->get('config_admin_limit');
-		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = $this->url->link('catalog/category', 'token=' . $this->session->data['token'] . $url . '&page={page}', 'SSL');
+
+		$mode = isset($this->request->get['mode']) ? strtolower(trim($this->request->get['mode'])) : 'list';
+
+		switch ($mode) {
+			case 'tree':
+				$this->data['button_mode'] = $this->language->get('button_mode_list');
+				$this->data['mode'] = $this->url->link('catalog/category', 'token=' . $this->session->data['token'] . $url, 'SSL');
+				$this->template = 'catalog/category_tree.tpl';
+				break;
 			
-		$this->data['pagination'] = $pagination->render();
+			default:
+				$this->data['button_mode'] = $this->language->get('button_mode_tree');
+				$this->data['mode'] = $this->url->link('catalog/category', 'mode=tree&token=' . $this->session->data['token'] . $url, 'SSL');
+				$this->data['categories'] = array();
 		
-		$this->template = 'catalog/category_list.tpl';
+				$data = array(
+					'start' => ($page - 1) * $this->config->get('config_admin_limit'),
+					'limit' => $this->config->get('config_admin_limit')
+				);
+						
+				$category_total = $this->model_catalog_category->getTotalCategories();
+				
+				$results = $this->model_catalog_category->getCategories($data);
+
+				foreach ($results as $result) {
+					$action = array();
+								
+					$action[] = array(
+						'text' => $this->language->get('text_edit'),
+						'href' => $this->url->link('catalog/category/update', 'token=' . $this->session->data['token'] . '&category_id=' . $result['category_id'] . $url, 'SSL')
+					);
+
+					$this->data['categories'][] = array(
+						'category_id' => $result['category_id'],
+						'name'        => $result['name'],
+						'sort_order'  => $result['sort_order'],
+						'selected'    => isset($this->request->post['selected']) && in_array($result['category_id'], $this->request->post['selected']),
+						'action'      => $action
+					);
+				}
+				
+				$pagination = new Pagination();
+				$pagination->total = $category_total;
+				$pagination->page = $page;
+				$pagination->limit = $this->config->get('config_admin_limit');
+				$pagination->text = $this->language->get('text_pagination');
+				$pagination->url = $this->url->link('catalog/category', 'token=' . $this->session->data['token'] . $url . '&page={page}', 'SSL');
+					
+				$this->data['pagination'] = $pagination->render();
+				$this->template = 'catalog/category_list.tpl';
+				break;
+		}
+		
 		$this->children = array(
 			'common/header',
 			'common/footer'
