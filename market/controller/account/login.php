@@ -34,7 +34,6 @@ class ControllerAccountLogin extends Controller {
 		}
 
 		$this->load->model('account/customer');
-		// Login override for admin users
 		if (!empty($this->request->get['token'])) {
 			$this->customer->logout();
 			$this->cart->clear();
@@ -60,7 +59,7 @@ class ControllerAccountLogin extends Controller {
 			
 			$customer_info = $this->model_account_customer->getCustomerByToken($this->request->get['token']);
 			
-		 	if ($customer_info && $this->customer->login($customer_info['email'], '', true)) {
+		 	if ($customer_info && $this->customer->login($customer_info['mobile_phone'], '', true)) {
 				// Default Addresses
 				$this->load->model('account/address');
 					
@@ -124,7 +123,6 @@ class ControllerAccountLogin extends Controller {
 				unset($this->session->data['payment_zone_id']);	
 			}
 							
-			// Added strpos check to pass McAfee PCI compliance test (http://forum.opencart.com/viewtopic.php?f=10&t=12043&p=151494#p151295)
 			if (isset($this->request->post['redirect']) && (strpos($this->request->post['redirect'], $this->config->get('config_url')) !== false || strpos($this->request->post['redirect'], $this->config->get('config_ssl')) !== false)) {
 				$this->redirect(str_replace('&amp;', '&', $this->request->post['redirect']));
 			} else {
@@ -161,8 +159,10 @@ class ControllerAccountLogin extends Controller {
 		$this->data['text_returning_customer'] = $this->language->get('text_returning_customer');
 		$this->data['text_i_am_returning_customer'] = $this->language->get('text_i_am_returning_customer');
     	$this->data['text_forgotten'] = $this->language->get('text_forgotten');
+    	$this->data['text_auto'] = $this->language->get('text_auto');
 
     	$this->data['entry_email'] = $this->language->get('entry_email');
+    	$this->data['entry_mobile_phone'] = $this->language->get('entry_mobile_phone');
     	$this->data['entry_password'] = $this->language->get('entry_password');
 
     	$this->data['button_continue'] = $this->language->get('button_continue');
@@ -178,7 +178,6 @@ class ControllerAccountLogin extends Controller {
 		$this->data['register'] = $this->url->link('account/register', '', 'SSL');
 		$this->data['forgotten'] = $this->url->link('account/forgotten', '', 'SSL');
 
-    	// Added strpos check to pass McAfee PCI compliance test (http://forum.opencart.com/viewtopic.php?f=10&t=12043&p=151494#p151295)
 		if (isset($this->request->post['redirect']) && (strpos($this->request->post['redirect'], $this->config->get('config_url')) !== false || strpos($this->request->post['redirect'], $this->config->get('config_ssl')) !== false)) {
 			$this->data['redirect'] = $this->request->post['redirect'];
 		} elseif (isset($this->session->data['redirect'])) {
@@ -203,6 +202,12 @@ class ControllerAccountLogin extends Controller {
 			$this->data['email'] = '';
 		}
 
+		if (isset($this->request->post['mobile_phone'])) {
+			$this->data['mobile_phone'] = $this->request->post['mobile_phone'];
+		} else {
+			$this->data['mobile_phone'] = '';
+		}
+
 		if (isset($this->request->post['password'])) {
 			$this->data['password'] = $this->request->post['password'];
 		} else {
@@ -223,14 +228,15 @@ class ControllerAccountLogin extends Controller {
   	}
   
   	protected function validate() {
-    	if (!$this->customer->login($this->request->post['email'], $this->request->post['password'])) {
+
+    	if (!$this->customer->phone_login($this->request->post['mobile_phone'], $this->request->post['password'],false,(!empty($this->request->post['remember'])))) {
       		$this->error['warning'] = $this->language->get('error_login');
     	}
 	
-		$customer_info = $this->model_account_customer->getCustomerByEmail($this->request->post['email']);
+		$customer_info = $this->model_account_customer->getCustomerByMobilePhone($this->request->post['mobile_phone']);
 		
     	if ($customer_info && !$customer_info['approved']) {
-      		$this->error['warning'] = $this->language->get('error_approved');
+      		//$this->error['warning'] = $this->language->get('error_approved');
     	}		
 		
     	if (!$this->error) {

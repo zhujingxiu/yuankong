@@ -52,14 +52,14 @@ $(function(){ $('input, textarea').placeholder(); });
 			</div>
 			<form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
 				<div class="logintext">
-	                <i class="icon2 person"></i><input type="text" name="email" value="<?php echo $email; ?>" class="login-t" placeholder="<?php echo $entry_email; ?>"/>
+	                <i class="icon2 person"></i><input type="text" name="mobile_phone" value="<?php echo $mobile_phone; ?>" class="login-t" placeholder="<?php echo $entry_mobile_phone; ?>"/>
 	            </div>
 	            <div class="logintext">
 	                <i class="icon2 passwd"></i><input type="password" name="password" value="<?php echo $password; ?>" class="login-t" placeholder="<?php echo $entry_password; ?>"/>
 	            </div>
 	            <div class="loginb-yz">
 	                <a href="<?php echo $forgotten; ?>" class="r"><?php echo $text_forgotten; ?></a>
-	                <input type="checkbox" name="c" /><em class="pl5">自动登录</em>
+	                <input type="checkbox" name="remember" value="1"/><em class="pl5"><?php echo $text_auto ?></em>
 	            </div>
 	            <div class="mt15">
 	                <input type="submit" class="gc-tab-sub" value="<?php echo $button_login; ?>" />

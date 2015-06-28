@@ -14,7 +14,11 @@
   <div class="box">
     <div class="heading">
       <h1><img src="view/image/customer.png" alt="" /> <?php echo $heading_title; ?></h1>
-      <div class="buttons"><a onclick="$('form').attr('action', '<?php echo $approve; ?>'); $('form').submit();" class="button"><?php echo $button_approve; ?></a><a href="<?php echo $insert; ?>" class="button"><?php echo $button_insert; ?></a><a onclick="$('form').attr('action', '<?php echo $delete; ?>'); $('form').submit();" class="button"><?php echo $button_delete; ?></a></div>
+      <div class="buttons">
+        <a style="display:none;" onclick="$('form').attr('action', '<?php echo $approve; ?>'); $('form').submit();" class="button"><?php echo $button_approve; ?></a>
+        <a href="<?php echo $insert; ?>" class="button"><?php echo $button_insert; ?></a>
+        <a onclick="$('form').attr('action', '<?php echo $delete; ?>'); $('form').submit();" class="button"><?php echo $button_delete; ?></a>
+      </div>
     </div>
     <div class="content">
       <form action="" method="post" enctype="multipart/form-data" id="form">
@@ -22,6 +26,11 @@
           <thead>
             <tr>
               <td width="1" style="text-align: center;"><input type="checkbox" onclick="$('input[name*=\'selected\']').attr('checked', this.checked);" /></td>
+              <td class="left"><?php if ($sort == 'mobile_phone') { ?>
+                <a href="<?php echo $sort_mobile_phone; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_mobile_phone; ?></a>
+                <?php } else { ?>
+                <a href="<?php echo $sort_mobile_phone; ?>"><?php echo $column_mobile_phone; ?></a>
+                <?php } ?></td>
               <td class="left"><?php if ($sort == 'name') { ?>
                 <a href="<?php echo $sort_name; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_name; ?></a>
                 <?php } else { ?>
@@ -42,11 +51,7 @@
                 <?php } else { ?>
                 <a href="<?php echo $sort_status; ?>"><?php echo $column_status; ?></a>
                 <?php } ?></td>
-              <td class="left"><?php if ($sort == 'c.approved') { ?>
-                <a href="<?php echo $sort_approved; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_approved; ?></a>
-                <?php } else { ?>
-                <a href="<?php echo $sort_approved; ?>"><?php echo $column_approved; ?></a>
-                <?php } ?></td>
+
               <td class="left"><?php if ($sort == 'c.ip') { ?>
                 <a href="<?php echo $sort_ip; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_ip; ?></a>
                 <?php } else { ?>
@@ -64,6 +69,7 @@
           <tbody>
             <tr class="filter">
               <td></td>
+              <td><input type="text" name="filter_mobile_phone" value="<?php echo $filter_mobile_phone; ?>" /></td>
               <td><input type="text" name="filter_name" value="<?php echo $filter_name; ?>" /></td>
               <td><input type="text" name="filter_email" value="<?php echo $filter_email; ?>" /></td>
               <td><select name="filter_customer_group_id">
@@ -89,19 +95,7 @@
                   <option value="0"><?php echo $text_disabled; ?></option>
                   <?php } ?>
                 </select></td>
-              <td><select name="filter_approved">
-                  <option value="*"></option>
-                  <?php if ($filter_approved) { ?>
-                  <option value="1" selected="selected"><?php echo $text_yes; ?></option>
-                  <?php } else { ?>
-                  <option value="1"><?php echo $text_yes; ?></option>
-                  <?php } ?>
-                  <?php if (!is_null($filter_approved) && !$filter_approved) { ?>
-                  <option value="0" selected="selected"><?php echo $text_no; ?></option>
-                  <?php } else { ?>
-                  <option value="0"><?php echo $text_no; ?></option>
-                  <?php } ?>
-                </select></td>
+
               <td><input type="text" name="filter_ip" value="<?php echo $filter_ip; ?>" /></td>
               <td><input type="text" name="filter_date_added" value="<?php echo $filter_date_added; ?>" size="12" id="date" /></td>
               <td></td>
@@ -115,11 +109,11 @@
                 <?php } else { ?>
                 <input type="checkbox" name="selected[]" value="<?php echo $customer['customer_id']; ?>" />
                 <?php } ?></td>
+              <td class="left"><?php echo $customer['mobile_phone']; ?></td>
               <td class="left"><?php echo $customer['name']; ?></td>
               <td class="left"><?php echo $customer['email']; ?></td>
               <td class="left"><?php echo $customer['customer_group']; ?></td>
               <td class="left"><?php echo $customer['status']; ?></td>
-              <td class="left"><?php echo $customer['approved']; ?></td>
               <td class="left"><?php echo $customer['ip']; ?></td>
               <td class="left"><?php echo $customer['date_added']; ?></td>
               <td class="left"><select onchange="((this.value !== '') ? window.open('index.php?route=sale/customer/login&token=<?php echo $token; ?>&customer_id=<?php echo $customer['customer_id']; ?>&store_id=' + this.value) : null); this.value = '';">
@@ -149,7 +143,11 @@
 <script type="text/javascript"><!--
 function filter() {
 	url = 'index.php?route=sale/customer&token=<?php echo $token; ?>';
-	
+	var filter_mobile_phone = $('input[name=\'filter_mobile_phone\']').attr('value');
+  
+  if (filter_name) {
+    url += '&filter_name=' + encodeURIComponent(filter_name);
+  }
 	var filter_name = $('input[name=\'filter_name\']').attr('value');
 	
 	if (filter_name) {

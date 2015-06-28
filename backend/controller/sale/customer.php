@@ -267,6 +267,11 @@ class ControllerSaleCustomer extends Controller {
 	} 
     
   	protected function getList() {
+  		if (isset($this->request->get['filter_mobile_phone'])) {
+			$filter_mobile_phone = $this->request->get['filter_mobile_phone'];
+		} else {
+			$filter_mobile_phone = null;
+		}
 		if (isset($this->request->get['filter_name'])) {
 			$filter_name = $this->request->get['filter_name'];
 		} else {
@@ -328,7 +333,9 @@ class ControllerSaleCustomer extends Controller {
 		}
 						
 		$url = '';
-
+		if (isset($this->request->get['filter_mobile_phone'])) {
+			$url .= '&filter_mobile_phone=' . urlencode(html_entity_decode($this->request->get['filter_mobile_phone'], ENT_QUOTES, 'UTF-8'));
+		}
 		if (isset($this->request->get['filter_name'])) {
 			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
 		}
@@ -390,6 +397,7 @@ class ControllerSaleCustomer extends Controller {
 		$this->data['customers'] = array();
 
 		$data = array(
+			'filter_mobile_phone'      => $filter_mobile_phone, 
 			'filter_name'              => $filter_name, 
 			'filter_email'             => $filter_email, 
 			'filter_customer_group_id' => $filter_customer_group_id, 
@@ -417,6 +425,7 @@ class ControllerSaleCustomer extends Controller {
 			
 			$this->data['customers'][] = array(
 				'customer_id'    => $result['customer_id'],
+				'mobile_phone'   => $result['mobile_phone'],
 				'name'           => $result['name'],
 				'email'          => $result['email'],
 				'customer_group' => $result['customer_group'],
@@ -439,6 +448,7 @@ class ControllerSaleCustomer extends Controller {
 		$this->data['text_default'] = $this->language->get('text_default');		
 		$this->data['text_no_results'] = $this->language->get('text_no_results');
 
+		$this->data['column_mobile_phone'] = $this->language->get('column_mobile_phone');
 		$this->data['column_name'] = $this->language->get('column_name');
 		$this->data['column_email'] = $this->language->get('column_email');
 		$this->data['column_customer_group'] = $this->language->get('column_customer_group');
@@ -471,7 +481,9 @@ class ControllerSaleCustomer extends Controller {
 		}
 		
 		$url = '';
-
+		if (isset($this->request->get['filter_mobile_phone'])) {
+			$url .= '&filter_mobile_phone=' . urlencode(html_entity_decode($this->request->get['filter_mobile_phone'], ENT_QUOTES, 'UTF-8'));
+		}
 		if (isset($this->request->get['filter_name'])) {
 			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
 		}
@@ -510,6 +522,7 @@ class ControllerSaleCustomer extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 		
+		$this->data['sort_mobile_phone'] = $this->url->link('sale/customer', 'token=' . $this->session->data['token'] . '&sort=c.mobile_phone' . $url, 'SSL');
 		$this->data['sort_name'] = $this->url->link('sale/customer', 'token=' . $this->session->data['token'] . '&sort=name' . $url, 'SSL');
 		$this->data['sort_email'] = $this->url->link('sale/customer', 'token=' . $this->session->data['token'] . '&sort=c.email' . $url, 'SSL');
 		$this->data['sort_customer_group'] = $this->url->link('sale/customer', 'token=' . $this->session->data['token'] . '&sort=customer_group' . $url, 'SSL');
@@ -519,7 +532,9 @@ class ControllerSaleCustomer extends Controller {
 		$this->data['sort_date_added'] = $this->url->link('sale/customer', 'token=' . $this->session->data['token'] . '&sort=c.date_added' . $url, 'SSL');
 		
 		$url = '';
-
+		if (isset($this->request->get['filter_mobile_phone'])) {
+			$url .= '&filter_mobile_phone=' . urlencode(html_entity_decode($this->request->get['filter_mobile_phone'], ENT_QUOTES, 'UTF-8'));
+		}
 		if (isset($this->request->get['filter_name'])) {
 			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
 		}
@@ -565,6 +580,7 @@ class ControllerSaleCustomer extends Controller {
 			
 		$this->data['pagination'] = $pagination->render();
 
+		$this->data['filter_mobile_phone'] = $filter_mobile_phone;
 		$this->data['filter_name'] = $filter_name;
 		$this->data['filter_email'] = $filter_email;
 		$this->data['filter_customer_group_id'] = $filter_customer_group_id;
@@ -613,6 +629,7 @@ class ControllerSaleCustomer extends Controller {
     	$this->data['entry_firstname'] = $this->language->get('entry_firstname');
     	$this->data['entry_lastname'] = $this->language->get('entry_lastname');
     	$this->data['entry_email'] = $this->language->get('entry_email');
+    	$this->data['entry_mobile_phone'] = $this->language->get('entry_mobile_phone');
     	$this->data['entry_telephone'] = $this->language->get('entry_telephone');
     	$this->data['entry_fax'] = $this->language->get('entry_fax');
     	$this->data['entry_password'] = $this->language->get('entry_password');
@@ -680,6 +697,12 @@ class ControllerSaleCustomer extends Controller {
 			$this->data['error_email'] = $this->error['email'];
 		} else {
 			$this->data['error_email'] = '';
+		}
+
+		if (isset($this->error['mobile_phone'])) {
+			$this->data['error_mobile_phone'] = $this->error['mobile_phone'];
+		} else {
+			$this->data['error_mobile_phone'] = '';
 		}
 		
  		if (isset($this->error['telephone'])) {
@@ -749,7 +772,9 @@ class ControllerSaleCustomer extends Controller {
 		}
 		
 		$url = '';
-		
+		if (isset($this->request->get['filter_mobile_phone'])) {
+			$url .= '&filter_mobile_phone=' . urlencode(html_entity_decode($this->request->get['filter_mobile_phone'], ENT_QUOTES, 'UTF-8'));
+		}
 		if (isset($this->request->get['filter_name'])) {
 			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
 		}
@@ -836,14 +861,20 @@ class ControllerSaleCustomer extends Controller {
       		$this->data['email'] = '';
     	}
 
-    	if (isset($this->request->post['telephone'])) {
+    	if (isset($this->request->post['mobile_phone'])) {
+      		$this->data['mobile_phone'] = $this->request->post['mobile_phone'];
+    	} elseif (!empty($customer_info)) { 
+			$this->data['mobile_phone'] = $customer_info['mobile_phone'];
+		} else {
+      		$this->data['mobile_phone'] = '';
+    	}
+		if (isset($this->request->post['telephone'])) {
       		$this->data['telephone'] = $this->request->post['telephone'];
     	} elseif (!empty($customer_info)) { 
 			$this->data['telephone'] = $customer_info['telephone'];
 		} else {
       		$this->data['telephone'] = '';
     	}
-
     	if (isset($this->request->post['fax'])) {
       		$this->data['fax'] = $this->request->post['fax'];
     	} elseif (!empty($customer_info)) { 
@@ -951,7 +982,22 @@ class ControllerSaleCustomer extends Controller {
     	if ((utf8_strlen($this->request->post['lastname']) < 1) || (utf8_strlen($this->request->post['lastname']) > 32)) {
       		$this->error['lastname'] = $this->language->get('error_lastname');
     	}
+    	if ((utf8_strlen($this->request->post['mobile_phone']) > 16) || !preg_match('/^0?(13[0-9]|15[012356789]|18[0236789]|14[57])[0-9]{8}$/', $this->request->post['mobile_phone'])) {
+      		$this->error['mobile_phone'] = $this->language->get('error_mobile_phone');
+    	}
 
+    	$customer_info = $this->model_sale_customer->getCustomerByMobilePhone($this->request->post['mobile_phone']);
+		
+		if (!isset($this->request->get['customer_id'])) {
+			if ($customer_info) {
+				$this->error['warning'] = $this->language->get('error_exists');
+			}
+		} else {
+			if ($customer_info && ($this->request->get['customer_id'] != $customer_info['customer_id'])) {
+				$this->error['warning'] = $this->language->get('error_exists');
+			}
+		}
+/*
 		if ((utf8_strlen($this->request->post['email']) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $this->request->post['email'])) {
       		$this->error['email'] = $this->language->get('error_email');
     	}
@@ -971,7 +1017,7 @@ class ControllerSaleCustomer extends Controller {
     	if ((utf8_strlen($this->request->post['telephone']) < 3) || (utf8_strlen($this->request->post['telephone']) > 32)) {
       		$this->error['telephone'] = $this->language->get('error_telephone');
     	}
-
+*/
     	if ($this->request->post['password'] || (!isset($this->request->get['customer_id']))) {
       		if ((utf8_strlen($this->request->post['password']) < 4) || (utf8_strlen($this->request->post['password']) > 20)) {
         		$this->error['password'] = $this->language->get('error_password');

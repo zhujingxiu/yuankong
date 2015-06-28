@@ -121,6 +121,16 @@ $registry->set('cache', $cache);
 $session = new Session();
 $registry->set('session', $session);
 
+
+//Remember Me
+if (!isset($session->data['customer_id']) || !$session->data['customer_id']) {
+	if(!empty($_COOKIE['_remember_phone']) && !empty($_COOKIE['_remember_pwd'])){
+		$remember = $db->fetch("customer",array('one'=>true,'condition'=>array('mobile_phone'=>$_COOKIE['_remember_phone'],'password'=>$_COOKIE['_remember_pwd'])));
+		if(!empty($remember['customer_id'])){
+			$session->data['customer_id'] = $remember['customer_id'];
+		}
+	}
+}
 // Language Detection
 $languages = array();
 
@@ -226,4 +236,3 @@ $controller->dispatch($action, new Action('error/not_found'));
 
 // Output
 $response->output();
-?>

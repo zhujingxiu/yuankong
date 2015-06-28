@@ -12,6 +12,7 @@ $_['text_add_ban_ip']       = '添加到黑名单';
 $_['text_remove_ban_ip'] 	= '从黑名单中删除';
 
 // Column
+$_['column_mobile_phone']   = '手机号码';
 $_['column_name']           = '客户名称';
 $_['column_email']          = 'E-Mail';
 $_['column_customer_group'] = '用户组';
@@ -31,6 +32,7 @@ $_['column_action']         = '管理';
 $_['entry_firstname']       = '名字：';
 $_['entry_lastname']        = '姓氏：';
 $_['entry_email']           = 'E-Mail：';
+$_['entry_mobile_phone']    = '手机号码：';
 $_['entry_telephone']       = '电话：';
 $_['entry_fax']             = '&nbsp;&nbsp;传真：';
 $_['entry_newsletter']      = '&nbsp;&nbsp;咨询：';
@@ -56,7 +58,8 @@ $_['entry_description']     = '说明：';
 // Error
 $_['error_warning']         = '警告： 请认真查看错误信息！';
 $_['error_permission']      = '警告： 您没有权限更改客户设置！';
-$_['error_exists']          = '警告： E-Mail地址已存在！';
+$_['error_exists']          = '警告： 手机号码已存在！';
+$_['error_mobile_phone']    = '无效的手机号码！';
 $_['error_firstname']       = '名字必须在1至32个字符之间！';
 $_['error_lastname']        = '姓氏必须在1至32个字符之间！';
 $_['error_email']           = '邮箱地址无效！';
@@ -71,4 +74,3 @@ $_['error_city']            = '城市名必须在2至128个字符之间！';
 $_['error_postcode']        = '邮编必须在2至10个字符之间！';
 $_['error_country']         = '请选择国家！';
 $_['error_zone']            = '请选择区域/省/市！';
-?>

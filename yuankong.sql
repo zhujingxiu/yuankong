@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2015 年 06 月 25 日 15:18
+-- 生成日期: 2015 年 06 月 28 日 15:13
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.4.3
 
@@ -1059,6 +1059,7 @@ INSERT INTO `yk_currency` (`currency_id`, `title`, `code`, `symbol_left`, `symbo
 CREATE TABLE IF NOT EXISTS `yk_customer` (
   `customer_id` int(11) NOT NULL AUTO_INCREMENT,
   `store_id` int(11) NOT NULL DEFAULT '0',
+  `mobile_phone` varchar(16) NOT NULL,
   `firstname` varchar(32) NOT NULL,
   `lastname` varchar(32) NOT NULL,
   `email` varchar(96) NOT NULL,
@@ -1084,8 +1085,8 @@ CREATE TABLE IF NOT EXISTS `yk_customer` (
 -- 转存表中的数据 `yk_customer`
 --
 
-INSERT INTO `yk_customer` (`customer_id`, `store_id`, `firstname`, `lastname`, `email`, `telephone`, `fax`, `password`, `salt`, `cart`, `wishlist`, `viewed`, `newsletter`, `address_id`, `customer_group_id`, `ip`, `status`, `approved`, `token`, `date_added`) VALUES
-(1, 0, '靖', '郭', 'guojing@shediao.cn', '123123', '', '3838e00e6e59c95a65bc786ff38d303252338a3f', '7abf86dd9', 'a:0:{}', '', '', 0, 0, 1, '127.0.0.1', 1, 0, '', '2015-06-12 17:34:52');
+INSERT INTO `yk_customer` (`customer_id`, `store_id`, `mobile_phone`, `firstname`, `lastname`, `email`, `telephone`, `fax`, `password`, `salt`, `cart`, `wishlist`, `viewed`, `newsletter`, `address_id`, `customer_group_id`, `ip`, `status`, `approved`, `token`, `date_added`) VALUES
+(1, 0, '18850911766', '无忌', '张', 'zhangwuji@yitiantulong.cn', '123123', '', '3838e00e6e59c95a65bc786ff38d303252338a3f', '7abf86dd9', 'a:0:{}', '', '', 0, 0, 1, '127.0.0.1', 1, 0, '', '2015-06-12 17:34:52');
 
 -- --------------------------------------------------------
 
@@ -2345,6 +2346,7 @@ CREATE TABLE IF NOT EXISTS `yk_product` (
   `manufacturer_id` int(11) NOT NULL,
   `shipping` tinyint(1) NOT NULL DEFAULT '1',
   `price` decimal(15,4) NOT NULL DEFAULT '0.0000',
+  `market` decimal(15,4) NOT NULL DEFAULT '0.0000',
   `points` int(8) NOT NULL DEFAULT '0',
   `tax_class_id` int(11) NOT NULL,
   `date_available` date NOT NULL,
@@ -2369,13 +2371,13 @@ CREATE TABLE IF NOT EXISTS `yk_product` (
 -- 转存表中的数据 `yk_product`
 --
 
-INSERT INTO `yk_product` (`product_id`, `model`, `sku`, `upc`, `ean`, `jan`, `isbn`, `mpn`, `location`, `quantity`, `stock_status_id`, `image`, `manufacturer_id`, `shipping`, `price`, `points`, `tax_class_id`, `date_available`, `weight`, `weight_class_id`, `length`, `width`, `height`, `length_class_id`, `subtract`, `minimum`, `sort_order`, `category_related`, `status`, `date_added`, `date_modified`, `viewed`) VALUES
-(50, '132143', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic1.jpg', 0, 1, '126.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, 1, '2015-06-16 14:52:22', '2015-06-16 16:23:34', 62),
-(51, 'ae123213', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic2.jpg', 0, 1, '123.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, 1, '2015-06-23 07:23:47', '0000-00-00 00:00:00', 19),
-(52, '123123', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic4.jpg', 0, 1, '123.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, 1, '2015-06-16 16:29:23', '0000-00-00 00:00:00', 7),
-(53, '231414', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic3.jpg', 0, 1, '125.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, 1, '2015-06-25 13:24:47', '0000-00-00 00:00:00', 84),
-(54, '2144232', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic5.jpg', 0, 1, '128.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, 1, '2015-06-16 09:03:38', '0000-00-00 00:00:00', 6),
-(55, 'xf1325324', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic6.jpg', 0, 1, '158.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, 1, '2015-06-16 09:05:42', '0000-00-00 00:00:00', 1);
+INSERT INTO `yk_product` (`product_id`, `model`, `sku`, `upc`, `ean`, `jan`, `isbn`, `mpn`, `location`, `quantity`, `stock_status_id`, `image`, `manufacturer_id`, `shipping`, `price`, `market`, `points`, `tax_class_id`, `date_available`, `weight`, `weight_class_id`, `length`, `width`, `height`, `length_class_id`, `subtract`, `minimum`, `sort_order`, `category_related`, `status`, `date_added`, `date_modified`, `viewed`) VALUES
+(50, '132143', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic1.jpg', 0, 1, '126.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, 1, '2015-06-26 13:00:31', '2015-06-16 16:23:34', 62),
+(51, 'ae123213', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic2.jpg', 0, 1, '123.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, 1, '2015-06-23 07:23:47', '0000-00-00 00:00:00', 19),
+(52, '123123', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic4.jpg', 0, 1, '123.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, 1, '2015-06-16 16:29:23', '0000-00-00 00:00:00', 7),
+(53, '231414', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic3.jpg', 0, 1, '125.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, 1, '2015-06-26 13:13:01', '0000-00-00 00:00:00', 125),
+(54, '2144232', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic5.jpg', 0, 1, '128.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, 1, '2015-06-16 09:03:38', '0000-00-00 00:00:00', 6),
+(55, 'xf1325324', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic6.jpg', 0, 1, '158.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, 1, '2015-06-16 09:05:42', '0000-00-00 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -2415,7 +2417,7 @@ CREATE TABLE IF NOT EXISTS `yk_product_description` (
 --
 
 INSERT INTO `yk_product_description` (`product_id`, `language_id`, `name`, `subtitle`, `description`, `meta_description`, `meta_keyword`, `tag`) VALUES
-(50, 2, '嵌入式插电安全出口疏散指示灯', NULL, '&lt;div class=&quot;rel z-i&quot; style=&quot;margin: 0px; padding: 0px; border: 0px; position: relative; z-index: 1;&quot;&gt;\r\n&lt;p style=&quot;margin: 0px; padding: 0px; border: 0px;&quot;&gt;&lt;a class=&quot;db rel&quot; href=&quot;#&quot; style=&quot;margin: 0px; padding: 0px; border: 0px; color: rgb(136, 136, 136); text-decoration: none; display: block; position: relative; width: 234px; height: 184px; overflow: hidden; font-size: 12px; font-family: ''microsoft yahei''; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 25px; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);&quot;&gt;全场5折起售，10件更优惠&lt;/a&gt;&lt;/p&gt;\r\n&lt;/div&gt;\r\n', '', '', ''),
+(50, 2, '嵌入式插电安全出口疏散指示灯', '', '&lt;div class=&quot;rel z-i&quot; style=&quot;margin: 0px; padding: 0px; border: 0px; position: relative; z-index: 1;&quot;&gt;\r\n&lt;p style=&quot;margin: 0px; padding: 0px; border: 0px;&quot;&gt;&lt;a class=&quot;db rel&quot; href=&quot;#&quot; style=&quot;margin: 0px; padding: 0px; border: 0px; color: rgb(136, 136, 136); text-decoration: none; display: block; position: relative; width: 234px; height: 184px; overflow: hidden; font-size: 12px; font-family: ''microsoft yahei''; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 25px; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);&quot;&gt;全场5折起售，10件更优惠&lt;/a&gt;&lt;/p&gt;\r\n&lt;/div&gt;', '', '', ''),
 (52, 2, '灭火器箱', NULL, '', '', '', ''),
 (1, 2, '消防应急照明灯具', '', '', '', '', ''),
 (53, 2, '源控消防水带', '源控消防水带', '&lt;p&gt;源控消防水带&lt;/p&gt;', '源控消防水带', '', ''),
@@ -2466,16 +2468,19 @@ CREATE TABLE IF NOT EXISTS `yk_product_image` (
   `image` varchar(255) DEFAULT NULL,
   `sort_order` int(3) NOT NULL DEFAULT '0',
   PRIMARY KEY (`product_image_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2356 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2360 ;
 
 --
 -- 转存表中的数据 `yk_product_image`
 --
 
 INSERT INTO `yk_product_image` (`product_image_id`, `product_id`, `image`, `sort_order`) VALUES
-(2353, 50, 'no_image.jpg', 0),
+(2356, 50, 'no_image.jpg', 0),
 (2354, 51, 'data/sdetail1.jpg', 1),
-(2355, 51, 'data/sdetail2.jpg', 0);
+(2355, 51, 'data/sdetail2.jpg', 0),
+(2357, 53, 'data/demo/imac_1.jpg', 1),
+(2358, 53, 'data/demo/canon_eos_5d_1.jpg', 2),
+(2359, 53, 'data/demo/sony_logo.jpg', 3);
 
 -- --------------------------------------------------------
 
@@ -2527,10 +2532,10 @@ CREATE TABLE IF NOT EXISTS `yk_product_option_value` (
 --
 
 INSERT INTO `yk_product_option_value` (`product_option_value_id`, `product_option_id`, `product_id`, `option_id`, `option_value_id`, `quantity`, `subtract`, `price`, `price_prefix`, `points`, `points_prefix`, `weight`, `weight_prefix`) VALUES
-(17, 227, 53, 13, 49, 100, 0, '10.0000', '+', 0, '+', '0.000', '+'),
-(18, 227, 53, 13, 50, 100, 0, '15.0000', '+', 0, '+', '0.000', '+'),
-(19, 227, 53, 13, 51, 100, 0, '5.0000', '+', 0, '+', '0.000', '+'),
 (20, 227, 53, 13, 52, 100, 1, '5.0000', '-', 0, '+', '0.000', '+'),
+(19, 227, 53, 13, 51, 100, 0, '5.0000', '+', 0, '+', '0.000', '+'),
+(18, 227, 53, 13, 50, 100, 0, '15.0000', '+', 0, '+', '0.000', '+'),
+(17, 227, 53, 13, 49, 100, 0, '10.0000', '+', 0, '+', '0.000', '+'),
 (21, 227, 53, 13, 53, 100, 1, '10.0000', '-', 0, '+', '0.000', '+');
 
 -- --------------------------------------------------------
@@ -2603,7 +2608,6 @@ CREATE TABLE IF NOT EXISTS `yk_product_to_category` (
 
 INSERT INTO `yk_product_to_category` (`product_id`, `category_id`) VALUES
 (1, 95),
-(50, 95),
 (50, 96),
 (51, 95),
 (52, 64),

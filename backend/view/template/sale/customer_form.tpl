@@ -31,6 +31,13 @@
           <div id="tab-customer" class="vtabs-content">
             <table class="form">
               <tr>
+                <td><span class="required">*</span> <?php echo $entry_mobile_phone; ?></td>
+                <td><input type="text" name="mobile_phone" value="<?php echo $mobile_phone; ?>" />
+                  <?php if ($error_mobile_phone) { ?>
+                  <span class="error"><?php echo $error_mobile_phone; ?></span>
+                  <?php } ?></td>
+              </tr>
+              <tr>
                 <td><span class="required">*</span> <?php echo $entry_firstname; ?></td>
                 <td><input type="text" name="firstname" value="<?php echo $firstname; ?>" />
                   <?php if ($error_firstname) { ?>

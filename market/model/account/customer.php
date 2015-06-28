@@ -108,6 +108,10 @@ class ModelAccountCustomer extends Model {
 		
 		return $query->row;
 	}
+
+	public function getCustomerByMobilePhone($mobile_phone) {
+		return $this->db->fetch("customer",array('one'=>true,'condition'=>array('mobile_phone' => $mobile_phone)));
+	}
 		
 	public function getCustomerByToken($token) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer WHERE token = '" . $this->db->escape($token) . "' AND token != ''");
