@@ -230,7 +230,7 @@ class ControllerAccountLogin extends Controller {
   	protected function validate() {
 
     	if (!$this->customer->phone_login($this->request->post['mobile_phone'], $this->request->post['password'],false,(!empty($this->request->post['remember'])))) {
-      		$this->error['warning'] = $this->language->get('error_login');
+      		$this->error['warning'] = $this->language->get('error_phone_login');
     	}
 	
 		$customer_info = $this->model_account_customer->getCustomerByMobilePhone($this->request->post['mobile_phone']);

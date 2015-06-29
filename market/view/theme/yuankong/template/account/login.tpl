@@ -50,6 +50,9 @@ $(function(){ $('input, textarea').placeholder(); });
 			  <a class="l-zhuce" href="<?php echo $register ?>"><?php echo $text_register; ?></a>
 			  <span class="f_xl c2"><?php echo $text_customer; ?></span>
 			</div>
+			<?php if(!empty($error_warning)){ ?>
+			<div class="msg-error"><?php echo $error_warning ?></div>
+			<?php }?>
 			<form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
 				<div class="logintext">
 	                <i class="icon2 person"></i><input type="text" name="mobile_phone" value="<?php echo $mobile_phone; ?>" class="login-t" placeholder="<?php echo $entry_mobile_phone; ?>"/>
@@ -63,6 +66,14 @@ $(function(){ $('input, textarea').placeholder(); });
 	            </div>
 	            <div class="mt15">
 	                <input type="submit" class="gc-tab-sub" value="<?php echo $button_login; ?>" />
+	            </div>
+	            <div class="mt15">
+	                <p class="f_s c8">使用合作网站登录消防e站</p>
+	                <p class="mt5">
+	                	<a href="#" class="pr15"><img src="market/view/theme/yuankong/yk_img/icon/qq-l.png" alt="qq登录"></a>
+	                	<a href="#" class="pr15"><img src="market/view/theme/yuankong/yk_img/icon/zfb-l.png" alt="支付宝登录"></a>
+	                	<a href="#" class="pr15"><img src="market/view/theme/yuankong/yk_img/icon/wb-l.png" alt="微博登录"></a>
+	                </p>
 	            </div>
 	            <?php if ($redirect) { ?>
 				  <input type="hidden" name="redirect" value="<?php echo $redirect; ?>" />
@@ -79,4 +90,17 @@ $('#login input').keydown(function(e) {
 	}
 });
 //--></script> 
+<style type="text/css">
+	.loginbox .msg-error {
+	  position: relative;
+	  background: #ffebeb;
+	  color: #e4393c;
+	  border: 1px solid #e4393c;
+	  padding: 3px 8px ;
+	  font-size: 14px;
+	  line-height: 18px;
+	  min-height: 18px;
+	  _height: 18px;
+	}
+</style>
 <?php echo $footer; ?>

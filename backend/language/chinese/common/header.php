@@ -7,6 +7,7 @@ $_['text_affiliate']                   = '商户管理';
 $_['text_affiliate_group']             = '商户类别';
 $_['text_attribute']                   = '属性';
 $_['text_attribute_group']             = '属性组';
+$_['text_api']             			   = '平台账户';
 $_['text_backup']                      = '数据维护';
 $_['text_banner']                      = '横幅广告';
 $_['text_catalog']                     = '商品目录';
