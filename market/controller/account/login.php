@@ -213,6 +213,45 @@ class ControllerAccountLogin extends Controller {
 		} else {
 			$this->data['password'] = '';
 		}
+
+        $oauth_html = '';
+        
+        $oauth_lists = array();
+        
+        if ($this->config->get('oauth')) {
+            foreach ($this->config->get('oauth') as $key => $val) {
+                if ($val['status']) {           
+                    $oauth_lists[$val['sort']] = array(
+                        'tag'      => $key,
+                        'status'   => $val['status'],
+                        'icon'      => $val['img'],
+                        'href'     => $this->url->link('account/oauth/bind', 'tag='.$key, 'SSL')
+                    );
+                }
+            }
+                
+            ksort($oauth_lists);
+        }
+        
+        if ($oauth_lists) {
+            $this->language->load('account/oauth');
+            
+            $oauth_html .= '<p class="f_s c8">'.$this->language->get('text_login').'</p>';
+            $oauth_html .= '<p class="mt5">';
+            foreach ($oauth_lists as $item) {
+                $oauth_html .= '<a class="pr15" href="' . $item['href'] . '" >' ;
+                $oauth_html .= '<img src="'.$item['icon'].'" title="' . $item['tag'] . '">' ;
+                $oauth_html .= '</a>';
+            }
+            $oauth_html .= '</p>';
+        }
+        
+        if ($this->customer->isLogged()) {
+            $oauth_html = '<div class="oauth_login">';
+            $oauth_html .= $this->data['text_logged'] = sprintf($this->language->get('text_logged'), $this->url->link('account/account', '', 'SSL'), $this->customer->getFirstName(), $this->url->link('account/logout', '', 'SSL'));
+            $oauth_html .= '</div>';
+        }
+        $this->data['oauth_html'] = $oauth_html;
 				
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/login.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/account/login.tpl';

@@ -6,13 +6,15 @@ $_['heading_title']     = '商店管理员';
 $_['text_success']      = '成功： 您已成功更新管理员设置！';
 
 // Column
-$_['column_username']   = '管理员名';
+$_['column_username']   = '用户名';
+$_['column_nickname']   = '管理员名称';
 $_['column_status']     = '状态';
 $_['column_date_added'] = '生成日期';
 $_['column_action']     = '管理';
 
 // Entry
 $_['entry_username']    = '管理员名称：';
+$_['entry_nickname']    = '管理员昵称：';
 $_['entry_password']    = '&nbsp;&nbsp;&nbsp;密码：';
 $_['entry_confirm']     = '&nbsp;&nbsp;&nbsp;确认密码：';
 $_['entry_firstname']   = '名字：';

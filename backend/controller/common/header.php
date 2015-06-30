@@ -118,7 +118,7 @@ class ControllerCommonHeader extends Controller {
 			$this->data['home'] = $this->url->link('common/login', '', 'SSL');
 		} else {
 			$profile = $this->url->link('common/profile','token=' . $this->session->data['token'], 'SSL');
-			$this->data['logged'] = sprintf($this->language->get('text_logged'), $profile,$this->user->getFullName());
+			$this->data['logged'] = sprintf($this->language->get('text_logged'), $profile,$this->user->getNickName());
 	
 			$this->data['home'] = $this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['affiliate'] = $this->url->link('sale/affiliate', 'token=' . $this->session->data['token'], 'SSL');

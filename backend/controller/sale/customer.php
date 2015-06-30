@@ -426,7 +426,7 @@ class ControllerSaleCustomer extends Controller {
 			$this->data['customers'][] = array(
 				'customer_id'    => $result['customer_id'],
 				'mobile_phone'   => $result['mobile_phone'],
-				'name'           => $result['name'],
+				'name'           => $result['nickname'],
 				'email'          => $result['email'],
 				'customer_group' => $result['customer_group'],
 				'status'         => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),
@@ -680,7 +680,11 @@ class ControllerSaleCustomer extends Controller {
 		} else {
 			$this->data['error_warning'] = '';
 		}
-
+ 		if (isset($this->error['nickname'])) {
+			$this->data['error_nickname'] = $this->error['nickname'];
+		} else {
+			$this->data['error_nickname'] = '';
+		}
  		if (isset($this->error['firstname'])) {
 			$this->data['error_firstname'] = $this->error['firstname'];
 		} else {
@@ -705,12 +709,7 @@ class ControllerSaleCustomer extends Controller {
 			$this->data['error_mobile_phone'] = '';
 		}
 		
- 		if (isset($this->error['telephone'])) {
-			$this->data['error_telephone'] = $this->error['telephone'];
-		} else {
-			$this->data['error_telephone'] = '';
-		}
-		
+	
  		if (isset($this->error['password'])) {
 			$this->data['error_password'] = $this->error['password'];
 		} else {
@@ -836,7 +835,13 @@ class ControllerSaleCustomer extends Controller {
     	if (isset($this->request->get['customer_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
       		$customer_info = $this->model_sale_customer->getCustomer($this->request->get['customer_id']);
     	}
-			
+		if (isset($this->request->post['nickname'])) {
+      		$this->data['nickname'] = $this->request->post['nickname'];
+		} elseif (!empty($customer_info)) { 
+			$this->data['nickname'] = $customer_info['nickname'];
+		} else {
+      		$this->data['nickname'] = '';
+    	}
     	if (isset($this->request->post['firstname'])) {
       		$this->data['firstname'] = $this->request->post['firstname'];
 		} elseif (!empty($customer_info)) { 
@@ -974,7 +979,7 @@ class ControllerSaleCustomer extends Controller {
     	if (!$this->user->hasPermission('modify', 'sale/customer')) {
       		$this->error['warning'] = $this->language->get('error_permission');
     	}
-
+/*
     	if ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32)) {
       		$this->error['firstname'] = $this->language->get('error_firstname');
     	}
@@ -982,6 +987,8 @@ class ControllerSaleCustomer extends Controller {
     	if ((utf8_strlen($this->request->post['lastname']) < 1) || (utf8_strlen($this->request->post['lastname']) > 32)) {
       		$this->error['lastname'] = $this->language->get('error_lastname');
     	}
+
+    	*/
     	if ((utf8_strlen($this->request->post['mobile_phone']) > 16) || !preg_match('/^0?(13[0-9]|15[012356789]|18[0236789]|14[57])[0-9]{8}$/', $this->request->post['mobile_phone'])) {
       		$this->error['mobile_phone'] = $this->language->get('error_mobile_phone');
     	}

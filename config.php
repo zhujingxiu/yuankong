@@ -13,6 +13,7 @@ define('TPL_IMG', 'asset/image/');
 define('TPL_UPLOAD', 'asset/upload/');
 
 define('DIR_SYSTEM', APP_PATH.'system/');
+define('DIR_LIB', DIR_SYSTEM.'library/');
 define('DIR_CACHE', DIR_SYSTEM.'cache/');
 define('DIR_CONFIG', DIR_SYSTEM.'config/');
 

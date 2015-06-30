@@ -3,7 +3,7 @@ class User {
 	private $user_id;
 	private $user_group_id;
     private $username;
-    private $fullname;
+    private $nickname;
   	private $permission = array();
 
   	public function __construct($registry) {
@@ -17,7 +17,7 @@ class User {
 			if ($user_query->num_rows) {
 				$this->user_id = $user_query->row['user_id'];
                 $this->username = $user_query->row['username'];
-				$this->fullname = $user_query->row['lastname'].$user_query->row['firstname'];
+				$this->nickname = $user_query->row['nickname'];
 				$this->user_group_id = $user_query->row['user_group_id'];
 				
       			$this->db->query("UPDATE " . DB_PREFIX . "user SET ip = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "' WHERE user_id = '" . (int)$this->session->data['user_id'] . "'");
@@ -45,7 +45,7 @@ class User {
 			
 			$this->user_id = $user_query->row['user_id'];
 			$this->username = $user_query->row['username'];
-            $this->fullname = $user_query->row['lastname'].$user_query->row['firstname'];
+            $this->nickname = $user_query->row['nickname'];
 			$this->user_group_id = $user_query->row['user_group_id'];			
 
       		$user_group_query = $this->db->query("SELECT permission FROM " . DB_PREFIX . "user_group WHERE user_group_id = '" . (int)$user_query->row['user_group_id'] . "'");
@@ -70,8 +70,8 @@ class User {
         $this->user_id = '';
 		$this->user_group_id = '';
         $this->username = '';
-		$this->fullname = '';
-		
+		$this->nickname = '';
+
 		session_destroy();
   	}
 
@@ -89,14 +89,14 @@ class User {
   	}
   
   	public function getId() {
-    	return $this->user_id;
+    	return (int)$this->user_id;
   	}
 	
   	public function getUserName() {
     	return $this->username;
   	}	
-    public function getFullName() {
-        return $this->fullname;
+    public function getNickName() {
+        return $this->nickname;
     }
   	public function getUserGroupId(){
   		return $this->user_group_id;

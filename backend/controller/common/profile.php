@@ -15,6 +15,7 @@ class ControllerCommonProfile extends Controller {
         $this->data['text_disabled'] = $this->language->get('text_disabled');
         
         $this->data['entry_username'] = $this->language->get('entry_username');
+        $this->data['entry_nickname'] = $this->language->get('entry_nickname');
         $this->data['entry_password'] = $this->language->get('entry_password');
         $this->data['entry_confirm'] = $this->language->get('entry_confirm');
         $this->data['entry_firstname'] = $this->language->get('entry_firstname');
@@ -56,6 +57,12 @@ class ControllerCommonProfile extends Controller {
             $this->data['error_confirm'] = $this->error['confirm'];
         } else {
             $this->data['error_confirm'] = '';
+        }
+
+        if (isset($this->error['nickname'])) {
+            $this->data['error_nickname'] = $this->error['nickname'];
+        } else {
+            $this->data['error_nickname'] = '';
         }
         
         if (isset($this->error['firstname'])) {
@@ -124,6 +131,13 @@ class ControllerCommonProfile extends Controller {
             $this->data['confirm'] = $this->request->post['confirm'];
         } else {
             $this->data['confirm'] = '';
+        }
+        if (isset($this->request->post['nickname'])) {
+            $this->data['nickname'] = $this->request->post['nickname'];
+        } elseif (!empty($user_info['nickname'])) {
+            $this->data['nickname'] = $user_info['nickname'];
+        } else {
+            $this->data['nickname'] = '';
         }
   
         if (isset($this->request->post['firstname'])) {
@@ -221,7 +235,7 @@ class ControllerCommonProfile extends Controller {
         if ($user_info && ($this->user->getId() != $user_info['user_id'])) {
             $this->error['warning'] = $this->language->get('error_exists');
         }
-        
+        /*
         if ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32)) {
             $this->error['firstname'] = $this->language->get('error_firstname');
         }
@@ -229,7 +243,7 @@ class ControllerCommonProfile extends Controller {
         if ((utf8_strlen($this->request->post['lastname']) < 1) || (utf8_strlen($this->request->post['lastname']) > 32)) {
             $this->error['lastname'] = $this->language->get('error_lastname');
         }
-
+*/
         if (!empty($this->request->post['password'])) {
             if ((utf8_strlen($this->request->post['password']) < 4) || (utf8_strlen($this->request->post['password']) > 20)) {
                 $this->error['password'] = $this->language->get('error_password');

@@ -27,17 +27,17 @@
           <table class="form">
             <tr>
               <td><span class="required">*</span> <?php echo 'Appid'; ?></td>
-              <td><input type="text" name="api_qq_appid" value="<?php echo $api_qq_appid; ?>" size="40" />
+              <td><input type="text" name="api_qq_appid" value="<?php echo $api_qq_appid; ?>" size="50" />
                 </td>
             </tr>
             <tr>
               <td><span class="required">*</span> <?php echo 'Appkey'; ?></td>
-              <td><input type="text" name="api_qq_appkey" value="<?php echo $api_qq_appkey; ?>" size="40" />
+              <td><input type="text" name="api_qq_appkey" value="<?php echo $api_qq_appkey; ?>" size="50" />
                 </td>
             </tr>
             <tr>
               <td><span class="required">*</span> <?php echo 'callback'; ?></td>
-              <td><textarea name="api_qq_callback" cols="40" rows="5"><?php echo $api_qq_callback; ?></textarea>
+              <td><input type="text" name="api_qq_callback" value="<?php echo $api_qq_callback; ?>" size="50"/>
                 </td>
             </tr>
             <tr>
@@ -79,17 +79,17 @@
           <table class="form">
             <tr>
               <td><span class="required">*</span> <?php echo 'Appid'; ?></td>
-              <td><input type="text" name="api_weibo_appid" value="<?php echo $api_weibo_appid; ?>" size="40" />
+              <td><input type="text" name="api_weibo_appid" value="<?php echo $api_weibo_appid; ?>" size="50" />
                 </td>
             </tr>
             <tr>
               <td><span class="required">*</span> <?php echo 'Appkey'; ?></td>
-              <td><input type="text" name="api_weibo_appkey" value="<?php echo $api_weibo_appkey; ?>" size="40" />
+              <td><input type="text" name="api_weibo_appkey" value="<?php echo $api_weibo_appkey; ?>" size="50" />
                 </td>
             </tr>
             <tr>
               <td><span class="required">*</span> <?php echo 'callback'; ?></td>
-              <td><textarea name="api_weibo_callback" cols="40" rows="5"><?php echo $api_weibo_callback; ?></textarea>
+              <td><input type="text" name="api_weibo_callback" size="50" value="<?php echo $api_weibo_callback; ?>"></textarea>
                 </td>
             </tr>
             <tr>
@@ -131,17 +131,17 @@
           <table class="form">
             <tr>
               <td><span class="required">*</span> <?php echo 'Appid'; ?></td>
-              <td><input type="text" name="api_alipay_appid" value="<?php echo $api_alipay_appid; ?>" size="40" />
+              <td><input type="text" name="api_alipay_appid" value="<?php echo $api_alipay_appid; ?>" size="50" />
                 </td>
             </tr>
             <tr>
               <td><span class="required">*</span> <?php echo 'Appkey'; ?></td>
-              <td><input type="text" name="api_alipay_appkey" value="<?php echo $api_alipay_appkey; ?>" size="40" />
+              <td><input type="text" name="api_alipay_appkey" value="<?php echo $api_alipay_appkey; ?>" size="50" />
                 </td>
             </tr>
             <tr>
               <td><span class="required">*</span> <?php echo 'callback'; ?></td>
-              <td><textarea name="api_alipay_callback" cols="40" rows="5"><?php echo $api_alipay_callback; ?></textarea>
+              <td><input typ="text" name="api_alipay_callback" size="50" value="<?php echo $api_alipay_callback; ?>" />
                 </td>
             </tr>
             <tr>

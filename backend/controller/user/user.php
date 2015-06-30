@@ -114,7 +114,7 @@ class ControllerUserUser extends Controller {
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
-			$sort = 'username';
+			$sort = 'user_id';
 		}
 		
 		if (isset($this->request->get['order'])) {
@@ -183,7 +183,8 @@ class ControllerUserUser extends Controller {
 					
       		$this->data['users'][] = array(
 				'user_id'    => $result['user_id'],
-				'username'   => $result['username'],
+                'username'   => $result['username'],
+				'nickname'   => $result['nickname'],
 				'status'     => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),
 				'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 				'selected'   => isset($this->request->post['selected']) && in_array($result['user_id'], $this->request->post['selected']),
@@ -195,7 +196,8 @@ class ControllerUserUser extends Controller {
 		
 		$this->data['text_no_results'] = $this->language->get('text_no_results');
 
-		$this->data['column_username'] = $this->language->get('column_username');
+        $this->data['column_username'] = $this->language->get('column_username');
+		$this->data['column_nickname'] = $this->language->get('column_nickname');
 		$this->data['column_status'] = $this->language->get('column_status');
 		$this->data['column_date_added'] = $this->language->get('column_date_added');
 		$this->data['column_action'] = $this->language->get('column_action');
@@ -229,7 +231,8 @@ class ControllerUserUser extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 					
-		$this->data['sort_username'] = $this->url->link('user/user', 'token=' . $this->session->data['token'] . '&sort=username' . $url, 'SSL');
+        $this->data['sort_username'] = $this->url->link('user/user', 'token=' . $this->session->data['token'] . '&sort=username' . $url, 'SSL');
+		$this->data['sort_nickname'] = $this->url->link('user/user', 'token=' . $this->session->data['token'] . '&sort=nickname' . $url, 'SSL');
 		$this->data['sort_status'] = $this->url->link('user/user', 'token=' . $this->session->data['token'] . '&sort=status' . $url, 'SSL');
 		$this->data['sort_date_added'] = $this->url->link('user/user', 'token=' . $this->session->data['token'] . '&sort=date_added' . $url, 'SSL');
 		
@@ -270,7 +273,8 @@ class ControllerUserUser extends Controller {
     	$this->data['text_enabled'] = $this->language->get('text_enabled');
     	$this->data['text_disabled'] = $this->language->get('text_disabled');
 		
-    	$this->data['entry_username'] = $this->language->get('entry_username');
+        $this->data['entry_username'] = $this->language->get('entry_username');
+    	$this->data['entry_nickname'] = $this->language->get('entry_nickname');
     	$this->data['entry_password'] = $this->language->get('entry_password');
     	$this->data['entry_confirm'] = $this->language->get('entry_confirm');
     	$this->data['entry_firstname'] = $this->language->get('entry_firstname');
@@ -378,7 +382,13 @@ class ControllerUserUser extends Controller {
 		} else {
 			$this->data['confirm'] = '';
 		}
-  
+        if (isset($this->request->post['nickname'])) {
+            $this->data['nickname'] = $this->request->post['nickname'];
+        } elseif (!empty($user_info)) {
+            $this->data['nickname'] = $user_info['nickname'];
+        } else {
+            $this->data['nickname'] = '';
+        }
     	if (isset($this->request->post['firstname'])) {
       		$this->data['firstname'] = $this->request->post['firstname'];
     	} elseif (!empty($user_info)) {
@@ -452,7 +462,7 @@ class ControllerUserUser extends Controller {
 				$this->error['warning'] = $this->language->get('error_exists');
 			}
 		}
-		
+		/*
     	if ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32)) {
 			$this->error['firstname'] = $this->language->get('error_firstname');
     	}
@@ -460,7 +470,7 @@ class ControllerUserUser extends Controller {
     	if ((utf8_strlen($this->request->post['lastname']) < 1) || (utf8_strlen($this->request->post['lastname']) > 32)) {
       		$this->error['lastname'] = $this->language->get('error_lastname');
     	}
-
+        */
     	if ($this->request->post['password'] || (!isset($this->request->get['user_id']))) {
       		if ((utf8_strlen($this->request->post['password']) < 4) || (utf8_strlen($this->request->post['password']) > 20)) {
         		$this->error['password'] = $this->language->get('error_password');
@@ -496,4 +506,3 @@ class ControllerUserUser extends Controller {
 		}
   	}
 }
-?>

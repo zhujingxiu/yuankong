@@ -49,7 +49,6 @@ if( count($modules) ){ ?>
 		echo $powered;
 	} ?>
 </div>
-
 <script type="text/javascript">
 	o.mous.init(".h-weix","hov");
     o.mous.init(".my-ezhan","hov");

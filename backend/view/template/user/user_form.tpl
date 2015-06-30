@@ -24,14 +24,21 @@
               <?php } ?></td>
           </tr>
           <tr>
-            <td><span class="required">*</span> <?php echo $entry_firstname; ?></td>
+            <td> <?php echo $entry_nickname; ?></td>
+            <td><input type="text" name="nickname" value="<?php echo $nickname; ?>" />
+              <?php if ($error_nickname) { ?>
+              <span class="error"><?php echo $error_nickname; ?></span>
+              <?php } ?></td>
+          </tr>
+          <tr style="display:none">
+            <td> <?php echo $entry_firstname; ?></td>
             <td><input type="text" name="firstname" value="<?php echo $firstname; ?>" />
               <?php if ($error_firstname) { ?>
               <span class="error"><?php echo $error_firstname; ?></span>
               <?php } ?></td>
           </tr>
-          <tr>
-            <td><span class="required">*</span> <?php echo $entry_lastname; ?></td>
+          <tr style="display:none">
+            <td> <?php echo $entry_lastname; ?></td>
             <td><input type="text" name="lastname" value="<?php echo $lastname; ?>" />
               <?php if ($error_lastname) { ?>
               <span class="error"><?php echo $error_lastname; ?></span>

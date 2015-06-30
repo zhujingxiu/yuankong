@@ -7,12 +7,12 @@
 <div>
 
 <?php if( $SPAN[0] ): ?>
-	<div class="span<?php echo $SPAN[0];?>">
+	<div class="<?php echo $SPAN[0];?>">
 	<?php echo $column_left; ?>
 	</div>
 <?php endif; ?>
 
-<div class="span<?php echo $SPAN[1];?>">
+<div class="<?php echo $SPAN[1];?>">
 
 	
 	<div id="content" class="page"><?php echo $content_top; ?>
@@ -53,7 +53,7 @@
 </div>
  
 	<?php if( $SPAN[2] ): ?>
-	<div class="span<?php echo $SPAN[2];?>">	
+	<div class="<?php echo $SPAN[2];?>">	
 		<?php echo $column_right; ?>
 	</div>
 	<?php endif; ?>
