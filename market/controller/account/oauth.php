@@ -109,12 +109,10 @@ class ControllerAccountOauth extends Controller {
 		}
 		
 		$tags = array(
-			'facebook',
-			'google',
-			'live',
 			'qq',
 			'weibo',
-			'baidu'
+			'baidu',
+			'alipay'
 		);
 		
 		if (empty($tag) || !in_array($tag, $tags) || !$this->config->get('oauth')) {
@@ -318,6 +316,7 @@ class ControllerAccountOauth extends Controller {
     	$this->data['heading_title'] = $this->language->get('heading_login_title');
 		
 		// Entry	
+    	$this->data['entry_mobile_phone'] = $this->language->get('entry_mobile_phone');
     	$this->data['entry_firstname'] = $this->language->get('entry_firstname');
     	$this->data['entry_lastname'] = $this->language->get('entry_lastname');
     	$this->data['entry_email'] = $this->language->get('entry_email');
@@ -424,6 +423,12 @@ class ControllerAccountOauth extends Controller {
 		} else {
 			$this->data['error_warning'] = '';
 		}
+
+		if (isset($error_register['mobile_phone'])) {
+			$this->data['error_mobile_phone'] = $error_register['mobile_phone'];
+		} else {
+			$this->data['error_mobile_phone'] = '';
+		}
 		
 		if (isset($error_register['firstname'])) {
 			$this->data['error_firstname'] = $error_register['firstname'];
@@ -510,7 +515,13 @@ class ControllerAccountOauth extends Controller {
 		}
 		
 		$this->data['action'] = $this->url->link('account/register', '', 'SSL');
-		
+
+		if (isset($posts_register['nickname'])) {
+			$this->data['nickname'] = $posts_register['nickname'];
+		} else {
+			$this->data['nickname'] = '';
+		}
+
 		if (isset($posts_register['firstname'])) {
 			$this->data['firstname'] = $posts_register['firstname'];
 		} else {
@@ -1128,6 +1139,9 @@ class ControllerAccountOauth extends Controller {
 
   	protected function validate_register() {		
 		if (!$this->error) {
+			if ((utf8_strlen($this->request->post['nickname']) < 1) || (utf8_strlen($this->request->post['nickname']) > 32)) {
+				$this->error['register']['nickname'] = $this->language->get('error_nickname');
+			}
 			if ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32)) {
 				$this->error['register']['firstname'] = $this->language->get('error_firstname');
 			}
@@ -1246,7 +1260,7 @@ class ControllerAccountOauth extends Controller {
 			curl_setopt($ci, CURLOPT_POST, TRUE);
 			if($postfields!='')curl_setopt($ci, CURLOPT_POSTFIELDS, $postfields);
 		}
-		$headers[]='User-Agent: Oauth.PHP(65li.com)';
+		//$headers[]='User-Agent: Oauth.PHP(65li.com)';
 		curl_setopt($ci, CURLOPT_HTTPHEADER, $headers);
 		curl_setopt($ci, CURLOPT_URL, $url);
 		

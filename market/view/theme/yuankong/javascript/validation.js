@@ -8,7 +8,7 @@ valid.gcdj={
         var $sel=$(select);
         var $gname=$sel.children(".gcname");
         var $gtel=$sel.children(".gctel");
-        var mytelreg = /^(((13[0-9]{1})|159|153)+\d{8})$/;
+        var mytelreg = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
         var mynreg=/^[\u4e00-\u9fa5]{2,6}$/;
         $gname.blur(function(){
             if(!mynreg.test($gname.val())){

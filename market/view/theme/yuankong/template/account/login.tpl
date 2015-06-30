@@ -67,14 +67,11 @@ $(function(){ $('input, textarea').placeholder(); });
 	            <div class="mt15">
 	                <input type="submit" class="gc-tab-sub" value="<?php echo $button_login; ?>" />
 	            </div>
+	            <?php if($oauth_html){ ?>
 	            <div class="mt15">
-	                <p class="f_s c8">使用合作网站登录消防e站</p>
-	                <p class="mt5">
-	                	<a href="#" class="pr15"><img src="market/view/theme/yuankong/yk_img/icon/qq-l.png" alt="qq登录"></a>
-	                	<a href="#" class="pr15"><img src="market/view/theme/yuankong/yk_img/icon/zfb-l.png" alt="支付宝登录"></a>
-	                	<a href="#" class="pr15"><img src="market/view/theme/yuankong/yk_img/icon/wb-l.png" alt="微博登录"></a>
-	                </p>
+	                <?php echo $oauth_html ?>
 	            </div>
+	            <?php }?>
 	            <?php if ($redirect) { ?>
 				  <input type="hidden" name="redirect" value="<?php echo $redirect; ?>" />
 				<?php } ?>

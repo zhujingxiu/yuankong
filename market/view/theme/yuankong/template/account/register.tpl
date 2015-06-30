@@ -117,25 +117,25 @@ $(function(){ $('input, textarea').placeholder(); });
 
 	<div class="fix">
         <ul class="l regis-tab">
-            <li class="regis-li tabon">个人用户</li>
-            <li class="regis-li">企业用户</li>
+            <li class="regis-li tabon"><?php echo $text_regs_customer ?></li>
+            <li class="regis-li"><?php echo $text_regs_affiliate ?></li>
         </ul>
         <span class="r"></span>
     </div>
 
 	<div class="regis-box fix">
 	  	<div class="r">
-            <p class="f_m c46">手机微信扫描二维码，关注e站</p>
+            <p class="f_m c46"><?php echo $text_qr_code ?></p>
             <p><img src="asset/image/data/yuankong/ewm2.jpg" alt=""/></p>
         </div>
-	  	<form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
+	  	<form action="<?php echo $customer_action; ?>" method="post" enctype="multipart/form-data">
 			<div class="regis">
 			  	<table class="registable">
 					<tr>
-					  <td class="tr" width="90"><em class="c_r">*</em> <?php echo $entry_telephone; ?></td>
-					  <td><input type="text" name="telephone" value="<?php echo $telephone; ?>" class="regis-text"/>
-						<?php if ($error_telephone) { ?>
-						<span class="error"><?php echo $error_telephone; ?></span>
+					  <td class="tr" width="90"><em class="c_r">*</em> <?php echo $entry_mobile_phone; ?></td>
+					  <td><input type="text" name="mobile_phone" value="<?php echo $mobile_phone; ?>" class="regis-text" placeholder="<?php echo $entry_mobile_phone ?>"/>
+						<?php if ($error_mobile_phone) { ?>
+						<span class="error"><?php echo $error_mobile_phone; ?></span>
 						<?php } ?></td>
 					</tr>
 					<tr>
@@ -146,19 +146,25 @@ $(function(){ $('input, textarea').placeholder(); });
 						<?php } ?></td>
 					</tr>
 					<tr>
-					  <td class="tr" width="90"><em class="c_r">*</em> <?php echo $entry_confirm; ?></td>
+					  <td class="tr" width="96"><em class="c_r">*</em> <?php echo $entry_confirm; ?></td>
 					  <td><input type="password" name="confirm" value="<?php echo $confirm; ?>" class="regis-text"/>
 						<?php if ($error_confirm) { ?>
 						<span class="error"><?php echo $error_confirm; ?></span>
 						<?php } ?></td>
 					</tr>
 					<tr>
-		                <td class="tr"><em class="c_r">*</em> 短信验证码:</td>
-		                <td><input type="password" class="regis-text w100" value=""  /><a href="javascript:viod(0)" class="hq-yzm">获取验证码</a> </td>
+		                <td class="tr"><em class="c_r">*</em> <?php echo $entry_input_sms ?></td>
+		                <td><input type="password" class="regis-text w100" value=""  /><a href="javascript:viod(0)" class="hq-yzm"><?php echo $text_get_sms ?></a> </td>
 		            </tr>
 		            <tr>
-		                <td class="tr"><em class="c_r">*</em> 验证码:</td>
-		                <td><input type="password" class="regis-text w100" value=""  /><span class="pl10"><img src="imgs/adimg/yzm.jpg" /><a href="#" class="pl10 c_g">换一张</a></span></td>
+		                <td class="tr"><em class="c_r">*</em> <?php echo $entry_captcha ?></td>
+		                <td>
+		                	<input type="captcha" class="regis-text w100" value=""  />
+		                	<span class="pl10 captcha">
+		                		<img src="<?php echo $this->url->link('account/register/captcha','','ssl') ?>" />
+		                		<a href="#" class="pl10 c_g chg-img"><?php echo $text_captcha_change ?></a>
+		                	</span>
+		                </td>
 		            </tr>
 		            <tr>
 		                <td>&nbsp;</td>
@@ -170,47 +176,61 @@ $(function(){ $('input, textarea').placeholder(); });
 		            </tr>
 			  	</table>
 			</div>
+		</form>
+		<form action="<?php echo $affiliate_action; ?>" method="post" enctype="multipart/form-data">
 			<div class="regis" style="display: none;">
 	            <table class="registable">
 	            	<tr>
-	                    <td class="tr" width="90">注册邮箱:</td>
-	                    <td><input type="text" class="regis-text" value="" placeholder="填写企业邮箱" /></td>
+	                    <td class="tr" width="96"><?php echo $entry_email ?></td>
+	                    <td><input type="text" class="regis-text" value="" placeholder="<?php echo $text_affiliate_email ?>" /></td>
 	                </tr>
 	                <tr>
-	                    <td class="tr">设置密码:</td>
+	                    <td class="tr"><?php echo $entry_password ?></td>
 	                    <td><input type="password" class="regis-text" value=""  /></td>
 	                </tr>
 	                <tr>
-	                    <td class="tr">确认密码:</td>
+	                    <td class="tr"><?php echo $entry_confirm ?></td>
 	                    <td><input type="password" class="regis-text" value=""  /></td>
 	                </tr>
 	                <tr>
-	                    <td class="tr">单位名称:</td>
-	                    <td><input type="text" class="regis-text" value="" placeholder="请填写营业执照上的单位名称" /></td>
+	                    <td class="tr"><?php echo $entry_affiliate_name ?></td>
+	                    <td><input type="text" class="regis-text" value="" placeholder="<?php echo $text_affiliate_name ?>" /></td>
 	                </tr>
 	                <tr>
-	                    <td class="tr">公司项目:</td>
-	                    <td><select class="regis-text"><option>设计公司</option><option>工程公司</option><option>检测公司</option><option>维保公司</option></select></td>
+	                    <td class="tr"><?php echo $entry_affiliate_group ?></td>
+	                    <td><select class="regis-text" name="group_id">
+		                    	<option>设计公司</option>
+		                    	<option>工程公司</option>
+		                    	<option>检测公司</option>
+		                    	<option>维保公司</option>
+		                    </select>
+		                </td>
 	                </tr>
 	                <tr>
-	                    <td class="tr">单位地址:</td>
+	                    <td class="tr"><?php echo $entry_affiliate_address ?></td>
 	                    <td><input type="text" class="regis-text" value=""  /></td>
 	                </tr>
 	                <tr>
-	                    <td class="tr">联系人姓名:</td>
+	                    <td class="tr"><?php echo $entry_affiliate_customer ?></td>
 	                    <td><input type="text" class="regis-text" value=""  /></td>
 	                </tr>
 	                <tr>
-	                    <td class="tr">手机号码:</td>
+	                    <td class="tr"><?php echo $entry_affiliate_telephone ?></td>
 	                    <td><input type="text" class="regis-text" value=""  /></td>
 	                </tr>
 	                <tr>
-	                    <td class="tr">短信验证码:</td>
-	                    <td><input type="password" class="regis-text w100" value=""  /><a href="javascript:viod(0)" class="hq-yzm">获取验证码</a> </td>
+	                    <td class="tr"><?php echo $entry_input_sms ?></td>
+	                    <td><input type="password" class="regis-text w100" value=""  /><a href="javascript:viod(0)" class="hq-yzm"><?php echo $text_get_sms ?></a> </td>
 	                </tr>
 	                <tr>
-	                    <td class="tr"><em class="c_r">*</em> 验证码:</td>
-	                    <td><input type="password" class="regis-text w100" value=""  /><span class="pl10"><img src="imgs/adimg/yzm.jpg" /><a href="#" class="pl10 c_g">换一张</a></span></td>
+	                    <td class="tr"><em class="c_r">*</em> <?php echo $entry_captcha ?></td>
+	                    <td>
+	                    	<input type="captcha" class="regis-text w100" value=""  />
+	                    	<span class="pl10 captcha">
+	                    		<img src="<?php echo $this->url->link('account/register/captcha','','ssl') ?>" />
+	                    		<a href="#" class="pl10 c_g chg-img"><?php echo $text_captcha_change ?></a>
+	                    	</span>
+	                    </td>
 	                </tr>
 	                <tr>
 		                <td>&nbsp;</td>
@@ -228,5 +248,9 @@ $(function(){ $('input, textarea').placeholder(); });
 
 <script type="text/javascript">
     o.moushov.init(".regis-tab li",".regis-box .regis");
+    $('.captcha a.chg-img').bind('click',function(e){
+    	e.preventDefault();
+    	$('.captcha img').attr('src',"<?php echo $this->url->link('account/register/captcha','','ssl') ?>")
+    })
 </script>
 <?php echo $footer; ?>
