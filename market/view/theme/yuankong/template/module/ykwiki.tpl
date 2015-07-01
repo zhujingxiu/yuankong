@@ -10,7 +10,7 @@
         	<ul class="index-news-ul">
         		<?php foreach ($wiki['top'] as $item): ?>
         		<li class="index-n-li fix">
-        			<h3 class="f_l lh30"><a href="" class="c3"><?php echo $item['title'] ?></a></h3>
+        			<h3 class="f_l lh30"><a href="<?php echo $item['link'] ?>" class="c3"><?php echo $item['title'] ?></a></h3>
         			<p class="newspic"><img src="<?php echo TPL_IMG.$item['icon'] ?>" /></p>
         			<div class="news-a">
         				<?php if(isset($item['data']) && is_array($item['data'])){?>
@@ -31,7 +31,7 @@
         	<ul class="index-news-ul mt10">
         		<?php foreach ($wiki['bottom'] as $item): ?>
         		<li class="index-n-li fix">
-        			<h3 class="f_l lh30"><a href="" class="c3"><?php echo $item['title'] ?></a></h3>
+        			<h3 class="f_l lh30"><a href="<?php echo $item['link'] ?>" class="c3"><?php echo $item['title'] ?></a></h3>
         			<p class="newspic"><img src="<?php echo TPL_IMG.$item['icon'] ?>" /></p>
         			<div class="news-a">
         				<?php if(isset($item['data']) && is_array($item['data'])){?>

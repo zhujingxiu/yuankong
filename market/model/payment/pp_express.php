@@ -264,35 +264,6 @@ class ModelPaymentPPExpress extends Model {
 
         $data['PAYMENTREQUEST_0_ITEMAMT'] = number_format($item_total, 2);
         $data['PAYMENTREQUEST_0_AMT'] = number_format($item_total, 2);
-        
-        $z = 0;
-
-        $recurring_products = $this->cart->getRecurringProducts();
-        if(!empty($recurring_products)) {
-            
-            $this->language->load('payment/pp_express');
-
-            foreach($recurring_products as $item) {
-                $data['L_BILLINGTYPE' . $z] = 'RecurringPayments';
-
-                if($item['recurring_trial'] == 1) {
-                    $trial_amt = $this->currency->format($this->tax->calculate($item['recurring_trial_price'], $item['tax_class_id'], $this->config->get('config_tax')), false, false, false) * $item['quantity'].' '.$this->currency->getCode();
-                    $trial_text =  sprintf($this->language->get('text_trial'), $trial_amt, $item['recurring_trial_cycle'], $item['recurring_trial_frequency'], $item['recurring_trial_duration']);
-                } else {
-                    $trial_text = '';
-                }
-
-                $recurring_amt = $this->currency->format($this->tax->calculate($item['recurring_price'], $item['tax_class_id'], $this->config->get('config_tax')), false, false, false)  * $item['quantity'].' '.$this->currency->getCode();
-                $recurring_description = $trial_text . sprintf($this->language->get('text_recurring'), $recurring_amt, $item['recurring_cycle'], $item['recurring_frequency']);
-
-                if($item['recurring_duration'] > 0) {
-                    $recurring_description .= sprintf($this->language->get('text_length'), $item['recurring_duration']);
-                }
-
-                $data['L_BILLINGAGREEMENTDESCRIPTION' . $z] = $recurring_description;
-                $z++;
-            }
-        }
 
         return $data;
     }
@@ -334,23 +305,5 @@ class ModelPaymentPPExpress extends Model {
         $this->db->query("UPDATE `" . DB_PREFIX . "paypal_order` SET `modified` = now(), `capture_status` = '".$this->db->escape($capture_status)."' WHERE `order_id` = '".(int)$order_id."'");
     }
 
-    public function recurringCancel($ref) {
 
-        $data = array(
-            'METHOD' => 'ManageRecurringPaymentsProfileStatus',
-            'PROFILEID' => $ref,
-            'ACTION' => 'Cancel'
-        );
-
-        return $this->call($data);
-    }
-
-    public function recurringPayments() {
-        /*
-         * Used by the checkout to state the module
-         * supports recurring profiles.
-         */
-        return true;
-    }
 }
-?>

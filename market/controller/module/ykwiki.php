@@ -19,15 +19,13 @@ class ControllerModuleYkwiki extends Controller {
                 $groups = $setting['category_tabs'];
             }
             foreach ($groups as $key => $gid) {
-
                 if($gid){
                     $group = $this->model_module_ykmodule->getGroup($gid);
-
                     $title = !empty($group['name']) ? $group['name'] : $this->language->get('text_unknown');
-                    
+                    $link = $this->url->link('information/wiki','wiki_group='.$gid,'SSL');
                 }else{
                     $title = $this->language->get('text_wiki_help');
-                    
+                    $link = $this->url->link('information/help','','SSL');
                 }
                 $config =  array(
                     'group_id' => $gid,
@@ -46,6 +44,7 @@ class ControllerModuleYkwiki extends Controller {
                     'data' => $_wiki,
                     'icon' => isset($setting['image'][$key]) ? $setting['image'][$key] : '',
                     'title' => $title,
+                    'link' => $link
                 );
                 if(isset($this->data['wiki']['top']) && count($this->data['wiki']['top'])>2){
                     $this->data['wiki']['bottom'][] = $data;

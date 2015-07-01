@@ -1,7 +1,7 @@
-<div class="r">
+<div class="r" id="mini-cart">
     
-  <a class="gwc icon2"><i class="icon2 gw_num"><?php echo $total; ?></i></a>
-  <?php if ($products || $vouchers) { ?>
+  <a href="<?php echo $cart ?>" class="gwc icon2"><i class="icon2 gw_num" id="cart-total"><?php echo $total; ?></i></a>
+  <?php if ( false && $products || $vouchers) { ?>
   <div class="content">
     
     <div class="mini-cart-info">
@@ -18,13 +18,6 @@
               <?php foreach ($product['option'] as $option) { ?>
               - <small><?php echo $option['name']; ?> <?php echo $option['value']; ?></small><br />
               <?php } ?>
-
-              
-              <?php if ($product['recurring']): ?>
-              - <small><?php echo $text_payment_profile ?> <?php echo $product['profile']; ?></small><br />
-              <?php endif; ?>
-
-
             </div></td>
           <td class="quantity">x&nbsp;<?php echo $product['quantity']; ?></td>
           <td class="total"><?php echo $product['total']; ?></td>

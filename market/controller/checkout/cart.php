@@ -78,11 +78,49 @@ class ControllerCheckoutCart extends Controller {
 			
 			$this->redirect($this->url->link('checkout/cart'));
 		}
+		      
+        
+        if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
+            $server = $this->config->get('config_ssl');
+        } else {
+            $server = $this->config->get('config_url');
+        }
+        
+        if (isset($this->session->data['error']) && !empty($this->session->data['error'])) {
+            $this->data['error'] = $this->session->data['error'];
+            
+            unset($this->session->data['error']);
+        } else {
+            $this->data['error'] = '';
+        }
+
+        $this->data['base'] = $server;
+        $this->data['description'] = $this->document->getDescription();
+        $this->data['keywords'] = $this->document->getKeywords();
+        $this->data['links'] = $this->document->getLinks();  
+        $this->data['styles'] = $this->document->getStyles();
+        $this->data['scripts'] = $this->document->getScripts();
+        $this->data['lang'] = $this->language->get('code');
+        $this->data['direction'] = $this->language->get('direction');
+        $this->data['google_analytics'] = html_entity_decode($this->config->get('config_google_analytics'), ENT_QUOTES, 'UTF-8');
+        $this->data['name'] = $this->config->get('config_name');
+        
+        if ($this->config->get('config_icon') && file_exists(DIR_IMAGE . $this->config->get('config_icon'))) {
+            $this->data['icon'] = $server . TPL_IMG . $this->config->get('config_icon');
+        } else {
+            $this->data['icon'] = '';
+        }
+        
+        if ($this->config->get('config_logo') && file_exists(DIR_IMAGE . $this->config->get('config_logo'))) {
+            $this->data['logo'] = $server . TPL_IMG . $this->config->get('config_logo');
+        } else {
+            $this->data['logo'] = '';
+        }       
+        
+        $this->data['home'] = $this->url->link('common/home');
+
+		$this->data['document'] = $this->language->get('heading_title');
 		
-		$this->document->setTitle($this->language->get('heading_title'));
-		$this->document->addScript('market/view/javascript/jquery/colorbox/jquery.colorbox-min.js');
-		$this->document->addStyle('market/view/javascript/jquery/colorbox/colorbox.css');
-			
       	$this->data['breadcrumbs'] = array();
 
       	$this->data['breadcrumbs'][] = array(
@@ -150,12 +188,6 @@ class ControllerCheckoutCart extends Controller {
 			$this->data['button_shipping'] = $this->language->get('button_shipping');			
       		$this->data['button_shopping'] = $this->language->get('button_shopping');
       		$this->data['button_checkout'] = $this->language->get('button_checkout');
-
-      		$this->data['text_trial'] = $this->language->get('text_trial');
-      		$this->data['text_recurring'] = $this->language->get('text_recurring');
-      		$this->data['text_length'] = $this->language->get('text_length');
-      		$this->data['text_recurring_item'] = $this->language->get('text_recurring_item');
-      		$this->data['text_payment_profile'] = $this->language->get('text_payment_profile');
 
 			if (isset($this->error['warning'])) {
 				$this->data['error_warning'] = $this->error['warning'];
@@ -242,31 +274,6 @@ class ControllerCheckoutCart extends Controller {
                 } else {
                     $total = false;
                 }
-                
-                $profile_description = '';
-                
-                if ($product['recurring']) {
-                    $frequencies = array(
-                        'day' => $this->language->get('text_day'),
-                        'week' => $this->language->get('text_week'),
-                        'semi_month' => $this->language->get('text_semi_month'),
-                        'month' => $this->language->get('text_month'),
-                        'year' => $this->language->get('text_year'),
-                    );
-
-                    if ($product['recurring_trial']) {
-                        $recurring_price = $this->currency->format($this->tax->calculate($product['recurring_trial_price'] * $product['quantity'], $product['tax_class_id'], $this->config->get('config_tax')));
-                        $profile_description = sprintf($this->language->get('text_trial_description'), $recurring_price, $product['recurring_trial_cycle'], $frequencies[$product['recurring_trial_frequency']], $product['recurring_trial_duration']) . ' ';
-                    }
-
-                    $recurring_price = $this->currency->format($this->tax->calculate($product['recurring_price'] * $product['quantity'], $product['tax_class_id'], $this->config->get('config_tax')));
-
-                    if ($product['recurring_duration']) {
-                        $profile_description .= sprintf($this->language->get('text_payment_description'), $recurring_price, $product['recurring_cycle'], $frequencies[$product['recurring_frequency']], $product['recurring_duration']);
-                    } else {
-                        $profile_description .= sprintf($this->language->get('text_payment_until_canceled_description'), $recurring_price, $product['recurring_cycle'], $frequencies[$product['recurring_frequency']], $product['recurring_duration']);
-                    }
-                }
 
                 $this->data['products'][] = array(
                     'key'                 => $product['key'],
@@ -281,15 +288,10 @@ class ControllerCheckoutCart extends Controller {
                     'total'               => $total,
                     'href'                => $this->url->link('product/product', 'product_id=' . $product['product_id']),
                     'remove'              => $this->url->link('checkout/cart', 'remove=' . $product['key']),
-                    'recurring'           => $product['recurring'],
-                    'profile_name'        => $product['profile_name'],
-                    'profile_description' => $profile_description,
+
                 );
             }
-
-
-            $this->data['products_recurring'] = array();
-            
+           
 			// Gift Voucher
 			$this->data['vouchers'] = array();
 			
@@ -431,12 +433,10 @@ class ControllerCheckoutCart extends Controller {
 			}
 			
 			$this->children = array(
-				'common/column_left',
-				'common/column_right',
 				'common/content_bottom',
 				'common/content_top',
 				'common/footer',
-				'common/header'	
+				'common/top'	
 			);
 						
 			$this->response->setOutput($this->render());					
@@ -463,7 +463,7 @@ class ControllerCheckoutCart extends Controller {
 				'common/content_top',
 				'common/content_bottom',
 				'common/footer',
-				'common/header'	
+				'common/header'    
 			);
 					
 			$this->response->setOutput($this->render());			
@@ -591,7 +591,7 @@ class ControllerCheckoutCart extends Controller {
 					$json['error']['option'][$product_option['product_option_id']] = sprintf($this->language->get('error_required'), $product_option['name']);
 				}
 			}
-            
+            /*
             $profiles = $this->model_catalog_product->getProfiles($product_info['product_id']);
             
             if ($profiles) {
@@ -605,7 +605,7 @@ class ControllerCheckoutCart extends Controller {
                     $json['error']['profile'] = $this->language->get('error_profile_required');
                 }
             }
-			
+			*/
 			if (!$json) {
 				$this->cart->add($this->request->post['product_id'], $quantity, $option, $profile_id);
 

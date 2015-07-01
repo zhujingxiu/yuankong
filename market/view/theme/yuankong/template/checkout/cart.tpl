@@ -1,5 +1,80 @@
-<?php require( DIR_TEMPLATE.$this->config->get('config_template')."/template/common/config.tpl" ); ?>
-<?php echo $header; ?>
+<?php 
+  $themeConfig = $this->config->get( 'themecontrol' );
+  $themeName =  $this->config->get('config_template');
+  require_once( DIR_TEMPLATE.$this->config->get('config_template')."/template/libs/module.php" );
+  $helper = ThemeControlHelper::getInstance( $this->registry, $themeName );
+?>
+<!DOCTYPE html>
+<html dir="<?php echo $direction; ?>" lang="<?php echo $lang; ?>">
+<head>
+ 
+<meta name="viewport" content="width=device-width">
+<meta http-equiv="X-UA-Compatible"content="IE=9; IE=8; IE=7; IE=EDGE">
+<meta charset="UTF-8" />
+<title><?php echo $heading_title; ?></title>
+<base href="<?php echo $base; ?>" />
+<?php if ($description) { ?>
+<meta name="description" content="<?php echo $description; ?>" />
+<?php } ?>
+<?php if ($keywords) { ?>
+<meta name="keywords" content="<?php echo $keywords; ?>" />
+<?php } ?>
+<?php if ($icon) { ?>
+<link href="<?php echo $icon; ?>" rel="icon" />
+<?php } ?>
+<?php foreach ($links as $link) { ?>
+<link href="<?php echo $link['href']; ?>" rel="<?php echo $link['rel']; ?>" />
+<?php } ?>
+<link rel="stylesheet" type="text/css" href="market/view/theme/<?php echo $themeName;?>/stylesheet/yk_basic.css" />
+
+
+<?php foreach ($styles as $style) { ?>
+<link rel="<?php echo $style['rel']; ?>" type="text/css" href="<?php echo $style['href']; ?>" media="<?php echo $style['media']; ?>" />
+<?php } ?>
+<script type="text/javascript" src="market/view/theme/<?php echo $themeName;?>/javascript/lib/jquery-1.9.0.min.js"></script>
+<script type="text/javascript" src="market/view/theme/<?php echo $themeName;?>/javascript/common.js"></script>
+
+<?php foreach( $helper->getScriptFiles() as $script )  { ?>
+<script type="text/javascript" src="<?php echo $script; ?>"></script>
+<?php } ?>
+
+<?php foreach ($scripts as $script) { ?>
+<script type="text/javascript" src="<?php echo $script; ?>"></script>
+<?php } ?>
+
+<!--[if lt IE 9]>
+<script src="market/view/javascript/html5.js"></script>
+<![endif]-->
+
+<!--[if IE ]>
+<script type="text/javascript" src="market/view/theme/<?php echo $themeName;?>/javascript/lib/jquery.placeholder.js"></script>
+<script type="text/javascript">
+$(function(){ $('input, textarea').placeholder(); });
+</script>
+<style type="text/css">
+  .placeholder{color:#999999;}
+</style>
+<![endif]-->
+<script type="text/javascript" src="market/view/theme/<?php echo $themeName;?>/javascript/index.js"></script>
+
+<?php if ( isset($stores) && $stores ) { ?>
+<script type="text/javascript"><!--
+$(document).ready(function() {
+<?php foreach ($stores as $store) { ?>
+$('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></iframe>');
+<?php } ?>
+});
+//--></script>
+<?php } ?>
+<?php //echo $google_analytics; ?>
+</head>
+<body>
+<!--Top-->
+
+<?php echo $top ?>
+
+<!--Top-->
+
 <?php if ($attention) { ?>
 <div class="attention"><?php echo $attention; ?><img src="market/view/theme/default/image/close.png" alt="" class="close" /></div>
 <?php } ?>
@@ -9,18 +84,37 @@
 <?php if ($error_warning) { ?>
 <div class="warning"><?php echo $error_warning; ?><img src="market/view/theme/default/image/close.png" alt="" class="close" /></div>
 <?php } ?>
-<?php require( DIR_TEMPLATE.$this->config->get('config_template')."/template/common/breadcrumb.tpl" ); ?>
-<div>
-<?php if( $SPAN[0] ): ?>
-	<div class="span<?php echo $SPAN[0];?>">
-		<?php echo $column_left; ?>
-	</div>
-<?php endif; ?> 
-<div class="span<?php echo $SPAN[1];?>">
-
+<section id="columns">
+<div class="w w980 mt20">
+  <div class="ovh">
+    <ul class="gw-process">
+        <li class="online-s">
+            <p class="process-num">1</p>
+            <p class="">我的购物车</p>
+        </li>
+        <li>
+            <p class="process-num">2</p>
+            <p>填写/确认订单</p>
+        </li>
+        <li>
+            <p class="process-num">3</p>
+            <p>付款</p>
+        </li>
+        <li>
+            <p class="process-num">4</p>
+            <p>支付成功</p>
+        </li>
+    </ul>
+    <?php if ($logo) { ?>
+    <a href="<?php echo $home; ?>" class="pr10">
+      <img src="<?php echo $logo; ?>" title="<?php echo $name; ?>" alt="<?php echo $name; ?>" />
+    </a>
+    <?php } ?>
+    <span class="pl20 logospan"><?php echo $heading_title ?></span>
+  </div>
 <div id="content" class="checkout-cart"><?php echo $content_top; ?>
 
-  <h1 class="page-title"><?php echo $heading_title; ?>
+  
     <?php if ($weight) { ?>
     &nbsp;(<?php echo $weight; ?>)
     <?php } ?>
@@ -41,17 +135,6 @@
         </thead>
         <tbody>
           <?php foreach ($products as $product) { ?>
-
-          <?php if($product['recurring']): ?>
-              <tr>
-                  <td colspan="6" style="border:none;"><image src="market/view/theme/default/image/reorder.png" alt="" title="" style="float:left;" /><span style="float:left;line-height:18px; margin-left:10px;"> 
-                      <strong><?php echo $text_recurring_item ?></strong>
-                      <?php echo $product['profile_description'] ?>
-                  </td>
-                </tr>
-            <?php endif; ?>
-
-
           <tr>
             <td class="image" data-label="<?php echo $column_image; ?>"><?php if ($product['thumb']) { ?>
               <a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" title="<?php echo $product['name']; ?>" /></a>
@@ -64,16 +147,6 @@
                 <?php foreach ($product['option'] as $option) { ?>
                 - <small><?php echo $option['name']; ?>: <?php echo $option['value']; ?></small><br />
                 <?php } ?>
-
-
-                <?php if($product['recurring']): ?>
-                - <small><?php echo $text_payment_profile ?>: <?php echo $product['profile_name'] ?></small>
-                <?php endif; ?>
-
-
-
-
-
               </div>
               <?php if ($product['reward']) { ?>
               <small><?php echo $product['reward']; ?></small>
@@ -233,7 +306,7 @@ $('input[name=\'next\']').bind('change', function() {
 //--></script>
 <?php if ($shipping_status) { ?>
 <script type="text/javascript"><!--
-$('#button-quote').live('click', function() {
+$(document).delegate('#button-quote','click', function() {
 	$.ajax({
 		url: 'index.php?route=checkout/cart/quote',
 		type: 'post',
@@ -378,10 +451,6 @@ $('select[name=\'country_id\']').trigger('change');
 //--></script>
 <?php } ?>
 </div> 
-<?php if( $SPAN[2] ): ?>
-<div class="span<?php echo $SPAN[2];?>">	
-	<?php echo $column_right; ?>
-</div>
-<?php endif; ?>
-</div>
+
+
 <?php echo $footer; ?>

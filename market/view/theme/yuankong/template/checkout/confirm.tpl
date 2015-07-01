@@ -12,15 +12,6 @@
     </thead>
     <tbody>
       <?php foreach ($products as $product) { ?>
-        <?php if($product['recurring']): ?>
-        <tr>
-            <td colspan="6" style="border:none;"><image src="market/view/theme/default/image/reorder.png" alt="" title="" style="float:left;" /><span style="float:left;line-height:18px; margin-left:10px;"> 
-                <strong><?php echo $text_recurring_item ?></strong>
-                <?php echo $product['profile_description'] ?>
-            </td>
-        </tr>
-      <?php endif; ?>
-
       <tr>
 
         <td class="name"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a>
@@ -28,16 +19,7 @@
           <br />
           &nbsp;<small> - <?php echo $option['name']; ?>: <?php echo $option['value']; ?></small>
           <?php } ?>
-          <?php if($product['recurring']): ?>
-          <br />
-          &nbsp;<small><?php echo $text_payment_profile ?>: <?php echo $product['profile_name'] ?></small>
-          <?php endif; ?>
         </td>
-        
-
-
-
-
         <td class="model"><?php echo $product['model']; ?></td>
         <td class="quantity"><?php echo $product['quantity']; ?></td>
         <td class="price"><?php echo $product['price']; ?></td>

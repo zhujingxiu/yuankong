@@ -31,10 +31,13 @@ class ControllerModuleYkproduct extends Controller {
                 'name'          => $_category['name'],
             );
             foreach ($_sub_categories as $item) {
+                $path = $this->model_catalog_product->getCategoryPath($item['category_id']);
+            
+                $path_param = empty($path) ? '' : 'path='.$path;
                 $sub_category = array(
                     'category_id'   => $item['category_id'],
                     'name'          => $item['name'],
-                    'link'          => $this->url->link('product/category','path='.$item['category_id'],'SSL')
+                    'link'          => $this->url->link('product/category',$path_param,'SSL')
                 );
                 if(!isset($category['show']) || count($category['show']) < $setting['category_tabs']['limit'][$i]){
                     $category['show'][] = $sub_category;
@@ -63,9 +66,15 @@ class ControllerModuleYkproduct extends Controller {
             }else{
                 $image = $this->model_tool_image->resize("no_image.jpg",155,155);
             }
+
+            $parent_id = $this->model_catalog_product->getProductCategories($_product['product_id']);
+            
+            $path = $this->model_catalog_product->getCategoryPath($parent_id);
+            
+            $path_param = empty($path) ? '' : '&path='.$path;
             $product = array(
                 'product_id' => $_product['product_id'],
-                'link'       => $this->url->link('product/product','product_id='.$_product['product_id'],'SSL'),
+                'link'       => $this->url->link('product/product','product_id='.$_product['product_id'].$path_param,'SSL'),
                 'name'       => $_product['name'],
                 'subtitle'   => $_product['subtitle'],
                 'price'      => $price,

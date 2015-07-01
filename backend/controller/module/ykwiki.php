@@ -117,8 +117,8 @@ class ControllerModuleYkwiki extends Controller {
         } elseif ($this->config->get('ykwiki_module')) { 
             $this->data['modules'] = $this->config->get('ykwiki_module');
         }   
-        $this->load->model('extension/news_group');
-        $news_group = $this->model_extension_news_group->getNewsGroups();
+        $this->load->model('extension/wiki_group');
+        $news_group = $this->model_extension_wiki_group->getWikiGroups();
         foreach ($news_group as $key => $value) {
             $news_group[$key]['name'] = $this->language->get('text_wiki_news').' -> '.$value['name'];
         }
