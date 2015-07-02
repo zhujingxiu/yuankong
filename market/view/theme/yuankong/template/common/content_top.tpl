@@ -10,9 +10,9 @@
 <?php if( count($modules) ) : ?>
 
 <?php foreach ($modules as $module) { ?>
-<div class="w mt15">
+
 <?php echo $module; ?>
-</div>
+
 <?php } ?>
 
 <?php endif; ?>

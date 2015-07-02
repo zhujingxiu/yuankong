@@ -33,6 +33,9 @@ class ControllerAccountLogin extends Controller {
 			$this->data['logo'] = '';
 		}
 
+        $this->data['home'] = $this->url->link('common/home');
+        $this->data['logged'] = $this->customer->isLogged();
+
 		$this->load->model('account/customer');
 		if (!empty($this->request->get['token'])) {
 			$this->customer->logout();

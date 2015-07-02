@@ -287,4 +287,17 @@ o.scroll={
         }
         new silder(select,dom);
     }
+
 };
+
+//点击父元素增加类
+o.dbclicked={
+    init:function(sel,dom){
+        var sel=$(sel);
+        sel.on("click",function(){
+            $(this).parent().parent().siblings().removeClass(dom);
+            $(this).parent().parent().addClass(dom);
+        });
+
+    }
+}

@@ -57,7 +57,7 @@ class ControllerCommonContentTop extends Controller {
 				}
 			}
 		}
-		
+
 		$sort_order = array(); 
 	  
 		foreach ($module_data as $key => $value) {

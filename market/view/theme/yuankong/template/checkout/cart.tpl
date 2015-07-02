@@ -192,8 +192,9 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
         </div>
       </div>
     </form>
-    <?php echo $content_bottom; ?>
+    
     </div>
+    <?php echo $content_bottom; ?>
   </div>
 </div> 
 

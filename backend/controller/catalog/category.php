@@ -485,26 +485,7 @@ class ControllerCatalogCategory extends Controller {
 
 		$this->data['top_categories'] = $this->model_catalog_category->getSelectionCategories(null);
 
-		if (isset($this->request->post['category_related'])) {
-			$products = $this->request->post['category_related'];
-		} elseif (isset($this->request->get['category_id'])) {		
-			$products = $this->model_catalog_category->getCategoryRelated($this->request->get['category_id']);
-		} else {
-			$products = array();
-		}
-	
-		$this->data['category_related'] = array();
-		
-		foreach ($products as $category_id) {
-			$related_info = $this->model_catalog_category->getCategory($category_id);
-			
-			if ($related_info) {
-				$this->data['category_related'][] = array(
-					'category_id' => $related_info['category_id'],
-					'name'       => $related_info['name']
-				);
-			}
-		}
+
 		$this->template = 'catalog/category_form.tpl';
 		$this->children = array(
 			'common/header',

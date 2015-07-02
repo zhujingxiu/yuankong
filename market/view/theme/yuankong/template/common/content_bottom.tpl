@@ -8,9 +8,11 @@
 *******************************************************/
 ?>
 <?php if( count($modules) ) : ?>
-	<div class="w mt15"> 
-	<?php foreach ($modules as $module) { ?>
-		<?php echo $module; ?>
-	<?php } ?>
-	</div>
+
+<?php foreach ($modules as $module) { ?>
+
+<?php echo $module; ?>
+
+<?php } ?>
+
 <?php endif; ?>

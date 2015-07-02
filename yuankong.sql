@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2015 年 06 月 30 日 09:35
+-- 生成日期: 2015 年 07 月 02 日 09:41
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.4.3
 
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `yk_address` (
   `address_id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) NOT NULL,
+  `nickname` varchar(64) DEFAULT NULL,
   `firstname` varchar(32) NOT NULL,
   `lastname` varchar(32) NOT NULL,
   `company` varchar(32) NOT NULL,
@@ -53,6 +54,7 @@ CREATE TABLE IF NOT EXISTS `yk_address` (
 CREATE TABLE IF NOT EXISTS `yk_affiliate` (
   `affiliate_id` int(11) NOT NULL AUTO_INCREMENT,
   `group_id` smallint(6) NOT NULL DEFAULT '0',
+  `nickname` varchar(64) DEFAULT NULL,
   `firstname` varchar(32) NOT NULL,
   `lastname` varchar(32) NOT NULL,
   `email` varchar(96) NOT NULL,
@@ -790,34 +792,6 @@ INSERT INTO `yk_category_path` (`category_id`, `path_id`, `level`) VALUES
 -- --------------------------------------------------------
 
 --
--- 表的结构 `yk_category_related`
---
-
-CREATE TABLE IF NOT EXISTS `yk_category_related` (
-  `category_id` int(11) NOT NULL,
-  `related_id` int(11) NOT NULL,
-  PRIMARY KEY (`category_id`,`related_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `yk_category_related`
---
-
-INSERT INTO `yk_category_related` (`category_id`, `related_id`) VALUES
-(95, 99),
-(95, 105),
-(95, 116),
-(95, 121),
-(95, 133),
-(99, 95),
-(105, 95),
-(116, 95),
-(121, 95),
-(133, 95);
-
--- --------------------------------------------------------
-
---
 -- 表的结构 `yk_category_to_layout`
 --
 
@@ -1140,7 +1114,7 @@ CREATE TABLE IF NOT EXISTS `yk_customer_group` (
 --
 
 INSERT INTO `yk_customer_group` (`customer_group_id`, `approval`, `company_id_display`, `company_id_required`, `tax_id_display`, `tax_id_required`, `sort_order`) VALUES
-(1, 0, 1, 0, 0, 1, 1);
+(1, 0, 0, 0, 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -1161,7 +1135,7 @@ CREATE TABLE IF NOT EXISTS `yk_customer_group_description` (
 --
 
 INSERT INTO `yk_customer_group_description` (`customer_group_id`, `language_id`, `name`, `description`) VALUES
-(1, 2, 'Default', 'test');
+(1, 2, '默 认', '默认分组');
 
 -- --------------------------------------------------------
 
@@ -1374,7 +1348,7 @@ CREATE TABLE IF NOT EXISTS `yk_extension` (
   `type` varchar(32) NOT NULL,
   `code` varchar(32) NOT NULL,
   PRIMARY KEY (`extension_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=470 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=472 ;
 
 --
 -- 转存表中的数据 `yk_extension`
@@ -1415,7 +1389,9 @@ INSERT INTO `yk_extension` (`extension_id`, `type`, `code`) VALUES
 (465, 'module', 'latest'),
 (466, 'module', 'ykviewed'),
 (468, 'module', 'wiki'),
-(469, 'module', 'oauth');
+(469, 'module', 'oauth'),
+(470, 'payment', 'alipay_direct'),
+(471, 'module', 'ykliked');
 
 -- --------------------------------------------------------
 
@@ -1582,7 +1558,7 @@ CREATE TABLE IF NOT EXISTS `yk_information_description` (
 
 INSERT INTO `yk_information_description` (`information_id`, `language_id`, `title`, `description`) VALUES
 (4, 2, 'About Us', '&lt;p&gt;\r\n	About Us&lt;/p&gt;\r\n'),
-(5, 2, 'Terms &amp; Conditions', '&lt;p&gt;\r\n	Terms &amp;amp; Conditions&lt;/p&gt;\r\n'),
+(5, 2, '政策&amp; 条款', '&lt;p&gt;&lt;a alt=&quot;政策&amp;amp; 条款&quot; class=&quot;colorbox cboxElement&quot; href=&quot;http://www.opencart.cn/app/information/information/info/%E6%94%BF%E7%AD%96and-%E6%9D%A1%E6%AC%BE.html&quot; style=&quot;font-size: 12px; color: rgb(56, 176, 227); text-decoration: underline; cursor: pointer; font-family: Arial, Helvetica, sans-serif; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: right; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);&quot;&gt;&lt;b style=&quot;color: rgb(56, 176, 227); text-decoration: underline; cursor: pointer;&quot;&gt;政策&amp;amp; 条款&lt;/b&gt;&lt;/a&gt;&lt;/p&gt;\r\n'),
 (3, 2, 'Privacy Policy', '&lt;p&gt;\r\n	Privacy Policy&lt;/p&gt;\r\n'),
 (6, 2, 'Delivery Information', '&lt;p&gt;\r\n	Delivery Information&lt;/p&gt;\r\n');
 
@@ -2303,7 +2279,7 @@ INSERT INTO `yk_order_status` (`order_status_id`, `language_id`, `name`) VALUES
 (5, 2, '已完成'),
 (11, 2, '已退款'),
 (1, 2, '待处理'),
-(15, 2, '已处理'),
+(15, 2, '已付款'),
 (10, 2, '付款失败');
 
 -- --------------------------------------------------------
@@ -2381,7 +2357,6 @@ CREATE TABLE IF NOT EXISTS `yk_product` (
   `subtract` tinyint(1) NOT NULL DEFAULT '1',
   `minimum` tinyint(4) NOT NULL DEFAULT '1',
   `sort_order` smallint(6) NOT NULL DEFAULT '0',
-  `category_related` tinyint(4) NOT NULL DEFAULT '1',
   `status` tinyint(1) NOT NULL DEFAULT '0',
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -2393,13 +2368,13 @@ CREATE TABLE IF NOT EXISTS `yk_product` (
 -- 转存表中的数据 `yk_product`
 --
 
-INSERT INTO `yk_product` (`product_id`, `model`, `sku`, `upc`, `ean`, `jan`, `isbn`, `mpn`, `location`, `quantity`, `stock_status_id`, `image`, `manufacturer_id`, `shipping`, `price`, `market`, `points`, `tax_class_id`, `date_available`, `weight`, `weight_class_id`, `length`, `width`, `height`, `length_class_id`, `subtract`, `minimum`, `sort_order`, `category_related`, `status`, `date_added`, `date_modified`, `viewed`) VALUES
-(50, '132143', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic1.jpg', 0, 1, '126.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, 1, '2015-06-26 13:00:31', '2015-06-16 16:23:34', 62),
-(51, 'ae123213', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic2.jpg', 0, 1, '123.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, 1, '2015-06-23 07:23:47', '0000-00-00 00:00:00', 19),
-(52, '123123', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic4.jpg', 0, 1, '123.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, 1, '2015-06-16 16:29:23', '0000-00-00 00:00:00', 7),
-(53, '231414', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic3.jpg', 0, 1, '125.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, 1, '2015-06-26 13:13:01', '0000-00-00 00:00:00', 125),
-(54, '2144232', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic5.jpg', 0, 1, '128.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, 1, '2015-06-16 09:03:38', '0000-00-00 00:00:00', 6),
-(55, 'xf1325324', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic6.jpg', 0, 1, '158.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, 1, '2015-06-16 09:05:42', '0000-00-00 00:00:00', 1);
+INSERT INTO `yk_product` (`product_id`, `model`, `sku`, `upc`, `ean`, `jan`, `isbn`, `mpn`, `location`, `quantity`, `stock_status_id`, `image`, `manufacturer_id`, `shipping`, `price`, `market`, `points`, `tax_class_id`, `date_available`, `weight`, `weight_class_id`, `length`, `width`, `height`, `length_class_id`, `subtract`, `minimum`, `sort_order`, `status`, `date_added`, `date_modified`, `viewed`) VALUES
+(50, '132143', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic1.jpg', 0, 1, '126.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-26 13:00:31', '2015-06-16 16:23:34', 64),
+(51, 'ae123213', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic2.jpg', 0, 1, '123.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-23 07:23:47', '0000-00-00 00:00:00', 27),
+(52, '123123', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic4.jpg', 0, 1, '123.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-16 16:29:23', '0000-00-00 00:00:00', 18),
+(53, '231414', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic3.jpg', 0, 1, '125.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-26 13:13:01', '0000-00-00 00:00:00', 128),
+(54, '2144232', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic5.jpg', 0, 1, '128.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-16 09:03:38', '0000-00-00 00:00:00', 6),
+(55, 'xf1325324', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic6.jpg', 0, 1, '158.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-16 09:05:42', '0000-00-00 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -2891,7 +2866,7 @@ CREATE TABLE IF NOT EXISTS `yk_setting` (
   `value` text NOT NULL,
   `serialized` tinyint(1) NOT NULL,
   PRIMARY KEY (`setting_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1625 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1733 ;
 
 --
 -- 转存表中的数据 `yk_setting`
@@ -2927,133 +2902,134 @@ INSERT INTO `yk_setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `se
 (54, 0, 'reward', 'reward_status', '1', 0),
 (727, 0, 'category', 'category_module', 'a:2:{i:0;a:4:{s:9:"layout_id";s:1:"3";s:8:"position";s:11:"column_left";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"1";}i:1;a:4:{s:9:"layout_id";s:1:"2";s:8:"position";s:11:"column_left";s:6:"status";s:1:"0";s:10:"sort_order";s:1:"1";}}', 1),
 (658, 0, 'account', 'account_module', 'a:1:{i:0;a:4:{s:9:"layout_id";s:1:"6";s:8:"position";s:12:"column_right";s:6:"status";s:1:"0";s:10:"sort_order";s:1:"1";}}', 1),
-(1608, 0, 'config', 'config_seo_url', '0', 0),
-(1609, 0, 'config', 'config_file_extension_allowed', 'txt\r\npng\r\njpe\r\njpeg\r\njpg\r\ngif\r\nbmp\r\nico\r\ntiff\r\ntif\r\nsvg\r\nsvgz\r\nzip\r\nrar\r\nmsi\r\ncab\r\nmp3\r\nqt\r\nmov\r\npdf\r\npsd\r\nai\r\neps\r\nps\r\ndoc\r\nrtf\r\nxls\r\nppt\r\nodt\r\nods', 0),
-(1610, 0, 'config', 'config_file_mime_allowed', 'text/plain\r\nimage/png\r\nimage/jpeg\r\nimage/jpeg\r\nimage/jpeg\r\nimage/gif\r\nimage/bmp\r\nimage/vnd.microsoft.icon\r\nimage/tiff\r\nimage/tiff\r\nimage/svg+xml\r\nimage/svg+xml\r\napplication/zip\r\napplication/x-rar-compressed\r\napplication/x-msdownload\r\napplication/vnd.ms-cab-compressed\r\naudio/mpeg\r\nvideo/quicktime\r\nvideo/quicktime\r\napplication/pdf\r\nimage/vnd.adobe.photoshop\r\napplication/postscript\r\napplication/postscript\r\napplication/postscript\r\napplication/msword\r\napplication/rtf\r\napplication/vnd.ms-excel\r\napplication/vnd.ms-powerpoint\r\napplication/vnd.oasis.opendocument.text\r\napplication/vnd.oasis.opendocument.spreadsheet', 0),
+(1718, 0, 'config', 'config_seo_url', '0', 0),
+(1719, 0, 'config', 'config_file_extension_allowed', 'txt\r\npng\r\njpe\r\njpeg\r\njpg\r\ngif\r\nbmp\r\nico\r\ntiff\r\ntif\r\nsvg\r\nsvgz\r\nzip\r\nrar\r\nmsi\r\ncab\r\nmp3\r\nqt\r\nmov\r\npdf\r\npsd\r\nai\r\neps\r\nps\r\ndoc\r\nrtf\r\nxls\r\nppt\r\nodt\r\nods', 0),
+(1720, 0, 'config', 'config_file_mime_allowed', 'text/plain\r\nimage/png\r\nimage/jpeg\r\nimage/jpeg\r\nimage/jpeg\r\nimage/gif\r\nimage/bmp\r\nimage/vnd.microsoft.icon\r\nimage/tiff\r\nimage/tiff\r\nimage/svg+xml\r\nimage/svg+xml\r\napplication/zip\r\napplication/x-rar-compressed\r\napplication/x-msdownload\r\napplication/vnd.ms-cab-compressed\r\naudio/mpeg\r\nvideo/quicktime\r\nvideo/quicktime\r\napplication/pdf\r\nimage/vnd.adobe.photoshop\r\napplication/postscript\r\napplication/postscript\r\napplication/postscript\r\napplication/msword\r\napplication/rtf\r\napplication/vnd.ms-excel\r\napplication/vnd.ms-powerpoint\r\napplication/vnd.oasis.opendocument.text\r\napplication/vnd.oasis.opendocument.spreadsheet', 0),
 (94, 0, 'voucher', 'voucher_sort_order', '8', 0),
 (95, 0, 'voucher', 'voucher_status', '1', 0),
 (103, 0, 'free_checkout', 'free_checkout_status', '1', 0),
 (104, 0, 'free_checkout', 'free_checkout_order_status_id', '1', 0),
-(1605, 0, 'config', 'config_secure', '0', 0),
-(1606, 0, 'config', 'config_shared', '0', 0),
-(1607, 0, 'config', 'config_robots', 'abot\r\ndbot\r\nebot\r\nhbot\r\nkbot\r\nlbot\r\nmbot\r\nnbot\r\nobot\r\npbot\r\nrbot\r\nsbot\r\ntbot\r\nvbot\r\nybot\r\nzbot\r\nbot.\r\nbot/\r\n_bot\r\n.bot\r\n/bot\r\n-bot\r\n:bot\r\n(bot\r\ncrawl\r\nslurp\r\nspider\r\nseek\r\naccoona\r\nacoon\r\nadressendeutschland\r\nah-ha.com\r\nahoy\r\naltavista\r\nananzi\r\nanthill\r\nappie\r\narachnophilia\r\narale\r\naraneo\r\naranha\r\narchitext\r\naretha\r\narks\r\nasterias\r\natlocal\r\natn\r\natomz\r\naugurfind\r\nbackrub\r\nbannana_bot\r\nbaypup\r\nbdfetch\r\nbig brother\r\nbiglotron\r\nbjaaland\r\nblackwidow\r\nblaiz\r\nblog\r\nblo.\r\nbloodhound\r\nboitho\r\nbooch\r\nbradley\r\nbutterfly\r\ncalif\r\ncassandra\r\nccubee\r\ncfetch\r\ncharlotte\r\nchurl\r\ncienciaficcion\r\ncmc\r\ncollective\r\ncomagent\r\ncombine\r\ncomputingsite\r\ncsci\r\ncurl\r\ncusco\r\ndaumoa\r\ndeepindex\r\ndelorie\r\ndepspid\r\ndeweb\r\ndie blinde kuh\r\ndigger\r\nditto\r\ndmoz\r\ndocomo\r\ndownload express\r\ndtaagent\r\ndwcp\r\nebiness\r\nebingbong\r\ne-collector\r\nejupiter\r\nemacs-w3 search engine\r\nesther\r\nevliya celebi\r\nezresult\r\nfalcon\r\nfelix ide\r\nferret\r\nfetchrover\r\nfido\r\nfindlinks\r\nfireball\r\nfish search\r\nfouineur\r\nfunnelweb\r\ngazz\r\ngcreep\r\ngenieknows\r\ngetterroboplus\r\ngeturl\r\nglx\r\ngoforit\r\ngolem\r\ngrabber\r\ngrapnel\r\ngralon\r\ngriffon\r\ngromit\r\ngrub\r\ngulliver\r\nhamahakki\r\nharvest\r\nhavindex\r\nhelix\r\nheritrix\r\nhku www octopus\r\nhomerweb\r\nhtdig\r\nhtml index\r\nhtml_analyzer\r\nhtmlgobble\r\nhubater\r\nhyper-decontextualizer\r\nia_archiver\r\nibm_planetwide\r\nichiro\r\niconsurf\r\niltrovatore\r\nimage.kapsi.net\r\nimagelock\r\nincywincy\r\nindexer\r\ninfobee\r\ninformant\r\ningrid\r\ninktomisearch.com\r\ninspector web\r\nintelliagent\r\ninternet shinchakubin\r\nip3000\r\niron33\r\nisraeli-search\r\nivia\r\njack\r\njakarta\r\njavabee\r\njetbot\r\njumpstation\r\nkatipo\r\nkdd-explorer\r\nkilroy\r\nknowledge\r\nkototoi\r\nkretrieve\r\nlabelgrabber\r\nlachesis\r\nlarbin\r\nlegs\r\nlibwww\r\nlinkalarm\r\nlink validator\r\nlinkscan\r\nlockon\r\nlwp\r\nlycos\r\nmagpie\r\nmantraagent\r\nmapoftheinternet\r\nmarvin/\r\nmattie\r\nmediafox\r\nmediapartners\r\nmercator\r\nmerzscope\r\nmicrosoft url control\r\nminirank\r\nmiva\r\nmj12\r\nmnogosearch\r\nmoget\r\nmonster\r\nmoose\r\nmotor\r\nmultitext\r\nmuncher\r\nmuscatferret\r\nmwd.search\r\nmyweb\r\nnajdi\r\nnameprotect\r\nnationaldirectory\r\nnazilla\r\nncsa beta\r\nnec-meshexplorer\r\nnederland.zoek\r\nnetcarta webmap engine\r\nnetmechanic\r\nnetresearchserver\r\nnetscoop\r\nnewscan-online\r\nnhse\r\nnokia6682/\r\nnomad\r\nnoyona\r\nnutch\r\nnzexplorer\r\nobjectssearch\r\noccam\r\nomni\r\nopen text\r\nopenfind\r\nopenintelligencedata\r\norb search\r\nosis-project\r\npack rat\r\npageboy\r\npagebull\r\npage_verifier\r\npanscient\r\nparasite\r\npartnersite\r\npatric\r\npear.\r\npegasus\r\nperegrinator\r\npgp key agent\r\nphantom\r\nphpdig\r\npicosearch\r\npiltdownman\r\npimptrain\r\npinpoint\r\npioneer\r\npiranha\r\nplumtreewebaccessor\r\npogodak\r\npoirot\r\npompos\r\npoppelsdorf\r\npoppi\r\npopular iconoclast\r\npsycheclone\r\npublisher\r\npython\r\nrambler\r\nraven search\r\nroach\r\nroad runner\r\nroadhouse\r\nrobbie\r\nrobofox\r\nrobozilla\r\nrules\r\nsalty\r\nsbider\r\nscooter\r\nscoutjet\r\nscrubby\r\nsearch.\r\nsearchprocess\r\nsemanticdiscovery\r\nsenrigan\r\nsg-scout\r\nshai''hulud\r\nshark\r\nshopwiki\r\nsidewinder\r\nsift\r\nsilk\r\nsimmany\r\nsite searcher\r\nsite valet\r\nsitetech-rover\r\nskymob.com\r\nsleek\r\nsmartwit\r\nsna-\r\nsnappy\r\nsnooper\r\nsohu\r\nspeedfind\r\nsphere\r\nsphider\r\nspinner\r\nspyder\r\nsteeler/\r\nsuke\r\nsuntek\r\nsupersnooper\r\nsurfnomore\r\nsven\r\nsygol\r\nszukacz\r\ntach black widow\r\ntarantula\r\ntempleton\r\n/teoma\r\nt-h-u-n-d-e-r-s-t-o-n-e\r\ntheophrastus\r\ntitan\r\ntitin\r\ntkwww\r\ntoutatis\r\nt-rex\r\ntutorgig\r\ntwiceler\r\ntwisted\r\nucsd\r\nudmsearch\r\nurl check\r\nupdated\r\nvagabondo\r\nvalkyrie\r\nverticrawl\r\nvictoria\r\nvision-search\r\nvolcano\r\nvoyager/\r\nvoyager-hc\r\nw3c_validator\r\nw3m2\r\nw3mir\r\nwalker\r\nwallpaper\r\nwanderer\r\nwauuu\r\nwavefire\r\nweb core\r\nweb hopper\r\nweb wombat\r\nwebbandit\r\nwebcatcher\r\nwebcopy\r\nwebfoot\r\nweblayers\r\nweblinker\r\nweblog monitor\r\nwebmirror\r\nwebmonkey\r\nwebquest\r\nwebreaper\r\nwebsitepulse\r\nwebsnarf\r\nwebstolperer\r\nwebvac\r\nwebwalk\r\nwebwatch\r\nwebwombat\r\nwebzinger\r\nwhizbang\r\nwhowhere\r\nwild ferret\r\nworldlight\r\nwwwc\r\nwwwster\r\nxenu\r\nxget\r\nxift\r\nxirq\r\nyandex\r\nyanga\r\nyeti\r\nyodao\r\nzao\r\nzippp\r\nzyborg', 0),
-(1604, 0, 'config', 'config_fraud_status_id', '7', 0),
-(1603, 0, 'config', 'config_fraud_score', '', 0),
-(1602, 0, 'config', 'config_fraud_key', '', 0),
-(1601, 0, 'config', 'config_fraud_detection', '0', 0),
-(1600, 0, 'config', 'config_alert_emails', '', 0),
-(1599, 0, 'config', 'config_account_mail', '0', 0),
-(1598, 0, 'config', 'config_alert_mail', '0', 0),
-(1597, 0, 'config', 'config_smtp_timeout', '5', 0),
-(1596, 0, 'config', 'config_smtp_port', '25', 0),
-(1595, 0, 'config', 'config_smtp_password', '', 0),
-(1594, 0, 'config', 'config_smtp_username', '', 0),
-(1593, 0, 'config', 'config_smtp_host', '', 0),
-(1592, 0, 'config', 'config_mail_parameter', '', 0),
-(1591, 0, 'config', 'config_mail_protocol', 'mail', 0),
-(1590, 0, 'config', 'config_ftp_status', '0', 0),
-(1589, 0, 'config', 'config_ftp_root', '', 0),
-(1588, 0, 'config', 'config_ftp_password', '', 0),
-(1587, 0, 'config', 'config_ftp_username', '', 0),
-(1586, 0, 'config', 'config_ftp_port', '21', 0),
-(1585, 0, 'config', 'config_ftp_host', 'yuankong.com', 0),
-(1584, 0, 'config', 'config_image_cart_height', '47', 0),
-(1583, 0, 'config', 'config_image_cart_width', '47', 0),
-(1582, 0, 'config', 'config_image_wishlist_height', '47', 0),
-(1581, 0, 'config', 'config_image_wishlist_width', '47', 0),
-(1580, 0, 'config', 'config_image_compare_height', '90', 0),
-(1579, 0, 'config', 'config_image_compare_width', '90', 0),
-(1578, 0, 'config', 'config_image_related_height', '80', 0),
-(1577, 0, 'config', 'config_image_related_width', '80', 0),
-(1576, 0, 'config', 'config_image_additional_height', '429', 0),
-(1575, 0, 'config', 'config_image_additional_width', '429', 0),
-(1574, 0, 'config', 'config_image_product_height', '221', 0),
-(1573, 0, 'config', 'config_image_product_width', '221', 0),
-(1572, 0, 'config', 'config_image_popup_height', '500', 0),
-(1571, 0, 'config', 'config_image_popup_width', '500', 0),
-(1570, 0, 'config', 'config_image_thumb_height', '429', 0),
-(1569, 0, 'config', 'config_image_thumb_width', '429', 0),
-(1568, 0, 'config', 'config_image_category_height', '80', 0),
-(1567, 0, 'config', 'config_image_category_width', '80', 0),
-(1566, 0, 'config', 'config_icon', 'data/cart.png', 0),
-(1565, 0, 'config', 'config_logo', 'data/logo.png', 0),
-(1564, 0, 'config', 'config_return_status_id', '1', 0),
-(1563, 0, 'config', 'config_return_id', '0', 0),
-(1562, 0, 'config', 'config_commission', '5', 0),
-(1561, 0, 'config', 'config_affiliate_id', '4', 0),
-(1560, 0, 'config', 'config_stock_status_id', '7', 0),
-(1559, 0, 'config', 'config_stock_checkout', '0', 0),
-(1558, 0, 'config', 'config_stock_warning', '0', 0),
-(1557, 0, 'config', 'config_stock_display', '0', 0),
-(1556, 0, 'config', 'config_complete_status_id', '5', 0),
-(1555, 0, 'config', 'config_order_status_id', '1', 0),
-(1554, 0, 'config', 'config_invoice_prefix', 'INV-2015-00', 0),
-(1553, 0, 'config', 'config_order_edit', '100', 0),
-(1552, 0, 'config', 'config_checkout_id', '5', 0),
-(1551, 0, 'config', 'config_guest_checkout', '1', 0),
-(1550, 0, 'config', 'config_cart_weight', '1', 0),
-(1549, 0, 'config', 'config_account_id', '3', 0),
-(1548, 0, 'config', 'config_customer_price', '0', 0),
-(1547, 0, 'config', 'config_customer_group_display', 'a:1:{i:0;s:1:"1";}', 1),
-(1546, 0, 'config', 'config_customer_group_id', '1', 0),
-(1545, 0, 'config', 'config_customer_online', '0', 0),
-(1544, 0, 'config', 'config_tax_customer', 'shipping', 0),
-(1543, 0, 'config', 'config_tax_default', 'shipping', 0),
+(1715, 0, 'config', 'config_secure', '0', 0),
+(1716, 0, 'config', 'config_shared', '0', 0),
+(1717, 0, 'config', 'config_robots', 'abot\r\ndbot\r\nebot\r\nhbot\r\nkbot\r\nlbot\r\nmbot\r\nnbot\r\nobot\r\npbot\r\nrbot\r\nsbot\r\ntbot\r\nvbot\r\nybot\r\nzbot\r\nbot.\r\nbot/\r\n_bot\r\n.bot\r\n/bot\r\n-bot\r\n:bot\r\n(bot\r\ncrawl\r\nslurp\r\nspider\r\nseek\r\naccoona\r\nacoon\r\nadressendeutschland\r\nah-ha.com\r\nahoy\r\naltavista\r\nananzi\r\nanthill\r\nappie\r\narachnophilia\r\narale\r\naraneo\r\naranha\r\narchitext\r\naretha\r\narks\r\nasterias\r\natlocal\r\natn\r\natomz\r\naugurfind\r\nbackrub\r\nbannana_bot\r\nbaypup\r\nbdfetch\r\nbig brother\r\nbiglotron\r\nbjaaland\r\nblackwidow\r\nblaiz\r\nblog\r\nblo.\r\nbloodhound\r\nboitho\r\nbooch\r\nbradley\r\nbutterfly\r\ncalif\r\ncassandra\r\nccubee\r\ncfetch\r\ncharlotte\r\nchurl\r\ncienciaficcion\r\ncmc\r\ncollective\r\ncomagent\r\ncombine\r\ncomputingsite\r\ncsci\r\ncurl\r\ncusco\r\ndaumoa\r\ndeepindex\r\ndelorie\r\ndepspid\r\ndeweb\r\ndie blinde kuh\r\ndigger\r\nditto\r\ndmoz\r\ndocomo\r\ndownload express\r\ndtaagent\r\ndwcp\r\nebiness\r\nebingbong\r\ne-collector\r\nejupiter\r\nemacs-w3 search engine\r\nesther\r\nevliya celebi\r\nezresult\r\nfalcon\r\nfelix ide\r\nferret\r\nfetchrover\r\nfido\r\nfindlinks\r\nfireball\r\nfish search\r\nfouineur\r\nfunnelweb\r\ngazz\r\ngcreep\r\ngenieknows\r\ngetterroboplus\r\ngeturl\r\nglx\r\ngoforit\r\ngolem\r\ngrabber\r\ngrapnel\r\ngralon\r\ngriffon\r\ngromit\r\ngrub\r\ngulliver\r\nhamahakki\r\nharvest\r\nhavindex\r\nhelix\r\nheritrix\r\nhku www octopus\r\nhomerweb\r\nhtdig\r\nhtml index\r\nhtml_analyzer\r\nhtmlgobble\r\nhubater\r\nhyper-decontextualizer\r\nia_archiver\r\nibm_planetwide\r\nichiro\r\niconsurf\r\niltrovatore\r\nimage.kapsi.net\r\nimagelock\r\nincywincy\r\nindexer\r\ninfobee\r\ninformant\r\ningrid\r\ninktomisearch.com\r\ninspector web\r\nintelliagent\r\ninternet shinchakubin\r\nip3000\r\niron33\r\nisraeli-search\r\nivia\r\njack\r\njakarta\r\njavabee\r\njetbot\r\njumpstation\r\nkatipo\r\nkdd-explorer\r\nkilroy\r\nknowledge\r\nkototoi\r\nkretrieve\r\nlabelgrabber\r\nlachesis\r\nlarbin\r\nlegs\r\nlibwww\r\nlinkalarm\r\nlink validator\r\nlinkscan\r\nlockon\r\nlwp\r\nlycos\r\nmagpie\r\nmantraagent\r\nmapoftheinternet\r\nmarvin/\r\nmattie\r\nmediafox\r\nmediapartners\r\nmercator\r\nmerzscope\r\nmicrosoft url control\r\nminirank\r\nmiva\r\nmj12\r\nmnogosearch\r\nmoget\r\nmonster\r\nmoose\r\nmotor\r\nmultitext\r\nmuncher\r\nmuscatferret\r\nmwd.search\r\nmyweb\r\nnajdi\r\nnameprotect\r\nnationaldirectory\r\nnazilla\r\nncsa beta\r\nnec-meshexplorer\r\nnederland.zoek\r\nnetcarta webmap engine\r\nnetmechanic\r\nnetresearchserver\r\nnetscoop\r\nnewscan-online\r\nnhse\r\nnokia6682/\r\nnomad\r\nnoyona\r\nnutch\r\nnzexplorer\r\nobjectssearch\r\noccam\r\nomni\r\nopen text\r\nopenfind\r\nopenintelligencedata\r\norb search\r\nosis-project\r\npack rat\r\npageboy\r\npagebull\r\npage_verifier\r\npanscient\r\nparasite\r\npartnersite\r\npatric\r\npear.\r\npegasus\r\nperegrinator\r\npgp key agent\r\nphantom\r\nphpdig\r\npicosearch\r\npiltdownman\r\npimptrain\r\npinpoint\r\npioneer\r\npiranha\r\nplumtreewebaccessor\r\npogodak\r\npoirot\r\npompos\r\npoppelsdorf\r\npoppi\r\npopular iconoclast\r\npsycheclone\r\npublisher\r\npython\r\nrambler\r\nraven search\r\nroach\r\nroad runner\r\nroadhouse\r\nrobbie\r\nrobofox\r\nrobozilla\r\nrules\r\nsalty\r\nsbider\r\nscooter\r\nscoutjet\r\nscrubby\r\nsearch.\r\nsearchprocess\r\nsemanticdiscovery\r\nsenrigan\r\nsg-scout\r\nshai''hulud\r\nshark\r\nshopwiki\r\nsidewinder\r\nsift\r\nsilk\r\nsimmany\r\nsite searcher\r\nsite valet\r\nsitetech-rover\r\nskymob.com\r\nsleek\r\nsmartwit\r\nsna-\r\nsnappy\r\nsnooper\r\nsohu\r\nspeedfind\r\nsphere\r\nsphider\r\nspinner\r\nspyder\r\nsteeler/\r\nsuke\r\nsuntek\r\nsupersnooper\r\nsurfnomore\r\nsven\r\nsygol\r\nszukacz\r\ntach black widow\r\ntarantula\r\ntempleton\r\n/teoma\r\nt-h-u-n-d-e-r-s-t-o-n-e\r\ntheophrastus\r\ntitan\r\ntitin\r\ntkwww\r\ntoutatis\r\nt-rex\r\ntutorgig\r\ntwiceler\r\ntwisted\r\nucsd\r\nudmsearch\r\nurl check\r\nupdated\r\nvagabondo\r\nvalkyrie\r\nverticrawl\r\nvictoria\r\nvision-search\r\nvolcano\r\nvoyager/\r\nvoyager-hc\r\nw3c_validator\r\nw3m2\r\nw3mir\r\nwalker\r\nwallpaper\r\nwanderer\r\nwauuu\r\nwavefire\r\nweb core\r\nweb hopper\r\nweb wombat\r\nwebbandit\r\nwebcatcher\r\nwebcopy\r\nwebfoot\r\nweblayers\r\nweblinker\r\nweblog monitor\r\nwebmirror\r\nwebmonkey\r\nwebquest\r\nwebreaper\r\nwebsitepulse\r\nwebsnarf\r\nwebstolperer\r\nwebvac\r\nwebwalk\r\nwebwatch\r\nwebwombat\r\nwebzinger\r\nwhizbang\r\nwhowhere\r\nwild ferret\r\nworldlight\r\nwwwc\r\nwwwster\r\nxenu\r\nxget\r\nxift\r\nxirq\r\nyandex\r\nyanga\r\nyeti\r\nyodao\r\nzao\r\nzippp\r\nzyborg', 0),
+(1714, 0, 'config', 'config_fraud_status_id', '7', 0),
+(1713, 0, 'config', 'config_fraud_score', '', 0),
+(1712, 0, 'config', 'config_fraud_key', '', 0),
+(1711, 0, 'config', 'config_fraud_detection', '0', 0),
+(1710, 0, 'config', 'config_alert_emails', '', 0),
+(1709, 0, 'config', 'config_account_mail', '0', 0),
+(1708, 0, 'config', 'config_alert_mail', '0', 0),
+(1707, 0, 'config', 'config_smtp_timeout', '5', 0),
+(1706, 0, 'config', 'config_smtp_port', '25', 0),
+(1705, 0, 'config', 'config_smtp_password', '', 0),
+(1704, 0, 'config', 'config_smtp_username', '', 0),
+(1703, 0, 'config', 'config_smtp_host', '', 0),
+(1702, 0, 'config', 'config_mail_parameter', '', 0),
+(1701, 0, 'config', 'config_mail_protocol', 'mail', 0),
+(1700, 0, 'config', 'config_ftp_status', '0', 0),
+(1699, 0, 'config', 'config_ftp_root', '', 0),
+(1698, 0, 'config', 'config_ftp_password', '', 0),
+(1697, 0, 'config', 'config_ftp_username', '', 0),
+(1696, 0, 'config', 'config_ftp_port', '21', 0),
+(1695, 0, 'config', 'config_ftp_host', 'yuankong.com', 0),
+(1694, 0, 'config', 'config_image_cart_height', '47', 0),
+(1693, 0, 'config', 'config_image_cart_width', '47', 0),
+(1692, 0, 'config', 'config_image_wishlist_height', '47', 0),
+(1691, 0, 'config', 'config_image_wishlist_width', '47', 0),
+(1690, 0, 'config', 'config_image_compare_height', '90', 0),
+(1689, 0, 'config', 'config_image_compare_width', '90', 0),
+(1688, 0, 'config', 'config_image_related_height', '80', 0),
+(1687, 0, 'config', 'config_image_related_width', '80', 0),
+(1686, 0, 'config', 'config_image_additional_height', '429', 0),
+(1685, 0, 'config', 'config_image_additional_width', '429', 0),
+(1684, 0, 'config', 'config_image_product_height', '221', 0),
+(1683, 0, 'config', 'config_image_product_width', '221', 0),
+(1682, 0, 'config', 'config_image_popup_height', '500', 0),
+(1681, 0, 'config', 'config_image_popup_width', '500', 0),
+(1680, 0, 'config', 'config_image_thumb_height', '429', 0),
+(1679, 0, 'config', 'config_image_thumb_width', '429', 0),
+(1678, 0, 'config', 'config_image_category_height', '80', 0),
+(1677, 0, 'config', 'config_image_category_width', '80', 0),
+(1676, 0, 'config', 'config_icon', 'data/cart.png', 0),
+(1675, 0, 'config', 'config_logo', 'data/logo.png', 0),
+(1674, 0, 'config', 'config_return_status_id', '1', 0),
+(1673, 0, 'config', 'config_return_id', '0', 0),
+(1672, 0, 'config', 'config_commission', '5', 0),
+(1671, 0, 'config', 'config_affiliate_id', '4', 0),
+(1670, 0, 'config', 'config_stock_status_id', '7', 0),
+(1669, 0, 'config', 'config_stock_checkout', '0', 0),
+(1668, 0, 'config', 'config_stock_warning', '0', 0),
+(1667, 0, 'config', 'config_stock_display', '0', 0),
+(1666, 0, 'config', 'config_complete_status_id', '5', 0),
+(1665, 0, 'config', 'config_order_status_id', '1', 0),
+(1664, 0, 'config', 'config_invoice_prefix', 'INV-2015-00', 0),
+(1663, 0, 'config', 'config_order_edit', '100', 0),
+(1662, 0, 'config', 'config_checkout_id', '5', 0),
+(1661, 0, 'config', 'config_guest_checkout', '1', 0),
+(1660, 0, 'config', 'config_cart_weight', '1', 0),
+(1659, 0, 'config', 'config_account_id', '5', 0),
+(1658, 0, 'config', 'config_customer_price', '0', 0),
+(1657, 0, 'config', 'config_customer_group_display', 'a:1:{i:0;s:1:"1";}', 1),
+(1656, 0, 'config', 'config_customer_group_id', '1', 0),
+(1655, 0, 'config', 'config_customer_online', '0', 0),
+(1654, 0, 'config', 'config_tax_customer', 'shipping', 0),
+(1653, 0, 'config', 'config_tax_default', 'shipping', 0),
 (1619, 0, 'yknews', 'yknews_module', 'a:1:{i:0;a:8:{s:9:"layout_id";s:1:"1";s:8:"position";s:9:"slideshow";s:8:"group_id";s:1:"2";s:5:"title";s:10:"e站快报";s:5:"limit";s:1:"5";s:11:"first_class";s:3:"cff";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"3";}}', 1),
 (1396, 0, 'ykproject', 'ykproject_module', 'a:1:{i:0;a:4:{s:9:"layout_id";s:1:"1";s:8:"position";s:9:"slideshow";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"1";}}', 1),
 (1397, 0, 'ykcarousel', 'ykcarousel_module', 'a:1:{i:0;a:5:{s:9:"layout_id";s:5:"99999";s:8:"position";s:9:"slideshow";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"1";s:12:"banner_image";a:3:{i:1;a:4:{s:5:"image";s:16:"data/banner2.jpg";s:4:"link";s:17:" www.yk119.com.cn";s:5:"title";a:1:{i:2;s:0:"";}s:11:"description";a:1:{i:2;s:31:"&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n";}}i:2;a:4:{s:5:"image";s:16:"data/banner1.jpg";s:4:"link";s:17:" www.yk119.com.cn";s:5:"title";a:1:{i:2;s:0:"";}s:11:"description";a:1:{i:2;s:31:"&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n";}}i:3;a:4:{s:5:"image";s:16:"data/banner3.jpg";s:4:"link";s:17:" www.yk119.com.cn";s:5:"title";a:1:{i:2;s:0:"";}s:11:"description";a:1:{i:2;s:31:"&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n";}}}}}', 1),
 (1281, 0, 'affiliate', 'affiliate_module', 'a:2:{i:0;a:4:{s:9:"layout_id";s:2:"10";s:8:"position";s:12:"column_right";s:6:"status";s:1:"0";s:10:"sort_order";s:1:"1";}i:1;a:4:{s:9:"layout_id";s:1:"1";s:8:"position";s:12:"column_right";s:6:"status";s:1:"0";s:10:"sort_order";i:1;}}', 1),
-(1542, 0, 'config', 'config_vat', '0', 0),
-(1541, 0, 'config', 'config_tax', '0', 0),
-(1540, 0, 'config', 'config_voucher_max', '1000', 0),
-(1539, 0, 'config', 'config_voucher_min', '1', 0),
-(1538, 0, 'config', 'config_download', '1', 0),
+(1652, 0, 'config', 'config_vat', '0', 0),
+(1651, 0, 'config', 'config_tax', '0', 0),
+(1650, 0, 'config', 'config_voucher_max', '1000', 0),
+(1649, 0, 'config', 'config_voucher_min', '1', 0),
+(1648, 0, 'config', 'config_download', '1', 0),
 (1279, 0, 'ykcase', 'ykcase_module', 'a:1:{i:0;a:6:{s:9:"layout_id";s:1:"1";s:8:"position";s:8:"showcase";s:5:"title";s:12:"案例精选";s:5:"limit";s:2:"16";s:6:"status";s:1:"1";s:10:"sort_order";i:1;}}', 1),
-(1285, 0, 'ykwiki', 'ykwiki_module', 'a:1:{i:1;a:10:{s:5:"title";a:1:{i:2;s:12:"消防百科";}s:11:"description";a:1:{i:2;s:0:"";}s:9:"layout_id";s:1:"1";s:8:"position";s:11:"mass_bottom";s:6:"status";s:1:"1";s:10:"sort_order";i:4;s:13:"category_tabs";a:6:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";i:3;s:1:"0";i:4;s:1:"4";i:5;s:1:"7";}s:5:"limit";a:6:{i:0;s:1:"5";i:1;s:1:"5";i:2;s:1:"5";i:3;s:1:"5";i:4;s:1:"5";i:5;s:1:"5";}s:5:"image";a:6:{i:0;s:24:"data/yuankong/bkpic1.jpg";i:1;s:24:"data/yuankong/bkpic2.jpg";i:2;s:24:"data/yuankong/bkpic3.jpg";i:3;s:24:"data/yuankong/bkpic4.jpg";i:4;s:24:"data/yuankong/bkpic5.jpg";i:5;s:24:"data/yuankong/bkpic6.jpg";}s:4:"sort";a:6:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";i:3;s:1:"4";i:4;s:1:"5";i:5;s:1:"6";}}}', 1),
+(1625, 0, 'ykwiki', 'ykwiki_module', 'a:1:{i:1;a:9:{s:5:"title";a:1:{i:2;s:12:"消防百科";}s:9:"layout_id";s:1:"1";s:8:"position";s:11:"mass_bottom";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"4";s:13:"category_tabs";a:6:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";i:3;s:1:"0";i:4;s:1:"4";i:5;s:1:"5";}s:5:"limit";a:6:{i:0;s:1:"5";i:1;s:1:"5";i:2;s:1:"5";i:3;s:1:"5";i:4;s:1:"5";i:5;s:1:"5";}s:5:"image";a:6:{i:0;s:24:"data/yuankong/bkpic1.jpg";i:1;s:24:"data/yuankong/bkpic2.jpg";i:2;s:24:"data/yuankong/bkpic3.jpg";i:3;s:24:"data/yuankong/bkpic4.jpg";i:4;s:24:"data/yuankong/bkpic5.jpg";i:5;s:24:"data/yuankong/bkpic6.jpg";}s:4:"sort";a:6:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";i:3;s:1:"4";i:4;s:1:"5";i:5;s:1:"6";}}}', 1),
 (1284, 0, 'ykaffiliate', 'ykaffiliate_module', 'a:1:{i:1;a:10:{s:5:"title";a:1:{i:2;s:12:"消防公司";}s:9:"layout_id";s:1:"1";s:8:"position";s:11:"mass_bottom";s:6:"status";s:1:"1";s:7:"lateast";s:1:"5";s:10:"sort_order";i:3;s:13:"category_tabs";a:4:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";i:3;s:1:"4";}s:5:"limit";a:4:{i:0;s:1:"5";i:1;s:1:"5";i:2;s:1:"5";i:3;s:1:"5";}s:10:"icon_class";a:4:{i:0;s:14:"icon design-gs";i:1;s:10:"icon jc-gs";i:2;s:10:"icon wb-gs";i:3;s:10:"icon gc-gs";}s:4:"sort";a:4:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";i:3;s:1:"4";}}}', 1),
 (1283, 0, 'ykproduct', 'ykproduct_module', 'a:2:{i:1;a:10:{s:5:"title";a:1:{i:2;s:12:"消防器材";}s:9:"layout_id";s:1:"1";s:8:"position";s:11:"mass_bottom";s:6:"status";s:1:"1";s:11:"title_class";s:14:"index-t l-blue";s:16:"additional_class";s:0:"";s:10:"sort_order";s:1:"1";s:13:"category_tabs";a:3:{s:8:"category";a:6:{i:0;s:2:"61";i:1;s:2:"69";i:2;s:2:"75";i:3;s:2:"84";i:4;s:2:"89";i:5;s:2:"94";}s:5:"limit";a:6:{i:0;s:1:"3";i:1;s:1:"2";i:2;s:1:"2";i:3;s:1:"3";i:4;s:1:"2";i:5;s:1:"3";}s:4:"sort";a:6:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";i:3;s:1:"4";i:4;s:1:"5";i:5;s:1:"6";}}s:12:"product_tabs";a:3:{s:7:"product";a:6:{i:0;s:2:"53";i:1;s:2:"52";i:2;s:2:"55";i:3;s:2:"54";i:4;s:2:"50";i:5;s:2:"51";}s:5:"image";a:6:{i:0;s:26:"data/yuankong/shoppic3.jpg";i:1;s:26:"data/yuankong/shoppic4.jpg";i:2;s:26:"data/yuankong/shoppic6.jpg";i:3;s:26:"data/yuankong/shoppic5.jpg";i:4;s:26:"data/yuankong/shoppic1.jpg";i:5;s:26:"data/yuankong/shoppic2.jpg";}s:4:"sort";a:6:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";i:3;s:1:"4";i:4;s:1:"5";i:5;s:1:"6";}}s:11:"banner_tabs";a:3:{s:5:"image";a:3:{i:0;s:25:"data/yuankong/banner4.jpg";i:1;s:25:"data/yuankong/banner5.jpg";i:2;s:25:"data/yuankong/banner6.jpg";}s:4:"link";a:3:{i:0;s:18:"www.yk119.com.cn/1";i:1;s:18:"www.yk119.com.cn/2";i:2;s:18:"www.yk119.com.cn/3";}s:4:"sort";a:3:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";}}}i:2;a:10:{s:5:"title";a:1:{i:2;s:12:"消防装备";}s:9:"layout_id";s:1:"1";s:8:"position";s:11:"mass_bottom";s:6:"status";s:1:"1";s:11:"title_class";s:15:"index-t l-zongs";s:16:"additional_class";s:6:"shebei";s:10:"sort_order";i:2;s:13:"category_tabs";a:3:{s:8:"category";a:4:{i:0;s:2:"97";i:1;s:3:"109";i:2;s:3:"115";i:3;s:3:"128";}s:5:"limit";a:4:{i:0;s:1:"6";i:1;s:1:"5";i:2;s:1:"6";i:3;s:1:"5";}s:4:"sort";a:4:{i:0;s:1:"0";i:1;s:1:"0";i:2;s:1:"0";i:3;s:1:"0";}}s:12:"product_tabs";a:3:{s:7:"product";a:6:{i:0;s:2:"50";i:1;s:2:"51";i:2;s:2:"54";i:3;s:2:"53";i:4;s:2:"55";i:5;s:2:"52";}s:5:"image";a:6:{i:0;s:26:"data/yuankong/shoppic1.jpg";i:1;s:26:"data/yuankong/shoppic2.jpg";i:2;s:26:"data/yuankong/shoppic5.jpg";i:3;s:26:"data/yuankong/shoppic3.jpg";i:4;s:26:"data/yuankong/shoppic6.jpg";i:5;s:26:"data/yuankong/shoppic4.jpg";}s:4:"sort";a:6:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";i:3;s:1:"4";i:4;s:1:"5";i:5;s:1:"6";}}s:11:"banner_tabs";a:3:{s:5:"image";a:3:{i:0;s:25:"data/yuankong/banner6.jpg";i:1;s:25:"data/yuankong/banner5.jpg";i:2;s:25:"data/yuankong/banner4.jpg";}s:4:"link";a:3:{i:0;s:24:"http://www.yuankong.com/";i:1;s:24:"http://www.yuankong.com/";i:2;s:24:"http://www.yuankong.com/";}s:4:"sort";a:3:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";}}}}', 1),
 (1620, 0, 'yknavigation', 'yknavigation_module', 'a:1:{i:0;a:5:{s:9:"layout_id";s:5:"99999";s:8:"position";s:8:"mainmenu";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"0";s:9:"navigator";a:6:{i:0;a:8:{s:5:"title";s:6:"首页";s:5:"route";s:11:"common/home";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:0:"";s:6:"status";s:1:"1";s:8:"selected";s:1:"1";s:4:"sort";s:1:"1";}i:1;a:8:{s:5:"title";s:12:"消防商城";s:5:"route";s:16:"product/category";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:0:"";s:6:"status";s:1:"1";s:8:"selected";s:1:"0";s:4:"sort";s:1:"2";}i:2;a:8:{s:5:"title";s:13:"工程-设计";s:5:"route";s:15:"service/project";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:10:"icon freem";s:6:"status";s:1:"1";s:8:"selected";s:1:"0";s:4:"sort";s:1:"3";}i:3;a:8:{s:5:"title";s:12:"精选案例";s:5:"route";s:12:"service/case";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:0:"";s:6:"status";s:1:"1";s:8:"selected";s:1:"0";s:4:"sort";s:1:"4";}i:4;a:8:{s:5:"title";s:12:"消防公司";s:5:"route";s:17:"affiliate/company";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:0:"";s:6:"status";s:1:"1";s:8:"selected";s:1:"0";s:4:"sort";s:1:"5";}i:5;a:8:{s:5:"title";s:12:"消防百科";s:5:"route";s:16:"information/wiki";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:0:"";s:6:"status";s:1:"1";s:8:"selected";s:1:"0";s:4:"sort";s:1:"6";}}}}', 1),
-(1537, 0, 'config', 'config_review_status', '1', 0),
-(1536, 0, 'config', 'config_product_count', '1', 0),
-(1535, 0, 'config', 'config_admin_limit', '20', 0),
-(1534, 0, 'config', 'config_catalog_limit', '15', 0),
+(1647, 0, 'config', 'config_review_status', '1', 0),
+(1646, 0, 'config', 'config_product_count', '1', 0),
+(1645, 0, 'config', 'config_admin_limit', '20', 0),
+(1644, 0, 'config', 'config_catalog_limit', '15', 0),
 (1408, 0, 'featured', 'product', '', 0),
 (1409, 0, 'featured', 'featured_product', '54,53,55,51', 0),
 (1410, 0, 'featured', 'featured_module', 'a:2:{i:0;a:7:{s:5:"limit";s:1:"6";s:11:"image_width";s:3:"185";s:12:"image_height";s:3:"106";s:9:"layout_id";s:1:"3";s:8:"position";s:11:"column_left";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"2";}i:1;a:7:{s:5:"limit";s:1:"6";s:11:"image_width";s:3:"185";s:12:"image_height";s:3:"106";s:9:"layout_id";s:1:"2";s:8:"position";s:11:"column_left";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"2";}}', 1),
 (1289, 0, 'themecontrol', 'themecontrol', 'a:23:{s:13:"default_theme";s:8:"yuankong";s:9:"layout_id";s:1:"1";s:8:"position";s:1:"1";s:21:"cateogry_display_mode";s:4:"grid";s:20:"cateogry_product_row";s:1:"0";s:14:"category_pzoom";s:1:"1";s:18:"product_enablezoom";s:1:"1";s:19:"product_zoomgallery";s:6:"slider";s:16:"product_zoommode";s:5:"basic";s:20:"product_zoomlenssize";s:3:"150";s:18:"product_zoomeasing";s:1:"1";s:21:"product_zoomlensshape";s:5:"basic";s:22:"product_related_column";s:1:"0";s:6:"search";a:3:{s:6:"option";a:2:{i:0;s:7:"product";i:1;s:4:"news";}s:11:"placeholder";s:9:"消防栓";s:7:"keyword";a:4:{i:0;a:4:{s:5:"title";s:15:"干粉灭火器";s:4:"link";s:23:"http://www.yuankong.com";s:16:"additional_class";s:0:"";s:4:"sort";s:1:"1";}i:1;a:4:{s:5:"title";s:15:"应急指示灯";s:4:"link";s:23:"http://www.yuankong.com";s:16:"additional_class";s:0:"";s:4:"sort";s:1:"2";}i:2;a:4:{s:5:"title";s:12:"防毒面罩";s:4:"link";s:23:"http://www.yuankong.com";s:16:"additional_class";s:0:"";s:4:"sort";s:1:"3";}i:3;a:4:{s:5:"title";s:9:"消防栓";s:4:"link";s:23:"http://www.yuankong.com";s:16:"additional_class";s:0:"";s:4:"sort";s:1:"4";}}}s:23:"enable_custom_copyright";s:1:"1";s:20:"copyright_customhtml";a:1:{i:2;s:307:"&lt;p class=&quot;pt5 c8&quot;&gt;\r\n  消防e站 版权所有Copyright ? 2015-2025 www.yk119.com.cn www.yk119.cn All rights reserved\r\n  &lt;br&gt;苏ICP备15012632号 组织机构代码证：320585000221760\r\n  &lt;br&gt;中国互联网协会信用评价中心网信认证 网信编码:1664391091\r\n&lt;/p&gt;";}s:18:"topleft_customhtml";a:1:{i:2;s:430:"&lt;div class=&quot;h-weix l rel&quot;&gt;&lt;i class=&quot;icon2 wxtub&quot;&gt;&lt;/i&gt;&lt;em class=&quot;icon2 h-down&quot;&gt;&lt;/em&gt;\r\n&lt;div class=&quot;wxbox&quot;&gt;&lt;img src=&quot;http://www.yuankong.com/asset/image/data/yuankong/ewm2.jpg&quot; /&gt;\r\n&lt;p class=&quot;c8&quot;&gt;打开微信，点击“发现”，使用“扫一扫”即可关注爱游戏官方微信&lt;/p&gt;\r\n&lt;/div&gt;\r\n&lt;/div&gt;\r\n";}s:18:"contact_customhtml";a:1:{i:2;s:31:"&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n";}s:15:"block_promotion";s:0:"";s:14:"block_showcase";s:0:"";s:16:"block_footer_top";s:0:"";s:19:"block_footer_center";s:0:"";s:19:"block_footer_bottom";s:0:"";}', 1),
 (1402, 0, 'ykprocedure', 'ykprocedure_module', 'a:1:{i:0;a:4:{s:9:"layout_id";s:1:"1";s:8:"position";s:9:"promotion";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"4";}}', 1),
-(1533, 0, 'config', 'config_weight_class_id', '1', 0),
-(1532, 0, 'config', 'config_length_class_id', '1', 0),
-(1531, 0, 'config', 'config_currency_auto', '0', 0),
-(1530, 0, 'config', 'config_currency', 'CNY', 0),
-(1529, 0, 'config', 'config_admin_language', 'cn', 0),
-(1528, 0, 'config', 'config_language', 'cn', 0),
-(1527, 0, 'config', 'config_zone_id', '700', 0),
-(1526, 0, 'config', 'config_country_id', '44', 0),
-(1525, 0, 'config', 'config_layout_id', '4', 0),
-(1524, 0, 'config', 'config_template', 'yuankong', 0),
-(1523, 0, 'config', 'config_meta_description', '苏州源控', 0),
-(1522, 0, 'config', 'config_title', '消防器材_消防装备_消防公司_消防网上商城【消防E站官网】', 0),
-(1521, 0, 'config', 'config_fax', '', 0),
+(1643, 0, 'config', 'config_weight_class_id', '1', 0),
+(1642, 0, 'config', 'config_length_class_id', '1', 0),
+(1641, 0, 'config', 'config_currency_auto', '0', 0),
+(1640, 0, 'config', 'config_currency', 'CNY', 0),
+(1639, 0, 'config', 'config_admin_language', 'cn', 0),
+(1638, 0, 'config', 'config_language', 'cn', 0),
+(1637, 0, 'config', 'config_zone_id', '700', 0),
+(1636, 0, 'config', 'config_country_id', '44', 0),
+(1635, 0, 'config', 'config_layout_id', '4', 0),
+(1634, 0, 'config', 'config_template', 'yuankong', 0),
+(1633, 0, 'config', 'config_meta_description', '苏州源控', 0),
 (1287, 0, 'yklink', 'yklink_module', 'a:1:{i:0;a:5:{s:9:"layout_id";s:5:"99999";s:8:"position";s:10:"footer_top";s:6:"status";s:1:"1";s:5:"limit";s:2:"15";s:10:"sort_order";i:1;}}', 1),
 (1401, 0, 'ykslideshow', 'ykslideshow_module', 'a:1:{i:0;a:7:{s:9:"layout_id";s:1:"1";s:8:"position";s:9:"slideshow";s:6:"status";s:1:"1";s:5:"width";s:3:"940";s:6:"height";s:3:"350";s:10:"sort_order";s:1:"2";s:12:"banner_image";a:3:{i:1;a:4:{s:5:"image";s:16:"data/banner3.jpg";s:4:"link";s:16:"www.yk119.com.cn";s:5:"title";a:1:{i:2;s:0:"";}s:11:"description";a:1:{i:2;s:31:"&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n";}}i:2;a:4:{s:5:"image";s:16:"data/banner1.jpg";s:4:"link";s:16:"www.yk119.com.cn";s:5:"title";a:1:{i:2;s:0:"";}s:11:"description";a:1:{i:2;s:31:"&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n";}}i:3;a:4:{s:5:"image";s:16:"data/banner2.jpg";s:4:"link";s:16:"www.yk119.com.cn";s:5:"title";a:1:{i:2;s:0:"";}s:11:"description";a:1:{i:2;s:31:"&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n";}}}}}', 1),
 (1407, 0, 'ykcustom', 'ykcustom_module', 'a:2:{i:1;a:7:{s:12:"module_title";a:1:{i:2;s:12:"页底导航";}s:11:"description";a:1:{i:2;s:816:"&lt;div class=&quot;foot tc&quot;&gt;\r\n&lt;p class=&quot;lh30&quot;&gt;&lt;a href=&quot;#&quot;&gt;关于我们&lt;/a&gt; &lt;b&gt;|&lt;/b&gt; &lt;a href=&quot;#&quot;&gt;项目工程&lt;/a&gt; &lt;b&gt;|&lt;/b&gt; &lt;a href=&quot;#&quot;&gt;入驻消防e站&lt;/a&gt; &lt;b&gt;|&lt;/b&gt; &lt;a href=&quot;#&quot;&gt;诚聘英才&lt;/a&gt; &lt;b&gt;|&lt;/b&gt; &lt;a href=&quot;#&quot;&gt;联系我们&lt;/a&gt; &lt;b&gt;|&lt;/b&gt; &lt;a href=&quot;#&quot;&gt;网站地图&lt;/a&gt;&lt;/p&gt;\r\n\r\n&lt;p class=&quot;pt5 c8&quot;&gt;消防e站 版权所有Copyright ? 2015-2025 www.yk119.com.cn www.yk119.cn All rights reserved&lt;br /&gt;\r\n苏ICP备15012632号 组织机构代码证：320585000221760&lt;br /&gt;\r\n中国互联网协会信用评价中心网信认证 网信编码:1664391091&lt;/p&gt;\r\n&lt;/div&gt;\r\n";}s:9:"layout_id";s:5:"99999";s:8:"position";s:13:"footer_bottom";s:6:"status";s:1:"1";s:12:"module_class";s:0:"";s:10:"sort_order";s:1:"1";}i:2;a:7:{s:12:"module_title";a:1:{i:2;s:13:"e站直通车";}s:11:"description";a:1:{i:2;s:2388:"&lt;div class=&quot;rel pb10&quot;&gt;\r\n&lt;h3 class=&quot;index-t l-fens&quot;&gt;e站直通车&lt;/h3&gt;\r\n&lt;/div&gt;\r\n\r\n&lt;div class=&quot;ovh fix b_f btb3 bd2 p10&quot;&gt;&lt;span class=&quot;ztc-pic&quot;&gt;&lt;img src=&quot;http://www.yuankong.com/asset/image/data/yuankong/bkpic7.jpg&quot; /&gt;&lt;/span&gt;\r\n\r\n&lt;ul class=&quot;l ztc-ul fix&quot;&gt;\r\n	&lt;li class=&quot;ztc-li&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;建设工程&lt;br /&gt;\r\n	消防备案&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor3&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;消防技术&lt;br /&gt;\r\n	服务&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor1&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;消防产品装修&lt;br /&gt;\r\n	材料检验&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor2&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;生产企业消防&lt;br /&gt;\r\n	产品抽封样&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor4&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;消防产品市场&lt;br /&gt;\r\n	准入查询&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor5&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;建筑施工资质&lt;br /&gt;\r\n	证书查询&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor6&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;社会单位消防安全&lt;br /&gt;\r\n	户籍化管理系统&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;灭火器维修技术&lt;br /&gt;\r\n	服务管理&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor1&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;建设工程消防&lt;br /&gt;\r\n	检查信息管理&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor3&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;灭火器维修技术&lt;br /&gt;\r\n	服务机构查询&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor5&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;建筑消防设施维修保养&lt;br /&gt;\r\n	技术服务机构查询&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor4&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;建筑消防设施检测&lt;br /&gt;\r\n	技术服务机构查询&lt;/a&gt;&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;/div&gt;\r\n";}s:9:"layout_id";s:1:"1";s:8:"position";s:11:"mass_bottom";s:6:"status";s:1:"1";s:12:"module_class";s:0:"";s:10:"sort_order";s:1:"5";}}', 1),
 (1412, 0, 'ykviewed', 'ykviewed_module', 'a:2:{i:0;a:8:{s:5:"limit";s:1:"6";s:11:"image_width";s:3:"160";s:12:"image_height";s:2:"92";s:9:"layout_id";s:1:"3";s:8:"position";s:11:"mass_bottom";s:6:"status";s:1:"1";s:16:"additional_class";s:0:"";s:10:"sort_order";s:1:"1";}i:1;a:8:{s:5:"limit";s:1:"6";s:11:"image_width";s:3:"160";s:12:"image_height";s:2:"92";s:9:"layout_id";s:1:"2";s:8:"position";s:11:"mass_bottom";s:6:"status";s:1:"1";s:16:"additional_class";s:0:"";s:10:"sort_order";s:1:"1";}}', 1),
-(1520, 0, 'config', 'config_telephone', '123456789', 0),
-(1519, 0, 'config', 'config_email', 'admin@yuankong.com', 0),
-(1518, 0, 'config', 'config_address', '苏州太仓', 0),
-(1517, 0, 'config', 'config_owner', '苏州源控', 0),
-(1516, 0, 'config', 'config_name', '源控智能', 0),
-(1611, 0, 'config', 'config_maintenance', '0', 0),
-(1612, 0, 'config', 'config_password', '1', 0),
-(1613, 0, 'config', 'config_encryption', '8e7509edd480014c251f1b57bb4ef5f4', 0),
-(1614, 0, 'config', 'config_compression', '0', 0),
-(1615, 0, 'config', 'config_error_display', '1', 0),
-(1616, 0, 'config', 'config_error_log', '1', 0),
-(1617, 0, 'config', 'config_error_filename', 'error.txt', 0),
-(1618, 0, 'config', 'config_google_analytics', '', 0),
+(1632, 0, 'config', 'config_title', '消防器材_消防装备_消防公司_消防网上商城【消防E站官网】', 0),
+(1631, 0, 'config', 'config_fax', '', 0),
+(1630, 0, 'config', 'config_telephone', '123456789', 0),
+(1629, 0, 'config', 'config_email', 'admin@yuankong.com', 0),
+(1628, 0, 'config', 'config_address', '苏州太仓', 0),
+(1627, 0, 'config', 'config_owner', '苏州源控', 0),
+(1626, 0, 'config', 'config_name', '源控智能', 0),
 (1622, 0, 'wiki', 'wiki_module', 'a:1:{i:0;a:6:{s:9:"layout_id";s:2:"12";s:8:"position";s:11:"column_left";s:6:"status";s:1:"1";s:5:"title";s:12:"消防百科";s:16:"additional_class";s:0:"";s:10:"sort_order";s:1:"1";}}', 1),
-(1624, 0, 'oauth', 'oauth', 'a:3:{s:2:"qq";a:5:{s:9:"client_id";s:0:"";s:13:"client_secret";s:0:"";s:3:"img";s:18:"data/case/qq-l.png";s:4:"sort";s:1:"1";s:6:"status";s:1:"1";}s:5:"weibo";a:5:{s:9:"client_id";s:0:"";s:13:"client_secret";s:0:"";s:3:"img";s:18:"data/case/wb-l.png";s:4:"sort";s:1:"2";s:6:"status";s:1:"1";}s:5:"baidu";a:5:{s:9:"client_id";s:0:"";s:13:"client_secret";s:0:"";s:3:"img";s:0:"";s:4:"sort";s:1:"0";s:6:"status";s:1:"0";}}', 1);
+(1624, 0, 'oauth', 'oauth', 'a:3:{s:2:"qq";a:5:{s:9:"client_id";s:0:"";s:13:"client_secret";s:0:"";s:3:"img";s:18:"data/case/qq-l.png";s:4:"sort";s:1:"1";s:6:"status";s:1:"1";}s:5:"weibo";a:5:{s:9:"client_id";s:0:"";s:13:"client_secret";s:0:"";s:3:"img";s:18:"data/case/wb-l.png";s:4:"sort";s:1:"2";s:6:"status";s:1:"1";}s:5:"baidu";a:5:{s:9:"client_id";s:0:"";s:13:"client_secret";s:0:"";s:3:"img";s:0:"";s:4:"sort";s:1:"0";s:6:"status";s:1:"0";}}', 1),
+(1721, 0, 'config', 'config_maintenance', '0', 0),
+(1722, 0, 'config', 'config_password', '1', 0),
+(1723, 0, 'config', 'config_encryption', '8e7509edd480014c251f1b57bb4ef5f4', 0),
+(1724, 0, 'config', 'config_compression', '0', 0),
+(1725, 0, 'config', 'config_error_display', '1', 0),
+(1726, 0, 'config', 'config_error_log', '1', 0),
+(1727, 0, 'config', 'config_error_filename', 'error.txt', 0),
+(1728, 0, 'config', 'config_google_analytics', '', 0),
+(1732, 0, 'ykliked', 'ykliked_module', 'a:1:{i:0;a:8:{s:5:"limit";s:1:"6";s:11:"image_width";s:3:"160";s:12:"image_height";s:2:"92";s:9:"layout_id";s:1:"7";s:8:"position";s:14:"content_bottom";s:6:"status";s:1:"1";s:16:"additional_class";s:4:"mt10";s:10:"sort_order";s:1:"1";}}', 1);
 
 -- --------------------------------------------------------
 
@@ -3235,7 +3211,7 @@ CREATE TABLE IF NOT EXISTS `yk_user_group` (
 --
 
 INSERT INTO `yk_user_group` (`user_group_id`, `name`, `permission`) VALUES
-(1, 'Top Administrator', 'a:2:{s:6:"access";a:164:{i:0;s:17:"catalog/attribute";i:1;s:23:"catalog/attribute_group";i:2;s:16:"catalog/category";i:3;s:16:"catalog/download";i:4;s:14:"catalog/filter";i:5;s:19:"catalog/information";i:6;s:20:"catalog/manufacturer";i:7;s:14:"catalog/option";i:8;s:15:"catalog/product";i:9;s:14:"catalog/review";i:10;s:18:"common/filemanager";i:11;s:13:"design/banner";i:12;s:13:"design/layout";i:13;s:14:"extension/feed";i:14;s:17:"extension/manager";i:15;s:16:"extension/module";i:16;s:17:"extension/payment";i:17;s:18:"extension/shipping";i:18;s:15:"extension/total";i:19;s:16:"feed/google_base";i:20;s:19:"feed/google_sitemap";i:21;s:20:"localisation/country";i:22;s:21:"localisation/currency";i:23;s:21:"localisation/geo_zone";i:24;s:21:"localisation/language";i:25;s:25:"localisation/length_class";i:26;s:25:"localisation/order_status";i:27;s:26:"localisation/return_action";i:28;s:26:"localisation/return_reason";i:29;s:26:"localisation/return_status";i:30;s:25:"localisation/stock_status";i:31;s:22:"localisation/tax_class";i:32;s:21:"localisation/tax_rate";i:33;s:25:"localisation/weight_class";i:34;s:17:"localisation/zone";i:35;s:14:"module/account";i:36;s:16:"module/affiliate";i:37;s:13:"module/banner";i:38;s:17:"module/bestseller";i:39;s:15:"module/carousel";i:40;s:15:"module/category";i:41;s:15:"module/featured";i:42;s:13:"module/filter";i:43;s:18:"module/google_talk";i:44;s:18:"module/information";i:45;s:13:"module/latest";i:46;s:16:"module/slideshow";i:47;s:14:"module/special";i:48;s:12:"module/store";i:49;s:14:"module/welcome";i:50;s:24:"payment/authorizenet_aim";i:51;s:21:"payment/bank_transfer";i:52;s:14:"payment/cheque";i:53;s:11:"payment/cod";i:54;s:21:"payment/free_checkout";i:55;s:14:"payment/liqpay";i:56;s:20:"payment/moneybookers";i:57;s:14:"payment/nochex";i:58;s:15:"payment/paymate";i:59;s:16:"payment/paypoint";i:60;s:13:"payment/payza";i:61;s:26:"payment/perpetual_payments";i:62;s:14:"payment/pp_pro";i:63;s:17:"payment/pp_pro_uk";i:64;s:19:"payment/pp_standard";i:65;s:15:"payment/sagepay";i:66;s:22:"payment/sagepay_direct";i:67;s:18:"payment/sagepay_us";i:68;s:19:"payment/twocheckout";i:69;s:28:"payment/web_payment_software";i:70;s:16:"payment/worldpay";i:71;s:27:"report/affiliate_commission";i:72;s:22:"report/customer_credit";i:73;s:22:"report/customer_online";i:74;s:21:"report/customer_order";i:75;s:22:"report/customer_reward";i:76;s:24:"report/product_purchased";i:77;s:21:"report/product_viewed";i:78;s:18:"report/sale_coupon";i:79;s:17:"report/sale_order";i:80;s:18:"report/sale_return";i:81;s:20:"report/sale_shipping";i:82;s:15:"report/sale_tax";i:83;s:14:"sale/affiliate";i:84;s:12:"sale/contact";i:85;s:11:"sale/coupon";i:86;s:13:"sale/customer";i:87;s:20:"sale/customer_ban_ip";i:88;s:19:"sale/customer_group";i:89;s:10:"sale/order";i:90;s:11:"sale/return";i:91;s:12:"sale/voucher";i:92;s:18:"sale/voucher_theme";i:93;s:15:"setting/setting";i:94;s:13:"setting/store";i:95;s:16:"shipping/auspost";i:96;s:17:"shipping/citylink";i:97;s:14:"shipping/fedex";i:98;s:13:"shipping/flat";i:99;s:13:"shipping/free";i:100;s:13:"shipping/item";i:101;s:23:"shipping/parcelforce_48";i:102;s:15:"shipping/pickup";i:103;s:19:"shipping/royal_mail";i:104;s:12:"shipping/ups";i:105;s:13:"shipping/usps";i:106;s:15:"shipping/weight";i:107;s:11:"tool/backup";i:108;s:14:"tool/error_log";i:109;s:12:"total/coupon";i:110;s:12:"total/credit";i:111;s:14:"total/handling";i:112;s:16:"total/klarna_fee";i:113;s:19:"total/low_order_fee";i:114;s:12:"total/reward";i:115;s:14:"total/shipping";i:116;s:15:"total/sub_total";i:117;s:9:"total/tax";i:118;s:11:"total/total";i:119;s:13:"total/voucher";i:120;s:9:"user/user";i:121;s:20:"user/user_permission";i:122;s:11:"module/news";i:123;s:11:"module/news";i:124;s:19:"module/themecontrol";i:125;s:16:"module/pavcustom";i:126;s:23:"module/pavcontentslider";i:127;s:25:"module/pavproductcarousel";i:128;s:18:"module/pavproducts";i:129;s:16:"module/pavcustom";i:130;s:23:"module/pavcontentslider";i:131;s:16:"module/ykproject";i:132;s:13:"module/yknews";i:133;s:13:"module/yknews";i:134;s:16:"module/ykproject";i:135;s:18:"module/pavmegamenu";i:136;s:17:"module/ykshowcase";i:137;s:13:"module/ykcase";i:138;s:13:"module/ykcase";i:139;s:25:"module/pavproductcarousel";i:140;s:18:"module/information";i:141;s:20:"module/ykinformation";i:142;s:13:"module/ykwiki";i:143;s:13:"module/ykwiki";i:144;s:13:"module/ykwiki";i:145;s:13:"module/ykwiki";i:146;s:13:"module/ykwiki";i:147;s:13:"module/ykwiki";i:148;s:13:"module/ykwiki";i:149;s:18:"module/ykaffiliate";i:150;s:17:"module/ykcarousel";i:151;s:16:"module/ykproduct";i:152;s:19:"module/yknavigation";i:153;s:18:"module/ykprocedure";i:154;s:18:"module/ykprocedure";i:155;s:13:"module/banner";i:156;s:13:"module/yklink";i:157;s:18:"module/ykslideshow";i:158;s:15:"module/ykcustom";i:159;s:13:"module/latest";i:160;s:15:"module/ykviewed";i:161;s:11:"module/news";i:162;s:11:"module/wiki";i:163;s:12:"module/oauth";}s:6:"modify";a:164:{i:0;s:17:"catalog/attribute";i:1;s:23:"catalog/attribute_group";i:2;s:16:"catalog/category";i:3;s:16:"catalog/download";i:4;s:14:"catalog/filter";i:5;s:19:"catalog/information";i:6;s:20:"catalog/manufacturer";i:7;s:14:"catalog/option";i:8;s:15:"catalog/product";i:9;s:14:"catalog/review";i:10;s:18:"common/filemanager";i:11;s:13:"design/banner";i:12;s:13:"design/layout";i:13;s:14:"extension/feed";i:14;s:17:"extension/manager";i:15;s:16:"extension/module";i:16;s:17:"extension/payment";i:17;s:18:"extension/shipping";i:18;s:15:"extension/total";i:19;s:16:"feed/google_base";i:20;s:19:"feed/google_sitemap";i:21;s:20:"localisation/country";i:22;s:21:"localisation/currency";i:23;s:21:"localisation/geo_zone";i:24;s:21:"localisation/language";i:25;s:25:"localisation/length_class";i:26;s:25:"localisation/order_status";i:27;s:26:"localisation/return_action";i:28;s:26:"localisation/return_reason";i:29;s:26:"localisation/return_status";i:30;s:25:"localisation/stock_status";i:31;s:22:"localisation/tax_class";i:32;s:21:"localisation/tax_rate";i:33;s:25:"localisation/weight_class";i:34;s:17:"localisation/zone";i:35;s:14:"module/account";i:36;s:16:"module/affiliate";i:37;s:13:"module/banner";i:38;s:17:"module/bestseller";i:39;s:15:"module/carousel";i:40;s:15:"module/category";i:41;s:15:"module/featured";i:42;s:13:"module/filter";i:43;s:18:"module/google_talk";i:44;s:18:"module/information";i:45;s:13:"module/latest";i:46;s:16:"module/slideshow";i:47;s:14:"module/special";i:48;s:12:"module/store";i:49;s:14:"module/welcome";i:50;s:24:"payment/authorizenet_aim";i:51;s:21:"payment/bank_transfer";i:52;s:14:"payment/cheque";i:53;s:11:"payment/cod";i:54;s:21:"payment/free_checkout";i:55;s:14:"payment/liqpay";i:56;s:20:"payment/moneybookers";i:57;s:14:"payment/nochex";i:58;s:15:"payment/paymate";i:59;s:16:"payment/paypoint";i:60;s:13:"payment/payza";i:61;s:26:"payment/perpetual_payments";i:62;s:14:"payment/pp_pro";i:63;s:17:"payment/pp_pro_uk";i:64;s:19:"payment/pp_standard";i:65;s:15:"payment/sagepay";i:66;s:22:"payment/sagepay_direct";i:67;s:18:"payment/sagepay_us";i:68;s:19:"payment/twocheckout";i:69;s:28:"payment/web_payment_software";i:70;s:16:"payment/worldpay";i:71;s:27:"report/affiliate_commission";i:72;s:22:"report/customer_credit";i:73;s:22:"report/customer_online";i:74;s:21:"report/customer_order";i:75;s:22:"report/customer_reward";i:76;s:24:"report/product_purchased";i:77;s:21:"report/product_viewed";i:78;s:18:"report/sale_coupon";i:79;s:17:"report/sale_order";i:80;s:18:"report/sale_return";i:81;s:20:"report/sale_shipping";i:82;s:15:"report/sale_tax";i:83;s:14:"sale/affiliate";i:84;s:12:"sale/contact";i:85;s:11:"sale/coupon";i:86;s:13:"sale/customer";i:87;s:20:"sale/customer_ban_ip";i:88;s:19:"sale/customer_group";i:89;s:10:"sale/order";i:90;s:11:"sale/return";i:91;s:12:"sale/voucher";i:92;s:18:"sale/voucher_theme";i:93;s:15:"setting/setting";i:94;s:13:"setting/store";i:95;s:16:"shipping/auspost";i:96;s:17:"shipping/citylink";i:97;s:14:"shipping/fedex";i:98;s:13:"shipping/flat";i:99;s:13:"shipping/free";i:100;s:13:"shipping/item";i:101;s:23:"shipping/parcelforce_48";i:102;s:15:"shipping/pickup";i:103;s:19:"shipping/royal_mail";i:104;s:12:"shipping/ups";i:105;s:13:"shipping/usps";i:106;s:15:"shipping/weight";i:107;s:11:"tool/backup";i:108;s:14:"tool/error_log";i:109;s:12:"total/coupon";i:110;s:12:"total/credit";i:111;s:14:"total/handling";i:112;s:16:"total/klarna_fee";i:113;s:19:"total/low_order_fee";i:114;s:12:"total/reward";i:115;s:14:"total/shipping";i:116;s:15:"total/sub_total";i:117;s:9:"total/tax";i:118;s:11:"total/total";i:119;s:13:"total/voucher";i:120;s:9:"user/user";i:121;s:20:"user/user_permission";i:122;s:11:"module/news";i:123;s:11:"module/news";i:124;s:19:"module/themecontrol";i:125;s:16:"module/pavcustom";i:126;s:23:"module/pavcontentslider";i:127;s:25:"module/pavproductcarousel";i:128;s:18:"module/pavproducts";i:129;s:16:"module/pavcustom";i:130;s:23:"module/pavcontentslider";i:131;s:16:"module/ykproject";i:132;s:13:"module/yknews";i:133;s:13:"module/yknews";i:134;s:16:"module/ykproject";i:135;s:18:"module/pavmegamenu";i:136;s:17:"module/ykshowcase";i:137;s:13:"module/ykcase";i:138;s:13:"module/ykcase";i:139;s:25:"module/pavproductcarousel";i:140;s:18:"module/information";i:141;s:20:"module/ykinformation";i:142;s:13:"module/ykwiki";i:143;s:13:"module/ykwiki";i:144;s:13:"module/ykwiki";i:145;s:13:"module/ykwiki";i:146;s:13:"module/ykwiki";i:147;s:13:"module/ykwiki";i:148;s:13:"module/ykwiki";i:149;s:18:"module/ykaffiliate";i:150;s:17:"module/ykcarousel";i:151;s:16:"module/ykproduct";i:152;s:19:"module/yknavigation";i:153;s:18:"module/ykprocedure";i:154;s:18:"module/ykprocedure";i:155;s:13:"module/banner";i:156;s:13:"module/yklink";i:157;s:18:"module/ykslideshow";i:158;s:15:"module/ykcustom";i:159;s:13:"module/latest";i:160;s:15:"module/ykviewed";i:161;s:11:"module/news";i:162;s:11:"module/wiki";i:163;s:12:"module/oauth";}}'),
+(1, 'Top Administrator', 'a:2:{s:6:"access";a:166:{i:0;s:17:"catalog/attribute";i:1;s:23:"catalog/attribute_group";i:2;s:16:"catalog/category";i:3;s:16:"catalog/download";i:4;s:14:"catalog/filter";i:5;s:19:"catalog/information";i:6;s:20:"catalog/manufacturer";i:7;s:14:"catalog/option";i:8;s:15:"catalog/product";i:9;s:14:"catalog/review";i:10;s:18:"common/filemanager";i:11;s:13:"design/banner";i:12;s:13:"design/layout";i:13;s:14:"extension/feed";i:14;s:17:"extension/manager";i:15;s:16:"extension/module";i:16;s:17:"extension/payment";i:17;s:18:"extension/shipping";i:18;s:15:"extension/total";i:19;s:16:"feed/google_base";i:20;s:19:"feed/google_sitemap";i:21;s:20:"localisation/country";i:22;s:21:"localisation/currency";i:23;s:21:"localisation/geo_zone";i:24;s:21:"localisation/language";i:25;s:25:"localisation/length_class";i:26;s:25:"localisation/order_status";i:27;s:26:"localisation/return_action";i:28;s:26:"localisation/return_reason";i:29;s:26:"localisation/return_status";i:30;s:25:"localisation/stock_status";i:31;s:22:"localisation/tax_class";i:32;s:21:"localisation/tax_rate";i:33;s:25:"localisation/weight_class";i:34;s:17:"localisation/zone";i:35;s:14:"module/account";i:36;s:16:"module/affiliate";i:37;s:13:"module/banner";i:38;s:17:"module/bestseller";i:39;s:15:"module/carousel";i:40;s:15:"module/category";i:41;s:15:"module/featured";i:42;s:13:"module/filter";i:43;s:18:"module/google_talk";i:44;s:18:"module/information";i:45;s:13:"module/latest";i:46;s:16:"module/slideshow";i:47;s:14:"module/special";i:48;s:12:"module/store";i:49;s:14:"module/welcome";i:50;s:24:"payment/authorizenet_aim";i:51;s:21:"payment/bank_transfer";i:52;s:14:"payment/cheque";i:53;s:11:"payment/cod";i:54;s:21:"payment/free_checkout";i:55;s:14:"payment/liqpay";i:56;s:20:"payment/moneybookers";i:57;s:14:"payment/nochex";i:58;s:15:"payment/paymate";i:59;s:16:"payment/paypoint";i:60;s:13:"payment/payza";i:61;s:26:"payment/perpetual_payments";i:62;s:14:"payment/pp_pro";i:63;s:17:"payment/pp_pro_uk";i:64;s:19:"payment/pp_standard";i:65;s:15:"payment/sagepay";i:66;s:22:"payment/sagepay_direct";i:67;s:18:"payment/sagepay_us";i:68;s:19:"payment/twocheckout";i:69;s:28:"payment/web_payment_software";i:70;s:16:"payment/worldpay";i:71;s:27:"report/affiliate_commission";i:72;s:22:"report/customer_credit";i:73;s:22:"report/customer_online";i:74;s:21:"report/customer_order";i:75;s:22:"report/customer_reward";i:76;s:24:"report/product_purchased";i:77;s:21:"report/product_viewed";i:78;s:18:"report/sale_coupon";i:79;s:17:"report/sale_order";i:80;s:18:"report/sale_return";i:81;s:20:"report/sale_shipping";i:82;s:15:"report/sale_tax";i:83;s:14:"sale/affiliate";i:84;s:12:"sale/contact";i:85;s:11:"sale/coupon";i:86;s:13:"sale/customer";i:87;s:20:"sale/customer_ban_ip";i:88;s:19:"sale/customer_group";i:89;s:10:"sale/order";i:90;s:11:"sale/return";i:91;s:12:"sale/voucher";i:92;s:18:"sale/voucher_theme";i:93;s:15:"setting/setting";i:94;s:13:"setting/store";i:95;s:16:"shipping/auspost";i:96;s:17:"shipping/citylink";i:97;s:14:"shipping/fedex";i:98;s:13:"shipping/flat";i:99;s:13:"shipping/free";i:100;s:13:"shipping/item";i:101;s:23:"shipping/parcelforce_48";i:102;s:15:"shipping/pickup";i:103;s:19:"shipping/royal_mail";i:104;s:12:"shipping/ups";i:105;s:13:"shipping/usps";i:106;s:15:"shipping/weight";i:107;s:11:"tool/backup";i:108;s:14:"tool/error_log";i:109;s:12:"total/coupon";i:110;s:12:"total/credit";i:111;s:14:"total/handling";i:112;s:16:"total/klarna_fee";i:113;s:19:"total/low_order_fee";i:114;s:12:"total/reward";i:115;s:14:"total/shipping";i:116;s:15:"total/sub_total";i:117;s:9:"total/tax";i:118;s:11:"total/total";i:119;s:13:"total/voucher";i:120;s:9:"user/user";i:121;s:20:"user/user_permission";i:122;s:11:"module/news";i:123;s:11:"module/news";i:124;s:19:"module/themecontrol";i:125;s:16:"module/pavcustom";i:126;s:23:"module/pavcontentslider";i:127;s:25:"module/pavproductcarousel";i:128;s:18:"module/pavproducts";i:129;s:16:"module/pavcustom";i:130;s:23:"module/pavcontentslider";i:131;s:16:"module/ykproject";i:132;s:13:"module/yknews";i:133;s:13:"module/yknews";i:134;s:16:"module/ykproject";i:135;s:18:"module/pavmegamenu";i:136;s:17:"module/ykshowcase";i:137;s:13:"module/ykcase";i:138;s:13:"module/ykcase";i:139;s:25:"module/pavproductcarousel";i:140;s:18:"module/information";i:141;s:20:"module/ykinformation";i:142;s:13:"module/ykwiki";i:143;s:13:"module/ykwiki";i:144;s:13:"module/ykwiki";i:145;s:13:"module/ykwiki";i:146;s:13:"module/ykwiki";i:147;s:13:"module/ykwiki";i:148;s:13:"module/ykwiki";i:149;s:18:"module/ykaffiliate";i:150;s:17:"module/ykcarousel";i:151;s:16:"module/ykproduct";i:152;s:19:"module/yknavigation";i:153;s:18:"module/ykprocedure";i:154;s:18:"module/ykprocedure";i:155;s:13:"module/banner";i:156;s:13:"module/yklink";i:157;s:18:"module/ykslideshow";i:158;s:15:"module/ykcustom";i:159;s:13:"module/latest";i:160;s:15:"module/ykviewed";i:161;s:11:"module/news";i:162;s:11:"module/wiki";i:163;s:12:"module/oauth";i:164;s:21:"payment/alipay_direct";i:165;s:14:"module/ykliked";}s:6:"modify";a:166:{i:0;s:17:"catalog/attribute";i:1;s:23:"catalog/attribute_group";i:2;s:16:"catalog/category";i:3;s:16:"catalog/download";i:4;s:14:"catalog/filter";i:5;s:19:"catalog/information";i:6;s:20:"catalog/manufacturer";i:7;s:14:"catalog/option";i:8;s:15:"catalog/product";i:9;s:14:"catalog/review";i:10;s:18:"common/filemanager";i:11;s:13:"design/banner";i:12;s:13:"design/layout";i:13;s:14:"extension/feed";i:14;s:17:"extension/manager";i:15;s:16:"extension/module";i:16;s:17:"extension/payment";i:17;s:18:"extension/shipping";i:18;s:15:"extension/total";i:19;s:16:"feed/google_base";i:20;s:19:"feed/google_sitemap";i:21;s:20:"localisation/country";i:22;s:21:"localisation/currency";i:23;s:21:"localisation/geo_zone";i:24;s:21:"localisation/language";i:25;s:25:"localisation/length_class";i:26;s:25:"localisation/order_status";i:27;s:26:"localisation/return_action";i:28;s:26:"localisation/return_reason";i:29;s:26:"localisation/return_status";i:30;s:25:"localisation/stock_status";i:31;s:22:"localisation/tax_class";i:32;s:21:"localisation/tax_rate";i:33;s:25:"localisation/weight_class";i:34;s:17:"localisation/zone";i:35;s:14:"module/account";i:36;s:16:"module/affiliate";i:37;s:13:"module/banner";i:38;s:17:"module/bestseller";i:39;s:15:"module/carousel";i:40;s:15:"module/category";i:41;s:15:"module/featured";i:42;s:13:"module/filter";i:43;s:18:"module/google_talk";i:44;s:18:"module/information";i:45;s:13:"module/latest";i:46;s:16:"module/slideshow";i:47;s:14:"module/special";i:48;s:12:"module/store";i:49;s:14:"module/welcome";i:50;s:24:"payment/authorizenet_aim";i:51;s:21:"payment/bank_transfer";i:52;s:14:"payment/cheque";i:53;s:11:"payment/cod";i:54;s:21:"payment/free_checkout";i:55;s:14:"payment/liqpay";i:56;s:20:"payment/moneybookers";i:57;s:14:"payment/nochex";i:58;s:15:"payment/paymate";i:59;s:16:"payment/paypoint";i:60;s:13:"payment/payza";i:61;s:26:"payment/perpetual_payments";i:62;s:14:"payment/pp_pro";i:63;s:17:"payment/pp_pro_uk";i:64;s:19:"payment/pp_standard";i:65;s:15:"payment/sagepay";i:66;s:22:"payment/sagepay_direct";i:67;s:18:"payment/sagepay_us";i:68;s:19:"payment/twocheckout";i:69;s:28:"payment/web_payment_software";i:70;s:16:"payment/worldpay";i:71;s:27:"report/affiliate_commission";i:72;s:22:"report/customer_credit";i:73;s:22:"report/customer_online";i:74;s:21:"report/customer_order";i:75;s:22:"report/customer_reward";i:76;s:24:"report/product_purchased";i:77;s:21:"report/product_viewed";i:78;s:18:"report/sale_coupon";i:79;s:17:"report/sale_order";i:80;s:18:"report/sale_return";i:81;s:20:"report/sale_shipping";i:82;s:15:"report/sale_tax";i:83;s:14:"sale/affiliate";i:84;s:12:"sale/contact";i:85;s:11:"sale/coupon";i:86;s:13:"sale/customer";i:87;s:20:"sale/customer_ban_ip";i:88;s:19:"sale/customer_group";i:89;s:10:"sale/order";i:90;s:11:"sale/return";i:91;s:12:"sale/voucher";i:92;s:18:"sale/voucher_theme";i:93;s:15:"setting/setting";i:94;s:13:"setting/store";i:95;s:16:"shipping/auspost";i:96;s:17:"shipping/citylink";i:97;s:14:"shipping/fedex";i:98;s:13:"shipping/flat";i:99;s:13:"shipping/free";i:100;s:13:"shipping/item";i:101;s:23:"shipping/parcelforce_48";i:102;s:15:"shipping/pickup";i:103;s:19:"shipping/royal_mail";i:104;s:12:"shipping/ups";i:105;s:13:"shipping/usps";i:106;s:15:"shipping/weight";i:107;s:11:"tool/backup";i:108;s:14:"tool/error_log";i:109;s:12:"total/coupon";i:110;s:12:"total/credit";i:111;s:14:"total/handling";i:112;s:16:"total/klarna_fee";i:113;s:19:"total/low_order_fee";i:114;s:12:"total/reward";i:115;s:14:"total/shipping";i:116;s:15:"total/sub_total";i:117;s:9:"total/tax";i:118;s:11:"total/total";i:119;s:13:"total/voucher";i:120;s:9:"user/user";i:121;s:20:"user/user_permission";i:122;s:11:"module/news";i:123;s:11:"module/news";i:124;s:19:"module/themecontrol";i:125;s:16:"module/pavcustom";i:126;s:23:"module/pavcontentslider";i:127;s:25:"module/pavproductcarousel";i:128;s:18:"module/pavproducts";i:129;s:16:"module/pavcustom";i:130;s:23:"module/pavcontentslider";i:131;s:16:"module/ykproject";i:132;s:13:"module/yknews";i:133;s:13:"module/yknews";i:134;s:16:"module/ykproject";i:135;s:18:"module/pavmegamenu";i:136;s:17:"module/ykshowcase";i:137;s:13:"module/ykcase";i:138;s:13:"module/ykcase";i:139;s:25:"module/pavproductcarousel";i:140;s:18:"module/information";i:141;s:20:"module/ykinformation";i:142;s:13:"module/ykwiki";i:143;s:13:"module/ykwiki";i:144;s:13:"module/ykwiki";i:145;s:13:"module/ykwiki";i:146;s:13:"module/ykwiki";i:147;s:13:"module/ykwiki";i:148;s:13:"module/ykwiki";i:149;s:18:"module/ykaffiliate";i:150;s:17:"module/ykcarousel";i:151;s:16:"module/ykproduct";i:152;s:19:"module/yknavigation";i:153;s:18:"module/ykprocedure";i:154;s:18:"module/ykprocedure";i:155;s:13:"module/banner";i:156;s:13:"module/yklink";i:157;s:18:"module/ykslideshow";i:158;s:15:"module/ykcustom";i:159;s:13:"module/latest";i:160;s:15:"module/ykviewed";i:161;s:11:"module/news";i:162;s:11:"module/wiki";i:163;s:12:"module/oauth";i:164;s:21:"payment/alipay_direct";i:165;s:14:"module/ykliked";}}'),
 (10, 'Demonstration', '');
 
 -- --------------------------------------------------------

@@ -173,7 +173,7 @@
                     </span>
                 </li>
                 <li class="fix">
-                    <input type="button" id="button-cart"  class="gc-tab-sub w150"value="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product_id; ?>');">
+                    <input type="button" id="button-cart"  class="gc-tab-sub w150"value="<?php echo $button_cart; ?>">
                     <input type="button" id="button-buynow" class="gc-tab-sub2 w150 ml20" value="<?php echo $button_buynow ?>">
                     <?php if ($minimum > 1) { ?>
 					<div class="minimum clearfix"><?php echo $text_minimum; ?></div>

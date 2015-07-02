@@ -107,8 +107,6 @@ class ControllerCheckoutCheckout extends Controller {
 		}
 		
 		$this->children = array(
-			'common/content_top',
-			'common/content_bottom',
 			'common/footer',
 			'common/top'	
 		);

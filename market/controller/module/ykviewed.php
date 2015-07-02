@@ -11,6 +11,8 @@ class ControllerModuleYkviewed extends Controller {
 		
 		$this->load->model('tool/image');
 		
+		$this->data['additional_class'] = $setting['additional_class'];
+
 		$this->data['products'] = array();
 		
 		

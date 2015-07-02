@@ -1,0 +1,1 @@
+{"appid":"100460575","appkey":"5ec59786bf3dcfd2db9722d016876da2","callback":"example/oauth/callback.php","scope":"get_user_info","errorReport":true,"storageType":"file","host":"localhost","user":"root","password":"root","database":"test"}
