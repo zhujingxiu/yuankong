@@ -31,6 +31,7 @@ $_['column_action']         = '管理';
 // Entry
 $_['entry_firstname']       = '名字：';
 $_['entry_lastname']        = '姓氏：';
+$_['entry_nickname']        = '昵称：';
 $_['entry_email']           = 'E-Mail：';
 $_['entry_mobile_phone']    = '手机号码：';
 $_['entry_telephone']       = '电话：';

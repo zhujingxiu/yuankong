@@ -97,26 +97,51 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
                 <i class="dw-btn icon2"></i>
                 <label>寄送至</label>
                 <div class="adress-new">
-                    <input type="radio" class="adress-radio" name="newadress"  checked="checked" />江苏省 南京市 玄武区 花园路11号森林公安学院内<em class="pl10 c8">15951997250</em>
+                    <input type="radio" class="adress-radio" name="newadress"  checked="checked" />
+                    江苏省 南京市 玄武区 花园路11号森林公安学院内<em class="pl10 c8">15951997250</em>
                 </div>
             </li>
             <li class="order-li-adess fix">
                 <i class="dw-btn icon2"></i>
                 <label>寄送至</label>
                 <div class="adress-new">
-                    <input type="radio" class="adress-radio" name="newadress" />江苏省 南京市 玄武区 花园路11号森林公安学院内<em class="pl10 c8">15951997250</em>
+                    <input type="radio" class="adress-radio" name="newadress" />
+                    江苏省 南京市 玄武区 花园路11号森林公安学院内<em class="pl10 c8">15951997250</em>
                 </div>
             </li>
 
         </ul>
         <div class="new-adress">
-            <div class="ovh"><input type="radio" class="adress-radio" name="newadress" /><label>新增新地址</label></div>
+            <div class="ovh">
+                <input type="radio" class="adress-radio" name="newadress" />
+                <label>新增新地址</label>
+            </div>
             <div class="newadress-box">
                 <ul>
-                    <li class="item-adress"><label>收货地址：</label><select class="adress-sec"><option>-- 省 --</option></select><select class="adress-sec"><option>-- 市 --</option></select><select class="adress-sec"><option>-- 区 --</option></select></li>
-                    <li class="item-adress"><label>详细地址：</label><input type="text" class="text-box w350" value="" /></li>
-                    <li class="item-adress"><label>收货人姓名：</label><input type="text" class="text-box w210" value="" /></li>
-                    <li class="item-adress"><label>手机号码：</label><input type="text" class="text-box w210" value="" /></li>
+                    <li class="item-adress">
+                        <label>收货地址：</label>
+                        <select class="adress-sec">
+                            <option>-- 省 --</option>
+                        </select>
+                        <select class="adress-sec">
+                            <option>-- 市 --</option>
+                        </select>
+                        <select class="adress-sec">
+                            <option>-- 区 --</option>
+                        </select>
+                    </li>
+                    <li class="item-adress">
+                        <label>详细地址：</label>
+                        <input type="text" class="text-box w350" value="" />
+                    </li>
+                    <li class="item-adress">
+                        <label>收货人姓名：</label>
+                        <input type="text" class="text-box w210" value="" />
+                    </li>
+                    <li class="item-adress">
+                        <label>手机号码：</label>
+                        <input type="text" class="text-box w210" value="" />
+                    </li>
                 </ul>
             </div>
         </div>
@@ -172,7 +197,7 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
                 </table>
                 <div class="mt10">
                     <h5 class="c3 f_m">给卖家留言</h5>
-                    <textarea class="liuy-tarea"></textarea>
+                    <textarea class="liuy-tarea" name="comment"></textarea>
                 </div>
             </div>
         </div>
@@ -180,10 +205,21 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
             <h3><b>费用确认并支付</b></h3>
             <div class="ovh p15">
                 <ul class="order-item-ul">
-                    <li class="all-money"><strong>您需支付</strong><b>11940.00</b>元=<b>1000.00</b>元<span>(商品总价)</span>+<b>20</b>元<span>(配送费)</span></li>
-                    <li class="all-money"><strong>支付方式：</strong><input type="radio" name="a-pay" checked="checked" />支付宝<span class="pl10">（支持全国85家银行、信用卡、网银在线支付）</span></li>
-                    <li><em class="c_r l">*</em>支付成功后，我们会在7个工作日内发货。</li>
-                    <li class="mt10"><div class="w210"><input type="submit" class="gc-tab-sub" value="提交订单" /></div> </li>
+                    <li class="all-money">
+                        <strong>您需支付</strong>
+                        <b>11940.00</b>元=<b>1000.00</b>元<span>(商品总价)</span>+<b>20</b>元<span>(配送费)</span>
+                    </li>
+                    <li class="all-money">
+                        <strong>支付方式：</strong>
+                        <input type="radio" name="a-pay" checked="checked" />支付宝
+                        <span class="pl10">（支持全国85家银行、信用卡、网银在线支付）</span>
+                    </li>
+                    <li>
+                        <em class="c_r l">*</em>支付成功后，我们会在7个工作日内发货。
+                    </li>
+                    <li class="mt10">
+                        <div class="w210"><input type="submit" class="gc-tab-sub" value="提交订单" /></div> 
+                    </li>
                 </ul>
             </div>
         </div>

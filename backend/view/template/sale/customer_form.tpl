@@ -38,34 +38,33 @@
                   <?php } ?></td>
               </tr>
               <tr>
-                <td><span class="required">*</span> <?php echo $entry_firstname; ?></td>
+                <td><span class="required">*</span> <?php echo $entry_nickname; ?></td>
+                <td><input type="text" name="nickname" value="<?php echo $nickname; ?>" />
+                  <?php if ($error_nickname) { ?>
+                  <span class="error"><?php echo $error_nickname; ?></span>
+                  <?php } ?></td>
+              </tr>
+              <tr style="display:none">
+                <td><?php echo $entry_firstname; ?></td>
                 <td><input type="text" name="firstname" value="<?php echo $firstname; ?>" />
-                  <?php if ($error_firstname) { ?>
-                  <span class="error"><?php echo $error_firstname; ?></span>
-                  <?php } ?></td>
+                  </td>
               </tr>
-              <tr>
-                <td><span class="required">*</span> <?php echo $entry_lastname; ?></td>
+              <tr style="display:none">
+                <td><?php echo $entry_lastname; ?></td>
                 <td><input type="text" name="lastname" value="<?php echo $lastname; ?>" />
-                  <?php if ($error_lastname) { ?>
-                  <span class="error"><?php echo $error_lastname; ?></span>
-                  <?php } ?></td>
+                  </td>
               </tr>
               <tr>
-                <td><span class="required">*</span> <?php echo $entry_email; ?></td>
+                <td><?php echo $entry_email; ?></td>
                 <td><input type="text" name="email" value="<?php echo $email; ?>" />
-                  <?php if ($error_email) { ?>
-                  <span class="error"><?php echo $error_email; ?></span>
-                  <?php  } ?></td>
+                  </td>
               </tr>
-              <tr>
-                <td><span class="required">*</span> <?php echo $entry_telephone; ?></td>
+              <tr style="display:none">
+                <td><?php echo $entry_telephone; ?></td>
                 <td><input type="text" name="telephone" value="<?php echo $telephone; ?>" />
-                  <?php if ($error_telephone) { ?>
-                  <span class="error"><?php echo $error_telephone; ?></span>
-                  <?php  } ?></td>
+                  </td>
               </tr>
-              <tr>
+              <tr style="display:none">
                 <td><?php echo $entry_fax; ?></td>
                 <td><input type="text" name="fax" value="<?php echo $fax; ?>" /></td>
               </tr>
@@ -83,7 +82,7 @@
                   <span class="error"><?php echo $error_confirm; ?></span>
                   <?php  } ?></td>
               </tr>
-              <tr>
+              <tr style="display:none">
                 <td><?php echo $entry_newsletter; ?></td>
                 <td><select name="newsletter">
                     <?php if ($newsletter) { ?>
@@ -377,23 +376,27 @@ function addAddress() {
 	html  = '<div id="tab-address-' + address_row + '" class="vtabs-content" style="display: none;">';
 	html += '  <input type="hidden" name="address[' + address_row + '][address_id]" value="" />';
 	html += '  <table class="form">'; 
-	html += '    <tr>';
-    html += '	   <td><span class="required">*</span> <?php echo $entry_firstname; ?></td>';
+    html += '    <tr>';
+    html += '      <td><span class="required">*</span> <?php echo $entry_nickname; ?></td>';
+    html += '      <td><input type="text" name="address[' + address_row + '][nickname]" value="" /></td>';
+    html += '    </tr>';
+	  html += '    <tr style="display:none">';
+    html += '	   <td><?php echo $entry_firstname; ?></td>';
     html += '	   <td><input type="text" name="address[' + address_row + '][firstname]" value="" /></td>';
     html += '    </tr>';
-    html += '    <tr>';
-    html += '      <td><span class="required">*</span> <?php echo $entry_lastname; ?></td>';
+    html += '    <tr style="display:none">';
+    html += '      <td><?php echo $entry_lastname; ?></td>';
     html += '      <td><input type="text" name="address[' + address_row + '][lastname]" value="" /></td>';
     html += '    </tr>';
-    html += '    <tr>';
+    html += '    <tr style="display:none">';
     html += '      <td><?php echo $entry_company; ?></td>';
     html += '      <td><input type="text" name="address[' + address_row + '][company]" value="" /></td>';
     html += '    </tr>';	
-    html += '    <tr class="company-id-display">';
+    html += '    <tr class="company-id-display" style="display:none">';
     html += '      <td><?php echo $entry_company_id; ?></td>';
     html += '      <td><input type="text" name="address[' + address_row + '][company_id]" value="" /></td>';
     html += '    </tr>';
-    html += '    <tr class="tax-id-display">';
+    html += '    <tr class="tax-id-display" style="display:none">';
     html += '      <td><?php echo $entry_tax_id; ?></td>';
     html += '      <td><input type="text" name="address[' + address_row + '][tax_id]" value="" /></td>';
     html += '    </tr>';			
@@ -416,7 +419,6 @@ function addAddress() {
 	html += '    <tr>';
     html += '      <td><span class="required">*</span> <?php echo $entry_country; ?></td>';
     html += '      <td><select name="address[' + address_row + '][country_id]" onchange="country(this, \'' + address_row + '\', \'0\');">';
-    html += '         <option value=""><?php echo $text_select; ?></option>';
     <?php foreach ($countries as $country) { ?>
     html += '         <option value="<?php echo $country['country_id']; ?>"><?php echo addslashes($country['name']); ?></option>';
     <?php } ?>

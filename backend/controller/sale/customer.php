@@ -628,6 +628,7 @@ class ControllerSaleCustomer extends Controller {
 		
     	$this->data['entry_firstname'] = $this->language->get('entry_firstname');
     	$this->data['entry_lastname'] = $this->language->get('entry_lastname');
+    	$this->data['entry_nickname'] = $this->language->get('entry_nickname');
     	$this->data['entry_email'] = $this->language->get('entry_email');
     	$this->data['entry_mobile_phone'] = $this->language->get('entry_mobile_phone');
     	$this->data['entry_telephone'] = $this->language->get('entry_telephone');
@@ -685,24 +686,7 @@ class ControllerSaleCustomer extends Controller {
 		} else {
 			$this->data['error_nickname'] = '';
 		}
- 		if (isset($this->error['firstname'])) {
-			$this->data['error_firstname'] = $this->error['firstname'];
-		} else {
-			$this->data['error_firstname'] = '';
-		}
-
- 		if (isset($this->error['lastname'])) {
-			$this->data['error_lastname'] = $this->error['lastname'];
-		} else {
-			$this->data['error_lastname'] = '';
-		}
 		
- 		if (isset($this->error['email'])) {
-			$this->data['error_email'] = $this->error['email'];
-		} else {
-			$this->data['error_email'] = '';
-		}
-
 		if (isset($this->error['mobile_phone'])) {
 			$this->data['error_mobile_phone'] = $this->error['mobile_phone'];
 		} else {
@@ -837,30 +821,28 @@ class ControllerSaleCustomer extends Controller {
     	}
 		if (isset($this->request->post['nickname'])) {
       		$this->data['nickname'] = $this->request->post['nickname'];
-		} elseif (!empty($customer_info)) { 
+		} elseif (!empty($customer_info['nickname'])) { 
 			$this->data['nickname'] = $customer_info['nickname'];
 		} else {
       		$this->data['nickname'] = '';
     	}
-    	if (isset($this->request->post['firstname'])) {
+		if (isset($this->request->post['firstname'])) {
       		$this->data['firstname'] = $this->request->post['firstname'];
-		} elseif (!empty($customer_info)) { 
+		} elseif (!empty($customer_info['firstname'])) { 
 			$this->data['firstname'] = $customer_info['firstname'];
 		} else {
       		$this->data['firstname'] = '';
     	}
-
-    	if (isset($this->request->post['lastname'])) {
+		if (isset($this->request->post['lastname'])) {
       		$this->data['lastname'] = $this->request->post['lastname'];
-    	} elseif (!empty($customer_info)) { 
+		} elseif (!empty($customer_info['lastname'])) { 
 			$this->data['lastname'] = $customer_info['lastname'];
 		} else {
       		$this->data['lastname'] = '';
     	}
-
     	if (isset($this->request->post['email'])) {
       		$this->data['email'] = $this->request->post['email'];
-    	} elseif (!empty($customer_info)) { 
+    	} elseif (!empty($customer_info['email'])) { 
 			$this->data['email'] = $customer_info['email'];
 		} else {
       		$this->data['email'] = '';
@@ -868,21 +850,22 @@ class ControllerSaleCustomer extends Controller {
 
     	if (isset($this->request->post['mobile_phone'])) {
       		$this->data['mobile_phone'] = $this->request->post['mobile_phone'];
-    	} elseif (!empty($customer_info)) { 
+    	} elseif (!empty($customer_info['mobile_phone'])) { 
 			$this->data['mobile_phone'] = $customer_info['mobile_phone'];
 		} else {
       		$this->data['mobile_phone'] = '';
     	}
 		if (isset($this->request->post['telephone'])) {
       		$this->data['telephone'] = $this->request->post['telephone'];
-    	} elseif (!empty($customer_info)) { 
+    	} elseif (!empty($customer_info['telephone'])) { 
 			$this->data['telephone'] = $customer_info['telephone'];
 		} else {
       		$this->data['telephone'] = '';
     	}
+
     	if (isset($this->request->post['fax'])) {
       		$this->data['fax'] = $this->request->post['fax'];
-    	} elseif (!empty($customer_info)) { 
+    	} elseif (!empty($customer_info['fax'])) { 
 			$this->data['fax'] = $customer_info['fax'];
 		} else {
       		$this->data['fax'] = '';
@@ -890,7 +873,7 @@ class ControllerSaleCustomer extends Controller {
 
     	if (isset($this->request->post['newsletter'])) {
       		$this->data['newsletter'] = $this->request->post['newsletter'];
-    	} elseif (!empty($customer_info)) { 
+    	} elseif (!empty($customer_info['newsletter'])) { 
 			$this->data['newsletter'] = $customer_info['newsletter'];
 		} else {
       		$this->data['newsletter'] = '';
@@ -910,7 +893,7 @@ class ControllerSaleCustomer extends Controller {
 		
     	if (isset($this->request->post['status'])) {
       		$this->data['status'] = $this->request->post['status'];
-    	} elseif (!empty($customer_info)) { 
+    	} elseif (!empty($customer_info['status'])) { 
 			$this->data['status'] = $customer_info['status'];
 		} else {
       		$this->data['status'] = 1;
@@ -942,7 +925,7 @@ class ControllerSaleCustomer extends Controller {
 
     	if (isset($this->request->post['address_id'])) {
       		$this->data['address_id'] = $this->request->post['address_id'];
-    	} elseif (!empty($customer_info)) { 
+    	} elseif (!empty($customer_info['address_id'])) { 
 			$this->data['address_id'] = $customer_info['address_id'];
 		} else {
       		$this->data['address_id'] = '';
