@@ -46,17 +46,14 @@ class ControllerServiceProject extends Controller {
 
 		$this->data['heading_title'] = $this->language->get('heading_title');
 
-		$this->data['text_project_id'] = $this->language->get('text_project_id');
-		$this->data['text_status'] = $this->language->get('text_status');
-		$this->data['text_date_added'] = $this->language->get('text_date_added');
-		$this->data['text_customer'] = $this->language->get('text_customer');
-		$this->data['text_products'] = $this->language->get('text_products');
-		$this->data['text_total'] = $this->language->get('text_total');
-		$this->data['text_empty'] = $this->language->get('text_empty');
+		$this->data['column_telephone'] = $this->language->get('column_telephone');
+		$this->data['column_account'] = $this->language->get('column_account');
+		$this->data['column_group'] = $this->language->get('column_group');
+		$this->data['column_status'] = $this->language->get('column_status');
+		$this->data['column_date_applied'] = $this->language->get('column_date_applied');
 
+		$this->data['action'] = $this->url->link('service/project/apply', '', 'SSL');
 		$this->data['button_view'] = $this->language->get('button_view');
-		$this->data['button_reorder'] = $this->language->get('button_reorder');
-		$this->data['button_continue'] = $this->language->get('button_continue');
 		
 		if (isset($this->request->get['page'])) {
 			$page = $this->request->get['page'];
@@ -66,16 +63,36 @@ class ControllerServiceProject extends Controller {
 		
 		$this->data['projects'] = array();
 		
-		$order_total = $this->model_service_project->getTotalProjects();
+		$total = $this->model_service_project->getTotalProjects();
 		
 		$results = $this->model_service_project->getProjects(($page - 1) * 10, 10);
 		
 		foreach ($results as $result) {
+			if(isset($result['status'])){
+				switch ((int)$result['status']) {
+					case 1:
+						$status_text = $this->language->get('text_project_pending');
+						break;
+					case 2:
+						$status_text = $this->language->get('text_project_processing');
+						break;
+					case 3:
+						$status_text = $this->language->get('text_project_completed');
+						break;
+					default:
+						$status_text = $this->language->get('text_unknown');
+						break;
+				}
+				$result['status_text'] = $status_text;
+			}
+			$result['group'] = $result['name'];
+			$result['date_applied'] = date('Y-m-d',strtotime($result['date_applied']));
+			$result['telephone'] = substr_replace($result['telephone'],'****',3,4);
 			$this->data['projects'][] = $result;
 		}
 
 		$pagination = new Pagination();
-		$pagination->total = $order_total;
+		$pagination->total = $total;
 		$pagination->page = $page;
 		$pagination->limit = 10;
 		$pagination->text = $this->language->get('text_pagination');
@@ -83,15 +100,10 @@ class ControllerServiceProject extends Controller {
 		
 		$this->data['pagination'] = $pagination->render();
 
-		$this->data['continue'] = $this->url->link('account/account', '', 'SSL');
 
 		$this->template = $this->config->get('config_template') . '/template/service/project.tpl';
 		
 		$this->children = array(
-			'common/column_left',
-			'common/column_right',
-			'common/content_top',
-			'common/content_bottom',
 			'common/footer',
 			'common/header'	
 		);
@@ -172,6 +184,7 @@ class ControllerServiceProject extends Controller {
 
 
       		$this->data['continue'] = $this->url->link('service/project', '', 'SSL');
+      		$this->data['action'] = $this->url->link('service/project/apply', '', 'SSL');
 		
 			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/service/project_info.tpl')) {
 				$this->template = $this->config->get('config_template') . '/template/service/project_info.tpl';
@@ -242,6 +255,48 @@ class ControllerServiceProject extends Controller {
 			);
 								
 			$this->response->setOutput($this->render());				
+    	}
+  	}
+
+
+  	public function apply() {
+
+    	$this->language->load('service/project');
+
+		$this->load->model('service/project');
+			
+    	if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateApply()) {
+			$this->model_service_project->addProject($this->request->post);
+			
+      		$this->session->data['success'] = $this->language->get('text_apply_success');
+      		$this->session->data['apply_phone'] = $this->request->post['group_id'] . '_' . $this->request->post['telephone'];
+      		$this->session->data['apply_time'] = time();
+
+      		if(isset($this->request->post['redirect'])){
+      			$this->redirect(htmlspecialchars_decode($this->request->post['redirect']));	
+      		}
+	  		$this->redirect($this->url->link('service/project', '', 'SSL'));
+    	} 
+
+  	}
+
+  	protected function validateApply() {
+    	if (!isset($this->request->post['telephone']) || !isMobile($this->request->post['telephone'])) {
+      		$this->error['telephone'] = $this->language->get('error_telephone');
+    	}
+    	if(!isset($this->request->post['group_id'])){
+    		$this->request->post['group_id'] = 0;
+    	}
+    	if ((utf8_strlen($this->request->post['account']) < 2) || (utf8_strlen($this->request->post['account']) > 128)) {
+      		$this->error['account'] = $this->language->get('error_account');
+    	}
+		if(isset($this->session->data['apply_phone']) && $this->session->data['apply_phone'] == ($this->request->post['group_id'] . '_' .$this->request->post['telephone']) && ($this->session->data['apply_time'] - time() < 3600)){
+			$this->error['repeat'] = $this->language->get('error_repeat');	
+		}
+    	if (!$this->error) {
+      		return true;
+		} else {
+      		return false;
     	}
   	}
 }

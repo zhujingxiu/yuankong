@@ -60,6 +60,7 @@ class ControllerModuleYkaffiliate extends Controller {
         $this->data['text_lateast'] = $this->language->get('text_lateast');
         $this->data['button_apply'] = $this->language->get('button_apply');
         $this->data['more'] = $this->url->link('affiliate/account/list','','SSL');
+        $this->data['action'] = $this->url->link('service/project/apply','','SSL');
         $this->template = $this->config->get('config_template') . '/template/module/ykaffiliate.tpl';
         
         $this->render();

@@ -1,7 +1,7 @@
 <?php
 // Version
 define('VERSION', '1.0.0.0');
-
+date_default_timezone_set('PRC');
 define('APP_PATH', realpath(dirname(__FILE__) . '/../') . '/');
 
 // Configuration

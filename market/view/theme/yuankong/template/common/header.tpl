@@ -67,6 +67,7 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
 //--></script>
 <?php } ?>
 <?php //echo $google_analytics; ?>
+<link rel="stylesheet" type="text/css" href="market/view/theme/<?php echo $themeName;?>/stylesheet/yk.css" />
 </head>
 <body class="b_fa">
 <!--Top-->
@@ -167,19 +168,22 @@ if( count($modules) ){ ?>
 
 <?php } ?>
 </div>
-<?php if (false): ?>
+
 <section id="sys-notification">
-	<div class="container">
-		<?php if ($error) { ?>    
-	    <div class="warning"><?php echo $error ?>
+	<div class="notification w mt10">
+		<?php if (!empty($error)){ ?>    
+	    <div class="msg-warning"><?php echo $error ?>
+	    	<img src="market/view/theme/default/image/close.png" class="close" />
+	    </div>    
+		<?php } ?>
+		<?php if (!empty($success)) { ?>    
+	    <div class="msg-success"><?php echo $success ?>
 	    	<img src="market/view/theme/default/image/close.png" class="close" />
 	    </div>    
 		<?php } ?>
 		<div id="notification"></div>
 	</div>
 </section>
-<?php endif ?>
-
 
 <?php
 
