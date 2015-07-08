@@ -187,7 +187,37 @@
 								  <?php } ?>
 								</select></td>
             </tr>
-            <tr>
+            <tr >
+              <td class="left">支付宝登陆</td>
+              <td class="left"><input type="text" class="t" name="oauth[alipay][client_id]" value="<?php echo isset($oauth['alipay'])?$oauth['alipay']['client_id']:''; ?>" /></td>
+              <td class="left"><input type="text" class="t" name="oauth[alipay][client_secret]" value="<?php echo isset($oauth['alipay'])?$oauth['alipay']['client_secret']:''; ?>" /></td>
+              <td class="left">
+                <?php 
+                  $alipay_thumb = isset($oauth['alipay']['img']) ? $this->model_tool_image->resize($oauth['alipay']['img'], 18, 18) : $this->model_tool_image->resize("no_image.jpg", 18, 18);
+                  $alipay_image = isset($oauth['alipay']['img']) ? $oauth['alipay']['img'] : "";  
+                     
+                   ?> 
+                <div class="image">
+                    <img src="<?php echo $alipay_thumb; ?>" alt="" id="thumb-alipay" />
+                    <input type="hidden" name="oauth[alipay][img]" value="<?php echo $alipay_image ?>" id="image-alipay" /> &nbsp;&nbsp; 
+                    <a onclick="image_upload('image-alipay', 'thumb-alipay');">
+                        <?php echo $text_browse; ?></a>
+                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                    <a onclick="$('#thumb-alipay').attr('src', '<?php echo $alipay_thumb; ?>'); $('#image-alipay').attr('value', '');"><?php echo $text_clear; ?></a>
+                </div>
+              </td>
+              <td class="right"><input type="text" name="oauth[alipay][sort]" value="<?php echo isset($oauth['alipay'])?$oauth['alipay']['sort']:'0'; ?>" /></td>
+              <td class="right"><select name="oauth[alipay][status]">
+								  <?php if ($oauth && $oauth['alipay']['status']) { ?>
+								  <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
+								  <option value="0"><?php echo $text_disabled; ?></option>
+								  <?php } else { ?>
+								  <option value="1"><?php echo $text_enabled; ?></option>
+								  <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
+								  <?php } ?>
+								</select></td>
+            </tr>
+            <tr style="display:none;">
               <td class="left">百度登陆</td>
               <td class="left"><input type="text" class="t" name="oauth[baidu][client_id]" value="<?php echo isset($oauth['baidu'])?$oauth['baidu']['client_id']:''; ?>" /></td>
               <td class="left"><input type="text" class="t" name="oauth[baidu][client_secret]" value="<?php echo isset($oauth['baidu'])?$oauth['baidu']['client_secret']:''; ?>" /></td>

@@ -97,7 +97,7 @@ $(function(){ $('input, textarea').placeholder(); });
 		            <tr>
 		                <td class="tr"><em class="c_r">*</em> <?php echo $entry_captcha ?></td>
 		                <td>
-		                	<input type="captcha" class="regis-text w100" value=""  />
+		                	<input type="text" name="captcha" class="regis-text w100" value=""  />
 		                	<span class="pl10 captcha">
 		                		<img src="<?php echo $this->url->link('account/register/captcha','','ssl') ?>" />
 		                		<a href="#" class="pl10 c_g chg-img"><?php echo $text_captcha_change ?></a>
@@ -106,11 +106,15 @@ $(function(){ $('input, textarea').placeholder(); });
 		            </tr>
 		            <tr>
 		                <td>&nbsp;</td>
-		                <td><input type="checkbox" name="c" checked="checked" /><?php echo $text_agree; ?> </td>
+		                <td><input type="checkbox" name="agree" checked="checked" /><?php echo $text_agree; ?> </td>
 		            </tr>
 		            <tr>
 		                <td>&nbsp;</td>
-		                <td><p class="w210"><input type="submit" class="gc-tab-sub" value="<?php echo $button_register; ?>" /></p></td>
+		                <td>
+		                	<p class="w210">
+		                		<input type="submit" class="gc-tab-sub" value="<?php echo $button_register; ?>" />
+		                	</p>
+		                </td>
 		            </tr>
 			  	</table>
 			</div>
@@ -163,7 +167,7 @@ $(function(){ $('input, textarea').placeholder(); });
 	                <tr>
 	                    <td class="tr"><em class="c_r">*</em> <?php echo $entry_captcha ?></td>
 	                    <td>
-	                    	<input type="captcha" class="regis-text w100" value=""  />
+	                    	<input type="text" name="captcha" class="regis-text w100" value=""  />
 	                    	<span class="pl10 captcha">
 	                    		<img src="<?php echo $this->url->link('account/register/captcha','','ssl') ?>" />
 	                    		<a href="#" class="pl10 c_g chg-img"><?php echo $text_captcha_change ?></a>
@@ -172,7 +176,7 @@ $(function(){ $('input, textarea').placeholder(); });
 	                </tr>
 	                <tr>
 		                <td>&nbsp;</td>
-		                <td><input type="checkbox" name="c" checked="checked" /><?php echo $text_agree; ?> </td>
+		                <td><input type="checkbox" name="agree" checked="checked" /><?php echo $text_agree; ?> </td>
 		            </tr>
 	                <tr>
 	                    <td>&nbsp;</td>

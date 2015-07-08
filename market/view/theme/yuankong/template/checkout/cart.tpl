@@ -93,7 +93,7 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
   </div>
   <?php if(!$this->customer->isLogged()){?>
   <div class="gwc-login-ts">
-    <i class="icon2 gth-small"></i>您还没有登录！<a href="#" class="c_g">登录</a>后购物车的商品将保存到您账号中
+    <i class="icon2 gth-small"></i>您还没有登录！<a href="<?php echo $action ?>" class="c_g">登录</a>后购物车的商品将保存到您账号中
   </div>
   <?php } ?>
   <?php echo $content_top; ?>
@@ -177,7 +177,7 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
           </p>
           <p class="pl20 l">
             <a href="#" class="c-blue plr">删除选中商品</a>
-            <a href="#" class="c-blue plr">清空购物车</a> 
+            <a href="#" class="c-blue plr" id="clear-cart">清空购物车</a> 
           </p>
           <?php if(isset($totals['sub_total'])){?>
           <div class="r c2">
