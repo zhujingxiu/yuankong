@@ -39,7 +39,11 @@ $(function(){ $('input, textarea').placeholder(); });
 </style>
 <![endif]-->
 <script type="text/javascript" src="market/view/theme/yuankong/javascript/index.js"></script>
+<script type="text/javascript" src="<?php echo TPL_JS ?>validation/dist/jquery.validate.js"></script>
+<script type="text/javascript" src="<?php echo TPL_JS ?>validation/dist/additional-methods.js"></script>
+<script type="text/javascript" src="<?php echo TPL_JS ?>validation/dist/localization/messages_zh.js"></script>
 
+<link rel="stylesheet" type="text/css" href="market/view/theme/yuankong/stylesheet/yk_validate.css" />
 </head>
 <body class="b_fa">
 <?php echo $top ?>
@@ -66,38 +70,39 @@ $(function(){ $('input, textarea').placeholder(); });
             <p class="f_m c46"><?php echo $text_qr_code ?></p>
             <p><img src="asset/image/data/yuankong/ewm2.jpg" alt=""/></p>
         </div>
-	  	<form action="<?php echo $customer_action; ?>" method="post" enctype="multipart/form-data">
+	  	<form id="customer-signup" action="<?php echo $customer_action; ?>" method="post" enctype="multipart/form-data">
 			<div class="regis">
 			  	<table class="registable">
 					<tr>
 					  <td class="tr" width="90"><em class="c_r">*</em> <?php echo $entry_mobile_phone; ?></td>
-					  <td><input type="text" name="mobile_phone" value="<?php echo $mobile_phone; ?>" class="regis-text" placeholder="<?php echo $entry_mobile_phone ?>"/>
+					  <td><input type="text" name="mobile_phone" value="<?php echo $mobile_phone; ?>" class="regis-text" placeholder="<?php echo $entry_mobile_phone ?>" />
 						<?php if ($error_mobile_phone) { ?>
 						<span class="error"><?php echo $error_mobile_phone; ?></span>
 						<?php } ?></td>
 					</tr>
 					<tr>
 					  <td class="tr" width="90"><em class="c_r">*</em> <?php echo $entry_password; ?></td>
-					  <td><input type="password" name="password" value="<?php echo $password; ?>" class="regis-text"/>
+					  <td><input type="password" name="password" value="<?php echo $password; ?>" class="regis-text" id="customer-password"/>
 						<?php if ($error_password) { ?>
 						<span class="error"><?php echo $error_password; ?></span>
 						<?php } ?></td>
 					</tr>
 					<tr>
 					  <td class="tr" width="96"><em class="c_r">*</em> <?php echo $entry_confirm; ?></td>
-					  <td><input type="password" name="confirm" value="<?php echo $confirm; ?>" class="regis-text"/>
+					  <td><input type="password" name="confirm" value="<?php echo $confirm; ?>" class="regis-text" />
 						<?php if ($error_confirm) { ?>
 						<span class="error"><?php echo $error_confirm; ?></span>
 						<?php } ?></td>
 					</tr>
 					<tr>
 		                <td class="tr"><em class="c_r">*</em> <?php echo $entry_input_sms ?></td>
-		                <td><input type="password" class="regis-text w100" value=""  /><a href="javascript:viod(0)" class="hq-yzm"><?php echo $text_get_sms ?></a> </td>
+		                <td><input type="text" class="regis-text w100" name="sms" />
+		                	<a href="javascript:viod(0)" class="hq-yzm"><?php echo $text_get_sms ?></a> </td>
 		            </tr>
 		            <tr>
 		                <td class="tr"><em class="c_r">*</em> <?php echo $entry_captcha ?></td>
 		                <td>
-		                	<input type="text" name="captcha" class="regis-text w100" value=""  />
+		                	<input type="text" name="captcha" class="regis-text w100" />
 		                	<span class="pl10 captcha">
 		                		<img src="<?php echo $this->url->link('account/register/captcha','','ssl') ?>" />
 		                		<a href="#" class="pl10 c_g chg-img"><?php echo $text_captcha_change ?></a>
@@ -106,7 +111,10 @@ $(function(){ $('input, textarea').placeholder(); });
 		            </tr>
 		            <tr>
 		                <td>&nbsp;</td>
-		                <td><input type="checkbox" name="agree" checked="checked" /><?php echo $text_agree; ?> </td>
+		                <td>
+		                	<input type="checkbox" name="agree" checked="checked" id="customer-agree"/>
+		                	<?php echo $text_agree; ?> 
+		                </td>
 		            </tr>
 		            <tr>
 		                <td>&nbsp;</td>
@@ -119,27 +127,27 @@ $(function(){ $('input, textarea').placeholder(); });
 			  	</table>
 			</div>
 		</form>
-		<form action="<?php echo $affiliate_action; ?>" method="post" enctype="multipart/form-data">
+		<form id="affiliate-signup" action="<?php echo $affiliate_action; ?>" method="post" enctype="multipart/form-data" >
 			<div class="regis" style="display: none;">
 	            <table class="registable">
 	            	<tr>
-	                    <td class="tr" width="96"><?php echo $entry_email ?></td>
-	                    <td><input type="text" class="regis-text" value="" placeholder="<?php echo $text_affiliate_email ?>" /></td>
+	                    <td class="tr" width="96"><em class="c_r">*</em> <?php echo $entry_email ?></td>
+	                    <td><input type="text" class="regis-text" name="email" placeholder="<?php echo $text_affiliate_email ?>" /></td>
 	                </tr>
 	                <tr>
-	                    <td class="tr"><?php echo $entry_password ?></td>
-	                    <td><input type="password" class="regis-text" value=""  /></td>
+	                    <td class="tr"><em class="c_r">*</em> <?php echo $entry_password ?></td>
+	                    <td><input type="password" class="regis-text" name="password"  /></td>
 	                </tr>
 	                <tr>
-	                    <td class="tr"><?php echo $entry_confirm ?></td>
-	                    <td><input type="password" class="regis-text" value=""  /></td>
+	                    <td class="tr"><em class="c_r">*</em> <?php echo $entry_confirm ?></td>
+	                    <td><input type="password" class="regis-text" name="confirm"  /></td>
 	                </tr>
 	                <tr>
-	                    <td class="tr"><?php echo $entry_affiliate_name ?></td>
-	                    <td><input type="text" class="regis-text" value="" placeholder="<?php echo $text_affiliate_name ?>" /></td>
+	                    <td class="tr"><em class="c_r">*</em> <?php echo $entry_affiliate_name ?></td>
+	                    <td><input type="text" class="regis-text" name="company" placeholder="<?php echo $text_affiliate_name ?>" /></td>
 	                </tr>
 	                <tr>
-	                    <td class="tr"><?php echo $entry_affiliate_group ?></td>
+	                    <td class="tr"><em class="c_r">*</em> <?php echo $entry_affiliate_group ?></td>
 	                    <td><select class="regis-text" name="group_id">
 		                    	<option>设计公司</option>
 		                    	<option>工程公司</option>
@@ -149,20 +157,23 @@ $(function(){ $('input, textarea').placeholder(); });
 		                </td>
 	                </tr>
 	                <tr>
-	                    <td class="tr"><?php echo $entry_affiliate_address ?></td>
-	                    <td><input type="text" class="regis-text" value=""  /></td>
+	                    <td class="tr"><em class="c_r">*</em> <?php echo $entry_affiliate_address ?></td>
+	                    <td><input type="text" class="regis-text" name="address"  /></td>
 	                </tr>
 	                <tr>
-	                    <td class="tr"><?php echo $entry_affiliate_customer ?></td>
-	                    <td><input type="text" class="regis-text" value=""  /></td>
+	                    <td class="tr"><em class="c_r">*</em> <?php echo $entry_affiliate_customer ?></td>
+	                    <td><input type="text" class="regis-text" name="nickname"  /></td>
 	                </tr>
 	                <tr>
-	                    <td class="tr"><?php echo $entry_affiliate_telephone ?></td>
-	                    <td><input type="text" class="regis-text" value=""  /></td>
+	                    <td class="tr"><em class="c_r">*</em> <?php echo $entry_affiliate_telephone ?></td>
+	                    <td><input type="text" class="regis-text" name="mobile_phone"  /></td>
 	                </tr>
 	                <tr>
-	                    <td class="tr"><?php echo $entry_input_sms ?></td>
-	                    <td><input type="password" class="regis-text w100" value=""  /><a href="javascript:viod(0)" class="hq-yzm"><?php echo $text_get_sms ?></a> </td>
+	                    <td class="tr"><em class="c_r">*</em> <?php echo $entry_input_sms ?></td>
+	                    <td>
+	                    	<input type="password" class="regis-text w100" name="sms" />
+	                    	<a href="javascript:viod(0)" class="hq-yzm"><?php echo $text_get_sms ?></a> 
+	                    </td>
 	                </tr>
 	                <tr>
 	                    <td class="tr"><em class="c_r">*</em> <?php echo $entry_captcha ?></td>
@@ -193,6 +204,105 @@ $(function(){ $('input, textarea').placeholder(); });
     $('.captcha a.chg-img').bind('click',function(e){
     	e.preventDefault();
     	$('.captcha img').attr('src',"<?php echo $this->url->link('account/register/captcha','','ssl') ?>")
-    })
+    });
+    $(function(){
+    	$.validator.setDefaults({      
+	        submitHandler: function(form) {   
+	            form.submit();   
+	       }
+	    }),
+	    $("#customer-signup").validate({
+	    	rules:{
+	    		password: {
+	                required: true,
+	                minlength: 5
+	            },
+	            confirm: {
+	                required: true,
+	                minlength: 5,
+	                equalTo: "#customer-password"
+	            },	            
+	            mobile_phone: {
+	            	required: true,
+	                mobileCN: true
+	            },
+	            agree: "required"
+	    	},
+	    	messages:{
+	    		password:"密码必填",
+	    		mobile_phone:"请填写有效的手机号码",
+	    		agree:{
+	                required:"请先阅读注册协议"
+	            },
+	    	},
+	    	errorElement: "span",
+	    	errorPlacement: function (error, element) {
+	            
+	            if (element.is(':radio') || element.is(':checkbox')) {
+	                error.appendTo(element.parent());
+	            } else {
+	                element.after(error);
+	            }
+	        },
+	        focusInvalid: true,
+	        success:function(e){
+	        	e.html("&nbsp;").addClass("valid");
+	        }
+	    });
+	    $('#affiliate-signup').validate({
+	    	rules:{
+	    		email:{
+					required: true,
+					email:true
+	    		},
+	    		company:{
+	    			required: true,
+	    			byteRangeLength:[4,15]
+	    		},
+	    		nickname:{
+	    			required: true,
+	    			byteRangeLength:[4,15]
+	    		},
+	    		address:{
+	    			required: true,
+	    			byteRangeLength:[4,15]
+	    		},
+	    		password: {
+	                required: true,
+	                minlength: 5
+	            },
+	            confirm: {
+	                required: true,
+	                minlength: 5,
+	                equalTo: "#customer-password"
+	            },	            
+	            mobile_phone: {
+	            	required: true,
+	                mobileCN: true
+	            },
+	            agree: "required"
+	    	},
+	    	messages:{
+	    		password:"密码必填",
+	    		mobile_phone:"请填写有效的手机号码",
+	    		agree:{
+	                required:"请先阅读注册协议"
+	            },
+	    	},
+	    	errorElement: "span",
+	    	errorPlacement: function (error, element) {
+	            
+	            if (element.is(':radio') || element.is(':checkbox')) {
+	                error.appendTo(element.parent());
+	            } else {
+	                element.after(error);
+	            }
+	        },
+	        focusInvalid: true,
+	        success:function(e){
+	        	e.html("&nbsp;").addClass("valid");
+	        }
+	    })
+    });
 </script>
 <?php echo $footer; ?>
