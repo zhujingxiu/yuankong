@@ -82,10 +82,11 @@ o.dlist={
         var dom2=sel.children(dom2);
         dom2.find("span").click(function(){
             var self = $(this);
-            var t = self.attr("val");
+            var t = self.attr("data-val");console.info(t);
             dom1.find("span").html(self.text());
             dom1.find("input[name='search_model']").val(self.attr('val'));
             sel.removeClass("hov");
+            sel.find('input[name="group_id"]').val(t);
         }).hover(function(){
             $(this).addClass("on");
         }, function(){

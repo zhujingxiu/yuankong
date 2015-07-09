@@ -1,36 +1,48 @@
 <div class="gc-boxl">
-
-   <ul class="gc-table" id="tab">
+    
+    <ul class="gc-table" id="tab">
         <li class="taboff tabon">消防<br />设计<i class="icon s-down"></i></li>
         <li class="taboff">消防<br />检测<i class="icon s-down"></i></li>
         <li class="taboff">消防<br />工程<i class="icon s-down"></i></li>
         <li class="taboff">消防<br />维保<i class="icon s-down"></i></li>
     </ul>
     <div class="ovh">
-        <div class="gc-b-detail">
-            <p class="f_m c8">十秒登记，免费获取专业消防设计案例</p>
-            <input type="text" class="gc-tab-text mt15 gcname" value="" placeholder="您的姓名" />
-            <input type="text" class="gc-tab-text mt15 gctel" value="" placeholder="您的手机号" />
-            <input type="submit" class="gc-tab-sub mt15" value="立即申请" />
-        </div>
-        <div class="gc-b-detail" style="display: none;">
-            <p class="f_m c8">十秒登记，免费获取专业消防检测</p>
-            <input type="text" class="gc-tab-text mt15 gcname" value="" placeholder="您的姓名" />
-            <input type="text" class="gc-tab-text mt15 gctel" value="" placeholder="您的手机号" />
-            <input type="submit" class="gc-tab-sub mt15" value="立即申请" />
-        </div>
-        <div class="gc-b-detail" style="display: none;">
-            <p class="f_m c8">十秒登记，免费获取专业消防工程案例</p>
-            <input type="text" class="gc-tab-text mt15 gcname" value="" placeholder="您的姓名" />
-            <input type="text" class="gc-tab-text mt15 gctel" value="" placeholder="您的手机号" />
-            <input type="submit" class="gc-tab-sub mt15" value="立即申请" />
-        </div>
-        <div class="gc-b-detail" style="display: none;">
-            <p class="f_m c8">十秒登记，免费获取专业消防维保服务</p>
-            <input type="text" class="gc-tab-text mt15 gcname" value="" placeholder="您的姓名" />
-            <input type="text" class="gc-tab-text mt15 gctel" value="" placeholder="您的手机号" />
-            <input type="submit" class="gc-tab-sub mt15" value="立即申请" />
-        </div>
+        <form action="<?php echo $action ?>" method="post" id="design-form">
+            <div class="gc-b-detail">
+                <p class="f_m c8">十秒登记，免费获取专业消防设计案例</p>
+                <input type="text" class="gc-tab-text mt15 gcname" name="account" placeholder="您的姓名" />
+                <input type="text" class="gc-tab-text mt15 gctel" name="telephone" placeholder="您的手机号" />
+                <input type="hidden" name="group_id" value="1" />
+                <input type="submit" class="gc-tab-sub mt15" value="立即申请" />
+            </div>
+        </form>
+        <form action="<?php echo $action ?>" method="post" id="test-form">
+            <div class="gc-b-detail" style="display: none;">
+                <p class="f_m c8">十秒登记，免费获取专业消防检测</p>
+                <input type="text" class="gc-tab-text mt15 gcname" name="account" placeholder="您的姓名" />
+                <input type="text" class="gc-tab-text mt15 gctel" name="telephone" placeholder="您的手机号" />
+                <input type="hidden" name="group_id" value="2" />
+                <input type="submit" class="gc-tab-sub mt15" value="立即申请" />
+            </div>
+        </form>
+        <form action="<?php echo $action ?>" method="post" id="project-form">
+            <div class="gc-b-detail" style="display: none;">
+                <p class="f_m c8">十秒登记，免费获取专业消防工程案例</p>
+                <input type="text" class="gc-tab-text mt15 gcname" name="account" placeholder="您的姓名" />
+                <input type="text" class="gc-tab-text mt15 gctel" name="telephone" placeholder="您的手机号" />
+                <input type="hidden" name="group_id" value="3" />
+                <input type="submit" class="gc-tab-sub mt15" value="立即申请" />
+            </div>
+        </form>
+        <form action="<?php echo $action ?>" method="post" id="maintenance-form">
+            <div class="gc-b-detail" style="display: none;">
+                <p class="f_m c8">十秒登记，免费获取专业消防维保服务</p>
+                <input type="text" class="gc-tab-text mt15 gcname" name="account" placeholder="您的姓名" />
+                <input type="text" class="gc-tab-text mt15 gctel" name="telephone" placeholder="您的手机号" />
+                <input type="hidden" name="group_id" value="4" />
+                <input type="submit" class="gc-tab-sub mt15" value="立即申请" />
+            </div>
+        </form>
         <div class="tel-phone">
             <i class="icon telphone"></i>服务热线:400-883-4119
         </div>

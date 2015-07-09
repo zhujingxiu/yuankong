@@ -1,5 +1,17 @@
 <?php
 class ModelServiceProject extends Model {
+    public function addProject($data) {
+        $fields =  array(
+            'project_sn'    => 'xf'. date('YmdHis'),
+            'group_id'      => $data['group_id'],
+            'telephone'     => $data['telephone'],
+            'account'       => $data['account'],
+            'status'        => 1,
+            'date_applied'  => date('Y-m-d H:i:s'),
+            'date_modified' => date('Y-m-d H:i:s'),
+        );
+        return $this->db->insert('project',$fields);
+    }
     public function getProject($project_id) {
         $project_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "project` WHERE project_id = '" . (int)$project_id . "'  ");
     
@@ -17,10 +29,10 @@ class ModelServiceProject extends Model {
         }
         
         if ($limit < 1) {
-            $limit = 1;
+            $limit = 10;
         }   
         
-        $query = $this->db->query("SELECT o.* FROM `" . DB_PREFIX . "project` o  WHERE 1 ORDER BY o.project_id DESC LIMIT " . (int)$start . "," . (int)$limit);   
+        $query = $this->db->query("SELECT p.*,pg.name FROM `" . DB_PREFIX . "project` p LEFT JOIN ".DB_PREFIX."project_group pg ON p.group_id = pg.group_id WHERE 1 ORDER BY p.project_id DESC LIMIT " . (int)$start . "," . (int)$limit);   
     
         return $query->rows;
     }

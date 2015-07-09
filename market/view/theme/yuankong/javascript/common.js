@@ -64,9 +64,9 @@ function addToCart(product_id, quantity) {
             }
             
             if (json['success']) {
-                $('#notification').html('<div class="success" style="display: none;">' + json['success'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
+                $('#notification').html('<div class="msg-success" style="display: none;">' + json['success'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
                 
-                $('.success').fadeIn('slow');
+                $('.msg-success').fadeIn('slow');
                 
                 $('#cart-total').html(json['total']);
                 

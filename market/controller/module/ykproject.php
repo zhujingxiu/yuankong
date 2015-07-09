@@ -7,7 +7,9 @@ class ControllerModuleYkproject extends Controller {
         $this->data['setting'] = $setting;
 
         $this->data['module'] = $module++;
-                        
+        $this->data['action'] = $this->url->link('service/project/apply','','SSL');
+        $this->data['redirect'] = $this->url->link('common/home','','SSL');
+
         $this->template = $this->config->get('config_template') . '/template/module/ykproject.tpl';
         
         $this->render();

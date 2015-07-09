@@ -36,12 +36,14 @@
                 <li class="taboff"><?php echo $text_lateast ?><i class="icon s-down"></i></li>
             </ul>
             <div class="plr ovh">
-                <div class="gsbox" style="display: block;">
-                    <p class="f_m c8 pt5"><em class="c_r"><?php echo $error_name ?></em></p>
-                    <input type="text" class="gc-tab-text mt5 gcname" value="" placeholder="<?php echo $entry_name ?>">
-                    <input type="text" class="gc-tab-text mt15 gctel" value="" placeholder="<?php echo $entry_telephone ?>">
-                    <input type="submit" class="gc-tab-sub mt15" value="<?php echo $button_apply ?>">
-                </div>
+                <form action="<?php echo $action ?>" method="post" id="find-form">
+                    <div class="gsbox" style="display: block;">
+                        <p class="f_m c8 pt5"><em class="c_r"><?php echo $error_name ?></em></p>
+                        <input type="text" class="gc-tab-text mt5 gcname" name="account" placeholder="<?php echo $entry_name ?>">
+                        <input type="text" class="gc-tab-text mt15 gctel" name="telephone" placeholder="<?php echo $entry_telephone ?>">
+                        <input type="submit" class="gc-tab-sub mt15" value="<?php echo $button_apply ?>">
+                    </div>
+                </form>
                 <div class="gsbox" style="display: none;">
                     <ul class="ovh mt5">
                         <?php foreach ($lateast as $key => $item): ?>

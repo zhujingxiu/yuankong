@@ -1,6 +1,6 @@
 <div class="r" id="mini-cart">
     
-  <a href="<?php echo $cart ?>" class="gwc icon2"><i class="icon2 gw_num" id="cart-total"><?php echo $total; ?></i></a>
+  <a href="<?php echo $cart ?>" class="gwc icon2"><i class="icon2 gw_num" id="cart-total"><?php echo $this->cart->countProducts(); ?></i></a>
   <?php if ( false && $products || $vouchers) { ?>
   <div class="content">
     
