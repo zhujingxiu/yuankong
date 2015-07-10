@@ -310,6 +310,12 @@ class ControllerUserUser extends Controller {
 		} else {
 			$this->data['error_confirm'] = '';
 		}
+
+		if (isset($this->error['nickname'])) {
+			$this->data['error_nickname'] = $this->error['nickname'];
+		} else {
+			$this->data['error_nickname'] = '';
+		}
 		
 	 	if (isset($this->error['firstname'])) {
 			$this->data['error_firstname'] = $this->error['firstname'];

@@ -106,3 +106,8 @@
 2015-07-10 22:21:52 - PHP Notice:  Undefined index: confirm in E:\wamp\www\yuankong\market\controller\account\register.php on line 273
 2015-07-10 22:21:52 - PHP Notice:  Undefined index: password in E:\wamp\www\yuankong\market\controller\account\register.php on line 273
 2015-07-10 22:22:52 - PHP Notice:  Error: Could not load model account/register! in E:\wamp\www\yuankong\system\engine\loader.php on line 48
+2015-07-11 6:43:20 - PHP Notice:  Undefined variable: error_nickname in E:\wamp\www\yuankong\backend\view\template\user\user_form.tpl on line 29
+2015-07-11 7:00:03 - PHP Notice:  Undefined variable: sort_group in E:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 39
+2015-07-11 7:00:03 - PHP Notice:  Undefined variable: sort_account in E:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 44
+2015-07-11 7:00:03 - PHP Notice:  Undefined variable: sort_telephone in E:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 49
+2015-07-11 7:00:52 - PHP Notice:  Undefined index: alipay in E:\wamp\www\yuankong\backend\view\template\module\oauth.tpl on line 211
