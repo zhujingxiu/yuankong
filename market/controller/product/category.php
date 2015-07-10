@@ -14,6 +14,18 @@ class ControllerProductCategory extends Controller {
 		} else {
 			$filter = '';
 		}
+
+		if (isset($this->request->get['min_price'])) {
+			$min_price = $this->request->get['min_price'];
+		} else {
+			$min_price = '';
+		}
+
+		if (isset($this->request->get['max_price'])) {
+			$max_price = $this->request->get['max_price'];
+		} else {
+			$max_price = '';
+		}
 				
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
@@ -186,12 +198,12 @@ class ControllerProductCategory extends Controller {
 			$results = $this->model_catalog_category->getCategories($category_id);
 			
 			foreach ($results as $result) {
-				$data = array(
+				$filter = array(
 					'filter_category_id'  => $result['category_id'],
 					'filter_sub_category' => true
 				);
 				
-				$product_total = $this->model_catalog_product->getTotalProducts($data);				
+				$product_total = $this->model_catalog_product->getTotalProducts($filter);				
 				
 				$this->data['categories'][] = array(
 					'name'  => $result['name'] . ($this->config->get('config_product_count') ? ' (' . $product_total . ')' : ''),
@@ -199,9 +211,11 @@ class ControllerProductCategory extends Controller {
 				);
 			}
 			
-			$data = array(
+			$filter = array(
 				'filter_category_id' => $category_id,
 				'filter_filter'      => $filter, 
+				'filter_min_price'   => $min_price, 
+				'filter_max_price'   => $max_price, 
 				'sort'               => $sort,
 				'order'              => $order,
 				'start'              => ($page - 1) * $limit,
@@ -219,9 +233,10 @@ class ControllerProductCategory extends Controller {
 				'href'      => 'javascript:;',
 				'separator' => $this->language->get('text_separator')
 			);
-    		$data = array(
-				
+    		$filter = array(				
 				'filter_filter'      => $filter, 
+				'filter_min_price'   => $min_price, 
+				'filter_max_price'   => $max_price, 
 				'sort'               => $sort,
 				'order'              => $order,
 				'start'              => ($page - 1) * $limit,
@@ -230,9 +245,9 @@ class ControllerProductCategory extends Controller {
     	}
     	$this->data['categories'] = array();
     	$this->data['products'] = array();
-		$product_total = $this->model_catalog_product->getTotalProducts($data); 
+		$product_total = $this->model_catalog_product->getTotalProducts($filter); 
 		
-		$results = $this->model_catalog_product->getProducts($data);
+		$results = $this->model_catalog_product->getProducts($filter);
 		
 		foreach ($results as $result) {
 			if ($result['image']) {
@@ -296,39 +311,23 @@ class ControllerProductCategory extends Controller {
 		if (isset($this->request->get['limit'])) {
 			$url .= '&limit=' . $this->request->get['limit'];
 		}
-									
-		$this->data['sorts'] = array();
-		
-		$this->data['sorts'][] = array(
-			'text'  => $this->language->get('text_default'),
-			'value' => 'p.sort_order-ASC',
-			'href'  => $this->url->link('product/category',  '&sort=p.sort_order&order=ASC' . $url)
-		);
-		
-		$this->data['sorts'][] = array(
-			'text'  => $this->language->get('text_name_asc'),
-			'value' => 'pd.name-ASC',
-			'href'  => $this->url->link('product/category',  '&sort=pd.name&order=ASC' . $url)
-		);
 
-		$this->data['sorts'][] = array(
-			'text'  => $this->language->get('text_name_desc'),
-			'value' => 'pd.name-DESC',
-			'href'  => $this->url->link('product/category',  '&sort=pd.name&order=DESC' . $url)
-		);
-
-		$this->data['sorts'][] = array(
-			'text'  => $this->language->get('text_price_asc'),
-			'value' => 'p.price-ASC',
-			'href'  => $this->url->link('product/category',  '&sort=p.price&order=ASC' . $url)
-		); 
-
-		$this->data['sorts'][] = array(
-			'text'  => $this->language->get('text_price_desc'),
-			'value' => 'p.price-DESC',
-			'href'  => $this->url->link('product/category',  '&sort=p.price&order=DESC' . $url)
-		); 
-
+		if(isset($this->request->get['order']) && strtolower($this->request->get['order']) == 'desc'){
+			$this->data['sort_order'] = $this->url->link('product/category',  '&sort=p.sort_order&order=ASC' . $url);
+			$this->data['sort_price'] = $this->url->link('product/category',  '&sort=p.price&order=ASC' . $url);
+			$this->data['sort_sales'] = $this->url->link('product/category',  '&sort=p.sales&order=ASC' . $url);
+		}else{
+			$this->data['sort_order'] = $this->url->link('product/category',  '&sort=p.sort_order&order=DESC' . $url);
+			$this->data['sort_price'] = $this->url->link('product/category',  '&sort=p.price&order=DESC' . $url);
+			$this->data['sort_sales'] = $this->url->link('product/category',  '&sort=p.sales&order=DESC' . $url);
+		}
+		if(isset($this->request->get['sort'])&& strtolower($this->request->get['sort']) == 'p.price'){
+			$this->data['sort_on'] = 'price';
+		}else if(isset($this->request->get['sort'])&& strtolower($this->request->get['sort']) == 'p.sales'){
+			$this->data['sort_on'] = 'sales';
+		}else{
+			$this->data['sort_on'] = 'sort_order';
+		}
 		
 		$url = '';
 		
@@ -385,6 +384,9 @@ class ControllerProductCategory extends Controller {
 	
 		$this->data['pagination'] = $pagination->render_page();
 	
+		$this->data['filter_action'] = $this->url->link('product/category',$url,'SSL');
+		$this->data['min_price'] = $min_price;
+		$this->data['max_price'] = $max_price;
 		$this->data['sort'] = $sort;
 		$this->data['order'] = $order;
 		$this->data['limit'] = $limit;

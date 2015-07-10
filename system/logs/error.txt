@@ -12,3 +12,64 @@
 2015-07-09 22:45:14 - PHP Notice:  Undefined index: password in E:\wamp\www\yuankong\market\controller\affiliate\register.php on line 392
 2015-07-09 22:45:14 - PHP Notice:  Undefined index: confirm in E:\wamp\www\yuankong\market\controller\affiliate\register.php on line 396
 2015-07-09 22:45:14 - PHP Notice:  Undefined index: password in E:\wamp\www\yuankong\market\controller\affiliate\register.php on line 396
+2015-07-10 13:26:37 - PHP Notice:  Undefined variable: sort_order in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 5
+2015-07-10 13:26:37 - PHP Notice:  Undefined variable: sort_price in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 8
+2015-07-10 13:26:37 - PHP Notice:  Undefined variable: sort_sales in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 11
+2015-07-10 13:26:37 - PHP Notice:  Undefined variable: sorts in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 28
+2015-07-10 13:26:38 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 28
+2015-07-10 13:26:53 - PHP Notice:  Undefined variable: sort_order in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 5
+2015-07-10 13:26:53 - PHP Notice:  Undefined variable: sort_price in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 8
+2015-07-10 13:26:53 - PHP Notice:  Undefined variable: sort_sales in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 11
+2015-07-10 13:26:53 - PHP Notice:  Undefined variable: sorts in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 28
+2015-07-10 13:26:53 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 28
+2015-07-10 13:27:48 - PHP Notice:  Undefined variable: sorts in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 28
+2015-07-10 13:27:48 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 28
+2015-07-10 13:27:59 - PHP Notice:  Undefined variable: sorts in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 28
+2015-07-10 13:27:59 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 28
+2015-07-10 13:28:04 - PHP Notice:  Undefined variable: sorts in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 28
+2015-07-10 13:28:04 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 28
+2015-07-10 13:28:08 - PHP Notice:  Undefined variable: sorts in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 28
+2015-07-10 13:28:08 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 28
+2015-07-10 13:28:11 - PHP Notice:  Undefined variable: sorts in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 28
+2015-07-10 13:28:11 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 28
+2015-07-10 13:28:14 - PHP Notice:  Undefined variable: sorts in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 28
+2015-07-10 13:28:14 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 28
+2015-07-10 13:32:44 - PHP Notice:  Undefined variable: sorts in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 28
+2015-07-10 13:32:44 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 28
+2015-07-10 13:32:50 - PHP Notice:  Undefined variable: sorts in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 28
+2015-07-10 13:32:50 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 28
+2015-07-10 13:33:11 - PHP Notice:  Undefined variable: sorts in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 28
+2015-07-10 13:33:11 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 28
+2015-07-10 13:33:30 - PHP Notice:  Undefined variable: sorts in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 28
+2015-07-10 13:33:30 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 28
+2015-07-10 13:33:58 - PHP Notice:  Undefined variable: sorts in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 28
+2015-07-10 13:33:58 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 28
+2015-07-10 13:34:30 - PHP Notice:  Undefined variable: sorts in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 28
+2015-07-10 13:34:30 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 28
+2015-07-10 13:34:43 - PHP Notice:  Undefined variable: sorts in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 28
+2015-07-10 13:34:43 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 28
+2015-07-10 13:34:46 - PHP Notice:  Undefined variable: sorts in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 28
+2015-07-10 13:34:46 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 28
+2015-07-10 13:34:50 - PHP Notice:  Undefined variable: sorts in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 28
+2015-07-10 13:34:50 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 28
+2015-07-10 13:35:54 - PHP Notice:  Undefined variable: sorts in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 28
+2015-07-10 13:35:54 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 28
+2015-07-10 13:37:15 - PHP Notice:  Undefined variable: sorts in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 34
+2015-07-10 13:37:15 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 34
+2015-07-10 13:37:17 - PHP Notice:  Undefined variable: sorts in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 34
+2015-07-10 13:37:17 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 34
+2015-07-10 13:37:20 - PHP Notice:  Undefined variable: sorts in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 34
+2015-07-10 13:37:20 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 34
+2015-07-10 13:37:23 - PHP Notice:  Undefined variable: sorts in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 34
+2015-07-10 13:37:23 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 34
+2015-07-10 13:37:27 - PHP Notice:  Undefined variable: sorts in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 34
+2015-07-10 13:37:27 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 34
+2015-07-10 13:37:40 - PHP Notice:  Undefined variable: sorts in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 34
+2015-07-10 13:37:40 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 34
+2015-07-10 13:40:30 - PHP Notice:  Undefined variable: sorts in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 39
+2015-07-10 13:40:30 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 39
+2015-07-10 14:14:56 - PHP Notice:  Undefined variable: sorts in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 39
+2015-07-10 14:14:56 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-filter.tpl on line 39
+2015-07-10 14:38:55 - PHP Notice:  Undefined index: category_related in D:\wamp\www\yuankong\backend\controller\catalog\product.php on line 917
+2015-07-10 14:40:10 - PHP Notice:  Undefined variable: entry_category_related in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 281
+2015-07-10 14:40:10 - PHP Notice:  Undefined variable: category_related in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 283

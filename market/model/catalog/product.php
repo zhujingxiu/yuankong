@@ -172,6 +172,14 @@ class ModelCatalogProduct extends Model {
 		if (!empty($data['filter_manufacturer_id'])) {
 			$sql .= " AND p.manufacturer_id = '" . (int)$data['filter_manufacturer_id'] . "'";
 		}
+
+		if (!empty($data['filter_min_price'])) {
+			$sql .= " AND p.price >= '" . (int)$data['filter_min_price'] . "'";
+		}
+
+		if (!empty($data['filter_max_price'])) {
+			$sql .= " AND p.price <= '" . (int)$data['filter_max_price'] . "'";
+		}
 		
 		$sql .= " GROUP BY p.product_id";
 		
@@ -180,6 +188,7 @@ class ModelCatalogProduct extends Model {
 			'p.model',
 			'p.quantity',
 			'p.price',
+			'p.sales',
 			'rating',
 			'p.sort_order',
 			'p.date_added'
@@ -591,7 +600,14 @@ class ModelCatalogProduct extends Model {
 		if (!empty($data['filter_manufacturer_id'])) {
 			$sql .= " AND p.manufacturer_id = '" . (int)$data['filter_manufacturer_id'] . "'";
 		}
-		
+
+		if (!empty($data['filter_min_price'])) {
+			$sql .= " AND p.price >= '" . (int)$data['filter_min_price'] . "'";
+		}
+
+		if (!empty($data['filter_max_price'])) {
+			$sql .= " AND p.price <= '" . (int)$data['filter_max_price'] . "'";
+		}		
 		$query = $this->db->query($sql);
 		
 		return $query->row['total'];

@@ -25,10 +25,13 @@
 	</div>
 	<?php require( DIR_TEMPLATE.$this->config->get('config_template')."/template/product/category-info.tpl" ); ?>
     <?php }?>
+    <div class="ovh">
+        <a href="#"><img src="<?php echo TPL_IMG ?>data/banner/adpic2.jpg" /></a>
+    </div>
+    <?php require( DIR_TEMPLATE.$this->config->get('config_template')."/template/product/product-filter.tpl" ); ?>
 	<?php if ($products) { ?>
-		<?php require( DIR_TEMPLATE.$this->config->get('config_template')."/template/product/product-filter.tpl" ); ?>
-		<?php require( DIR_TEMPLATE.$this->config->get('config_template')."/template/product/product-list.tpl" ); ?>
 		
+		<?php require( DIR_TEMPLATE.$this->config->get('config_template')."/template/product/product-list.tpl" ); ?>
 	<?php } ?>
   <?php if (!$categories && !$products) { ?>
   <div class="content"><?php echo $text_empty; ?></div>

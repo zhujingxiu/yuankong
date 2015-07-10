@@ -582,7 +582,6 @@ class ControllerCatalogProduct extends Controller {
     	$this->data['entry_image'] = $this->language->get('entry_image');
     	$this->data['entry_download'] = $this->language->get('entry_download');
     	$this->data['entry_category'] = $this->language->get('entry_category');
-    	$this->data['entry_category_related'] = $this->language->get('entry_category_related');
 		$this->data['entry_filter'] = $this->language->get('entry_filter');
 		$this->data['entry_related'] = $this->language->get('entry_related');
 		$this->data['entry_attribute'] = $this->language->get('entry_attribute');
@@ -909,14 +908,6 @@ class ControllerCatalogProduct extends Controller {
       		$this->data['sort_order'] = $product_info['sort_order'];
     	} else {
 			$this->data['sort_order'] = 1;
-		}
-
-		if (isset($this->request->post['category_related'])) {
-      		$this->data['category_related'] = $this->request->post['category_related'];
-    	} elseif (!empty($product_info)) {
-      		$this->data['category_related'] = $product_info['category_related'];
-    	} else {
-			$this->data['category_related'] = 1;
 		}
 
 		$this->load->model('localisation/stock_status');

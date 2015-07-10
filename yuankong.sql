@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2015 年 07 月 02 日 09:41
+-- 生成日期: 2015 年 07 月 10 日 09:36
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.4.3
 
@@ -1404,7 +1404,7 @@ CREATE TABLE IF NOT EXISTS `yk_filter` (
   `filter_group_id` int(11) NOT NULL,
   `sort_order` int(3) NOT NULL,
   PRIMARY KEY (`filter_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 
@@ -1430,7 +1430,7 @@ CREATE TABLE IF NOT EXISTS `yk_filter_group` (
   `filter_group_id` int(11) NOT NULL AUTO_INCREMENT,
   `sort_order` int(3) NOT NULL,
   PRIMARY KEY (`filter_group_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -2361,6 +2361,7 @@ CREATE TABLE IF NOT EXISTS `yk_product` (
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `viewed` smallint(6) NOT NULL DEFAULT '0',
+  `sales` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`product_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=56 ;
 
@@ -2368,13 +2369,13 @@ CREATE TABLE IF NOT EXISTS `yk_product` (
 -- 转存表中的数据 `yk_product`
 --
 
-INSERT INTO `yk_product` (`product_id`, `model`, `sku`, `upc`, `ean`, `jan`, `isbn`, `mpn`, `location`, `quantity`, `stock_status_id`, `image`, `manufacturer_id`, `shipping`, `price`, `market`, `points`, `tax_class_id`, `date_available`, `weight`, `weight_class_id`, `length`, `width`, `height`, `length_class_id`, `subtract`, `minimum`, `sort_order`, `status`, `date_added`, `date_modified`, `viewed`) VALUES
-(50, '132143', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic1.jpg', 0, 1, '126.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-26 13:00:31', '2015-06-16 16:23:34', 64),
-(51, 'ae123213', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic2.jpg', 0, 1, '123.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-23 07:23:47', '0000-00-00 00:00:00', 27),
-(52, '123123', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic4.jpg', 0, 1, '123.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-16 16:29:23', '0000-00-00 00:00:00', 18),
-(53, '231414', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic3.jpg', 0, 1, '125.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-26 13:13:01', '0000-00-00 00:00:00', 128),
-(54, '2144232', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic5.jpg', 0, 1, '128.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-16 09:03:38', '0000-00-00 00:00:00', 6),
-(55, 'xf1325324', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic6.jpg', 0, 1, '158.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-16 09:05:42', '0000-00-00 00:00:00', 1);
+INSERT INTO `yk_product` (`product_id`, `model`, `sku`, `upc`, `ean`, `jan`, `isbn`, `mpn`, `location`, `quantity`, `stock_status_id`, `image`, `manufacturer_id`, `shipping`, `price`, `market`, `points`, `tax_class_id`, `date_available`, `weight`, `weight_class_id`, `length`, `width`, `height`, `length_class_id`, `subtract`, `minimum`, `sort_order`, `status`, `date_added`, `date_modified`, `viewed`, `sales`) VALUES
+(50, '132143', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic1.jpg', 0, 1, '126.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-26 13:00:31', '2015-06-16 16:23:34', 64, 0),
+(51, 'ae123213', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic2.jpg', 0, 1, '123.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-23 07:23:47', '0000-00-00 00:00:00', 27, 0),
+(52, '123123', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic4.jpg', 0, 1, '123.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-16 16:29:23', '0000-00-00 00:00:00', 22, 0),
+(53, '231414', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic3.jpg', 0, 1, '125.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-26 13:13:01', '0000-00-00 00:00:00', 128, 0),
+(54, '2144232', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic5.jpg', 0, 1, '128.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-16 09:03:38', '0000-00-00 00:00:00', 6, 0),
+(55, 'xf1325324', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic6.jpg', 0, 1, '158.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-16 09:05:42', '0000-00-00 00:00:00', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -2672,7 +2673,6 @@ CREATE TABLE IF NOT EXISTS `yk_project` (
   `project_id` int(11) NOT NULL AUTO_INCREMENT,
   `project_sn` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `group_id` smallint(6) NOT NULL DEFAULT '0',
-  `group` char(4) COLLATE utf8_unicode_ci NOT NULL,
   `account` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `telephone` varchar(16) COLLATE utf8_unicode_ci NOT NULL,
   `status` tinyint(4) NOT NULL DEFAULT '1',
@@ -2680,20 +2680,21 @@ CREATE TABLE IF NOT EXISTS `yk_project` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `date_modified` datetime DEFAULT NULL,
   PRIMARY KEY (`project_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=9 ;
 
 --
 -- 转存表中的数据 `yk_project`
 --
 
-INSERT INTO `yk_project` (`project_id`, `project_sn`, `group_id`, `group`, `account`, `telephone`, `status`, `date_applied`, `user_id`, `date_modified`) VALUES
-(1, 'xf2015121501', 1, 'xfsj', 'sadsadsadsa', '15951997250', 1, '2015-05-27 09:28:30', 1, NULL),
-(2, 'xf2015151301', 2, 'xfwb', 'dasdasdasdas', '15951117250', 2, '2015-05-27 19:28:30', 2, '2015-05-27 19:38:30'),
-(3, 'xf2015128501', 3, 'xfjc', 'assdaq21212', '13351997250', 3, '2015-05-27 09:38:30', 2, '2015-06-03 20:57:39'),
-(4, 'xf2015151301', 2, 'xfwb', 'dasdasdasdas', '15951117250', 2, '2015-05-27 19:48:30', 3, '2015-05-27 19:49:30'),
-(5, 'xf2015058501', 4, 'xfgc', 'assdaq21212', '13351997250', 2, '2015-05-27 09:38:30', 2, '2015-05-27 19:49:30'),
-(6, 'xf2015061301', 4, 'xfgc', '45dasdasdasdas', '18951117250', 3, '2015-05-27 19:48:30', 3, '2015-05-27 19:49:30'),
-(7, 'xf2015151901', 2, 'xfwb', '879dasdasdasdas', '15991117250', 3, '2015-05-27 19:28:30', 2, '2015-05-27 19:38:30');
+INSERT INTO `yk_project` (`project_id`, `project_sn`, `group_id`, `account`, `telephone`, `status`, `date_applied`, `user_id`, `date_modified`) VALUES
+(1, 'xf2015121501', 1, 'sadsadsadsa', '15951997250', 1, '2015-05-27 09:28:30', 1, NULL),
+(2, 'xf2015151301', 2, 'dasdasdasdas', '15951117250', 2, '2015-05-27 19:28:30', 2, '2015-05-27 19:38:30'),
+(3, 'xf2015128501', 3, 'assdaq21212', '13351997250', 3, '2015-05-27 09:38:30', 2, '2015-06-03 20:57:39'),
+(4, 'xf2015151301', 2, 'dasdasdasdas', '15951117250', 2, '2015-05-27 19:48:30', 3, '2015-05-27 19:49:30'),
+(5, 'xf2015058501', 4, 'assdaq21212', '13351997250', 2, '2015-05-27 09:38:30', 2, '2015-05-27 19:49:30'),
+(6, 'xf2015061301', 4, '45dasdasdasdas', '18951117250', 3, '2015-05-27 19:48:30', 3, '2015-05-27 19:49:30'),
+(7, 'xf2015151901', 2, '879dasdasdasdas', '15991117250', 3, '2015-05-27 19:28:30', 2, '2015-05-27 19:38:30'),
+(8, 'xf20150703063615', 1, '213213', '18850911766', 1, '2015-07-03 06:36:15', 0, '2015-07-03 06:36:15');
 
 -- --------------------------------------------------------
 
