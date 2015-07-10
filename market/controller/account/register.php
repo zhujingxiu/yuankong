@@ -249,6 +249,24 @@ class ControllerAccountRegister extends Controller {
 		$this->response->setOutput($this->render());	
   	}
 
+  	public function validatePhone(){
+  		$used = 0;
+  		$this->load->model('account/customer');
+  		$customer = $this->model_account_customer->getCustomerByMobilePhone($this->request->post['mobile_phone']);
+  		if($customer){
+  			$used = 1;
+  		}
+  		$this->response->setOutput(json_encode(array('used'=>$used)));
+  	}
+
+  	public function getSMS(){
+  		//var_dump($this->request->post['mobile_phone']);exit;
+  		$sms = new Sms();
+  		$pattern = '您的验证码为xxxxx,如非本人操作请忽略。【消防e站】';
+  		$res = $sms->sendMsg($this->request->post['mobile_phone'],$pattern);
+  		var_dump($res);
+  	}
+
   	protected function validate() {
 
   		if (empty($this->session->data['captcha']) || ($this->session->data['captcha'] != $this->request->post['captcha'])) {

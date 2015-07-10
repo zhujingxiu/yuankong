@@ -14,8 +14,9 @@ class Sms {
 			'sendTime'	=> '',
 			'content'	=> rawurlencode($msg)
 		);
-//$binarydata = pack("A", $post_data);
+
 		$response = $this->_request(http_build_query($post_data), $this->target_url);
+		var_dump($response);
 		$start=strpos($response,"<?xml");
 		$data=substr($response,$start);
 		$xml=simplexml_load_string($data);
