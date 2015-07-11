@@ -10,9 +10,7 @@ class ControllerAffiliateRegister extends Controller {
     	$this->language->load('affiliate/register');
 		
 		$this->document->setTitle($this->language->get('heading_title'));
-		$this->document->addScript('market/view/javascript/jquery/colorbox/jquery.colorbox-min.js');
-		$this->document->addStyle('market/view/javascript/jquery/colorbox/colorbox.css');
-					
+		
 		$this->load->model('affiliate/affiliate');
 		
     	if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
@@ -345,12 +343,11 @@ class ControllerAffiliateRegister extends Controller {
   	}
 
   	protected function validate() {
-    	if ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32)) {
-      		$this->error['firstname'] = $this->language->get('error_firstname');
-    	}
-
-    	if ((utf8_strlen($this->request->post['lastname']) < 1) || (utf8_strlen($this->request->post['lastname']) > 32)) {
-      		$this->error['lastname'] = $this->language->get('error_lastname');
+        if (empty($this->session->data['captcha']) || ($this->session->data['captcha'] != $this->request->post['captcha'])) {
+            $this->error['error'] = $this->language->get('error_captcha');
+        }
+    	if ((utf8_strlen($this->request->post['nickname']) < 1) || (utf8_strlen($this->request->post['nickname']) > 32)) {
+      		$this->error['nickname'] = $this->language->get('error_nickname');
     	}
 
     	if ((utf8_strlen($this->request->post['email']) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $this->request->post['email'])) {
@@ -361,32 +358,12 @@ class ControllerAffiliateRegister extends Controller {
       		$this->error['warning'] = $this->language->get('error_exists');
     	}
 		
-    	if ((utf8_strlen($this->request->post['telephone']) < 3) || (utf8_strlen($this->request->post['telephone']) > 32)) {
-      		$this->error['telephone'] = $this->language->get('error_telephone');
+    	if ((utf8_strlen($this->request->post['mobile_phone']) < 3) || (utf8_strlen($this->request->post['mobile_phone']) > 32)) {
+      		$this->error['mobile_phone'] = $this->language->get('error_mobile_phone');
     	}
 
     	if ((utf8_strlen($this->request->post['address_1']) < 3) || (utf8_strlen($this->request->post['address_1']) > 128)) {
       		$this->error['address_1'] = $this->language->get('error_address_1');
-    	}
-
-    	if ((utf8_strlen($this->request->post['city']) < 2) || (utf8_strlen($this->request->post['city']) > 128)) {
-      		$this->error['city'] = $this->language->get('error_city');
-    	}
-		
-		$this->load->model('localisation/country');
-		
-		$country_info = $this->model_localisation_country->getCountry($this->request->post['country_id']);
-		
-		if ($country_info && $country_info['postcode_required'] && (utf8_strlen($this->request->post['postcode']) < 2) || (utf8_strlen($this->request->post['postcode']) > 10)) {
-			$this->error['postcode'] = $this->language->get('error_postcode');
-		}
-
-    	if ($this->request->post['country_id'] == '') {
-      		$this->error['country'] = $this->language->get('error_country');
-    	}
-		
-    	if (!isset($this->request->post['zone_id']) || $this->request->post['zone_id'] == '') {
-      		$this->error['zone'] = $this->language->get('error_zone');
     	}
 
     	if ((utf8_strlen($this->request->post['password']) < 4) || (utf8_strlen($this->request->post['password']) > 20)) {

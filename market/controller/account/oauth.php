@@ -47,11 +47,6 @@ class ControllerAccountOauth extends Controller {
 
 		$this->data['text_welcome'] = $this->language->get('text_welcome');
 		$this->data['text_confirm'] = $this->language->get('text_confirm');
-
-		$this->data['entry_facebook'] = $this->language->get('entry_facebook');
-		$this->data['entry_google'] = $this->language->get('entry_google');
-		$this->data['entry_live'] = $this->language->get('entry_live');
-
 		$this->data['button_continue'] = $this->language->get('button_continue');
 		$this->data['button_back'] = $this->language->get('button_back');
 		$this->data['button_bind'] = $this->language->get('button_bind');
@@ -880,6 +875,28 @@ class ControllerAccountOauth extends Controller {
 				
 				$url = $host . http_build_query($code);
 				break;
+			case 'aplipay':
+				$alipay_config = array(
+					'partner'		=> $appid,
+					'key'			=> APP_SECRET,
+					'sign_type'     => strtoupper('MD5'),
+					'input_charset' => strtolower('utf-8'),
+					'cacert'	    => getcwd().'\\cacert.pem',
+					'transport'    	=> 'http'
+				);
+				$parameter = array(
+					"service" 		=> "alipay.auth.authorize",
+					"partner" 		=> $appid,
+					"target_service"=> "user.auth.quick.login",
+					"return_url"	=> $callback,
+					"anti_phishing_key"	=> "",
+					"exter_invoke_ip"	=> "",
+					"_input_charset"	=> "utf-8"
+				);
+				
+				$alipaySubmit = new AlipaySubmit($alipay_config);
+				die($alipaySubmit->buildRequestForm($parameter,"get", "确认"));
+				break;
 			case 'baidu':
 				$host  = 'http://openapi.baidu.com/oauth/2.0/authorize?';
 				
@@ -1052,6 +1069,64 @@ class ControllerAccountOauth extends Controller {
 				);
 				
 				break;
+			case 'alipay':
+
+				$alipay_config['partner']		= $appid;
+				$alipay_config['key']			= $appkey;
+				$alipay_config['grant_type']	= 'authorization_code';
+				$alipay_config['sign_type']    = strtoupper('MD5');
+				$alipay_config['input_charset']= strtolower('utf-8');
+				$alipay_config['cacert']    = getcwd().'\\cacert.pem';
+				$alipay_config['transport']    = 'http';
+			
+				$alipayNotify = new AlipayNotify($alipay_config);
+				$info = $alipayNotify->verifyReturn();
+				
+				if (isset($info['error'])) {
+					$this->log->write('WEIBO ERROR: '.$info['error'].' - '.$info['error_description']);
+					
+					$data = array(
+						'error'               => $info['error'],
+						'error_description'   => $info['error_description']
+					);
+					break;
+				}
+				
+				$access_token  = $info['access_token'];
+				$expires_in    = $info['expires_in'];
+				$remind_in     = $info['remind_in'];
+				$uid           = $info['uid'];
+				
+				$host = 'https://api.weibo.com/2/users/show.json?';
+				
+				$param = array();			
+				$param['access_token'] = $access_token;
+				$param['uid'] = $uid;
+			
+				$url = $host . http_build_query($param);
+				
+				$user_info = $this->http($url, 'GET');
+				
+				if (isset($user_info['error_code'])) {
+					$this->log->write('WEIBO ERROR: '.$user_info['error_code'].' - '.$user_info['error']);
+					
+					$data = array(
+						'error'               => $user_info['error_code'],
+						'error_description'   => $user_info['error']
+					);
+					break;
+				}
+			
+				$data = array(
+					'openid'          => $uid,
+					'expires_in'      => $expires_in,
+					'access_token'    => $info['access_token'],
+					'name'            => $user_info['name'],
+					'face'            => $user_info['profile_image_url'],
+					'email'           => ''
+				);
+				
+				break;				
 			case 'baidu':
 				$host = 'https://openapi.baidu.com/oauth/2.0/token?';
 		

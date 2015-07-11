@@ -13,7 +13,8 @@ class Pagination {
 	public $style_page = '';
 	public $style_links = 'links';
 	public $style_results = 'results';
-	 
+	public $prev_link = '';
+	public $next_link = '';
 	public function render() {
 		$total = $this->total;
 		
@@ -33,9 +34,10 @@ class Pagination {
 		$num_pages = ceil($total / $limit);
 		
 		$output = '';
-		
+		$this->prev_link = str_replace('{page}', 1, $this->url) ;
 		if ($page > 1) {
 			$output .= ' <a href="' . str_replace('{page}', 1, $this->url) . '">' . $this->text_first . '</a> <a href="' . str_replace('{page}', $page - 1, $this->url) . '">' . $this->text_prev . '</a> ';
+			$this->prev_link = str_replace('{page}', $page - 1, $this->url) ;
     	}
 
 		if ($num_pages > 1) {
@@ -73,9 +75,10 @@ class Pagination {
 				$output .= ' .... ';
 			}
 		}
-		
+		$this->next_link = str_replace('{page}', 1, $this->url) ;
    		if ($page < $num_pages) {
 			$output .= ' <a href="' . str_replace('{page}', $page + 1, $this->url) . '">' . $this->text_next . '</a> <a href="' . str_replace('{page}', $num_pages, $this->url) . '">' . $this->text_last . '</a> ';
+			$this->next_link = str_replace('{page}', $page + 1, $this->url) ;
 		}
 		
 		$find = array(
@@ -121,6 +124,8 @@ class Pagination {
 		
 		if ($page > 1) {
 			$output .= ' <a class="page-num" href="' . str_replace('{page}', 1, $this->url) . '">' . $this->text_first . '</a> <a class="prev-page" href="' . str_replace('{page}', $page - 1, $this->url) . '">' . $this->text_prev . '</a> ';
+
+			$this->prev_link = str_replace('{page}', $page - 1, $this->url) ;
     	}
 
 		if ($num_pages > 1) {
@@ -161,10 +166,11 @@ class Pagination {
 		
    		if ($page < $num_pages) {
 			$output .= ' <a class="next-page" href="' . str_replace('{page}', $page + 1, $this->url) . '">' . $this->text_next . '</a> <a class="page-num" href="' . str_replace('{page}', $num_pages, $this->url) . '">' . $this->text_last . '</a> ';
+			$this->next_link = str_replace('{page}', $page + 1, $this->url) ;
 		}
-		
-
 		
 		return $output ? '<div class="page">' . $output . '</div>' : '';
 	}
+
+
 }

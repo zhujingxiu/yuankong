@@ -37,9 +37,11 @@
         <button onclick="price_filter();" class="price-sub"><?php echo $button_submit ?></button>
     </p>
     <p class="top-page">
-        <a href="#" class="icon2 page-l"></a>
-        <span class="pl10 pr10"><em class="cff">1</em>/20</span>
-        <a href="#" class="icon2 page-r"></a>
+        <a href="<?php echo $prev_link ?>" class="icon2 page-l"></a>
+        <span class="pl10 pr10">
+          <em class="cff"><?php echo $page ?></em>/<em class="cff"><?php echo $total_page ?></em>
+        </span>
+        <a href="<?php echo $next_link ?>" class="icon2 page-r"></a>
     </p>
   
 </div>

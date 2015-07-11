@@ -286,8 +286,6 @@ class ControllerProductCategory extends Controller {
 			
 			$path_param = empty($path) ? '' : '&path='.$path;
 			
-			
-
 			$this->data['products'][] = array(
 				'product_id'  => $result['product_id'],
 				'thumb'       => $image,
@@ -383,7 +381,11 @@ class ControllerProductCategory extends Controller {
 		$pagination->url = $this->url->link('product/category',  $url . '&page={page}');
 	
 		$this->data['pagination'] = $pagination->render_page();
-	
+		$this->data['prev_link'] = $pagination->prev_link ? $pagination->prev_link : 'javascript:void(0)';
+		$this->data['next_link'] = $pagination->next_link ? $pagination->next_link : 'javascript:void(0)';
+		$this->data['page'] = $pagination->page;
+		$this->data['total_page'] = ceil($pagination->total / $pagination->limit);
+
 		$this->data['filter_action'] = $this->url->link('product/category',$url,'SSL');
 		$this->data['min_price'] = $min_price;
 		$this->data['max_price'] = $max_price;

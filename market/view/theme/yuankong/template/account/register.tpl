@@ -136,7 +136,7 @@ $(function(){ $('input, textarea').placeholder(); });
 	                </tr>
 	                <tr>
 	                    <td class="tr"><em class="c_r">*</em> <?php echo $entry_password ?></td>
-	                    <td><input type="password" class="regis-text" name="password"  /></td>
+	                    <td><input type="password" class="regis-text" name="password" id="affiliate-password" /></td>
 	                </tr>
 	                <tr>
 	                    <td class="tr"><em class="c_r">*</em> <?php echo $entry_confirm ?></td>
@@ -158,7 +158,7 @@ $(function(){ $('input, textarea').placeholder(); });
 	                </tr>
 	                <tr>
 	                    <td class="tr"><em class="c_r">*</em> <?php echo $entry_affiliate_address ?></td>
-	                    <td><input type="text" class="regis-text" name="address"  /></td>
+	                    <td><input type="text" class="regis-text" name="address_1"  /></td>
 	                </tr>
 	                <tr>
 	                    <td class="tr"><em class="c_r">*</em> <?php echo $entry_affiliate_customer ?></td>
@@ -263,7 +263,7 @@ $(function(){ $('input, textarea').placeholder(); });
 	    			required: true,
 	    			byteRangeLength:[4,15]
 	    		},
-	    		address:{
+	    		address_1:{
 	    			required: true,
 	    			byteRangeLength:[4,15]
 	    		},
@@ -274,7 +274,7 @@ $(function(){ $('input, textarea').placeholder(); });
 	            confirm: {
 	                required: true,
 	                minlength: 5,
-	                equalTo: "#customer-password"
+	                equalTo: "#affiliate-password"
 	            },	            
 	            mobile_phone: {
 	            	required: true,
