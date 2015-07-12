@@ -11,6 +11,7 @@ $_['text_points']         = '可使用积分：';
 $_['text_stock']          = '库存状态：';
 $_['text_instock']        = '有库存';
 $_['text_price']          = '销售价：';
+$_['text_market']          = '市场价：';
 $_['text_tax']            = '税前：'; 
 $_['text_discount']       = '数量折扣：';
 $_['text_option']         = '选项及配件：';

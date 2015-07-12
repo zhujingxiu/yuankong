@@ -88,10 +88,10 @@ class ControllerAffiliateRegister extends Controller {
 			$this->data['error_warning'] = '';
 		}
 		
-		if (isset($this->error['firstname'])) {
-			$this->data['error_firstname'] = $this->error['firstname'];
+		if (isset($this->error['nickname'])) {
+			$this->data['error_nickname'] = $this->error['nickname'];
 		} else {
-			$this->data['error_firstname'] = '';
+			$this->data['error_nickname'] = '';
 		}	
 		
 		if (isset($this->error['lastname'])) {
@@ -106,10 +106,10 @@ class ControllerAffiliateRegister extends Controller {
 			$this->data['error_email'] = '';
 		}
 		
-		if (isset($this->error['telephone'])) {
-			$this->data['error_telephone'] = $this->error['telephone'];
+		if (isset($this->error['mobile_phone'])) {
+			$this->data['error_mobile_phone'] = this->error['mobile_phone'];
 		} else {
-			$this->data['error_telephone'] = '';
+			$this->data['error_mobile_phone'] = '';
 		}
 		
 		if (isset($this->error['password'])) {
@@ -130,32 +130,13 @@ class ControllerAffiliateRegister extends Controller {
 			$this->data['error_address_1'] = '';
 		}
    		
-		if (isset($this->error['city'])) {
-			$this->data['error_city'] = $this->error['city'];
-		} else {
-			$this->data['error_city'] = '';
-		}
-		
-		if (isset($this->error['postcode'])) {
-			$this->data['error_postcode'] = $this->error['postcode'];
-		} else {
-			$this->data['error_postcode'] = '';
-		}
-
-		if (isset($this->error['country'])) {
-			$this->data['error_country'] = $this->error['country'];
-		} else {
-			$this->data['error_country'] = '';
-		}
-
-		if (isset($this->error['zone'])) {
-			$this->data['error_zone'] = $this->error['zone'];
-		} else {
-			$this->data['error_zone'] = '';
-		}
-								
+							
     	$this->data['action'] = $this->url->link('affiliate/register', '', 'SSL');
-
+		if (isset($this->request->post['nickname'])) {
+    		$this->data['nickname'] = $this->request->post['nickname'];
+		} else {
+			$this->data['nickname'] = '';
+		}
 		if (isset($this->request->post['firstname'])) {
     		$this->data['firstname'] = $this->request->post['firstname'];
 		} else {
@@ -172,6 +153,12 @@ class ControllerAffiliateRegister extends Controller {
     		$this->data['email'] = $this->request->post['email'];
 		} else {
 			$this->data['email'] = '';
+		}
+
+		if (isset($this->request->post['mobile_phone'])) {
+    		$this->data['mobile_phone'] = $this->request->post['mobile_phone'];
+		} else {
+			$this->data['mobile_phone'] = '';
 		}
 		
 		if (isset($this->request->post['telephone'])) {

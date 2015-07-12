@@ -76,6 +76,26 @@ function addToCart(product_id, quantity) {
         }
     });
 }
+function clearCart(){
+    $.ajax({
+        url: 'index.php?route=checkout/cart/clear',
+        type: 'post',
+        dataType: 'json',
+        success: function(json) {
+            $('.success, .warning, .attention, .information, .error').remove();
+            
+            if (json['success']) {
+                $('#notification').html('<div class="msg-success" style="display: none;">' + json['success'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
+                
+                $('.msg-success').fadeIn('slow');                
+                
+                $('html, body').animate({ scrollTop: 0 }, 'slow'); 
+                
+            }  
+            location.reload(); 
+        }
+    });
+}
 function addToWishList(product_id) {
     $.ajax({
         url: 'index.php?route=account/wishlist/add',

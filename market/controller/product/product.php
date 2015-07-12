@@ -242,6 +242,7 @@ class ControllerProductProduct extends Controller {
 			$this->data['text_discount'] = $this->language->get('text_discount');
 			$this->data['text_stock'] = $this->language->get('text_stock');
 			$this->data['text_price'] = $this->language->get('text_price');
+			$this->data['text_market'] = $this->language->get('text_market');
 			$this->data['text_tax'] = $this->language->get('text_tax');
 			$this->data['text_discount'] = $this->language->get('text_discount');
 			$this->data['text_option'] = $this->language->get('text_option');
@@ -321,6 +322,8 @@ class ControllerProductProduct extends Controller {
 			} else {
 				$this->data['price'] = false;
 			}
+
+			$this->data['market'] = $this->currency->format($this->tax->calculate($product_info['market'], $result['tax_class_id'], $this->config->get('config_tax')));
 						
 			if ((float)$product_info['special']) {
 				$this->data['special'] = $this->currency->format($this->tax->calculate($product_info['special'], $product_info['tax_class_id'], $this->config->get('config_tax')));
@@ -450,6 +453,7 @@ class ControllerProductProduct extends Controller {
 					'thumb'   	 => $image,
 					'name'    	 => $result['name'],
 					'price'   	 => $price,
+					'market'   	 => $market_price,
 					'special' 	 => $special,
 					'rating'     => $rating,
 					'reviews'    => sprintf($this->language->get('text_reviews'), (int)$result['reviews']),

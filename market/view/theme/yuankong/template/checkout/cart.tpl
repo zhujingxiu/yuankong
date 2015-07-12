@@ -91,13 +91,16 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
     <?php } ?>
     <span class="pl20 logospan"><?php echo $heading_title ?></span>
   </div>
-  <?php if(!$this->customer->isLogged()){?>
+
+  <?php if($this->cart->hasProducts() && !$this->customer->isLogged()){?>
   <div class="gwc-login-ts">
-    <i class="icon2 gth-small"></i>您还没有登录！<a href="<?php echo $action ?>" class="c_g">登录</a>后购物车的商品将保存到您账号中
+    <i class="icon2 gth-small"></i>您还没有登录！<a href="<?php echo $action ?>" class="c_g mini-login">登录</a>后购物车的商品将保存到您账号中
   </div>
   <?php } ?>
   <?php echo $content_top; ?>
+
   <div id="content" class="checkout-cart mt20">
+    <?php if($this->cart->hasProducts()){?>
     <div class="f_xl c_red"><i class="l-h-b"></i>全部商品</div>
       <div class="mt10 fix" >
     <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
@@ -106,7 +109,7 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
           <thead>
             <tr>
                 <th class="cart-h">
-                  <input type="checkbox" class="headcheck" name="h-chaeck" checked="checked">
+                  <input type="checkbox" class="headcheck" checked="checked" name="all"/>
                   <label>全选</label>
                 </th>
                 <th class="shop-n"><?php echo $column_name; ?></th>
@@ -119,7 +122,7 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
           <tbody>
             <?php foreach ($products as $product) { ?>
             <tr>
-              <td class="t-indet"><input type="checkbox" class="headcheck" name="h-chaeck" checked="checked"></td>
+              <td class="t-indet"><input type="checkbox" class="headcheck" name="selected[]" checked="checked"></td>
               <td class="name">
                 <div class="ovh">
                   <?php if ($product['thumb']) { ?>
@@ -127,16 +130,16 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
                   <?php } ?>
                   <span class="shop-name">
                     <a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a>
-                  </span>
-                  <div>
+                  
                     <?php foreach ($product['option'] as $option) { ?>
-                    - <small><?php echo $option['name']; ?>: <?php echo $option['value']; ?></small><br />
+                    <br />
+                    - <small><?php echo $option['name']; ?>: <?php echo $option['value']; ?></small>
+
                     <?php } ?>
-                  </div>
                   <?php if ($product['reward']) { ?>
                   <small><?php echo $product['reward']; ?></small>
                   <?php } ?>
-                  </div>
+                  </span>
               </td>
               <td class="price"><p class="tc"><?php echo $product['price']; ?></p></td>
               <td class="quantity">
@@ -145,6 +148,7 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
                   <input type="text" name="quantity[<?php echo $product['key']; ?>]" value="<?php echo $product['quantity']; ?>" class="jiajiantext"  />
                   <span class="icon2 jabtn"></span>
                   <input type="image" src="market/view/theme/default/image/update.png" alt="<?php echo $button_update; ?>" title="<?php echo $button_update; ?>" style="display:none"/>
+                  <input type="hidden" name="price[<?php echo $product['key']; ?>]" value="<?php echo $product['_price'] ?>"/>
                 </div>
               </td>
               
@@ -173,18 +177,18 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
         </table>
         <div class="tablefoot">
           <p class="l pl10">
-            <input type="checkbox" class="headcheck" name="h-chaeck" checked="checked"><label>全选</label>
+            <input type="checkbox" class="headcheck" checked="checked" name="all"/><label>全选</label>
           </p>
           <p class="pl20 l">
             <a href="#" class="c-blue plr">删除选中商品</a>
-            <a href="#" class="c-blue plr" id="clear-cart">清空购物车</a> 
+            <a href="javascript:;" class="c-blue plr" onclick="clearCart();">清空购物车</a> 
           </p>
           <?php if(isset($totals['sub_total'])){?>
           <div class="r c2">
             <span class="plr">已选商品<em id="count-products"><?php echo $this->cart->countProducts() ?></em>件</span>
             <b class="plr">
               <?php echo $totals['sub_total']['title'] ?>
-              <i class="c_red f_xl"><?php echo $totals['sub_total']['text'] ?></i>
+              <i id="cart-sub-total" class="c_red f_xl"><?php echo $totals['sub_total']['text'] ?></i>
             </b>
             <a href="<?php echo $checkout; ?>" class="js-sub"><?php echo $button_checkout; ?></a>
           </div>
@@ -194,9 +198,93 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
     </form>
     
     </div>
+    <?php }else{?>
+    <div class="ovh">
+        <div class="empty-gwc">
+            <span class=" icon2 gwc-big-btn"></span>
+            <span class="empty-card">
+                <b>您的购物车还是空的
+                  <?php if(!$this->customer->isLogged()){ ?>，
+                  <a href="javscript:;" class="c-blue mini-login">马上登录</a>可展示您之前加入购物车的商品
+                  <?php }?>
+                </b>
+                <br>
+                <a href="<?php echo $home ?>" class="c-blue mr15">商城首页</a>
+                <a href="<?php echo $store ?>" class="c-blue">消防商城</a>
+            </span>
+        </div>
+    </div>
+    <?php }?>
     <?php echo $content_bottom; ?>
   </div>
 </div> 
 
-
+<script type="text/javascript">
+  $('.headcheck[name="all"]').bind('click',function(){
+    $('.headcheck[name^="selected"]').prop('checked', this.checked);
+    $('.headcheck[name="all"]').prop('checked', this.checked);
+    cart_list();
+  });
+  $('.headcheck[name^="selected"]').bind('click',function(){
+    $('.headcheck[name="all"]').removeAttr('checked');
+    var checked = 0;
+    $.each($('.headcheck[name^="selected"]'),function(){
+      if($(this).is(":checked")){
+        checked++;
+      }
+    });
+    if(checked == $('.headcheck[name^="selected"]').length){
+      $('.headcheck[name="all"]').prop('checked',this.checked);
+    }
+    cart_list();
+  });
+  var cart_list = function (){
+    var amount = 0.00 ,countProducts = 0;
+    $.each($('.headcheck[name^="selected"]'),function(){
+      if($(this).is(":checked")){
+        var _qty = parseInt($(this).parent().parent('tr').find('input[name^="quantity"]').val()),
+        _price = parseFloat($(this).parent().parent('tr').find('input[name^="price"]').val()).toFixed(2);
+        countProducts += _qty;
+        amount += _qty*_price;
+      }
+    });
+    $('#count-products').html(countProducts);
+    $('#cart-sub-total').html(format_amount(amount));
+  }
+  var format_amount = function(amount){
+    return '<?php echo $this->currency->getSymbolLeft() ?>'+parseFloat(amount).toFixed(2);
+  }
+  $('.mini-login').bind('click',function(){
+    $('#tm-mask').show();
+    $('.iframe-login').show();
+  });
+  $('.iframe-login').focusout(function(){
+    $(this).hide();
+    $('#tm-mask').hide();
+  })
+</script>
 <?php echo $footer; ?>
+
+<div class="tm-mask" id="tm-mask" style="display:none;"></div>
+<div class="iframe-login" style="display:none;">
+    <div class="login-jion-box">
+        <div class="login-b-top"><a href="#" class="l-zhuce">立即注册</a><span class="f_xl c2">e站会员</span></div>
+        <div class="logintext">
+            <i class="icon2 person"></i><input type="text" value="" class="login-t" />
+        </div>
+        <div class="logintext">
+            <i class="icon2 passwd"></i><input type="text" value="" class="login-t" />
+        </div>
+        <div class="loginb-yz">
+            <a href="#" class="r">忘记密码?</a>
+            <input type="checkbox" name="c" /><em class="pl5">自动登录</em>
+        </div>
+        <div class="mt15">
+            <input type="submit" class="gc-tab-sub" value="登  录" />
+        </div>
+        <div class="mt15">
+            <p class="f_s c8">使用合作网站登录消防e站</p>
+            <p class="mt5"><a href="#" class="pr15"><img src="imgs/icon/qq-l.png" alt="qq登录"/></a><a href="#" class="pr15"><img src="imgs/icon/zfb-l.png" alt="支付宝登录"/></a><a href="#" class="pr15"><img src="imgs/icon/wb-l.png" alt="微博登录"/></a></p>
+        </div>
+    </div>
+</div>

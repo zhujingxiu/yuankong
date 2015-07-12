@@ -43,7 +43,7 @@
 				<p id="price-old" class="price-old"><?php echo $price; ?></p> 
 				<p id="price-special" class="price-new"><?php echo $special; ?></p>
 				<?php } ?>
-                <p class="pt5">市场价:<em class="pl10 c8">￥123456.00</em> </p>
+                <p class="pt5"><?php echo $text_market ?><em class="pl10 c8"><?php echo $market ?></em> </p>
 				<?php if ($discounts) { ?>
 
 				<p class="discount">
@@ -55,6 +55,7 @@
             </div>
             <?php }?>
             <ul class="shop-other-news mt20">
+            	<?php if(false){?>
 				<?php if ($manufacturer) { ?>
 				<li class="fix">
 					<span><?php echo $text_manufacturer; ?></span> 
@@ -67,6 +68,7 @@
 				<li class="fix">
 					<span><?php echo $text_stock; ?></span> <?php echo $stock; ?>
 				</li>
+				<?php }?>
                 <?php if ($options) { ?>
 				<li class="fix">					
 					<?php foreach ($options as $option) { ?>
