@@ -1,6 +1,6 @@
 <?php
 // Heading 
-$_['heading_title']   = '忘记密码?';
+$_['heading_title']   = '找回密码';
 
 // Text
 $_['text_account']    = '我的账户';
