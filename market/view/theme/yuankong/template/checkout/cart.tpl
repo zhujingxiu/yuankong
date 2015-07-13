@@ -205,7 +205,7 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
             <span class="empty-card">
                 <b>您的购物车还是空的
                   <?php if(!$this->customer->isLogged()){ ?>，
-                  <a href="javscript:;" class="c-blue mini-login">马上登录</a>可展示您之前加入购物车的商品
+                  <a href="javascript:void(0);" class="c-blue mini-login">马上登录</a>可展示您之前加入购物车的商品
                   <?php }?>
                 </b>
                 <br>
@@ -256,35 +256,26 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
   }
   $('.mini-login').bind('click',function(){
     $('#tm-mask').show();
-    $('.iframe-login').show();
+    $('.iframe-login').show().focus();
   });
-  $('.iframe-login').focusout(function(){
-    $(this).hide();
+  $(document).on('click','#tm-mask',function(){
+    $('.iframe-login').hide();
     $('#tm-mask').hide();
-  })
+  }).on('keydown',function(e){
+    if(e.which === 27) {
+      $('.iframe-login').hide();
+      $('#tm-mask').hide();
+    }
+    if (e.keyCode == 13) {
+      $('#login').submit();
+    }
+  });
+
 </script>
-<?php echo $footer; ?>
+
 
 <div class="tm-mask" id="tm-mask" style="display:none;"></div>
 <div class="iframe-login" style="display:none;">
-    <div class="login-jion-box">
-        <div class="login-b-top"><a href="#" class="l-zhuce">立即注册</a><span class="f_xl c2">e站会员</span></div>
-        <div class="logintext">
-            <i class="icon2 person"></i><input type="text" value="" class="login-t" />
-        </div>
-        <div class="logintext">
-            <i class="icon2 passwd"></i><input type="text" value="" class="login-t" />
-        </div>
-        <div class="loginb-yz">
-            <a href="#" class="r">忘记密码?</a>
-            <input type="checkbox" name="c" /><em class="pl5">自动登录</em>
-        </div>
-        <div class="mt15">
-            <input type="submit" class="gc-tab-sub" value="登  录" />
-        </div>
-        <div class="mt15">
-            <p class="f_s c8">使用合作网站登录消防e站</p>
-            <p class="mt5"><a href="#" class="pr15"><img src="imgs/icon/qq-l.png" alt="qq登录"/></a><a href="#" class="pr15"><img src="imgs/icon/zfb-l.png" alt="支付宝登录"/></a><a href="#" class="pr15"><img src="imgs/icon/wb-l.png" alt="微博登录"/></a></p>
-        </div>
-    </div>
+  <?php echo $mini_login ?>
 </div>
+<?php echo $footer; ?>

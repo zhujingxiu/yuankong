@@ -169,3 +169,16 @@
 2015-07-12 22:41:39 - PHP Notice:  Undefined index: market in E:\wamp\www\yuankong\market\controller\product\product.php on line 326
 2015-07-12 22:41:39 - PHP Notice:  Undefined index: tax_class_id in E:\wamp\www\yuankong\market\controller\product\product.php on line 326
 2015-07-12 22:41:39 - PHP Notice:  Undefined variable: market_price in E:\wamp\www\yuankong\market\controller\product\product.php on line 456
+2015-07-13 14:53:38 - PHP Notice:  Undefined variable: login in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\cart.tpl on line 279
+2015-07-13 14:53:38 - PHP Notice:  Undefined variable: mobile_phone in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\cart.tpl on line 282
+2015-07-13 14:53:38 - PHP Notice:  Undefined variable: entry_mobile_phone in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\cart.tpl on line 282
+2015-07-13 14:53:38 - PHP Notice:  Undefined variable: password in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\cart.tpl on line 285
+2015-07-13 14:53:38 - PHP Notice:  Undefined variable: entry_password in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\cart.tpl on line 285
+2015-07-13 14:53:38 - PHP Notice:  Undefined variable: forgotten in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\cart.tpl on line 288
+2015-07-13 14:53:38 - PHP Notice:  Undefined variable: text_forgotten in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\cart.tpl on line 288
+2015-07-13 14:53:38 - PHP Notice:  Undefined variable: text_auto in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\cart.tpl on line 289
+2015-07-13 14:53:38 - PHP Notice:  Undefined variable: button_login in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\cart.tpl on line 292
+2015-07-13 14:53:38 - PHP Notice:  Undefined variable: oauth_html in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\cart.tpl on line 294
+2015-07-13 14:56:57 - PHP Notice:  Error: Could not load controller module/mini_login! in D:\wamp\www\yuankong\system\engine\controller.php on line 47
+2015-07-13 14:57:43 - PHP Notice:  Undefined variable: mobile_phone in D:\wamp\www\yuankong\market\view\theme\yuankong\template\module\mini_login.tpl on line 4
+2015-07-13 14:57:43 - PHP Notice:  Undefined variable: password in D:\wamp\www\yuankong\market\view\theme\yuankong\template\module\mini_login.tpl on line 7

@@ -425,7 +425,7 @@ class ControllerCheckoutCart extends Controller {
 					
 		$this->data['home'] = $this->url->link('common/home');
 		$this->data['store'] = $this->url->link('product/category');
-					
+
 		$this->data['checkout'] = $this->url->link('checkout/checkout', '', 'SSL');
 
         $this->load->model('setting/extension');
@@ -441,8 +441,9 @@ class ControllerCheckoutCart extends Controller {
 		$this->children = array(
 			'common/content_bottom',
 			'common/content_top',
+            'module/mini_login',
 			'common/footer',
-			'common/top'	
+			'common/top',	
 		);
 					
 		$this->response->setOutput($this->render());					
