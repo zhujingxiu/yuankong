@@ -180,8 +180,8 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
             <input type="checkbox" class="headcheck" checked="checked" name="all"/><label>全选</label>
           </p>
           <p class="pl20 l">
-            <a href="#" class="c-blue plr">删除选中商品</a>
-            <a href="javascript:;" class="c-blue plr" onclick="clearCart();">清空购物车</a> 
+            <a href="javascript:void(0);" class="c-blue plr" onclick="removeItem();">删除选中商品</a>
+            <a href="javascript:void(0);" class="c-blue plr" onclick="clearCart();">清空购物车</a> 
           </p>
           <?php if(isset($totals['sub_total'])){?>
           <div class="r c2">

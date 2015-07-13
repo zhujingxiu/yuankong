@@ -14,12 +14,12 @@ class ModelAccountCustomer extends Model {
 		$fields = array(
 			'store_id' 		=> (int)$this->config->get('config_store_id') ,
 			'mobile_phone'	=> $data['mobile_phone'],
-			'nickname'		=> $data['nickname'],
+			'nickname'		=> empty($data['nickname']) ? 'yk'.$data['mobile_phone'] : $data['nickname'],
 			'salt' 			=> $salt, 
 			'password' 		=> sha1($salt . sha1($salt . sha1($data['password']))), 
 			'customer_group_id' => (int)$customer_group_id , 
 			'ip' 			=> $this->request->server['REMOTE_ADDR'], 
-			'status' 		=> '1', 
+			'status' 		=> 1, 
 			'approved' 		=> (int)!$customer_group_info['approval'] , 
 			'date_added' 	=> date('Y-m-d H:i:s')
 		);

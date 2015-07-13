@@ -323,7 +323,7 @@ class ControllerProductProduct extends Controller {
 				$this->data['price'] = false;
 			}
 
-			$this->data['market'] = $this->currency->format($this->tax->calculate($product_info['market'], $result['tax_class_id'], $this->config->get('config_tax')));
+			$this->data['market'] = $this->currency->format($this->tax->calculate($product_info['market'], $product_info['tax_class_id'], $this->config->get('config_tax')));
 						
 			if ((float)$product_info['special']) {
 				$this->data['special'] = $this->currency->format($this->tax->calculate($product_info['special'], $product_info['tax_class_id'], $this->config->get('config_tax')));
@@ -453,7 +453,6 @@ class ControllerProductProduct extends Controller {
 					'thumb'   	 => $image,
 					'name'    	 => $result['name'],
 					'price'   	 => $price,
-					'market'   	 => $market_price,
 					'special' 	 => $special,
 					'rating'     => $rating,
 					'reviews'    => sprintf($this->language->get('text_reviews'), (int)$result['reviews']),
