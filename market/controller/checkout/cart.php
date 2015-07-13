@@ -425,7 +425,7 @@ class ControllerCheckoutCart extends Controller {
 					
 		$this->data['home'] = $this->url->link('common/home');
 		$this->data['store'] = $this->url->link('product/category');
-					
+
 		$this->data['checkout'] = $this->url->link('checkout/checkout', '', 'SSL');
 
         $this->load->model('setting/extension');
@@ -441,8 +441,9 @@ class ControllerCheckoutCart extends Controller {
 		$this->children = array(
 			'common/content_bottom',
 			'common/content_top',
+            'module/mini_login',
 			'common/footer',
-			'common/top'	
+			'common/top',	
 		);
 					
 		$this->response->setOutput($this->render());					
@@ -537,6 +538,17 @@ class ControllerCheckoutCart extends Controller {
 		unset($this->session->data['shipping_methods']);
 		unset($this->session->data['payment_method']);
 		unset($this->session->data['payment_methods']);
+		$this->response->setOutput(json_encode($json));
+	}
+
+	public function remove(){
+		$json = array();
+
+		$selected = isset($this->request->post['selected']) ? $this->request->post['selected'] : array();
+		foreach ($selected as $value) {
+			$this->cart->remove($value);
+		}
+		$json['success'] = $this->language->get('text_success');
 		$this->response->setOutput(json_encode($json));
 	}
 								
@@ -798,4 +810,3 @@ class ControllerCheckoutCart extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 }
-?>

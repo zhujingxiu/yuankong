@@ -146,11 +146,11 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
             </div>
         </div>
     </div>
-	        <div class="order-w">
-            <h3><b>核对产品信息</b></h3>
-            <div class="ovh p15">
-                <table class="cart-table">
-                    <thead>
+	<div class="order-w">
+        <h3><b>核对产品信息</b></h3>
+        <div class="ovh p15">
+            <table class="cart-table">
+                <thead>
                     <tr>
                         <th class="shop-n">商品</th>
                         <th>单价(元)</th>
@@ -158,47 +158,57 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
                         <th>小计(元)</th>
                         <th width="120">操作</th>
                     </tr>
-                    </thead>
-                    <tbody>
+                </thead>
+                <tbody>
+                    <?php foreach ($products as $product) { ?>
                     <tr>
-                        <td>
+                        <td class="name">
                             <div class="ovh">
-                                <a class="shop-pic" href="#">
-                                    <img src="imgs/adimg/shoppic7.jpg" />
-                                </a>
-                            <span class="shop-name">
-                                <a href="#">【果郡王】海南妃子笑荔枝3斤装 新鲜荔枝 国产水果</a>
-                            </span>
-                            </div>
-                        </td>
-                        <td><p class="tc">￥76.08</p></td>
-                        <td><div class="tc ovh"><span class="icon2 janbtn"></span><input type="text" class="jiajiantext" value="1" /><span class="icon2 jabtn"></span></div></td>
-                        <td><p class="tc c_red"><b>￥76.08</b></p></td>
-                        <td><p class="tc"><a href="#">删除</a></p></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="ovh">
-                                <a class="shop-pic" href="#">
-                                    <img src="imgs/adimg/shoppic7.jpg" />
-                                </a>
-                            <span class="shop-name">
-                                <a href="#">【果郡王】海南妃子笑荔枝3斤装 新鲜荔枝 国产水果</a>
-                            </span>
-                            </div>
-                        </td>
-                        <td><p class="tc">￥76.08</p></td>
-                        <td><div class="tc ovh"><span class="icon2 janbtn"></span><input type="text" class="jiajiantext" value="1" /><span class="icon2 jabtn"></span></div></td>
-                        <td><p class="tc c_red"><b>￥76.08</b></p></td>
-                        <td><p class="tc"><a href="#">删除</a></p></td>
-                    </tr>
+                                <?php if ($product['thumb']) { ?>
+                                <a class="shop-pic" href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" title="<?php echo $product['name']; ?>" /></a>
+                                <?php } ?>
+                                <span class="shop-name">
+                                    <a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a>
+                              
+                                    <?php foreach ($product['option'] as $option) { ?>
+                                    <br />
+                                    - <small><?php echo $option['name']; ?>: <?php echo $option['value']; ?></small>
 
-                    </tbody>
-                </table>
-                <div class="mt10">
-                    <h5 class="c3 f_m">给卖家留言</h5>
-                    <textarea class="liuy-tarea" name="comment"></textarea>
-                </div>
+                                    <?php } ?>
+                                    <?php if ($product['reward']) { ?>
+                                    <small><?php echo $product['reward']; ?></small>
+                                    <?php } ?>
+                                </span>
+                          </td>
+                        <td class="price"><p class="tc"><?php echo $product['price']; ?></p></td>
+                        <td class="quantity">
+                            <div class="tc ovh">
+                                <span class="icon2 janbtn"></span>
+                                <input type="text" name="quantity[<?php echo $product['key']; ?>]" value="<?php echo $product['quantity']; ?>" class="jiajiantext"  />
+                                <span class="icon2 jabtn"></span>
+                                
+                                <input type="hidden" name="price[<?php echo $product['key']; ?>]" value="<?php echo $product['_price'] ?>"/>
+                            </div>
+                        </td>
+                        <td class="total">
+                            <p class="tc c_red"><b><?php echo $product['total']; ?></b></p>
+                        </td>
+
+                        <td>
+                            <p class="tc">
+                            <a href="<?php echo $product['remove']; ?>" class="remove-item">
+                                <img src="market/view/theme/default/image/remove.png" alt="<?php echo $button_remove; ?>" title="<?php echo $button_remove; ?>" />
+                            </a></p>
+                        </td>
+                    </tr>
+                    <?php }?>
+
+                </tbody>
+            </table>
+            <div class="mt10">
+                <h5 class="c3 f_m">给卖家留言</h5>
+                <textarea class="liuy-tarea" name="comment"></textarea>
+            </div>
             </div>
         </div>
         <div class="order-w">
@@ -223,7 +233,7 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
                 </ul>
             </div>
         </div>
-  </div>
+    </div>
 
 </div> 
 

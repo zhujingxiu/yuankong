@@ -181,7 +181,7 @@ $(function(){ $('input, textarea').placeholder(); });
 	                    	<input type="text" name="captcha" class="regis-text w100" value=""  />
 	                    	<span class="pl10 captcha">
 	                    		<img src="<?php echo $this->url->link('account/register/captcha','','ssl') ?>" />
-	                    		<a href="#" class="pl10 c_g chg-img"><?php echo $text_captcha_change ?></a>
+	                    		<a href="javascript:void(0);" class="pl10 c_g chg-img"><?php echo $text_captcha_change ?></a>
 	                    	</span>
 	                    </td>
 	                </tr>

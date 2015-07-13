@@ -11,7 +11,8 @@ $_['text_success']    = '成功： 新密码已发送到您的邮箱，请及时
 
 // Entry
 $_['entry_email']     = '邮箱地址：';
-
+$_['entry_mobile_phone']   		= '手机号码：';
+$_['entry_captcha']   		= '验证码：';
 // Error
 $_['error_email']     = '警告： 该邮箱地址不在我们的记录中， 请重试！';
 ?>
