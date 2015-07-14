@@ -100,7 +100,7 @@ class ControllerCheckoutCheckout extends Controller {
 		$this->data['logged'] = $this->customer->isLogged();
 		$this->data['shipping_required'] = $this->cart->hasShipping();	
 
-				$this->load->model('tool/image');
+		$this->load->model('tool/image');
 
         $this->data['products'] = array();
 

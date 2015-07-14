@@ -12,11 +12,11 @@ class Sms {
 			'password'	=> $this->password,
 			'mobile'	=> $telephone,
 			'sendTime'	=> '',
-			'content'	=> rawurlencode($msg)
+			'content'	=> $msg
 		);
 
 		$response = $this->_request(http_build_query($post_data), $this->target_url);
-		var_dump($response);
+		
 		$start=strpos($response,"<?xml");
 		$data=substr($response,$start);
 		$xml=simplexml_load_string($data);

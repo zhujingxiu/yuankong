@@ -228,3 +228,8 @@
 2015-07-13 22:44:58 - PHP Notice:  Undefined variable: customer_action in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\forgotten.tpl on line 69
 2015-07-13 22:45:14 - PHP Notice:  Undefined variable: text_qr_code in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\forgotten.tpl on line 66
 2015-07-13 22:45:14 - PHP Notice:  Undefined variable: customer_action in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\forgotten.tpl on line 69
+2015-07-14 13:39:53 - PHP Notice:  Undefined variable: button_remove in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 200
+2015-07-14 13:39:53 - PHP Notice:  Undefined variable: button_remove in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 200
+2015-07-14 13:41:34 - PHP Notice:  Undefined variable: button_remove in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 200
+2015-07-14 13:41:34 - PHP Notice:  Undefined variable: button_remove in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 200
+2015-07-14 14:07:47 - PHP Notice:  Undefined variable: response in D:\wamp\www\yuankong\system\library\sms.php on line 45

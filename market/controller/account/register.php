@@ -262,7 +262,9 @@ class ControllerAccountRegister extends Controller {
   	public function getSMS(){
   		//var_dump($this->request->post['mobile_phone']);exit;
   		$sms = new Sms();
-  		$pattern = '您的验证码为xxxxx,如非本人操作请忽略。【消防e站】';
+        $sms_number = mt_rand(1000,9999);
+
+  		$pattern = "尊敬的用户，您的验证码是".$sms_number."请填入以完成注册。该验证码@分钟内有效，限本次使用。【消防e站】";
   		$res = $sms->sendMsg($this->request->post['mobile_phone'],$pattern);
   		var_dump($res);
   	}
