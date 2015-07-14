@@ -259,8 +259,20 @@ class ControllerAccountRegister extends Controller {
   		$this->response->setOutput(json_encode(array('used'=>$used)));
   	}
 
+  	public function validateCaptcha(){
+  		$status = 0;
+  		$captcha = isset($this->session->data['captcha']) ? $this->session->data['captcha'] : false;
+  		$_captcha = isset($this->request->post['captcha']) ? $this->request->post['captcha'] : false;
+  		if($captcha && $_captcha && $captcha==$_captcha ){
+  			$status = 1;
+  		}
+  		$this->response->setOutput(json_encode(array('status'=>$status)));
+  	}
+
   	public function getSMS(){
-  		//var_dump($this->request->post['mobile_phone']);exit;
+  		if (empty($this->session->data['captcha']) || ($this->session->data['captcha'] != $this->request->post['captcha'])) {
+			$this->error['error'] = $this->language->get('error_captcha');
+		}
   		$sms = new Sms();
         $sms_number = mt_rand(1000,9999);
 

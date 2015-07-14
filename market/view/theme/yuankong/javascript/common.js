@@ -164,7 +164,12 @@ function addToCompare(product_id) {
         }
     });
 }
-
+function stripHtml(value) {
+    // remove html tags and space chars
+    return value.replace(/<.[^<>]*?>/g, " ").replace(/&nbsp;|&#160;/gi, " ")
+    // remove punctuation
+    .replace(/[.(),;:!?%#$'\"_+=\/\-“”’]*/g, "");
+}
 function getQueryString(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
     var r = window.location.search.substr(1).match(reg);

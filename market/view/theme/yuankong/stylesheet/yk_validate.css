@@ -1,32 +1,11 @@
-/**
- *  @DO 校验的样式文件
- *  @DATE 2010-11-25
- *  @AUTHOR Frylan
- */
- /*错误样式*/
-input.error { border: 1px dashed red;background:yellow; padding:2px; }
-select.error { border: 1px dashed red; background:yellow; padding:2px; }
-.error {
-    /*padding-left: 16px;*/
-    margin-left: 2px;
-    vertical-align: middle;
-    color:red;
-    /*背景图片（校验未通过的’×’图标）
-    background: url("../yk_img/icon/warning.png") no-repeat 0px 0px;*/
-    font-family:Verdana, Geneva, sans-serif;
-    font-size:11px;
-    display: block;
-}
-/*验证通过样式*/
-input.valid{ background:#FFC; border:#09F solid 1px; padding:2px;}
-select.valid{ background:#FFC; border:#09F solid 1px; padding:2px;}
+
+input.error { border: 1px dashed red;background:yellow;  }
+select.error { border: 1px dashed red; background:yellow;  }
+.error { color:red; font-size:11px;}
+
 .valid {
-    padding-left: 16px;
-    margin-left: 2px;
-    /*背景图片(校验通过的’√’图标)*/
-    background: url("../yk_img/icon/success.png") no-repeat 0px 0px;
-    font-family:Verdana, Geneva, sans-serif;
-    color:#00F;
-    font-size:11px;
-    display: inline;
+    background: url("../yk_img/icon/success.png") no-repeat 280px 10px;
+    color:#00F;    
 }
+input.valid{ border:#09F solid 1px;}
+select.valid{ background:#FFC;}

@@ -72,48 +72,66 @@ $(function(){ $('input, textarea').placeholder(); });
         </div>
 	  	<form id="customer-signup" action="<?php echo $customer_action; ?>" method="post" enctype="multipart/form-data">
 			<div class="regis">
-			  	<table class="registable">
+			  	<table class="registable" id="customer-form">
 					<tr>
 					  <td class="tr" width="90"><em class="c_r">*</em> <?php echo $entry_mobile_phone; ?></td>
-					  <td><input type="text" name="mobile_phone" value="<?php echo $mobile_phone; ?>" class="regis-text" placeholder="<?php echo $entry_mobile_phone ?>" id="customer-mobilephone"/>
+					  <td>
+					  	<div class="form-group">
+					  		<input type="text" name="mobile_phone" value="<?php echo $mobile_phone; ?>" class="regis-text" placeholder="<?php echo $entry_mobile_phone ?>" id="customer-mobilephone"/>
+					  	</div>
 						<?php if ($error_mobile_phone) { ?>
 						<span class="error"><?php echo $error_mobile_phone; ?></span>
 						<?php } ?></td>
 					</tr>
 					<tr>
 					  <td class="tr" width="90"><em class="c_r">*</em> <?php echo $entry_password; ?></td>
-					  <td><input type="password" name="password" value="<?php echo $password; ?>" class="regis-text" id="customer-password"/>
+					  <td>
+					  	<div class="form-group">
+					  		<input type="password" name="password" value="<?php echo $password; ?>" class="regis-text" id="customer-password"/>
+					  	</div>
 						<?php if ($error_password) { ?>
 						<span class="error"><?php echo $error_password; ?></span>
 						<?php } ?></td>
 					</tr>
 					<tr>
 					  <td class="tr" width="96"><em class="c_r">*</em> <?php echo $entry_confirm; ?></td>
-					  <td><input type="password" name="confirm" value="<?php echo $confirm; ?>" class="regis-text" />
+					  <td>
+					  	<div class="form-group">
+					  		<input type="password" name="confirm" value="<?php echo $confirm; ?>" class="regis-text" />
+					  	</div>
 						<?php if ($error_confirm) { ?>
 						<span class="error"><?php echo $error_confirm; ?></span>
 						<?php } ?></td>
 					</tr>
-					<tr>
-		                <td class="tr"><em class="c_r">*</em> <?php echo $entry_input_sms ?></td>
-		                <td><input type="text" class="regis-text w100" name="sms" />
-		                	<a href="javascript:void(0)" data-rel="customer-mobilephone" class="hq-yzm"><?php echo $text_get_sms ?></a> </td>
-		            </tr>
+					
 		            <tr>
 		                <td class="tr"><em class="c_r">*</em> <?php echo $entry_captcha ?></td>
 		                <td>
-		                	<input type="text" name="captcha" class="regis-text w100" />
-		                	<span class="pl10 captcha">
-		                		<img src="<?php echo $this->url->link('account/register/captcha','','ssl') ?>" />
-		                		<a href="#" class="pl10 c_g chg-img"><?php echo $text_captcha_change ?></a>
-		                	</span>
+		                	<div class="form-group">
+			                	<input type="text" name="captcha" class="regis-text w100" id="customer-captcha"/>
+			                	<span class="pl10 captcha">
+			                		<img src="<?php echo $this->url->link('account/register/captcha','','ssl') ?>" />
+			                		<a href="#" class="pl10 c_g chg-img"><?php echo $text_captcha_change ?></a>
+			                	</span>
+			                </div>
+		                </td>
+		            </tr>
+		            <tr>
+		                <td class="tr"><em class="c_r">*</em> <?php echo $entry_input_sms ?></td>
+		                <td>
+		                	<div class="form-group">
+			                	<input type="text" class="regis-text w100" name="sms" />
+			                	<a href="javascript:void(0)" data-rel="customer" class="hq-yzm"><?php echo $text_get_sms ?></a>
+			                </div>
 		                </td>
 		            </tr>
 		            <tr>
 		                <td>&nbsp;</td>
 		                <td>
-		                	<input type="checkbox" name="agree" checked="checked" id="customer-agree"/>
-		                	<?php echo $text_agree; ?> 
+		                	<div class="form-group">
+			                		<input type="checkbox" name="agree" checked="checked" id="customer-agree" value="1"/>
+			                	<?php echo $text_agree; ?> 
+			                </div>
 		                </td>
 		            </tr>
 		            <tr>
@@ -129,65 +147,92 @@ $(function(){ $('input, textarea').placeholder(); });
 		</form>
 		<form id="affiliate-signup" action="<?php echo $affiliate_action; ?>" method="post" enctype="multipart/form-data" >
 			<div class="regis" style="display: none;">
-	            <table class="registable">
+	            <table class="registable" id="affiliate-form">
 	            	<tr>
 	                    <td class="tr" width="96"><em class="c_r">*</em> <?php echo $entry_email ?></td>
-	                    <td><input type="text" class="regis-text" name="email" placeholder="<?php echo $text_affiliate_email ?>" /></td>
+	                    <td>
+	                    	<div class="form-group">
+		                    	<input type="text" class="regis-text" name="email" placeholder="<?php echo $text_affiliate_email ?>" />
+		                    </div>
+	                    </td>
 	                </tr>
 	                <tr>
 	                    <td class="tr"><em class="c_r">*</em> <?php echo $entry_password ?></td>
-	                    <td><input type="password" class="regis-text" name="password" id="affiliate-password" /></td>
+	                    <td>
+							<div class="form-group">
+		                    	<input type="password" class="regis-text" name="password" id="affiliate-password" />
+		                    </div>
+	                    </td>
 	                </tr>
 	                <tr>
 	                    <td class="tr"><em class="c_r">*</em> <?php echo $entry_confirm ?></td>
-	                    <td><input type="password" class="regis-text" name="confirm"  /></td>
+	                    <td>
+	                    	<div class="form-group">
+	                    		<input type="password" class="regis-text" name="confirm"  />
+	                    	</div>
+	                    </td>
 	                </tr>
 	                <tr>
 	                    <td class="tr"><em class="c_r">*</em> <?php echo $entry_affiliate_name ?></td>
-	                    <td><input type="text" class="regis-text" name="company" placeholder="<?php echo $text_affiliate_name ?>" /></td>
+	                    <td>
+	                    	<div class="form-group">
+	                    		<input type="text" class="regis-text" name="company" placeholder="<?php echo $text_affiliate_name ?>" />
+	                    	</div>
+	                    </td>
 	                </tr>
 	                <tr>
 	                    <td class="tr"><em class="c_r">*</em> <?php echo $entry_affiliate_group ?></td>
-	                    <td><select class="regis-text" name="group_id">
-		                    	<option>设计公司</option>
-		                    	<option>工程公司</option>
-		                    	<option>检测公司</option>
-		                    	<option>维保公司</option>
-		                    </select>
+	                    <td>
+							<div class="form-group">
+		                    	<select class="regis-text" name="group_id">
+			                    	<option>设计公司</option>
+			                    	<option>工程公司</option>
+			                    	<option>检测公司</option>
+			                    	<option>维保公司</option>
+			                    </select>
+			                </div>
 		                </td>
 	                </tr>
 	                <tr>
 	                    <td class="tr"><em class="c_r">*</em> <?php echo $entry_affiliate_address ?></td>
-	                    <td><input type="text" class="regis-text" name="address_1"  /></td>
+	                    <td><div class="form-group"><input type="text" class="regis-text" name="address_1"  /></div></td>
 	                </tr>
 	                <tr>
 	                    <td class="tr"><em class="c_r">*</em> <?php echo $entry_affiliate_customer ?></td>
-	                    <td><input type="text" class="regis-text" name="nickname"  /></td>
+	                    <td><div class="form-group"><input type="text" class="regis-text" name="nickname"  /></div></td>
 	                </tr>
 	                <tr>
 	                    <td class="tr"><em class="c_r">*</em> <?php echo $entry_affiliate_telephone ?></td>
-	                    <td><input type="text" class="regis-text" name="mobile_phone" id="affiliate-mobilephone" /></td>
+	                    <td><div class="form-group"><input type="text" class="regis-text" name="mobile_phone" id="affiliate-mobilephone" /></div></td>
+	                </tr>
+	                
+	                <tr>
+	                    <td class="tr"><em class="c_r">*</em> <?php echo $entry_captcha ?></td>
+	                    <td>
+	                    	<div class="form-group">
+		                    	<input type="text" name="captcha" class="regis-text w100" value="" id="affiliate-captcha" />
+		                    	<span class="pl10 captcha">
+		                    		<img src="<?php echo $this->url->link('account/register/captcha','','ssl') ?>" />
+		                    		<a href="javascript:void(0);" class="pl10 c_g chg-img"><?php echo $text_captcha_change ?></a>
+		                    	</span>
+		                    </div>
+	                    </td>
 	                </tr>
 	                <tr>
 	                    <td class="tr"><em class="c_r">*</em> <?php echo $entry_input_sms ?></td>
 	                    <td>
-	                    	<input type="password" class="regis-text w100" name="sms" />
-	                    	<a href="javascript:void(0)"  data-rel="affiliate-mobilephone" class="hq-yzm"><?php echo $text_get_sms ?></a> 
-	                    </td>
-	                </tr>
-	                <tr>
-	                    <td class="tr"><em class="c_r">*</em> <?php echo $entry_captcha ?></td>
-	                    <td>
-	                    	<input type="text" name="captcha" class="regis-text w100" value=""  />
-	                    	<span class="pl10 captcha">
-	                    		<img src="<?php echo $this->url->link('account/register/captcha','','ssl') ?>" />
-	                    		<a href="javascript:void(0);" class="pl10 c_g chg-img"><?php echo $text_captcha_change ?></a>
-	                    	</span>
+	                    	<div class="form-group">
+		                    	<input type="password" class="regis-text w100" name="sms" />
+		                    	<a href="javascript:void(0)" class="hq-yzm"><?php echo $text_get_sms ?></a> 
+		                    </div>
 	                    </td>
 	                </tr>
 	                <tr>
 		                <td>&nbsp;</td>
-		                <td><input type="checkbox" name="agree" checked="checked" /><?php echo $text_agree; ?> </td>
+		                <td><div class="form-group">
+		                		<input type="checkbox" name="agree" checked="checked" /><?php echo $text_agree; ?> 
+							</div>
+		                </td>
 		            </tr>
 	                <tr>
 	                    <td>&nbsp;</td>
@@ -215,38 +260,46 @@ $(function(){ $('input, textarea').placeholder(); });
 	    	rules:{
 	    		password: {
 	                required: true,
-	                minlength: 5
+	                byteRangeLength: [6,20]
 	            },
 	            confirm: {
 	                required: true,
-	                minlength: 5,
 	                equalTo: "#customer-password"
 	            },	            
 	            mobile_phone: {
 	            	required: true,
+	            	isMobile: true,
 	                mobileCN: true
 	            },
-	            agree: "required"
+	            captcha:{
+	            	required:true,
+	            	validCaptcha:true
+	            },
+	            agree: {
+	            	required:true
+	            }
 	    	},
 	    	messages:{
-	    		password:"密码必填",
-	    		mobile_phone:"手机号已注册或非法，请填写有效的手机号码",
+	    		password:{
+	    			required:"密码必填",
+	    			byteRangeLength:"密码长度须在6到20个字符",
+	    		},
+	    		mobile_phone:{
+	    			required:"手机号必填",
+	    			isMobile:"手机号非法，请填写有效的手机号码",
+	    			mobileCN:"手机号码已注册"
+	    		},
 	    		agree:{
 	                required:"请先阅读注册协议"
 	            },
 	    	},
 	    	errorElement: "span",
-	    	errorPlacement: function (error, element) {
-	            
-	            if (element.is(':radio') || element.is(':checkbox')) {
-	                error.appendTo(element.parent());
-	            } else {
-	                element.after(error);
-	            }
+	    	errorPlacement: function (error, element) {	   
+	    		element.parent('.form-group').removeClass('valid').after(error);         
 	        },
 	        focusInvalid: true,
 	        success:function(e){
-	        	e.html("&nbsp;").addClass("valid");
+	        	e.prev('.form-group').addClass("valid").next('.error').remove();
 	        }
 	    });
 	    $('#affiliate-signup').validate({
@@ -257,34 +310,41 @@ $(function(){ $('input, textarea').placeholder(); });
 	    		},
 	    		company:{
 	    			required: true,
-	    			byteRangeLength:[4,15]
+	    			byteRangeLength:[4,32]
 	    		},
 	    		nickname:{
 	    			required: true,
-	    			byteRangeLength:[4,15]
+	    			byteRangeLength:[2,6]
 	    		},
 	    		address_1:{
 	    			required: true,
-	    			byteRangeLength:[4,15]
+	    			byteRangeLength:[4,32]
 	    		},
 	    		password: {
 	                required: true,
-	                minlength: 5
+	                byteRangeLength:[6,20]
 	            },
 	            confirm: {
 	                required: true,
-	                minlength: 5,
 	                equalTo: "#affiliate-password"
 	            },	            
 	            mobile_phone: {
 	            	required: true,
+	            	isMobile: true,
 	                mobileCN: true
 	            },
 	            agree: "required"
 	    	},
 	    	messages:{
-	    		password:"密码必填",
-	    		mobile_phone:"手机号已注册或非法，请填写有效的手机号码",
+	    		password:{
+	    			required:"密码必填",
+	    			byteRangeLength:"密码长度须在6到20个字符",
+	    		},
+	    		mobile_phone:{
+	    			required:"手机号必填",
+	    			isMobile:"手机号非法，请填写有效的手机号码",
+	    			mobileCN:"手机号码已注册"
+	    		},
 	    		agree:{
 	                required:"请先阅读注册协议"
 	            },
@@ -303,6 +363,19 @@ $(function(){ $('input, textarea').placeholder(); });
 	        	e.html("&nbsp;").addClass("valid");
 	        }
 	    });
+		$.validator.addMethod("byteRangeLength", function(value, element, params) {
+
+			var valueStripped = stripHtml(value);
+			return this.optional(element) || valueStripped.length >= params[0] && valueStripped.length <= params[1];
+		}, $.validator.format("字符长度须在 {0} 到 {1} 之间"));
+
+		$.validator.addMethod("isMobile", function(phone_number, element) {
+			phone_number = phone_number.replace(/\(|\)|\s+|-/g, "");
+			var isMobile = this.optional(element) || phone_number.length > 9 &&
+				phone_number.match(/^[(86)|0]?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/);
+			
+			return isMobile;
+		}, "手机号码非法");
 		$.validator.addMethod("mobileCN", function(phone_number, element) {
 			phone_number = phone_number.replace(/\(|\)|\s+|-/g, "");
 			var isMobile = this.optional(element) || phone_number.length > 9 &&
@@ -323,10 +396,29 @@ $(function(){ $('input, textarea').placeholder(); });
 			}
 			return isMobile;
 		}, "手机号码已注册");
+		$.validator.addMethod("validCaptcha", function(captcha, element) {
+			captcha = captcha.replace(/\(|\)|\s+|-/g, "");
+			var validCaptcha = this.optional(element) || captcha.length == 4 ;
+			if(validCaptcha){
+				var valide = false;
+				$.ajax({
+					url:'index.php?route=account/register/validateCaptcha',
+					data:{captcha:captcha},
+					type:'post',
+					dataType:'json',
+					async:false,
+					success:function(json){
+						valide = json.status==0 ? false : true;
+					}
+				});
+				return valide ? true : false;
+			}
+			return validCaptcha;
+		}, "验证码错误");
     });
 
 	$('.hq-yzm').bind('click',function(){
-		if($('#'+$(this).attr('data-rel')).hasClass('valid')){
+		if($('#'+$(this).attr('data-rel')+'-mobilephone').hasClass('valid') && $('#'+$(this).attr('data-rel')+'-captcha').hasClass('valid')){
 			$.ajax({
 				url:'index.php?route=account/register/getSMS',
 				data:{mobile_phone:$('#'+$(this).attr('data-rel')).val()},
