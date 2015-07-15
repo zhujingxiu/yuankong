@@ -82,7 +82,6 @@ class ControllerAccountRegister extends Controller {
 			'href'      => $this->url->link('account/register', '', 'SSL'),      	
         	'separator' => $this->language->get('text_separator')
       	);
-		
     	$this->data['heading_title'] = $this->language->get('heading_title');
 
     	$this->data['text_home'] = $this->language->get('text_home');
@@ -269,16 +268,49 @@ class ControllerAccountRegister extends Controller {
   		$this->response->setOutput(json_encode(array('status'=>$status)));
   	}
 
-  	public function getSMS(){
-  		if (empty($this->session->data['captcha']) || ($this->session->data['captcha'] != $this->request->post['captcha'])) {
-			$this->error['error'] = $this->language->get('error_captcha');
-		}
-  		$sms = new Sms();
-        $sms_number = mt_rand(1000,9999);
+  	public function validateSMS(){
+  		$status = 0;
+  		$sms = isset($this->request->post['sms']) ? $this->request->post['sms'] : false;
+  		$mobile_phone = isset($this->request->post['mobile_phone']) ? $this->request->post['mobile_phone'] : false;
+  		$this->load->model('account/customer');
+  		$sms_log = $this->model_account_customer->getSMS($this->request->post['mobile_phone']);
+  		if(!empty($sms_log['sms']) && ($sms_log['sms'] == $sms) && (time() < ($sms_log['time']+30*60))) {
+  			$status = 1;
+  		}
+  		$this->response->setOutput(json_encode(array('status'=>$status)));
+  	}
 
-  		$pattern = "尊敬的用户，您的验证码是".$sms_number."请填入以完成注册。该验证码@分钟内有效，限本次使用。【消防e站】";
-  		$res = $sms->sendMsg($this->request->post['mobile_phone'],$pattern);
-  		var_dump($res);
+  	public function getSMS(){
+  		$json = array();	
+
+  		if(empty($this->session->data['captcha']) || ($this->session->data['captcha'] != $this->request->post['captcha'])) {
+			$json['error']['captcha'] = $this->language->get('error_captcha');
+		}
+		if ((utf8_strlen($this->request->post['mobile_phone']) < 3) || !isMobile($this->request->post['mobile_phone'])) {
+      		$json['error']['mobile_phone'] = $this->language->get('error_mobile_phone');
+    	}
+    	$this->load->model('account/customer');
+    	if ($this->model_account_customer->getCustomerByMobilePhone($this->request->post['mobile_phone'])) {
+      		$json['error']['mobile_phone'] = $this->language->get('error_exists');
+    	}
+    	$sms_log = $this->model_account_customer->getSMS($this->request->post['mobile_phone']);
+    	if($sms_log){
+    		if(!empty($sms_log['sms']) && time() < ($sms_log['time']+30*60) ){
+    			$json['error']['mobile_phone'] = $this->language->get('error_sms_time');
+    		}
+    	}
+
+    	if(!$json){
+	  		$sms = new Sms();
+	        $sms_number = mt_rand(100000,999999);
+	  		$pattern = "尊敬的用户，您的验证码是".$sms_number."请填入以完成注册。该验证码30分钟内有效，限本次使用。【消防e站】";
+	  		$res = $sms->sendMsg($this->request->post['mobile_phone'],$pattern);
+	  		$this->model_account_customer->delSMS($this->request->post['mobile_phone']);
+	  		$this->model_account_customer->addSMS($this->request->post['mobile_phone'],$sms_number);
+	  		$json['success'] = $this->language->get('text_send_success');
+	  		
+    	}
+  		$this->response->setOutput(json_encode($json));
   	}
 
   	protected function validate() {
@@ -288,6 +320,9 @@ class ControllerAccountRegister extends Controller {
 		}
 		if ((utf8_strlen($this->request->post['mobile_phone']) < 3) || !isMobile($this->request->post['mobile_phone'])) {
       		$this->error['mobile_phone'] = $this->language->get('error_mobile_phone');
+    	}
+    	if ($this->model_account_customer->getCustomerByMobilePhone($this->request->post['mobile_phone'])) {
+      		$this->error['warning'] = $this->language->get('error_exists');
     	}
     	if ((utf8_strlen($this->request->post['password']) < 4) || (utf8_strlen($this->request->post['password']) > 20)) {
       		$this->error['password'] = $this->language->get('error_password');

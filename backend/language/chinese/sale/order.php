@@ -199,4 +199,3 @@ $_['error_upload']            = '请上传文件！';
 $_['error_filename']          = '文件名必须在3至128个字符之间！';
 $_['error_filetype']          = '非法的文件类型！';
 $_['error_action']            = '警告： 不能完成本操作！';
-?>

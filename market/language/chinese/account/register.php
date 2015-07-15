@@ -13,6 +13,7 @@ $_['text_qr_code']      		= '手机微信扫描二维码，关注e站';
 $_['text_captcha_change']  		= '换一张';
 $_['text_affiliate_name']   	= '请填写营业执照上的单位名称';
 $_['text_affiliate_email']   	= '填写企业邮箱';
+$_['text_send_success']   		= '短信发送成功';
 $_['text_get_sms']   	   		= '获取验证码';
 $_['text_agree']           		= '<em class="pl5">我已经阅读并同意</em> <a class="colorbox c_r" href="%s" alt="%s"><b>%s</b></a>条款';
 
@@ -40,6 +41,7 @@ $_['button_register']      		= '立即注册';
 // Error
 $_['error_exists']         = '警告： 该手机号码已被注册、请换一个手机号码！';
 $_['error_mobile_phone']   = '警告： 手机号码非法！';
+$_['error_sms_time']   	   = '该手机号码在30分钟内刚发送过验证短信，请查阅！';
 $_['error_firstname']      = '名字必须在1到32字符之间！';
 $_['error_lastname']       = '姓氏必须在1到32字符之间！';
 $_['error_email']          = '无效的邮箱地址！';

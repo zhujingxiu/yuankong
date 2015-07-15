@@ -139,7 +139,7 @@ $(function(){ $('input, textarea').placeholder(); });
 		                <td>&nbsp;</td>
 		                <td>
 		                	<div class="form-group">
-			                	<input type="checkbox" name="agree" checked="checked" value="1"/>
+			                	<input type="checkbox" name="agree" checked="checked" value="1" id="customer-agree"/>
 			                	<?php echo $text_agree; ?> 
 			                </div>
 		                </td>
@@ -273,7 +273,7 @@ $(function(){ $('input, textarea').placeholder(); });
 		                <td>&nbsp;</td>
 		                <td>
 		                	<div class="form-group">
-		                		<input type="checkbox" name="agree" checked="checked" />
+		                		<input type="checkbox" name="agree" checked="checked" value="1" id="affiliate-agree"/>
 		                		<?php echo $text_agree; ?> 
 							</div>
 		                </td>
@@ -323,6 +323,9 @@ $(function(){ $('input, textarea').placeholder(); });
 	            	required:true,
 	            	validCaptcha:true
 	            },
+	            sms:{
+	            	validSMS:"#customer-mobilephone"
+	            },
 	            agree:{
 	            	required:true
 	            }
@@ -336,6 +339,9 @@ $(function(){ $('input, textarea').placeholder(); });
 	    			required:"手机号必填",
 	    			isMobile:"手机号非法，请填写有效的手机号码",
 	    			mobileCN:"手机号码已注册",
+	    		},
+	    		sms:{
+	    			validSMS:"短信验证码无效"
 	    		},
 	    		agree:{
 	    			required:"请先阅读注册协议"
@@ -460,21 +466,55 @@ $(function(){ $('input, textarea').placeholder(); });
 			}
 			return validCaptcha;
 		}, "验证码错误");
+
+		$.validator.addMethod("validSMS", function(sms, element,param) {
+			sms = sms.replace(/\(|\)|\s+|-/g, "");
+			var target = $( param );
+			var validSMS = this.optional(element) || sms.length == 6 ;
+			if(validSMS){
+				var valide = false;
+				$.ajax({
+					url:'index.php?route=account/register/validateSMS',
+					data:{sms:sms,mobile_phone:target.val()},
+					type:'post',
+					dataType:'json',
+					async:false,
+					success:function(json){
+						valide = json.status==0 ? false : true;
+					}
+				});
+				return valide ? true : false;
+			}
+			return validSMS;
+		}, "短信验证码错误");
     });
 
+	$(function(){
+		$('input[name="agree"]').change(function(){			
+			$(this).parent('.form-group').toggleClass('valid');
+		});
+		$('input[name="agree"]:checked').trigger('change');
+	});
+
 	$('.hq-yzm').bind('click',function(){
-		if($('#'+$(this).attr('data-rel')+'-mobilephone').hasClass('valid') && $('#'+$(this).attr('data-rel')+'-captcha').hasClass('valid')){
+		var send = true;
+		var $that = $(this);
+		var items = $('#'+$(this).attr('data-rel')+'-form .form-group').length,
+		valids = $('#'+$(this).attr('data-rel')+'-form .form-group.valid').length;
+		if(items - valids == 1){
 			$.ajax({
 				url:'index.php?route=account/register/getSMS',
-				data:{mobile_phone:$('#'+$(this).attr('data-rel')).val()},
+				data:{mobile_phone:$('#'+$(this).attr('data-rel')+'-form input[name="mobile_phone"]').val(),captcha:$('#'+$(this).attr('data-rel')+'-form input[name="captcha"]').val()},
 				type:'post',
 				dataType:'json',
 				success:function(json){
-
+					if(json.success){
+						$that.html(json.success).attr('disabled');
+					}
 				}
 			})
 		}else{
-			alert('invalid');
+			alert('请确认输入的数据合法')
 		}
 	})
 </script>

@@ -245,5 +245,26 @@ class ModelAccountCustomer extends Model {
 		
 		return $query->num_rows;
 	}	
+
+	public function getSMS($mobile_phone){
+		$filter = array(
+			'one' => true,
+			'condition' => array(
+				'phone_number' => $mobile_phone
+			) 
+		);
+		return $this->db->fetch('sms',$filter);
+	}
+	public function addSMS($mobile_phone,$sms){
+		$fields = array(
+			'phone_number' => $mobile_phone,
+			'sms' => $sms,
+			'time' => time()
+		);
+		return $this->db->insert('sms',$fields);
+	}
+
+	public function delSMS($mobile_phone){
+		return $this->db->delete('sms',array('phone_number'=>$mobile_phone));
+	}
 }
-?>
