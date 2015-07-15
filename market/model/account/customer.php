@@ -246,25 +246,27 @@ class ModelAccountCustomer extends Model {
 		return $query->num_rows;
 	}	
 
-	public function getSMS($mobile_phone){
+	public function getSMS($mobile_phone,$type ='register'){
 		$filter = array(
 			'one' => true,
 			'condition' => array(
-				'phone_number' => $mobile_phone
+				'phone_number' => $mobile_phone,
+				'type'	=> $type
 			) 
 		);
 		return $this->db->fetch('sms',$filter);
 	}
-	public function addSMS($mobile_phone,$sms){
+	public function addSMS($mobile_phone,$sms,$type='register'){
 		$fields = array(
 			'phone_number' => $mobile_phone,
 			'sms' => $sms,
+			'type' => $type,
 			'time' => time()
 		);
 		return $this->db->insert('sms',$fields);
 	}
 
-	public function delSMS($mobile_phone){
-		return $this->db->delete('sms',array('phone_number'=>$mobile_phone));
+	public function delSMS($mobile_phone,$type="register"){
+		return $this->db->delete('sms',array('phone_number'=>$mobile_phone,'type'=>$type));
 	}
 }

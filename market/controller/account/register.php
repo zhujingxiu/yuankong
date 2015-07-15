@@ -273,7 +273,7 @@ class ControllerAccountRegister extends Controller {
   		$sms = isset($this->request->post['sms']) ? $this->request->post['sms'] : false;
   		$mobile_phone = isset($this->request->post['mobile_phone']) ? $this->request->post['mobile_phone'] : false;
   		$this->load->model('account/customer');
-  		$sms_log = $this->model_account_customer->getSMS($this->request->post['mobile_phone']);
+  		$sms_log = $this->model_account_customer->getSMS($this->request->post['mobile_phone'],'register');
   		if(!empty($sms_log['sms']) && ($sms_log['sms'] == $sms) && (time() < ($sms_log['time']+30*60))) {
   			$status = 1;
   		}
@@ -293,7 +293,7 @@ class ControllerAccountRegister extends Controller {
     	if ($this->model_account_customer->getCustomerByMobilePhone($this->request->post['mobile_phone'])) {
       		$json['error']['mobile_phone'] = $this->language->get('error_exists');
     	}
-    	$sms_log = $this->model_account_customer->getSMS($this->request->post['mobile_phone']);
+    	$sms_log = $this->model_account_customer->getSMS($this->request->post['mobile_phone'],'register');
     	if($sms_log){
     		if(!empty($sms_log['sms']) && time() < ($sms_log['time']+30*60) ){
     			$json['error']['mobile_phone'] = $this->language->get('error_sms_time');
@@ -305,8 +305,8 @@ class ControllerAccountRegister extends Controller {
 	        $sms_number = mt_rand(100000,999999);
 	  		$pattern = "尊敬的用户，您的验证码是".$sms_number."请填入以完成注册。该验证码30分钟内有效，限本次使用。【消防e站】";
 	  		$res = $sms->sendMsg($this->request->post['mobile_phone'],$pattern);
-	  		$this->model_account_customer->delSMS($this->request->post['mobile_phone']);
-	  		$this->model_account_customer->addSMS($this->request->post['mobile_phone'],$sms_number);
+	  		$this->model_account_customer->delSMS($this->request->post['mobile_phone'],'register');
+	  		$this->model_account_customer->addSMS($this->request->post['mobile_phone'],$sms_number,'register');
 	  		$json['success'] = $this->language->get('text_send_success');
 	  		
     	}
