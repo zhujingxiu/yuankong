@@ -46,7 +46,11 @@ function getURLVar(key) {
             return '';
         }
     }
-} 
+}
+
+function addToCheckout(){
+    
+}
 
 function addToCart(product_id, quantity) {
     quantity = typeof(quantity) != 'undefined' ? quantity : 1;

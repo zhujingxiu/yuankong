@@ -191,7 +191,7 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
               <?php echo $totals['sub_total']['title'] ?>
               <i id="cart-sub-total" class="c_red f_xl"><?php echo $totals['sub_total']['text'] ?></i>
             </b>
-            <a href="<?php echo $checkout; ?>" class="js-sub"><?php echo $button_checkout; ?></a>
+            <a href="javascript:void(0);" id="checkout-cart" class="js-sub"><?php echo $button_checkout; ?></a>
           </div>
           <?php }?>
         </div>
@@ -270,6 +270,22 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
     if (e.keyCode == 13) {
       $('#mini-login').submit();
     }
+  });
+
+  $('#checkout-cart').bind('click',function(){
+    <?php if(!$this->customer->isLogged()){?>
+      $('#tm-mask').show();
+      $('.iframe-login').show().focus();
+    <?php }else{?>
+      $.each($('.headcheck[name^="selected"]'),function(){
+        if($(this).is(":checked")){
+          var _qty = parseInt($(this).parent().parent('tr').find('input[name^="quantity"]').val()),
+          _price = parseFloat($(this).parent().parent('tr').find('input[name^="price"]').val()).toFixed(2);
+          countProducts += _qty;
+          amount += _qty*_price;
+        }
+      });
+    <?php }?>
   });
 </script>
 

@@ -157,12 +157,6 @@ class ControllerCheckoutCart extends Controller {
 		$this->data['text_shipping_method'] = $this->language->get('text_shipping_method');
 		$this->data['text_select'] = $this->language->get('text_select');
 		$this->data['text_none'] = $this->language->get('text_none');
-		$this->data['text_until_cancelled'] = $this->language->get('text_until_cancelled');
-		$this->data['text_freq_day'] = $this->language->get('text_freq_day');
-		$this->data['text_freq_week'] = $this->language->get('text_freq_week');
-		$this->data['text_freq_month'] = $this->language->get('text_freq_month');
-		$this->data['text_freq_bi_month'] = $this->language->get('text_freq_bi_month');
-		$this->data['text_freq_year'] = $this->language->get('text_freq_year');
 
 		$this->data['column_image'] = $this->language->get('column_image');
   		$this->data['column_name'] = $this->language->get('column_name');
@@ -288,7 +282,6 @@ class ControllerCheckoutCart extends Controller {
                 '_price'               => (float)$product['price'],
                 'href'                => $this->url->link('product/product', 'product_id=' . $product['product_id']),
                 'remove'              => $this->url->link('checkout/cart', 'remove=' . $product['key']),
-
             );
         }
        
@@ -579,13 +572,7 @@ class ControllerCheckoutCart extends Controller {
 			} else {
 				$option = array();	
 			}
-            
-            if (isset($this->request->post['profile_id'])) {
-                $profile_id = $this->request->post['profile_id'];
-            } else {
-                $profile_id = 0;
-            }
-			
+            			
 			$product_options = $this->model_catalog_product->getProductOptions($this->request->post['product_id']);
 			
 			foreach ($product_options as $product_option) {
@@ -593,23 +580,9 @@ class ControllerCheckoutCart extends Controller {
 					$json['error']['option'][$product_option['product_option_id']] = sprintf($this->language->get('error_required'), $product_option['name']);
 				}
 			}
-            /*
-            $profiles = $this->model_catalog_product->getProfiles($product_info['product_id']);
-            
-            if ($profiles) {
-                $profile_ids = array();
-                
-                foreach ($profiles as $profile) {
-                    $profile_ids[] = $profile['profile_id'];
-                }
-                
-                if (!in_array($profile_id, $profile_ids)) {
-                    $json['error']['profile'] = $this->language->get('error_profile_required');
-                }
-            }
-			*/
+
 			if (!$json) {
-				$this->cart->add($this->request->post['product_id'], $quantity, $option, $profile_id);
+				$this->cart->add($this->request->post['product_id'], $quantity, $option);
 
 				$json['success'] = sprintf($this->language->get('text_success'), $this->url->link('product/product', 'product_id=' . $this->request->post['product_id']), $product_info['name'], $this->url->link('checkout/cart'));
 				

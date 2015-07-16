@@ -7,7 +7,7 @@ $_['text_help']  			= '帮助中心';
 $_['text_items']    		= '%s 个商品 - %s';
 $_['text_search']   		= '搜索';
 $_['text_welcome']  		= '欢迎光临，您可以<a href="%s">登录</a> 或 <a href="%s">注册一个帐户</a>。';
-$_['text_logged']   		= '您登录为<a href="%s">%s</a> <b>(</b> <a href="%s">退出</a> <b>)</b>';
+$_['text_logged']   		= '<a href="%s">%s</a> <a href="%s">退出</a>';
 $_['text_account']  		= '我的e站';
 $_['text_checkout'] 		= '去结账';
 $_['text_language'] 		= '语言';

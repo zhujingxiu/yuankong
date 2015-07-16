@@ -41,7 +41,8 @@ $_['button_register']      		= '立即注册';
 // Error
 $_['error_exists']         = '警告： 该手机号码已被注册、请换一个手机号码！';
 $_['error_mobile_phone']   = '警告： 手机号码非法！';
-$_['error_sms_time']   	   = '该手机号码在30分钟内刚发送过验证短信，请查阅！';
+$_['error_sms_time']       = '该手机号码在30分钟内刚发送过验证短信，请查阅！';
+$_['error_sms']   	       = '输入的短信验证码无效';
 $_['error_firstname']      = '名字必须在1到32字符之间！';
 $_['error_lastname']       = '姓氏必须在1到32字符之间！';
 $_['error_email']          = '无效的邮箱地址！';

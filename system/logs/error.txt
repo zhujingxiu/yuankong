@@ -288,3 +288,24 @@
 2015-07-15 23:32:29 - PHP Notice:  Undefined variable: res in E:\wamp\www\yuankong\market\controller\account\register.php on line 304
 2015-07-15 23:41:24 - PHP Warning:  trim() expects parameter 1 to be string, array given in E:\wamp\www\yuankong\system\library\db.php on line 159
 2015-07-15 23:41:24 - PHP Notice:  Error: Unknown column 'condition' in 'where clause'<br />Error No: 1054<br />DELETE FROM yk_sms WHERE  `condition` = '' in E:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-07-16 13:06:18 - PHP Notice:  Error: Table 'yuankong.yk_sms' doesn't exist<br />Error No: 1146<br />SELECT *  FROM yk_sms   WHERE `phone_number` = 'admin' AND `type` = 'register' in D:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-07-16 13:06:18 - PHP Notice:  Trying to get property of non-object in D:\wamp\www\yuankong\system\library\db.php on line 122
+2015-07-16 13:38:42 - PHP Notice:  Undefined index: firstname in D:\wamp\www\yuankong\market\model\account\customer.php on line 48
+2015-07-16 13:38:42 - PHP Notice:  Undefined index: lastname in D:\wamp\www\yuankong\market\model\account\customer.php on line 48
+2015-07-16 13:38:42 - PHP Notice:  Undefined index: company in D:\wamp\www\yuankong\market\model\account\customer.php on line 48
+2015-07-16 13:38:42 - PHP Notice:  Undefined index: company_id in D:\wamp\www\yuankong\market\model\account\customer.php on line 48
+2015-07-16 13:38:42 - PHP Notice:  Undefined index: tax_id in D:\wamp\www\yuankong\market\model\account\customer.php on line 48
+2015-07-16 13:38:42 - PHP Notice:  Undefined index: address_1 in D:\wamp\www\yuankong\market\model\account\customer.php on line 48
+2015-07-16 13:38:42 - PHP Notice:  Undefined index: address_2 in D:\wamp\www\yuankong\market\model\account\customer.php on line 48
+2015-07-16 13:38:42 - PHP Notice:  Undefined index: city in D:\wamp\www\yuankong\market\model\account\customer.php on line 48
+2015-07-16 13:38:42 - PHP Notice:  Undefined index: postcode in D:\wamp\www\yuankong\market\model\account\customer.php on line 48
+2015-07-16 13:38:42 - PHP Notice:  Undefined index: country_id in D:\wamp\www\yuankong\market\model\account\customer.php on line 48
+2015-07-16 13:38:42 - PHP Notice:  Undefined index: zone_id in D:\wamp\www\yuankong\market\model\account\customer.php on line 48
+2015-07-16 13:38:42 - PHP Notice:  Undefined index: email in D:\wamp\www\yuankong\market\controller\account\register.php on line 47
+2015-07-16 13:38:42 - PHP Notice:  Undefined index: country_id in D:\wamp\www\yuankong\market\controller\account\register.php on line 53
+2015-07-16 13:38:42 - PHP Notice:  Undefined index: zone_id in D:\wamp\www\yuankong\market\controller\account\register.php on line 54
+2015-07-16 13:38:42 - PHP Notice:  Undefined index: postcode in D:\wamp\www\yuankong\market\controller\account\register.php on line 55
+2015-07-16 17:13:28 - PHP Notice:  Undefined variable: button_remove in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 200
+2015-07-16 17:13:28 - PHP Notice:  Undefined variable: button_remove in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 200
+2015-07-16 17:13:28 - PHP Notice:  Undefined variable: button_remove in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 200
+2015-07-16 17:13:28 - PHP Notice:  Undefined variable: button_remove in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 200
