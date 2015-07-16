@@ -279,12 +279,14 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
     <?php }else{?>
       $.each($('.headcheck[name^="selected"]'),function(){
         if($(this).is(":checked")){
-          var _qty = parseInt($(this).parent().parent('tr').find('input[name^="quantity"]').val()),
-          _price = parseFloat($(this).parent().parent('tr').find('input[name^="price"]').val()).toFixed(2);
-          countProducts += _qty;
-          amount += _qty*_price;
+          var key = $(this).val(),
+          qty = parseInt($(this).parent().parent('tr').find('input[name^="quantity"]').val());
+          addToCheckout(key,qty);
         }
       });
+      <?php if($this->customer->isLogged()){?>
+      location = '<?php echo $checkout ?>'
+      <?php }?>
     <?php }?>
   });
 </script>

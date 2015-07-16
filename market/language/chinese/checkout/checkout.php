@@ -4,13 +4,7 @@ $_['heading_title']                  = '结账';
 
 // Text
 $_['text_cart']                      = '购物车';
-$_['text_checkout_option']           = '第 1 步： 结账选项';
-$_['text_checkout_account']          = '第 2 步： 账户 &amp; 运单详细';
-$_['text_checkout_payment_address']  = '第 2 步： 运单地址';
-$_['text_checkout_shipping_address'] = '第 3 步： 货运地址';
-$_['text_checkout_shipping_method']  = '第 4 步： 货运方式';
-$_['text_checkout_payment_method']   = '第 5 步： 支付方式';
-$_['text_checkout_confirm']          = '第 6 步： 确认订单';
+$_['text_remove_success']            = '产品删除成功！';
 $_['text_modify']                    = '更新 &raquo;';
 $_['text_new_customer']              = '新客户';
 $_['text_returning_customer']        = '注册用户';
@@ -65,6 +59,7 @@ $_['entry_shipping'] 	             = '我的货运地址和运单地址相同。
 $_['error_warning']                  = '在结算时出现了问题！ 如果此问题继续存在请使用其它支付方式或<a href="%s">联系我们</a>。';
 $_['error_login']                    = '警告： 邮件地址或是密码不符。';
 $_['error_approved']                 = '警告: 您的帐号还没有通过审核！'; 
+$_['error_checkout_key']             = '警告: 参数异常！'; 
 $_['error_exists']                   = '警告： 该邮箱地址已被注册、请换一个电子邮箱！';
 $_['error_firstname']                = '名字必须在1到32字符之间！';
 $_['error_lastname']                 = '姓氏必须在1到32字符之间！';

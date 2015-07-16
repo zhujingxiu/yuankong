@@ -48,8 +48,25 @@ function getURLVar(key) {
     }
 }
 
-function addToCheckout(){
-    
+function addToCheckout(key,quantity){
+    quantity = typeof(quantity) != 'undefined' ? quantity : 1;type=
+    $.ajax({
+        url:'index.php?route=checkout/checkout/add',
+        type:'post',
+        data:'key='+key+'&quantity='+quantity,
+        dataType:'json',
+        success:function(json){
+
+            if(json['error']){
+                $('#notification').html('<div class="msg-error" style="display: none;">' + json['error'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
+
+                $('.msg-error').fadeIn('slow');
+                
+                $('html, body').animate({ scrollTop: 0 }, 'slow'); 
+            }
+        }
+
+    })
 }
 
 function addToCart(product_id, quantity) {
@@ -61,7 +78,7 @@ function addToCart(product_id, quantity) {
         data: 'product_id=' + product_id + '&quantity=' + quantity,
         dataType: 'json',
         success: function(json) {
-            $('.success, .warning, .attention, .information, .error').remove();
+            $('.msg-success, .warning, .attention, .information, .error').remove();
             
             if (json['redirect']) {
                 location = json['redirect'];

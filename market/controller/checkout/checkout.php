@@ -88,7 +88,7 @@ class ControllerCheckoutCheckout extends Controller {
 					
 	    $this->data['heading_title'] = $this->language->get('heading_title');
 		
-		$this->data['text_checkout_option'] = $this->language->get('text_checkout_option');
+		$this->data['button_remove'] = $this->language->get('button_remove');
 		$this->data['text_checkout_account'] = $this->language->get('text_checkout_account');
 		$this->data['text_checkout_payment_address'] = $this->language->get('text_checkout_payment_address');
 		$this->data['text_checkout_shipping_address'] = $this->language->get('text_checkout_shipping_address');
@@ -98,13 +98,22 @@ class ControllerCheckoutCheckout extends Controller {
 		$this->data['text_modify'] = $this->language->get('text_modify');
 		
 		$this->data['logged'] = $this->customer->isLogged();
-		$this->data['shipping_required'] = $this->cart->hasShipping();	
+
+		if (isset($this->session->data['shipping_address_id'])) {
+			$this->data['address_id'] = $this->session->data['shipping_address_id'];
+		} else {
+			$this->data['address_id'] = $this->customer->getAddressId();
+		}
+
+		$this->load->model('account/address');
+
+		$this->data['addresses'] = $this->model_account_address->getAddresses();
 
 		$this->load->model('tool/image');
 
         $this->data['products'] = array();
 
-        $products = $this->cart->getProducts();
+        $products = $this->cart->getProducts(true);
 
         foreach ($products as $product) {
             $product_total = 0;
@@ -169,7 +178,7 @@ class ControllerCheckoutCheckout extends Controller {
                 'total'               => $total,
                 '_price'               => (float)$product['price'],
                 'href'                => $this->url->link('product/product', 'product_id=' . $product['product_id']),
-                'remove'              => $this->url->link('checkout/cart', 'remove=' . $product['key']),
+                'remove'              => $this->url->link('checkout/checkout/remove', 'remove=' . $product['key']),
 
             );
         }
@@ -183,7 +192,7 @@ class ControllerCheckoutCheckout extends Controller {
 					'key'         => $key,
 					'description' => $voucher['description'],
 					'amount'      => $this->currency->format($voucher['amount']),
-					'remove'      => $this->url->link('checkout/cart', 'remove=' . $key)   
+					'remove'      => $this->url->link('checkout/checkout', 'remove=' . $key)   
 				);
 			}
 		}
@@ -228,9 +237,14 @@ class ControllerCheckoutCheckout extends Controller {
 				$totals[strtolower($item['code'])] = $item;
 			}
 		}
-		
-		$this->data['totals'] = $totals;
-		
+		if(isset($totals['total'])){
+			$this->data['checkout_total'] = $totals['total'];
+			unset($totals['total']);
+		}else{
+			$this->data['checkout_total'] = array('');
+		}
+		$this->data['other_totals'] = $totals;
+
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/checkout/checkout.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/checkout/checkout.tpl';
 		} else {
@@ -248,6 +262,95 @@ class ControllerCheckoutCheckout extends Controller {
 				
 		$this->response->setOutput($this->render());
   	}
+
+	public function add() {
+		$this->language->load('checkout/checkout');
+		
+		$json = array();
+		
+		$key = isset($this->request->post['key']) ? $this->request->post['key'] : false;
+		$quantity = isset($this->request->post['quantity']) ? $this->request->post['quantity'] : 1;
+
+		if($key){
+			if(isset($this->session->data['checkout'][$key])){
+				$this->session->data['checkout'][$key] += $quantity;
+				$this->cart->update($key, $quantity);
+			}else{
+				$this->session->data['checkout'][$key] = $quantity;
+			}			
+
+		}else{
+			$json['error'] = $this->language->get('error_checkout_key');
+		}			
+
+		if (!$json) {
+			unset($this->session->data['shipping_method']);
+			unset($this->session->data['shipping_methods']);
+			unset($this->session->data['payment_method']);
+			unset($this->session->data['payment_methods']);			
+		}
+		
+		$this->response->setOutput(json_encode($json));		
+	}
+
+	public function remove(){
+		$json = array();
+
+		$key = isset($this->request->get['remove']) ? $this->request->get['remove'] : false;
+		if($key && isset($this->session->data['checkout'])){
+			unset($this->session->data['checkout'][$key]);
+		}
+		
+		$this->session->data['success'] = $this->language->get('text_remove_success');
+		$this->response->redirect($this->url->link('checkout/checkout', '', 'SSL'));
+	}
+
+	public function validateAddress() {
+		if ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32)) {
+			$json['error']['firstname'] = $this->language->get('error_firstname');
+		}
+
+		if ((utf8_strlen($this->request->post['lastname']) < 1) || (utf8_strlen($this->request->post['lastname']) > 32)) {
+			$json['error']['lastname'] = $this->language->get('error_lastname');
+		}
+
+		if ((utf8_strlen($this->request->post['address_1']) < 3) || (utf8_strlen($this->request->post['address_1']) > 128)) {
+			$json['error']['address_1'] = $this->language->get('error_address_1');
+		}
+
+		if ((utf8_strlen($this->request->post['city']) < 2) || (utf8_strlen($this->request->post['city']) > 128)) {
+			$json['error']['city'] = $this->language->get('error_city');
+		}
+		
+		$this->load->model('localisation/country');
+		
+		$country_info = $this->model_localisation_country->getCountry($this->request->post['country_id']);
+		
+		if ($country_info && $country_info['postcode_required'] && (utf8_strlen($this->request->post['postcode']) < 2) || (utf8_strlen($this->request->post['postcode']) > 10)) {
+			$json['error']['postcode'] = $this->language->get('error_postcode');
+		}
+		
+		if ($this->request->post['country_id'] == '') {
+			$json['error']['country'] = $this->language->get('error_country');
+		}
+		
+		if (!isset($this->request->post['zone_id']) || $this->request->post['zone_id'] == '') {
+			$json['error']['zone'] = $this->language->get('error_zone');
+		}
+		
+		if (!$json) {						
+			// Default Shipping Address
+			$this->load->model('account/address');		
+			
+			$this->session->data['shipping_address_id'] = $this->model_account_address->addAddress($this->request->post);
+			$this->session->data['shipping_country_id'] = $this->request->post['country_id'];
+			$this->session->data['shipping_zone_id'] = $this->request->post['zone_id'];
+			$this->session->data['shipping_postcode'] = $this->request->post['postcode'];
+							
+			unset($this->session->data['shipping_method']);						
+			unset($this->session->data['shipping_methods']);
+		}
+	}
 	
 	public function country() {
 		$json = array();

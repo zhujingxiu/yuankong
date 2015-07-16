@@ -53,8 +53,10 @@ class ModelAccountAddress extends Model {
 			}		
 			
 			$address_data = array(
+				'nickname'      => $address_query->row['nickname'],
 				'firstname'      => $address_query->row['firstname'],
 				'lastname'       => $address_query->row['lastname'],
+				'mobile_phone'   => $address_query->row['mobile_phone'],
 				'company'        => $address_query->row['company'],
 				'company_id'     => $address_query->row['company_id'],
 				'tax_id'         => $address_query->row['tax_id'],
@@ -110,8 +112,10 @@ class ModelAccountAddress extends Model {
 		
 			$address_data[$result['address_id']] = array(
 				'address_id'     => $result['address_id'],
+				'nickname'      => $result['nickname'],
 				'firstname'      => $result['firstname'],
 				'lastname'       => $result['lastname'],
+				'mobile_phone'   => $result['mobile_phone'],
 				'company'        => $result['company'],
 				'company_id'     => $result['company_id'],
 				'tax_id'         => $result['tax_id'],				
@@ -139,4 +143,3 @@ class ModelAccountAddress extends Model {
 		return $query->row['total'];
 	}
 }
-?>

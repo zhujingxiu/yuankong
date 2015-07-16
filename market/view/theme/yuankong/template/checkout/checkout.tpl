@@ -93,27 +93,22 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
     <div class="order-w">
         <h3><b>确认收货地址</b></h3>
         <ul class="order-ul">
-            <li class="order-li-adess adress-show fix">
+            <?php $n=0; foreach ($addresses as $key => $item) { ?>
+             <li class="order-li-adess fix <?php echo !$n ? 'adress-show' : '' ?>">
                 <i class="dw-btn icon2"></i>
                 <label>寄送至</label>
                 <div class="adress-new">
-                    <input type="radio" class="adress-radio" name="newadress"  checked="checked" />
-                    江苏省 南京市 玄武区 花园路11号森林公安学院内<em class="pl10 c8">15951997250</em>
+                    <input type="radio" class="adress-radio" name="shipping_address_id" value="<?php echo $item['address_id'] ?>" <?php echo !$n ? 'checked="checked"' : '' ?>/>
+                    江苏省 南京市 玄武区 <?php echo $item['address_1'] ?>
+                    <em class="pl10 c8"><?php echo $item['mobile_phone'] ?></em>
+                    <em class="pl10 c8"><?php echo $item['nickname'] ?></em>
                 </div>
             </li>
-            <li class="order-li-adess fix">
-                <i class="dw-btn icon2"></i>
-                <label>寄送至</label>
-                <div class="adress-new">
-                    <input type="radio" class="adress-radio" name="newadress" />
-                    江苏省 南京市 玄武区 花园路11号森林公安学院内<em class="pl10 c8">15951997250</em>
-                </div>
-            </li>
-
+            <?php $n++;}?>
         </ul>
         <div class="new-adress">
             <div class="ovh">
-                <input type="radio" class="adress-radio" name="newadress" />
+                <input type="radio" class="adress-radio" name="shipping_address_id" value="0" />
                 <label>新增新地址</label>
             </div>
             <div class="newadress-box">
@@ -216,8 +211,20 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
             <div class="ovh p15">
                 <ul class="order-item-ul">
                     <li class="all-money">
-                        <strong>您需支付</strong>
-                        <b>11940.00</b>元=<b>1000.00</b>元<span>(商品总价)</span>+<b>20</b>元<span>(配送费)</span>
+                        <strong><?php echo $checkout_total['title'] ?></strong>
+                        <b><?php echo $checkout_total['text'] ?></b>=
+                        <?php foreach ($other_totals as $key => $item): ?>
+                            <?php if($key!='total'){ ?>
+                            <b><?php echo $item['text'] ?></b>
+                            <span>(<?php echo $item['title'] ?>)</span>
+                            <?php }?>
+                            <?php if(count($other_totals) != $key+1){?>
+                            +
+                            <?php } ?>
+                        <?php endforeach ?>
+                        
+                        
+                        
                     </li>
                     <li class="all-money">
                         <strong>支付方式：</strong>

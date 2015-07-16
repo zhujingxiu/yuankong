@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2015 年 07 月 16 日 09:44
+-- 生成日期: 2015 年 07 月 16 日 15:58
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.4.3
 
@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS `yk_address` (
   `nickname` varchar(64) DEFAULT NULL,
   `firstname` varchar(32) NOT NULL,
   `lastname` varchar(32) NOT NULL,
+  `mobile_phone` varchar(16) DEFAULT NULL,
   `company` varchar(32) NOT NULL,
   `company_id` varchar(32) NOT NULL,
   `tax_id` varchar(32) NOT NULL,
@@ -43,14 +44,15 @@ CREATE TABLE IF NOT EXISTS `yk_address` (
   `zone_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`address_id`),
   KEY `customer_id` (`customer_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- 转存表中的数据 `yk_address`
 --
 
-INSERT INTO `yk_address` (`address_id`, `customer_id`, `nickname`, `firstname`, `lastname`, `company`, `company_id`, `tax_id`, `address_1`, `address_2`, `city`, `postcode`, `country_id`, `zone_id`) VALUES
-(1, 2, NULL, '', '', '', '', '', '', '', '', '', 0, 0);
+INSERT INTO `yk_address` (`address_id`, `customer_id`, `nickname`, `firstname`, `lastname`, `mobile_phone`, `company`, `company_id`, `tax_id`, `address_1`, `address_2`, `city`, `postcode`, `country_id`, `zone_id`) VALUES
+(1, 2, '朱景修', '', '', '18850911766', '', '', '', '黄石镇丁庄村', '', '', '', 0, 0),
+(2, 2, '朱景修', '', '', '18959526595', '', '', '', '黄石镇定庄村浊影中', '', '', '', 0, 0);
 
 -- --------------------------------------------------------
 
