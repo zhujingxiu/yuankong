@@ -397,3 +397,29 @@
 2015-07-16 23:47:12 - PHP Notice:  Undefined index: nickname in E:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 112
 2015-07-16 23:48:27 - PHP Notice:  Undefined index: mobile_phone in E:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 111
 2015-07-16 23:48:27 - PHP Notice:  Undefined index: nickname in E:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 112
+2015-07-17 9:22:09 - PHP Notice:  Undefined index: checkout in D:\wamp\www\yuankong\system\library\cart.php on line 24
+2015-07-17 9:22:09 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\system\library\cart.php on line 27
+2015-07-17 9:22:09 - PHP Notice:  Undefined index: checkout in D:\wamp\www\yuankong\system\library\cart.php on line 24
+2015-07-17 9:22:09 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\system\library\cart.php on line 27
+2015-07-17 9:22:09 - PHP Notice:  Undefined index: checkout in D:\wamp\www\yuankong\system\library\cart.php on line 24
+2015-07-17 9:22:09 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\system\library\cart.php on line 27
+2015-07-17 9:22:09 - PHP Notice:  Undefined index: checkout in D:\wamp\www\yuankong\system\library\cart.php on line 24
+2015-07-17 9:22:09 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\system\library\cart.php on line 27
+2015-07-17 9:22:09 - PHP Notice:  Undefined index: checkout in D:\wamp\www\yuankong\system\library\cart.php on line 24
+2015-07-17 9:22:09 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\system\library\cart.php on line 27
+2015-07-17 9:22:09 - PHP Notice:  Undefined index: checkout in D:\wamp\www\yuankong\system\library\cart.php on line 24
+2015-07-17 9:22:09 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\system\library\cart.php on line 27
+2015-07-17 9:22:09 - PHP Notice:  Undefined index: checkout in D:\wamp\www\yuankong\system\library\cart.php on line 24
+2015-07-17 9:22:09 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\system\library\cart.php on line 27
+2015-07-17 14:49:40 - PHP Notice:  Undefined index: alipay in D:\wamp\www\yuankong\backend\view\template\module\oauth.tpl on line 211
+2015-07-17 15:20:02 - PHP Notice:  Error: Unknown column 'pid' in 'order clause'<br />Error No: 1054<br />SELECT * FROM yk_area  ORDER BY `pid` ,`sort`  in D:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-07-17 15:20:02 - PHP Notice:  Trying to get property of non-object in D:\wamp\www\yuankong\backend\model\localisation\area.php on line 40
+2015-07-17 15:20:03 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\model\localisation\area.php on line 45
+2015-07-17 15:20:08 - PHP Notice:  Error: Unknown column 'pid' in 'order clause'<br />Error No: 1054<br />SELECT * FROM yk_area  ORDER BY `pid` ,`sort`  in D:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-07-17 15:20:08 - PHP Notice:  Trying to get property of non-object in D:\wamp\www\yuankong\backend\model\localisation\area.php on line 40
+2015-07-17 15:20:08 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\model\localisation\area.php on line 45
+2015-07-17 17:12:59 - PHP Warning:  Missing argument 1 for ModelLocalisationArea::getAreas(), called in D:\wamp\www\yuankong\market\controller\checkout\checkout.php on line 386 and defined in D:\wamp\www\yuankong\market\model\localisation\area.php on line 3
+2015-07-17 17:12:59 - PHP Notice:  Undefined variable: area_id in D:\wamp\www\yuankong\market\model\localisation\area.php on line 4
+2015-07-17 17:13:37 - PHP Warning:  Illegal string offset 'id' in D:\wamp\www\yuankong\market\controller\checkout\checkout.php on line 393
+2015-07-17 17:14:13 - PHP Warning:  Illegal string offset 'area_id' in D:\wamp\www\yuankong\market\controller\checkout\checkout.php on line 393
+2015-07-17 17:14:39 - PHP Warning:  Illegal string offset 'area_id' in D:\wamp\www\yuankong\market\controller\checkout\checkout.php on line 396

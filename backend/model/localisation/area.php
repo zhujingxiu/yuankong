@@ -23,6 +23,37 @@ class ModelLocalisationArea extends Model {
 
 		$this->cache->delete('area');	
 	}
+
+    function getNodesByParentId($parent_id){
+        $query = $this->db->query("SELECT * FROM ".DB_PREFIX."area WHERE pid = '".(int)$parent_id."' ORDER BY sort ASC ,area_id ASC");
+        return $query->rows;
+    }
+
+    function getAllChildrenNodesByRecursion($parent_id){
+        $children_node= array();
+        $nodes = $this->getNodesByParentId($parent_id);
+
+        if($nodes){
+            foreach ($nodes as $item) {
+                if($item['area_id']){
+                    $tmp = $this->getAllChildrenNodesByRecursion($item['area_id']);
+                    $tmp[] = $item['area_id'];
+                    $children_node = array_merge($tmp,$children_node);
+                }
+            }
+        }
+
+        return $children_node;
+    }
+
+    public function deleteNode($node_id) {
+        $all_nodes = $this->getAllChildrenNodesByRecursion($node_id);
+        $all_nodes[] = $node_id;
+
+        $this->db->query("DELETE FROM `" . DB_PREFIX . "area` WHERE area_id IN (" . implode(',', $all_nodes) . ")");
+        $this->cache->delete('area');
+        return count($all_nodes);
+    }
 	
 	public function getTotalAreas() {
       	$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "area");

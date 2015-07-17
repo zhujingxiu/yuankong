@@ -113,17 +113,9 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
             </div>
             <div class="newadress-box">
                 <ul>
-                    <li class="item-adress">
+                    <li class="item-adress" id="area">
                         <label>收货地址：</label>
-                        <select class="adress-sec">
-                            <option>-- 省 --</option>
-                        </select>
-                        <select class="adress-sec">
-                            <option>-- 市 --</option>
-                        </select>
-                        <select class="adress-sec">
-                            <option>-- 区 --</option>
-                        </select>
+                        
                     </li>
                     <li class="item-adress">
                         <label>详细地址：</label>
@@ -254,6 +246,46 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
         $(this).parent().parent().parent().next(".new-adress").removeClass("adressbox");
         $(this).parent().parent().siblings().removeClass("adress-show");
         $(this).parent().parent().addClass("adress-show");
+    });
+    $(function(){
+
+        add_select(0);
+
+        $('body').on('change', '#area select', function() {
+            var $me = $(this);
+            var $next = $me.next();
+            /**
+             * 如果下一级已经是当前所选地区的子地区，则不进行处理
+             */
+            if ($me.val() == $next.data('pid')) {
+                return;
+            }
+            $me.nextAll().remove();
+            add_select($me.val());
+        });
+
+        function add_select(pid) {
+            var area_names = area['name'+pid];
+            if (!area_names) {
+                return false;
+            }
+            var area_codes = area['code'+pid];
+            var $select = $('<select >');
+            $select.attr('name', 'area[]');
+            $select.attr('class', 'adress-sec');
+            $select.data('pid', pid);
+            if (area_codes[0] != -1) {
+                area_names.unshift('请选择');
+                area_codes.unshift(-1);
+            }
+            for (var idx in area_codes) {
+                var $option = $('<option>');
+                $option.attr('value', area_codes[idx]);
+                $option.text(area_names[idx]);
+                $select.append($option);
+            }
+            $('#area').append($select);
+        };
     });
 </script>
 <?php echo $footer; ?>

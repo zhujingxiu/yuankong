@@ -19,9 +19,9 @@ class Cart {
 	      
   	public function getProducts($checkout=false) {
   		if($checkout){
-  			$cart_data = $this->session->data['cart'];
+  			$cart_data = isset($this->session->data['checkout']) ? $this->session->data['checkout'] : array();
   		}else{
-  			$cart_data = $this->session->data['checkout'];
+  			$cart_data = $this->session->data['cart'];
   		}
 		if (!$this->data) {
 			foreach ($cart_data as $key => $quantity) {

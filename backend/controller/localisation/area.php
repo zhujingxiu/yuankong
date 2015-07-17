@@ -88,8 +88,6 @@ class ControllerLocalisationArea extends Controller {
                 $tmp['data'] = $item['name'];
                 if($open){
                     $tmp['state'] = 'open';
-                }else{
-                	$tmp['state'] = 'closed';
                 }
                 $parent_area = $this->model_localisation_area->getParentArea($item['area_id']);
                 $tmp['attributes'] = array(
@@ -105,6 +103,7 @@ class ControllerLocalisationArea extends Controller {
                     $tmp['children'] = $this->render_tree($item['children']);
                 }else{
                     $tmp['attributes']['rel'] = "file";
+                    $tmp['attributes']['class'] = 'leaf';
                 }
                 $data[] = $tmp;
             }
@@ -153,7 +152,7 @@ class ControllerLocalisationArea extends Controller {
         $this->load->model('localisation/area');
     
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm('localisation/area/save')) {
-            if($this->model_user_permission_node->saveArea($this->request->post)){
+            if($this->model_localisation_area->saveArea($this->request->post)){
                 $data = array('status'=>1,'msg'=>$this->language->get('text_success'));
             }else{              
                 $data = array('status'=>0,'msg'=>$this->language->get('text_error'));
@@ -170,8 +169,8 @@ class ControllerLocalisationArea extends Controller {
         $this->load->model('localisation/area');
     
         if (isset($this->request->post['area_id']) && $this->validateDelete('localisation/area/delete')) {
-            if($this->model_user_permission_node->deleteNode($this->request->post['area_id'])){
-                $this->response->setOutput(json_encode(array('status'=>1,'msg'=>'Deleted!')));  
+            if($this->model_localisation_area->deleteNode($this->request->post['area_id'])){
+                $this->response->setOutput(json_encode(array('status'=>1,'msg'=>'已删除')));  
             }
         }   
     }

@@ -12,20 +12,19 @@
             <h1><img src="view/image/user.png" alt="" /> <?php echo $heading_title; ?></h1>
         </div>
         <div class="content">
-
-                <table class="form">
-                    <tr>
-                        <td style="width:80%"><div class="tree" id="menu-tree"></div></td>
-                        <td valign ="top">
-                            <br/><br/>
-                            <a data-rel="menu-tree" class="button toggle">展开 / 收缩</a>
-                        </td>
-                    </tr>
-                </table>
+            <table class="form">
+                <tr>
+                    <td style="width:80%"><div class="tree" id="menu-tree"></div></td>
+                    <td valign ="top">
+                        <br/><br/>
+                        <a data-rel="menu-tree" class="button toggle">展开 / 收缩</a>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>
-<div id="menu-dialog" style="display:none">
+<div id="area-dialog" style="display:none">
     <table class="form">
         <tr>
             <td>上级:</td>
@@ -59,7 +58,7 @@
     $(function () { 
         $("#menu-tree").tree({
             types : {"file" :{icon : {image : "view/image/file.png"}}},
-            ui : {theme_name : "default"},
+            ui : {theme_name : "apple"},
             data : { 
                 async : true,
                 type : "json",
@@ -119,25 +118,25 @@
         });
     });
     function render_dialog(node,mode,text){
-        $('#menu-dialog input').val('');
-        $('#menu-dialog #do-result').empty();
+        $('#area-dialog input').val('');
+        $('#area-dialog #do-result').empty();
         var title = '';
         var that = this;
         if(node && mode=='edit'){
             title = '编辑 ['+text+']';
             $('#parent-name').html(node.attr('p_name'));
-            $('#menu-dialog input[name="area_id"]').val(node.attr('area_id'));
-            $('#menu-dialog input[name="pid"]').val(node.attr('pid'));
-            $('#menu-dialog input[name="name"]').val(text);
-            $('#menu-dialog select[name="status"]').val(node.attr('status'));
-            $('#menu-dialog input[name="sort"]').val(node.attr('sort'));
+            $('#area-dialog input[name="area_id"]').val(node.attr('area_id'));
+            $('#area-dialog input[name="pid"]').val(node.attr('pid'));
+            $('#area-dialog input[name="name"]').val(text);
+            $('#area-dialog select[name="status"]').val(node.attr('status'));
+            $('#area-dialog input[name="sort"]').val(node.attr('sort'));
         }else{
             title = '新建 ';
             $('#parent-name').html(node ? node.attr('p_name')+'/'+text :'/');
-            $('#menu-dialog input[name="pid"]').val(node ? node.attr('area_id') : 0); 
+            $('#area-dialog input[name="pid"]').val(node ? node.attr('area_id') : 0); 
         }
-        $('#menu-dialog input[name="mode"]').val('menu');
-        $('#menu-dialog').dialog({
+        $('#area-dialog input[name="mode"]').val('menu');
+        $('#area-dialog').dialog({
             title:title,
             width:500,
             modal:true,
@@ -146,7 +145,7 @@
                     $.ajax({
                         url:'index.php?route=localisation/area/save&token=<?php echo $token; ?>',
                         type:'post',
-                        data:$('#menu-dialog input,#menu-dialog select'),
+                        data:$('#area-dialog input,#area-dialog select'),
                         dataType:'json',
                         success:function(json){
                             if(json.status==1){

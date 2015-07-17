@@ -127,7 +127,7 @@ class ControllerAccountOauth extends Controller {
 			$server = $this->config->get('config_url');
 		}
 		
-		$callback  = $server.'v.aspx';
+		$callback  = $server;
 		$state = $tag.'|'.md5('getOauth'.time());
 		
 		$this->session->data['oauth']['state'] = $state;

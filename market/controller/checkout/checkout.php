@@ -7,7 +7,7 @@ class ControllerCheckoutCheckout extends Controller {
     	}	
 		
 		// Validate minimum quantity requirments.			
-		$products = $this->cart->getProducts();
+		$products = $this->cart->getProducts(true);
 				
 		foreach ($products as $product) {
 			$product_total = 0;
@@ -35,7 +35,7 @@ class ControllerCheckoutCheckout extends Controller {
         } else {
             $this->data['error'] = '';
         }
-
+        $this->document->addScript('market/view/theme/'.$this->area_js());
         $this->data['base'] = $server;
         $this->data['description'] = $this->document->getDescription();
         $this->data['keywords'] = $this->document->getKeywords();
@@ -104,6 +104,7 @@ class ControllerCheckoutCheckout extends Controller {
 		} else {
 			$this->data['address_id'] = $this->customer->getAddressId();
 		}
+
 
 		$this->load->model('account/address');
 
@@ -376,4 +377,54 @@ class ControllerCheckoutCheckout extends Controller {
 		
 		$this->response->setOutput(json_encode($json));
 	}
+
+    private function area_js(){
+        if(file_exists(DIR_TEMPLATE.$this->config->get('config_template').'/javascript/area.js')){
+            
+            return $this->config->get('config_template').'/javascript/area.js';
+        }else{
+            $this->load->model('localisation/area');
+            $areas = $this->model_localisation_area->getAreas();
+            $area_rows_group_by_pid = $this->array_group($areas, 'pid');
+
+            $address = array();
+            foreach ($area_rows_group_by_pid as $pid => $item) {
+                if ($pid == 0) {
+                    
+                    $item = array_filter($item, function($item){
+                        return $item['area_id'] <= 84;// ID 大于 84 的为其他国家
+                    });
+                }
+                $address['name'.$pid] = array_keys($this->array_group($item, 'name'));
+                $address['code'.$pid] = array_keys($this->array_group($item, 'area_id'));
+            }
+            $file = $this->config->get('config_template').'/javascript/area.js';
+            file_put_contents(DIR_TEMPLATE.$file, 'var area = ' . json_encode_ex($address) . ';');
+            return $file;
+        }
+    }   
+
+    private function array_group($array, $key, $limit = false){
+        if (empty ($array) || !is_array($array)){
+            return $array;
+        }
+
+        $_result = array ();
+        foreach ($array as $item) {
+            if ((isset($item[$key]))) {
+                $_result[(string)$item[$key]][] = $item;
+            } else {
+                $_result[count($_result)][] = $item;
+            }
+        }
+        if (!$limit) {
+            return $_result;
+        }
+
+        $result = array ();
+        foreach ($_result as $k => $item) {
+            $result[$k] = $item[0];
+        }
+        return $result;
+    } 
 }

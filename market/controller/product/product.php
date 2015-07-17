@@ -169,7 +169,7 @@ class ControllerProductProduct extends Controller {
 		$product_info = $this->model_catalog_product->getProduct($product_id);
 		
 		if ($product_info) {
-
+			
 			$this->document->addScript('market/view/theme/yuankong/javascript/lib/fdj.js');
 			$url = '';
 			
@@ -856,4 +856,6 @@ class ControllerProductProduct extends Controller {
 
 		die(json_encode($json));
 	}
+
+
 }
