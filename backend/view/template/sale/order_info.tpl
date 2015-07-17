@@ -159,66 +159,6 @@
       <div id="tab-payment" class="vtabs-content">
         <table class="form">
           <tr>
-            <td><?php echo $text_firstname; ?></td>
-            <td><?php echo $payment_firstname; ?></td>
-          </tr>
-          <tr>
-            <td><?php echo $text_lastname; ?></td>
-            <td><?php echo $payment_lastname; ?></td>
-          </tr>
-          <?php if ($payment_company) { ?>
-          <tr>
-            <td><?php echo $text_company; ?></td>
-            <td><?php echo $payment_company; ?></td>
-          </tr>
-          <?php } ?>
-          <?php if ($payment_company_id) { ?>
-          <tr>
-            <td><?php echo $text_company_id; ?></td>
-            <td><?php echo $payment_company_id; ?></td>
-          </tr>
-          <?php } ?>          
-          <?php if ($payment_tax_id) { ?>
-          <tr>
-            <td><?php echo $text_tax_id; ?></td>
-            <td><?php echo $payment_tax_id; ?></td>
-          </tr>
-          <?php } ?>            
-          <tr>
-            <td><?php echo $text_address_1; ?></td>
-            <td><?php echo $payment_address_1; ?></td>
-          </tr>
-          <?php if ($payment_address_2) { ?>
-          <tr>
-            <td><?php echo $text_address_2; ?></td>
-            <td><?php echo $payment_address_2; ?></td>
-          </tr>
-          <?php } ?>
-          <tr>
-            <td><?php echo $text_city; ?></td>
-            <td><?php echo $payment_city; ?></td>
-          </tr>
-          <?php if ($payment_postcode) { ?>
-          <tr>
-            <td><?php echo $text_postcode; ?></td>
-            <td><?php echo $payment_postcode; ?></td>
-          </tr>
-          <?php } ?>
-          <tr>
-            <td><?php echo $text_zone; ?></td>
-            <td><?php echo $payment_zone; ?></td>
-          </tr>
-          <?php if ($payment_zone_code) { ?>
-          <tr>
-            <td><?php echo $text_zone_code; ?></td>
-            <td><?php echo $payment_zone_code; ?></td>
-          </tr>
-          <?php } ?>
-          <tr>
-            <td><?php echo $text_country; ?></td>
-            <td><?php echo $payment_country; ?></td>
-          </tr>
-          <tr>
             <td><?php echo $text_payment_method; ?></td>
             <td><?php echo $payment_method; ?></td>
           </tr>
@@ -251,10 +191,6 @@
             <td><?php echo $shipping_address_2; ?></td>
           </tr>
           <?php } ?>
-          <tr>
-            <td><?php echo $text_city; ?></td>
-            <td><?php echo $shipping_city; ?></td>
-          </tr>
           <?php if ($shipping_postcode) { ?>
           <tr>
             <td><?php echo $text_postcode; ?></td>
@@ -271,10 +207,7 @@
             <td><?php echo $shipping_zone_code; ?></td>
           </tr>
           <?php } ?>
-          <tr>
-            <td><?php echo $text_country; ?></td>
-            <td><?php echo $shipping_country; ?></td>
-          </tr>
+
           <?php if ($shipping_method) { ?>
           <tr>
             <td><?php echo $text_shipping_method; ?></td>

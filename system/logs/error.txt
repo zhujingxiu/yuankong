@@ -423,3 +423,10 @@
 2015-07-17 17:13:37 - PHP Warning:  Illegal string offset 'id' in D:\wamp\www\yuankong\market\controller\checkout\checkout.php on line 393
 2015-07-17 17:14:13 - PHP Warning:  Illegal string offset 'area_id' in D:\wamp\www\yuankong\market\controller\checkout\checkout.php on line 393
 2015-07-17 17:14:39 - PHP Warning:  Illegal string offset 'area_id' in D:\wamp\www\yuankong\market\controller\checkout\checkout.php on line 396
+2015-07-17 22:52:42 - PHP Notice:  Undefined variable: text_comments in E:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 197
+2015-07-17 23:01:00 - PHP Notice:  Undefined variable: payment_address in E:\wamp\www\yuankong\market\controller\checkout\checkout.php on line 261
+2015-07-17 23:07:20 - PHP Notice:  Undefined variable: result in E:\wamp\www\yuankong\market\model\account\address.php on line 89
+2015-07-17 23:07:20 - PHP Warning:  Illegal string offset 'country_id' in E:\wamp\www\yuankong\market\model\payment\cod.php on line 6
+2015-07-17 23:07:20 - PHP Warning:  Illegal string offset 'zone_id' in E:\wamp\www\yuankong\market\model\payment\cod.php on line 6
+2015-07-17 23:08:31 - PHP Warning:  Illegal string offset 'country_id' in E:\wamp\www\yuankong\market\model\payment\cod.php on line 6
+2015-07-17 23:08:31 - PHP Warning:  Illegal string offset 'zone_id' in E:\wamp\www\yuankong\market\model\payment\cod.php on line 6

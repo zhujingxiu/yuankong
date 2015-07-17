@@ -277,16 +277,21 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
       $('#tm-mask').show();
       $('.iframe-login').show().focus();
     <?php }else{?>
-      $.each($('.headcheck[name^="selected"]'),function(){
-        if($(this).is(":checked")){
-          var key = $(this).val(),
-          qty = parseInt($(this).parent().parent('tr').find('input[name^="quantity"]').val());
-          addToCheckout(key,qty);
-        }
-      });
-      <?php if($this->customer->isLogged()){?>
-      location = '<?php echo $checkout ?>'
-      <?php }?>
+      if($('.headcheck[name^="selected"]:checked').length){
+        $.each($('.headcheck[name^="selected"]'),function(){
+          if($(this).is(":checked")){
+            var key = $(this).val(),
+            qty = parseInt($(this).parent().parent('tr').find('input[name^="quantity"]').val());
+            addToCheckout(key,qty);
+          }
+        });
+        <?php if($this->customer->isLogged()){?>
+        location = '<?php echo $checkout ?>'
+        <?php }?>
+      }else{
+        alert('没有选中商品');
+      }
+
     <?php }?>
   });
 </script>

@@ -29,14 +29,10 @@ class Controllerpaymentalipaydirect extends Controller {
 		$this->data['entry_partner_id'] = $this->language->get('entry_partner_id');
 		
 		$this->data['entry_account'] = $this->language->get('entry_account');
-		
-
-		$this->data['entry_order_status'] = $this->language->get('entry_order_status');
-		
-		
+		$this->data['entry_note'] = $this->language->get('entry_note');
+		$this->data['entry_order_status'] = $this->language->get('entry_order_status');		
 		$this->data['entry_status'] = $this->language->get('entry_status');
 		$this->data['entry_sort_order'] = $this->language->get('entry_sort_order');
-
 		$this->data['entry_cod'] = $this->language->get('entry_cod');
 		$this->data['entry_cod_help'] = $this->language->get('entry_cod_help');
 
@@ -132,6 +128,12 @@ class Controllerpaymentalipaydirect extends Controller {
 			$this->data['alipay_direct_status'] = $this->request->post['alipay_direct_status'];
 		} else {
 			$this->data['alipay_direct_status'] = $this->config->get('alipay_direct_status');
+		}
+
+		if (isset($this->request->post['alipay_direct_note'])) {
+			$this->data['alipay_direct_note'] = $this->request->post['alipay_direct_note'];
+		} else {
+			$this->data['alipay_direct_note'] = $this->config->get('alipay_direct_note');
 		}
 		
 		//排序

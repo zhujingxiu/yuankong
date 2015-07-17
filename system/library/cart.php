@@ -3,6 +3,7 @@ class Cart {
 	private $config;
 	private $db;
 	private $data = array();
+	private $checkout = array();
 	
   	public function __construct($registry) {
 		$this->config = $registry->get('config');
@@ -20,10 +21,13 @@ class Cart {
   	public function getProducts($checkout=false) {
   		if($checkout){
   			$cart_data = isset($this->session->data['checkout']) ? $this->session->data['checkout'] : array();
+  			$result = $this->checkout ;
   		}else{
   			$cart_data = $this->session->data['cart'];
+  			$result = $this->data ;
   		}
-		if (!$this->data) {
+
+		if (!$result) {
 			foreach ($cart_data as $key => $quantity) {
 				$product = explode(':', $key);
 				$product_id = $product[0];
@@ -31,7 +35,7 @@ class Cart {
 	
 				// Options
 				if (isset($product[1])) {
-					$options = unserialize(base64_decode($product[1]));
+					$options = mb_unserialize(base64_decode($product[1]));
 				} else {
 					$options = array();
 				} 
@@ -222,7 +226,7 @@ class Cart {
 						$stock = false;
 					}
 					
-					$this->data[$key] = array(
+					$result[$key] = array(
 						'key'             => $key,
 						'product_id'      => $product_query->row['product_id'],
 						'name'            => $product_query->row['name'],
@@ -247,13 +251,18 @@ class Cart {
 						'height'          => $product_query->row['height'],
 						'length_class_id' => $product_query->row['length_class_id']					
 					);
+					if($checkout){
+						$this->checkout = $result;
+					}else{
+						$this->data = $result;
+					}
 				} else {
 					$this->remove($key);
 				}
 			}
 		}
 		
-		return $this->data;
+		return $checkout ? $this->checkout : $this->data;
   	}
 		  
   	public function add($product_id, $qty = 1, $option = array()) {
@@ -284,17 +293,29 @@ class Cart {
 		$this->data = array();
   	}
 
-  	public function remove($key) {
-		if (isset($this->session->data['cart'][$key])) {
-     		unset($this->session->data['cart'][$key]);
-  		}
-		
-		$this->data = array();
+  	public function remove($key,$checkout=false) {
+  		if($checkout){
+  			if (isset($this->session->data['checkout'][$key])) {
+	     		unset($this->session->data['checkout'][$key]);
+	  		}
+	  		$this->checkout = array();
+  		}else{
+			if (isset($this->session->data['cart'][$key])) {
+	     		unset($this->session->data['cart'][$key]);
+	  		}
+			
+			$this->data = array();
+		}
 	}
 	
-  	public function clear() {
-		$this->session->data['cart'] = array();
-		$this->data = array();
+  	public function clear($checkout=false) {
+  		if($checkout){
+			$this->session->data['checkout'] = array();
+			$this->checkout = array();
+  		}else{
+			$this->session->data['cart'] = array();
+			$this->data = array();
+		}
   	}
 	
   	public function getWeight($checkout=false) {
@@ -361,8 +382,8 @@ class Cart {
 		return $product_total;
 	}
 	  
-  	public function hasProducts() {
-    	return count($this->session->data['cart']);
+  	public function hasProducts($checkout=false) {
+    	return $checkout ? count($this->session->data['checkout']) : count($this->session->data['cart']);
   	}
   
   	public function hasStock($checkout=false) {

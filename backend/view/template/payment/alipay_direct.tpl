@@ -11,11 +11,11 @@
   <div class="box">
     <div class="heading">
       <h1><img src="view/image/payment.png" alt="" /> <?php echo $heading_title; ?></h1>
-      <div class="buttons"><a onclick="$('#form').submit();" class="button"><?php echo $button_save; ?></a><a href="<?php echo $cancel; ?>" class="button"><?php echo $button_cancel; ?></a></div>
+      <div class="buttons"><a onclick="$('#form-alipay').submit();" class="button"><?php echo $button_save; ?></a><a href="<?php echo $cancel; ?>" class="button"><?php echo $button_cancel; ?></a></div>
     </div>
     
     <div class="content">
-      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form-cod" class="form-horizontal">
+      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form-alipay" class="form-horizontal">
         <table class="form">  
           <tr>
             <td>
@@ -49,7 +49,7 @@
             </div>
           </tr>
           <tr>
-            <td class="col-sm-2 control-label" for="input-order-status"><?php echo $entry_order_status; ?></label>
+            <td for="input-order-status"><?php echo $entry_order_status; ?></label>
             </td>
             <td>
               <select name="alipay_direct_order_status_id" id="input-order-status">
@@ -64,7 +64,7 @@
             </div>          
           </tr>
           <tr>
-            <td class="col-sm-2 control-label" for="input-status"><?php echo $entry_status; ?></label>
+            <td for="input-status"><?php echo $entry_status; ?></label>
             </td>
             <td>
               <select name="alipay_direct_status" id="input-status">
@@ -79,7 +79,14 @@
             </div>
           </tr>
           <tr>
-            <td class="col-sm-2 control-label" for="alipay_direct_sort_order"><?php echo $entry_sort_order; ?></label>
+            <td for="alipay_direct_note"><?php echo $entry_note; ?></label>
+            </td>
+            <td>
+              <input type="text" name="alipay_direct_note" value="<?php echo $alipay_direct_note; ?>" placeholder="<?php echo $entry_note; ?>" id="alipay_direct_note" />
+            </div>
+          </tr>
+          <tr>
+            <td for="alipay_direct_sort_order"><?php echo $entry_sort_order; ?></label>
             </td>
             <td>
               <input type="text" name="alipay_direct_sort_order" value="<?php echo $alipay_direct_sort_order; ?>" placeholder="<?php echo $entry_sort_order; ?>" id="alipay_direct_sort_order" />

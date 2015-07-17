@@ -8,7 +8,7 @@ class ControllerCheckoutCart extends Controller {
 		if (!isset($this->session->data['vouchers'])) {
 			$this->session->data['vouchers'] = array();
 		}
-		
+		$this->session->data['checkout'] = array();
 		// Update
 		if (!empty($this->request->post['quantity'])) {
 			foreach ($this->request->post['quantity'] as $key => $value) {

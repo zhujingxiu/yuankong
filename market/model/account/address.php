@@ -1,7 +1,21 @@
 <?php
 class ModelAccountAddress extends Model {
 	public function addAddress($data) {
-		$this->db->query("INSERT INTO " . DB_PREFIX . "address SET customer_id = '" . (int)$this->customer->getId() . "', firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', company = '" . $this->db->escape($data['company']) . "', company_id = '" . $this->db->escape(isset($data['company_id']) ? $data['company_id'] : '') . "', tax_id = '" . $this->db->escape(isset($data['tax_id']) ? $data['tax_id'] : '') . "', address_1 = '" . $this->db->escape($data['address_1']) . "', address_2 = '" . $this->db->escape($data['address_2']) . "', postcode = '" . $this->db->escape($data['postcode']) . "', city = '" . $this->db->escape($data['city']) . "', zone_id = '" . (int)$data['zone_id'] . "', country_id = '" . (int)$data['country_id'] . "'");
+		$fields = array(
+			'customer_id' 	=> $this->customer->getId(),
+			'nickname'		=> isset($data['nickname']) ? $data['nickname'] : '',
+			'firstname'		=> isset($data['firstname']) ? $data['firstname'] : '',
+			'lastname'		=> isset($data['lastname']) ? $data['lastname'] : '',
+			'company'		=> isset($data['company']) ? $data['company'] : '',
+			'tax_id'		=> isset($data['tax_id']) ? $data['tax_id'] : '',
+			'mobile_phone'	=> $data['mobile_phone'],
+			'address_1'		=> $data['address_1'],
+			'address_2'		=> isset($data['address_2']) ? $data['address_2'] : '',
+			'postcode'		=> isset($data['postcode']) ? $data['postcode'] : '',
+			'zone_id'		=> isset($data['zone_id']) ? $data['zone_id'] : '',
+			'areas'			=> isset($data['area']) && is_array($data['area']) ? implode("|", $data['area']) : '',
+		);
+		$this->db->insert("address", $fields);
 		
 		$address_id = $this->db->getLastId();
 		
@@ -13,7 +27,21 @@ class ModelAccountAddress extends Model {
 	}
 	
 	public function editAddress($address_id, $data) {
-		$this->db->query("UPDATE " . DB_PREFIX . "address SET firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', company = '" . $this->db->escape($data['company']) . "', company_id = '" . $this->db->escape(isset($data['company_id']) ? $data['company_id'] : '') . "', tax_id = '" . $this->db->escape(isset($data['tax_id']) ? $data['tax_id'] : '') . "', address_1 = '" . $this->db->escape($data['address_1']) . "', address_2 = '" . $this->db->escape($data['address_2']) . "', postcode = '" . $this->db->escape($data['postcode']) . "', city = '" . $this->db->escape($data['city']) . "', zone_id = '" . (int)$data['zone_id'] . "', country_id = '" . (int)$data['country_id'] . "' WHERE address_id  = '" . (int)$address_id . "' AND customer_id = '" . (int)$this->customer->getId() . "'");
+		$fields = array(
+			'customer_id' 	=> $this->customer->getId(),
+			'nickname'		=> isset($data['nickname']) ? $data['nickname'] : '',
+			'firstname'		=> isset($data['firstname']) ? $data['firstname'] : '',
+			'lastname'		=> isset($data['lastname']) ? $data['lastname'] : '',
+			'company'		=> isset($data['company']) ? $data['company'] : '',
+			'tax_id'		=> isset($data['tax_id']) ? $data['tax_id'] : '',
+			'mobile_phone'	=> $data['mobile_phone'],
+			'address_1'		=> $data['address_1'],
+			'address_2'		=> isset($data['address_2']) ? $data['address_2'] : '',
+			'postcode'		=> isset($data['postcode']) ? $data['postcode'] : '',
+			'zone_id'		=> isset($data['zone_id']) ? $data['zone_id'] : '',
+			'areas'			=> isset($data['area']) && is_array($data['area']) ? implode("|", $data['area']) : '',
+		);
+		$this->db->update("address",array('address_id' => (int)$address_id,'customer_id' => (int)$this->customer->getId()), $fields);
 	
 		if (!empty($data['default'])) {
 			$this->db->query("UPDATE " . DB_PREFIX . "customer SET address_id = '" . (int)$address_id . "' WHERE customer_id = '" . (int)$this->customer->getId() . "'");
@@ -28,19 +56,6 @@ class ModelAccountAddress extends Model {
 		$address_query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "address WHERE address_id = '" . (int)$address_id . "' AND customer_id = '" . (int)$this->customer->getId() . "'");
 		
 		if ($address_query->num_rows) {
-			$country_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "country` WHERE country_id = '" . (int)$address_query->row['country_id'] . "'");
-			
-			if ($country_query->num_rows) {
-				$country = $country_query->row['name'];
-				$iso_code_2 = $country_query->row['iso_code_2'];
-				$iso_code_3 = $country_query->row['iso_code_3'];
-				$address_format = $country_query->row['address_format'];
-			} else {
-				$country = '';
-				$iso_code_2 = '';
-				$iso_code_3 = '';	
-				$address_format = '';
-			}
 			
 			$zone_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "zone` WHERE zone_id = '" . (int)$address_query->row['zone_id'] . "'");
 			
@@ -50,7 +65,16 @@ class ModelAccountAddress extends Model {
 			} else {
 				$zone = '';
 				$zone_code = '';
-			}		
+			}	
+
+			$areas = explode("|", $address_query->row['areas']);
+			$area = array();
+			foreach ($areas as $key => $area_id) {
+				if($area_id){
+					$info = $this->db->query("SELECT name FROM ".DB_PREFIX."area WHERE area_id = '".$area_id."'");
+					$area[] = empty($info->row['name']) ? '' : $info->row['name'];
+				}
+			}	
 			
 			$address_data = array(
 				'nickname'      => $address_query->row['nickname'],
@@ -58,20 +82,15 @@ class ModelAccountAddress extends Model {
 				'lastname'       => $address_query->row['lastname'],
 				'mobile_phone'   => $address_query->row['mobile_phone'],
 				'company'        => $address_query->row['company'],
-				'company_id'     => $address_query->row['company_id'],
 				'tax_id'         => $address_query->row['tax_id'],
 				'address_1'      => $address_query->row['address_1'],
 				'address_2'      => $address_query->row['address_2'],
 				'postcode'       => $address_query->row['postcode'],
-				'city'           => $address_query->row['city'],
 				'zone_id'        => $address_query->row['zone_id'],
 				'zone'           => $zone,
 				'zone_code'      => $zone_code,
-				'country_id'     => $address_query->row['country_id'],
-				'country'        => $country,	
-				'iso_code_2'     => $iso_code_2,
-				'iso_code_3'     => $iso_code_3,
-				'address_format' => $address_format
+				'address_format' => $address_format,
+				'areas'			 => implode(" ", $area)
 			);
 			
 			return $address_data;
@@ -86,19 +105,6 @@ class ModelAccountAddress extends Model {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "address WHERE customer_id = '" . (int)$this->customer->getId() . "'");
 	
 		foreach ($query->rows as $result) {
-			$country_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "country` WHERE country_id = '" . (int)$result['country_id'] . "'");
-			
-			if ($country_query->num_rows) {
-				$country = $country_query->row['name'];
-				$iso_code_2 = $country_query->row['iso_code_2'];
-				$iso_code_3 = $country_query->row['iso_code_3'];
-				$address_format = $country_query->row['address_format'];
-			} else {
-				$country = '';
-				$iso_code_2 = '';
-				$iso_code_3 = '';	
-				$address_format = '';
-			}
 			
 			$zone_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "zone` WHERE zone_id = '" . (int)$result['zone_id'] . "'");
 			
@@ -109,28 +115,32 @@ class ModelAccountAddress extends Model {
 				$zone = '';
 				$zone_code = '';
 			}		
+
+			$areas = explode("|", $result['areas']);
+			$area = array();
+			foreach ($areas as $key => $area_id) {
+				if($area_id){
+					$info = $this->db->query("SELECT name FROM ".DB_PREFIX."area WHERE area_id = '".$area_id."'");
+					$area[] = empty($info->row['name']) ? '' : $info->row['name'];
+				}
+			}
 		
 			$address_data[$result['address_id']] = array(
 				'address_id'     => $result['address_id'],
-				'nickname'      => $result['nickname'],
+				'nickname'       => $result['nickname'],
 				'firstname'      => $result['firstname'],
 				'lastname'       => $result['lastname'],
 				'mobile_phone'   => $result['mobile_phone'],
 				'company'        => $result['company'],
-				'company_id'     => $result['company_id'],
 				'tax_id'         => $result['tax_id'],				
 				'address_1'      => $result['address_1'],
 				'address_2'      => $result['address_2'],
 				'postcode'       => $result['postcode'],
-				'city'           => $result['city'],
 				'zone_id'        => $result['zone_id'],
 				'zone'           => $zone,
 				'zone_code'      => $zone_code,
-				'country_id'     => $result['country_id'],
-				'country'        => $country,	
-				'iso_code_2'     => $iso_code_2,
-				'iso_code_3'     => $iso_code_3,
-				'address_format' => $address_format
+				'address_format' => $address_format,
+				'areas'			 => implode(" ", $area)
 			);
 		}		
 		

@@ -2,13 +2,14 @@
 class ControllerCheckoutCheckout extends Controller { 
 	public function index() {
 		// Validate cart has products and has stock.
-		if ((!$this->cart->hasProducts() && empty($this->session->data['vouchers'])) || (!$this->cart->hasStock() && !$this->config->get('config_stock_checkout'))) {
+		if ((!$this->cart->hasProducts(true) && empty($this->session->data['vouchers'])) || (!$this->cart->hasStock(true) && !$this->config->get('config_stock_checkout'))) {
+	  		
 	  		$this->redirect($this->url->link('checkout/cart'));
     	}	
 		
 		// Validate minimum quantity requirments.			
 		$products = $this->cart->getProducts(true);
-				
+
 		foreach ($products as $product) {
 			$product_total = 0;
 				
@@ -89,12 +90,17 @@ class ControllerCheckoutCheckout extends Controller {
 	    $this->data['heading_title'] = $this->language->get('heading_title');
 		
 		$this->data['button_remove'] = $this->language->get('button_remove');
+		
 		$this->data['text_checkout_account'] = $this->language->get('text_checkout_account');
-		$this->data['text_checkout_payment_address'] = $this->language->get('text_checkout_payment_address');
+		$this->data['text_address_new'] = $this->language->get('text_address_new');
 		$this->data['text_checkout_shipping_address'] = $this->language->get('text_checkout_shipping_address');
-		$this->data['text_checkout_shipping_method'] = $this->language->get('text_checkout_shipping_method');
-		$this->data['text_checkout_payment_method'] = $this->language->get('text_checkout_payment_method');		
+		$this->data['text_checkout_payment_method'] = $this->language->get('text_checkout_payment_method');	
+
+		$this->data['text_checkout_product'] = $this->language->get('text_checkout_product');
+		$this->data['text_checkout_payment'] = $this->language->get('text_checkout_payment');
 		$this->data['text_checkout_confirm'] = $this->language->get('text_checkout_confirm');
+		$this->data['text_checkout_shipping'] = $this->language->get('text_checkout_shipping');
+		$this->data['text_finished_payment'] = $this->language->get('text_finished_payment');
 		$this->data['text_modify'] = $this->language->get('text_modify');
 		
 		$this->data['logged'] = $this->customer->isLogged();
@@ -245,6 +251,61 @@ class ControllerCheckoutCheckout extends Controller {
 			$this->data['checkout_total'] = array('');
 		}
 		$this->data['other_totals'] = $totals;
+
+		//payment
+		$payment_address = $this->model_account_address->getAddress($this->data['address_id']);		
+
+		if (!empty($payment_address)) {
+			
+			// Payment Methods
+			$method_data = array();
+						
+			$results = $this->model_setting_extension->getExtensions('payment');
+
+			foreach ($results as $result) {
+				if ($this->config->get($result['code'] . '_status')) {
+					$this->load->model('payment/' . $result['code']);
+					
+					$method = $this->{'model_payment_' . $result['code']}->getMethod($payment_address, $total);
+					
+					if ($method) {
+                        $method_data[$result['code']] = $method;                        
+					}
+				}
+			}
+
+			$sort_order = array(); 
+		  
+			foreach ($method_data as $key => $value) {
+				$sort_order[$key] = $value['sort_order'];
+			}
+	
+			array_multisort($sort_order, SORT_ASC, $method_data);			
+
+			$this->session->data['payment_methods'] = $method_data;	
+		}
+
+		$this->data['text_payment_method'] = $this->language->get('text_payment_method');
+		$this->data['text_comments'] = $this->language->get('text_comments');
+
+		if (isset($this->session->data['payment_methods'])) {
+			$this->data['payment_methods'] = $this->session->data['payment_methods']; 
+		} else {
+			$this->data['payment_methods'] = array();
+		}
+
+		if (isset($this->session->data['payment_method']['code'])) {
+			$this->data['payment_code'] = $this->session->data['payment_method']['code'];
+		} else {
+			$this->data['payment_code'] = '';
+		}
+		
+		if (isset($this->session->data['comment'])) {
+			$this->data['comment'] = $this->session->data['comment'];
+		} else {
+			$this->data['comment'] = '';
+		}
+
 
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/checkout/checkout.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/checkout/checkout.tpl';

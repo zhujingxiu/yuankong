@@ -87,7 +87,9 @@ class ControllerCommonHeader extends Controller {
 		} else {
 			$this->data['search'] = '';
 		}
-		
+		if (!isset($this->session->data['checkout'])) {
+			$this->session->data['checkout'] = array();
+		}
 		// Menu
 		$this->load->model('catalog/category');
 		

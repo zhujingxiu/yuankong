@@ -91,7 +91,7 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
   </div>
 <div id="content" class="mt20">
     <div class="order-w">
-        <h3><b>确认收货地址</b></h3>
+        <h3><b><?php echo $text_checkout_shipping ?></b></h3>
         <ul class="order-ul">
             <?php $n=0; foreach ($addresses as $key => $item) { ?>
              <li class="order-li-adess fix <?php echo !$n ? 'adress-show' : '' ?>">
@@ -99,7 +99,7 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
                 <label>寄送至</label>
                 <div class="adress-new">
                     <input type="radio" class="adress-radio" name="shipping_address_id" value="<?php echo $item['address_id'] ?>" <?php echo !$n ? 'checked="checked"' : '' ?>/>
-                    江苏省 南京市 玄武区 <?php echo $item['address_1'] ?>
+                    <?php echo $item['areas'] ?> <?php echo $item['address_1'] ?>
                     <em class="pl10 c8"><?php echo $item['mobile_phone'] ?></em>
                     <em class="pl10 c8"><?php echo $item['nickname'] ?></em>
                 </div>
@@ -109,32 +109,31 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
         <div class="new-adress">
             <div class="ovh">
                 <input type="radio" class="adress-radio" name="shipping_address_id" value="0" />
-                <label>新增新地址</label>
+                <label><?php echo $text_address_new ?></label>
             </div>
             <div class="newadress-box">
                 <ul>
                     <li class="item-adress" id="area">
-                        <label>收货地址：</label>
-                        
+                        <label>收货地址：</label>                        
                     </li>
                     <li class="item-adress">
                         <label>详细地址：</label>
-                        <input type="text" class="text-box w350" value="" />
+                        <input type="text" class="text-box w350" value="" name="address_1" />
                     </li>
                     <li class="item-adress">
                         <label>收货人姓名：</label>
-                        <input type="text" class="text-box w210" value="" />
+                        <input type="text" class="text-box w210" name="nickname" value="" />
                     </li>
                     <li class="item-adress">
                         <label>手机号码：</label>
-                        <input type="text" class="text-box w210" value="" />
+                        <input type="text" class="text-box w210" name="mobile_phone" value="<?php echo $this->customer->getMobilePhone() ?>" />
                     </li>
                 </ul>
             </div>
         </div>
     </div>
 	<div class="order-w">
-        <h3><b>核对产品信息</b></h3>
+        <h3><b><?php echo $text_checkout_product ?></b></h3>
         <div class="ovh p15">
             <table class="cart-table">
                 <thead>
@@ -152,7 +151,9 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
                         <td class="name">
                             <div class="ovh">
                                 <?php if ($product['thumb']) { ?>
-                                <a class="shop-pic" href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" title="<?php echo $product['name']; ?>" /></a>
+                                <a class="shop-pic" href="<?php echo $product['href']; ?>">
+                                    <img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" title="<?php echo $product['name']; ?>" />
+                                </a>
                                 <?php } ?>
                                 <span class="shop-name">
                                     <a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a>
@@ -193,13 +194,13 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
                 </tbody>
             </table>
             <div class="mt10">
-                <h5 class="c3 f_m">给卖家留言</h5>
+                <h5 class="c3 f_m"><?php echo $text_comments ?></h5>
                 <textarea class="liuy-tarea" name="comment"></textarea>
             </div>
             </div>
         </div>
         <div class="order-w">
-            <h3><b>费用确认并支付</b></h3>
+            <h3><b><?php echo $text_checkout_confirm ?></b></h3>
             <div class="ovh p15">
                 <ul class="order-item-ul">
                     <li class="all-money">
@@ -214,17 +215,20 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
                             +
                             <?php } ?>
                         <?php endforeach ?>
-                        
-                        
-                        
                     </li>
                     <li class="all-money">
-                        <strong>支付方式：</strong>
-                        <input type="radio" name="a-pay" checked="checked" />支付宝
-                        <span class="pl10">（支持全国85家银行、信用卡、网银在线支付）</span>
+                        <strong><?php echo $text_checkout_payment ?></strong>
+                        <?php $n = 0;foreach ($payment_methods as $payment): ?>
+                        <input type="radio" name="payment_code" value="<?php echo $payment['code'] ?>" <?php echo !$n ? 'checked="checked"' : '' ?> />
+                        <?php echo $payment['title'] ?>
+                        <?php if(isset($payment['note'])){ ?>
+                        <span class="pl10"><?php echo $payment['note'] ?></span>
+                        <?php }?>
+                        <?php $n++; endforeach ?>
+                        
                     </li>
                     <li>
-                        <em class="c_r l">*</em>支付成功后，我们会在7个工作日内发货。
+                        <?php echo $text_finished_payment ?>
                     </li>
                     <li class="mt10">
                         <div class="w210"><input type="submit" class="gc-tab-sub" value="提交订单" /></div> 
@@ -254,9 +258,7 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
         $('body').on('change', '#area select', function() {
             var $me = $(this);
             var $next = $me.next();
-            /**
-             * 如果下一级已经是当前所选地区的子地区，则不进行处理
-             */
+
             if ($me.val() == $next.data('pid')) {
                 return;
             }
@@ -276,7 +278,7 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
             $select.data('pid', pid);
             if (area_codes[0] != -1) {
                 area_names.unshift('请选择');
-                area_codes.unshift(-1);
+                area_codes.unshift(0);
             }
             for (var idx in area_codes) {
                 var $option = $('<option>');

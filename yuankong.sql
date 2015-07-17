@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2015 年 07 月 17 日 09:41
+-- 生成日期: 2015 年 07 月 17 日 16:33
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.4.3
 
@@ -34,25 +34,24 @@ CREATE TABLE IF NOT EXISTS `yk_address` (
   `lastname` varchar(32) NOT NULL,
   `mobile_phone` varchar(16) DEFAULT NULL,
   `company` varchar(32) NOT NULL,
-  `company_id` varchar(32) NOT NULL,
   `tax_id` varchar(32) NOT NULL,
   `address_1` varchar(128) NOT NULL,
   `address_2` varchar(128) NOT NULL,
-  `city` varchar(128) NOT NULL,
   `postcode` varchar(10) NOT NULL,
-  `country_id` int(11) NOT NULL DEFAULT '0',
   `zone_id` int(11) NOT NULL DEFAULT '0',
+  `areas` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`address_id`),
   KEY `customer_id` (`customer_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- 转存表中的数据 `yk_address`
 --
 
-INSERT INTO `yk_address` (`address_id`, `customer_id`, `nickname`, `firstname`, `lastname`, `mobile_phone`, `company`, `company_id`, `tax_id`, `address_1`, `address_2`, `city`, `postcode`, `country_id`, `zone_id`) VALUES
-(1, 2, '朱景修', '', '', '18850911766', '', '', '', '黄石镇丁庄村', '', '', '', 0, 0),
-(2, 2, '朱景修', '', '', '18959526595', '', '', '', '黄石镇定庄村浊影中', '', '', '', 0, 0);
+INSERT INTO `yk_address` (`address_id`, `customer_id`, `nickname`, `firstname`, `lastname`, `mobile_phone`, `company`, `tax_id`, `address_1`, `address_2`, `postcode`, `zone_id`, `areas`) VALUES
+(1, 2, '朱景修', '', '', '18850911766', '', '', '黄石镇丁庄村', '', '', 0, '16|1329|46147'),
+(2, 2, '朱景修', '', '', '18959526595', '', '', '黄石镇定庄村浊影中', '', '', 0, '16|1329|46147'),
+(3, 2, '林琼', '', '', '18959526595', '', '', '黄石镇定庄村浊影中', '', '', 0, '16|1329|46147');
 
 -- --------------------------------------------------------
 
@@ -158,35 +157,35 @@ CREATE TABLE IF NOT EXISTS `yk_area` (
 --
 
 INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
-(1, 0, '北京', 1, 0),
-(2, 0, '上海', 1, 0),
-(3, 0, '天津', 1, 0),
-(4, 0, '重庆', 1, 0),
-(5, 0, '河北', 1, 0),
-(6, 0, '山西', 1, 0),
-(7, 0, '河南', 1, 0),
-(8, 0, '辽宁', 1, 0),
-(9, 0, '吉林', 1, 0),
-(10, 0, '黑龙江', 1, 0),
-(11, 0, '内蒙古', 1, 0),
-(12, 0, '江苏', 1, 0),
-(13, 0, '山东', 1, 0),
-(14, 0, '安徽', 1, 0),
-(15, 0, '浙江', 1, 0),
-(16, 0, '福建', 1, 0),
-(17, 0, '湖北', 1, 0),
-(18, 0, '湖南', 1, 0),
-(19, 0, '广东', 1, 0),
-(20, 0, '广西', 1, 0),
-(21, 0, '江西', 1, 0),
-(22, 0, '四川', 1, 0),
-(23, 0, '海南', 1, 0),
-(24, 0, '贵州', 1, 0),
-(25, 0, '云南', 1, 0),
-(27, 0, '陕西', 1, 0),
-(28, 0, '甘肃', 1, 0),
-(29, 0, '青海', 1, 0),
-(30, 0, '宁夏', 1, 0),
+(1, 0, '北京市', 1, 0),
+(2, 0, '上海市', 1, 0),
+(3, 0, '天津市', 1, 0),
+(4, 0, '重庆市', 1, 0),
+(5, 0, '河北省', 1, 14),
+(6, 0, '山西省', 1, 13),
+(7, 0, '河南省', 1, 12),
+(8, 0, '辽宁省', 1, 15),
+(9, 0, '吉林省', 1, 16),
+(10, 0, '黑龙江省', 1, 17),
+(11, 0, '内蒙古', 1, 18),
+(12, 0, '江苏省', 1, 1),
+(13, 0, '山东省', 1, 4),
+(14, 0, '安徽省', 1, 3),
+(15, 0, '浙江省', 1, 2),
+(16, 0, '福建省', 1, 5),
+(17, 0, '湖北省', 1, 6),
+(18, 0, '湖南省', 1, 8),
+(19, 0, '广东省', 1, 9),
+(20, 0, '广西省', 1, 10),
+(21, 0, '江西省', 1, 7),
+(22, 0, '四川省', 1, 11),
+(23, 0, '海南省', 1, 25),
+(24, 0, '贵州省', 1, 24),
+(25, 0, '云南省', 1, 21),
+(27, 0, '陕西省', 1, 19),
+(28, 0, '甘肃省', 1, 20),
+(29, 0, '青海省', 1, 21),
+(30, 0, '宁夏省', 1, 22),
 (72, 1, '朝阳区', 1, 0),
 (78, 2, '黄浦区', 1, 0),
 (79, 78, '内环以内', 1, 0),
@@ -815,54 +814,54 @@ INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
 (900, 895, '科尔沁右翼前旗', 1, 0),
 (901, 895, '科尔沁右翼中旗', 1, 0),
 (902, 11, '通辽市', 1, 0),
-(904, 12, '南京市', 1, 0),
+(904, 12, '南京市', 1, 1),
 (905, 904, '江宁区', 1, 0),
 (907, 904, '高淳区', 1, 0),
 (908, 904, '六合区', 1, 0),
-(911, 12, '徐州市', 1, 0),
+(911, 12, '徐州市', 1, 10),
 (914, 911, '铜山区', 1, 0),
 (915, 911, '睢宁县', 1, 0),
 (916, 911, '沛县', 1, 0),
 (917, 911, '丰县', 1, 0),
-(919, 12, '连云港市', 1, 0),
+(919, 12, '连云港市', 1, 11),
 (920, 919, '赣榆县', 1, 0),
 (921, 919, '灌云县', 1, 0),
 (922, 919, '东海县', 1, 0),
 (923, 919, '灌南县', 1, 0),
-(925, 12, '淮安市', 1, 0),
+(925, 12, '淮安市', 1, 12),
 (926, 925, '楚州区', 1, 0),
 (929, 925, '洪泽县', 1, 0),
 (930, 925, '金湖县', 1, 0),
 (931, 925, '盱眙县', 1, 0),
-(933, 12, '宿迁市', 1, 0),
+(933, 12, '宿迁市', 1, 13),
 (934, 933, '宿豫区', 1, 0),
 (937, 933, '泗洪县', 1, 0),
-(939, 12, '盐城市', 1, 0),
+(939, 12, '盐城市', 1, 9),
 (940, 939, '东台市', 1, 0),
 (941, 939, '大丰市', 1, 0),
 (945, 939, '建湖县', 1, 0),
 (946, 939, '响水县', 1, 0),
 (948, 939, '阜宁县', 1, 0),
 (949, 939, '滨海县', 1, 0),
-(951, 12, '扬州市', 1, 0),
+(951, 12, '扬州市', 1, 8),
 (955, 951, '广陵区', 1, 0),
 (956, 951, '邗江区', 1, 0),
 (957, 951, '宝应县', 1, 0),
-(959, 12, '泰州市', 1, 0),
+(959, 12, '泰州市', 1, 7),
 (960, 959, '泰兴市', 1, 0),
 (962, 959, '靖江市', 1, 0),
 (963, 959, '兴化市', 1, 0),
-(965, 12, '南通市', 1, 0),
+(965, 12, '南通市', 1, 6),
 (967, 965, '通州区', 1, 0),
 (970, 965, '如东县', 1, 0),
-(972, 12, '镇江市', 1, 0),
+(972, 12, '镇江市', 1, 5),
 (973, 972, '扬中市', 1, 0),
 (976, 972, '丹徒区', 1, 0),
-(978, 12, '常州市', 1, 0),
+(978, 12, '常州市', 1, 4),
 (980, 978, '金坛市', 1, 0),
 (981, 978, '溧阳市', 1, 0),
-(984, 12, '无锡市', 1, 0),
-(988, 12, '苏州市', 1, 0),
+(984, 12, '无锡市', 1, 3),
+(988, 12, '苏州市', 1, 2),
 (993, 988, '常熟市', 1, 0),
 (994, 988, '张家港市', 1, 0),
 (1000, 13, '济南市', 1, 0),
@@ -1815,12 +1814,12 @@ INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
 (2296, 2291, '永德县', 1, 0),
 (2297, 2291, '耿马县', 1, 0),
 (2298, 25, '保山市', 1, 0),
-(2299, 2298, '隆阳区', 1, 0),
+(2299, 2298, '隆阳区', 1, 0);
+INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
 (2300, 2298, '施甸县', 1, 0),
 (2301, 2298, '昌宁县', 1, 0),
 (2302, 2298, '龙陵县', 1, 0),
-(2303, 2298, '腾冲县', 1, 0);
-INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
+(2303, 2298, '腾冲县', 1, 0),
 (2304, 25, '丽江市', 1, 0),
 (2305, 2304, '玉龙县', 1, 0),
 (2306, 2304, '华坪县', 1, 0),
@@ -3415,12 +3414,12 @@ INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
 (6120, 1116, '新站综合开发试验区', 1, 0),
 (6219, 1687, '白石镇', 1, 0),
 (6220, 1687, '北界镇', 1, 0),
-(6221, 1687, '茶山镇', 1, 0),
+(6221, 1687, '茶山镇', 1, 0);
+INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
 (6222, 1687, '池洞镇', 1, 0),
 (6223, 1687, '大成镇', 1, 0),
 (6224, 1687, '丁堡镇', 1, 0),
-(6226, 1687, '贵子镇', 1, 0);
-INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
+(6226, 1687, '贵子镇', 1, 0),
 (6227, 1687, '合水镇', 1, 0),
 (6228, 1687, '洪冠镇', 1, 0),
 (6229, 1687, '怀乡镇', 1, 0),
@@ -4999,12 +4998,12 @@ INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
 (10169, 135, '峰灵乡', 1, 0),
 (10170, 135, '花台乡', 1, 0),
 (10171, 135, '兰英乡', 1, 0),
-(10172, 135, '菱角乡', 1, 0),
+(10172, 135, '菱角乡', 1, 0);
+INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
 (10173, 135, '蒲莲乡', 1, 0),
 (10174, 135, '胜利乡', 1, 0),
 (10175, 135, '双阳乡', 1, 0),
-(10176, 135, '塘坊乡', 1, 0);
-INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
+(10176, 135, '塘坊乡', 1, 0),
 (10177, 135, '天星乡', 1, 0),
 (10178, 135, '天元乡', 1, 0),
 (10179, 135, '田坝乡', 1, 0),
@@ -6492,11 +6491,11 @@ INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
 (16467, 841, '贺斯格乌拉农牧场', 1, 0),
 (16468, 841, '宝格达乌拉总场', 1, 0),
 (16469, 841, '哈拉盖图农牧场', 1, 0),
-(16470, 841, '乌拉盖牧场', 1, 0),
+(16470, 841, '乌拉盖牧场', 1, 0);
+INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
 (16471, 840, '巴拉嘎尔高勒镇', 1, 0),
 (16472, 840, '浩勒图高勒镇', 1, 0),
-(16473, 840, '吉仁高勒镇', 1, 0);
-INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
+(16473, 840, '吉仁高勒镇', 1, 0),
 (16474, 840, '巴彦花镇', 1, 0),
 (16475, 840, '高日罕镇', 1, 0),
 (16476, 840, '巴彦胡舒苏木', 1, 0),
@@ -7970,11 +7969,11 @@ INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
 (21111, 3909, '艳山红镇', 1, 0),
 (21112, 3909, '麦架镇', 1, 0),
 (21113, 3909, '沙文镇', 1, 0),
-(21114, 3909, '都拉乡', 1, 0),
+(21114, 3909, '都拉乡', 1, 0);
+INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
 (21115, 3909, '牛场乡', 1, 0),
 (21121, 2146, '城关镇', 1, 0),
-(21122, 2146, '双流镇', 1, 0);
-INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
+(21122, 2146, '双流镇', 1, 0),
 (21123, 2146, '金中镇', 1, 0),
 (21124, 2146, '冯三镇', 1, 0),
 (21125, 2146, '龙岗镇', 1, 0),
@@ -9467,11 +9466,11 @@ INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
 (24547, 24069, '孤店子镇', 1, 0),
 (24548, 24069, '桦皮厂镇', 1, 0),
 (24549, 24069, '左家镇', 1, 0),
-(24550, 24069, '两家子乡', 1, 0),
+(24550, 24069, '两家子乡', 1, 0);
+INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
 (24551, 24069, '土城子乡', 1, 0),
 (24552, 24069, '哈达湾开发区', 1, 0),
-(24553, 24069, '幸福经济管理区', 1, 0);
-INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
+(24553, 24069, '幸福经济管理区', 1, 0),
 (24554, 24069, '东市商贸示范区', 1, 0),
 (24555, 24070, '泡子沿街道', 1, 0),
 (24556, 24070, '新吉林街道', 1, 0),
@@ -10970,11 +10969,11 @@ INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
 (28884, 3914, '永昌街道', 1, 0),
 (28885, 3914, '前卫街道', 1, 0),
 (28886, 3914, '福海街道', 1, 0),
-(28887, 3914, '碧鸡街道', 1, 0),
+(28887, 3914, '碧鸡街道', 1, 0);
+INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
 (28888, 3914, '团结街道', 1, 0),
 (28889, 3914, '海口街道', 1, 0),
-(28890, 3914, '棕树营街道', 1, 0);
-INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
+(28890, 3914, '棕树营街道', 1, 0),
 (28891, 3914, '滇池旅游区', 1, 0),
 (28920, 1108, '东港区', 1, 0),
 (28921, 1032, '潍城区', 1, 0),
@@ -12449,11 +12448,11 @@ INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
 (32802, 32769, '半截店牧场', 1, 0),
 (32803, 32769, '三义堂农场', 1, 0),
 (32804, 32769, '哲南农场', 1, 0),
-(32894, 3254, '大沁他拉镇', 1, 0),
+(32894, 3254, '大沁他拉镇', 1, 0);
+INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
 (32895, 3254, '沙日浩来镇', 1, 0),
 (32896, 3254, '黄花塔拉镇', 1, 0),
-(32897, 3254, '白音塔拉镇', 1, 0);
-INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
+(32897, 3254, '白音塔拉镇', 1, 0),
 (32898, 3254, '八仙筒镇', 1, 0),
 (32899, 3254, '青龙山镇', 1, 0),
 (32900, 3254, '土城子镇', 1, 0),
@@ -13966,11 +13965,11 @@ INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
 (35418, 476, '庆祖镇', 1, 0),
 (35419, 476, '文留镇', 1, 0),
 (35420, 476, '徐镇镇', 1, 0),
-(35421, 476, '清河头乡', 1, 0),
+(35421, 476, '清河头乡', 1, 0);
+INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
 (35422, 476, '王称固乡', 1, 0),
 (35423, 476, '白罡乡', 1, 0),
-(35424, 476, '海通乡', 1, 0);
-INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
+(35424, 476, '海通乡', 1, 0),
 (35425, 476, '胡状乡', 1, 0),
 (35426, 476, '郎中乡', 1, 0),
 (35427, 476, '梨园乡', 1, 0),
@@ -15480,11 +15479,11 @@ INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
 (38686, 38576, '新皂镇', 1, 0),
 (38687, 38576, '磨家镇', 1, 0),
 (38688, 38576, '永兴镇', 1, 0),
-(38689, 38576, '金峰镇', 1, 0),
+(38689, 38576, '金峰镇', 1, 0);
+INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
 (38690, 38576, '玉皇镇', 1, 0),
 (38691, 38576, '河边镇', 1, 0),
-(38692, 38576, '城郊乡', 1, 0);
-INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
+(38692, 38576, '城郊乡', 1, 0),
 (38693, 38576, '石洞乡', 1, 0),
 (38694, 38630, '南站街道', 1, 0),
 (38695, 38630, '桂林街道', 1, 0),
@@ -17012,11 +17011,11 @@ INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
 (43460, 43226, '新复乡', 1, 0),
 (43461, 43226, '同仁乡', 1, 0),
 (43462, 43226, '大林乡', 1, 0),
-(43463, 43226, '梵殿乡', 1, 0),
+(43463, 43226, '梵殿乡', 1, 0);
+INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
 (43464, 43226, '顺河乡', 1, 0),
 (43465, 43226, '灯台乡', 1, 0),
-(43466, 43226, '辉景乡', 1, 0);
-INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
+(43466, 43226, '辉景乡', 1, 0),
 (43467, 43226, '龙桂乡', 1, 0),
 (43468, 43226, '永丰乡', 1, 0),
 (43469, 43226, '桂花乡', 1, 0),
@@ -18519,12 +18518,12 @@ INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
 (46328, 1331, '鲤南镇', 1, 0),
 (46329, 1331, '赖店镇', 1, 0),
 (46330, 1331, '盖尾镇', 1, 0),
-(46331, 1331, '园庄镇', 1, 0),
+(46331, 1331, '园庄镇', 1, 0);
+INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
 (46332, 1331, '大济镇', 1, 0),
 (46333, 1331, '龙华镇', 1, 0),
 (46334, 1331, '钟山镇', 1, 0),
-(46335, 1331, '游洋镇', 1, 0);
-INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
+(46335, 1331, '游洋镇', 1, 0),
 (46336, 1331, '西苑乡', 1, 0),
 (46337, 1331, '石苍乡', 1, 0),
 (46338, 1331, '社硎乡', 1, 0),
@@ -20017,12 +20016,12 @@ INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
 (49219, 1189, '石涧镇', 1, 0),
 (49221, 1189, '蜀山镇', 1, 0),
 (49223, 1189, '无城镇', 1, 0),
-(49225, 1189, '襄安镇', 1, 0),
+(49225, 1189, '襄安镇', 1, 0);
+INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
 (49227, 1189, '严桥镇', 1, 0),
 (49229, 1189, '姚沟镇', 1, 0),
 (49233, 1189, '鹤毛乡', 1, 0),
-(49234, 1189, '洪巷乡', 1, 0);
-INSERT INTO `yk_area` (`area_id`, `pid`, `name`, `status`, `sort`) VALUES
+(49234, 1189, '洪巷乡', 1, 0),
 (49235, 1189, '昆山乡', 1, 0),
 (49237, 1189, '十里墩乡', 1, 0),
 (49239, 1128, '城区', 1, 0),
@@ -22523,7 +22522,6 @@ INSERT INTO `yk_extension` (`extension_id`, `type`, `code`) VALUES
 (408, 'module', 'account'),
 (393, 'total', 'reward'),
 (398, 'total', 'voucher'),
-(407, 'payment', 'free_checkout'),
 (427, 'module', 'featured'),
 (430, 'module', 'themecontrol'),
 (439, 'module', 'yknews'),
@@ -23204,39 +23202,25 @@ CREATE TABLE IF NOT EXISTS `yk_order` (
   `store_url` varchar(255) NOT NULL,
   `customer_id` int(11) NOT NULL DEFAULT '0',
   `customer_group_id` int(11) NOT NULL DEFAULT '0',
+  `nickname` varchar(64) DEFAULT NULL,
   `firstname` varchar(32) NOT NULL,
   `lastname` varchar(32) NOT NULL,
-  `email` varchar(96) NOT NULL,
+  `mobile_phone` varchar(16) NOT NULL,
   `telephone` varchar(32) NOT NULL,
   `fax` varchar(32) NOT NULL,
-  `payment_firstname` varchar(32) NOT NULL,
-  `payment_lastname` varchar(32) NOT NULL,
-  `payment_company` varchar(32) NOT NULL,
-  `payment_company_id` varchar(32) NOT NULL,
-  `payment_tax_id` varchar(32) NOT NULL,
-  `payment_address_1` varchar(128) NOT NULL,
-  `payment_address_2` varchar(128) NOT NULL,
-  `payment_city` varchar(128) NOT NULL,
-  `payment_postcode` varchar(10) NOT NULL,
-  `payment_country` varchar(128) NOT NULL,
-  `payment_country_id` int(11) NOT NULL,
-  `payment_zone` varchar(128) NOT NULL,
-  `payment_zone_id` int(11) NOT NULL,
-  `payment_address_format` text NOT NULL,
   `payment_method` varchar(128) NOT NULL,
   `payment_code` varchar(128) NOT NULL,
+  `shipping_nickname` varchar(64) DEFAULT NULL,
+  `shipping_mobile_phone` varchar(16) DEFAULT NULL,
   `shipping_firstname` varchar(32) NOT NULL,
   `shipping_lastname` varchar(32) NOT NULL,
   `shipping_company` varchar(32) NOT NULL,
   `shipping_address_1` varchar(128) NOT NULL,
   `shipping_address_2` varchar(128) NOT NULL,
-  `shipping_city` varchar(128) NOT NULL,
   `shipping_postcode` varchar(10) NOT NULL,
-  `shipping_country` varchar(128) NOT NULL,
-  `shipping_country_id` int(11) NOT NULL,
   `shipping_zone` varchar(128) NOT NULL,
   `shipping_zone_id` int(11) NOT NULL,
-  `shipping_address_format` text NOT NULL,
+  `shipping_areas` varchar(64) DEFAULT NULL,
   `shipping_method` varchar(128) NOT NULL,
   `shipping_code` varchar(128) NOT NULL,
   `comment` text NOT NULL,
@@ -24019,7 +24003,7 @@ CREATE TABLE IF NOT EXISTS `yk_setting` (
   `value` text NOT NULL,
   `serialized` tinyint(1) NOT NULL,
   PRIMARY KEY (`setting_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1734 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1752 ;
 
 --
 -- 转存表中的数据 `yk_setting`
@@ -24033,12 +24017,9 @@ INSERT INTO `yk_setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `se
 (5, 0, 'total', 'total_sort_order', '9', 0),
 (6, 0, 'total', 'total_status', '1', 0),
 (7, 0, 'tax', 'tax_sort_order', '5', 0),
-(8, 0, 'free_checkout', 'free_checkout_sort_order', '1', 0),
-(9, 0, 'cod', 'cod_sort_order', '5', 0),
-(10, 0, 'cod', 'cod_total', '0.01', 0),
-(11, 0, 'cod', 'cod_order_status_id', '1', 0),
-(12, 0, 'cod', 'cod_geo_zone_id', '0', 0),
-(13, 0, 'cod', 'cod_status', '1', 0),
+(1749, 0, 'cod', 'cod_geo_zone_id', '0', 0),
+(1748, 0, 'cod', 'cod_order_status_id', '1', 0),
+(1747, 0, 'cod', 'cod_total', '0.01', 0),
 (14, 0, 'shipping', 'shipping_status', '1', 0),
 (15, 0, 'shipping', 'shipping_estimator', '1', 0),
 (27, 0, 'coupon', 'coupon_sort_order', '4', 0),
@@ -24060,8 +24041,8 @@ INSERT INTO `yk_setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `se
 (1720, 0, 'config', 'config_file_mime_allowed', 'text/plain\r\nimage/png\r\nimage/jpeg\r\nimage/jpeg\r\nimage/jpeg\r\nimage/gif\r\nimage/bmp\r\nimage/vnd.microsoft.icon\r\nimage/tiff\r\nimage/tiff\r\nimage/svg+xml\r\nimage/svg+xml\r\napplication/zip\r\napplication/x-rar-compressed\r\napplication/x-msdownload\r\napplication/vnd.ms-cab-compressed\r\naudio/mpeg\r\nvideo/quicktime\r\nvideo/quicktime\r\napplication/pdf\r\nimage/vnd.adobe.photoshop\r\napplication/postscript\r\napplication/postscript\r\napplication/postscript\r\napplication/msword\r\napplication/rtf\r\napplication/vnd.ms-excel\r\napplication/vnd.ms-powerpoint\r\napplication/vnd.oasis.opendocument.text\r\napplication/vnd.oasis.opendocument.spreadsheet', 0),
 (94, 0, 'voucher', 'voucher_sort_order', '8', 0),
 (95, 0, 'voucher', 'voucher_status', '1', 0),
-(103, 0, 'free_checkout', 'free_checkout_status', '1', 0),
-(104, 0, 'free_checkout', 'free_checkout_order_status_id', '1', 0),
+(1751, 0, 'cod', 'cod_sort_order', '5', 0),
+(1750, 0, 'cod', 'cod_status', '0', 0),
 (1715, 0, 'config', 'config_secure', '0', 0),
 (1716, 0, 'config', 'config_shared', '0', 0),
 (1717, 0, 'config', 'config_robots', 'abot\r\ndbot\r\nebot\r\nhbot\r\nkbot\r\nlbot\r\nmbot\r\nnbot\r\nobot\r\npbot\r\nrbot\r\nsbot\r\ntbot\r\nvbot\r\nybot\r\nzbot\r\nbot.\r\nbot/\r\n_bot\r\n.bot\r\n/bot\r\n-bot\r\n:bot\r\n(bot\r\ncrawl\r\nslurp\r\nspider\r\nseek\r\naccoona\r\nacoon\r\nadressendeutschland\r\nah-ha.com\r\nahoy\r\naltavista\r\nananzi\r\nanthill\r\nappie\r\narachnophilia\r\narale\r\naraneo\r\naranha\r\narchitext\r\naretha\r\narks\r\nasterias\r\natlocal\r\natn\r\natomz\r\naugurfind\r\nbackrub\r\nbannana_bot\r\nbaypup\r\nbdfetch\r\nbig brother\r\nbiglotron\r\nbjaaland\r\nblackwidow\r\nblaiz\r\nblog\r\nblo.\r\nbloodhound\r\nboitho\r\nbooch\r\nbradley\r\nbutterfly\r\ncalif\r\ncassandra\r\nccubee\r\ncfetch\r\ncharlotte\r\nchurl\r\ncienciaficcion\r\ncmc\r\ncollective\r\ncomagent\r\ncombine\r\ncomputingsite\r\ncsci\r\ncurl\r\ncusco\r\ndaumoa\r\ndeepindex\r\ndelorie\r\ndepspid\r\ndeweb\r\ndie blinde kuh\r\ndigger\r\nditto\r\ndmoz\r\ndocomo\r\ndownload express\r\ndtaagent\r\ndwcp\r\nebiness\r\nebingbong\r\ne-collector\r\nejupiter\r\nemacs-w3 search engine\r\nesther\r\nevliya celebi\r\nezresult\r\nfalcon\r\nfelix ide\r\nferret\r\nfetchrover\r\nfido\r\nfindlinks\r\nfireball\r\nfish search\r\nfouineur\r\nfunnelweb\r\ngazz\r\ngcreep\r\ngenieknows\r\ngetterroboplus\r\ngeturl\r\nglx\r\ngoforit\r\ngolem\r\ngrabber\r\ngrapnel\r\ngralon\r\ngriffon\r\ngromit\r\ngrub\r\ngulliver\r\nhamahakki\r\nharvest\r\nhavindex\r\nhelix\r\nheritrix\r\nhku www octopus\r\nhomerweb\r\nhtdig\r\nhtml index\r\nhtml_analyzer\r\nhtmlgobble\r\nhubater\r\nhyper-decontextualizer\r\nia_archiver\r\nibm_planetwide\r\nichiro\r\niconsurf\r\niltrovatore\r\nimage.kapsi.net\r\nimagelock\r\nincywincy\r\nindexer\r\ninfobee\r\ninformant\r\ningrid\r\ninktomisearch.com\r\ninspector web\r\nintelliagent\r\ninternet shinchakubin\r\nip3000\r\niron33\r\nisraeli-search\r\nivia\r\njack\r\njakarta\r\njavabee\r\njetbot\r\njumpstation\r\nkatipo\r\nkdd-explorer\r\nkilroy\r\nknowledge\r\nkototoi\r\nkretrieve\r\nlabelgrabber\r\nlachesis\r\nlarbin\r\nlegs\r\nlibwww\r\nlinkalarm\r\nlink validator\r\nlinkscan\r\nlockon\r\nlwp\r\nlycos\r\nmagpie\r\nmantraagent\r\nmapoftheinternet\r\nmarvin/\r\nmattie\r\nmediafox\r\nmediapartners\r\nmercator\r\nmerzscope\r\nmicrosoft url control\r\nminirank\r\nmiva\r\nmj12\r\nmnogosearch\r\nmoget\r\nmonster\r\nmoose\r\nmotor\r\nmultitext\r\nmuncher\r\nmuscatferret\r\nmwd.search\r\nmyweb\r\nnajdi\r\nnameprotect\r\nnationaldirectory\r\nnazilla\r\nncsa beta\r\nnec-meshexplorer\r\nnederland.zoek\r\nnetcarta webmap engine\r\nnetmechanic\r\nnetresearchserver\r\nnetscoop\r\nnewscan-online\r\nnhse\r\nnokia6682/\r\nnomad\r\nnoyona\r\nnutch\r\nnzexplorer\r\nobjectssearch\r\noccam\r\nomni\r\nopen text\r\nopenfind\r\nopenintelligencedata\r\norb search\r\nosis-project\r\npack rat\r\npageboy\r\npagebull\r\npage_verifier\r\npanscient\r\nparasite\r\npartnersite\r\npatric\r\npear.\r\npegasus\r\nperegrinator\r\npgp key agent\r\nphantom\r\nphpdig\r\npicosearch\r\npiltdownman\r\npimptrain\r\npinpoint\r\npioneer\r\npiranha\r\nplumtreewebaccessor\r\npogodak\r\npoirot\r\npompos\r\npoppelsdorf\r\npoppi\r\npopular iconoclast\r\npsycheclone\r\npublisher\r\npython\r\nrambler\r\nraven search\r\nroach\r\nroad runner\r\nroadhouse\r\nrobbie\r\nrobofox\r\nrobozilla\r\nrules\r\nsalty\r\nsbider\r\nscooter\r\nscoutjet\r\nscrubby\r\nsearch.\r\nsearchprocess\r\nsemanticdiscovery\r\nsenrigan\r\nsg-scout\r\nshai''hulud\r\nshark\r\nshopwiki\r\nsidewinder\r\nsift\r\nsilk\r\nsimmany\r\nsite searcher\r\nsite valet\r\nsitetech-rover\r\nskymob.com\r\nsleek\r\nsmartwit\r\nsna-\r\nsnappy\r\nsnooper\r\nsohu\r\nspeedfind\r\nsphere\r\nsphider\r\nspinner\r\nspyder\r\nsteeler/\r\nsuke\r\nsuntek\r\nsupersnooper\r\nsurfnomore\r\nsven\r\nsygol\r\nszukacz\r\ntach black widow\r\ntarantula\r\ntempleton\r\n/teoma\r\nt-h-u-n-d-e-r-s-t-o-n-e\r\ntheophrastus\r\ntitan\r\ntitin\r\ntkwww\r\ntoutatis\r\nt-rex\r\ntutorgig\r\ntwiceler\r\ntwisted\r\nucsd\r\nudmsearch\r\nurl check\r\nupdated\r\nvagabondo\r\nvalkyrie\r\nverticrawl\r\nvictoria\r\nvision-search\r\nvolcano\r\nvoyager/\r\nvoyager-hc\r\nw3c_validator\r\nw3m2\r\nw3mir\r\nwalker\r\nwallpaper\r\nwanderer\r\nwauuu\r\nwavefire\r\nweb core\r\nweb hopper\r\nweb wombat\r\nwebbandit\r\nwebcatcher\r\nwebcopy\r\nwebfoot\r\nweblayers\r\nweblinker\r\nweblog monitor\r\nwebmirror\r\nwebmonkey\r\nwebquest\r\nwebreaper\r\nwebsitepulse\r\nwebsnarf\r\nwebstolperer\r\nwebvac\r\nwebwalk\r\nwebwatch\r\nwebwombat\r\nwebzinger\r\nwhizbang\r\nwhowhere\r\nwild ferret\r\nworldlight\r\nwwwc\r\nwwwster\r\nxenu\r\nxget\r\nxift\r\nxirq\r\nyandex\r\nyanga\r\nyeti\r\nyodao\r\nzao\r\nzippp\r\nzyborg', 0),
@@ -24182,7 +24163,14 @@ INSERT INTO `yk_setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `se
 (1726, 0, 'config', 'config_error_log', '1', 0),
 (1727, 0, 'config', 'config_error_filename', 'error.txt', 0),
 (1728, 0, 'config', 'config_google_analytics', '', 0),
-(1732, 0, 'ykliked', 'ykliked_module', 'a:1:{i:0;a:8:{s:5:"limit";s:1:"6";s:11:"image_width";s:3:"160";s:12:"image_height";s:2:"92";s:9:"layout_id";s:1:"7";s:8:"position";s:14:"content_bottom";s:6:"status";s:1:"1";s:16:"additional_class";s:4:"mt10";s:10:"sort_order";s:1:"1";}}', 1);
+(1732, 0, 'ykliked', 'ykliked_module', 'a:1:{i:0;a:8:{s:5:"limit";s:1:"6";s:11:"image_width";s:3:"160";s:12:"image_height";s:2:"92";s:9:"layout_id";s:1:"7";s:8:"position";s:14:"content_bottom";s:6:"status";s:1:"1";s:16:"additional_class";s:4:"mt10";s:10:"sort_order";s:1:"1";}}', 1),
+(1743, 0, 'alipay_direct', 'alipay_direct_order_status_id', '15', 0),
+(1742, 0, 'alipay_direct', 'alipay_direct_cod', '121ea23443sadse2wq21322qw1w32w45235', 0),
+(1741, 0, 'alipay_direct', 'alipay_direct_account', '3197104626@qq.com', 0),
+(1740, 0, 'alipay_direct', 'alipay_direct_partner_id', '208811547979441', 0),
+(1744, 0, 'alipay_direct', 'alipay_direct_status', '1', 0),
+(1745, 0, 'alipay_direct', 'alipay_direct_note', '（支持全国85家银行、信用卡、网银在线支付）', 0),
+(1746, 0, 'alipay_direct', 'alipay_direct_sort_order', '1', 0);
 
 -- --------------------------------------------------------
 

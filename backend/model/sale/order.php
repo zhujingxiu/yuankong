@@ -44,24 +44,7 @@ class ModelSaleOrder extends Model {
 		} else {
 			$shipping_zone = '';			
 		}	
-					
-		$country_info = $this->model_localisation_country->getCountry($data['payment_country_id']);
-		
-		if ($country_info) {
-			$payment_country = $country_info['name'];
-			$payment_address_format = $country_info['address_format'];			
-		} else {
-			$payment_country = '';	
-			$payment_address_format = '{firstname} {lastname}' . "\n" . '{company}' . "\n" . '{address_1}' . "\n" . '{address_2}' . "\n" . '{city} {postcode}' . "\n" . '{zone}' . "\n" . '{country}';					
-		}
-	
-		$zone_info = $this->model_localisation_zone->getZone($data['payment_zone_id']);
-		
-		if ($zone_info) {
-			$payment_zone = $zone_info['name'];
-		} else {
-			$payment_zone = '';			
-		}	
+
 
 		$this->load->model('localisation/currency');
 
@@ -166,23 +149,7 @@ class ModelSaleOrder extends Model {
 			$shipping_zone = '';			
 		}	
 					
-		$country_info = $this->model_localisation_country->getCountry($data['payment_country_id']);
-		
-		if ($country_info) {
-			$payment_country = $country_info['name'];
-			$payment_address_format = $country_info['address_format'];			
-		} else {
-			$payment_country = '';	
-			$payment_address_format = '{firstname} {lastname}' . "\n" . '{company}' . "\n" . '{address_1}' . "\n" . '{address_2}' . "\n" . '{city} {postcode}' . "\n" . '{zone}' . "\n" . '{country}';					
-		}
 	
-		$zone_info = $this->model_localisation_zone->getZone($data['payment_zone_id']);
-		
-		if ($zone_info) {
-			$payment_zone = $zone_info['name'];
-		} else {
-			$payment_zone = '';			
-		}			
 
 		// Restock products before subtracting the stock later on
 		$order_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "order` WHERE order_status_id > '0' AND order_id = '" . (int)$order_id . "'");
@@ -315,24 +282,7 @@ class ModelSaleOrder extends Model {
 				$reward += $product['reward'];
 			}			
 			
-			$country_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "country` WHERE country_id = '" . (int)$order_query->row['payment_country_id'] . "'");
-
-			if ($country_query->num_rows) {
-				$payment_iso_code_2 = $country_query->row['iso_code_2'];
-				$payment_iso_code_3 = $country_query->row['iso_code_3'];
-			} else {
-				$payment_iso_code_2 = '';
-				$payment_iso_code_3 = '';
-			}
-
-			$zone_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "zone` WHERE zone_id = '" . (int)$order_query->row['payment_zone_id'] . "'");
-
-			if ($zone_query->num_rows) {
-				$payment_zone_code = $zone_query->row['code'];
-			} else {
-				$payment_zone_code = '';
-			}
-			
+		
 			$country_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "country` WHERE country_id = '" . (int)$order_query->row['shipping_country_id'] . "'");
 
 			if ($country_query->num_rows) {
@@ -398,23 +348,6 @@ class ModelSaleOrder extends Model {
 				'telephone'               => $order_query->row['telephone'],
 				'fax'                     => $order_query->row['fax'],
 				'email'                   => $order_query->row['email'],
-				'payment_firstname'       => $order_query->row['payment_firstname'],
-				'payment_lastname'        => $order_query->row['payment_lastname'],
-				'payment_company'         => $order_query->row['payment_company'],
-				'payment_company_id'      => $order_query->row['payment_company_id'],
-				'payment_tax_id'          => $order_query->row['payment_tax_id'],
-				'payment_address_1'       => $order_query->row['payment_address_1'],
-				'payment_address_2'       => $order_query->row['payment_address_2'],
-				'payment_postcode'        => $order_query->row['payment_postcode'],
-				'payment_city'            => $order_query->row['payment_city'],
-				'payment_zone_id'         => $order_query->row['payment_zone_id'],
-				'payment_zone'            => $order_query->row['payment_zone'],
-				'payment_zone_code'       => $payment_zone_code,
-				'payment_country_id'      => $order_query->row['payment_country_id'],
-				'payment_country'         => $order_query->row['payment_country'],
-				'payment_iso_code_2'      => $payment_iso_code_2,
-				'payment_iso_code_3'      => $payment_iso_code_3,
-				'payment_address_format'  => $order_query->row['payment_address_format'],
 				'payment_method'          => $order_query->row['payment_method'],
 				'payment_code'            => $order_query->row['payment_code'],				
 				'shipping_firstname'      => $order_query->row['shipping_firstname'],
@@ -423,15 +356,10 @@ class ModelSaleOrder extends Model {
 				'shipping_address_1'      => $order_query->row['shipping_address_1'],
 				'shipping_address_2'      => $order_query->row['shipping_address_2'],
 				'shipping_postcode'       => $order_query->row['shipping_postcode'],
-				'shipping_city'           => $order_query->row['shipping_city'],
 				'shipping_zone_id'        => $order_query->row['shipping_zone_id'],
 				'shipping_zone'           => $order_query->row['shipping_zone'],
 				'shipping_zone_code'      => $shipping_zone_code,
-				'shipping_country_id'     => $order_query->row['shipping_country_id'],
-				'shipping_country'        => $order_query->row['shipping_country'],
-				'shipping_iso_code_2'     => $shipping_iso_code_2,
-				'shipping_iso_code_3'     => $shipping_iso_code_3,
-				'shipping_address_format' => $order_query->row['shipping_address_format'],
+				'shipping_areas' 		  => $order_query->row['shipping_areas'],
 				'shipping_method'         => $order_query->row['shipping_method'],
 				'shipping_code'           => $order_query->row['shipping_code'],
 				'comment'                 => $order_query->row['comment'],
@@ -772,4 +700,3 @@ class ModelSaleOrder extends Model {
 		return $query->row['total'];
 	}	
 }
-?>

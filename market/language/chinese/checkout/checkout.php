@@ -8,7 +8,10 @@ $_['text_remove_success']            = '产品删除成功！';
 $_['text_modify']                    = '更新 &raquo;';
 $_['text_new_customer']              = '新客户';
 $_['text_returning_customer']        = '注册用户';
-$_['text_checkout']                  = '结账选项：';
+$_['text_checkout_product']          = '核对产品信息';
+$_['text_checkout_confirm']          = '费用确认并支付';
+$_['text_checkout_payment']          = '支付方式：';
+$_['text_checkout_shipping']         = '确认收货地址';
 $_['text_i_am_returning_customer']   = '我已注册账户';
 $_['text_register']                  = '注册账户';
 $_['text_guest']                     = '直接结账';
@@ -19,11 +22,12 @@ $_['text_your_details']              = '我的个人信息';
 $_['text_your_address']              = '我的地址';
 $_['text_your_password']             = '我的密码';
 $_['text_agree']                     = '我已经阅读并同意 <a class="colorbox" href="%s" alt="%s"><b>%s</b></a> 条款';
-$_['text_address_new']               = '添加一个新地址';
+$_['text_address_new']               = '新增新地址';
 $_['text_address_existing']          = '使用现存地址';
 $_['text_shipping_method']           = '请选择一个货运方式。';
-$_['text_payment_method']            = '请选择一个支付方式。';
-$_['text_comments']                  = '添加订单备注';
+$_['text_finished_payment']          = '<em class="c_r l">*</em>支付成功后，我们会在7个工作日内发货。';
+
+$_['text_comments']                  = '给卖家留言';
 
 // Column
 $_['column_name']                    = '品名';
@@ -82,4 +86,3 @@ $_['error_no_shipping']              = '无可用货运方式。 请<a href="%s"
 $_['error_payment']                  = '警告： 请选择一个支付方式！';
 $_['error_no_payment']               = '警告： 无可用支付方式。 请<a href="%s">联系我们</a> 以获取帮助！';
 $_['error_minimum']                  = '%s 的最小起订量是 %s！';	
-?>
