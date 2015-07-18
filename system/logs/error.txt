@@ -430,3 +430,27 @@
 2015-07-17 23:07:20 - PHP Warning:  Illegal string offset 'zone_id' in E:\wamp\www\yuankong\market\model\payment\cod.php on line 6
 2015-07-17 23:08:31 - PHP Warning:  Illegal string offset 'country_id' in E:\wamp\www\yuankong\market\model\payment\cod.php on line 6
 2015-07-17 23:08:31 - PHP Warning:  Illegal string offset 'zone_id' in E:\wamp\www\yuankong\market\model\payment\cod.php on line 6
+2015-07-18 14:16:43 - PHP Notice:  Undefined variable: payment_firstname in D:\wamp\www\yuankong\backend\view\template\sale\order_form.tpl on line 99
+2015-07-18 14:16:43 - PHP Notice:  Undefined variable: error_payment_firstname in D:\wamp\www\yuankong\backend\view\template\sale\order_form.tpl on line 100
+2015-07-18 14:16:43 - PHP Notice:  Undefined variable: payment_lastname in D:\wamp\www\yuankong\backend\view\template\sale\order_form.tpl on line 106
+2015-07-18 14:16:43 - PHP Notice:  Undefined variable: error_payment_lastname in D:\wamp\www\yuankong\backend\view\template\sale\order_form.tpl on line 107
+2015-07-18 14:16:43 - PHP Notice:  Undefined variable: payment_company in D:\wamp\www\yuankong\backend\view\template\sale\order_form.tpl on line 113
+2015-07-18 14:16:43 - PHP Notice:  Undefined variable: payment_company_id in D:\wamp\www\yuankong\backend\view\template\sale\order_form.tpl on line 117
+2015-07-18 14:16:43 - PHP Notice:  Undefined variable: payment_tax_id in D:\wamp\www\yuankong\backend\view\template\sale\order_form.tpl on line 121
+2015-07-18 14:16:43 - PHP Notice:  Undefined variable: error_payment_tax_id in D:\wamp\www\yuankong\backend\view\template\sale\order_form.tpl on line 122
+2015-07-18 14:16:43 - PHP Notice:  Undefined variable: payment_address_1 in D:\wamp\www\yuankong\backend\view\template\sale\order_form.tpl on line 128
+2015-07-18 14:16:43 - PHP Notice:  Undefined variable: error_payment_address_1 in D:\wamp\www\yuankong\backend\view\template\sale\order_form.tpl on line 129
+2015-07-18 14:16:43 - PHP Notice:  Undefined variable: payment_address_2 in D:\wamp\www\yuankong\backend\view\template\sale\order_form.tpl on line 135
+2015-07-18 14:16:43 - PHP Notice:  Undefined variable: payment_city in D:\wamp\www\yuankong\backend\view\template\sale\order_form.tpl on line 139
+2015-07-18 14:16:43 - PHP Notice:  Undefined variable: error_payment_city in D:\wamp\www\yuankong\backend\view\template\sale\order_form.tpl on line 140
+2015-07-18 14:16:43 - PHP Notice:  Undefined variable: payment_postcode in D:\wamp\www\yuankong\backend\view\template\sale\order_form.tpl on line 146
+2015-07-18 14:16:43 - PHP Notice:  Undefined variable: error_payment_postcode in D:\wamp\www\yuankong\backend\view\template\sale\order_form.tpl on line 147
+2015-07-18 14:16:43 - PHP Notice:  Undefined variable: payment_country_id in D:\wamp\www\yuankong\backend\view\template\sale\order_form.tpl on line 156
+2015-07-18 14:16:43 - PHP Notice:  Undefined variable: error_payment_country in D:\wamp\www\yuankong\backend\view\template\sale\order_form.tpl on line 163
+2015-07-18 14:16:43 - PHP Notice:  Undefined variable: error_payment_zone in D:\wamp\www\yuankong\backend\view\template\sale\order_form.tpl on line 171
+2015-07-18 14:16:43 - PHP Notice:  Undefined variable: shipping_city in D:\wamp\www\yuankong\backend\view\template\sale\order_form.tpl on line 219
+2015-07-18 14:16:43 - PHP Notice:  Undefined variable: shipping_country_id in D:\wamp\www\yuankong\backend\view\template\sale\order_form.tpl on line 233
+2015-07-18 14:16:43 - PHP Notice:  Undefined variable: payment_zone_id in D:\wamp\www\yuankong\backend\view\template\sale\order_form.tpl on line 710
+2015-07-18 14:19:07 - PHP Notice:  Undefined variable: sort_group in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 39
+2015-07-18 14:19:07 - PHP Notice:  Undefined variable: sort_account in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 44
+2015-07-18 14:19:07 - PHP Notice:  Undefined variable: sort_telephone in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 49

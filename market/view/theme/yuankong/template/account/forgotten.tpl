@@ -51,13 +51,15 @@ $(function(){ $('input, textarea').placeholder(); });
 <div class="warning"><?php echo $error_warning; ?></div>
 <?php } ?>
 <section id="columns">
-<div class="login-logo register-w">
+  <div class="login-logo register-w">
     <a class="pr10" href="<?php echo $home; ?>">
       <img src="<?php echo $logo; ?>" title="<?php echo $name; ?>" alt="<?php echo $name; ?>" />
     </a>
     <span class="pl20 logospan"><?php echo $heading_title ?></span>
     <div class="retrieve-password">
-        <p><img src="<?php echo TPL_IMG ?>data/yuankong/r-password-step1.jpg" alt="找回密码流程" /></p>
+        <p>
+          <img src="<?php echo TPL_IMG ?>data/yuankong/r-password-step1.jpg" alt="找回密码流程" />
+        </p>
         <div class="r-password-text">
           <span class="texts text1">输入账号名</span>
           <span class="texts text2">验证身份</span>
@@ -67,14 +69,18 @@ $(function(){ $('input, textarea').placeholder(); });
         <div class="inputesbox">
             <table class="registable">
                 <tbody><tr>
-                    <td class="tr" width="90"><em class="c_red">*</em> <?php echo $entry_mobile_phone ?></td>
-                    <td><input type="text" class="regis-text" value="" placeholder="<?php echo $entry_mobile_phone ?>"></td>
+                    <td class="tr" width="90">
+                      <em class="c_red">*</em> <?php echo $entry_mobile_phone ?>
+                    </td>
+                    <td><input type="text" class="regis-text" placeholder="<?php echo $entry_mobile_phone ?>"></td>
                 </tr>
                 <tr>
-                    <td class="tr"><em class="c_r">*</em> <?php echo $entry_captcha ?></td>
+                    <td class="tr">
+                      <em class="c_r">*</em> <?php echo $entry_captcha ?>
+                    </td>
                     <td>
-                      <input type="text" class="regis-text w100" value="" name="captcha">
-                      <span class="pl10">
+                      <input type="text" class="regis-text w100" name="captcha">
+                      <span class="pl10 captcha">
                         <img src="<?php echo $this->url->link('account/register/captcha','','ssl') ?>"><a href="javascript:void(0);" class="pl10 c_g">换一张</a>
                       </span>
                     </td>
@@ -86,19 +92,17 @@ $(function(){ $('input, textarea').placeholder(); });
             </tbody>
           </table>
         </div>
-
-  
-</div>  
+  </div>  
 
 <script type="text/javascript">
     o.moushov.init(".regis-tab li",".regis-box .regis");
-    $('.captcha a.chg-img').bind('click',function(e){
-      e.preventDefault();
-      $('.captcha img').attr('src',"<?php echo $this->url->link('account/register/captcha','','ssl') ?>")
+    $('.captcha a.c_g').bind('click',function(e){
+      //e.preventDefault();
+      $('.captcha img').attr('src',"<?php echo $this->url->link('account/register/captcha','t='.time(),'ssl') ?>")
     });
     $(function(){
 
 
-  })
+    })
 </script>
 <?php echo $footer; ?>

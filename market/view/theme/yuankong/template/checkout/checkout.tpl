@@ -227,9 +227,7 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
                         <?php $n++; endforeach ?>
                         
                     </li>
-                    <li>
-                        <?php echo $text_finished_payment ?>
-                    </li>
+                    <li><?php echo $text_finished_payment ?></li>
                     <li class="mt10">
                         <div class="w210"><input type="submit" class="gc-tab-sub" value="提交订单" /></div> 
                     </li>
@@ -252,9 +250,7 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
         $(this).parent().parent().addClass("adress-show");
     });
     $(function(){
-
         add_select(0);
-
         $('body').on('change', '#area select', function() {
             var $me = $(this);
             var $next = $me.next();
