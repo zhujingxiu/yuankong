@@ -1,7 +1,7 @@
 <?php
 class ModelTotalLowOrderFee extends Model {
-	public function getTotal(&$total_data, &$total, &$taxes) {
-		if ($this->cart->getSubTotal() && ($this->cart->getSubTotal() < $this->config->get('low_order_fee_total'))) {
+	public function getTotal(&$total_data, &$total, &$taxes,$checkout=false) {
+		if ($this->cart->getSubTotal($checkout) && ($this->cart->getSubTotal($checkout) < $this->config->get('low_order_fee_total'))) {
 			$this->language->load('total/low_order_fee');
 		 	
 			$total_data[] = array( 

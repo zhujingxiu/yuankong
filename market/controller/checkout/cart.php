@@ -556,6 +556,12 @@ class ControllerCheckoutCart extends Controller {
 			$product_id = 0;
 		}
 
+		if (isset($this->request->get['checkout'])) {
+			$checkout = $this->request->get['checkout'];
+		} else {
+			$checkout = false;
+		}
+
 		$this->load->model('catalog/product');
 						
 		$product_info = $this->model_catalog_product->getProduct($product_id);
@@ -582,7 +588,10 @@ class ControllerCheckoutCart extends Controller {
 			}
 
 			if (!$json) {
-				$this->cart->add($this->request->post['product_id'], $quantity, $option);
+				if($checkout){
+					$this->session->data['checkout'] = array();
+				}
+				$this->cart->add($this->request->post['product_id'], $quantity, $option,$checkout);
 
 				$json['success'] = sprintf($this->language->get('text_success'), $this->url->link('product/product', 'product_id=' . $this->request->post['product_id']), $product_info['name'], $this->url->link('checkout/cart'));
 				
@@ -628,6 +637,11 @@ class ControllerCheckoutCart extends Controller {
 				}
 				
 				$json['total'] = sprintf($this->language->get('text_items'), $this->cart->countProducts() + (isset($this->session->data['vouchers']) ? count($this->session->data['vouchers']) : 0), $this->currency->format($total));
+
+				if($checkout){
+
+					$json['redirect'] = str_replace('&amp;', '&', $this->url->link('checkout/checkout', '' ));
+				}
 			} else {
 				$json['redirect'] = str_replace('&amp;', '&', $this->url->link('product/product', 'product_id=' . $this->request->post['product_id']));
 			}

@@ -1,7 +1,7 @@
 <?php
 class ModelTotalHandling extends Model {
-	public function getTotal(&$total_data, &$total, &$taxes) {
-		if (($this->cart->getSubTotal() < $this->config->get('handling_total')) && ($this->cart->getSubTotal() > 0)) {
+	public function getTotal(&$total_data, &$total, &$taxes,$checkout=false) {
+		if (($this->cart->getSubTotal($checkout) < $this->config->get('handling_total')) && ($this->cart->getSubTotal($checkout) > 0)) {
 			$this->language->load('total/handling');
 		 	
 			$total_data[] = array( 

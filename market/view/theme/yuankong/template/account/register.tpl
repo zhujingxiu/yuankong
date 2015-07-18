@@ -42,7 +42,6 @@ $(function(){ $('input, textarea').placeholder(); });
 <script type="text/javascript" src="<?php echo TPL_JS ?>validation/dist/jquery.validate.js"></script>
 <script type="text/javascript" src="<?php echo TPL_JS ?>validation/dist/additional-methods.js"></script>
 <script type="text/javascript" src="<?php echo TPL_JS ?>validation/dist/localization/messages_zh.js"></script>
-
 <link rel="stylesheet" type="text/css" href="market/view/theme/yuankong/stylesheet/yk_validate.css" />
 </head>
 <body class="b_fa">
@@ -118,7 +117,7 @@ $(function(){ $('input, textarea').placeholder(); });
 		                	<div class="form-group">
 			                	<input type="text" name="captcha" class="regis-text w100" id="customer-captcha"/>
 			                	<span class="pl10 captcha">
-			                		<img src="<?php echo $this->url->link('account/register/captcha','','ssl') ?>" />
+			                		<img src="<?php echo $captcha_link ?>" />
 			                		<a href="javascript:;" class="pl10 c_g chg-img"><?php echo $text_captcha_change ?></a>
 			                	</span>
 			                </div>
@@ -252,7 +251,7 @@ $(function(){ $('input, textarea').placeholder(); });
 	                    	<div class="form-group">
 		                    	<input type="text" name="captcha" class="regis-text w100" value="" id="affiliate-captcha" />
 		                    	<span class="pl10 captcha">
-		                    		<img src="<?php echo $this->url->link('account/register/captcha','','ssl') ?>" />
+		                    		<img src="<?php echo $captcha_link ?>" />
 		                    		<a href="javascript:void(0);" class="pl10 c_g chg-img"><?php echo $text_captcha_change ?></a>
 		                    	</span>
 		                    </div>
@@ -294,9 +293,9 @@ $(function(){ $('input, textarea').placeholder(); });
 
 <script type="text/javascript">
     o.moushov.init(".regis-tab li",".regis-box .regis");
-    $('.captcha a.chg-img').bind('click',function(e){
+    $('.captcha a.c_g').bind('click',function(e){
     	e.preventDefault();
-    	$('.captcha img').attr('src',"<?php echo $this->url->link('account/register/captcha','','ssl') ?>")
+    	$('.captcha img').attr('src',"<?php echo $captcha_link ?>&t="+(Math.round(Math.random()*999)+9999))
     });
     $(function(){
     	$.validator.setDefaults({      
@@ -510,12 +509,14 @@ $(function(){ $('input, textarea').placeholder(); });
 				success:function(json){
 					if(json.success){
 						$that.html(json.success).attr('disabled');
+					}else{
+						alert(json.error.sms)
 					}
 				}
 			})
 		}else{
 			alert('请确认输入的数据合法')
 		}
-	})
+	});
 </script>
 <?php echo $footer; ?>

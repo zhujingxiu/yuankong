@@ -266,7 +266,37 @@
 	</div>
 </div>
 <script type="text/javascript"><!--
-	
+	$('#button-buynow').bind('click',function(){
+		$.ajax({
+			url: 'index.php?route=checkout/cart/add&checkout=1',
+			type: 'post',
+			data: $('.product-info input[type=\'text\'], .product-info input[type=\'hidden\'], .product-info input[type=\'radio\']:checked, .product-info input[type=\'checkbox\']:checked, .product-info select, .product-info textarea'),
+			dataType: 'json',
+			success: function(json) {
+				$('.msg-success, .warning, .attention, information, .error').remove();
+				
+				if (json['error']) {
+					if (json['error']['option']) {
+						for (i in json['error']['option']) {
+							$('#option-' + i).after('<span class="error">' + json['error']['option'][i] + '</span>');
+						}
+					}
+				} 
+				
+				if (json['success']) {
+					$('#notification').html('<div class="msg-success" style="display: none;">' + json['success'] + '<img src="market/view/theme/default/image/close.png" alt="" class="close" /></div>');
+						
+					$('.msg-success').fadeIn('slow');
+					
+					$('html, body').animate({ scrollTop: 0 }, 'slow'); 
+				}	
+
+				if(json['redirect']){
+					location.href = json['redirect'];
+				}
+			}
+		});
+	});
 	$('#button-cart').bind('click', function() {
 		$.ajax({
 			url: 'index.php?route=checkout/cart/add',

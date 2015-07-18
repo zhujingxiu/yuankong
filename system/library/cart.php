@@ -265,7 +265,7 @@ class Cart {
 		return $checkout ? $this->checkout : $this->data;
   	}
 		  
-  	public function add($product_id, $qty = 1, $option = array()) {
+  	public function add($product_id, $qty = 1, $option = array(),$checkout = false) {
     	if (!$option) {
       		$key = (int)$product_id;
     	} else {
@@ -281,6 +281,18 @@ class Cart {
 		}
 		
 		$this->data = array();
+
+		if($checkout){
+			if ((int)$qty && ((int)$qty > 0)) {
+	    		if (!isset($this->session->data['checkout'][$key])) {
+	      			$this->session->data['checkout'][$key] = (int)$qty;
+	    		} else {
+	      			$this->session->data['checkout'][$key] += (int)$qty;
+	    		}
+			}
+			
+			$this->checkout = array();
+		}
   	}
 
   	public function update($key, $qty) {

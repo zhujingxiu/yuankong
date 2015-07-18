@@ -113,7 +113,9 @@ class ModelAffiliateAffiliate extends Model {
 	public function editPassword($email, $password) {
       	$this->db->query("UPDATE " . DB_PREFIX . "affiliate SET salt = '" . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($password)))) . "' WHERE LOWER(email) = '" . $this->db->escape(utf8_strtolower($email)) . "'");
 	}
-				
+	public function editPasswordByMobilePhone($mobile_phone, $password) {
+      	$this->db->query("UPDATE " . DB_PREFIX . "affiliate SET salt = '" . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($password)))) . "' WHERE mobile_phone = '" . $this->db->escape($mobile_phone) . "'");
+	}			
 	public function getAffiliate($affiliate_id) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "affiliate WHERE affiliate_id = '" . (int)$affiliate_id . "'");
 		
@@ -125,7 +127,11 @@ class ModelAffiliateAffiliate extends Model {
 		
 		return $query->row;
 	}
+	public function getAffiliateByMobilePhone($mobile_phone) {
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "affiliate WHERE mobile_phone = '" . $this->db->escape($mobile_phone) . "'");
 		
+		return $query->row;
+	}
 	public function getAffiliateByCode($code) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "affiliate WHERE code = '" . $this->db->escape($code) . "'");
 		
@@ -138,4 +144,3 @@ class ModelAffiliateAffiliate extends Model {
 		return $query->row['total'];
 	}
 }
-?>

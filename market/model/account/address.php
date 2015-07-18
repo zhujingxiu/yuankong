@@ -89,7 +89,6 @@ class ModelAccountAddress extends Model {
 				'zone_id'        => $address_query->row['zone_id'],
 				'zone'           => $zone,
 				'zone_code'      => $zone_code,
-				'address_format' => $address_format,
 				'areas'			 => implode(" ", $area)
 			);
 			
@@ -139,7 +138,6 @@ class ModelAccountAddress extends Model {
 				'zone_id'        => $result['zone_id'],
 				'zone'           => $zone,
 				'zone_code'      => $zone_code,
-				'address_format' => $address_format,
 				'areas'			 => implode(" ", $area)
 			);
 		}		

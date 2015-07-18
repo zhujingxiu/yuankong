@@ -4,7 +4,7 @@ $_['heading_title']       = '平台账户 [ - 第三方开放帐户关联登陆 
 
 // Text
 $_['text_module']         = 'Modules';
-$_['text_success']        = 'Success: You have modified module welcome!';
+$_['text_success']        = '成功：平台开放登录帐户模块修改成功';
 $_['text_content_top']    = 'Content Top';
 $_['text_content_bottom'] = 'Content Bottom';
 $_['text_column_left']    = 'Column Left';

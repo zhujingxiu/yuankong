@@ -454,3 +454,20 @@
 2015-07-18 14:19:07 - PHP Notice:  Undefined variable: sort_group in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 39
 2015-07-18 14:19:07 - PHP Notice:  Undefined variable: sort_account in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 44
 2015-07-18 14:19:07 - PHP Notice:  Undefined variable: sort_telephone in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 49
+2015-07-18 23:01:45 - PHP Notice:  Error: Unknown column 'mobile_phone' in 'where clause'<br />Error No: 1054<br />UPDATE yk_affiliate SET salt = 'c3e0d316a', password = 'b761a7fb322e4d922b323b2de4ba62b048415279' WHERE mobile_phone = '18850911766' in E:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-07-18 23:14:28 - PHP Notice:  Error: Unknown column 'mobile_phone' in 'where clause'<br />Error No: 1054<br />UPDATE yk_affiliate SET salt = '93b0b12bd', password = '737ee5ed683e0617bb59a0a2999d1c4459acd6e6' WHERE mobile_phone = '18850911766' in E:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-07-18 23:14:28 - PHP Notice:  Undefined variable: error_warning in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\forgotten_success.tpl on line 49
+2015-07-18 23:15:34 - PHP Notice:  Undefined variable: address_format in E:\wamp\www\yuankong\market\model\account\address.php on line 92
+2015-07-18 23:15:34 - PHP Notice:  Undefined index: country_id in E:\wamp\www\yuankong\market\controller\account\login.php on line 112
+2015-07-18 23:45:01 - PHP Notice:  Undefined variable: address_format in E:\wamp\www\yuankong\market\model\account\address.php on line 142
+2015-07-18 23:45:01 - PHP Notice:  Undefined variable: address_format in E:\wamp\www\yuankong\market\model\account\address.php on line 142
+2015-07-18 23:45:01 - PHP Notice:  Undefined variable: address_format in E:\wamp\www\yuankong\market\model\account\address.php on line 142
+2015-07-18 23:45:01 - PHP Notice:  Undefined variable: address_format in E:\wamp\www\yuankong\market\model\account\address.php on line 92
+2015-07-18 23:46:28 - PHP Notice:  Undefined variable: address_format in E:\wamp\www\yuankong\market\model\account\address.php on line 92
+2015-07-19 0:18:50 - PHP Notice:  Undefined index: img in E:\wamp\www\yuankong\market\controller\account\login.php on line 230
+2015-07-19 0:18:50 - PHP Notice:  Undefined index: img in E:\wamp\www\yuankong\market\controller\account\login.php on line 230
+2015-07-19 0:25:51 - PHP Notice:  Undefined index: icon in E:\wamp\www\yuankong\market\controller\account\login.php on line 245
+2015-07-19 0:25:51 - PHP Notice:  Undefined index: icon in E:\wamp\www\yuankong\market\controller\account\login.php on line 245
+2015-07-19 0:26:19 - PHP Notice:  Undefined index: country_id in E:\wamp\www\yuankong\market\controller\account\login.php on line 112
+2015-07-19 0:26:22 - PHP Notice:  Undefined index: img in E:\wamp\www\yuankong\market\controller\module\mini_login.php on line 56
+2015-07-19 0:26:22 - PHP Notice:  Undefined index: img in E:\wamp\www\yuankong\market\controller\module\mini_login.php on line 56

@@ -1,6 +1,6 @@
 <?php
 class ModelTotalTotal extends Model {
-	public function getTotal(&$total_data, &$total, &$taxes) {
+	public function getTotal(&$total_data, &$total, &$taxes,$checkout=false) {
 		$this->language->load('total/total');
 	 
 		$total_data[] = array(

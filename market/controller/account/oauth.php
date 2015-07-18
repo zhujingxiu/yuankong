@@ -170,7 +170,7 @@ class ControllerAccountOauth extends Controller {
 		
 		$tag = explode('|', $this->session->data['oauth']['state']);
 		
-		$callback  = $server.'v.aspx';
+		$callback  = $server;
 		$tag       = $tag[0];
 		$code      = $this->request->get['code'];
 		$oauthInfo = $this->config->get('oauth');
@@ -810,7 +810,6 @@ class ControllerAccountOauth extends Controller {
 					$oauth_lists[$val['sort']] = array(
 						'tag'      => $key,
 						'status'   => $val['status'],
-						'icon'   	=> $val['img'],
 						'href'     => $this->url->link('account/oauth/bind', 'tag='.$key, 'SSL')
 					);
 				}

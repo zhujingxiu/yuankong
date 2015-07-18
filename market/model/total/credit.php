@@ -1,6 +1,6 @@
 <?php
 class ModelTotalCredit extends Model {
-	public function getTotal(&$total_data, &$total, &$taxes) {
+	public function getTotal(&$total_data, &$total, &$taxes,$checkout=false) {
 		if ($this->config->get('credit_status')) {
 			$this->language->load('total/credit');
 		 

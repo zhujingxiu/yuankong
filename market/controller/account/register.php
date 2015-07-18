@@ -226,7 +226,7 @@ class ControllerAccountRegister extends Controller {
 		} else {
 			$this->data['agree'] = false;
 		}
-		
+		$this->data['captcha_link'] = $this->url->link('account/register/captcha','','ssl');
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/register.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/account/register.tpl';
 		} else {
@@ -343,9 +343,7 @@ class ControllerAccountRegister extends Controller {
       			$this->error['warning'] = sprintf($this->language->get('error_agree'), $information_info['title']);
 			}
 		}
-		echo "<pre>";
-        print_r($this->error);
-        echo "</pre>";
+
     	if (!$this->error) {
       		return true;
     	} else {

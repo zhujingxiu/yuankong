@@ -249,7 +249,7 @@
 .defalt-adtree { height: 33px; line-height: 33px; width: 160px; border: 1px solid #dedede; position: relative; padding-right:22px;}
 .adtress-text { font-size: 14px; color: #666; padding-left: 5px; white-space: nowrap; overflow: hidden;}
 .defalt-adtree .h-down { top: 14px;}
-.gc-tab-sub2 {font-size: 16px; background: #fff; height: 33px; line-height: 30px; border: 2px solid #C30D23; border-radius: 3px; text-align: center;}
+.gc-tab-sub2 {font-size: 16px; background: #fff; height: 33px; line-height: 30px; border: 2px solid #C30D23; border-radius: 3px; text-align: center;cursor: pointer;}
 .xg-style { border: 1px solid #e4e4e4;}
 .xg-style .title {color: #333; background: #f2f2f2; line-height: 35px; padding: 0 10px; border-bottom: 1px solid #e4e4e4;}
 .box-s a { display: block; float: left; width: 94px; display: inline; font-size: 12px; line-height: 30px;}
