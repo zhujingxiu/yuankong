@@ -281,9 +281,10 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
         $.each($('.headcheck[name^="selected"]:checked'),function(){
             var key = $(this).val(),
             qty = parseInt($(this).parent().parent('tr').find('input[name^="quantity"]').val());
-            addToCheckout(key,qty);
+            selectedCheckout(key,qty);
         });
-        location.href = '<?php echo $checkout ?>'
+
+        location = '<?php echo $checkout ?>'
       }else{
         alert('没有选中商品');
       }

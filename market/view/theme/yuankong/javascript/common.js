@@ -48,10 +48,10 @@ function getURLVar(key) {
     }
 }
 
-function addToCheckout(key,quantity){
+function selectedCheckout(key,quantity){
     quantity = typeof(quantity) != 'undefined' ? quantity : 1;
     $.ajax({
-        url:'index.php?route=checkout/checkout/add',
+        url:'index.php?route=checkout/checkout/selected',
         type:'post',
         data:'key='+key+'&quantity='+quantity,
         dataType:'json',

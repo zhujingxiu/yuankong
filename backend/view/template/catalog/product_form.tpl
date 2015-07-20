@@ -117,7 +117,7 @@
               </tr>
               <tr>
                 <td><?php echo $entry_description; ?></td>
-                <td><textarea name="product_description[<?php echo $language['language_id']; ?>][description]" id="description<?php echo $language['language_id']; ?>"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['description'] : ''; ?></textarea></td>
+                <td><textarea name="product_description[<?php echo $language['language_id']; ?>][description]" id="description<?php echo $language['language_id']; ?>" style="width:880px;height:330px;"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['description'] : ''; ?></textarea></td>
               </tr>
               <tr class="hide-item">
                 <td><?php echo $entry_tag; ?></td>
@@ -277,18 +277,7 @@
                   <?php } ?>
                 </select></td>
             </tr>
-            <tr>
-              <td><?php echo $entry_category_related; ?></td>
-              <td><select name="category_related">
-                  <?php if ($category_related) { ?>
-                  <option value="1" selected="selected"><?php echo $text_yes; ?></option>
-                  <option value="0"><?php echo $text_no; ?></option>
-                  <?php } else { ?>
-                  <option value="1"><?php echo $text_yes; ?></option>
-                  <option value="0" selected="selected"><?php echo $text_no; ?></option>
-                  <?php } ?>
-                </select></td>
-            </tr>
+
             <tr>
               <td><?php echo $entry_sort_order; ?></td>
               <td><input type="text" name="sort_order" value="<?php echo $sort_order; ?>" size="2" /></td>
@@ -772,10 +761,17 @@
     </div>
   </div>
 </div>
-<script type="text/javascript" src="view/javascript/ckeditor/ckeditor.js"></script> 
+<link type="text/css" href="<?php echo TPL_JS ?>umeditor/themes/default/css/umeditor.min.css" rel="stylesheet" />
+<script type="text/javascript" src="<?php echo TPL_JS ?>umeditor/umeditor.config.js"></script> 
+<script type="text/javascript" src="<?php echo TPL_JS ?>umeditor/umeditor.min.js"></script> 
+<?php if(false){ ?>
+<script type="text/javascript" src="view/javascript/ckeditor/ckeditor.js"></script>
+<?php } ?>
 <script type="text/javascript"><!--
 <?php foreach ($languages as $language) { ?>
-CKEDITOR.replace('description<?php echo $language['language_id']; ?>', {
+  UM.getEditor('description<?php echo $language["language_id"]; ?>');
+  <?php if(false){ ?>
+CKEDITOR.replace('description<?php echo $language["language_id"]; ?>', {
 	filebrowserBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
 	filebrowserImageBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
 	filebrowserFlashBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
@@ -783,6 +779,7 @@ CKEDITOR.replace('description<?php echo $language['language_id']; ?>', {
 	filebrowserImageUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
 	filebrowserFlashUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>'
 });
+<?php } ?>
 <?php } ?>
 //--></script> 
 <script type="text/javascript"><!--

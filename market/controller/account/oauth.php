@@ -137,6 +137,350 @@ class ControllerAccountOauth extends Controller {
 		$this->redirect($url);
 	}
 	
+	private function getUrl($tag, $appid, $callback, $state) {
+		switch ($tag) {
+
+			case 'qq':
+				$host  = 'https://graph.qq.com/oauth2.0/authorize?';
+				
+				$code = array();
+				$code['response_type']   = 'code';
+				$code['client_id']       = $appid;
+				//$code['state']           = $state;
+				$code['redirect_uri']    = 'http://yk119.cn';
+				$code['scope']           = 'get_user_info';
+				
+				$url = $host . http_build_query($code);
+
+				break;
+			case 'weibo':
+				$host  = 'https://api.weibo.com/oauth2/authorize?';
+				
+				$code = array();
+				$code['response_type']   = 'code';
+				$code['client_id']       = $appid;
+				$code['state']           = $state;
+				$code['redirect_uri']    = $callback;
+				$code['scope']           = '';
+				
+				$url = $host . http_build_query($code);
+				break;
+			case 'aplipay':
+				$alipay_config = array(
+					'partner'		=> $appid,
+					'key'			=> APP_SECRET,
+					'sign_type'     => strtoupper('MD5'),
+					'input_charset' => strtolower('utf-8'),
+					'cacert'	    => getcwd().'\\cacert.pem',
+					'transport'    	=> 'http'
+				);
+				$parameter = array(
+					"service" 		=> "alipay.auth.authorize",
+					"partner" 		=> $appid,
+					"target_service"=> "user.auth.quick.login",
+					"return_url"	=> $callback,
+					"anti_phishing_key"	=> "",
+					"exter_invoke_ip"	=> "",
+					"_input_charset"	=> "utf-8"
+				);
+				
+				$alipaySubmit = new AlipaySubmit($alipay_config);
+				die($alipaySubmit->buildRequestForm($parameter,"get", "确认"));
+				break;
+			case 'baidu':
+				$host  = 'http://openapi.baidu.com/oauth/2.0/authorize?';
+				
+				$code = array();
+				$code['response_type']   = 'code';
+				$code['client_id']       = $appid;
+				$code['state']           = $state;
+				$code['redirect_uri']    = $callback;
+				$code['scope']           = 'basic';
+				
+				$url = $host . http_build_query($code);
+				break;
+			default:
+				$url = '';
+		}
+		
+		return $url;
+	}
+	
+	private function getOpenid($tag, $code, $appid, $appkey, $callback) {
+		switch ($tag) {
+			case 'qq':
+				$host = 'https://graph.qq.com/oauth2.0/token?';
+		
+				$param = array();			
+				$param['client_id'] = $appid;
+				$param['client_secret'] = $appkey;
+				$param['grant_type'] = 'authorization_code';
+				$param['code'] = $code;
+				$param['redirect_uri'] = $callback;
+			
+				$url = $host . http_build_query($param);
+				
+				$response = $this->http($url, 'GET');
+				
+				if(strpos($response, "callback") !== false){
+					$lpos = strpos($response, "(");
+					$rpos = strrpos($response, ")");
+					$response  = substr($response, $lpos + 1, $rpos - $lpos -1);
+					$msg = json_decode($response, 1);
+		
+					if(isset($msg['error'])){
+						$data = array(
+							'error'               => $msg['error'],
+							'error_description'   => $msg['error_description']
+						);
+					
+						$this->log->write('QQ ERROR: '.$msg['error'].' - '.$msg['error_description']);
+						
+						break;
+					}
+				}
+				
+				$info          = explode('&', $response);
+				$access_token  = str_replace('access_token=', '', $info[0]);
+				$expires_in    = str_replace('expires_in=', '', $info[1]);
+				$refresh_token = str_replace('refresh_token=', '', $info[2]);
+				
+				$host = 'https://graph.qq.com/oauth2.0/me?access_token='.$access_token;
+				
+				$response = $this->http($host, 'GET');
+				
+				if(strpos($response, "callback") !== false){
+					$lpos = strpos($response, "(");
+					$rpos = strrpos($response, ")");
+					$response  = substr($response, $lpos + 1, $rpos - $lpos -1);
+					$msg = json_decode($response, 1);
+		
+					if(isset($msg['error'])){
+						$data = array(
+							'error'               => $msg['error'],
+							'error_description'   => $msg['error_description']
+						);
+					
+						$this->log->write('QQ ERROR: '.$msg['error'].' - '.$msg['error_description']);
+						
+						break;
+					}
+				}
+				
+				$openid = $msg['openid'];
+				
+				$host = 'https://graph.qq.com/user/get_user_info?';
+		
+				$param = array();			
+				$param['oauth_consumer_key'] = $appid;
+				$param['openid'] = $openid;
+				$param['access_token'] = $access_token;
+			
+				$url = $host . http_build_query($param);
+				
+				$user_info = $this->http($url, 'GET');
+				
+				if (isset($user_info['ret']) && $user_info['ret']) {
+					$this->log->write('QQ ERROR: '.$user_info['ret'].' - '.$user_info['msg']);
+					
+					$data = array(
+						'error'               => $user_info['ret'],
+						'error_description'   => $user_info['msg']
+					);
+					break;
+				}
+				
+				$data = array(
+					'openid'          => $openid,
+					'expires_in'      => $expires_in,
+					'access_token'    => $access_token,
+					'name'            => $user_info['nickname'],
+					'face'            => $user_info['figureurl_2'],
+					'email'           => ''
+				);
+				
+				break;
+			case 'weibo':
+				$host = 'https://api.weibo.com/oauth2/access_token?';
+		
+				$param = array();			
+				$param['client_id'] = $appid;
+				$param['client_secret'] = $appkey;
+				$param['grant_type'] = 'authorization_code';
+				$param['code'] = $code;
+				$param['redirect_uri'] = $callback;
+			
+				$url = $host . http_build_query($param);
+				
+				$info = $this->http($url, 'POST', http_build_query($param));
+				
+				if (isset($info['error'])) {
+					$this->log->write('WEIBO ERROR: '.$info['error'].' - '.$info['error_description']);
+					
+					$data = array(
+						'error'               => $info['error'],
+						'error_description'   => $info['error_description']
+					);
+					break;
+				}
+				
+				$access_token  = $info['access_token'];
+				$expires_in    = $info['expires_in'];
+				$remind_in     = $info['remind_in'];
+				$uid           = $info['uid'];
+				
+				$host = 'https://api.weibo.com/2/users/show.json?';
+				
+				$param = array();			
+				$param['access_token'] = $access_token;
+				$param['uid'] = $uid;
+			
+				$url = $host . http_build_query($param);
+				
+				$user_info = $this->http($url, 'GET');
+				
+				if (isset($user_info['error_code'])) {
+					$this->log->write('WEIBO ERROR: '.$user_info['error_code'].' - '.$user_info['error']);
+					
+					$data = array(
+						'error'               => $user_info['error_code'],
+						'error_description'   => $user_info['error']
+					);
+					break;
+				}
+			
+				$data = array(
+					'openid'          => $uid,
+					'expires_in'      => $expires_in,
+					'access_token'    => $access_token,
+					'name'            => $user_info['name'],
+					'face'            => $user_info['profile_image_url'],
+					'email'           => ''
+				);
+				
+				break;
+			case 'alipay':
+
+				$alipay_config['partner']		= $appid;
+				$alipay_config['key']			= $appkey;
+				$alipay_config['grant_type']	= 'authorization_code';
+				$alipay_config['sign_type']    = strtoupper('MD5');
+				$alipay_config['input_charset']= strtolower('utf-8');
+				$alipay_config['cacert']    = getcwd().'\\cacert.pem';
+				$alipay_config['transport']    = 'http';
+			
+				$alipayNotify = new AlipayNotify($alipay_config);
+				$info = $alipayNotify->verifyReturn();
+				
+				if (isset($info['error'])) {
+					$this->log->write('WEIBO ERROR: '.$info['error'].' - '.$info['error_description']);
+					
+					$data = array(
+						'error'               => $info['error'],
+						'error_description'   => $info['error_description']
+					);
+					break;
+				}
+				
+				$access_token  = $info['access_token'];
+				$expires_in    = $info['expires_in'];
+				$remind_in     = $info['remind_in'];
+				$uid           = $info['uid'];
+				
+				$host = 'https://api.weibo.com/2/users/show.json?';
+				
+				$param = array();			
+				$param['access_token'] = $access_token;
+				$param['uid'] = $uid;
+			
+				$url = $host . http_build_query($param);
+				
+				$user_info = $this->http($url, 'GET');
+				
+				if (isset($user_info['error_code'])) {
+					$this->log->write('WEIBO ERROR: '.$user_info['error_code'].' - '.$user_info['error']);
+					
+					$data = array(
+						'error'               => $user_info['error_code'],
+						'error_description'   => $user_info['error']
+					);
+					break;
+				}
+			
+				$data = array(
+					'openid'          => $uid,
+					'expires_in'      => $expires_in,
+					'access_token'    => $info['access_token'],
+					'name'            => $user_info['name'],
+					'face'            => $user_info['profile_image_url'],
+					'email'           => ''
+				);
+				
+				break;				
+			case 'baidu':
+				$host = 'https://openapi.baidu.com/oauth/2.0/token?';
+		
+				$param = array();			
+				$param['client_id'] = $appid;
+				$param['client_secret'] = $appkey;
+				$param['grant_type'] = 'authorization_code';
+				$param['code'] = $code;
+				$param['redirect_uri'] = $callback;
+			
+				$url = $host . http_build_query($param);
+				
+				$info = $this->http($url, 'POST', http_build_query($param));
+				
+				if (isset($info['error'])) {
+					$this->log->write('BAIDU ERROR: '.$info['error'].' - '.$info['error_description']);
+					
+					$data = array(
+						'error'               => $info['error'],
+						'error_description'   => $info['error_description']
+					);
+					break;
+				}
+				
+				$access_token  = $info['access_token'];
+				$expires_in    = $info['expires_in'];
+				$refresh_token = $info['refresh_token'];
+				
+				$host = 'https://openapi.baidu.com/rest/2.0/passport/users/getLoggedInUser?';
+		
+				$param = array();
+				$param['format'] = 'json';
+				$param['access_token'] = $access_token;
+			
+				$url = $host . http_build_query($param);
+				
+				$user_info = $this->http($url, 'POST', http_build_query($param));
+				
+				if (isset($user_info['error_code'])) {
+					$this->log->write('BAIDU ERROR: '.$user_info['error_code'].' - '.$user_info['error_msg']);
+					
+					$data = array(
+						'error'               => $user_info['error_code'],
+						'error_description'   => $user_info['error_msg']
+					);
+					break;
+				}
+			
+				$data = array(
+					'openid'          => $user_info['uid'],
+					'expires_in'      => $expires_in,
+					'access_token'    => $access_token,
+					'name'            => $user_info['uname'],
+					'face'            => 'http://tb.himg.baidu.com/sys/portrait/item/'.$user_info['portrait'],
+					'email'           => ''
+				);
+				
+				break;
+			default:
+				$data = array();
+		}
+		
+		return $data;
+	}
 	// 取消绑定
 	public function remove() {
 		if (!$this->customer->isLogged()) {
@@ -847,349 +1191,7 @@ class ControllerAccountOauth extends Controller {
 		$this->response->setOutput($html);
 	}
 
-	private function getUrl($tag, $appid, $callback, $state) {
-		switch ($tag) {
 
-			case 'qq':
-				$host  = 'https://graph.qq.com/oauth2.0/authorize?';
-				
-				$code = array();
-				$code['response_type']   = 'code';
-				$code['client_id']       = $appid;
-				$code['state']           = $state;
-				$code['redirect_uri']    = $callback;
-				$code['scope']           = 'get_user_info';
-				
-				$url = $host . http_build_query($code);
-				break;
-			case 'weibo':
-				$host  = 'https://api.weibo.com/oauth2/authorize?';
-				
-				$code = array();
-				$code['response_type']   = 'code';
-				$code['client_id']       = $appid;
-				$code['state']           = $state;
-				$code['redirect_uri']    = $callback;
-				$code['scope']           = '';
-				
-				$url = $host . http_build_query($code);
-				break;
-			case 'aplipay':
-				$alipay_config = array(
-					'partner'		=> $appid,
-					'key'			=> APP_SECRET,
-					'sign_type'     => strtoupper('MD5'),
-					'input_charset' => strtolower('utf-8'),
-					'cacert'	    => getcwd().'\\cacert.pem',
-					'transport'    	=> 'http'
-				);
-				$parameter = array(
-					"service" 		=> "alipay.auth.authorize",
-					"partner" 		=> $appid,
-					"target_service"=> "user.auth.quick.login",
-					"return_url"	=> $callback,
-					"anti_phishing_key"	=> "",
-					"exter_invoke_ip"	=> "",
-					"_input_charset"	=> "utf-8"
-				);
-				
-				$alipaySubmit = new AlipaySubmit($alipay_config);
-				die($alipaySubmit->buildRequestForm($parameter,"get", "确认"));
-				break;
-			case 'baidu':
-				$host  = 'http://openapi.baidu.com/oauth/2.0/authorize?';
-				
-				$code = array();
-				$code['response_type']   = 'code';
-				$code['client_id']       = $appid;
-				$code['state']           = $state;
-				$code['redirect_uri']    = $callback;
-				$code['scope']           = 'basic';
-				
-				$url = $host . http_build_query($code);
-				break;
-			default:
-				$url = '';
-		}
-		
-		return $url;
-	}
-	
-	private function getOpenid($tag, $code, $appid, $appkey, $callback) {
-		switch ($tag) {
-			case 'qq':
-				$host = 'https://graph.qq.com/oauth2.0/token?';
-		
-				$param = array();			
-				$param['client_id'] = $appid;
-				$param['client_secret'] = $appkey;
-				$param['grant_type'] = 'authorization_code';
-				$param['code'] = $code;
-				$param['redirect_uri'] = $callback;
-			
-				$url = $host . http_build_query($param);
-				
-				$response = $this->http($url, 'GET');
-				
-				if(strpos($response, "callback") !== false){
-					$lpos = strpos($response, "(");
-					$rpos = strrpos($response, ")");
-					$response  = substr($response, $lpos + 1, $rpos - $lpos -1);
-					$msg = json_decode($response, 1);
-		
-					if(isset($msg['error'])){
-						$data = array(
-							'error'               => $msg['error'],
-							'error_description'   => $msg['error_description']
-						);
-					
-						$this->log->write('QQ ERROR: '.$msg['error'].' - '.$msg['error_description']);
-						
-						break;
-					}
-				}
-				
-				$info          = explode('&', $response);
-				$access_token  = str_replace('access_token=', '', $info[0]);
-				$expires_in    = str_replace('expires_in=', '', $info[1]);
-				$refresh_token = str_replace('refresh_token=', '', $info[2]);
-				
-				$host = 'https://graph.qq.com/oauth2.0/me?access_token='.$access_token;
-				
-				$response = $this->http($host, 'GET');
-				
-				if(strpos($response, "callback") !== false){
-					$lpos = strpos($response, "(");
-					$rpos = strrpos($response, ")");
-					$response  = substr($response, $lpos + 1, $rpos - $lpos -1);
-					$msg = json_decode($response, 1);
-		
-					if(isset($msg['error'])){
-						$data = array(
-							'error'               => $msg['error'],
-							'error_description'   => $msg['error_description']
-						);
-					
-						$this->log->write('QQ ERROR: '.$msg['error'].' - '.$msg['error_description']);
-						
-						break;
-					}
-				}
-				
-				$openid = $msg['openid'];
-				
-				$host = 'https://graph.qq.com/user/get_user_info?';
-		
-				$param = array();			
-				$param['oauth_consumer_key'] = $appid;
-				$param['openid'] = $openid;
-				$param['access_token'] = $access_token;
-			
-				$url = $host . http_build_query($param);
-				
-				$user_info = $this->http($url, 'GET');
-				
-				if (isset($user_info['ret']) && $user_info['ret']) {
-					$this->log->write('QQ ERROR: '.$user_info['ret'].' - '.$user_info['msg']);
-					
-					$data = array(
-						'error'               => $user_info['ret'],
-						'error_description'   => $user_info['msg']
-					);
-					break;
-				}
-				
-				$data = array(
-					'openid'          => $openid,
-					'expires_in'      => $expires_in,
-					'access_token'    => $access_token,
-					'name'            => $user_info['nickname'],
-					'face'            => $user_info['figureurl_2'],
-					'email'           => ''
-				);
-				
-				break;
-			case 'weibo':
-				$host = 'https://api.weibo.com/oauth2/access_token?';
-		
-				$param = array();			
-				$param['client_id'] = $appid;
-				$param['client_secret'] = $appkey;
-				$param['grant_type'] = 'authorization_code';
-				$param['code'] = $code;
-				$param['redirect_uri'] = $callback;
-			
-				$url = $host . http_build_query($param);
-				
-				$info = $this->http($url, 'POST', http_build_query($param));
-				
-				if (isset($info['error'])) {
-					$this->log->write('WEIBO ERROR: '.$info['error'].' - '.$info['error_description']);
-					
-					$data = array(
-						'error'               => $info['error'],
-						'error_description'   => $info['error_description']
-					);
-					break;
-				}
-				
-				$access_token  = $info['access_token'];
-				$expires_in    = $info['expires_in'];
-				$remind_in     = $info['remind_in'];
-				$uid           = $info['uid'];
-				
-				$host = 'https://api.weibo.com/2/users/show.json?';
-				
-				$param = array();			
-				$param['access_token'] = $access_token;
-				$param['uid'] = $uid;
-			
-				$url = $host . http_build_query($param);
-				
-				$user_info = $this->http($url, 'GET');
-				
-				if (isset($user_info['error_code'])) {
-					$this->log->write('WEIBO ERROR: '.$user_info['error_code'].' - '.$user_info['error']);
-					
-					$data = array(
-						'error'               => $user_info['error_code'],
-						'error_description'   => $user_info['error']
-					);
-					break;
-				}
-			
-				$data = array(
-					'openid'          => $uid,
-					'expires_in'      => $expires_in,
-					'access_token'    => $access_token,
-					'name'            => $user_info['name'],
-					'face'            => $user_info['profile_image_url'],
-					'email'           => ''
-				);
-				
-				break;
-			case 'alipay':
-
-				$alipay_config['partner']		= $appid;
-				$alipay_config['key']			= $appkey;
-				$alipay_config['grant_type']	= 'authorization_code';
-				$alipay_config['sign_type']    = strtoupper('MD5');
-				$alipay_config['input_charset']= strtolower('utf-8');
-				$alipay_config['cacert']    = getcwd().'\\cacert.pem';
-				$alipay_config['transport']    = 'http';
-			
-				$alipayNotify = new AlipayNotify($alipay_config);
-				$info = $alipayNotify->verifyReturn();
-				
-				if (isset($info['error'])) {
-					$this->log->write('WEIBO ERROR: '.$info['error'].' - '.$info['error_description']);
-					
-					$data = array(
-						'error'               => $info['error'],
-						'error_description'   => $info['error_description']
-					);
-					break;
-				}
-				
-				$access_token  = $info['access_token'];
-				$expires_in    = $info['expires_in'];
-				$remind_in     = $info['remind_in'];
-				$uid           = $info['uid'];
-				
-				$host = 'https://api.weibo.com/2/users/show.json?';
-				
-				$param = array();			
-				$param['access_token'] = $access_token;
-				$param['uid'] = $uid;
-			
-				$url = $host . http_build_query($param);
-				
-				$user_info = $this->http($url, 'GET');
-				
-				if (isset($user_info['error_code'])) {
-					$this->log->write('WEIBO ERROR: '.$user_info['error_code'].' - '.$user_info['error']);
-					
-					$data = array(
-						'error'               => $user_info['error_code'],
-						'error_description'   => $user_info['error']
-					);
-					break;
-				}
-			
-				$data = array(
-					'openid'          => $uid,
-					'expires_in'      => $expires_in,
-					'access_token'    => $info['access_token'],
-					'name'            => $user_info['name'],
-					'face'            => $user_info['profile_image_url'],
-					'email'           => ''
-				);
-				
-				break;				
-			case 'baidu':
-				$host = 'https://openapi.baidu.com/oauth/2.0/token?';
-		
-				$param = array();			
-				$param['client_id'] = $appid;
-				$param['client_secret'] = $appkey;
-				$param['grant_type'] = 'authorization_code';
-				$param['code'] = $code;
-				$param['redirect_uri'] = $callback;
-			
-				$url = $host . http_build_query($param);
-				
-				$info = $this->http($url, 'POST', http_build_query($param));
-				
-				if (isset($info['error'])) {
-					$this->log->write('BAIDU ERROR: '.$info['error'].' - '.$info['error_description']);
-					
-					$data = array(
-						'error'               => $info['error'],
-						'error_description'   => $info['error_description']
-					);
-					break;
-				}
-				
-				$access_token  = $info['access_token'];
-				$expires_in    = $info['expires_in'];
-				$refresh_token = $info['refresh_token'];
-				
-				$host = 'https://openapi.baidu.com/rest/2.0/passport/users/getLoggedInUser?';
-		
-				$param = array();
-				$param['format'] = 'json';
-				$param['access_token'] = $access_token;
-			
-				$url = $host . http_build_query($param);
-				
-				$user_info = $this->http($url, 'POST', http_build_query($param));
-				
-				if (isset($user_info['error_code'])) {
-					$this->log->write('BAIDU ERROR: '.$user_info['error_code'].' - '.$user_info['error_msg']);
-					
-					$data = array(
-						'error'               => $user_info['error_code'],
-						'error_description'   => $user_info['error_msg']
-					);
-					break;
-				}
-			
-				$data = array(
-					'openid'          => $user_info['uid'],
-					'expires_in'      => $expires_in,
-					'access_token'    => $access_token,
-					'name'            => $user_info['uname'],
-					'face'            => 'http://tb.himg.baidu.com/sys/portrait/item/'.$user_info['portrait'],
-					'email'           => ''
-				);
-				
-				break;
-			default:
-				$data = array();
-		}
-		
-		return $data;
-	}
 	
   	protected function validate_login() {		
 		if (!$this->error) {

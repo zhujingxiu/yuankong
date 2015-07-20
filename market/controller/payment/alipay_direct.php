@@ -1,5 +1,5 @@
 <?php
-require_once("lib/alipay_submit.class.php");
+
 class ControllerPaymentAlipayDirect extends Controller {
 	public function index() {
 		

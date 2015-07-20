@@ -83,9 +83,17 @@
   </div>
 </div>
 
-<script type="text/javascript" src="view/javascript/ckeditor/ckeditor.js"></script> 
+<link type="text/css" href="<?php echo TPL_JS ?>umeditor/themes/default/css/umeditor.min.css" rel="stylesheet" />
+<script type="text/javascript" src="<?php echo TPL_JS ?>umeditor/umeditor.config.js"></script> 
+<script type="text/javascript" src="<?php echo TPL_JS ?>umeditor/umeditor.min.js"></script> 
+<?php if(false){ ?>
+<script type="text/javascript" src="view/javascript/ckeditor/ckeditor.js"></script>
+<?php } ?>
 <script type="text/javascript"><!--
 
+  UM.getEditor('news-text');
+
+<?php if(false){ ?>
 CKEDITOR.replace('news-text', {
 	filebrowserBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
 	filebrowserImageBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
@@ -97,5 +105,6 @@ CKEDITOR.replace('news-text', {
 
 
 $('#language a').tabs();
+<?php } ?>
 //--></script> 
 <?php echo $footer; ?>

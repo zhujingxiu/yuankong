@@ -11,6 +11,7 @@
 <meta name="viewport" content="width=device-width">
 <meta http-equiv="X-UA-Compatible"content="IE=9; IE=8; IE=7; IE=EDGE">
 <meta charset="UTF-8" />
+<meta property="qc:admins" content="3557373151613111636" />
 <title><?php echo $title; ?></title>
 <base href="<?php echo $base; ?>" />
 <?php if ($description) { ?>

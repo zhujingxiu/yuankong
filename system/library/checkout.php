@@ -20,7 +20,7 @@ class Checkout {
     public function getProducts() {
 
         if (!$this->data) {
-            foreach ($this->data as $key => $quantity) {
+            foreach ($this->session->data['checkout'] as $key => $quantity) {
                 $product = explode(':', $key);
                 $product_id = $product[0];
                 $stock = true;

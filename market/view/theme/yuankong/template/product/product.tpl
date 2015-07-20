@@ -268,7 +268,7 @@
 <script type="text/javascript"><!--
 	$('#button-buynow').bind('click',function(){
 		$.ajax({
-			url: 'index.php?route=checkout/cart/add&checkout=1',
+			url: 'index.php?route=checkout/checkout/add',
 			type: 'post',
 			data: $('.product-info input[type=\'text\'], .product-info input[type=\'hidden\'], .product-info input[type=\'radio\']:checked, .product-info input[type=\'checkbox\']:checked, .product-info select, .product-info textarea'),
 			dataType: 'json',
@@ -282,14 +282,6 @@
 						}
 					}
 				} 
-				
-				if (json['success']) {
-					$('#notification').html('<div class="msg-success" style="display: none;">' + json['success'] + '<img src="market/view/theme/default/image/close.png" alt="" class="close" /></div>');
-						
-					$('.msg-success').fadeIn('slow');
-					
-					$('html, body').animate({ scrollTop: 0 }, 'slow'); 
-				}	
 
 				if(json['redirect']){
 					location.href = json['redirect'];

@@ -3,7 +3,7 @@ class ControllerCheckoutConfirm extends Controller {
 	public function index() {
 		$redirect = '';
 		
-		if ($this->cart->hasShipping()) {
+		if ($this->checkout->hasShipping()) {
 			// Validate if shipping address has been set.		
 			$this->load->model('account/address');
 	
@@ -45,12 +45,12 @@ class ControllerCheckoutConfirm extends Controller {
 		}
 					
 		// Validate cart has products and has stock.	
-		if ((!$this->cart->hasProducts() && empty($this->session->data['vouchers'])) || (!$this->cart->hasStock() && !$this->config->get('config_stock_checkout'))) {
+		if ((!$this->checkout->hasProducts() && empty($this->session->data['vouchers'])) || (!$this->checkout->hasStock() && !$this->config->get('config_stock_checkout'))) {
 			$redirect = $this->url->link('checkout/cart');				
 		}	
 		
 		// Validate minimum quantity requirments.			
-		$products = $this->cart->getProducts();
+		$products = $this->checkout->getProducts();
 				
 		foreach ($products as $product) {
 			$product_total = 0;
@@ -71,7 +71,7 @@ class ControllerCheckoutConfirm extends Controller {
 		if (!$redirect) {
 			$total_data = array();
 			$total = 0;
-			$taxes = $this->cart->getTaxes();
+			$taxes = $this->checkout->getTaxes();
 			 
 			$this->load->model('setting/extension');
 			
@@ -89,7 +89,7 @@ class ControllerCheckoutConfirm extends Controller {
 				if ($this->config->get($result['code'] . '_status')) {
 					$this->load->model('total/' . $result['code']);
 		
-					$this->{'model_total_' . $result['code']}->getTotal($total_data, $total, $taxes);
+					$this->{'model_total_' . $result['code']}->getCheckoutTotal($total_data, $total, $taxes);
 				}
 			}
 			
@@ -127,32 +127,7 @@ class ControllerCheckoutConfirm extends Controller {
 				$this->load->model('account/address');
 				
 				$payment_address = $this->model_account_address->getAddress($this->session->data['payment_address_id']);
-			} elseif (isset($this->session->data['guest'])) {
-				$data['customer_id'] = 0;
-				$data['customer_group_id'] = $this->session->data['guest']['customer_group_id'];
-				$data['firstname'] = $this->session->data['guest']['firstname'];
-				$data['lastname'] = $this->session->data['guest']['lastname'];
-				$data['email'] = $this->session->data['guest']['email'];
-				$data['telephone'] = $this->session->data['guest']['telephone'];
-				$data['fax'] = $this->session->data['guest']['fax'];
-				
-				$payment_address = $this->session->data['guest']['payment'];
-			}
-			
-			$data['payment_firstname'] = $payment_address['firstname'];
-			$data['payment_lastname'] = $payment_address['lastname'];	
-			$data['payment_company'] = $payment_address['company'];	
-			$data['payment_company_id'] = $payment_address['company_id'];	
-			$data['payment_tax_id'] = $payment_address['tax_id'];	
-			$data['payment_address_1'] = $payment_address['address_1'];
-			$data['payment_address_2'] = $payment_address['address_2'];
-			$data['payment_city'] = $payment_address['city'];
-			$data['payment_postcode'] = $payment_address['postcode'];
-			$data['payment_zone'] = $payment_address['zone'];
-			$data['payment_zone_id'] = $payment_address['zone_id'];
-			$data['payment_country'] = $payment_address['country'];
-			$data['payment_country_id'] = $payment_address['country_id'];
-			$data['payment_address_format'] = $payment_address['address_format'];
+			} 
 		
 			if (isset($this->session->data['payment_method']['title'])) {
 				$data['payment_method'] = $this->session->data['payment_method']['title'];
@@ -166,7 +141,7 @@ class ControllerCheckoutConfirm extends Controller {
 				$data['payment_code'] = '';
 			}
 						
-			if ($this->cart->hasShipping()) {
+			if ($this->checkout->hasShipping()) {
 				if ($this->customer->isLogged()) {
 					$this->load->model('account/address');
 					
@@ -218,7 +193,7 @@ class ControllerCheckoutConfirm extends Controller {
 			
 			$product_data = array();
 		
-			foreach ($this->cart->getProducts() as $product) {
+			foreach ($this->checkout->getProducts() as $product) {
 				$option_data = array();
 	
 				foreach ($product['option'] as $option) {
@@ -283,7 +258,7 @@ class ControllerCheckoutConfirm extends Controller {
 				$this->load->model('affiliate/affiliate');
 				
 				$affiliate_info = $this->model_affiliate_affiliate->getAffiliateByCode($this->request->cookie['tracking']);
-				$subtotal = $this->cart->getSubTotal();
+				$subtotal = $this->checkout->getSubTotal();
 				
 				if ($affiliate_info) {
 					$data['affiliate_id'] = $affiliate_info['affiliate_id']; 
@@ -335,7 +310,7 @@ class ControllerCheckoutConfirm extends Controller {
             
             $this->data['products'] = array();
 
-            foreach ($this->cart->getProducts() as $product) {
+            foreach ($this->checkout->getProducts() as $product) {
                 $option_data = array();
 
                 foreach ($product['option'] as $option) {
@@ -394,4 +369,55 @@ class ControllerCheckoutConfirm extends Controller {
 		
 		$this->response->setOutput($this->render());	
   	}
+
+  	protected function validateAddress() {
+		if ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32)) {
+			$json['error']['firstname'] = $this->language->get('error_firstname');
+		}
+
+		if ((utf8_strlen($this->request->post['lastname']) < 1) || (utf8_strlen($this->request->post['lastname']) > 32)) {
+			$json['error']['lastname'] = $this->language->get('error_lastname');
+		}
+
+		if ((utf8_strlen($this->request->post['address_1']) < 3) || (utf8_strlen($this->request->post['address_1']) > 128)) {
+			$json['error']['address_1'] = $this->language->get('error_address_1');
+		}
+
+		if ((utf8_strlen($this->request->post['city']) < 2) || (utf8_strlen($this->request->post['city']) > 128)) {
+			$json['error']['city'] = $this->language->get('error_city');
+		}
+		
+		$this->load->model('localisation/country');
+		
+		$country_info = $this->model_localisation_country->getCountry($this->request->post['country_id']);
+		
+		if ($country_info && $country_info['postcode_required'] && (utf8_strlen($this->request->post['postcode']) < 2) || (utf8_strlen($this->request->post['postcode']) > 10)) {
+			$json['error']['postcode'] = $this->language->get('error_postcode');
+		}
+		
+		if ($this->request->post['country_id'] == '') {
+			$json['error']['country'] = $this->language->get('error_country');
+		}
+		
+		if (!isset($this->request->post['zone_id']) || $this->request->post['zone_id'] == '') {
+			$json['error']['zone'] = $this->language->get('error_zone');
+		}
+		
+		if (!$json) {						
+			// Default Shipping Address
+			$this->load->model('account/address');		
+			
+			$this->session->data['shipping_address_id'] = $this->model_account_address->addAddress($this->request->post);
+			$this->session->data['shipping_country_id'] = $this->request->post['country_id'];
+			$this->session->data['shipping_zone_id'] = $this->request->post['zone_id'];
+			$this->session->data['shipping_postcode'] = $this->request->post['postcode'];
+							
+			unset($this->session->data['shipping_method']);						
+			unset($this->session->data['shipping_methods']);
+		}
+	}
+
+	protected function validetePayment(){
+
+	}
 }

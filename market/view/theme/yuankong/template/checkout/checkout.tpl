@@ -90,6 +90,7 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
     <?php } ?>
   </div>
 <div id="content" class="mt20">
+    <form id="checkout-form" method="post" action="<?php echo $confirm ?>">
     <div class="order-w">
         <h3><b><?php echo $text_checkout_shipping ?></b></h3>
         <ul class="order-ul">
@@ -229,13 +230,15 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
                     </li>
                     <li><?php echo $text_finished_payment ?></li>
                     <li class="mt10">
-                        <div class="w210"><input type="submit" class="gc-tab-sub" value="提交订单" /></div> 
+                        <div class="w210">
+                            <input type="submit" class="gc-tab-sub" value="提交订单" id="button-confirm"/>
+                        </div> 
                     </li>
                 </ul>
             </div>
         </div>
     </div>
-
+    </form>
 </div> 
 
 <script type="text/javascript">
@@ -286,4 +289,16 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
         };
     });
 </script>
+<script type="text/javascript"><!--
+$('#button-confirm').bind('click', function() {
+    $.ajax({ 
+        type: 'post',
+        url: 'index.php?route=checkout/confirm',
+        success: function() {
+            location = '<?php echo $continue; ?>';
+        }       
+    });
+});
+//--></script> 
+
 <?php echo $footer; ?>
