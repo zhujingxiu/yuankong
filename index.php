@@ -213,6 +213,9 @@ $registry->set('length', new Length($registry));
 // Cart
 $registry->set('cart', new Cart($registry));
 
+// Cart
+$registry->set('checkout', new Checkout($registry));
+
 // Encryption
 $registry->set('encryption', new Encryption($config->get('config_encryption')));
 		

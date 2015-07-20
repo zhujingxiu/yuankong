@@ -1,10 +1,10 @@
 <?php
 // Development Environment
 // HTTP
-$_['HTTP_SERVER']       = 'http://www.yuankong.com/';
+$_['HTTP_SERVER']       = 'http://www.yk119.cn/';
 
 // HTTPS
-$_['HTTPS_SERVER']      = 'http://www.yuankong.com/';
+$_['HTTPS_SERVER']      = 'http://www.yk119.cn/';
 
 
 // DB

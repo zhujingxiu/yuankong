@@ -1,6 +1,6 @@
 <?php
 class ModelTotalReward extends Model {
-	public function getTotal(&$total_data, &$total, &$taxes,$checkout=false) {
+	public function getTotal(&$total_data, &$total, &$taxes) {
 		if (isset($this->session->data['reward'])) {
 			$this->language->load('total/reward');
 			
@@ -11,7 +11,7 @@ class ModelTotalReward extends Model {
 				
 				$points_total = 0;
 				
-				foreach ($this->cart->getProducts($checkout) as $product) {
+				foreach ($this->checkout->getProducts() as $product) {
 					if ($product['points']) {
 						$points_total += $product['points'];
 					}
@@ -19,7 +19,7 @@ class ModelTotalReward extends Model {
 				
 				$points = min($points, $points_total);
 		
-				foreach ($this->cart->getProducts($checkout) as $product) {
+				foreach ($this->checkout->getProducts() as $product) {
 					$discount = 0;
 					
 					if ($product['points']) {
@@ -69,4 +69,3 @@ class ModelTotalReward extends Model {
 		}
 	}		
 }
-?>

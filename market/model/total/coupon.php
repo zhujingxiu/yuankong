@@ -1,6 +1,6 @@
 <?php
 class ModelTotalCoupon extends Model {
-	public function getTotal(&$total_data, &$total, &$taxes,$checkout=false) {
+	public function getTotal(&$total_data, &$total, &$taxes) {
 		if (isset($this->session->data['coupon'])) {
 			$this->language->load('total/coupon');
 			
@@ -12,11 +12,11 @@ class ModelTotalCoupon extends Model {
 				$discount_total = 0;
 				
 				if (!$coupon_info['product']) {
-					$sub_total = $this->cart->getSubTotal($checkout);
+					$sub_total = $this->checkout->getSubTotal();
 				} else {
 					$sub_total = 0;
 				
-					foreach ($this->cart->getProducts($checkout) as $product) {
+					foreach ($this->checkout->getProducts() as $product) {
 						if (in_array($product['product_id'], $coupon_info['product'])) {
 							$sub_total += $product['total'];
 						}
@@ -27,7 +27,7 @@ class ModelTotalCoupon extends Model {
 					$coupon_info['discount'] = min($coupon_info['discount'], $sub_total);
 				}
 				
-				foreach ($this->cart->getProducts($checkout) as $product) {
+				foreach ($this->checkout->getProducts() as $product) {
 					$discount = 0;
 					
 					if (!$coupon_info['product']) {
@@ -107,4 +107,3 @@ class ModelTotalCoupon extends Model {
 		}						
 	}
 }
-?>

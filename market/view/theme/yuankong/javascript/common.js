@@ -56,7 +56,6 @@ function addToCheckout(key,quantity){
         data:'key='+key+'&quantity='+quantity,
         dataType:'json',
         success:function(json){
-
             if(json['error']){
                 $('#notification').html('<div class="msg-error" style="display: none;">' + json['error'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
 

@@ -8,8 +8,8 @@ input[type=submit]:active { opacity: 0.8;}
 .login-box { border-top:1px solid #20272f; }
 .login-dt { padding: 40px 0 30px; border-top: 1px solid #3f4954;}
 .login-dd { padding: 20px 40px 18px; height: 40px;}
-.iconbox { display: inline-block; vertical-align: middle; background: #28b779; width:48px; position: relative; height: 35px;}
-.iconbox2 { display: inline-block; vertical-align: middle; background: #ffb848; width:48px; position: relative; height: 35px;}
+.iconbox { display: inline-block; vertical-align: middle; background: #28b779; width:45px; position: relative; height: 35px;}
+.iconbox2 { display: inline-block; vertical-align: middle; background: #ffb848; width:45px; position: relative; height: 35px;}
 .icon-user { position: absolute; background-position: -169px -1px; top:12px; left:17px;}
 .icon-pwd { position: absolute; background-position: -289px -25px; top:12px; left:17px;}
 .login-text { background:#fff; line-height: 35px; height: 35px; padding: 0 10px; width: 285px;}

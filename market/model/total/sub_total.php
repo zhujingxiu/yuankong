@@ -1,9 +1,9 @@
 <?php
 class ModelTotalSubTotal extends Model {
-	public function getTotal(&$total_data, &$total, &$taxes,$checkout=false) {
+	public function getTotal(&$total_data, &$total, &$taxes) {
 		$this->language->load('total/sub_total');
 		
-		$sub_total = $this->cart->getSubTotal($checkout);
+		$sub_total = $this->checkout->getSubTotal();
 		
 		if (isset($this->session->data['vouchers']) && $this->session->data['vouchers']) {
 			foreach ($this->session->data['vouchers'] as $voucher) {
@@ -22,4 +22,3 @@ class ModelTotalSubTotal extends Model {
 		$total += $sub_total;
 	}
 }
-?>

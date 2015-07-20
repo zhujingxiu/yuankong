@@ -1,10 +1,11 @@
 <?php  
 class ControllerCheckoutCheckout extends Controller { 
 	public function index() {
+
 		// Validate cart has products and has stock.
 		if ((!$this->cart->hasProducts(true) && empty($this->session->data['vouchers'])) || (!$this->cart->hasStock(true) && !$this->config->get('config_stock_checkout'))) {
 	  		
-	  		$this->redirect($this->url->link('checkout/cart'));
+	  		//$this->redirect($this->url->link('checkout/cart'));
     	}	
 		
 		// Validate minimum quantity requirments.			
@@ -332,12 +333,7 @@ class ControllerCheckoutCheckout extends Controller {
 		$quantity = isset($this->request->post['quantity']) ? $this->request->post['quantity'] : 1;
 
 		if($key){
-			if(isset($this->session->data['checkout'][$key])){
-				$this->session->data['checkout'][$key] += $quantity;
-				$this->cart->update($key, $quantity);
-			}else{
-				$this->session->data['checkout'][$key] = $quantity;
-			}			
+			$this->session->data['checkout'][$key] = $quantity;			
 
 		}else{
 			$json['error'] = $this->language->get('error_checkout_key');
@@ -349,7 +345,6 @@ class ControllerCheckoutCheckout extends Controller {
 			unset($this->session->data['payment_method']);
 			unset($this->session->data['payment_methods']);			
 		}
-		
 		$this->response->setOutput(json_encode($json));		
 	}
 

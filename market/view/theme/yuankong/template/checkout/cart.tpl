@@ -278,16 +278,12 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
       $('.iframe-login').show().focus();
     <?php }else{?>
       if($('.headcheck[name^="selected"]:checked').length){
-        $.each($('.headcheck[name^="selected"]'),function(){
-          if($(this).is(":checked")){
+        $.each($('.headcheck[name^="selected"]:checked'),function(){
             var key = $(this).val(),
             qty = parseInt($(this).parent().parent('tr').find('input[name^="quantity"]').val());
             addToCheckout(key,qty);
-          }
         });
-        <?php if($this->customer->isLogged()){?>
-        location = '<?php echo $checkout ?>'
-        <?php }?>
+        location.href = '<?php echo $checkout ?>'
       }else{
         alert('没有选中商品');
       }

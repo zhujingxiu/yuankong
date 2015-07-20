@@ -3,7 +3,6 @@ class Cart {
 	private $config;
 	private $db;
 	private $data = array();
-	private $checkout = array();
 	
   	public function __construct($registry) {
 		$this->config = $registry->get('config');
@@ -18,17 +17,10 @@ class Cart {
     	}
 	}
 	      
-  	public function getProducts($checkout=false) {
-  		if($checkout){
-  			$cart_data = isset($this->session->data['checkout']) ? $this->session->data['checkout'] : array();
-  			$result = $this->checkout ;
-  		}else{
-  			$cart_data = $this->session->data['cart'];
-  			$result = $this->data ;
-  		}
+  	public function getProducts() {
 
-		if (!$result) {
-			foreach ($cart_data as $key => $quantity) {
+		if (!$this->data) {
+			foreach ($this->data as $key => $quantity) {
 				$product = explode(':', $key);
 				$product_id = $product[0];
 				$stock = true;
@@ -226,7 +218,7 @@ class Cart {
 						$stock = false;
 					}
 					
-					$result[$key] = array(
+					$this->data[$key] = array(
 						'key'             => $key,
 						'product_id'      => $product_query->row['product_id'],
 						'name'            => $product_query->row['name'],
@@ -251,21 +243,17 @@ class Cart {
 						'height'          => $product_query->row['height'],
 						'length_class_id' => $product_query->row['length_class_id']					
 					);
-					if($checkout){
-						$this->checkout = $result;
-					}else{
-						$this->data = $result;
-					}
+					
 				} else {
 					$this->remove($key);
 				}
 			}
 		}
 		
-		return $checkout ? $this->checkout : $this->data;
+		return  $this->data;
   	}
 		  
-  	public function add($product_id, $qty = 1, $option = array(),$checkout = false) {
+  	public function add($product_id, $qty = 1, $option = array()) {
     	if (!$option) {
       		$key = (int)$product_id;
     	} else {
@@ -282,20 +270,10 @@ class Cart {
 		
 		$this->data = array();
 
-		if($checkout){
-			if ((int)$qty && ((int)$qty > 0)) {
-	    		if (!isset($this->session->data['checkout'][$key])) {
-	      			$this->session->data['checkout'][$key] = (int)$qty;
-	    		} else {
-	      			$this->session->data['checkout'][$key] += (int)$qty;
-	    		}
-			}
-			
-			$this->checkout = array();
-		}
   	}
 
   	public function update($key, $qty) {
+
 		if ((int)$qty && ((int)$qty > 0) && isset($this->session->data['cart'][$key])) {
       		$this->session->data['cart'][$key] = (int)$qty;
     	} else {
@@ -303,37 +281,29 @@ class Cart {
 		}
 		
 		$this->data = array();
+
   	}
 
-  	public function remove($key,$checkout=false) {
-  		if($checkout){
-  			if (isset($this->session->data['checkout'][$key])) {
-	     		unset($this->session->data['checkout'][$key]);
-	  		}
-	  		$this->checkout = array();
-  		}else{
-			if (isset($this->session->data['cart'][$key])) {
-	     		unset($this->session->data['cart'][$key]);
-	  		}
-			
-			$this->data = array();
-		}
+  	public function remove($key) {
+
+		if (isset($this->session->data['cart'][$key])) {
+     		unset($this->session->data['cart'][$key]);
+  		}
+		
+		$this->data = array();
 	}
 	
-  	public function clear($checkout=false) {
-  		if($checkout){
-			$this->session->data['checkout'] = array();
-			$this->checkout = array();
-  		}else{
-			$this->session->data['cart'] = array();
-			$this->data = array();
-		}
+  	public function clear() {
+
+		$this->session->data['cart'] = array();
+		$this->data = array();
+
   	}
 	
-  	public function getWeight($checkout=false) {
+  	public function getWeight() {
 		$weight = 0;
 	
-    	foreach ($this->getProducts($checkout) as $product) {
+    	foreach ($this->getProducts() as $product) {
 			if ($product['shipping']) {
       			$weight += $this->weight->convert($product['weight'], $product['weight_class_id'], $this->config->get('config_weight_class_id'));
 			}
@@ -342,20 +312,20 @@ class Cart {
 		return $weight;
 	}
 	
-  	public function getSubTotal($checkout=false) {
+  	public function getSubTotal() {
 		$total = 0;
 		
-		foreach ($this->getProducts($checkout) as $product) {
+		foreach ($this->getProducts() as $product) {
 			$total += $product['total'];
 		}
 
 		return $total;
   	}
 	
-	public function getTaxes($checkout=false) {
+	public function getTaxes() {
 		$tax_data = array();
 		
-		foreach ($this->getProducts($checkout) as $product) {
+		foreach ($this->getProducts() as $product) {
 			if ($product['tax_class_id']) {
 				$tax_rates = $this->tax->getRates($product['price'], $product['tax_class_id']);
 				
@@ -372,20 +342,20 @@ class Cart {
 		return $tax_data;
   	}
 
-  	public function getTotal($checkout=false) {
+  	public function getTotal() {
 		$total = 0;
 		
-		foreach ($this->getProducts($checkout) as $product) {
+		foreach ($this->getProducts() as $product) {
 			$total += $this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax')) * $product['quantity'];
 		}
 
 		return $total;
   	}
 	  	
-  	public function countProducts($checkout=false) {
+  	public function countProducts() {
 		$product_total = 0;
 			
-		$products = $this->getProducts($checkout);
+		$products = $this->getProducts();
 			
 		foreach ($products as $product) {
 			$product_total += $product['quantity'];
@@ -394,14 +364,15 @@ class Cart {
 		return $product_total;
 	}
 	  
-  	public function hasProducts($checkout=false) {
-    	return $checkout ? count($this->session->data['checkout']) : count($this->session->data['cart']);
+  	public function hasProducts() {
+
+    	return count($this->session->data['cart']);
   	}
   
-  	public function hasStock($checkout=false) {
+  	public function hasStock() {
 		$stock = true;
 		
-		foreach ($this->getProducts($checkout) as $product) {
+		foreach ($this->getProducts() as $product) {
 			if (!$product['stock']) {
 	    		$stock = false;
 			}
@@ -410,10 +381,10 @@ class Cart {
     	return $stock;
   	}
   
-  	public function hasShipping($checkout=false) {
+  	public function hasShipping() {
 		$shipping = false;
 		
-		foreach ($this->getProducts($checkout) as $product) {
+		foreach ($this->getProducts() as $product) {
 	  		if ($product['shipping']) {
 	    		$shipping = true;
 				
@@ -424,10 +395,10 @@ class Cart {
 		return $shipping;
 	}
 	
-  	public function hasDownload($checkout=false) {
+  	public function hasDownload() {
 		$download = false;
 		
-		foreach ($this->getProducts($checkout) as $product) {
+		foreach ($this->getProducts() as $product) {
 	  		if ($product['download']) {
 	    		$download = true;
 				
