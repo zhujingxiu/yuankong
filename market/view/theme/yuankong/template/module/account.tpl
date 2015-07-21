@@ -1,26 +1,30 @@
-<div class="box">
-  <div class="box-heading"><h2><?php echo $heading_title; ?></h2></div>
-  <div class="box-content">
-    <ul>
-      <?php if (!$logged) { ?>
-      <li><a href="<?php echo $login; ?>"><?php echo $text_login; ?></a> / <a href="<?php echo $register; ?>"><?php echo $text_register; ?></a></li>
-      <li><a href="<?php echo $forgotten; ?>"><?php echo $text_forgotten; ?></a></li>
-      <?php } ?>
-      <li><a href="<?php echo $account; ?>"><?php echo $text_account; ?></a></li>
-      <?php if ($logged) { ?>
-      <li><a href="<?php echo $edit; ?>"><?php echo $text_edit; ?></a></li>
-      <li><a href="<?php echo $password; ?>"><?php echo $text_password; ?></a></li>
-      <?php } ?>
-      <li><a href="<?php echo $address; ?>"><?php echo $text_address; ?></a></li>
-      <li><a href="<?php echo $wishlist; ?>"><?php echo $text_wishlist; ?></a></li>
-      <li><a href="<?php echo $order; ?>"><?php echo $text_order; ?></a></li>
-      <li><a href="<?php echo $download; ?>"><?php echo $text_download; ?></a></li>
-      <li><a href="<?php echo $return; ?>"><?php echo $text_return; ?></a></li>
-      <li><a href="<?php echo $transaction; ?>"><?php echo $text_transaction; ?></a></li>
-      <li><a href="<?php echo $newsletter; ?>"><?php echo $text_newsletter; ?></a></li>
-      <?php if ($logged) { ?>
-      <li><a href="<?php echo $logout; ?>"><?php echo $text_logout; ?></a></li>
-      <?php } ?>
-    </ul>
-  </div>
+<div class="userbox1">
+    <b class="userbg"></b>
+    <dl class="userxinxi">
+        <dt><?php echo $text_order; ?></dt>
+        <dd><a class="redbg" href="<?php echo $order; ?>">所有订单</a></dd>
+        <dd><a href="<?php echo $return; ?>"><?php echo $text_return; ?></a></dd>
+    </dl>
+    <dl class="userxinxi">
+        <dt>我的活动</dt>
+        <dd><a href="#">订单点评</a></dd>
+        <dd><a href="#">我的提问</a></dd>
+    </dl>
+    <dl class="userxinxi">
+        <dt><?php echo $text_account; ?></dt>
+        <dd><a href="<?php echo $edit; ?>"><?php echo $text_edit; ?></a></dd>
+        <dd><a href="<?php echo $address; ?>"><?php echo $text_address; ?></a></dd>
+        <dd><a href="<?php echo $password; ?>"><?php echo $text_password; ?></a></dd>
+        <dd><a href="<?php echo $transaction; ?>"><?php echo $text_transaction; ?></a></dd>
+        <dd><a href="<?php echo $newsletter; ?>"><?php echo $text_newsletter; ?></a></dd>
+    </dl>
+    
+    <!-- 我的应用 -->
+    <div class="userbox1 mt10">
+        <h3><b>企业发布</b></h3>
+        <ul class="useryy">
+          <li class="usergl"><a href="#">信息发布</a></li>
+          <li class="userwt"><a href="#">在线提问</a></li>
+        </ul>
+    </div>
 </div>

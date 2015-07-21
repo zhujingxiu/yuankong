@@ -258,19 +258,19 @@ i,em,cite {
     color: white;
 }
 .c_r {
-    color: #f00;
+    color: #f00 !important;
 }
 .c_g {
-    color: #8ec31f;
+    color: #8ec31f !important;
 }
 .cf6 {
-    color: #f60;
+    color: #f60 !important;
 }
 .cff {
-    color: #be1025;
+    color: #be1025 !important;
 }
 .c_red {
-    color: #C30D23;
+    color: #C30D23 !important;
 }
 .f_0 {
     font-size: 0;

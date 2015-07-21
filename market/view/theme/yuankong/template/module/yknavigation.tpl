@@ -1,4 +1,4 @@
-<div class="w rel fix">
+<div class="<?php echo $container_class ?> rel fix">
         <div class="l ovh">
             <ul class="nav fix">
                 <?php foreach ($navgatiors as $item): ?>
@@ -11,9 +11,9 @@
                 <?php endforeach ?>
             </ul>
         </div>
-        
+        <?php if($container_class=="w"){?>
         <div class="nav-adbox"><img src="<?php echo $nav_img ?>" /></div>
-        
+        <?php }?>
     </div>
 <script type="text/javascript">
     o.mous.init(".nav-adbox","hov");

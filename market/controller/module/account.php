@@ -4,7 +4,7 @@ class ControllerModuleAccount extends Controller {
 		$this->language->load('module/account');
 		
     	$this->data['heading_title'] = $this->language->get('heading_title');
-    	
+    	$this->document->addStyle('market/view/theme/' . $this->config->get('config_template') . '/stylesheet/yk_usercenter.css');
 		$this->data['text_register'] = $this->language->get('text_register');
     	$this->data['text_login'] = $this->language->get('text_login');
 		$this->data['text_logout'] = $this->language->get('text_logout');
@@ -45,4 +45,3 @@ class ControllerModuleAccount extends Controller {
 		$this->render();
 	}
 }
-?>

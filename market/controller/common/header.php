@@ -25,6 +25,18 @@ class ControllerCommonHeader extends Controller {
             $this->data['sucess'] = '';
         }
 
+        if (isset($this->request->get['route'])) {
+			$route = (string)$this->request->get['route'];
+		} else {
+			$route = 'common/home';
+		}
+
+		$part = explode("/", $route);
+		$this->data['container_class'] = "w";
+		if(isset($part[0]) && $part[0] =='account'){
+			$this->data['container_class'] = "register-w";
+		}
+
 		$this->data['base'] = $server;
 		$this->data['description'] = $this->document->getDescription();
 		$this->data['keywords'] = $this->document->getKeywords();

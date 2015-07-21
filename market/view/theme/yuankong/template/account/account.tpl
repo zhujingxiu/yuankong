@@ -1,56 +1,93 @@
 <?php require( DIR_TEMPLATE.$this->config->get('config_template')."/template/common/config.tpl" ); ?>
 <?php echo $header; ?>
-<?php require( DIR_TEMPLATE.$this->config->get('config_template')."/template/common/breadcrumb.tpl" ); ?>
+
 <?php if ($success) { ?>
 <div class="success"><?php echo $success; ?></div>
 <?php } ?>
-<div>
+<div class="register-w f_s fix" id="main">
 
 <?php if( $SPAN[0] ): ?>
-	<div class="<?php echo $SPAN[0];?>">
+	<div class="<?php echo $SPAN[0];?> aside">
 	<?php echo $column_left; ?>
 	</div>
 <?php endif; ?>
-
-<div class="<?php echo $SPAN[1];?>">
-
-	
-	<div id="content" class="page"><?php echo $content_top; ?>
-
-	  <h1 class="page-title"><?php echo $heading_title; ?></h1> 
-	  <h2><?php echo $text_my_account; ?></h2>
-	  <div class="content">
-		<ul>
-		  <li><a href="<?php echo $edit; ?>"><?php echo $text_edit; ?></a></li>
-		  <li><a href="<?php echo $password; ?>"><?php echo $text_password; ?></a></li>
-		  <li><a href="<?php echo $address; ?>"><?php echo $text_address; ?></a></li>
-		  <li><a href="<?php echo $wishlist; ?>"><?php echo $text_wishlist; ?></a></li>
-		</ul>
-	  </div>
-	  <h2><?php echo $text_my_orders; ?></h2>
-	  <div class="content">
-		<ul>
-		  <li><a href="<?php echo $order; ?>"><?php echo $text_order; ?></a></li>
-		  <li><a href="<?php echo $download; ?>"><?php echo $text_download; ?></a></li>
-		  <?php if ($reward) { ?>
-		  <li><a href="<?php echo $reward; ?>"><?php echo $text_reward; ?></a></li>
-		  <?php } ?>
-		  <li><a href="<?php echo $return; ?>"><?php echo $text_return; ?></a></li>
-		  <li><a href="<?php echo $transaction; ?>"><?php echo $text_transaction; ?></a></li>
-
-
-		</ul>
-	  </div>
-	  <h2><?php echo $text_my_newsletter; ?></h2>
-	  <div class="content">
-		<ul>
-		  <li><a href="<?php echo $newsletter; ?>"><?php echo $text_newsletter; ?></a></li>
-		</ul>
-	  </div>
-</div>  
-  <?php echo $content_bottom; ?>
-</div>
- 
+	<div class="<?php echo $SPAN[1];?> article">
+		<?php echo $content_top; ?>
+	  	<div class="userbox2">
+			<div class="userer">
+				<div class="userleft">
+                	<p class="userpic"><img src="yk_img/adimg/touxiang.png" width="112" height="112" /></p>
+                </div>
+                <ul class="fl pad20 uname">
+                	<li class="uname1">欢迎您！<strong>liu417288184</strong></li>
+                	<li>为了账户安全，请您尽快完善资料</li>
+                    <li>
+                    	<a class="pad15" href="#">完善资料</a><a href="#">编辑头像</a>
+                    </li>
+                    <li class="uxxjs">
+                    	<span>总订单（<a href="#">10</a>）</span>
+                    	<span>成功订单（<a href="#">2</a>）</span>
+                    </li>
+                </ul>
+                <dl class="fl pad20 unameer">
+                	<dt>您有（<a href="#">2</a>）条站内信息</dt>
+                    <dd>共提问题：<a href="#">15</a>个</dd>
+                    <dd>共评价订单：<a href="#">15</a>个</dd>
+                </dl>
+			</div>
+			<b class="box2bottom"></b>
+	  	</div>
+	  	<div class="left">
+			<div class="jqdingdan">
+            	<b class="jqtittle">近期订单</b>
+            	<table class="jqxldd">
+                	<thead>
+                    	<tr>
+                        	<th width="100px">下单时间</th>
+                            <th align="left" width="380px">产品名称</th>
+                            <th width="100px">总价格</th>
+                            <th width="80px">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    	<tr>
+                        	<td align="center">2012-05-06 </td>
+                            <td ><a href="#">嵌入式插电安全出口疏散指示灯</a></td>
+                            <td align="center"><strong>￥1250</strong></td>
+                            <td align="center"><a href="#">查看</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="jqdingdan martop20">
+            	<p class="tuijian1">为您推荐的热门商品</p>
+            	<table class="wntuijian">
+                	<tr>
+                    	<td><a class="tjpic" href="#"><img src="imgs/adimg/newspic.jpg" width="171" height="100" alt="" /></a><a href="#">嵌入式插电安全出口疏散指示灯</a><br />全场5折起售，10件更优惠<br />优惠价:<strong>￥1250</strong></td>
+                        <td><a class="tjpic" href="#"><img src="imgs/adimg/newspic.jpg" width="171" height="100" alt="" /></a><a href="#">嵌入式插电安全出口疏散指示灯</a><br />全场5折起售，10件更优惠<br />优惠价:<strong>￥1250</strong></td>
+                        <td><a class="tjpic" href="#"><img src="imgs/adimg/newspic.jpg" width="171" height="100" alt="" /></a><a href="#">嵌入式插电安全出口疏散指示灯</a><br />全场5折起售，10件更优惠<br />优惠价:<strong>￥1250</strong></td>
+                    </tr>
+                </table>
+            </div>
+	  	</div>
+	  	<div class="right">
+			<div class="rightbox1">
+            	<h3><b>温馨提示</b></h3>
+                <p class="usertishi">
+                	如果您的e站网账号密码和QQ或其他网站一致，请马上修改密码以免账号被盗。
+                </p>
+                <h3><b>近期活动</b></h3>
+                <p class="jqhuodong">
+                	<img src="imgs/adimg/adpic1.jpg" width="170" height="70" alt="" />
+                    <a href="#">&gt;&nbsp;旅游优惠券将永久有效</a>
+                    <a href="#">&gt;&nbsp;旅游优惠券将永久有效</a>
+                    <a href="#">&gt;&nbsp;旅游优惠券将永久有效</a>
+                    <a href="#">&gt;&nbsp;旅游优惠券将永久有效</a>
+                </p>
+            </div>
+	  	</div>
+  		<?php echo $content_bottom; ?>
+	</div> 
 	<?php if( $SPAN[2] ): ?>
 	<div class="<?php echo $SPAN[2];?>">	
 		<?php echo $column_right; ?>

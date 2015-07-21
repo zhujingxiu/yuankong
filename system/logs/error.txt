@@ -478,3 +478,16 @@
 2015-07-20 20:36:00 - PHP Notice:  Undefined variable: entry_category_related in E:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 281
 2015-07-20 20:36:00 - PHP Notice:  Undefined variable: category_related in E:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 283
 2015-07-20 22:55:01 - PHP Notice:  Undefined variable: continue in E:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 298
+2015-07-21 21:56:39 - PHP Notice:  Undefined index: country_id in E:\wamp\www\yuankong\market\controller\account\login.php on line 112
+2015-07-21 22:41:12 - PHP Notice:  Undefined index: address_format in E:\wamp\www\yuankong\market\controller\account\address.php on line 178
+2015-07-21 22:41:12 - PHP Notice:  Undefined index: city in E:\wamp\www\yuankong\market\controller\account\address.php on line 203
+2015-07-21 22:41:12 - PHP Notice:  Undefined index: country in E:\wamp\www\yuankong\market\controller\account\address.php on line 207
+2015-07-21 22:41:12 - PHP Notice:  Undefined index: address_format in E:\wamp\www\yuankong\market\controller\account\address.php on line 178
+2015-07-21 22:41:12 - PHP Notice:  Undefined index: city in E:\wamp\www\yuankong\market\controller\account\address.php on line 203
+2015-07-21 22:41:12 - PHP Notice:  Undefined index: country in E:\wamp\www\yuankong\market\controller\account\address.php on line 207
+2015-07-21 22:41:12 - PHP Notice:  Undefined index: address_format in E:\wamp\www\yuankong\market\controller\account\address.php on line 178
+2015-07-21 22:41:12 - PHP Notice:  Undefined index: city in E:\wamp\www\yuankong\market\controller\account\address.php on line 203
+2015-07-21 22:41:12 - PHP Notice:  Undefined index: country in E:\wamp\www\yuankong\market\controller\account\address.php on line 207
+2015-07-21 23:07:29 - PHP Notice:  Undefined variable: container_class in E:\wamp\www\yuankong\market\view\theme\yuankong\template\common\top.tpl on line 4
+2015-07-21 23:12:43 - PHP Notice:  Undefined variable: continue in E:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 298
+2015-07-21 23:12:51 - PHP Notice:  Undefined variable: continue in E:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 298

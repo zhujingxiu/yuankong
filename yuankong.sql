@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2015 年 07 月 18 日 09:46
+-- 生成日期: 2015 年 07 月 21 日 15:40
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.4.3
 
@@ -22189,6 +22189,7 @@ CREATE TABLE IF NOT EXISTS `yk_customer` (
   `email` varchar(96) NOT NULL,
   `telephone` varchar(32) NOT NULL,
   `fax` varchar(32) NOT NULL,
+  `avatar` varchar(128) DEFAULT NULL,
   `password` varchar(40) NOT NULL,
   `salt` varchar(9) NOT NULL,
   `cart` text,
@@ -22209,9 +22210,9 @@ CREATE TABLE IF NOT EXISTS `yk_customer` (
 -- 转存表中的数据 `yk_customer`
 --
 
-INSERT INTO `yk_customer` (`customer_id`, `store_id`, `mobile_phone`, `nickname`, `firstname`, `lastname`, `email`, `telephone`, `fax`, `password`, `salt`, `cart`, `wishlist`, `viewed`, `newsletter`, `address_id`, `customer_group_id`, `ip`, `status`, `approved`, `token`, `date_added`) VALUES
-(1, 0, '18959526595', NULL, '无忌', '张', 'zhangwuji@yitiantulong.cn', '123123', '', '3838e00e6e59c95a65bc786ff38d303252338a3f', '7abf86dd9', 'a:0:{}', '', '', 0, 0, 1, '127.0.0.1', 1, 0, '', '2015-06-12 17:34:52'),
-(2, 0, '18850911766', 'yk18850911766', '', '', '', '', '', 'e8a75e331334d9ce78c228afc59c485d99e4a9b3', '2f645ca7b', 'a:3:{i:52;i:1;i:50;i:1;s:31:"53:YToxOntpOjIyNztzOjI6IjE4Ijt9";i:1;}', '', NULL, 0, 1, 1, '127.0.0.1', 1, 1, '', '2015-07-16 13:38:42');
+INSERT INTO `yk_customer` (`customer_id`, `store_id`, `mobile_phone`, `nickname`, `firstname`, `lastname`, `email`, `telephone`, `fax`, `avatar`, `password`, `salt`, `cart`, `wishlist`, `viewed`, `newsletter`, `address_id`, `customer_group_id`, `ip`, `status`, `approved`, `token`, `date_added`) VALUES
+(1, 0, '18959526595', NULL, '无忌', '张', 'zhangwuji@yitiantulong.cn', '123123', '', NULL, '3838e00e6e59c95a65bc786ff38d303252338a3f', '7abf86dd9', 'a:0:{}', '', '', 0, 0, 1, '127.0.0.1', 1, 0, '', '2015-06-12 17:34:52'),
+(2, 0, '18850911766', 'yk18850911766', '', '', '', '', '', NULL, 'e8a75e331334d9ce78c228afc59c485d99e4a9b3', '2f645ca7b', 'a:0:{}', '', NULL, 0, 1, 1, '127.0.0.1', 1, 1, '', '2015-07-16 13:38:42');
 
 -- --------------------------------------------------------
 
@@ -23508,9 +23509,9 @@ CREATE TABLE IF NOT EXISTS `yk_product` (
 
 INSERT INTO `yk_product` (`product_id`, `model`, `sku`, `upc`, `ean`, `jan`, `isbn`, `mpn`, `location`, `quantity`, `stock_status_id`, `image`, `manufacturer_id`, `shipping`, `price`, `market`, `points`, `tax_class_id`, `date_available`, `weight`, `weight_class_id`, `length`, `width`, `height`, `length_class_id`, `subtract`, `minimum`, `sort_order`, `status`, `date_added`, `date_modified`, `viewed`, `sales`) VALUES
 (50, '132143', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic1.jpg', 0, 1, '126.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-26 13:00:31', '2015-06-16 16:23:34', 65, 0),
-(51, 'ae123213', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic2.jpg', 0, 1, '123.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-23 07:23:47', '0000-00-00 00:00:00', 28, 0),
-(52, '123123', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic4.jpg', 0, 1, '123.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-16 16:29:23', '0000-00-00 00:00:00', 23, 0),
-(53, '231414', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic3.jpg', 0, 1, '125.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-26 13:13:01', '0000-00-00 00:00:00', 129, 0),
+(51, 'ae123213', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic2.jpg', 0, 1, '123.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-23 07:23:47', '0000-00-00 00:00:00', 31, 0),
+(52, '123123', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic4.jpg', 0, 1, '123.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-07-20 23:44:32', '0000-00-00 00:00:00', 24, 0),
+(53, '231414', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic3.jpg', 0, 1, '125.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-26 13:13:01', '0000-00-00 00:00:00', 140, 0),
 (54, '2144232', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic5.jpg', 0, 1, '128.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-16 09:03:38', '0000-00-00 00:00:00', 6, 0),
 (55, 'xf1325324', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic6.jpg', 0, 1, '158.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-16 09:05:42', '0000-00-00 00:00:00', 1, 0);
 
@@ -23553,7 +23554,7 @@ CREATE TABLE IF NOT EXISTS `yk_product_description` (
 
 INSERT INTO `yk_product_description` (`product_id`, `language_id`, `name`, `subtitle`, `description`, `meta_description`, `meta_keyword`, `tag`) VALUES
 (50, 2, '嵌入式插电安全出口疏散指示灯', '', '&lt;div class=&quot;rel z-i&quot; style=&quot;margin: 0px; padding: 0px; border: 0px; position: relative; z-index: 1;&quot;&gt;\r\n&lt;p style=&quot;margin: 0px; padding: 0px; border: 0px;&quot;&gt;&lt;a class=&quot;db rel&quot; href=&quot;#&quot; style=&quot;margin: 0px; padding: 0px; border: 0px; color: rgb(136, 136, 136); text-decoration: none; display: block; position: relative; width: 234px; height: 184px; overflow: hidden; font-size: 12px; font-family: ''microsoft yahei''; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 25px; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);&quot;&gt;全场5折起售，10件更优惠&lt;/a&gt;&lt;/p&gt;\r\n&lt;/div&gt;', '', '', ''),
-(52, 2, '灭火器箱', NULL, '', '', '', ''),
+(52, 2, '灭火器箱', '', '&lt;p&gt;&lt;img src=&quot;http://www.yk119.com/asset/javascript/umeditor/php/upload/20150720/14374070561860.jpg&quot; _src=&quot;http://www.yk119.com/asset/javascript/umeditor/php/upload/20150720/14374070561860.jpg&quot;/&gt;&lt;/p&gt;&lt;p&gt;sadasdsadas&lt;/p&gt;', '', '', ''),
 (1, 2, '消防应急照明灯具', '', '', '', '', ''),
 (53, 2, '源控消防水带', '源控消防水带', '&lt;p&gt;源控消防水带&lt;/p&gt;', '源控消防水带', '', ''),
 (54, 2, '源控灭火器', '源控灭火器', '&lt;p&gt;源控灭火器&lt;/p&gt;', '源控灭火器', '', ''),
@@ -24004,7 +24005,7 @@ CREATE TABLE IF NOT EXISTS `yk_setting` (
   `value` text NOT NULL,
   `serialized` tinyint(1) NOT NULL,
   PRIMARY KEY (`setting_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1752 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1754 ;
 
 --
 -- 转存表中的数据 `yk_setting`
@@ -24036,7 +24037,7 @@ INSERT INTO `yk_setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `se
 (53, 0, 'reward', 'reward_sort_order', '2', 0),
 (54, 0, 'reward', 'reward_status', '1', 0),
 (727, 0, 'category', 'category_module', 'a:2:{i:0;a:4:{s:9:"layout_id";s:1:"3";s:8:"position";s:11:"column_left";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"1";}i:1;a:4:{s:9:"layout_id";s:1:"2";s:8:"position";s:11:"column_left";s:6:"status";s:1:"0";s:10:"sort_order";s:1:"1";}}', 1),
-(658, 0, 'account', 'account_module', 'a:1:{i:0;a:4:{s:9:"layout_id";s:1:"6";s:8:"position";s:12:"column_right";s:6:"status";s:1:"0";s:10:"sort_order";s:1:"1";}}', 1),
+(1752, 0, 'account', 'account_module', 'a:1:{i:0;a:4:{s:9:"layout_id";s:1:"6";s:8:"position";s:11:"column_left";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"1";}}', 1),
 (1718, 0, 'config', 'config_seo_url', '0', 0),
 (1719, 0, 'config', 'config_file_extension_allowed', 'txt\r\npng\r\njpe\r\njpeg\r\njpg\r\ngif\r\nbmp\r\nico\r\ntiff\r\ntif\r\nsvg\r\nsvgz\r\nzip\r\nrar\r\nmsi\r\ncab\r\nmp3\r\nqt\r\nmov\r\npdf\r\npsd\r\nai\r\neps\r\nps\r\ndoc\r\nrtf\r\nxls\r\nppt\r\nodt\r\nods', 0),
 (1720, 0, 'config', 'config_file_mime_allowed', 'text/plain\r\nimage/png\r\nimage/jpeg\r\nimage/jpeg\r\nimage/jpeg\r\nimage/gif\r\nimage/bmp\r\nimage/vnd.microsoft.icon\r\nimage/tiff\r\nimage/tiff\r\nimage/svg+xml\r\nimage/svg+xml\r\napplication/zip\r\napplication/x-rar-compressed\r\napplication/x-msdownload\r\napplication/vnd.ms-cab-compressed\r\naudio/mpeg\r\nvideo/quicktime\r\nvideo/quicktime\r\napplication/pdf\r\nimage/vnd.adobe.photoshop\r\napplication/postscript\r\napplication/postscript\r\napplication/postscript\r\napplication/msword\r\napplication/rtf\r\napplication/vnd.ms-excel\r\napplication/vnd.ms-powerpoint\r\napplication/vnd.oasis.opendocument.text\r\napplication/vnd.oasis.opendocument.spreadsheet', 0),
@@ -24122,7 +24123,7 @@ INSERT INTO `yk_setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `se
 (1625, 0, 'ykwiki', 'ykwiki_module', 'a:1:{i:1;a:9:{s:5:"title";a:1:{i:2;s:12:"消防百科";}s:9:"layout_id";s:1:"1";s:8:"position";s:11:"mass_bottom";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"4";s:13:"category_tabs";a:6:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";i:3;s:1:"0";i:4;s:1:"4";i:5;s:1:"5";}s:5:"limit";a:6:{i:0;s:1:"5";i:1;s:1:"5";i:2;s:1:"5";i:3;s:1:"5";i:4;s:1:"5";i:5;s:1:"5";}s:5:"image";a:6:{i:0;s:24:"data/yuankong/bkpic1.jpg";i:1;s:24:"data/yuankong/bkpic2.jpg";i:2;s:24:"data/yuankong/bkpic3.jpg";i:3;s:24:"data/yuankong/bkpic4.jpg";i:4;s:24:"data/yuankong/bkpic5.jpg";i:5;s:24:"data/yuankong/bkpic6.jpg";}s:4:"sort";a:6:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";i:3;s:1:"4";i:4;s:1:"5";i:5;s:1:"6";}}}', 1),
 (1284, 0, 'ykaffiliate', 'ykaffiliate_module', 'a:1:{i:1;a:10:{s:5:"title";a:1:{i:2;s:12:"消防公司";}s:9:"layout_id";s:1:"1";s:8:"position";s:11:"mass_bottom";s:6:"status";s:1:"1";s:7:"lateast";s:1:"5";s:10:"sort_order";i:3;s:13:"category_tabs";a:4:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";i:3;s:1:"4";}s:5:"limit";a:4:{i:0;s:1:"5";i:1;s:1:"5";i:2;s:1:"5";i:3;s:1:"5";}s:10:"icon_class";a:4:{i:0;s:14:"icon design-gs";i:1;s:10:"icon jc-gs";i:2;s:10:"icon wb-gs";i:3;s:10:"icon gc-gs";}s:4:"sort";a:4:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";i:3;s:1:"4";}}}', 1),
 (1283, 0, 'ykproduct', 'ykproduct_module', 'a:2:{i:1;a:10:{s:5:"title";a:1:{i:2;s:12:"消防器材";}s:9:"layout_id";s:1:"1";s:8:"position";s:11:"mass_bottom";s:6:"status";s:1:"1";s:11:"title_class";s:14:"index-t l-blue";s:16:"additional_class";s:0:"";s:10:"sort_order";s:1:"1";s:13:"category_tabs";a:3:{s:8:"category";a:6:{i:0;s:2:"61";i:1;s:2:"69";i:2;s:2:"75";i:3;s:2:"84";i:4;s:2:"89";i:5;s:2:"94";}s:5:"limit";a:6:{i:0;s:1:"3";i:1;s:1:"2";i:2;s:1:"2";i:3;s:1:"3";i:4;s:1:"2";i:5;s:1:"3";}s:4:"sort";a:6:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";i:3;s:1:"4";i:4;s:1:"5";i:5;s:1:"6";}}s:12:"product_tabs";a:3:{s:7:"product";a:6:{i:0;s:2:"53";i:1;s:2:"52";i:2;s:2:"55";i:3;s:2:"54";i:4;s:2:"50";i:5;s:2:"51";}s:5:"image";a:6:{i:0;s:26:"data/yuankong/shoppic3.jpg";i:1;s:26:"data/yuankong/shoppic4.jpg";i:2;s:26:"data/yuankong/shoppic6.jpg";i:3;s:26:"data/yuankong/shoppic5.jpg";i:4;s:26:"data/yuankong/shoppic1.jpg";i:5;s:26:"data/yuankong/shoppic2.jpg";}s:4:"sort";a:6:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";i:3;s:1:"4";i:4;s:1:"5";i:5;s:1:"6";}}s:11:"banner_tabs";a:3:{s:5:"image";a:3:{i:0;s:25:"data/yuankong/banner4.jpg";i:1;s:25:"data/yuankong/banner5.jpg";i:2;s:25:"data/yuankong/banner6.jpg";}s:4:"link";a:3:{i:0;s:18:"www.yk119.com.cn/1";i:1;s:18:"www.yk119.com.cn/2";i:2;s:18:"www.yk119.com.cn/3";}s:4:"sort";a:3:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";}}}i:2;a:10:{s:5:"title";a:1:{i:2;s:12:"消防装备";}s:9:"layout_id";s:1:"1";s:8:"position";s:11:"mass_bottom";s:6:"status";s:1:"1";s:11:"title_class";s:15:"index-t l-zongs";s:16:"additional_class";s:6:"shebei";s:10:"sort_order";i:2;s:13:"category_tabs";a:3:{s:8:"category";a:4:{i:0;s:2:"97";i:1;s:3:"109";i:2;s:3:"115";i:3;s:3:"128";}s:5:"limit";a:4:{i:0;s:1:"6";i:1;s:1:"5";i:2;s:1:"6";i:3;s:1:"5";}s:4:"sort";a:4:{i:0;s:1:"0";i:1;s:1:"0";i:2;s:1:"0";i:3;s:1:"0";}}s:12:"product_tabs";a:3:{s:7:"product";a:6:{i:0;s:2:"50";i:1;s:2:"51";i:2;s:2:"54";i:3;s:2:"53";i:4;s:2:"55";i:5;s:2:"52";}s:5:"image";a:6:{i:0;s:26:"data/yuankong/shoppic1.jpg";i:1;s:26:"data/yuankong/shoppic2.jpg";i:2;s:26:"data/yuankong/shoppic5.jpg";i:3;s:26:"data/yuankong/shoppic3.jpg";i:4;s:26:"data/yuankong/shoppic6.jpg";i:5;s:26:"data/yuankong/shoppic4.jpg";}s:4:"sort";a:6:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";i:3;s:1:"4";i:4;s:1:"5";i:5;s:1:"6";}}s:11:"banner_tabs";a:3:{s:5:"image";a:3:{i:0;s:25:"data/yuankong/banner6.jpg";i:1;s:25:"data/yuankong/banner5.jpg";i:2;s:25:"data/yuankong/banner4.jpg";}s:4:"link";a:3:{i:0;s:24:"http://www.yuankong.com/";i:1;s:24:"http://www.yuankong.com/";i:2;s:24:"http://www.yuankong.com/";}s:4:"sort";a:3:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";}}}}', 1),
-(1620, 0, 'yknavigation', 'yknavigation_module', 'a:1:{i:0;a:5:{s:9:"layout_id";s:5:"99999";s:8:"position";s:8:"mainmenu";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"0";s:9:"navigator";a:6:{i:0;a:8:{s:5:"title";s:6:"首页";s:5:"route";s:11:"common/home";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:0:"";s:6:"status";s:1:"1";s:8:"selected";s:1:"1";s:4:"sort";s:1:"1";}i:1;a:8:{s:5:"title";s:12:"消防商城";s:5:"route";s:16:"product/category";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:0:"";s:6:"status";s:1:"1";s:8:"selected";s:1:"0";s:4:"sort";s:1:"2";}i:2;a:8:{s:5:"title";s:13:"工程-设计";s:5:"route";s:15:"service/project";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:10:"icon freem";s:6:"status";s:1:"1";s:8:"selected";s:1:"0";s:4:"sort";s:1:"3";}i:3;a:8:{s:5:"title";s:12:"精选案例";s:5:"route";s:12:"service/case";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:0:"";s:6:"status";s:1:"1";s:8:"selected";s:1:"0";s:4:"sort";s:1:"4";}i:4;a:8:{s:5:"title";s:12:"消防公司";s:5:"route";s:17:"affiliate/company";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:0:"";s:6:"status";s:1:"1";s:8:"selected";s:1:"0";s:4:"sort";s:1:"5";}i:5;a:8:{s:5:"title";s:12:"消防百科";s:5:"route";s:16:"information/wiki";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:0:"";s:6:"status";s:1:"1";s:8:"selected";s:1:"0";s:4:"sort";s:1:"6";}}}}', 1),
+(1753, 0, 'yknavigation', 'yknavigation_module', 'a:1:{i:0;a:5:{s:9:"layout_id";s:5:"99999";s:8:"position";s:8:"mainmenu";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"0";s:9:"navigator";a:6:{i:0;a:8:{s:5:"title";s:6:"首页";s:5:"route";s:11:"common/home";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:0:"";s:6:"status";s:1:"1";s:8:"selected";s:1:"1";s:4:"sort";s:1:"1";}i:1;a:8:{s:5:"title";s:12:"消防商城";s:5:"route";s:16:"product/category";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:0:"";s:6:"status";s:1:"1";s:8:"selected";s:1:"0";s:4:"sort";s:1:"2";}i:2;a:8:{s:5:"title";s:13:"报价-设计";s:5:"route";s:15:"service/project";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:10:"icon freem";s:6:"status";s:1:"1";s:8:"selected";s:1:"0";s:4:"sort";s:1:"3";}i:3;a:8:{s:5:"title";s:12:"精选案例";s:5:"route";s:12:"service/case";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:0:"";s:6:"status";s:1:"1";s:8:"selected";s:1:"0";s:4:"sort";s:1:"4";}i:4;a:8:{s:5:"title";s:12:"消防公司";s:5:"route";s:17:"affiliate/company";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:0:"";s:6:"status";s:1:"1";s:8:"selected";s:1:"0";s:4:"sort";s:1:"5";}i:5;a:8:{s:5:"title";s:12:"消防百科";s:5:"route";s:16:"information/wiki";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:0:"";s:6:"status";s:1:"1";s:8:"selected";s:1:"0";s:4:"sort";s:1:"6";}}}}', 1),
 (1647, 0, 'config', 'config_review_status', '1', 0),
 (1646, 0, 'config', 'config_product_count', '1', 0),
 (1645, 0, 'config', 'config_admin_limit', '20', 0),

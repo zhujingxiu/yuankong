@@ -76,7 +76,7 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
 <?php echo $top ?>
 
 <!--Top-->
-<div class="w">
+<div class="<?php echo $container_class ?>">
 	<div class="logobox fix">
 		<?php if ($logo) { ?>
 			<a href="<?php echo $home; ?>" class="l">
@@ -119,7 +119,9 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
 			<?php endif ?>
 			
 		</div>
+		<?php if($container_class=="w"){?>
 		<?php echo $cart; ?>
+		<?php }?>
 	</div>
 </div>
 <div class="navbox">
@@ -192,7 +194,7 @@ $modules = $helper->getModulesByPosition( 'slideshow' );
 
 if( $modules ){ ?>
 
-<div id="slideshow" class="w fix mt10">
+<div id="slideshow" class="<?php echo $container_class ?> fix mt10">
 	
 	<?php foreach ($modules as $module) { ?>
 
@@ -210,7 +212,7 @@ $modules = $helper->getModulesByPosition( 'promotion' );
 
 if( $modules ){ ?>
 
-<div id="promotion" class="w mt10" >
+<div id="promotion" class="<?php echo $container_class ?> mt10" >
 
 	<?php foreach ($modules as $module) {  ?>
 
@@ -228,7 +230,7 @@ $modules = $helper->getModulesByPosition( 'showcase' );
 
 if( $modules ){ ?>
 
-<div id="showcase" class="w mt15 ovh">
+<div id="showcase" class="<?php echo $container_class ?> mt15 ovh">
 
 	<?php foreach ($modules as $module) {  ?>
 

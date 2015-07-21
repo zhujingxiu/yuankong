@@ -40,7 +40,7 @@
             </tr>
 			<tr>
 				<td><?php echo $text_text; ?></td>
-				<td><textarea name="text" id="news-text"><?php echo $text; ?></textarea></td>
+				<td><textarea name="text" id="news-text" style="width:880px;height:220px;"><?php echo $text; ?></textarea></td>
 			</tr>
 
 			<tr>

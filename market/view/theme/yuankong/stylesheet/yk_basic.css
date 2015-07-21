@@ -395,6 +395,7 @@
 .paysucess { padding: 50px 100px; border: 1px solid #f9d979; background: #fff;}
 .pay-news-box { margin-top: 10px; border-top: 1px dotted #ddd; padding: 10px 0 0 60px; font-size: 14px;}
 .pay-news-box ul li { line-height: 35px; font-size: 12px;}
+
 /*  购物车 无商品  */
 .empty-gwc { width: 450px; margin: 100px auto 0; height: 250px; font-size: 14px;}
 .gwc-big-btn { background-position: -225px -170px; width: 96px; height: 116px; display: inline-block; margin-right: 15px;vertical-align:middle;}

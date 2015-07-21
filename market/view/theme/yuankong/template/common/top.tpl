@@ -1,7 +1,7 @@
 <?php $themeConfig = $this->config->get( 'themecontrol' ); ?>
 
 <div class="header f_s">
-    <div class="w">
+    <div class="<?php echo $container_class ?>">
 
         <div class="l">
             <?php if( isset($themeConfig['topleft_customhtml'][$this->config->get('config_language_id')]) )  { 

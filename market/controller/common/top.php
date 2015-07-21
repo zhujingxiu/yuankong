@@ -39,7 +39,17 @@ class ControllerCommonTop extends Controller {
         $this->data['upload'] = $this->url->link('affiliate/account', '', 'SSL');
         $this->data['perfact'] = $this->url->link('affiliate/edit', '', 'SSL');
         
-   
+        if (isset($this->request->get['route'])) {
+            $route = (string)$this->request->get['route'];
+        } else {
+            $route = 'common/home';
+        }
+
+        $part = explode("/", $route);
+        $this->data['container_class'] = "w";
+        if(isset($part[0]) && $part[0] =='account'){
+            $this->data['container_class'] = "register-w";
+        }
         $this->template = $this->config->get('config_template') . '/template/common/top.tpl';
         
         $this->render();
