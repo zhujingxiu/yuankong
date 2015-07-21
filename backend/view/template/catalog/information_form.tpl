@@ -34,7 +34,7 @@
               </tr>
               <tr>
                 <td><span class="required">*</span> <?php echo $entry_description; ?></td>
-                <td><textarea name="information_description[<?php echo $language['language_id']; ?>][description]" id="description<?php echo $language['language_id']; ?>"><?php echo isset($information_description[$language['language_id']]) ? $information_description[$language['language_id']]['description'] : ''; ?></textarea>
+                <td><textarea name="information_description[<?php echo $language['language_id']; ?>][description]" id="description<?php echo $language['language_id']; ?>" style="width:880px;height:220px;"><?php echo isset($information_description[$language['language_id']]) ? $information_description[$language['language_id']]['description'] : ''; ?></textarea>
                   <?php if (isset($error_description[$language['language_id']])) { ?>
                   <span class="error"><?php echo $error_description[$language['language_id']]; ?></span>
                   <?php } ?></td>
@@ -148,9 +148,16 @@
     </div>
   </div>
 </div>
-<script type="text/javascript" src="view/javascript/ckeditor/ckeditor.js"></script> 
+<link type="text/css" href="<?php echo TPL_JS ?>umeditor/themes/default/css/umeditor.min.css" rel="stylesheet" />
+<script type="text/javascript" src="<?php echo TPL_JS ?>umeditor/umeditor.config.js"></script> 
+<script type="text/javascript" src="<?php echo TPL_JS ?>umeditor/umeditor.min.js"></script> 
+<?php if(false){ ?>
+<script type="text/javascript" src="view/javascript/ckeditor/ckeditor.js"></script>
+<?php } ?>
 <script type="text/javascript"><!--
 <?php foreach ($languages as $language) { ?>
+    UM.getEditor('description<?php echo $language['language_id']; ?>');
+    <?php if(false){ ?>
 CKEDITOR.replace('description<?php echo $language['language_id']; ?>', {
 	filebrowserBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
 	filebrowserImageBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
@@ -159,6 +166,7 @@ CKEDITOR.replace('description<?php echo $language['language_id']; ?>', {
 	filebrowserImageUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
 	filebrowserFlashUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>'
 });
+<?php } ?>
 <?php } ?>
 //--></script> 
 <script type="text/javascript"><!--
