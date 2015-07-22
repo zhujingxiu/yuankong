@@ -48,12 +48,11 @@ function getURLVar(key) {
     }
 }
 
-function selectedCheckout(key,quantity){
-    quantity = typeof(quantity) != 'undefined' ? quantity : 1;
+function selectedCheckout(selected){
     $.ajax({
         url:'index.php?route=checkout/checkout/selected',
         type:'post',
-        data:'key='+key+'&quantity='+quantity,
+        data:'selected='+selected,
         dataType:'json',
         success:function(json){
             if(json['error']){
@@ -62,6 +61,9 @@ function selectedCheckout(key,quantity){
                 $('.msg-error').fadeIn('slow');
                 
                 $('html, body').animate({ scrollTop: 0 }, 'slow'); 
+            }
+            if (json['redirect']) {
+                location = json['redirect'];
             }
         }
 

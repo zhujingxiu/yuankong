@@ -125,9 +125,9 @@ $registry->set('session', $session);
 
 //Remember Me
 if (!isset($session->data['customer_id']) || !$session->data['customer_id']) {
-	if(!empty($_COOKIE['_remember_phone']) && !empty($_COOKIE['_remember_pwd'])){
-		$remember = $db->fetch("customer",array('one'=>true,'condition'=>array('mobile_phone'=>$_COOKIE['_remember_phone'],'password'=>$_COOKIE['_remember_pwd'])));
-		if(!empty($remember['customer_id'])){
+	if(!empty($_COOKIE['_remember_phone']) && !empty($_COOKIE['_remember_id'])){
+		$remember = $db->fetch("customer",array('one'=>true,'condition'=>array('mobile_phone'=>$_COOKIE['_remember_phone'])));
+		if(!empty($remember['customer_id']) && $remember['customer_id'] == $_COOKIE['_remember_id']){
 			$session->data['customer_id'] = $remember['customer_id'];
 		}
 	}

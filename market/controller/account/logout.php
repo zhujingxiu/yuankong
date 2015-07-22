@@ -3,7 +3,7 @@ class ControllerAccountLogout extends Controller {
 	public function index() {
     	if ($this->customer->isLogged()) {
       		$this->customer->logout();
-	  		$this->cart->clear();
+	  		$this->checkout->clear();
 			
 			unset($this->session->data['wishlist']);
 			unset($this->session->data['viewed']);
@@ -13,9 +13,6 @@ class ControllerAccountLogout extends Controller {
 			unset($this->session->data['shipping_postcode']);
 			unset($this->session->data['shipping_method']);
 			unset($this->session->data['shipping_methods']);
-			unset($this->session->data['payment_address_id']);
-			unset($this->session->data['payment_country_id']);
-			unset($this->session->data['payment_zone_id']);
 			unset($this->session->data['payment_method']);
 			unset($this->session->data['payment_methods']);
 			unset($this->session->data['comment']);
@@ -24,8 +21,8 @@ class ControllerAccountLogout extends Controller {
 			unset($this->session->data['reward']);			
 			unset($this->session->data['voucher']);
 			unset($this->session->data['vouchers']);
-			
-      		$this->redirect($this->url->link('account/logout', '', 'SSL'));
+            setcookie("_remember_id", 0, time()-1); 
+      		$this->redirect($this->url->link('account/login', '', 'SSL'));
     	}
  
     	$this->language->load('account/logout');

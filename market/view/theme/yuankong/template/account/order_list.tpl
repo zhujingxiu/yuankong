@@ -1,45 +1,86 @@
 <?php require( DIR_TEMPLATE.$this->config->get('config_template')."/template/common/config.tpl" ); ?>
 <?php echo $header; ?>
-<?php require( DIR_TEMPLATE.$this->config->get('config_template')."/template/common/breadcrumb.tpl" ); ?>
-<div>
+
+<div class="register-w f_s fix" id="main">
 <?php if( $SPAN[0] ): ?>
-	<div class="span<?php echo $SPAN[0];?>">
+	<div class="<?php echo $SPAN[0];?> aside">
 		<?php echo $column_left; ?>
 	</div>
 <?php endif; ?> 
-<div class="span<?php echo $SPAN[1];?>">
+<div class="<?php echo $SPAN[1];?> article">
+    <?php echo $content_top; ?>
+    <div class="userbox3">
+        <div class="userboxtop">
+          <?php require( DIR_TEMPLATE.$this->config->get('config_template')."/template/common/breadcrumb.tpl" ); ?>
+        </div>
+        <div class="userboxcen">
+            <ul class="userdd-zt martop">
+                <li class="userdd-zton">所有订单</li>
+                <li>进行中的订单</li>
+                <li>成功订单</li>
+                <li>已取消订单</li>
+            </ul>
+            <div class="userddnav">
+                <table class="userddnav1" width="100%">
+                    <tr>
+                        <td width="40%">产品名称</td>
+                        <td width="15%">规格型号</td>
+                        <td width="15%">总价格</td>
+                        <td width="10%">数量</td>
+                        <td width="10%">订单状态</td>
+                        <td width="10%">操作</td>
+                    </tr>
+                </table>
+            </div>
+            <?php if ($orders) { ?>
+            <table class="userxldd">
+              <?php foreach ($orders as $order) { ?>
+                <tr>
+                    <td class="xlddtop" colspan="6">
+                        <input class="xlddcheck" type="checkbox" name="xldd" />
+                        <span>订单编号：#<?php echo $order['order_id']; ?></span>
+                        <span>下单时间：<?php echo $order['date_added']; ?></span>
+                    </td>
+                </tr>
+                <tr class="jtuserdd">
+                    <td style="text-align:left;" width="40%">
+                        <div class="ovh">
+                            <a class="shop-pic" href="#">
+                                <img src="imgs/adimg/shoppic7.jpg" />
+                            </a>
+                            <span class="shop-name">
+                                <a href="#">【果郡王】海南妃子笑荔枝3斤装 新鲜荔枝 国产水果</a>
+                            </span>
+                        </div>
+                    </td>
+                    <td width="15%">T2250<br />红色</td>
+                    <td width="15%"><strong><?php echo $order['total']; ?></strong></td>
+                    <td width="10%">2</td>
+                    <td width="10%"><?php echo $order['status']; ?></td>
+                    <td width="10%">
+                      <a href="#">取消</a><br />
+                      <a href="<?php echo $order['href']; ?>"><?php echo $button_view; ?></a>
+                    </td>
+                </tr>
 
-<div id="content" class="page" ><?php echo $content_top; ?>
-
-  <h1 class="page-title"><?php echo $heading_title; ?></h1>
-  <div class="page-content" >
-  <?php if ($orders) { ?>
-  <?php foreach ($orders as $order) { ?>
-  <div class="order-list">
-    <div class="order-id"><b><?php echo $text_order_id; ?></b> #<?php echo $order['order_id']; ?></div>
-    <div class="order-status"><b><?php echo $text_status; ?></b> <?php echo $order['status']; ?></div>
-    <div class="order-content">
-      <div><b><?php echo $text_date_added; ?></b> <?php echo $order['date_added']; ?><br />
-        <b><?php echo $text_products; ?></b> <?php echo $order['products']; ?></div>
-      <div><b><?php echo $text_customer; ?></b> <?php echo $order['name']; ?><br />
-        <b><?php echo $text_total; ?></b> <?php echo $order['total']; ?></div>
-      <div class="order-info"><a href="<?php echo $order['href']; ?>"><img src="market/view/theme/default/image/info.png" alt="<?php echo $button_view; ?>" title="<?php echo $button_view; ?>" /></a>&nbsp;&nbsp;<a href="<?php echo $order['reorder']; ?>"><img src="market/view/theme/default/image/reorder.png" alt="<?php echo $button_reorder; ?>" title="<?php echo $button_reorder; ?>" /></a></div>
+              <?php } ?>
+              <div class="pagination"><?php echo $pagination; ?></div>
+            </table>
+            <?php } else { ?>
+            <div class="content"><?php echo $text_empty; ?></div>
+            <?php } ?>
+            <div class="buttons">
+                <div class="right">
+                    <a href="<?php echo $continue; ?>" class="button"><?php echo $button_continue; ?></a>
+                </div>
+            </div>
+        </div>
+        <?php echo $content_bottom; ?>
     </div>
-  </div>
-  <?php } ?>
-  <div class="pagination"><?php echo $pagination; ?></div>
-  <?php } else { ?>
-  <div class="content"><?php echo $text_empty; ?></div>
-  <?php } ?>
-  <div class="buttons">
-    <div class="right"><a href="<?php echo $continue; ?>" class="button"><?php echo $button_continue; ?></a></div>
-  </div>
-  </div>
-  <?php echo $content_bottom; ?></div>
 </div> 
 <?php if( $SPAN[2] ): ?>
-<div class="span<?php echo $SPAN[2];?>">	
-	<?php echo $column_right; ?>
+<div class="<?php echo $SPAN[2];?>">	
+	  <?php echo $column_right; ?>
 </div>
 <?php endif; ?>
 </div>

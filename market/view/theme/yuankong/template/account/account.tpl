@@ -6,11 +6,11 @@
 <?php } ?>
 <div class="register-w f_s fix" id="main">
 
-<?php if( $SPAN[0] ): ?>
+    <?php if( $SPAN[0] ): ?>
 	<div class="<?php echo $SPAN[0];?> aside">
 	<?php echo $column_left; ?>
 	</div>
-<?php endif; ?>
+    <?php endif; ?>
 	<div class="<?php echo $SPAN[1];?> article">
 		<?php echo $content_top; ?>
 	  	<div class="userbox2">

@@ -168,21 +168,20 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
                                     <small><?php echo $product['reward']; ?></small>
                                     <?php } ?>
                                 </span>
-                          </td>
+                            </div>
+                        </td>
                         <td class="price"><p class="tc"><?php echo $product['price']; ?></p></td>
                         <td class="quantity">
                             <div class="tc ovh">
                                 <span class="icon2 janbtn"></span>
                                 <input type="text" name="quantity[<?php echo $product['key']; ?>]" value="<?php echo $product['quantity']; ?>" class="jiajiantext"  />
-                                <span class="icon2 jabtn"></span>
-                                
+                                <span class="icon2 jabtn"></span>                                
                                 <input type="hidden" name="price[<?php echo $product['key']; ?>]" value="<?php echo $product['_price'] ?>"/>
                             </div>
                         </td>
                         <td class="total">
                             <p class="tc c_red"><b><?php echo $product['total']; ?></b></p>
                         </td>
-
                         <td>
                             <p class="tc">
                             <a href="<?php echo $product['remove']; ?>" class="remove-item">
@@ -191,13 +190,11 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
                         </td>
                     </tr>
                     <?php }?>
-
                 </tbody>
             </table>
             <div class="mt10">
                 <h5 class="c3 f_m"><?php echo $text_comments ?></h5>
                 <textarea class="liuy-tarea" name="comment"></textarea>
-            </div>
             </div>
         </div>
         <div class="order-w">
@@ -294,7 +291,7 @@ $('#button-confirm').bind('click', function() {
     $.ajax({ 
         type: 'post',
         url: 'index.php?route=checkout/confirm',
-        success: function() {
+        success: function(json) {
             location = '<?php echo $continue; ?>';
         }       
     });

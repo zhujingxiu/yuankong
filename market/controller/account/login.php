@@ -48,9 +48,6 @@ class ControllerAccountLogin extends Controller {
 			unset($this->session->data['shipping_postcode']);
 			unset($this->session->data['shipping_method']);
 			unset($this->session->data['shipping_methods']);
-			unset($this->session->data['payment_address_id']);
-			unset($this->session->data['payment_country_id']);
-			unset($this->session->data['payment_zone_id']);
 			unset($this->session->data['payment_method']);
 			unset($this->session->data['payment_methods']);
 			unset($this->session->data['comment']);
@@ -75,16 +72,10 @@ class ControllerAccountLogin extends Controller {
 						$this->session->data['shipping_postcode'] = $address_info['postcode'];	
 					}
 					
-					if ($this->config->get('config_tax_customer') == 'payment') {
-						$this->session->data['payment_country_id'] = $address_info['country_id'];
-						$this->session->data['payment_zone_id'] = $address_info['zone_id'];
-					}
 				} else {
 					unset($this->session->data['shipping_country_id']);	
 					unset($this->session->data['shipping_zone_id']);	
 					unset($this->session->data['shipping_postcode']);
-					unset($this->session->data['payment_country_id']);	
-					unset($this->session->data['payment_zone_id']);	
 				}
 									
 				$this->redirect($this->url->link('account/account', '', 'SSL')); 
@@ -113,17 +104,11 @@ class ControllerAccountLogin extends Controller {
 					$this->session->data['shipping_zone_id'] = $address_info['zone_id'];
 					$this->session->data['shipping_postcode'] = $address_info['postcode'];	
 				}
-				
-				if ($this->config->get('config_tax_customer') == 'payment') {
-					$this->session->data['payment_country_id'] = $address_info['country_id'];
-					$this->session->data['payment_zone_id'] = $address_info['zone_id'];
-				}
+
 			} else {
 				unset($this->session->data['shipping_country_id']);	
 				unset($this->session->data['shipping_zone_id']);	
 				unset($this->session->data['shipping_postcode']);
-				unset($this->session->data['payment_country_id']);	
-				unset($this->session->data['payment_zone_id']);	
 			}
 							
 			if (isset($this->request->post['redirect']) && (strpos($this->request->post['redirect'], $this->config->get('config_url')) !== false || strpos($this->request->post['redirect'], $this->config->get('config_ssl')) !== false)) {
@@ -207,13 +192,17 @@ class ControllerAccountLogin extends Controller {
 
 		if (isset($this->request->post['mobile_phone'])) {
 			$this->data['mobile_phone'] = $this->request->post['mobile_phone'];
-		} else {
-			$this->data['mobile_phone'] = '';
-		}
+		} else if(isset($_COOKIE['_remember_phone'])){
+			$this->data['mobile_phone'] = $_COOKIE['_remember_phone'];
+		}else{
+            $this->data['mobile_phone'] = '';
+        }
 
 		if (isset($this->request->post['password'])) {
 			$this->data['password'] = $this->request->post['password'];
-		} else {
+		}else if(isset($_COOKIE['_remember_pwd'])){
+            $this->data['password'] = $_COOKIE['_remember_pwd'];
+        }else {
 			$this->data['password'] = '';
 		}
 

@@ -9,9 +9,7 @@ class ControllerCheckoutConfirm extends Controller {
 	
 			if ($this->customer->isLogged() && isset($this->session->data['shipping_address_id'])) {					
 				$shipping_address = $this->model_account_address->getAddress($this->session->data['shipping_address_id']);		
-			} elseif (isset($this->session->data['guest'])) {
-				$shipping_address = $this->session->data['guest']['shipping'];
-			}
+			} 
 			
 			if (empty($shipping_address)) {								
 				$redirect = $this->url->link('checkout/checkout', '', 'SSL');
@@ -31,9 +29,7 @@ class ControllerCheckoutConfirm extends Controller {
 		
 		if ($this->customer->isLogged() && isset($this->session->data['payment_address_id'])) {
 			$payment_address = $this->model_account_address->getAddress($this->session->data['payment_address_id']);		
-		} elseif (isset($this->session->data['guest'])) {
-			$payment_address = $this->session->data['guest']['payment'];
-		}	
+		} 
 				
 		if (empty($payment_address)) {
 			$redirect = $this->url->link('checkout/checkout', '', 'SSL');

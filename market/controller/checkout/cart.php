@@ -93,7 +93,7 @@ class ControllerCheckoutCart extends Controller {
         } else {
             $this->data['error'] = '';
         }
-
+        $this->document->addScript(TPL_JS.'jquery.json.min.js');
         $this->data['base'] = $server;
         $this->data['description'] = $this->document->getDescription();
         $this->data['keywords'] = $this->document->getKeywords();
@@ -119,7 +119,8 @@ class ControllerCheckoutCart extends Controller {
         
         $this->data['home'] = $this->url->link('common/home');
 
-		$this->data['document'] = $this->language->get('heading_title');
+        $this->data['document'] = $this->language->get('heading_title');
+		
 		
       	$this->data['breadcrumbs'] = array();
 

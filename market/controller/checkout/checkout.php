@@ -2,6 +2,7 @@
 class ControllerCheckoutCheckout extends Controller { 
 	public function index() {
 		// Validate cart has products and has stock.
+
 		if ((!$this->checkout->hasProducts() && empty($this->session->data['vouchers'])) || (!$this->checkout->hasStock() && !$this->config->get('config_stock_checkout'))) {
 	  		
 	  		$this->redirect($this->url->link('checkout/cart'));
@@ -61,8 +62,7 @@ class ControllerCheckoutCheckout extends Controller {
         }       
         
         $this->data['home'] = $this->url->link('common/home');
-
-		$this->data['document'] = $this->language->get('heading_title');		
+		
 		$this->language->load('checkout/checkout');
 		
 		$this->document->setTitle($this->language->get('heading_title')); 
@@ -110,7 +110,6 @@ class ControllerCheckoutCheckout extends Controller {
 		} else {
 			$this->data['address_id'] = $this->customer->getAddressId();
 		}
-
 
 		$this->load->model('account/address');
 
@@ -406,7 +405,6 @@ class ControllerCheckoutCheckout extends Controller {
 						array_multisort($sort_order, SORT_ASC, $total_data);			
 					}
 				}
-				
 				$json['redirect'] = str_replace('&amp;', '&', $this->url->link('checkout/checkout', '' ,'SSL'));
 
 			} else {
@@ -419,24 +417,25 @@ class ControllerCheckoutCheckout extends Controller {
 
 	public function selected() {
 		$this->language->load('checkout/checkout');
-		
+		$this->checkout->clear();
 		$json = array();
 		
-		$key = isset($this->request->post['key']) ? $this->request->post['key'] : false;
-		$quantity = isset($this->request->post['quantity']) ? $this->request->post['quantity'] : 1;
+		$selected = isset($this->request->post['selected']) ? json_decode(htmlspecialchars_decode($this->request->post['selected']),true) : false;
 
-		if($key){
-			$this->session->data['checkout'][$key] = $quantity;			
-
+		if($selected && is_array($selected)){
+            foreach ($selected as $item) {
+                if(isset($item['key']))
+                $this->session->data['checkout'][$item['key']] = $item['qty'];
+            }
 		}else{
 			$json['error'] = $this->language->get('error_checkout_key');
 		}			
-		$json['checkout'] = $this->session->data['checkout'];
 		if (!$json) {
 			unset($this->session->data['shipping_method']);
 			unset($this->session->data['shipping_methods']);
 			unset($this->session->data['payment_method']);
-			unset($this->session->data['payment_methods']);			
+			unset($this->session->data['payment_methods']);	
+            $json['redirect'] = str_replace('&amp;', '&', $this->url->link('checkout/checkout', '' ,'SSL'));		
 		}
 		$this->response->setOutput(json_encode($json));		
 	}

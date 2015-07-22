@@ -278,13 +278,17 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
       $('.iframe-login').show().focus();
     <?php }else{?>
       if($('.headcheck[name^="selected"]:checked').length){
-        $.each($('.headcheck[name^="selected"]:checked'),function(){
-            var key = $(this).val(),
-            qty = parseInt($(this).parent().parent('tr').find('input[name^="quantity"]').val());
-            selectedCheckout(key,qty);
+        var selected = [];
+        $.each($('.headcheck[name^="selected"]:checked'),function(){            
+            selected.push({
+              key:$(this).val(),
+              qty:parseInt($(this).parent().parent('tr').find('input[name^="quantity"]').val())
+            });
         });
-
-        location = '<?php echo $checkout ?>'
+        if(selected.length>0){
+            selectedCheckout($.toJSON(selected));
+        }
+        
       }else{
         alert('没有选中商品');
       }
