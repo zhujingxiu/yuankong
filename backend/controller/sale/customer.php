@@ -646,7 +646,6 @@ class ControllerSaleCustomer extends Controller {
 		$this->data['entry_city'] = $this->language->get('entry_city');
 		$this->data['entry_postcode'] = $this->language->get('entry_postcode');
 		$this->data['entry_zone'] = $this->language->get('entry_zone');
-		$this->data['entry_country'] = $this->language->get('entry_country');
 		$this->data['entry_default'] = $this->language->get('entry_default');
 		$this->data['entry_comment'] = $this->language->get('entry_comment');
 		$this->data['entry_description'] = $this->language->get('entry_description');
@@ -742,16 +741,11 @@ class ControllerSaleCustomer extends Controller {
 			$this->data['error_address_postcode'] = '';
 		}
 		
-		if (isset($this->error['address_country'])) {
-			$this->data['error_address_country'] = $this->error['address_country'];
-		} else {
-			$this->data['error_address_country'] = '';
-		}
 		
-		if (isset($this->error['address_zone'])) {
-			$this->data['error_address_zone'] = $this->error['address_zone'];
+		if (isset($this->error['address_province'])) {
+			$this->data['error_address_province'] = $this->error['address_province'];
 		} else {
-			$this->data['error_address_zone'] = '';
+			$this->data['error_address_province'] = '';
 		}
 		
 		$url = '';
@@ -910,11 +904,7 @@ class ControllerSaleCustomer extends Controller {
 		} else {
 			$this->data['confirm'] = '';
 		}
-		
-		$this->load->model('localisation/country');
-		
-		$this->data['countries'] = $this->model_localisation_country->getCountries();
-			
+					
 		if (isset($this->request->post['address'])) { 
       		$this->data['addresses'] = $this->request->post['address'];
 		} elseif (isset($this->request->get['customer_id'])) {
@@ -1036,12 +1026,8 @@ class ControllerSaleCustomer extends Controller {
 					$this->error['address_city'][$key] = $this->language->get('error_city');
 				} 
 	
-				$this->load->model('localisation/country');
-				
-				$country_info = $this->model_localisation_country->getCountry($value['country_id']);
-						
-				if ($country_info) {
-					if ($country_info['postcode_required'] && (utf8_strlen($value['postcode']) < 2) || (utf8_strlen($value['postcode']) > 10)) {
+
+					if ((utf8_strlen($value['postcode']) < 2) || (utf8_strlen($value['postcode']) > 10)) {
 						$this->error['address_postcode'][$key] = $this->language->get('error_postcode');
 					}
 					
@@ -1051,14 +1037,11 @@ class ControllerSaleCustomer extends Controller {
 					if ($this->config->get('config_vat') && $value['tax_id'] && (vat_validation($country_info['iso_code_2'], $value['tax_id']) == 'invalid')) {
 						$this->error['address_tax_id'][$key] = $this->language->get('error_vat');
 					}
-				}
-			
-				if ($value['country_id'] == '') {
-					$this->error['address_country'][$key] = $this->language->get('error_country');
-				}
+
+
 				
-				if (!isset($value['zone_id']) || $value['zone_id'] == '') {
-					$this->error['address_zone'][$key] = $this->language->get('error_zone');
+				if (!isset($value['province_id']) || $value['province_id'] == '') {
+					$this->error['address_province'][$key] = $this->language->get('error_province');
 				}	
 			}
 		}
@@ -1414,30 +1397,6 @@ class ControllerSaleCustomer extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}		
 		
-	public function country() {
-		$json = array();
-		
-		$this->load->model('localisation/country');
-
-    	$country_info = $this->model_localisation_country->getCountry($this->request->get['country_id']);
-		
-		if ($country_info) {
-			$this->load->model('localisation/zone');
-
-			$json = array(
-				'country_id'        => $country_info['country_id'],
-				'name'              => $country_info['name'],
-				'iso_code_2'        => $country_info['iso_code_2'],
-				'iso_code_3'        => $country_info['iso_code_3'],
-				'address_format'    => $country_info['address_format'],
-				'postcode_required' => $country_info['postcode_required'],
-				'zone'              => $this->model_localisation_zone->getZonesByCountryId($this->request->get['country_id']),
-				'status'            => $country_info['status']		
-			);
-		}
-		
-		$this->response->setOutput(json_encode($json));
-	}
 		
 	public function address() {
 		$json = array();

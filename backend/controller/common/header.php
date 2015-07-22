@@ -30,7 +30,6 @@ class ControllerCommonHeader extends Controller {
 		$this->data['text_catalog'] = $this->language->get('text_catalog');
 		$this->data['text_category'] = $this->language->get('text_category');
 		$this->data['text_confirm'] = $this->language->get('text_confirm');
-		$this->data['text_country'] = $this->language->get('text_country');
 		$this->data['text_coupon'] = $this->language->get('text_coupon');
 		$this->data['text_currency'] = $this->language->get('text_currency');			
 		$this->data['text_customer'] = $this->language->get('text_customer');
@@ -48,7 +47,7 @@ class ControllerCommonHeader extends Controller {
 		$this->data['text_feed'] = $this->language->get('text_feed');
 		$this->data['text_filter'] = $this->language->get('text_filter');
 		$this->data['text_front'] = $this->language->get('text_front');
-		$this->data['text_geo_zone'] = $this->language->get('text_geo_zone');
+		$this->data['text_area_geo'] = $this->language->get('text_area_geo');
 		$this->data['text_help'] = $this->language->get('text_help');
 		$this->data['text_help_group'] = $this->language->get('text_help_group');
 		$this->data['text_dashboard'] = $this->language->get('text_dashboard');
@@ -106,7 +105,7 @@ class ControllerCommonHeader extends Controller {
 		$this->data['text_voucher_theme'] = $this->language->get('text_voucher_theme');
 		$this->data['text_weight_class'] = $this->language->get('text_weight_class');
 		$this->data['text_length_class'] = $this->language->get('text_length_class');
-		$this->data['text_zone'] = $this->language->get('text_zone');
+		$this->data['text_province'] = $this->language->get('text_province');
 		$this->data['text_project'] = $this->language->get('text_project');
 		$this->data['text_project_group'] = $this->language->get('text_project_group');
 		$this->data['text_case'] = $this->language->get('text_case');
@@ -128,7 +127,6 @@ class ControllerCommonHeader extends Controller {
 			$this->data['backup'] = $this->url->link('tool/backup', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['banner'] = $this->url->link('design/banner', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['category'] = $this->url->link('catalog/category', 'token=' . $this->session->data['token'], 'SSL');
-			$this->data['country'] = $this->url->link('localisation/country', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['coupon'] = $this->url->link('sale/coupon', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['currency'] = $this->url->link('localisation/currency', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['customer'] = $this->url->link('sale/customer', 'token=' . $this->session->data['token'], 'SSL');
@@ -140,7 +138,7 @@ class ControllerCommonHeader extends Controller {
 			$this->data['error_log'] = $this->url->link('tool/error_log', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['feed'] = $this->url->link('extension/feed', 'token=' . $this->session->data['token'], 'SSL');	
 			$this->data['filter'] = $this->url->link('catalog/filter', 'token=' . $this->session->data['token'], 'SSL');			
-			$this->data['geo_zone'] = $this->url->link('localisation/geo_zone', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['area_geo'] = $this->url->link('localisation/area_geo', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['help'] = $this->url->link('extension/help', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['help_group'] = $this->url->link('extension/help_group', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['information'] = $this->url->link('catalog/information', 'token=' . $this->session->data['token'], 'SSL');
@@ -187,7 +185,7 @@ class ControllerCommonHeader extends Controller {
 			$this->data['voucher_theme'] = $this->url->link('sale/voucher_theme', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['weight_class'] = $this->url->link('localisation/weight_class', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['length_class'] = $this->url->link('localisation/length_class', 'token=' . $this->session->data['token'], 'SSL');
-			$this->data['zone'] = $this->url->link('localisation/zone', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['province'] = $this->url->link('localisation/province', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['project'] = $this->url->link('sale/project', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['project_group'] = $this->url->link('sale/project_group', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['wiki'] = $this->url->link('extension/wiki', 'token=' . $this->session->data['token'], 'SSL');

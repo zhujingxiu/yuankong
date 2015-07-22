@@ -178,16 +178,10 @@ class ModelSaleAffiliate extends Model {
       	$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "affiliate WHERE status = '0' OR approved = '0'");
 
 		return $query->row['total'];
-	}
-	
-	public function getTotalAffiliatesByCountryId($country_id) {
-		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "affiliate WHERE country_id = '" . (int)$country_id . "'");
-		
-		return $query->row['total'];
 	}	
 	
-	public function getTotalAffiliatesByZoneId($zone_id) {
-		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "affiliate WHERE zone_id = '" . (int)$zone_id . "'");
+	public function getTotalAffiliatesByProvinceId($province_id) {
+		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "affiliate WHERE province_id = '" . (int)$province_id . "'");
 		
 		return $query->row['total'];
 	}

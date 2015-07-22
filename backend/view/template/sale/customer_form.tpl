@@ -177,27 +177,11 @@
                 <td><input type="text" name="address[<?php echo $address_row; ?>][postcode]" value="<?php echo $address['postcode']; ?>" /></td>
               </tr>
               <tr>
-                <td><span class="required">*</span> <?php echo $entry_country; ?></td>
-                <td><select name="address[<?php echo $address_row; ?>][country_id]" onchange="country(this, '<?php echo $address_row; ?>', '<?php echo $address['zone_id']; ?>');">
-                    <option value=""><?php echo $text_select; ?></option>
-                    <?php foreach ($countries as $country) { ?>
-                    <?php if ($country['country_id'] == $address['country_id']) { ?>
-                    <option value="<?php echo $country['country_id']; ?>" selected="selected"><?php echo $country['name']; ?></option>
-                    <?php } else { ?>
-                    <option value="<?php echo $country['country_id']; ?>"><?php echo $country['name']; ?></option>
-                    <?php } ?>
-                    <?php } ?>
+                <td><span class="required">*</span> <?php echo $entry_province; ?></td>
+                <td><select name="address[<?php echo $address_row; ?>][province_id]">
                   </select>
-                  <?php if (isset($error_address_country[$address_row])) { ?>
-                  <span class="error"><?php echo $error_address_country[$address_row]; ?></span>
-                  <?php } ?></td>
-              </tr>
-              <tr>
-                <td><span class="required">*</span> <?php echo $entry_zone; ?></td>
-                <td><select name="address[<?php echo $address_row; ?>][zone_id]">
-                  </select>
-                  <?php if (isset($error_address_zone[$address_row])) { ?>
-                  <span class="error"><?php echo $error_address_zone[$address_row]; ?></span>
+                  <?php if (isset($error_address_province[$address_row])) { ?>
+                  <span class="error"><?php echo $error_address_province[$address_row]; ?></span>
                   <?php } ?></td>
               </tr>
               <tr>
@@ -323,52 +307,7 @@ $('select[name=\'customer_group_id\']').live('change', function() {
 
 $('select[name=\'customer_group_id\']').trigger('change');
 //--></script> 
-<script type="text/javascript"><!--
-function country(element, index, zone_id) {
-  if (element.value != '') {
-		$.ajax({
-			url: 'index.php?route=sale/customer/country&token=<?php echo $token; ?>&country_id=' + element.value,
-			dataType: 'json',
-			beforeSend: function() {
-				$('select[name=\'address[' + index + '][country_id]\']').after('<span class="wait">&nbsp;<img src="view/image/loading.gif" alt="" /></span>');
-			},
-			complete: function() {
-				$('.wait').remove();
-			},			
-			success: function(json) {
-				if (json['postcode_required'] == '1') {
-					$('#postcode-required' + index).show();
-				} else {
-					$('#postcode-required' + index).hide();
-				}
-				
-				html = '<option value=""><?php echo $text_select; ?></option>';
-				
-				if (json['zone'] != '') {
-					for (i = 0; i < json['zone'].length; i++) {
-						html += '<option value="' + json['zone'][i]['zone_id'] + '"';
-						
-						if (json['zone'][i]['zone_id'] == zone_id) {
-							html += ' selected="selected"';
-						}
-		
-						html += '>' + json['zone'][i]['name'] + '</option>';
-					}
-				} else {
-					html += '<option value="0"><?php echo $text_none; ?></option>';
-				}
-				
-				$('select[name=\'address[' + index + '][zone_id]\']').html(html);
-			},
-			error: function(xhr, ajaxOptions, thrownError) {
-				alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-			}
-		});
-	}
-}
 
-$('select[name$=\'[country_id]\']').trigger('change');
-//--></script> 
 <script type="text/javascript"><!--
 var address_row = <?php echo $address_row; ?>;
 
@@ -416,17 +355,10 @@ function addAddress() {
     html += '      <td><span id="postcode-required' + address_row + '" class="required">*</span> <?php echo $entry_postcode; ?></td>';
     html += '      <td><input type="text" name="address[' + address_row + '][postcode]" value="" /></td>';
     html += '    </tr>';
-	html += '    <tr>';
-    html += '      <td><span class="required">*</span> <?php echo $entry_country; ?></td>';
-    html += '      <td><select name="address[' + address_row + '][country_id]" onchange="country(this, \'' + address_row + '\', \'0\');">';
-    <?php foreach ($countries as $country) { ?>
-    html += '         <option value="<?php echo $country['country_id']; ?>"><?php echo addslashes($country['name']); ?></option>';
-    <?php } ?>
-    html += '      </select></td>';
-    html += '    </tr>';
+
     html += '    <tr>';
-    html += '      <td><span class="required">*</span> <?php echo $entry_zone; ?></td>';
-    html += '      <td><select name="address[' + address_row + '][zone_id]"><option value="false"><?php echo $this->language->get('text_none'); ?></option></select></td>';
+    html += '      <td><span class="required">*</span> <?php echo $entry_province; ?></td>';
+    html += '      <td><select name="address[' + address_row + '][province_id]"><option value="false"><?php echo $this->language->get('text_none'); ?></option></select></td>';
     html += '    </tr>';
 	html += '    <tr>';
     html += '      <td><?php echo $entry_default; ?></td>';

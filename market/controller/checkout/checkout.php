@@ -114,6 +114,61 @@ class ControllerCheckoutCheckout extends Controller {
 		$this->load->model('account/address');
 
 		$this->data['addresses'] = $this->model_account_address->getAddresses();
+		//Shipping
+
+		$shipping_address = $this->model_account_address->getAddress($this->data['address_id']);		
+		
+		if (!empty($shipping_address)) {
+			// Shipping Methods
+			$quote_data = array();
+			
+			$this->load->model('setting/extension');
+			
+			$results = $this->model_setting_extension->getExtensions('shipping');
+			
+			foreach ($results as $result) {
+				if ($this->config->get($result['code'] . '_status')) {
+					$this->load->model('shipping/' . $result['code']);
+					
+					$quote = $this->{'model_shipping_' . $result['code']}->getQuote($shipping_address); 
+
+					if ($quote) {
+						$quote_data[$result['code']] = array( 
+							'title'      => $quote['title'],
+							'quote'      => $quote['quote'], 
+							'sort_order' => $quote['sort_order'],
+							'error'      => $quote['error']
+						);
+						if(!isset($this->session->data['shipping_method']) || !$this->session->data['shipping_method']){
+							$this->session->data['shipping_method'] = $quote['quote'][$result['code']];
+						}
+					}
+				}
+			}
+	
+			$sort_order = array();
+		  
+			foreach ($quote_data as $key => $value) {
+				$sort_order[$key] = $value['sort_order'];
+			}
+	
+			array_multisort($sort_order, SORT_ASC, $quote_data);
+			
+			$this->session->data['shipping_methods'] = $quote_data;
+		}
+
+
+		if (isset($this->session->data['shipping_methods'])) {
+			$this->data['shipping_methods'] = $this->session->data['shipping_methods']; 
+		} else {
+			$this->data['shipping_methods'] = array();
+		}
+		
+		if (isset($this->session->data['shipping_method']['code'])) {
+			$this->data['shipping_code'] = $this->session->data['shipping_method']['code'];
+		} else {
+			$this->data['shipping_code'] = '';
+		}
 
 		$this->load->model('tool/image');
 
@@ -219,7 +274,7 @@ class ControllerCheckoutCheckout extends Controller {
 			}
 			
 			array_multisort($sort_order, SORT_ASC, $results);
-			
+
 			foreach ($results as $result) {
 				if ($this->config->get($result['code'] . '_status')) {
 					$this->load->model('total/' . $result['code']);
@@ -282,10 +337,6 @@ class ControllerCheckoutCheckout extends Controller {
 			$this->session->data['payment_methods'] = $method_data;	
 		}
 
-		$this->data['text_payment_method'] = $this->language->get('text_payment_method');
-		$this->data['text_comments'] = $this->language->get('text_comments');
-		$this->data['confirm'] = $this->url->link('checkout/confirm','','SSL');
-
 		if (isset($this->session->data['payment_methods'])) {
 			$this->data['payment_methods'] = $this->session->data['payment_methods']; 
 		} else {
@@ -297,13 +348,15 @@ class ControllerCheckoutCheckout extends Controller {
 		} else {
 			$this->data['payment_code'] = '';
 		}
+		$this->data['text_payment_method'] = $this->language->get('text_payment_method');
+		$this->data['text_comments'] = $this->language->get('text_comments');
+		$this->data['confirm'] = $this->url->link('checkout/confirm','','SSL');
 		
 		if (isset($this->session->data['comment'])) {
 			$this->data['comment'] = $this->session->data['comment'];
 		} else {
 			$this->data['comment'] = '';
 		}
-
 
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/checkout/checkout.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/checkout/checkout.tpl';
@@ -469,20 +522,14 @@ class ControllerCheckoutCheckout extends Controller {
 			$json['error']['city'] = $this->language->get('error_city');
 		}
 		
-		$this->load->model('localisation/country');
-		
-		$country_info = $this->model_localisation_country->getCountry($this->request->post['country_id']);
-		
-		if ($country_info && $country_info['postcode_required'] && (utf8_strlen($this->request->post['postcode']) < 2) || (utf8_strlen($this->request->post['postcode']) > 10)) {
+
+		if ((utf8_strlen($this->request->post['postcode']) < 2) || (utf8_strlen($this->request->post['postcode']) > 10)) {
 			$json['error']['postcode'] = $this->language->get('error_postcode');
 		}
 		
-		if ($this->request->post['country_id'] == '') {
-			$json['error']['country'] = $this->language->get('error_country');
-		}
-		
-		if (!isset($this->request->post['zone_id']) || $this->request->post['zone_id'] == '') {
-			$json['error']['zone'] = $this->language->get('error_zone');
+	
+		if (!isset($this->request->post['province_id']) || $this->request->post['province_id'] == '') {
+			$json['error']['province'] = $this->language->get('error_province');
 		}
 		
 		if (!$json) {						
@@ -490,8 +537,7 @@ class ControllerCheckoutCheckout extends Controller {
 			$this->load->model('account/address');		
 			
 			$this->session->data['shipping_address_id'] = $this->model_account_address->addAddress($this->request->post);
-			$this->session->data['shipping_country_id'] = $this->request->post['country_id'];
-			$this->session->data['shipping_zone_id'] = $this->request->post['zone_id'];
+			$this->session->data['shipping_province_id'] = $this->request->post['province_id'];
 			$this->session->data['shipping_postcode'] = $this->request->post['postcode'];
 							
 			unset($this->session->data['shipping_method']);						
@@ -499,31 +545,6 @@ class ControllerCheckoutCheckout extends Controller {
 		}
 	}
 	
-	public function country() {
-		$json = array();
-		
-		$this->load->model('localisation/country');
-
-    	$country_info = $this->model_localisation_country->getCountry($this->request->get['country_id']);
-		
-		if ($country_info) {
-			$this->load->model('localisation/zone');
-
-			$json = array(
-				'country_id'        => $country_info['country_id'],
-				'name'              => $country_info['name'],
-				'iso_code_2'        => $country_info['iso_code_2'],
-				'iso_code_3'        => $country_info['iso_code_3'],
-				'address_format'    => $country_info['address_format'],
-				'postcode_required' => $country_info['postcode_required'],
-				'zone'              => $this->model_localisation_zone->getZonesByCountryId($this->request->get['country_id']),
-				'status'            => $country_info['status']		
-			);
-		}
-		
-		$this->response->setOutput(json_encode($json));
-	}
-
     private function area_js(){
         if(file_exists(DIR_TEMPLATE.$this->config->get('config_template').'/javascript/area.js')){
             
@@ -538,7 +559,7 @@ class ControllerCheckoutCheckout extends Controller {
                 if ($pid == 0) {
                     
                     $item = array_filter($item, function($item){
-                        return $item['area_id'] <= 84;// ID 大于 84 的为其他国家
+                        return $item['pid'] == 0;
                     });
                 }
                 $address['name'.$pid] = array_keys($this->array_group($item, 'name'));

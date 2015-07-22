@@ -34,7 +34,7 @@ $_['entry_meta_description']    = 'Meta标签说明：';
 $_['entry_layout']              = '默认布局：';
 $_['entry_template']            = '模版设置：';
 $_['entry_country']             = '国家：';
-$_['entry_zone']                = '地区 / 省份：';
+$_['entry_province']                = '地区 / 省份：';
 $_['entry_language']            = '前台语言：';
 $_['entry_currency']            = '币种设置：';
 $_['entry_catalog_limit']       = '默认每页显示 (前台)：<br /><span class="help">确定前台项目中每页显示多少（产品，类别等）</span>';

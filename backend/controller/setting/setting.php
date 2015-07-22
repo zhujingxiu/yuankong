@@ -56,8 +56,7 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_meta_description'] = $this->language->get('entry_meta_description');
 		$this->data['entry_layout'] = $this->language->get('entry_layout');
 		$this->data['entry_template'] = $this->language->get('entry_template');
-		$this->data['entry_country'] = $this->language->get('entry_country');
-		$this->data['entry_zone'] = $this->language->get('entry_zone');		
+		$this->data['entry_province'] = $this->language->get('entry_province');		
 		$this->data['entry_language'] = $this->language->get('entry_language');
 		$this->data['entry_admin_language'] = $this->language->get('entry_admin_language');
 		$this->data['entry_currency'] = $this->language->get('entry_currency');
@@ -415,21 +414,13 @@ class ControllerSettingSetting extends Controller {
 		foreach ($directories as $directory) {
 			$this->data['templates'][] = basename($directory);
 		}					
-				
-		if (isset($this->request->post['config_country_id'])) {
-			$this->data['config_country_id'] = $this->request->post['config_country_id'];
-		} else {
-			$this->data['config_country_id'] = $this->config->get('config_country_id');
-		}
+		$this->load->model('localisation/province');
+		$this->data['provinces'] = $this->model_localisation_province->getProvinces();
 		
-		$this->load->model('localisation/country');
-		
-		$this->data['countries'] = $this->model_localisation_country->getCountries();
-
-		if (isset($this->request->post['config_zone_id'])) {
-			$this->data['config_zone_id'] = $this->request->post['config_zone_id'];
+		if (isset($this->request->post['config_province_id'])) {
+			$this->data['config_province_id'] = $this->request->post['config_province_id'];
 		} else {
-			$this->data['config_zone_id'] = $this->config->get('config_zone_id');
+			$this->data['config_province_id'] = $this->config->get('config_province_id');
 		}		
 		
 		if (isset($this->request->post['config_language'])) {
@@ -1193,29 +1184,5 @@ class ControllerSettingSetting extends Controller {
 		$this->response->setOutput('<img src="' . $image . '" alt="" title="" style="border: 1px solid #EEEEEE;" />');
 	}		
 		
-	public function country() {
-		$json = array();
-		
-		$this->load->model('localisation/country');
 
-    	$country_info = $this->model_localisation_country->getCountry($this->request->get['country_id']);
-		
-		if ($country_info) {
-			$this->load->model('localisation/zone');
-
-			$json = array(
-				'country_id'        => $country_info['country_id'],
-				'name'              => $country_info['name'],
-				'iso_code_2'        => $country_info['iso_code_2'],
-				'iso_code_3'        => $country_info['iso_code_3'],
-				'address_format'    => $country_info['address_format'],
-				'postcode_required' => $country_info['postcode_required'],
-				'zone'              => $this->model_localisation_zone->getZonesByCountryId($this->request->get['country_id']),
-				'status'            => $country_info['status']		
-			);
-		}
-		
-		$this->response->setOutput(json_encode($json));
-	}
 }
-?>

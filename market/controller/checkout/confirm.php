@@ -25,15 +25,7 @@ class ControllerCheckoutConfirm extends Controller {
 		}
 		
 		// Validate if payment address has been set.
-		$this->load->model('account/address');
-		
-		if ($this->customer->isLogged() && isset($this->session->data['payment_address_id'])) {
-			$payment_address = $this->model_account_address->getAddress($this->session->data['payment_address_id']);		
-		} 
-				
-		if (empty($payment_address)) {
-			$redirect = $this->url->link('checkout/checkout', '', 'SSL');
-		}			
+		$this->load->model('account/address');		
 		
 		// Validate if payment method has been set.	
 		if (!isset($this->session->data['payment_method'])) {
@@ -121,8 +113,7 @@ class ControllerCheckoutConfirm extends Controller {
 				$data['fax'] = $this->customer->getFax();
 			
 				$this->load->model('account/address');
-				
-				$payment_address = $this->model_account_address->getAddress($this->session->data['payment_address_id']);
+
 			} 
 		
 			if (isset($this->session->data['payment_method']['title'])) {
@@ -142,9 +133,7 @@ class ControllerCheckoutConfirm extends Controller {
 					$this->load->model('account/address');
 					
 					$shipping_address = $this->model_account_address->getAddress($this->session->data['shipping_address_id']);	
-				} elseif (isset($this->session->data['guest'])) {
-					$shipping_address = $this->session->data['guest']['shipping'];
-				}			
+				} 			
 				
 				$data['shipping_firstname'] = $shipping_address['firstname'];
 				$data['shipping_lastname'] = $shipping_address['lastname'];	
@@ -155,8 +144,6 @@ class ControllerCheckoutConfirm extends Controller {
 				$data['shipping_postcode'] = $shipping_address['postcode'];
 				$data['shipping_zone'] = $shipping_address['zone'];
 				$data['shipping_zone_id'] = $shipping_address['zone_id'];
-				$data['shipping_country'] = $shipping_address['country'];
-				$data['shipping_country_id'] = $shipping_address['country_id'];
 				$data['shipping_address_format'] = $shipping_address['address_format'];
 			
 				if (isset($this->session->data['shipping_method']['title'])) {
@@ -180,9 +167,6 @@ class ControllerCheckoutConfirm extends Controller {
 				$data['shipping_postcode'] = '';
 				$data['shipping_zone'] = '';
 				$data['shipping_zone_id'] = '';
-				$data['shipping_country'] = '';
-				$data['shipping_country_id'] = '';
-				$data['shipping_address_format'] = '';
 				$data['shipping_method'] = '';
 				$data['shipping_code'] = '';
 			}
@@ -383,17 +367,6 @@ class ControllerCheckoutConfirm extends Controller {
 			$json['error']['city'] = $this->language->get('error_city');
 		}
 		
-		$this->load->model('localisation/country');
-		
-		$country_info = $this->model_localisation_country->getCountry($this->request->post['country_id']);
-		
-		if ($country_info && $country_info['postcode_required'] && (utf8_strlen($this->request->post['postcode']) < 2) || (utf8_strlen($this->request->post['postcode']) > 10)) {
-			$json['error']['postcode'] = $this->language->get('error_postcode');
-		}
-		
-		if ($this->request->post['country_id'] == '') {
-			$json['error']['country'] = $this->language->get('error_country');
-		}
 		
 		if (!isset($this->request->post['zone_id']) || $this->request->post['zone_id'] == '') {
 			$json['error']['zone'] = $this->language->get('error_zone');
@@ -404,7 +377,6 @@ class ControllerCheckoutConfirm extends Controller {
 			$this->load->model('account/address');		
 			
 			$this->session->data['shipping_address_id'] = $this->model_account_address->addAddress($this->request->post);
-			$this->session->data['shipping_country_id'] = $this->request->post['country_id'];
 			$this->session->data['shipping_zone_id'] = $this->request->post['zone_id'];
 			$this->session->data['shipping_postcode'] = $this->request->post['postcode'];
 							

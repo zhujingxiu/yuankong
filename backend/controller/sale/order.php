@@ -515,9 +515,7 @@ class ControllerSaleOrder extends Controller {
 		$this->data['entry_address_2'] = $this->language->get('entry_address_2');
 		$this->data['entry_city'] = $this->language->get('entry_city');
 		$this->data['entry_postcode'] = $this->language->get('entry_postcode');
-		$this->data['entry_zone'] = $this->language->get('entry_zone');
-		$this->data['entry_zone_code'] = $this->language->get('entry_zone_code');
-		$this->data['entry_country'] = $this->language->get('entry_country');		
+		$this->data['entry_province'] = $this->language->get('entry_province');
 		$this->data['entry_product'] = $this->language->get('entry_product');
 		$this->data['entry_option'] = $this->language->get('entry_option');
 		$this->data['entry_quantity'] = $this->language->get('entry_quantity');
@@ -623,16 +621,10 @@ class ControllerSaleOrder extends Controller {
 			$this->data['error_shipping_postcode'] = '';
 		}
 		
-		if (isset($this->error['shipping_country'])) {
-			$this->data['error_shipping_country'] = $this->error['shipping_country'];
+		if (isset($this->error['shipping_province'])) {
+			$this->data['error_shipping_province'] = $this->error['shipping_province'];
 		} else {
-			$this->data['error_shipping_country'] = '';
-		}
-		
-		if (isset($this->error['shipping_zone'])) {
-			$this->data['error_shipping_zone'] = $this->error['shipping_zone'];
-		} else {
-			$this->data['error_shipping_zone'] = '';
+			$this->data['error_shipping_province'] = '';
 		}
 		
 		if (isset($this->error['shipping_method'])) {
@@ -910,18 +902,14 @@ class ControllerSaleOrder extends Controller {
       		$this->data['shipping_postcode'] = '';
     	}
 				
-		if (isset($this->request->post['shipping_zone_id'])) {
-      		$this->data['shipping_zone_id'] = $this->request->post['shipping_zone_id'];
+		if (isset($this->request->post['shipping_province_id'])) {
+      		$this->data['shipping_province_id'] = $this->request->post['shipping_province_id'];
     	} elseif (!empty($order_info)) { 
-			$this->data['shipping_zone_id'] = $order_info['shipping_zone_id'];
+			$this->data['shipping_province_id'] = $order_info['shipping_province_id'];
 		} else {
-      		$this->data['shipping_zone_id'] = '';
+      		$this->data['shipping_province_id'] = '';
     	}	
-						
-		$this->load->model('localisation/country');
-		
-		$this->data['countries'] = $this->model_localisation_country->getCountries();															
-		
+							
     	if (isset($this->request->post['shipping_method'])) {
       		$this->data['shipping_method'] = $this->request->post['shipping_method'];
     	} elseif (!empty($order_info)) { 
@@ -1069,11 +1057,8 @@ class ControllerSaleOrder extends Controller {
 	
 
 	
-			$this->load->model('localisation/country');
-			
-			$country_info = $this->model_localisation_country->getCountry($this->request->post['shipping_country_id']);
-			
-			if ($country_info && $country_info['postcode_required'] && (utf8_strlen($this->request->post['shipping_postcode']) < 2) || (utf8_strlen($this->request->post['shipping_postcode']) > 10)) {
+
+			if ((utf8_strlen($this->request->post['shipping_postcode']) < 2) || (utf8_strlen($this->request->post['shipping_postcode']) > 10)) {
 				$this->error['shipping_postcode'] = $this->language->get('error_postcode');
 			}
 	
@@ -1111,30 +1096,6 @@ class ControllerSaleOrder extends Controller {
 		}
   	}
 	
-	public function country() {
-		$json = array();
-		
-		$this->load->model('localisation/country');
-
-    	$country_info = $this->model_localisation_country->getCountry($this->request->get['country_id']);
-		
-		if ($country_info) {
-			$this->load->model('localisation/zone');
-
-			$json = array(
-				'country_id'        => $country_info['country_id'],
-				'name'              => $country_info['name'],
-				'iso_code_2'        => $country_info['iso_code_2'],
-				'iso_code_3'        => $country_info['iso_code_3'],
-				'address_format'    => $country_info['address_format'],
-				'postcode_required' => $country_info['postcode_required'],
-				'zone'              => $this->model_localisation_zone->getZonesByCountryId($this->request->get['country_id']),
-				'status'            => $country_info['status']		
-			);
-		}
-		
-		$this->response->setOutput(json_encode($json));
-	}
 		
 	public function info() {
 		$this->load->model('sale/order');
@@ -1185,9 +1146,7 @@ class ControllerSaleOrder extends Controller {
 			$this->data['text_address_2'] = $this->language->get('text_address_2');
 			$this->data['text_city'] = $this->language->get('text_city');
 			$this->data['text_postcode'] = $this->language->get('text_postcode');
-			$this->data['text_zone'] = $this->language->get('text_zone');
-			$this->data['text_zone_code'] = $this->language->get('text_zone_code');
-			$this->data['text_country'] = $this->language->get('text_country');
+			$this->data['text_province'] = $this->language->get('text_province');
 			$this->data['text_shipping_method'] = $this->language->get('text_shipping_method');
 			$this->data['text_payment_method'] = $this->language->get('text_payment_method');	
 			$this->data['text_download'] = $this->language->get('text_download');
@@ -1199,55 +1158,7 @@ class ControllerSaleOrder extends Controller {
 			$this->data['text_commission_remove'] = $this->language->get('text_commission_remove');
 			$this->data['text_credit_add'] = $this->language->get('text_credit_add');
 			$this->data['text_credit_remove'] = $this->language->get('text_credit_remove');
-			$this->data['text_country_match'] = $this->language->get('text_country_match');
-			$this->data['text_country_code'] = $this->language->get('text_country_code');
-			$this->data['text_high_risk_country'] = $this->language->get('text_high_risk_country');
-			$this->data['text_distance'] = $this->language->get('text_distance');
-			$this->data['text_ip_region'] = $this->language->get('text_ip_region');
-			$this->data['text_ip_city'] = $this->language->get('text_ip_city');
-			$this->data['text_ip_latitude'] = $this->language->get('text_ip_latitude');
-			$this->data['text_ip_longitude'] = $this->language->get('text_ip_longitude');
-			$this->data['text_ip_isp'] = $this->language->get('text_ip_isp');
-			$this->data['text_ip_org'] = $this->language->get('text_ip_org');
-			$this->data['text_ip_asnum'] = $this->language->get('text_ip_asnum');
-			$this->data['text_ip_user_type'] = $this->language->get('text_ip_user_type');
-			$this->data['text_ip_country_confidence'] = $this->language->get('text_ip_country_confidence');
-			$this->data['text_ip_region_confidence'] = $this->language->get('text_ip_region_confidence');
-			$this->data['text_ip_city_confidence'] = $this->language->get('text_ip_city_confidence');
-			$this->data['text_ip_postal_confidence'] = $this->language->get('text_ip_postal_confidence');
-			$this->data['text_ip_postal_code'] = $this->language->get('text_ip_postal_code');
-			$this->data['text_ip_accuracy_radius'] = $this->language->get('text_ip_accuracy_radius');
-			$this->data['text_ip_net_speed_cell'] = $this->language->get('text_ip_net_speed_cell');
-			$this->data['text_ip_metro_code'] = $this->language->get('text_ip_metro_code');
-			$this->data['text_ip_area_code'] = $this->language->get('text_ip_area_code');
-			$this->data['text_ip_time_zone'] = $this->language->get('text_ip_time_zone');
-			$this->data['text_ip_region_name'] = $this->language->get('text_ip_region_name');
-			$this->data['text_ip_domain'] = $this->language->get('text_ip_domain');
-			$this->data['text_ip_country_name'] = $this->language->get('text_ip_country_name');
-			$this->data['text_ip_continent_code'] = $this->language->get('text_ip_continent_code');
-			$this->data['text_ip_corporate_proxy'] = $this->language->get('text_ip_corporate_proxy');
-			$this->data['text_anonymous_proxy'] = $this->language->get('text_anonymous_proxy');
-			$this->data['text_proxy_score'] = $this->language->get('text_proxy_score');
-			$this->data['text_is_trans_proxy'] = $this->language->get('text_is_trans_proxy');
-			$this->data['text_free_mail'] = $this->language->get('text_free_mail');
-			$this->data['text_carder_email'] = $this->language->get('text_carder_email');
-			$this->data['text_high_risk_username'] = $this->language->get('text_high_risk_username');
-			$this->data['text_high_risk_password'] = $this->language->get('text_high_risk_password');
-			$this->data['text_bin_match'] = $this->language->get('text_bin_match');
-			$this->data['text_bin_country'] = $this->language->get('text_bin_country');
-			$this->data['text_bin_name_match'] = $this->language->get('text_bin_name_match');
-			$this->data['text_bin_name'] = $this->language->get('text_bin_name');
-			$this->data['text_bin_phone_match'] = $this->language->get('text_bin_phone_match');
-			$this->data['text_bin_phone'] = $this->language->get('text_bin_phone');
-			$this->data['text_customer_phone_in_billing_location'] = $this->language->get('text_customer_phone_in_billing_location');
-			$this->data['text_ship_forward'] = $this->language->get('text_ship_forward');
-			$this->data['text_city_postal_match'] = $this->language->get('text_city_postal_match');
-			$this->data['text_ship_city_postal_match'] = $this->language->get('text_ship_city_postal_match');
-			$this->data['text_score'] = $this->language->get('text_score');
-			$this->data['text_explanation'] = $this->language->get('text_explanation');
-			$this->data['text_risk_score'] = $this->language->get('text_risk_score');
-			$this->data['text_queries_remaining'] = $this->language->get('text_queries_remaining');
-			$this->data['text_maxmind_id'] = $this->language->get('text_maxmind_id');
+
 			$this->data['text_error'] = $this->language->get('text_error');
 							
 			$this->data['column_product'] = $this->language->get('column_product');
@@ -1257,7 +1168,6 @@ class ControllerSaleOrder extends Controller {
 			$this->data['column_total'] = $this->language->get('column_total');
 			$this->data['column_download'] = $this->language->get('column_download');
 			$this->data['column_filename'] = $this->language->get('column_filename');
-			$this->data['column_remaining'] = $this->language->get('column_remaining');
 						
 			$this->data['entry_order_status'] = $this->language->get('entry_order_status');
 			$this->data['entry_notify'] = $this->language->get('entry_notify');
@@ -1421,9 +1331,7 @@ class ControllerSaleOrder extends Controller {
 			$this->data['shipping_address_2'] = $order_info['shipping_address_2'];
 			$this->data['shipping_city'] = $order_info['shipping_city'];
 			$this->data['shipping_postcode'] = $order_info['shipping_postcode'];
-			$this->data['shipping_zone'] = $order_info['shipping_zone'];
-			$this->data['shipping_zone_code'] = $order_info['shipping_zone_code'];
-			$this->data['shipping_country'] = $order_info['shipping_country'];
+			$this->data['shipping_province'] = $order_info['shipping_province'];
 
 			$this->data['products'] = array();
 
@@ -2202,11 +2110,9 @@ class ControllerSaleOrder extends Controller {
 					$invoice_no = '';
 				}
 				
-				if ($order_info['shipping_address_format']) {
-					$format = $order_info['shipping_address_format'];
-				} else {
-					$format = '{firstname} {lastname}' . "\n" . '{company}' . "\n" . '{address_1}' . "\n" . '{address_2}' . "\n" . '{city} {postcode}' . "\n" . '{zone}' . "\n" . '{country}';
-				}
+
+				$format = '{firstname} {lastname}' . "\n" . '{company}' . "\n" . '{address_1}' . "\n" . '{address_2}' . "\n" . '{city} {postcode}' . "\n" . '{province}';
+
 
 				$find = array(
 					'{firstname}',
@@ -2216,9 +2122,7 @@ class ControllerSaleOrder extends Controller {
 					'{address_2}',
 					'{city}',
 					'{postcode}',
-					'{zone}',
-					'{zone_code}',
-					'{country}'
+					'{province}',
 				);
 
 				$replace = array(
@@ -2229,9 +2133,7 @@ class ControllerSaleOrder extends Controller {
 					'address_2' => $order_info['shipping_address_2'],
 					'city'      => $order_info['shipping_city'],
 					'postcode'  => $order_info['shipping_postcode'],
-					'zone'      => $order_info['shipping_zone'],
-					'zone_code' => $order_info['shipping_zone_code'],
-					'country'   => $order_info['shipping_country']
+					'province'      => $order_info['shipping_province'],
 				);
 
 				$shipping_address = str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format))));

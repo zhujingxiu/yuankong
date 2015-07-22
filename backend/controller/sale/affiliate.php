@@ -551,9 +551,7 @@ class ControllerSaleAffiliate extends Controller {
 		$this->data['entry_address_2'] = $this->language->get('entry_address_2');
 		$this->data['entry_city'] = $this->language->get('entry_city');
 		$this->data['entry_postcode'] = $this->language->get('entry_postcode');
-		$this->data['entry_country'] = $this->language->get('entry_country');
-		$this->data['entry_zone'] = $this->language->get('entry_zone');
-		$this->data['entry_code'] = $this->language->get('entry_code');
+		$this->data['entry_province'] = $this->language->get('entry_province');
 		$this->data['entry_commission'] = $this->language->get('entry_commission');
 		$this->data['entry_tax'] = $this->language->get('entry_tax');
 		$this->data['entry_payment'] = $this->language->get('entry_payment');
@@ -639,16 +637,11 @@ class ControllerSaleAffiliate extends Controller {
 			$this->data['error_postcode'] = '';
 		}
 		
-		if (isset($this->error['country'])) {
-			$this->data['error_country'] = $this->error['country'];
-		} else {
-			$this->data['error_country'] = '';
-		}
 		
-		if (isset($this->error['zone'])) {
-			$this->data['error_zone'] = $this->error['zone'];
+		if (isset($this->error['province'])) {
+			$this->data['error_province'] = $this->error['province'];
 		} else {
-			$this->data['error_zone'] = '';
+			$this->data['error_province'] = '';
 		}
 
 		if (isset($this->error['code'])) {
@@ -813,24 +806,14 @@ class ControllerSaleAffiliate extends Controller {
       		$this->data['postcode'] = '';
     	}
     	
-		if (isset($this->request->post['country_id'])) {
-      		$this->data['country_id'] = $this->request->post['country_id'];
-    	} elseif (!empty($affiliate_info)) { 
-			$this->data['country_id'] = $affiliate_info['country_id'];
-		} else {
-      		$this->data['country_id'] = '';
-    	}
-		
-		$this->load->model('localisation/country');
-		
-		$this->data['countries'] = $this->model_localisation_country->getCountries();
+
 				
-		if (isset($this->request->post['zone_id'])) {
-      		$this->data['zone_id'] = $this->request->post['zone_id'];
+		if (isset($this->request->post['province_id'])) {
+      		$this->data['province_id'] = $this->request->post['province_id'];
     	} elseif (!empty($affiliate_info)) { 
-			$this->data['zone_id'] = $affiliate_info['zone_id'];
+			$this->data['province_id'] = $affiliate_info['province_id'];
 		} else {
-      		$this->data['zone_id'] = '';
+      		$this->data['province_id'] = '';
     	}
 
 		if (isset($this->request->post['code'])) {
@@ -1003,20 +986,12 @@ class ControllerSaleAffiliate extends Controller {
       		$this->error['city'] = $this->language->get('error_city');
     	}
 		
-		$this->load->model('localisation/country');
-		
-		$country_info = $this->model_localisation_country->getCountry($this->request->post['country_id']);
-		
-		if ($country_info && $country_info['postcode_required'] && (utf8_strlen($this->request->post['postcode']) < 2) || (utf8_strlen($this->request->post['postcode']) > 10)) {
+		if ( (utf8_strlen($this->request->post['postcode']) < 2) || (utf8_strlen($this->request->post['postcode']) > 10)) {
 			$this->error['postcode'] = $this->language->get('error_postcode');
 		}
 		
-    	if ($this->request->post['country_id'] == '') {
-      		$this->error['country'] = $this->language->get('error_country');
-    	}
-		
-    	if (!isset($this->request->post['zone_id']) || $this->request->post['zone_id'] == '') {
-      		$this->error['zone'] = $this->language->get('error_zone');
+    	if (!isset($this->request->post['province_id']) || $this->request->post['province_id'] == '') {
+      		$this->error['province'] = $this->language->get('error_province');
     	}
 
     	if (!$this->request->post['code']) {
@@ -1041,31 +1016,6 @@ class ControllerSaleAffiliate extends Controller {
 	  		return false;
 		}  
   	} 
-
-	public function country() {
-		$json = array();
-		
-		$this->load->model('localisation/country');
-
-    	$country_info = $this->model_localisation_country->getCountry($this->request->get['country_id']);
-		
-		if ($country_info) {
-			$this->load->model('localisation/zone');
-
-			$json = array(
-				'country_id'        => $country_info['country_id'],
-				'name'              => $country_info['name'],
-				'iso_code_2'        => $country_info['iso_code_2'],
-				'iso_code_3'        => $country_info['iso_code_3'],
-				'address_format'    => $country_info['address_format'],
-				'postcode_required' => $country_info['postcode_required'],
-				'zone'              => $this->model_localisation_zone->getZonesByCountryId($this->request->get['country_id']),
-				'status'            => $country_info['status']		
-			);
-		}
-		
-		$this->response->setOutput(json_encode($json));
-	}
 		
 	public function transaction() {
     	$this->language->load('sale/affiliate');

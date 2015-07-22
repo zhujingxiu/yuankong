@@ -37,9 +37,7 @@ class ControllerLocalisationArea extends Controller {
         $this->data['text_no'] = $this->language->get('text_no');
 		$this->data['text_no_results'] = $this->language->get('text_no_results');
 
-		$this->data['column_country'] = $this->language->get('column_country');
 		$this->data['column_name'] = $this->language->get('column_name');
-		$this->data['column_code'] = $this->language->get('column_code');
 		$this->data['column_action'] = $this->language->get('column_action');	
 
 		$this->data['button_insert'] = $this->language->get('button_insert');

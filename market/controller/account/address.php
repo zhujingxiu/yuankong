@@ -512,12 +512,8 @@ class ControllerAccountAddress extends Controller {
       		$this->error['city'] = $this->language->get('error_city');
     	}
 		
-		$this->load->model('localisation/country');
-		
-		$country_info = $this->model_localisation_country->getCountry($this->request->post['country_id']);
-		
-		if ($country_info) {
-			if ($country_info['postcode_required'] && (utf8_strlen($this->request->post['postcode']) < 2) || (utf8_strlen($this->request->post['postcode']) > 10)) {
+
+			if ( (utf8_strlen($this->request->post['postcode']) < 2) || (utf8_strlen($this->request->post['postcode']) > 10)) {
 				$this->error['postcode'] = $this->language->get('error_postcode');
 			}
 			
@@ -527,14 +523,10 @@ class ControllerAccountAddress extends Controller {
 			if ($this->config->get('config_vat') && !empty($this->request->post['tax_id']) && (vat_validation($country_info['iso_code_2'], $this->request->post['tax_id']) == 'invalid')) {
 				$this->error['tax_id'] = $this->language->get('error_vat');
 			}		
-		}
 		
-    	if ($this->request->post['country_id'] == '') {
-      		$this->error['country'] = $this->language->get('error_country');
-    	}
 		
-    	if (!isset($this->request->post['zone_id']) || $this->request->post['zone_id'] == '') {
-      		$this->error['zone'] = $this->language->get('error_zone');
+    	if (!isset($this->request->post['province_id']) || $this->request->post['province_id'] == '') {
+      		$this->error['province'] = $this->language->get('error_province');
     	}
 		
     	if (!$this->error) {
@@ -560,29 +552,5 @@ class ControllerAccountAddress extends Controller {
     	}
   	}
 	
-	public function country() {
-		$json = array();
-		
-		$this->load->model('localisation/country');
 
-    	$country_info = $this->model_localisation_country->getCountry($this->request->get['country_id']);
-		
-		if ($country_info) {
-			$this->load->model('localisation/zone');
-
-			$json = array(
-				'country_id'        => $country_info['country_id'],
-				'name'              => $country_info['name'],
-				'iso_code_2'        => $country_info['iso_code_2'],
-				'iso_code_3'        => $country_info['iso_code_3'],
-				'address_format'    => $country_info['address_format'],
-				'postcode_required' => $country_info['postcode_required'],
-				'zone'              => $this->model_localisation_zone->getZonesByCountryId($this->request->get['country_id']),
-				'status'            => $country_info['status']		
-			);
-		}
-		
-		$this->response->setOutput(json_encode($json));
-	}
 }
-?>

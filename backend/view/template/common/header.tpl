@@ -177,9 +177,8 @@ $(document).ready(function(){
                   <li><a href="<?php echo $return_reason; ?>"><?php echo $text_return_reason; ?></a></li>
                 </ul>
               </li>
-              <li><a href="<?php echo $country; ?>"><?php echo $text_country; ?></a></li>
-              <li><a href="<?php echo $zone; ?>"><?php echo $text_zone; ?></a></li>
-              <li><a href="<?php echo $geo_zone; ?>"><?php echo $text_geo_zone; ?></a></li>
+              <li><a href="<?php echo $province; ?>"><?php echo $text_province; ?></a></li>
+              <li><a href="<?php echo $area_geo; ?>"><?php echo $text_area_geo; ?></a></li>
               <li><a class="parent"><?php echo $text_tax; ?></a>
                 <ul>
                   <li><a href="<?php echo $tax_class; ?>"><?php echo $text_tax_class; ?></a></li>

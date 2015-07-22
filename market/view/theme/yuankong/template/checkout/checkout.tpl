@@ -203,16 +203,17 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
                 <ul class="order-item-ul">
                     <li class="all-money">
                         <strong><?php echo $checkout_total['title'] ?></strong>
-                        <b><?php echo $checkout_total['text'] ?></b>=
-                        <?php foreach ($other_totals as $key => $item): ?>
-                            <?php if($key!='total'){ ?>
-                            <b><?php echo $item['text'] ?></b>
-                            <span>(<?php echo $item['title'] ?>)</span>
-                            <?php }?>
-                            <?php if(count($other_totals) != $key+1){?>
-                            +
-                            <?php } ?>
-                        <?php endforeach ?>
+                        <b><?php echo $checkout_total['text'] ?></b>
+                        =
+                        <?php $n = 0;foreach ($other_totals as $key => $item): ?>
+                        <?php if($key!='total'){ ?>
+                        <b><?php echo $item['text'] ?></b>
+                        <span>(<?php echo $item['title'] ?>)</span>
+                        <?php }?>
+                        <?php if(count($other_totals) > $n+1){?>
+                        +
+                        <?php } ?>
+                        <?php $n++; endforeach ?>
                     </li>
                     <li class="all-money">
                         <strong><?php echo $text_checkout_payment ?></strong>

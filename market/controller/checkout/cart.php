@@ -337,24 +337,13 @@ class ControllerCheckoutCart extends Controller {
 		}
 		$this->data['shipping_status'] = $this->config->get('shipping_status') && $this->config->get('shipping_estimator') && $this->cart->hasShipping();	
 							
-		if (isset($this->request->post['country_id'])) {
-			$this->data['country_id'] = $this->request->post['country_id'];				
-		} elseif (isset($this->session->data['shipping_country_id'])) {
-			$this->data['country_id'] = $this->session->data['shipping_country_id'];			  	
+				
+		if (isset($this->request->post['province_id'])) {
+			$this->data['province_id'] = $this->request->post['province_id'];				
+		} elseif (isset($this->session->data['shipping_province_id'])) {
+			$this->data['province_id'] = $this->session->data['shipping_province_id'];			
 		} else {
-			$this->data['country_id'] = $this->config->get('config_country_id');
-		}
-			
-		$this->load->model('localisation/country');
-		
-		$this->data['countries'] = $this->model_localisation_country->getCountries();
-					
-		if (isset($this->request->post['zone_id'])) {
-			$this->data['zone_id'] = $this->request->post['zone_id'];				
-		} elseif (isset($this->session->data['shipping_zone_id'])) {
-			$this->data['zone_id'] = $this->session->data['shipping_zone_id'];			
-		} else {
-			$this->data['zone_id'] = '';
+			$this->data['province_id'] = '';
 		}
 		
 		if (isset($this->request->post['postcode'])) {
@@ -652,12 +641,9 @@ class ControllerCheckoutCart extends Controller {
 			$json['error']['warning'] = sprintf($this->language->get('error_no_shipping'), $this->url->link('information/contact'));				
 		}				
 		
-		if ($this->request->post['country_id'] == '') {
-			$json['error']['country'] = $this->language->get('error_country');
-		}
 		
-		if (!isset($this->request->post['zone_id']) || $this->request->post['zone_id'] == '') {
-			$json['error']['zone'] = $this->language->get('error_zone');
+		if (!isset($this->request->post['province_id']) || $this->request->post['province_id'] == '') {
+			$json['error']['province'] = $this->language->get('error_province');
 		}
 			
 		$this->load->model('localisation/country');
@@ -669,35 +655,21 @@ class ControllerCheckoutCart extends Controller {
 		}
 						
 		if (!$json) {		
-			$this->tax->setShippingAddress($this->request->post['country_id'], $this->request->post['zone_id']);
+			$this->tax->setShippingAddress(0, $this->request->post['province_id']);
 		
 			// Default Shipping Address
-			$this->session->data['shipping_country_id'] = $this->request->post['country_id'];
-			$this->session->data['shipping_zone_id'] = $this->request->post['zone_id'];
+			$this->session->data['shipping_province_id'] = $this->request->post['province_id'];
 			$this->session->data['shipping_postcode'] = $this->request->post['postcode'];
 		
-			if ($country_info) {
-				$country = $country_info['name'];
-				$iso_code_2 = $country_info['iso_code_2'];
-				$iso_code_3 = $country_info['iso_code_3'];
-				$address_format = $country_info['address_format'];
-			} else {
-				$country = '';
-				$iso_code_2 = '';
-				$iso_code_3 = '';	
-				$address_format = '';
-			}
 			
-			$this->load->model('localisation/zone');
+			$this->load->model('localisation/province');
 		
-			$zone_info = $this->model_localisation_zone->getZone($this->request->post['zone_id']);
+			$province_info = $this->model_localisation_province->getProvince($this->request->post['province_id']);
 			
-			if ($zone_info) {
-				$zone = $zone_info['name'];
-				$zone_code = $zone_info['code'];
+			if ($province_info) {
+				$province = $province_info['name'];
 			} else {
-				$zone = '';
-				$zone_code = '';
+				$province = '';
 			}	
 		 
 			$address_data = array(
@@ -707,15 +679,8 @@ class ControllerCheckoutCart extends Controller {
 				'address_1'      => '',
 				'address_2'      => '',
 				'postcode'       => $this->request->post['postcode'],
-				'city'           => '',
-				'zone_id'        => $this->request->post['zone_id'],
-				'zone'           => $zone,
-				'zone_code'      => $zone_code,
-				'country_id'     => $this->request->post['country_id'],
-				'country'        => $country,	
-				'iso_code_2'     => $iso_code_2,
-				'iso_code_3'     => $iso_code_3,
-				'address_format' => $address_format
+				'province_id'    => $this->request->post['province_id'],
+				'province'        => $province,
 			);
 		
 			$quote_data = array();
@@ -761,28 +726,4 @@ class ControllerCheckoutCart extends Controller {
 		$this->response->setOutput(json_encode($json));						
 	}
 	
-	public function country() {
-		$json = array();
-		
-		$this->load->model('localisation/country');
-
-    	$country_info = $this->model_localisation_country->getCountry($this->request->get['country_id']);
-		
-		if ($country_info) {
-			$this->load->model('localisation/zone');
-
-			$json = array(
-				'country_id'        => $country_info['country_id'],
-				'name'              => $country_info['name'],
-				'iso_code_2'        => $country_info['iso_code_2'],
-				'iso_code_3'        => $country_info['iso_code_3'],
-				'address_format'    => $country_info['address_format'],
-				'postcode_required' => $country_info['postcode_required'],
-				'zone'              => $this->model_localisation_zone->getZonesByCountryId($this->request->get['country_id']),
-				'status'            => $country_info['status']		
-			);
-		}
-		
-		$this->response->setOutput(json_encode($json));
-	}
 }

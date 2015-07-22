@@ -83,97 +83,7 @@
             </tr>
           </table>
         </div>
-        <div id="tab-payment" class="vtabs-content">
-          <table class="form">
-            <tr>
-              <td><?php echo $entry_address; ?></td>
-              <td><select name="payment_address">
-                  <option value="0" selected="selected"><?php echo $text_none; ?></option>
-                  <?php foreach ($addresses as $address) { ?>
-                  <option value="<?php echo $address['address_id']; ?>"><?php echo $address['firstname'] . ' ' . $address['lastname'] . ', ' . $address['address_1'] . ', ' . $address['city'] . ', ' . $address['country']; ?></option>
-                  <?php } ?>
-                </select></td>
-            </tr>
-            <tr>
-              <td><span class="required">*</span> <?php echo $entry_firstname; ?></td>
-              <td><input type="text" name="payment_firstname" value="<?php echo $payment_firstname; ?>" />
-                <?php if ($error_payment_firstname) { ?>
-                <span class="error"><?php echo $error_payment_firstname; ?></span>
-                <?php } ?></td>
-            </tr>
-            <tr>
-              <td><span class="required">*</span> <?php echo $entry_lastname; ?></td>
-              <td><input type="text" name="payment_lastname" value="<?php echo $payment_lastname; ?>" />
-                <?php if ($error_payment_lastname) { ?>
-                <span class="error"><?php echo $error_payment_lastname; ?></span>
-                <?php } ?></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_company; ?></td>
-              <td><input type="text" name="payment_company" value="<?php echo $payment_company; ?>" /></td>
-            </tr>
-            <tr id="company-id-display">
-              <td><span id="company-id-required" class="required">*</span> <?php echo $entry_company_id; ?></td>
-              <td><input type="text" name="payment_company_id" value="<?php echo $payment_company_id; ?>" /></td>
-            </tr>
-            <tr id="tax-id-display">
-              <td><span id="tax-id-required" class="required">*</span> <?php echo $entry_tax_id; ?></td>
-              <td><input type="text" name="payment_tax_id" value="<?php echo $payment_tax_id; ?>" />
-                <?php if ($error_payment_tax_id) { ?>
-                <span class="error"><?php echo $error_payment_tax_id; ?></span>
-                <?php } ?></td>
-            </tr>
-            <tr>
-              <td><span class="required">*</span> <?php echo $entry_address_1; ?></td>
-              <td><input type="text" name="payment_address_1" value="<?php echo $payment_address_1; ?>" />
-                <?php if ($error_payment_address_1) { ?>
-                <span class="error"><?php echo $error_payment_address_1; ?></span>
-                <?php } ?></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_address_2; ?></td>
-              <td><input type="text" name="payment_address_2" value="<?php echo $payment_address_2; ?>" /></td>
-            </tr>
-            <tr>
-              <td><span class="required">*</span> <?php echo $entry_city; ?></td>
-              <td><input type="text" name="payment_city" value="<?php echo $payment_city; ?>" />
-                <?php if ($error_payment_city) { ?>
-                <span class="error"><?php echo $error_payment_city; ?></span>
-                <?php } ?></td>
-            </tr>
-            <tr>
-              <td><span id="payment-postcode-required" class="required">*</span> <?php echo $entry_postcode; ?></td>
-              <td><input type="text" name="payment_postcode" value="<?php echo $payment_postcode; ?>" />
-                <?php if ($error_payment_postcode) { ?>
-                <span class="error"><?php echo $error_payment_postcode; ?></span>
-                <?php } ?></td>
-            </tr>
-            <tr>
-              <td><span class="required">*</span> <?php echo $entry_country; ?></td>
-              <td><select name="payment_country_id">
-                  <option value=""><?php echo $text_select; ?></option>
-                  <?php foreach ($countries as $country) { ?>
-                  <?php if ($country['country_id'] == $payment_country_id) { ?>
-                  <option value="<?php echo $country['country_id']; ?>" selected="selected"><?php echo $country['name']; ?></option>
-                  <?php } else { ?>
-                  <option value="<?php echo $country['country_id']; ?>"><?php echo $country['name']; ?></option>
-                  <?php } ?>
-                  <?php } ?>
-                </select>
-                <?php if ($error_payment_country) { ?>
-                <span class="error"><?php echo $error_payment_country; ?></span>
-                <?php } ?></td>
-            </tr>
-            <tr>
-              <td><span class="required">*</span> <?php echo $entry_zone; ?></td>
-              <td><select name="payment_zone_id">
-                </select>
-                <?php if ($error_payment_zone) { ?>
-                <span class="error"><?php echo $error_payment_zone; ?></span>
-                <?php } ?></td>
-            </tr>
-          </table>
-        </div>
+
         <div id="tab-shipping" class="vtabs-content">
           <table class="form">
             <tr>
@@ -225,28 +135,13 @@
                 <span class="error"><?php echo $error_shipping_postcode; ?></span>
                 <?php } ?></td>
             </tr>
+
             <tr>
-              <td><span class="required">*</span> <?php echo $entry_country; ?></td>
-              <td><select name="shipping_country_id">
-                  <option value=""><?php echo $text_select; ?></option>
-                  <?php foreach ($countries as $country) { ?>
-                  <?php if ($country['country_id'] == $shipping_country_id) { ?>
-                  <option value="<?php echo $country['country_id']; ?>" selected="selected"><?php echo $country['name']; ?></option>
-                  <?php } else { ?>
-                  <option value="<?php echo $country['country_id']; ?>"><?php echo $country['name']; ?></option>
-                  <?php } ?>
-                  <?php } ?>
+              <td><span class="required">*</span> <?php echo $entry_province; ?></td>
+              <td><select name="shipping_province_id">
                 </select>
-                <?php if ($error_shipping_country) { ?>
-                <span class="error"><?php echo $error_shipping_country; ?></span>
-                <?php } ?></td>
-            </tr>
-            <tr>
-              <td><span class="required">*</span> <?php echo $entry_zone; ?></td>
-              <td><select name="shipping_zone_id">
-                </select>
-                <?php if ($error_shipping_zone) { ?>
-                <span class="error"><?php echo $error_shipping_zone; ?></span>
+                <?php if ($error_shipping_province) { ?>
+                <span class="error"><?php echo $error_shipping_province; ?></span>
                 <?php } ?></td>
             </tr>
           </table>
@@ -624,7 +519,6 @@ $('input[name=\'customer\']').catcomplete({
 		}
 		
 		$('select[name=\'shipping_address\']').html(html);
-		$('select[name=\'payment_address\']').html(html);
 		
 		$('select[id=\'customer_group_id\']').attr('disabled', false);
 		$('select[id=\'customer_group_id\']').attr('value', ui.item['customer_group_id']);
@@ -707,94 +601,7 @@ $('input[name=\'affiliate\']').autocomplete({
    	}
 });
 
-var payment_zone_id = '<?php echo $payment_zone_id; ?>';
-
-$('select[name=\'payment_country_id\']').bind('change', function() {
-	$.ajax({
-		url: 'index.php?route=sale/order/country&token=<?php echo $token; ?>&country_id=' + this.value,
-		dataType: 'json',
-		beforeSend: function() {
-			$('select[name=\'payment_country_id\']').after('<span class="wait">&nbsp;<img src="view/image/loading.gif" alt="" /></span>');
-		},
-		complete: function() {
-			$('.wait').remove();
-		},			
-		success: function(json) {
-			if (json['postcode_required'] == '1') {
-				$('#payment-postcode-required').show();
-			} else {
-				$('#payment-postcode-required').hide();
-			}
-			
-			html = '<option value=""><?php echo $text_select; ?></option>';
-
-			if (json != '' && json['zone'] != '') {
-				for (i = 0; i < json['zone'].length; i++) {
-        			html += '<option value="' + json['zone'][i]['zone_id'] + '"';
-	    			
-					if (json['zone'][i]['zone_id'] == payment_zone_id) {
-	      				html += ' selected="selected"';
-	    			}
-	
-	    			html += '>' + json['zone'][i]['name'] + '</option>';
-				}
-			} else {
-				html += '<option value="0" selected="selected"><?php echo $text_none; ?></option>';
-			}
-			
-			$('select[name=\'payment_zone_id\']').html(html);
-		},
-		error: function(xhr, ajaxOptions, thrownError) {
-			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-		}
-	});
-});
-
-
 var shipping_zone_id = '<?php echo $shipping_zone_id; ?>';
-
-$('select[name=\'shipping_country_id\']').bind('change', function() {
-	$.ajax({
-		url: 'index.php?route=sale/order/country&token=<?php echo $token; ?>&country_id=' + this.value,
-		dataType: 'json',
-		beforeSend: function() {
-			$('select[name=\'payment_country_id\']').after('<span class="wait">&nbsp;<img src="view/image/loading.gif" alt="" /></span>');
-		},
-		complete: function() {
-			$('.wait').remove();
-		},			
-		success: function(json) {
-			if (json['postcode_required'] == '1') {
-				$('#shipping-postcode-required').show();
-			} else {
-				$('#shipping-postcode-required').hide();
-			}
-			
-			html = '<option value=""><?php echo $text_select; ?></option>';
-			
-			if (json != '' && json['zone'] != '') {
-				for (i = 0; i < json['zone'].length; i++) {
-        			html += '<option value="' + json['zone'][i]['zone_id'] + '"';
-	    			
-					if (json['zone'][i]['zone_id'] == shipping_zone_id) {
-	      				html += ' selected="selected"';
-	    			}
-	
-	    			html += '>' + json['zone'][i]['name'] + '</option>';
-				}
-			} else {
-				html += '<option value="0" selected="selected"><?php echo $text_none; ?></option>';
-			}
-			
-			$('select[name=\'shipping_zone_id\']').html(html);
-		},
-		error: function(xhr, ajaxOptions, thrownError) {
-			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-		}
-	});
-});
-
-$('select[name=\'shipping_country_id\']').trigger('change');
 
 $('select[name=\'shipping_address\']').bind('change', function() {
 	$.ajax({
@@ -809,11 +616,9 @@ $('select[name=\'shipping_address\']').bind('change', function() {
 				$('input[name=\'shipping_address_2\']').attr('value', json['address_2']);
 				$('input[name=\'shipping_city\']').attr('value', json['city']);
 				$('input[name=\'shipping_postcode\']').attr('value', json['postcode']);
-				$('select[name=\'shipping_country_id\']').attr('value', json['country_id']);
 				
 				shipping_zone_id = json['zone_id'];
 				
-				$('select[name=\'shipping_country_id\']').trigger('change');
 			}
 		}
 	});	

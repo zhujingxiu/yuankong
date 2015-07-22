@@ -64,14 +64,9 @@ class ModelSettingStore extends Model {
 		return $query->row['total'];		
 	}
 	
-	public function getTotalStoresByCountryId($country_id) {
-      	$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "setting WHERE `key` = 'config_country_id' AND `value` = '" . (int)$country_id . "' AND store_id != '0'");
-		
-		return $query->row['total'];		
-	}
 	
-	public function getTotalStoresByZoneId($zone_id) {
-      	$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "setting WHERE `key` = 'config_zone_id' AND `value` = '" . (int)$zone_id . "' AND store_id != '0'");
+	public function getTotalStoresByProvinceId($province_id) {
+      	$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "setting WHERE `key` = 'config_provice_id' AND `value` = '" . (int)$province_id . "' AND store_id != '0'");
 		
 		return $query->row['total'];		
 	}

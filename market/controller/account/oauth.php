@@ -955,26 +955,15 @@ class ControllerAccountOauth extends Controller {
 			$this->data['city'] = '';
 		}
 
-		if (isset($posts_register['country_id'])) {
-			$this->data['country_id'] = $posts_register['country_id'];
-		} elseif (isset($this->session->data['shipping_country_id'])) {
-			$this->data['country_id'] = $this->session->data['shipping_country_id'];		
-		} else {	
-			$this->data['country_id'] = $this->config->get('config_country_id');
-		}
-
-		if (isset($posts_register['zone_id'])) {
-			$this->data['zone_id'] = $posts_register['zone_id']; 	
-		} elseif (isset($this->session->data['shipping_zone_id'])) {
-			$this->data['zone_id'] = $this->session->data['shipping_zone_id'];			
+		if (isset($posts_register['province_id'])) {
+			$this->data['province_id'] = $posts_register['province_id']; 	
+		} elseif (isset($this->session->data['shipping_province_id'])) {
+			$this->data['province_id'] = $this->session->data['shipping_province_id'];			
 		} else {
-			$this->data['zone_id'] = '';
+			$this->data['province_id'] = '';
 		}
 		
-		$this->load->model('localisation/country');
-		
-		$this->data['countries'] = $this->model_localisation_country->getCountries();
-		
+
 		if (isset($posts_register['password'])) {
 			$this->data['password'] = $posts_register['password'];
 		} else {

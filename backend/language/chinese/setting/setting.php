@@ -35,7 +35,7 @@ $_['entry_meta_description']     = '&nbsp;&nbsp;SEO设置：';
 $_['entry_layout']               = '&nbsp;&nbsp;默认布局：';
 $_['entry_template']             = '&nbsp;&nbsp;模板设置：';
 $_['entry_country']              = '国家归属：';
-$_['entry_zone']                 = '所在地区：';
+$_['entry_province']                 = '所在地区：';
 $_['entry_language']             = '前台语言：';
 $_['entry_admin_language']       = '后台语言：';
 $_['entry_currency']             = '货币设置：<br /><span class="help">更改默认货币时需要清除浏览器缓存并重置您现有的cookie。</span>';
