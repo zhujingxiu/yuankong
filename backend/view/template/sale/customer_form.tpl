@@ -38,7 +38,7 @@
             </a>
             <?php $address_row++; ?>
             <?php } ?>
-            <span id="address-add"><?php echo $button_add_address; ?>
+            <span id="address-add" style="display:none;"><?php echo $button_add_address; ?>
               &nbsp;<img src="view/image/add.png" onclick="addAddress();" />
             </span>
           </div>
@@ -127,7 +127,7 @@
           <?php $address_row = 1; ?>
           <?php foreach ($addresses as $address) { ?>
           <div id="tab-address-<?php echo $address_row; ?>" class="vtabs-content">
-            <input type="hidden" name="address[<?php echo $address_row; ?>][address_id]" value="<?php echo $address['address_id']; ?>" />
+            <input type="hidden" name="address_id" value="<?php echo $address['address_id']; ?>" />
             <table class="form">
               <tr>
                 <td><?php echo $entry_fullname; ?></td>
@@ -152,20 +152,22 @@
               <tr>
                 <td><?php echo $entry_postcode; ?></td>
                 <td><span><?php echo $address['postcode']; ?></span></td>
-              </tr>              
+              </tr> 
+              <tr>
+                <td><?php echo $entry_default; ?></td>
+                <td><?php echo (($address['address_id'] == $address_id) || !$addresses) ? $this->language->get('text_yes') : $this->language->get('text_no') ?>
+              </tr>
+              <?php if(false){?>             
               <tr>
                 <td><?php echo $entry_default; ?></td>
                 <td><?php if (($address['address_id'] == $address_id) || !$addresses) { ?>
-                  <input type="radio" name="address[<?php echo $address_row; ?>][default]" value="<?php echo $address_row; ?>" checked="checked" /></td>
+                  <input type="radio" name="address_default" value="<?php echo $address_row; ?>" checked="checked" /></td>
                 <?php } else { ?>
-                <input type="radio" name="address[<?php echo $address_row; ?>][default]" value="<?php echo $address_row; ?>" />
+                  <input type="radio" name="address_default" value="<?php echo $address_row; ?>" />
                   </td>
                 <?php } ?>
               </tr>
-              <tr>
-                <td><?php echo $entry_postcode; ?></td>
-                <td><span><?php echo $address['postcode']; ?></span></td>
-              </tr>
+              <?php }?>
             </table>
           </div>
           <?php $address_row++; ?>
@@ -334,7 +336,11 @@ function addAddress() {
         $.ajax({
           url:'<?php echo $address_form ?>',
           type:'post',
-          data:{$('#address-dialog input')}
+          data:$('#address-dialog input[type="text"],#address-dialog select'),
+          dataType:'json',
+          success:function(json){
+
+          }
         })
       }
     }
@@ -498,4 +504,7 @@ function removeBanIP(ip) {
 $('.htabs a').tabs();
 $('.vtabs a').tabs();
 //--></script> 
+<style type="text/css">
+  table.form input[type="text"]{width: 300px;}
+</style>
 <?php echo $footer; ?>

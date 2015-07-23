@@ -21,24 +21,19 @@ class ModelAccountOrder extends Model {
 				'store_name'              => $order_query->row['store_name'],
 				'store_url'               => $order_query->row['store_url'],				
 				'customer_id'             => $order_query->row['customer_id'],
-				'nickname'                => $order_query->row['nickname'],
-				'firstname'               => $order_query->row['firstname'],
-				'lastname'                => $order_query->row['lastname'],
+				'fullname'                => $order_query->row['fullname'],
 				'telephone'               => $order_query->row['telephone'],
 				'fax'                     => $order_query->row['fax'],
 				'mobile_phone'            => $order_query->row['mobile_phone'],
 				'payment_method'          => $order_query->row['payment_method'],
-				'shipping_nickname'       => $order_query->row['shipping_nickname'],
-				'shipping_firstname'      => $order_query->row['shipping_firstname'],
-				'shipping_lastname'       => $order_query->row['shipping_lastname'],				
+				'shipping_fullname'       => $order_query->row['shipping_fullname'],
+				'shipping_telephone'      => $order_query->row['shipping_telephone'],
 				'shipping_company'        => $order_query->row['shipping_company'],
-				'shipping_address_1'      => $order_query->row['shipping_address_1'],
-				'shipping_address_2'      => $order_query->row['shipping_address_2'],
+				'shipping_address'        => $order_query->row['shipping_address'],
 				'shipping_postcode'       => $order_query->row['shipping_postcode'],
-				'shipping_zone_id'        => $order_query->row['shipping_zone_id'],
-				'shipping_zone'           => $order_query->row['shipping_zone'],
-				'shipping_zone_code'      => $shipping_zone_code,
-				'shipping_area' 		  => $order_query->row['shipping_area'],
+				'shipping_province_id'    => $order_query->row['shipping_province_id'],
+				'shipping_province'       => $order_query->row['shipping_province'],
+				'shipping_area_zone'      => $order_query->row['shipping_area_zone'],
 				'shipping_method'         => $order_query->row['shipping_method'],
 				'comment'                 => $order_query->row['comment'],
 				'total'                   => $order_query->row['total'],
@@ -65,7 +60,7 @@ class ModelAccountOrder extends Model {
 			$limit = 1;
 		}	
 		
-		$query = $this->db->query("SELECT o.order_id, o.firstname, o.lastname, os.name as status, o.date_added, o.total, o.currency_code, o.currency_value FROM `" . DB_PREFIX . "order` o LEFT JOIN " . DB_PREFIX . "order_status os ON (o.order_status_id = os.order_status_id) WHERE o.customer_id = '" . (int)$this->customer->getId() . "' AND o.order_status_id > '0' AND os.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY o.order_id DESC LIMIT " . (int)$start . "," . (int)$limit);	
+		$query = $this->db->query("SELECT o.order_id, o.fullname, os.name as status, o.date_added, o.total, o.currency_code, o.currency_value FROM `" . DB_PREFIX . "order` o LEFT JOIN " . DB_PREFIX . "order_status os ON (o.order_status_id = os.order_status_id) WHERE o.customer_id = '" . (int)$this->customer->getId() . "' AND o.order_status_id > '0' AND os.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY o.order_id DESC LIMIT " . (int)$start . "," . (int)$limit);	
 	
 		return $query->rows;
 	}

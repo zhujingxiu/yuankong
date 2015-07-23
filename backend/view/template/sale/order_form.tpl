@@ -515,7 +515,8 @@ $('input[name=\'customer\']').catcomplete({
 		html = '<option value="0"><?php echo $text_none; ?></option>'; 
 			
 		for (i in  ui.item['address']) {
-			html += '<option value="' + ui.item['address'][i]['address_id'] + '">' + ui.item['address'][i]['firstname'] + ' ' + ui.item['address'][i]['lastname'] + ', ' + ui.item['address'][i]['address_1'] + ', ' + ui.item['address'][i]['city'] + ', ' + ui.item['address'][i]['country'] + '</option>';
+			html += '<option value="' + ui.item['address'][i]['address_id'] + '">' 
+      + ui.item['address'][i]['firstname'] + ' ' + ui.item['address'][i]['lastname'] + ', ' + ui.item['address'][i]['address_1'] + ', ' + ui.item['address'][i]['city'] + ', ' + ui.item['address'][i]['country'] + '</option>';
 		}
 		
 		$('select[name=\'shipping_address\']').html(html);

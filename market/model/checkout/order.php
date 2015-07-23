@@ -1,9 +1,49 @@
 <?php
-class ModelCheckoutOrder extends Model {	
+class ModelCheckoutOrder extends Model {
+	private function generateSN($customer_id){
+		return '';
+	}	
 	public function addOrder($data) {
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "order` SET invoice_prefix = '" . $this->db->escape($data['invoice_prefix']) . "', store_id = '" . (int)$data['store_id'] . "', store_name = '" . $this->db->escape($data['store_name']) . "', store_url = '" . $this->db->escape($data['store_url']) . "', customer_id = '" . (int)$data['customer_id'] . "', customer_group_id = '" . (int)$data['customer_group_id'] . "', firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "', payment_firstname = '" . $this->db->escape($data['payment_firstname']) . "', payment_lastname = '" . $this->db->escape($data['payment_lastname']) . "', payment_company = '" . $this->db->escape($data['payment_company']) . "', payment_company_id = '" . $this->db->escape($data['payment_company_id']) . "', payment_tax_id = '" . $this->db->escape($data['payment_tax_id']) . "', payment_address_1 = '" . $this->db->escape($data['payment_address_1']) . "', payment_address_2 = '" . $this->db->escape($data['payment_address_2']) . "', payment_city = '" . $this->db->escape($data['payment_city']) . "', payment_postcode = '" . $this->db->escape($data['payment_postcode']) . "', payment_country = '" . $this->db->escape($data['payment_country']) . "', payment_country_id = '" . (int)$data['payment_country_id'] . "', payment_zone = '" . $this->db->escape($data['payment_zone']) . "', payment_zone_id = '" . (int)$data['payment_zone_id'] . "', payment_address_format = '" . $this->db->escape($data['payment_address_format']) . "', payment_method = '" . $this->db->escape($data['payment_method']) . "', payment_code = '" . $this->db->escape($data['payment_code']) . "', shipping_firstname = '" . $this->db->escape($data['shipping_firstname']) . "', shipping_lastname = '" . $this->db->escape($data['shipping_lastname']) . "', shipping_company = '" . $this->db->escape($data['shipping_company']) . "', shipping_address_1 = '" . $this->db->escape($data['shipping_address_1']) . "', shipping_address_2 = '" . $this->db->escape($data['shipping_address_2']) . "', shipping_city = '" . $this->db->escape($data['shipping_city']) . "', shipping_postcode = '" . $this->db->escape($data['shipping_postcode']) . "', shipping_country = '" . $this->db->escape($data['shipping_country']) . "', shipping_country_id = '" . (int)$data['shipping_country_id'] . "', shipping_zone = '" . $this->db->escape($data['shipping_zone']) . "', shipping_zone_id = '" . (int)$data['shipping_zone_id'] . "', shipping_address_format = '" . $this->db->escape($data['shipping_address_format']) . "', shipping_method = '" . $this->db->escape($data['shipping_method']) . "', shipping_code = '" . $this->db->escape($data['shipping_code']) . "', comment = '" . $this->db->escape($data['comment']) . "', total = '" . (float)$data['total'] . "', affiliate_id = '" . (int)$data['affiliate_id'] . "', commission = '" . (float)$data['commission'] . "', language_id = '" . (int)$data['language_id'] . "', currency_id = '" . (int)$data['currency_id'] . "', currency_code = '" . $this->db->escape($data['currency_code']) . "', currency_value = '" . (float)$data['currency_value'] . "', ip = '" . $this->db->escape($data['ip']) . "', forwarded_ip = '" .  $this->db->escape($data['forwarded_ip']) . "', user_agent = '" . $this->db->escape($data['user_agent']) . "', accept_language = '" . $this->db->escape($data['accept_language']) . "', date_added = NOW(), date_modified = NOW()");
-
-		$order_id = $this->db->getLastId();
+		$fields = array(
+			'invoice_prefix' 	=> $data['invoice_prefix'],
+			'order_sn' 			=> $this->generateSN($this->customer->getId()),
+			'store_id' 			=> $data['store_id'],
+			'store_name' 		=> $data['store_name'],
+			'store_url' 		=> $data['store_url'],
+			'customer_id' 		=> $data['customer_id'],
+			'customer_group_id' => $data['customer_group_id'],
+			'fullname' 			=> $data['fullname'],
+			'mobile_phone' 		=> $data['mobile_phone'],
+			'telephone' 		=> $data['telephone'],
+			'email' 			=> $data['email'],
+			'fax' 				=> $data['fax'],
+			'payment_method' 	=> $data['payment_method'],
+			'payment_code' 		=> $data['payment_code'],
+			'shipping_fullname' => $data['shipping_fullname'],
+			'shipping_telephone'=> $data['shipping_telephone'],
+			'shipping_company'	=> $data['shipping_company'],
+			'shipping_address'	=> $data['shipping_address'],
+			'shipping_postcode'	=> $data['shipping_postcode'],
+			'shipping_province'	=> $data['shipping_province'],
+			'shipping_province_id'=> $data['shipping_province_id'],
+			'shipping_method'	=> $data['shipping_method'],
+			'shipping_code'		=> $data['shipping_code'],
+			'comment'			=> $data['comment'],
+			'total'				=> (float)$data['total'],
+			'affiliate_id'		=> (int)$data['affiliate_id'],
+			'commission'		=> (float)$data['commission'],
+			'language_id'		=> (int)$data['language_id'],
+			'currency_id'		=> (int)$data['currency_id'],
+			'currency_code'		=> $data['currency_code'],
+			'currency_value'	=> (float)$data['currency_value'],
+			'ip'				=> $data['ip'],
+			'forwarded_ip'		=> $data['forwarded_ip'],
+			'user_agent'		=> $data['user_agent'],
+			'accept_language'	=> $data['accept_language'],
+			'date_added'		=> date('Y-m-d H:i:s'),
+			'date_modified'		=> date('Y-m-d H:i:s')
+		);
+		$order_id = $this->db->insert("order",$fields);
 
 		foreach ($data['products'] as $product) { 
 			$this->db->query("INSERT INTO " . DB_PREFIX . "order_product SET order_id = '" . (int)$order_id . "', product_id = '" . (int)$product['product_id'] . "', name = '" . $this->db->escape($product['name']) . "', model = '" . $this->db->escape($product['model']) . "', quantity = '" . (int)$product['quantity'] . "', price = '" . (float)$product['price'] . "', total = '" . (float)$product['total'] . "', tax = '" . (float)$product['tax'] . "', reward = '" . (int)$product['reward'] . "'");
@@ -34,15 +74,7 @@ class ModelCheckoutOrder extends Model {
 		$order_query = $this->db->query("SELECT *, (SELECT os.name FROM `" . DB_PREFIX . "order_status` os WHERE os.order_status_id = o.order_status_id AND os.language_id = o.language_id) AS order_status FROM `" . DB_PREFIX . "order` o WHERE o.order_id = '" . (int)$order_id . "'");
 			
 		if ($order_query->num_rows) {
-			
-			$zone_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "zone` WHERE zone_id = '" . (int)$order_query->row['shipping_zone_id'] . "'");
-			
-			if ($zone_query->num_rows) {
-				$shipping_zone_code = $zone_query->row['code'];
-			} else {
-				$shipping_zone_code = '';
-			}
-			
+						
 			$this->load->model('localisation/language');
 			
 			$language_info = $this->model_localisation_language->getLanguage($order_query->row['language_id']);
@@ -65,24 +97,20 @@ class ModelCheckoutOrder extends Model {
 				'store_name'              => $order_query->row['store_name'],
 				'store_url'               => $order_query->row['store_url'],				
 				'customer_id'             => $order_query->row['customer_id'],
-				'firstname'               => $order_query->row['firstname'],
-				'lastname'                => $order_query->row['lastname'],
+				'fullname'                => $order_query->row['fullname'],
+				'mobile_phone'            => $order_query->row['mobile_phone'],
 				'telephone'               => $order_query->row['telephone'],
 				'fax'                     => $order_query->row['fax'],
-				'mobile_phone'            => $order_query->row['mobile_phone'],
 				'payment_method'          => $order_query->row['payment_method'],
 				'payment_code'            => $order_query->row['payment_code'],
-				'shipping_nickname'       => $order_query->row['shipping_nickname'],
-				'shipping_firstname'      => $order_query->row['shipping_firstname'],
-				'shipping_lastname'       => $order_query->row['shipping_lastname'],				
+				'shipping_fullname'       => $order_query->row['shipping_fullname'],
+				'shipping_telephone'      => $order_query->row['shipping_telephone'],
 				'shipping_company'        => $order_query->row['shipping_company'],
-				'shipping_address_1'      => $order_query->row['shipping_address_1'],
-				'shipping_address_2'      => $order_query->row['shipping_address_2'],
+				'shipping_address'        => $order_query->row['shipping_address'],
 				'shipping_postcode'       => $order_query->row['shipping_postcode'],
-				'shipping_zone_id'        => $order_query->row['shipping_zone_id'],
-				'shipping_zone'           => $order_query->row['shipping_zone'],
-				'shipping_zone_code'      => $shipping_zone_code,
-				'shipping_areas' 		  => $order_query->row['shipping_areas'],
+				'shipping_province_id'    => $order_query->row['shipping_province_id'],
+				'shipping_province'       => $order_query->row['shipping_province'],
+				'shipping_area_zone'      => $order_query->row['shipping_area_zone'],
 				'shipping_method'         => $order_query->row['shipping_method'],
 				'shipping_code'           => $order_query->row['shipping_code'],
 				'comment'                 => $order_query->row['comment'],
@@ -112,16 +140,6 @@ class ModelCheckoutOrder extends Model {
 		$order_info = $this->getOrder($order_id);
 		 
 		if ($order_info && !$order_info['order_status_id']) {
-			// Fraud Detection
-			if ($this->config->get('config_fraud_detection')) {
-				$this->load->model('checkout/fraud');
-				
-				$risk_score = $this->model_checkout_fraud->getFraudScore($order_info);
-				
-				if ($risk_score > $this->config->get('config_fraud_score')) {
-					$order_status_id = $this->config->get('config_fraud_status_id');
-				}
-			}
 
 			// Ban IP
 			$status = false;
@@ -161,10 +179,7 @@ class ModelCheckoutOrder extends Model {
 					$this->db->query("UPDATE " . DB_PREFIX . "product_option_value SET quantity = (quantity - " . (int)$order_product['quantity'] . ") WHERE product_option_value_id = '" . (int)$option['product_option_value_id'] . "' AND subtract = '1'");
 				}
 			}
-
-            if(!isset($passArray) || empty($passArray)){ $passArray = null; }
-            $this->openbay->orderNew((int)$order_id);
-			
+		
 			$this->cache->delete('product');
 			
 			// Downloads
@@ -344,6 +359,7 @@ class ModelCheckoutOrder extends Model {
 			}
             
             // Can not send confirmation emails for CBA orders as email is unknown
+			/*
             $this->load->model('payment/amazon_checkout');
             if (!$this->model_payment_amazon_checkout->isAmazonOrder($order_info['order_id'])) {
                 // Text Mail
@@ -418,6 +434,7 @@ class ModelCheckoutOrder extends Model {
                 $mail->setText(html_entity_decode($text, ENT_QUOTES, 'UTF-8'));
                 $mail->send();
             }
+            */
             
 			// Admin Alert Mail
 			if ($this->config->get('config_alert_mail')) {
@@ -496,17 +513,7 @@ class ModelCheckoutOrder extends Model {
 	public function update($order_id, $order_status_id, $comment = '', $notify = false) {
 		$order_info = $this->getOrder($order_id);
 
-		if ($order_info && $order_info['order_status_id']) {
-			// Fraud Detection
-			if ($this->config->get('config_fraud_detection')) {
-				$this->load->model('checkout/fraud');
-				
-				$risk_score = $this->model_checkout_fraud->getFraudScore($order_info);
-				
-				if ($risk_score > $this->config->get('config_fraud_score')) {
-					$order_status_id = $this->config->get('config_fraud_status_id');
-				}
-			}			
+		if ($order_info && $order_info['order_status_id']) {	
 
 			// Ban IP
 			$status = false;
@@ -590,4 +597,3 @@ class ModelCheckoutOrder extends Model {
 		}
 	}
 }
-?>

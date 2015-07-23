@@ -90,16 +90,24 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
     <?php } ?>
   </div>
 <div id="content" class="mt20">
-    <form id="checkout-form" method="post" action="<?php echo $confirm ?>">
+    <form id="checkout-form" method="post" >
     <div class="order-w">
         <h3><b><?php echo $text_checkout_shipping ?></b></h3>
         <ul class="order-ul">
             <?php $n=0; foreach ($addresses as $key => $item) { ?>
-             <li class="order-li-adess fix <?php echo !$n ? 'adress-show' : '' ?>">
+            <?php 
+                $checked = false;
+                if(isset($this->session->data['shipping_address_id']) && $this->session->data['shipping_address_id'] == $item['address_id']){
+                    $checked = true;
+                }else if(!$n){
+                    $checked = true;
+                }
+            ?>
+             <li class="order-li-adess fix <?php echo $checked ? 'adress-show' : '' ?>">
                 <i class="dw-btn icon2"></i>
                 <label>寄送至</label>
                 <div class="adress-new">
-                    <input type="radio" class="adress-radio" name="shipping_address_id" value="<?php echo $item['address_id'] ?>" <?php echo !$n ? 'checked="checked"' : '' ?>/>
+                    <input type="radio" class="adress-radio" name="shipping_address_id" value="<?php echo $item['address_id'] ?>" <?php echo $checked ? 'checked="checked"' : '' ?>/>
                     <?php echo $item['area_zone'] ?> <?php echo $item['address'] ?>
                     <em class="pl10 c8"><?php echo $item['telephone'] ?></em>
                     <em class="pl10 c8"><?php echo $item['fullname'] ?></em>
@@ -218,7 +226,8 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
                     <li class="all-money">
                         <strong><?php echo $text_checkout_payment ?></strong>
                         <?php $n = 0;foreach ($payment_methods as $payment): ?>
-                        <input type="radio" name="payment_code" value="<?php echo $payment['code'] ?>" <?php echo !$n ? 'checked="checked"' : '' ?> />
+
+                        <input type="radio" name="payment_method" value="<?php echo $payment['code'] ?>" <?php echo !$n ? 'checked="checked"' : '' ?> />
                         <?php echo $payment['title'] ?>
                         <?php if(isset($payment['note'])){ ?>
                         <span class="pl10"><?php echo $payment['note'] ?></span>
@@ -229,7 +238,7 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
                     <li><?php echo $text_finished_payment ?></li>
                     <li class="mt10">
                         <div class="w210">
-                            <input type="submit" class="gc-tab-sub" value="提交订单" id="button-confirm"/>
+                            <input type="button" class="gc-tab-sub" value="提交订单" id="button-confirm"/>
                         </div> 
                     </li>
                 </ul>
@@ -292,8 +301,16 @@ $('#button-confirm').bind('click', function() {
     $.ajax({ 
         type: 'post',
         url: 'index.php?route=checkout/confirm',
+        data:$('#checkout-form input[type="radio"]:checked,#checkout-form select,#checkout-form textarea,#checkout-form input[type="hidden"]'),
+        dataType:'json',
         success: function(json) {
-            location = '<?php echo $continue; ?>';
+            console.info(json)
+            if(json.status==1){
+                location.href = json.redirect;
+            }else{
+
+            }
+            
         }       
     });
 });

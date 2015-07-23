@@ -37,7 +37,7 @@ class ControllerCheckoutCheckout extends Controller {
         } else {
             $this->data['error'] = '';
         }
-        $this->document->addScript('market/view/theme/'.$this->area_js());
+        $this->document->addScript($this->area_js());
         $this->data['base'] = $server;
         $this->data['description'] = $this->document->getDescription();
         $this->data['keywords'] = $this->document->getKeywords();
@@ -322,7 +322,8 @@ class ControllerCheckoutCheckout extends Controller {
 					
 					if ($method) {
                         $method_data[$result['code']] = $method;                        
-					}
+					}					
+
 				}
 			}
 
@@ -348,6 +349,9 @@ class ControllerCheckoutCheckout extends Controller {
 		} else {
 			$this->data['payment_code'] = '';
 		}
+
+		//$this->data['payment'] = $this->getChild('payment/' . $this->session->data['payment_method']['code']);
+
 		$this->data['text_payment_method'] = $this->language->get('text_payment_method');
 		$this->data['text_comments'] = $this->language->get('text_comments');
 		$this->data['confirm'] = $this->url->link('checkout/confirm','','SSL');
@@ -368,11 +372,7 @@ class ControllerCheckoutCheckout extends Controller {
 			'common/footer',
 			'common/top'	
 		);
-        
-        if (isset($this->request->get['quickconfirm'])) {
-            $this->data['quickconfirm'] = $this->request->get['quickconfirm'];
-        }
-				
+        	
 		$this->response->setOutput($this->render());
   	}
 
