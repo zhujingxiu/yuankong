@@ -63,25 +63,25 @@ class ControllerShippingWeight extends Controller {
 		
 		$this->data['cancel'] = $this->url->link('extension/shipping', 'token=' . $this->session->data['token'], 'SSL'); 
 
-		$this->load->model('localisation/geo_zone');
+		$this->load->model('localisation/area_geo');
 		
-		$geo_zones = $this->model_localisation_geo_zone->getGeoZones();
+		$area_geos = $this->model_localisation_area_geo->getAreaGeos();
 		
-		foreach ($geo_zones as $geo_zone) {
-			if (isset($this->request->post['weight_' . $geo_zone['geo_zone_id'] . '_rate'])) {
-				$this->data['weight_' . $geo_zone['geo_zone_id'] . '_rate'] = $this->request->post['weight_' . $geo_zone['geo_zone_id'] . '_rate'];
+		foreach ($area_geos as $item) {
+			if (isset($this->request->post['weight_' . $item['area_geo_id'] . '_rate'])) {
+				$this->data['weight_' . $item['area_geo_id'] . '_rate'] = $this->request->post['weight_' . $item['area_geo_id'] . '_rate'];
 			} else {
-				$this->data['weight_' . $geo_zone['geo_zone_id'] . '_rate'] = $this->config->get('weight_' . $geo_zone['geo_zone_id'] . '_rate');
+				$this->data['weight_' . $item['area_geo_id'] . '_rate'] = $this->config->get('weight_' . $item['area_geo_id'] . '_rate');
 			}		
 			
-			if (isset($this->request->post['weight_' . $geo_zone['geo_zone_id'] . '_status'])) {
-				$this->data['weight_' . $geo_zone['geo_zone_id'] . '_status'] = $this->request->post['weight_' . $geo_zone['geo_zone_id'] . '_status'];
+			if (isset($this->request->post['weight_' . $item['area_geo_id'] . '_status'])) {
+				$this->data['weight_' . $item['area_geo_id'] . '_status'] = $this->request->post['weight_' . $item['area_geo_id'] . '_status'];
 			} else {
-				$this->data['weight_' . $geo_zone['geo_zone_id'] . '_status'] = $this->config->get('weight_' . $geo_zone['geo_zone_id'] . '_status');
+				$this->data['weight_' . $item['area_geo_id'] . '_status'] = $this->config->get('weight_' . $item['area_geo_id'] . '_status');
 			}		
 		}
 		
-		$this->data['geo_zones'] = $geo_zones;
+		$this->data['area_geos'] = $area_geos;
 
 		if (isset($this->request->post['weight_tax_class_id'])) {
 			$this->data['weight_tax_class_id'] = $this->request->post['weight_tax_class_id'];
@@ -126,4 +126,3 @@ class ControllerShippingWeight extends Controller {
 		}	
 	}
 }
-?>

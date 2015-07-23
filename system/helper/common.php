@@ -147,24 +147,6 @@ function json_encode_ex( $value){
         return json_encode( $value, JSON_UNESCAPED_UNICODE); 
     } 
 }
-function newsCategory(){
-    return array(
-        'xffg'  => '消防法规',
-        'xfxw'  => '消防新闻',
-        'gfgg'  => '官方公告',
-        'xfzs'  => '消防知识',
-        'glpx'  => '管理培训',
-    );
-}
-
-function projectCategory(){
-    return array(
-        'xfsj'  => '消防设计',
-        'xfjc'  => '消防检测',
-        'xfgc'  => '消防工程',
-        'xfwb'  => '消防维保',
-    );
-}
 
 function getProjectStatus($status,$entry_id){
     $text = '';

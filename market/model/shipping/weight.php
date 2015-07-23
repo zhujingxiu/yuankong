@@ -5,11 +5,11 @@ class ModelShippingWeight extends Model {
 		
 		$quote_data = array();
 
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "geo_zone ORDER BY name");
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "area_geo ORDER BY name");
 	
 		foreach ($query->rows as $result) {
-			if ($this->config->get('weight_' . $result['geo_zone_id'] . '_status')) {
-				$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone_to_geo_zone WHERE geo_zone_id = '" . (int)$result['geo_zone_id'] . "' AND country_id = '" . (int)$address['country_id'] . "' AND (zone_id = '" . (int)$address['zone_id'] . "' OR zone_id = '0')");
+			if ($this->config->get('weight_' . $result['area_geo_id'] . '_status')) {
+				$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "area_to_area_geo WHERE area_geo_id = '" . (int)$result['area_geo_id'] . "' AND  (area_id = '" . (int)$address['province_id'] . "' OR area_id = '0')");
 			
 				if ($query->num_rows) {
 					$status = true;
@@ -22,9 +22,9 @@ class ModelShippingWeight extends Model {
 		
 			if ($status) {
 				$cost = '';
-				$weight = $this->cart->getWeight();
+				$weight = $this->checkout->getWeight();
 				
-				$rates = explode(',', $this->config->get('weight_' . $result['geo_zone_id'] . '_rate'));
+				$rates = explode(',', $this->config->get('weight_' . $result['area_geo_id'] . '_rate'));
 				
 				foreach ($rates as $rate) {
 					$data = explode(':', $rate);
@@ -39,8 +39,8 @@ class ModelShippingWeight extends Model {
 				}
 				
 				if ((string)$cost != '') { 
-					$quote_data['weight_' . $result['geo_zone_id']] = array(
-						'code'         => 'weight.weight_' . $result['geo_zone_id'],
+					$quote_data['weight_' . $result['area_geo_id']] = array(
+						'code'         => 'weight.weight_' . $result['area_geo_id'],
 						'title'        => $result['name'] . '  (' . $this->language->get('text_weight') . ' ' . $this->weight->format($weight, $this->config->get('config_weight_class_id')) . ')',
 						'cost'         => $cost,
 						'tax_class_id' => $this->config->get('weight_tax_class_id'),
@@ -65,4 +65,3 @@ class ModelShippingWeight extends Model {
 		return $method_data;
   	}
 }
-?>

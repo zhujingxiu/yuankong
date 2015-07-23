@@ -3,9 +3,9 @@ class ModelShippingPickup extends Model {
 	function getQuote($address) {
 		$this->language->load('shipping/pickup');
 		
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone_to_geo_zone WHERE geo_zone_id = '" . (int)$this->config->get('pickup_geo_zone_id') . "' AND country_id = '" . (int)$address['country_id'] . "' AND (zone_id = '" . (int)$address['zone_id'] . "' OR zone_id = '0')");
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "area_to_area_geo WHERE area_geo_id = '" . (int)$this->config->get('pickup_geo_area_id') . "' AND (area_id = '" . (int)$address['province_id'] . "' OR area_id = '0')");
 	
-		if (!$this->config->get('pickup_geo_zone_id')) {
+		if (!$this->config->get('pickup_area_geo_id')) {
 			$status = true;
 		} elseif ($query->num_rows) {
 			$status = true;

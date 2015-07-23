@@ -10,24 +10,38 @@
   <?php } ?>
   <div class="box">
     <div class="heading">
-      <h1><img src="view/image/customer.png" alt="" /> <?php echo $heading_title; ?></h1>
-      <div class="buttons"><a onclick="$('#form').submit();" class="button"><?php echo $button_save; ?></a><a href="<?php echo $cancel; ?>" class="button"><?php echo $button_cancel; ?></a></div>
+      <h1><img src="view/image/customer.png" /> <?php echo $heading_title; ?></h1>
+      <div class="buttons">
+        <a onclick="$('#form').submit();" class="button"><?php echo $button_save; ?></a>
+        <a href="<?php echo $cancel; ?>" class="button"><?php echo $button_cancel; ?></a>
+      </div>
     </div>
     <div class="content">
-      <div id="htabs" class="htabs"><a href="#tab-general"><?php echo $tab_general; ?></a>
+      <div id="htabs" class="htabs">
+        <a href="#tab-general"><?php echo $tab_general; ?></a>
         <?php if ($customer_id) { ?>
-        <a href="#tab-history"><?php echo $tab_history; ?></a><a href="#tab-transaction"><?php echo $tab_transaction; ?></a><a href="#tab-reward"><?php echo $tab_reward; ?></a>
+        <a href="#tab-history"><?php echo $tab_history; ?></a>
+        <a href="#tab-transaction"><?php echo $tab_transaction; ?></a>
+        <a href="#tab-reward"><?php echo $tab_reward; ?></a>
         <?php } ?>
-        <a href="#tab-ip"><?php echo $tab_ip; ?></a></div>
+        <a href="#tab-ip"><?php echo $tab_ip; ?></a>
+      </div>
       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
         <div id="tab-general">
-          <div id="vtabs" class="vtabs"><a href="#tab-customer"><?php echo $tab_general; ?></a>
+          <div id="vtabs" class="vtabs">
+            <a href="#tab-customer"><?php echo $tab_general; ?></a>
             <?php $address_row = 1; ?>
             <?php foreach ($addresses as $address) { ?>
-            <a href="#tab-address-<?php echo $address_row; ?>" id="address-<?php echo $address_row; ?>"><?php echo $tab_address . ' ' . $address_row; ?>&nbsp;<img src="view/image/delete.png" alt="" onclick="$('#vtabs a:first').trigger('click'); $('#address-<?php echo $address_row; ?>').remove(); $('#tab-address-<?php echo $address_row; ?>').remove(); return false;" /></a>
+            <a href="#tab-address-<?php echo $address_row; ?>" id="address-<?php echo $address_row; ?>">
+              <?php echo $tab_address . ' ' . $address_row; ?>&nbsp;
+              <img src="view/image/delete.png" onclick="$('#vtabs a:first').trigger('click'); $('#address-<?php echo $address_row; ?>').remove(); $('#tab-address-<?php echo $address_row; ?>').remove(); return false;" />
+            </a>
             <?php $address_row++; ?>
             <?php } ?>
-            <span id="address-add"><?php echo $button_add_address; ?>&nbsp;<img src="view/image/add.png" alt="" onclick="addAddress();" /></span></div>
+            <span id="address-add"><?php echo $button_add_address; ?>
+              &nbsp;<img src="view/image/add.png" onclick="addAddress();" />
+            </span>
+          </div>
           <div id="tab-customer" class="vtabs-content">
             <table class="form">
               <tr>
@@ -38,33 +52,23 @@
                   <?php } ?></td>
               </tr>
               <tr>
-                <td><span class="required">*</span> <?php echo $entry_nickname; ?></td>
-                <td><input type="text" name="nickname" value="<?php echo $nickname; ?>" />
-                  <?php if ($error_nickname) { ?>
-                  <span class="error"><?php echo $error_nickname; ?></span>
+                <td><span class="required">*</span> <?php echo $entry_fullname; ?></td>
+                <td><input type="text" name="fullname" value="<?php echo $fullname; ?>" />
+                  <?php if ($error_fullname) { ?>
+                  <span class="error"><?php echo $error_fullname; ?></span>
                   <?php } ?></td>
-              </tr>
-              <tr style="display:none">
-                <td><?php echo $entry_firstname; ?></td>
-                <td><input type="text" name="firstname" value="<?php echo $firstname; ?>" />
-                  </td>
-              </tr>
-              <tr style="display:none">
-                <td><?php echo $entry_lastname; ?></td>
-                <td><input type="text" name="lastname" value="<?php echo $lastname; ?>" />
-                  </td>
               </tr>
               <tr>
                 <td><?php echo $entry_email; ?></td>
                 <td><input type="text" name="email" value="<?php echo $email; ?>" />
                   </td>
               </tr>
-              <tr style="display:none">
+              <tr>
                 <td><?php echo $entry_telephone; ?></td>
                 <td><input type="text" name="telephone" value="<?php echo $telephone; ?>" />
                   </td>
               </tr>
-              <tr style="display:none">
+              <tr>
                 <td><?php echo $entry_fax; ?></td>
                 <td><input type="text" name="fax" value="<?php echo $fax; ?>" /></td>
               </tr>
@@ -126,64 +130,29 @@
             <input type="hidden" name="address[<?php echo $address_row; ?>][address_id]" value="<?php echo $address['address_id']; ?>" />
             <table class="form">
               <tr>
-                <td><span class="required">*</span> <?php echo $entry_firstname; ?></td>
-                <td><input type="text" name="address[<?php echo $address_row; ?>][firstname]" value="<?php echo $address['firstname']; ?>" />
-                  <?php if (isset($error_address_firstname[$address_row])) { ?>
-                  <span class="error"><?php echo $error_address_firstname[$address_row]; ?></span>
-                  <?php } ?></td>
+                <td><?php echo $entry_fullname; ?></td>
+                <td><span><?php echo $address['fullname']; ?></span></td>
               </tr>
               <tr>
-                <td><span class="required">*</span> <?php echo $entry_lastname; ?></td>
-                <td><input type="text" name="address[<?php echo $address_row; ?>][lastname]" value="<?php echo $address['lastname']; ?>" />
-                  <?php if (isset($error_address_lastname[$address_row])) { ?>
-                  <span class="error"><?php echo $error_address_lastname[$address_row]; ?></span>
-                  <?php } ?></td>
+                <td><?php echo $entry_telephone; ?></td>
+                <td><span><?php echo $address['telephone']; ?></span></td>
               </tr>
               <tr>
                 <td><?php echo $entry_company; ?></td>
-                <td><input type="text" name="address[<?php echo $address_row; ?>][company]" value="<?php echo $address['company']; ?>" /></td>
-              </tr>
-              <tr class="company-id-display">
-                <td><?php echo $entry_company_id; ?></td>
-                <td><input type="text" name="address[<?php echo $address_row; ?>][company_id]" value="<?php echo $address['company_id']; ?>" /></td>
-              </tr>
-              <tr class="tax-id-display">
-                <td><?php echo $entry_tax_id; ?></td>
-                <td><input type="text" name="address[<?php echo $address_row; ?>][tax_id]" value="<?php echo $address['tax_id']; ?>" />
-                  <?php if (isset($error_address_tax_id[$address_row])) { ?>
-                  <span class="error"><?php echo $error_address_tax_id[$address_row]; ?></span>
-                  <?php } ?></td>
+                <td><span><?php echo $address['company']; ?></span></td>
               </tr>
               <tr>
-                <td><span class="required">*</span> <?php echo $entry_address_1; ?></td>
-                <td><input type="text" name="address[<?php echo $address_row; ?>][address_1]" value="<?php echo $address['address_1']; ?>" />
-                  <?php if (isset($error_address_address_1[$address_row])) { ?>
-                  <span class="error"><?php echo $error_address_address_1[$address_row]; ?></span>
-                  <?php } ?></td>
+                <td><?php echo $entry_address; ?></td>
+                <td><span><?php echo $address['address']; ?></span></td>
               </tr>
               <tr>
-                <td><?php echo $entry_address_2; ?></td>
-                <td><input type="text" name="address[<?php echo $address_row; ?>][address_2]" value="<?php echo $address['address_2']; ?>" /></td>
+                <td><?php echo $entry_areas; ?></td>
+                <td><span><?php echo $address['area_zone'] ?></span></td>
               </tr>
               <tr>
-                <td><span class="required">*</span> <?php echo $entry_city; ?></td>
-                <td><input type="text" name="address[<?php echo $address_row; ?>][city]" value="<?php echo $address['city']; ?>" />
-                  <?php if (isset($error_address_city[$address_row])) { ?>
-                  <span class="error"><?php echo $error_address_city[$address_row]; ?></span>
-                  <?php } ?></td>
-              </tr>
-              <tr>
-                <td><span id="postcode-required<?php echo $address_row; ?>" class="required">*</span> <?php echo $entry_postcode; ?></td>
-                <td><input type="text" name="address[<?php echo $address_row; ?>][postcode]" value="<?php echo $address['postcode']; ?>" /></td>
-              </tr>
-              <tr>
-                <td><span class="required">*</span> <?php echo $entry_province; ?></td>
-                <td><select name="address[<?php echo $address_row; ?>][province_id]">
-                  </select>
-                  <?php if (isset($error_address_province[$address_row])) { ?>
-                  <span class="error"><?php echo $error_address_province[$address_row]; ?></span>
-                  <?php } ?></td>
-              </tr>
+                <td><?php echo $entry_postcode; ?></td>
+                <td><span><?php echo $address['postcode']; ?></span></td>
+              </tr>              
               <tr>
                 <td><?php echo $entry_default; ?></td>
                 <td><?php if (($address['address_id'] == $address_id) || !$addresses) { ?>
@@ -192,6 +161,10 @@
                 <input type="radio" name="address[<?php echo $address_row; ?>][default]" value="<?php echo $address_row; ?>" />
                   </td>
                 <?php } ?>
+              </tr>
+              <tr>
+                <td><?php echo $entry_postcode; ?></td>
+                <td><span><?php echo $address['postcode']; ?></span></td>
               </tr>
             </table>
           </div>
@@ -280,110 +253,98 @@
     </div>
   </div>
 </div>
+<div id="address-dialog" style="display:none">
+    <table class="form">'
+        <tr>
+          <td><span class="required">*</span> <?php echo $entry_fullname; ?></td>
+          <td><input type="text" name="fullname" value="" /></td>
+        </tr>
+        <tr>
+          <td><span class="required">*</span><?php echo $entry_telephone; ?></td>
+          <td><input type="text" name="telephone" value="" /></td>
+        </tr>
+        <tr>
+          <td><span class="required">*</span> <?php echo $entry_areas; ?></td>
+          <td><span id="areas-text"></span><div id="area"></div></td>
+        </tr>
+        <tr>
+          <td><span class="required">*</span> <?php echo $entry_address; ?></td>
+          <td><input type="text" name="address" value="" /></td>
+        </tr>
+        <tr>
+          <td><?php echo $entry_company; ?></td>
+          <td><input type="text" name="company" value="" /></td>
+        </tr>
+        <tr>
+          <td> <?php echo $entry_postcode; ?></td>
+          <td><input type="text" name="postcode" value="" /></td>
+        </tr>
+        <tr>
+          <td><?php echo $entry_default; ?></td>
+          <td><input type="radio" name="default" value="1" /></td>
+        </tr>
+    </table>
+</div>
 <script type="text/javascript"><!--
-$('select[name=\'customer_group_id\']').live('change', function() {
-	var customer_group = [];
-	
-<?php foreach ($customer_groups as $customer_group) { ?>
-	customer_group[<?php echo $customer_group['customer_group_id']; ?>] = [];
-	customer_group[<?php echo $customer_group['customer_group_id']; ?>]['company_id_display'] = '<?php echo $customer_group['company_id_display']; ?>';
-	customer_group[<?php echo $customer_group['customer_group_id']; ?>]['tax_id_display'] = '<?php echo $customer_group['tax_id_display']; ?>';
-<?php } ?>	
+    $(function(){
+        add_select(0);
+        $('body').on('change', '#area select', function() {
+            var $me = $(this);
+            var $next = $me.next();
 
-	if (customer_group[this.value]) {
-		if (customer_group[this.value]['company_id_display'] == '1') {
-			$('.company-id-display').show();
-		} else {
-			$('.company-id-display').hide();
-		}
-		
-		if (customer_group[this.value]['tax_id_display'] == '1') {
-			$('.tax-id-display').show();
-		} else {
-			$('.tax-id-display').hide();
-		}
-	}
-});
+            if ($me.val() == $next.data('pid')) {
+                return;
+            }
+            $me.nextAll().remove();
+            add_select($me.val());
+        });
 
-$('select[name=\'customer_group_id\']').trigger('change');
+        function add_select(pid) {
+            var area_names = area['name'+pid];
+            if (!area_names) {
+                return false;
+            }
+            var area_codes = area['code'+pid];
+            var $select = $('<select >');
+            $select.attr('name', 'area[]');
+            $select.attr('class', 'adress-sec');
+            $select.data('pid', pid);
+            if (area_codes[0] != -1) {
+                area_names.unshift('请选择');
+                area_codes.unshift(0);
+            }
+            for (var idx in area_codes) {
+                var $option = $('<option>');
+                $option.attr('value', area_codes[idx]);
+                $option.text(area_names[idx]);
+                $select.append($option);
+            }
+            $('#area').append($select);
+        };
+    });
 //--></script> 
-
 <script type="text/javascript"><!--
-var address_row = <?php echo $address_row; ?>;
-
 function addAddress() {	
-	html  = '<div id="tab-address-' + address_row + '" class="vtabs-content" style="display: none;">';
-	html += '  <input type="hidden" name="address[' + address_row + '][address_id]" value="" />';
-	html += '  <table class="form">'; 
-    html += '    <tr>';
-    html += '      <td><span class="required">*</span> <?php echo $entry_nickname; ?></td>';
-    html += '      <td><input type="text" name="address[' + address_row + '][nickname]" value="" /></td>';
-    html += '    </tr>';
-	  html += '    <tr style="display:none">';
-    html += '	   <td><?php echo $entry_firstname; ?></td>';
-    html += '	   <td><input type="text" name="address[' + address_row + '][firstname]" value="" /></td>';
-    html += '    </tr>';
-    html += '    <tr style="display:none">';
-    html += '      <td><?php echo $entry_lastname; ?></td>';
-    html += '      <td><input type="text" name="address[' + address_row + '][lastname]" value="" /></td>';
-    html += '    </tr>';
-    html += '    <tr style="display:none">';
-    html += '      <td><?php echo $entry_company; ?></td>';
-    html += '      <td><input type="text" name="address[' + address_row + '][company]" value="" /></td>';
-    html += '    </tr>';	
-    html += '    <tr class="company-id-display" style="display:none">';
-    html += '      <td><?php echo $entry_company_id; ?></td>';
-    html += '      <td><input type="text" name="address[' + address_row + '][company_id]" value="" /></td>';
-    html += '    </tr>';
-    html += '    <tr class="tax-id-display" style="display:none">';
-    html += '      <td><?php echo $entry_tax_id; ?></td>';
-    html += '      <td><input type="text" name="address[' + address_row + '][tax_id]" value="" /></td>';
-    html += '    </tr>';			
-    html += '    <tr>';
-    html += '      <td><span class="required">*</span> <?php echo $entry_address_1; ?></td>';
-    html += '      <td><input type="text" name="address[' + address_row + '][address_1]" value="" /></td>';
-    html += '    </tr>';
-    html += '    <tr>';
-    html += '      <td><?php echo $entry_address_2; ?></td>';
-    html += '      <td><input type="text" name="address[' + address_row + '][address_2]" value="" /></td>';
-    html += '    </tr>';
-    html += '    <tr>';
-    html += '      <td><span class="required">*</span> <?php echo $entry_city; ?></td>';
-    html += '      <td><input type="text" name="address[' + address_row + '][city]" value="" /></td>';
-    html += '    </tr>';
-    html += '    <tr>';
-    html += '      <td><span id="postcode-required' + address_row + '" class="required">*</span> <?php echo $entry_postcode; ?></td>';
-    html += '      <td><input type="text" name="address[' + address_row + '][postcode]" value="" /></td>';
-    html += '    </tr>';
+	$('#address-dialog').dialog({
+    title:'<?php echo $button_add_address ?>',
+    width:800,
+    modal:true,
+    buttons:{
+      '<?php echo $button_save ?>':function(){
+        $.ajax({
+          url:'<?php echo $address_form ?>',
+          type:'post',
+          data:{$('#address-dialog input')}
+        })
+      }
+    }
+  })
 
-    html += '    <tr>';
-    html += '      <td><span class="required">*</span> <?php echo $entry_province; ?></td>';
-    html += '      <td><select name="address[' + address_row + '][province_id]"><option value="false"><?php echo $this->language->get('text_none'); ?></option></select></td>';
-    html += '    </tr>';
-	html += '    <tr>';
-    html += '      <td><?php echo $entry_default; ?></td>';
-    html += '      <td><input type="radio" name="address[' + address_row + '][default]" value="1" /></td>';
-    html += '    </tr>';
-    html += '  </table>';
-    html += '</div>';
-	
-	$('#tab-general').append(html);
-	
-	$('select[name=\'address[' + address_row + '][country_id]\']').trigger('change');	
-	
-	$('#address-add').before('<a href="#tab-address-' + address_row + '" id="address-' + address_row + '"><?php echo $tab_address; ?> ' + address_row + '&nbsp;<img src="view/image/delete.png" alt="" onclick="$(\'#vtabs a:first\').trigger(\'click\'); $(\'#address-' + address_row + '\').remove(); $(\'#tab-address-' + address_row + '\').remove(); return false;" /></a>');
-		 
-	$('.vtabs a').tabs();
-	
-	$('#address-' + address_row).trigger('click');
-	
-	address_row++;
 }
 //--></script> 
 <script type="text/javascript"><!--
 $('#history .pagination a').live('click', function() {
-	$('#history').load(this.href);
-	
+	$('#history').load(this.href);	
 	return false;
 });			
 
@@ -398,7 +359,7 @@ $('#button-history').bind('click', function() {
 		beforeSend: function() {
 			$('.success, .warning').remove();
 			$('#button-history').attr('disabled', true);
-			$('#history').before('<div class="attention"><img src="view/image/loading.gif" alt="" /> <?php echo $text_wait; ?></div>');
+			$('#history').before('<div class="attention"><img src="view/image/loading.gif" /> <?php echo $text_wait; ?></div>');
 		},
 		complete: function() {
 			$('#button-history').attr('disabled', false);
@@ -406,8 +367,7 @@ $('#button-history').bind('click', function() {
       		$('#tab-history textarea[name=\'comment\']').val('');
 		},
 		success: function(html) {
-			$('#history').html(html);
-			
+			$('#history').html(html);			
 			$('#tab-history input[name=\'comment\']').val('');
 		}
 	});
@@ -415,8 +375,7 @@ $('#button-history').bind('click', function() {
 //--></script> 
 <script type="text/javascript"><!--
 $('#transaction .pagination a').live('click', function() {
-	$('#transaction').load(this.href);
-	
+	$('#transaction').load(this.href);	
 	return false;
 });			
 
@@ -431,25 +390,21 @@ $('#button-transaction').bind('click', function() {
 		beforeSend: function() {
 			$('.success, .warning').remove();
 			$('#button-transaction').attr('disabled', true);
-			$('#transaction').before('<div class="attention"><img src="view/image/loading.gif" alt="" /> <?php echo $text_wait; ?></div>');
+			$('#transaction').before('<div class="attention"><img src="view/image/loading.gif" /> <?php echo $text_wait; ?></div>');
 		},
 		complete: function() {
 			$('#button-transaction').attr('disabled', false);
 			$('.attention').remove();
 		},
 		success: function(html) {
-			$('#transaction').html(html);
-			
+			$('#transaction').html(html);			
 			$('#tab-transaction input[name=\'amount\']').val('');
 			$('#tab-transaction input[name=\'description\']').val('');
 		}
 	});
 });
-//--></script> 
-<script type="text/javascript"><!--
 $('#reward .pagination a').live('click', function() {
-	$('#reward').load(this.href);
-	
+	$('#reward').load(this.href);	
 	return false;
 });			
 
@@ -464,15 +419,14 @@ function addRewardPoints() {
 		beforeSend: function() {
 			$('.success, .warning').remove();
 			$('#button-reward').attr('disabled', true);
-			$('#reward').before('<div class="attention"><img src="view/image/loading.gif" alt="" /> <?php echo $text_wait; ?></div>');
+			$('#reward').before('<div class="attention"><img src="view/image/loading.gif" /> <?php echo $text_wait; ?></div>');
 		},
 		complete: function() {
 			$('#button-reward').attr('disabled', false);
 			$('.attention').remove();
 		},
 		success: function(html) {
-			$('#reward').html(html);
-								
+			$('#reward').html(html);								
 			$('#tab-reward input[name=\'points\']').val('');
 			$('#tab-reward input[name=\'description\']').val('');
 		}
@@ -480,8 +434,7 @@ function addRewardPoints() {
 }
 
 function addBanIP(ip) {
-	var id = ip.replace(/\./g, '-');
-	
+	var id = ip.replace(/\./g, '-');	
 	$.ajax({
 		url: 'index.php?route=sale/customer/addbanip&token=<?php echo $token; ?>',
 		type: 'post',
@@ -490,25 +443,21 @@ function addBanIP(ip) {
 		beforeSend: function() {
 			$('.success, .warning').remove();
 			
-			$('.box').before('<div class="attention"><img src="view/image/loading.gif" alt="" /> <?php echo $text_wait; ?></div>');		
+			$('.box').before('<div class="attention"><img src="view/image/loading.gif" /> <?php echo $text_wait; ?></div>');		
 		},
-		complete: function() {
-			
-		},			
+		complete: function() {},			
 		success: function(json) {
 			$('.attention').remove();
 			
 			if (json['error']) {
-				 $('.box').before('<div class="warning" style="display: none;">' + json['error'] + '</div>');
-				
+				$('.box').before('<div class="warning" style="display: none;">' + json['error'] + '</div>');	
 				$('.warning').fadeIn('slow');
 			}
 						
 			if (json['success']) {
-                $('.box').before('<div class="success" style="display: none;">' + json['success'] + '</div>');
+        $('.box').before('<div class="success" style="display: none;">' + json['success'] + '</div>');
 				
-				$('.success').fadeIn('slow');
-				
+				$('.success').fadeIn('slow');				
 				$('#' + id).replaceWith('<a id="' + id + '" onclick="removeBanIP(\'' + ip + '\');"><?php echo $text_remove_ban_ip; ?></a>');
 			}
 		}
@@ -524,9 +473,8 @@ function removeBanIP(ip) {
 		dataType: 'json',
 		data: 'ip=' + encodeURIComponent(ip),
 		beforeSend: function() {
-			$('.success, .warning').remove();
-			
-			$('.box').before('<div class="attention"><img src="view/image/loading.gif" alt="" /> <?php echo $text_wait; ?></div>');					
+			$('.success, .warning').remove();			
+			$('.box').before('<div class="attention"><img src="view/image/loading.gif" /> <?php echo $text_wait; ?></div>');					
 		},	
 		success: function(json) {
 			$('.attention').remove();
@@ -547,8 +495,6 @@ function removeBanIP(ip) {
 		}
 	});	
 };
-//--></script> 
-<script type="text/javascript"><!--
 $('.htabs a').tabs();
 $('.vtabs a').tabs();
 //--></script> 

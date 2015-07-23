@@ -1,9 +1,7 @@
 <?php
 class Customer {
 	private $customer_id;
-	private $firstname;
-    private $lastname;
-	private $nickname;
+	private $fullname;
 	private $email;
 	private $mobile_phone;
 	private $telephone;
@@ -24,9 +22,7 @@ class Customer {
 			if ($customer_query->num_rows) {
 				$this->customer_id = $customer_query->row['customer_id'];
 				$this->mobile_phone = $customer_query->row['mobile_phone'];
-				$this->firstname = $customer_query->row['firstname'];
-                $this->lastname = $customer_query->row['lastname'];
-				$this->nickname = $customer_query->row['nickname'];
+				$this->fullname = $customer_query->row['fullname'];
 				$this->email = $customer_query->row['email'];
 				$this->telephone = $customer_query->row['telephone'];
 				$this->fax = $customer_query->row['fax'];
@@ -85,9 +81,7 @@ class Customer {
 									
 			$this->customer_id = $customer_query->row['customer_id'];
 			$this->mobile_phone = $customer_query->row['mobile_phone'];
-			$this->firstname = $customer_query->row['firstname'];
-			$this->lastname = $customer_query->row['lastname'];
-            $this->nickname = $customer_query->row['nickname'];
+            $this->fullname = $customer_query->row['fullname'];
 			$this->email = $customer_query->row['email'];
 			$this->telephone = $customer_query->row['telephone'];
 			$this->fax = $customer_query->row['fax'];
@@ -146,9 +140,7 @@ class Customer {
 			}
 									
 			$this->customer_id = $customer_query->row['customer_id'];
-			$this->firstname = $customer_query->row['firstname'];
-			$this->lastname = $customer_query->row['lastname'];
-            $this->nickname = $customer_query->row['nickname'];
+            $this->fullname = $customer_query->row['fullname'];
 			$this->email = $customer_query->row['email'];
 			$this->telephone = $customer_query->row['telephone'];
 			$this->fax = $customer_query->row['fax'];
@@ -176,9 +168,7 @@ class Customer {
 
 		$this->customer_id = '';
 		$this->mobile_phone = '';
-		$this->firstname = '';
-		$this->lastname = '';
-        $this->nickname = '';
+        $this->fullname = '';
 		$this->email = '';
 		$this->telephone = '';
 		$this->fax = '';
@@ -199,16 +189,8 @@ class Customer {
 		return $this->mobile_phone;
   	}
 
-  	public function getNickName() {
-		return $this->nickname;
-  	}
-
-  	public function getFirstName() {
-		return $this->firstname;
-  	}
-  
-  	public function getLastName() {
-		return $this->lastname;
+  	public function getFullName() {
+		return $this->fullname;
   	}
   
   	public function getEmail() {

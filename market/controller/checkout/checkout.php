@@ -546,10 +546,8 @@ class ControllerCheckoutCheckout extends Controller {
 	}
 	
     private function area_js(){
-        if(file_exists(DIR_TEMPLATE.$this->config->get('config_template').'/javascript/area.js')){
-            
-            return $this->config->get('config_template').'/javascript/area.js';
-        }else{
+        $file = TPL_JS.'area.js';
+        if(!file_exists($file)){
             $this->load->model('localisation/area');
             $areas = $this->model_localisation_area->getAreas();
             $area_rows_group_by_pid = $this->array_group($areas, 'pid');
@@ -565,11 +563,11 @@ class ControllerCheckoutCheckout extends Controller {
                 $address['name'.$pid] = array_keys($this->array_group($item, 'name'));
                 $address['code'.$pid] = array_keys($this->array_group($item, 'area_id'));
             }
-            $file = $this->config->get('config_template').'/javascript/area.js';
-            file_put_contents(DIR_TEMPLATE.$file, 'var area = ' . json_encode_ex($address) . ';');
-            return $file;
+            file_put_contents($file, 'var area = ' . json_encode_ex($address) . ';');
+            
         }
-    }   
+        return $file;
+    } 
 
     private function array_group($array, $key, $limit = false){
         if (empty ($array) || !is_array($array)){

@@ -26,7 +26,7 @@ class ControllerShippingFlat extends Controller {
 		
 		$this->data['entry_cost'] = $this->language->get('entry_cost');
 		$this->data['entry_tax_class'] = $this->language->get('entry_tax_class');
-		$this->data['entry_geo_zone'] = $this->language->get('entry_geo_zone');
+		$this->data['entry_area_geo'] = $this->language->get('entry_area_geo');
 		$this->data['entry_status'] = $this->language->get('entry_status');
 		$this->data['entry_sort_order'] = $this->language->get('entry_sort_order');
 		
@@ -79,15 +79,15 @@ class ControllerShippingFlat extends Controller {
 		
 		$this->data['tax_classes'] = $this->model_localisation_tax_class->getTaxClasses();
 
-		if (isset($this->request->post['flat_geo_zone_id'])) {
-			$this->data['flat_geo_zone_id'] = $this->request->post['flat_geo_zone_id'];
+		if (isset($this->request->post['flat_area_geo_id'])) {
+			$this->data['flat_area_geo_id'] = $this->request->post['flat_area_geo_id'];
 		} else {
-			$this->data['flat_geo_zone_id'] = $this->config->get('flat_geo_zone_id');
+			$this->data['flat_area_geo_id'] = $this->config->get('flat_area_geo_id');
 		}
 		
-		$this->load->model('localisation/geo_zone');
+		$this->load->model('localisation/area_geo');
 		
-		$this->data['geo_zones'] = $this->model_localisation_geo_zone->getGeoZones();
+		$this->data['area_geos'] = $this->model_localisation_area_geo->getAreaGeos();
 		
 		if (isset($this->request->post['flat_status'])) {
 			$this->data['flat_status'] = $this->request->post['flat_status'];
@@ -122,4 +122,3 @@ class ControllerShippingFlat extends Controller {
 		}	
 	}
 }
-?>

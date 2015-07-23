@@ -76,7 +76,7 @@ class ControllerModuleMiniLogin extends Controller {
         
         if ($this->customer->isLogged()) {
             $oauth_html = '<div class="oauth_login">';
-            $oauth_html .= $this->data['text_logged'] = sprintf($this->language->get('text_logged'), $this->url->link('account/account', '', 'SSL'), $this->customer->getFirstName(), $this->url->link('account/logout', '', 'SSL'));
+            $oauth_html .= $this->data['text_logged'] = sprintf($this->language->get('text_logged'), $this->url->link('account/account', '', 'SSL'), $this->customer->getFullName(), $this->url->link('account/logout', '', 'SSL'));
             $oauth_html .= '</div>';
         }
         $this->data['oauth_html'] = $oauth_html;

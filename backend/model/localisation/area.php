@@ -135,5 +135,9 @@ class ModelLocalisationArea extends Model {
         return $this->_area[$area_id];
     }
 
-
+    public function getAreas() {
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "area WHERE  status = '1' ORDER BY sort");
+        
+        return $query->rows;
+    } 
 }

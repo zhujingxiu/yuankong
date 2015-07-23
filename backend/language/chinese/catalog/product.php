@@ -42,8 +42,6 @@ $_['entry_keyword']              = '&nbsp;&nbsp;SEO关键字：<br /><span class
 $_['entry_model']                = '&nbsp;&nbsp;商品型号：';
 $_['entry_sku']                  = '&nbsp;&nbsp;库存单位：<br/><span class="help">库存单位</span>';
 $_['entry_upc']                  = '&nbsp;&nbsp;UPC：<br/><span class="help">通用产品代码</span>';
-$_['entry_ean']                  = '&nbsp;&nbsp;EAN：<br/><span class="help">欧洲商品编号</span>';
-$_['entry_jan']                  = '&nbsp;&nbsp;JAN：<br/><span class="help">日本商品编号</span>';
 $_['entry_isbn']                 = '&nbsp;&nbsp;ISBN：<br/><span class="help">国际标准书号</span>';
 $_['entry_mpn']                  = '&nbsp;&nbsp;MPN：<br/><span class="help">制造商零件编号</span>';
 $_['entry_location']             = '&nbsp;&nbsp;商品位置：';

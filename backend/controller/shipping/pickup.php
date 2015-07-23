@@ -24,7 +24,7 @@ class ControllerShippingPickup extends Controller {
 		$this->data['text_all_zones'] = $this->language->get('text_all_zones');
 		$this->data['text_none'] = $this->language->get('text_none');
 		
-		$this->data['entry_geo_zone'] = $this->language->get('entry_geo_zone');
+		$this->data['entry_area_geo'] = $this->language->get('entry_area_geo');
 		$this->data['entry_status'] = $this->language->get('entry_status');
 		$this->data['entry_sort_order'] = $this->language->get('entry_sort_order');
 		
@@ -61,15 +61,15 @@ class ControllerShippingPickup extends Controller {
 		
 		$this->data['cancel'] = $this->url->link('extension/shipping', 'token=' . $this->session->data['token'], 'SSL');
 
-		if (isset($this->request->post['pickup_geo_zone_id'])) {
-			$this->data['pickup_geo_zone_id'] = $this->request->post['pickup_geo_zone_id'];
+		if (isset($this->request->post['pickup_area_geo_id'])) {
+			$this->data['pickup_area_geo_id'] = $this->request->post['pickup_area_geo_id'];
 		} else {
-			$this->data['pickup_geo_zone_id'] = $this->config->get('pickup_geo_zone_id');
+			$this->data['pickup_area_geo_id'] = $this->config->get('pickup_area_geo_id');
 		}
 		
-		$this->load->model('localisation/geo_zone');
+		$this->load->model('localisation/area_geo');
 		
-		$this->data['geo_zones'] = $this->model_localisation_geo_zone->getGeoZones();
+		$this->data['area_geos'] = $this->model_localisation_area_geo->getAreaGeos();
 		
 		if (isset($this->request->post['pickup_status'])) {
 			$this->data['pickup_status'] = $this->request->post['pickup_status'];

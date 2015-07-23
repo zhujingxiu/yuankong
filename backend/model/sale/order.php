@@ -118,15 +118,14 @@ class ModelSaleOrder extends Model {
 		
 		$this->load->model('localisation/province');
 		
-		$province_info = $this->model_localisation_province->getZone($data['shipping_province_id']);
+		$province_info = $this->model_localisation_province->getProvince($data['shipping_province_id']);
 		
 		if ($province_info) {
 			$shipping_province = $province_info['name'];
 		} else {
 			$shipping_province = '';			
 		}	
-					
-	
+
 
 		// Restock products before subtracting the stock later on
 		$order_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "order` WHERE order_status_id > '0' AND order_id = '" . (int)$order_id . "'");
@@ -145,7 +144,7 @@ class ModelSaleOrder extends Model {
 			}
 		}
 
-      	$this->db->query("UPDATE `" . DB_PREFIX . "order` SET firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "', payment_method = '" . $this->db->escape($data['payment_method']) . "', payment_code = '" . $this->db->escape($data['payment_code']) . "', shipping_firstname = '" . $this->db->escape($data['shipping_firstname']) . "', shipping_lastname = '" . $this->db->escape($data['shipping_lastname']) . "',  shipping_company = '" . $this->db->escape($data['shipping_company']) . "', shipping_address_1 = '" . $this->db->escape($data['shipping_address_1']) . "', shipping_address_2 = '" . $this->db->escape($data['shipping_address_2']) . "', shipping_city = '" . $this->db->escape($data['shipping_city']) . "', shipping_postcode = '" . $this->db->escape($data['shipping_postcode']) . "',  shipping_province = '" . $this->db->escape($shipping_province) . "', shipping_province_id = '" . (int)$data['shipping_province_id'] . "', shipping_address_format = '" . $this->db->escape($shipping_address_format) . "', shipping_method = '" . $this->db->escape($data['shipping_method']) . "', shipping_code = '" . $this->db->escape($data['shipping_code']) . "', comment = '" . $this->db->escape($data['comment']) . "', order_status_id = '" . (int)$data['order_status_id'] . "', affiliate_id  = '" . (int)$data['affiliate_id'] . "', date_modified = NOW() WHERE order_id = '" . (int)$order_id . "'");
+      	$this->db->query("UPDATE `" . DB_PREFIX . "order` SET fullname = '" . $this->db->escape($data['fullname']) . "', mobile_phone = '" . $this->db->escape($data['mobile_phone']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "', payment_method = '" . $this->db->escape($data['payment_method']) . "', payment_code = '" . $this->db->escape($data['payment_code']) . "', shipping_fullname = '" . $this->db->escape($data['shipping_fullname']) . "', shipping_telephone = '" . $this->db->escape($data['shipping_telephone']) . "',  shipping_company = '" . $this->db->escape($data['shipping_company']) . "', shipping_address = '" . $this->db->escape($data['shipping_address']) . "',  shipping_city = '" . $this->db->escape($data['shipping_city']) . "', shipping_postcode = '" . $this->db->escape($data['shipping_postcode']) . "',  shipping_province = '" . $this->db->escape($shipping_province) . "', shipping_province_id = '" . (int)$data['shipping_province_id'] . "', shipping_method = '" . $this->db->escape($data['shipping_method']) . "', shipping_code = '" . $this->db->escape($data['shipping_code']) . "', comment = '" . $this->db->escape($data['comment']) . "', order_status_id = '" . (int)$data['order_status_id'] . "', affiliate_id  = '" . (int)$data['affiliate_id'] . "', date_modified = NOW() WHERE order_id = '" . (int)$order_id . "'");
 				
 		$this->db->query("DELETE FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "'"); 
        	$this->db->query("DELETE FROM " . DB_PREFIX . "order_option WHERE order_id = '" . (int)$order_id . "'");
@@ -241,14 +240,13 @@ class ModelSaleOrder extends Model {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "order_voucher WHERE order_id = '" . (int)$order_id . "'");
       	$this->db->query("DELETE FROM " . DB_PREFIX . "order_total WHERE order_id = '" . (int)$order_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "order_history WHERE order_id = '" . (int)$order_id . "'");
-		$this->db->query("DELETE FROM " . DB_PREFIX . "order_fraud WHERE order_id = '" . (int)$order_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "customer_transaction WHERE order_id = '" . (int)$order_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "customer_reward WHERE order_id = '" . (int)$order_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "affiliate_transaction WHERE order_id = '" . (int)$order_id . "'");
 	}
 
 	public function getOrder($order_id) {
-		$order_query = $this->db->query("SELECT *, (SELECT CONCAT(c.firstname, ' ', c.lastname) FROM " . DB_PREFIX . "customer c WHERE c.customer_id = o.customer_id) AS customer FROM `" . DB_PREFIX . "order` o WHERE o.order_id = '" . (int)$order_id . "'");
+		$order_query = $this->db->query("SELECT *, (SELECT c.fullname FROM " . DB_PREFIX . "customer c WHERE c.customer_id = o.customer_id) AS customer FROM `" . DB_PREFIX . "order` o WHERE o.order_id = '" . (int)$order_id . "'");
 
 		if ($order_query->num_rows) {
 			$reward = 0;
@@ -293,6 +291,7 @@ class ModelSaleOrder extends Model {
 			
 			return array(
 				'order_id'                => $order_query->row['order_id'],
+				'order_sn'                => $order_query->row['order_sn'],
 				'invoice_no'              => $order_query->row['invoice_no'],
 				'invoice_prefix'          => $order_query->row['invoice_prefix'],
 				'store_id'                => $order_query->row['store_id'],
@@ -301,18 +300,17 @@ class ModelSaleOrder extends Model {
 				'customer_id'             => $order_query->row['customer_id'],
 				'customer'                => $order_query->row['customer'],
 				'customer_group_id'       => $order_query->row['customer_group_id'],
-				'firstname'               => $order_query->row['firstname'],
-				'lastname'                => $order_query->row['lastname'],
+				'fullname'                => $order_query->row['fullname'],
+				'mobile_phone'            => $order_query->row['mobile_phone'],
 				'telephone'               => $order_query->row['telephone'],
 				'fax'                     => $order_query->row['fax'],
 				'email'                   => $order_query->row['email'],
 				'payment_method'          => $order_query->row['payment_method'],
 				'payment_code'            => $order_query->row['payment_code'],				
-				'shipping_firstname'      => $order_query->row['shipping_firstname'],
-				'shipping_lastname'       => $order_query->row['shipping_lastname'],
+				'shipping_fullname'       => $order_query->row['shipping_fullname'],
+				'shipping_telephone'      => $order_query->row['shipping_telephone'],
 				'shipping_company'        => $order_query->row['shipping_company'],
-				'shipping_address_1'      => $order_query->row['shipping_address_1'],
-				'shipping_address_2'      => $order_query->row['shipping_address_2'],
+				'shipping_address'        => $order_query->row['shipping_address'],
 				'shipping_postcode'       => $order_query->row['shipping_postcode'],
 				'shipping_province_id'    => $order_query->row['shipping_province_id'],
 				'shipping_province'       => $order_query->row['shipping_province'],
@@ -347,7 +345,7 @@ class ModelSaleOrder extends Model {
 	}
 	
 	public function getOrders($data = array()) {
-		$sql = "SELECT o.order_id, CONCAT(o.firstname, ' ', o.lastname) AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS status, o.total, o.currency_code, o.currency_value, o.date_added, o.date_modified FROM `" . DB_PREFIX . "order` o";
+		$sql = "SELECT o.order_id, o.fullname AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS status, o.total, o.currency_code, o.currency_value, o.date_added, o.date_modified FROM `" . DB_PREFIX . "order` o";
 
 		if (isset($data['filter_order_status_id']) && !is_null($data['filter_order_status_id'])) {
 			$sql .= " WHERE o.order_status_id = '" . (int)$data['filter_order_status_id'] . "'";
@@ -360,7 +358,7 @@ class ModelSaleOrder extends Model {
 		}
 
 		if (!empty($data['filter_customer'])) {
-			$sql .= " AND CONCAT(o.firstname, ' ', o.lastname) LIKE '%" . $this->db->escape($data['filter_customer']) . "%'";
+			$sql .= " AND o.fullname LIKE '%" . $this->db->escape($data['filter_customer']) . "%'";
 		}
 
 		if (!empty($data['filter_date_added'])) {
@@ -469,7 +467,7 @@ class ModelSaleOrder extends Model {
 		}
 
 		if (!empty($data['filter_customer'])) {
-			$sql .= " AND CONCAT(firstname, ' ', lastname) LIKE '%" . $this->db->escape($data['filter_customer']) . "%'";
+			$sql .= " AND fullname LIKE '%" . $this->db->escape($data['filter_customer']) . "%'";
 		}
 
 		if (!empty($data['filter_date_added'])) {

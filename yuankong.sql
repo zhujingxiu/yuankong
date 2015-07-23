@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2015 年 07 月 22 日 16:42
+-- 生成日期: 2015 年 07 月 23 日 09:43
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.4.3
 
@@ -29,16 +29,13 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `yk_address` (
   `address_id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) NOT NULL,
-  `nickname` varchar(64) DEFAULT NULL,
-  `firstname` varchar(32) NOT NULL,
-  `lastname` varchar(32) NOT NULL,
-  `mobile_phone` varchar(16) DEFAULT NULL,
+  `fullname` varchar(64) DEFAULT NULL,
+  `telephone` varchar(16) DEFAULT NULL,
   `company` varchar(32) NOT NULL,
-  `tax_id` varchar(32) NOT NULL,
-  `address_1` varchar(128) NOT NULL,
-  `address_2` varchar(128) NOT NULL,
+  `address` varchar(128) NOT NULL,
   `postcode` varchar(10) NOT NULL,
-  `zone_id` int(11) NOT NULL DEFAULT '0',
+  `province_id` int(11) NOT NULL DEFAULT '0',
+  `area_zone` varchar(256) DEFAULT NULL,
   `areas` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`address_id`),
   KEY `customer_id` (`customer_id`)
@@ -48,10 +45,10 @@ CREATE TABLE IF NOT EXISTS `yk_address` (
 -- 转存表中的数据 `yk_address`
 --
 
-INSERT INTO `yk_address` (`address_id`, `customer_id`, `nickname`, `firstname`, `lastname`, `mobile_phone`, `company`, `tax_id`, `address_1`, `address_2`, `postcode`, `zone_id`, `areas`) VALUES
-(1, 2, '朱景修', '', '', '18850911766', '', '', '黄石镇丁庄村', '', '', 0, '16|1329|46147'),
-(2, 2, '朱景修', '', '', '18959526595', '', '', '黄石镇定庄村浊影中', '', '', 0, '16|1329|46147'),
-(3, 2, '林琼', '', '', '18959526595', '', '', '黄石镇定庄村浊影中', '', '', 0, '16|1329|46147');
+INSERT INTO `yk_address` (`address_id`, `customer_id`, `fullname`, `telephone`, `company`, `address`, `postcode`, `province_id`, `area_zone`, `areas`) VALUES
+(1, 2, '朱景修', '18850911766', '', '黄石镇丁庄村', '', 0, '', '16|1329|46147'),
+(2, 2, '朱景修', '18959526595', '', '黄石镇定庄村浊影中', '', 0, '', '16|1329|46147'),
+(3, 2, '林琼', '18959526595', '', '黄石镇定庄村浊影中', '', 0, '', '16|1329|46147');
 
 -- --------------------------------------------------------
 
@@ -21323,7 +21320,7 @@ INSERT INTO `yk_area_geo` (`area_geo_id`, `name`, `description`, `date_added`) V
 CREATE TABLE IF NOT EXISTS `yk_area_to_area_geo` (
   `area_to_area_geo_id` int(11) NOT NULL AUTO_INCREMENT,
   `area_id` int(11) NOT NULL DEFAULT '0',
-  `geo_area_id` int(11) NOT NULL,
+  `area_geo_id` int(11) NOT NULL,
   `date_added` datetime NOT NULL,
   PRIMARY KEY (`area_to_area_geo_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=192 ;
@@ -21332,7 +21329,7 @@ CREATE TABLE IF NOT EXISTS `yk_area_to_area_geo` (
 -- 转存表中的数据 `yk_area_to_area_geo`
 --
 
-INSERT INTO `yk_area_to_area_geo` (`area_to_area_geo_id`, `area_id`, `geo_area_id`, `date_added`) VALUES
+INSERT INTO `yk_area_to_area_geo` (`area_to_area_geo_id`, `area_id`, `area_geo_id`, `date_added`) VALUES
 (144, 30, 4, '2015-07-22 22:58:46'),
 (191, 25, 3, '2015-07-22 23:02:15'),
 (190, 1, 3, '2015-07-22 23:02:15'),
@@ -22253,9 +22250,7 @@ CREATE TABLE IF NOT EXISTS `yk_customer` (
   `customer_id` int(11) NOT NULL AUTO_INCREMENT,
   `store_id` int(11) NOT NULL DEFAULT '0',
   `mobile_phone` varchar(16) NOT NULL,
-  `nickname` varchar(64) DEFAULT NULL,
-  `firstname` varchar(32) NOT NULL,
-  `lastname` varchar(32) NOT NULL,
+  `fullname` varchar(64) DEFAULT NULL,
   `email` varchar(96) NOT NULL,
   `telephone` varchar(32) NOT NULL,
   `fax` varchar(32) NOT NULL,
@@ -22280,9 +22275,9 @@ CREATE TABLE IF NOT EXISTS `yk_customer` (
 -- 转存表中的数据 `yk_customer`
 --
 
-INSERT INTO `yk_customer` (`customer_id`, `store_id`, `mobile_phone`, `nickname`, `firstname`, `lastname`, `email`, `telephone`, `fax`, `avatar`, `password`, `salt`, `cart`, `wishlist`, `viewed`, `newsletter`, `address_id`, `customer_group_id`, `ip`, `status`, `approved`, `token`, `date_added`) VALUES
-(1, 0, '18959526595', NULL, '无忌', '张', 'zhangwuji@yitiantulong.cn', '123123', '', NULL, '3838e00e6e59c95a65bc786ff38d303252338a3f', '7abf86dd9', 'a:0:{}', '', '', 0, 0, 1, '127.0.0.1', 1, 0, '', '2015-06-12 17:34:52'),
-(2, 0, '18850911766', 'yk18850911766', '', '', '', '', '', NULL, 'e8a75e331334d9ce78c228afc59c485d99e4a9b3', '2f645ca7b', 'a:3:{s:31:"53:YToxOntpOjIyNztzOjI6IjIxIjt9";i:1;s:31:"53:YToxOntpOjIyNztzOjI6IjE5Ijt9";i:1;i:55;i:1;}', '', NULL, 0, 1, 1, '127.0.0.1', 1, 1, '', '2015-07-16 13:38:42');
+INSERT INTO `yk_customer` (`customer_id`, `store_id`, `mobile_phone`, `fullname`, `email`, `telephone`, `fax`, `avatar`, `password`, `salt`, `cart`, `wishlist`, `viewed`, `newsletter`, `address_id`, `customer_group_id`, `ip`, `status`, `approved`, `token`, `date_added`) VALUES
+(1, 0, '18959526595', NULL, 'zhangwuji@yitiantulong.cn', '123123', '', NULL, '3838e00e6e59c95a65bc786ff38d303252338a3f', '7abf86dd9', 'a:0:{}', '', '', 0, 0, 1, '127.0.0.1', 1, 0, '', '2015-06-12 17:34:52'),
+(2, 0, '18850911766', 'yk18850911766', '', '', '', NULL, 'e8a75e331334d9ce78c228afc59c485d99e4a9b3', '2f645ca7b', 'a:3:{s:31:"53:YToxOntpOjIyNztzOjI6IjIxIjt9";i:1;s:31:"53:YToxOntpOjIyNztzOjI6IjE5Ijt9";i:1;i:55;i:1;}', '', NULL, 0, 1, 1, '127.0.0.1', 1, 1, '', '2015-07-16 13:38:42');
 
 -- --------------------------------------------------------
 
@@ -22980,173 +22975,6 @@ CREATE TABLE IF NOT EXISTS `yk_manufacturer_to_store` (
 -- --------------------------------------------------------
 
 --
--- 表的结构 `yk_megamenu`
---
-
-CREATE TABLE IF NOT EXISTS `yk_megamenu` (
-  `megamenu_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `image` varchar(255) NOT NULL DEFAULT '',
-  `parent_id` int(11) NOT NULL DEFAULT '0',
-  `is_group` smallint(6) NOT NULL DEFAULT '2',
-  `width` varchar(255) DEFAULT NULL,
-  `submenu_width` varchar(255) DEFAULT NULL,
-  `colum_width` varchar(255) DEFAULT NULL,
-  `submenu_colum_width` varchar(255) DEFAULT NULL,
-  `item` varchar(255) DEFAULT NULL,
-  `colums` varchar(255) DEFAULT '1',
-  `type` varchar(255) NOT NULL,
-  `is_content` smallint(6) NOT NULL DEFAULT '2',
-  `show_title` smallint(6) NOT NULL DEFAULT '1',
-  `type_submenu` varchar(10) NOT NULL DEFAULT '1',
-  `level_depth` smallint(6) NOT NULL DEFAULT '0',
-  `published` smallint(6) NOT NULL DEFAULT '1',
-  `store_id` smallint(5) unsigned NOT NULL DEFAULT '0',
-  `position` int(11) unsigned NOT NULL DEFAULT '0',
-  `show_sub` smallint(6) NOT NULL DEFAULT '0',
-  `url` varchar(255) DEFAULT NULL,
-  `target` varchar(25) DEFAULT NULL,
-  `privacy` smallint(5) unsigned NOT NULL DEFAULT '0',
-  `position_type` varchar(25) DEFAULT 'top',
-  `menu_class` varchar(25) DEFAULT NULL,
-  `description` text,
-  `content_text` text,
-  `submenu_content` text,
-  `level` int(11) NOT NULL,
-  `left` int(11) NOT NULL,
-  `right` int(11) NOT NULL,
-  PRIMARY KEY (`megamenu_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=41 ;
-
---
--- 转存表中的数据 `yk_megamenu`
---
-
-INSERT INTO `yk_megamenu` (`megamenu_id`, `image`, `parent_id`, `is_group`, `width`, `submenu_width`, `colum_width`, `submenu_colum_width`, `item`, `colums`, `type`, `is_content`, `show_title`, `type_submenu`, `level_depth`, `published`, `store_id`, `position`, `show_sub`, `url`, `target`, `privacy`, `position_type`, `menu_class`, `description`, `content_text`, `submenu_content`, `level`, `left`, `right`) VALUES
-(1, '', 0, 2, NULL, NULL, NULL, NULL, NULL, '1', '', 2, 1, '1', 0, 1, 0, 0, 0, NULL, NULL, 0, 'top', NULL, NULL, NULL, NULL, -5, 34, 47),
-(4, '', 3, 0, NULL, NULL, NULL, '', '25', '1', 'category', 0, 1, 'menu', 0, 1, 0, 1, 0, '', NULL, 0, 'top', 'pav-parrent', NULL, '', '', 0, 0, 0),
-(5, '', 1, 0, NULL, NULL, NULL, '', '17', '1', 'category', 0, 1, 'menu', 0, 1, 0, 3, 0, '', NULL, 0, 'top', 'pav-parrent', NULL, '', '', 0, 0, 0),
-(7, '', 1, 0, NULL, NULL, NULL, '', '33', '1', 'category', 0, 1, 'menu', 0, 1, 0, 4, 0, '', NULL, 0, 'top', '', NULL, '', '', 0, 0, 0),
-(10, '', 8, 0, NULL, NULL, NULL, '', '59', '1', 'category', 0, 1, 'menu', 0, 1, 0, 1, 0, '', NULL, 0, 'top', 'pav-menu-child', NULL, '', '', 0, 0, 0),
-(11, '', 8, 0, NULL, NULL, NULL, '', '60', '1', 'category', 0, 1, 'menu', 0, 1, 0, 2, 0, '', NULL, 0, 'top', 'pav-menu-child', NULL, '', '', 0, 0, 0),
-(12, '', 8, 0, NULL, NULL, NULL, '', '61', '1', 'category', 0, 1, 'menu', 0, 1, 0, 3, 0, '', NULL, 0, 'top', 'pav-menu-child', NULL, '', '', 0, 0, 0),
-(13, '', 8, 0, NULL, NULL, NULL, '', '62', '1', 'category', 0, 1, 'menu', 0, 1, 0, 4, 0, '', NULL, 0, 'top', 'pav-menu-child', NULL, '', '', 0, 0, 0),
-(14, '', 8, 0, NULL, NULL, NULL, '', '63', '1', 'category', 0, 1, 'menu', 0, 1, 0, 5, 0, '', NULL, 0, 'top', 'pav-menu-child', NULL, '', '', 0, 0, 0),
-(15, '', 8, 0, NULL, NULL, NULL, '', '64', '1', 'category', 0, 1, 'menu', 0, 1, 0, 6, 0, '', NULL, 0, 'top', 'pav-menu-child', NULL, '', '', 0, 0, 0),
-(16, '', 8, 0, NULL, NULL, NULL, '', '65', '1', 'category', 0, 1, 'menu', 0, 1, 0, 7, 0, '', NULL, 0, 'top', 'pav-menu-child', NULL, '', '', 0, 0, 0),
-(17, '', 9, 0, NULL, NULL, NULL, '', '66', '1', 'category', 0, 1, 'menu', 0, 1, 0, 1, 0, '', NULL, 0, 'top', '', NULL, '', '', 0, 0, 0),
-(18, '', 9, 0, NULL, NULL, NULL, '', '67', '1', 'category', 0, 1, 'menu', 0, 1, 0, 2, 0, '', NULL, 0, 'top', 'pav-menu-child', NULL, '', '', 0, 0, 0),
-(19, '', 9, 0, NULL, NULL, NULL, '', '68', '1', 'category', 0, 1, 'menu', 0, 1, 0, 3, 0, '', NULL, 0, 'top', 'pav-menu-child', NULL, '', '', 0, 0, 0),
-(20, '', 9, 0, NULL, NULL, NULL, '', '71', '1', 'category', 0, 1, 'menu', 0, 1, 0, 4, 0, '', NULL, 0, 'top', 'pav-menu-child', NULL, '', '', 0, 0, 0),
-(21, '', 9, 0, NULL, NULL, NULL, '', '72', '1', 'category', 0, 1, 'menu', 0, 1, 0, 5, 0, '', NULL, 0, 'top', 'pav-menu-child', NULL, '', '', 0, 0, 0),
-(22, '', 9, 0, NULL, NULL, NULL, '', '69', '1', 'category', 0, 1, 'menu', 0, 1, 0, 6, 0, '', NULL, 0, 'top', 'pav-menu-child', NULL, '', '', 0, 0, 0),
-(23, '', 9, 0, NULL, NULL, NULL, '', '70', '1', 'category', 0, 1, 'menu', 0, 1, 0, 7, 0, '', NULL, 0, 'top', 'pav-menu-child', NULL, '', '', 0, 0, 0),
-(24, '', 2, 0, NULL, NULL, NULL, '', '', '1', 'html', 1, 1, 'menu', 0, 1, 0, 3, 0, '', NULL, 0, 'top', 'pav-menu-child', NULL, '&lt;div class=&quot;pav-menu-video&quot;&gt;&lt;iframe allowfullscreen=&quot;&quot; frameborder=&quot;0&quot; height=&quot;157&quot; src=&quot;http://www.youtube.com/embed/NBuLeA7nNFk&quot; width=&quot;279&quot;&gt;&lt;/iframe&gt;\r\n&lt;h3&gt;Lorem ipsum dolor sit&lt;/h3&gt;\r\n\r\n&lt;p&gt;Dorem ipsum dolor sit amet consectetur adipiscing elit congue sit amet erat roin tincidunt vehicula lorem in adipiscing urna iaculis vel.&lt;/p&gt;\r\n&lt;/div&gt;\r\n', '', 0, 0, 0),
-(25, '', 3, 0, NULL, NULL, NULL, '', '79', '1', 'category', 0, 1, 'menu', 0, 1, 0, 2, 0, '', NULL, 0, 'top', '', NULL, '', '', 0, 0, 0),
-(26, '', 3, 0, NULL, NULL, NULL, '', '74', '1', 'category', 0, 1, 'menu', 0, 1, 0, 3, 0, '', NULL, 0, 'top', '', NULL, '', '', 0, 0, 0),
-(27, '', 3, 0, NULL, NULL, NULL, '', '73', '1', 'category', 0, 1, 'menu', 0, 1, 0, 4, 0, '', NULL, 0, 'top', '', NULL, '', '', 0, 0, 0),
-(28, '', 3, 0, NULL, NULL, NULL, '', '80', '1', 'category', 0, 1, 'menu', 0, 1, 0, 5, 0, '', NULL, 0, 'top', '', NULL, '', '', 0, 0, 0),
-(29, '', 3, 0, NULL, NULL, NULL, '', '', '1', 'category', 0, 1, 'menu', 0, 1, 0, 6, 0, '', NULL, 0, 'top', '', NULL, '', '', 0, 0, 0),
-(30, '', 3, 0, NULL, NULL, NULL, '', '46', '1', 'category', 0, 1, 'menu', 0, 1, 0, 7, 0, '', NULL, 0, 'top', '', NULL, '', '', 0, 0, 0),
-(31, '', 3, 0, NULL, NULL, NULL, '', '75', '1', 'category', 0, 1, 'menu', 0, 1, 0, 8, 0, '', NULL, 0, 'top', '', NULL, '', '', 0, 0, 0),
-(32, '', 3, 0, NULL, NULL, NULL, '', '78', '1', 'category', 0, 1, 'menu', 0, 1, 0, 9, 0, '', NULL, 0, 'top', '', NULL, '', '', 0, 0, 0),
-(33, '', 3, 0, NULL, NULL, NULL, '', '77', '1', 'category', 0, 1, 'menu', 0, 1, 0, 10, 0, '', NULL, 0, 'top', '', NULL, '', '', 0, 0, 0),
-(34, '', 3, 0, NULL, NULL, NULL, '', '77', '1', 'category', 0, 1, 'menu', 0, 1, 0, 11, 0, '', NULL, 0, 'top', '', NULL, '', '', 0, 0, 0),
-(35, '', 3, 0, NULL, NULL, NULL, '', '45', '1', 'category', 0, 1, 'menu', 0, 1, 0, 12, 0, '', NULL, 0, 'top', '', NULL, '', '', 0, 0, 0),
-(36, '', 3, 0, NULL, NULL, NULL, '', '45', '1', 'category', 0, 1, 'menu', 0, 1, 0, 13, 0, '', NULL, 0, 'top', '', NULL, '', '', 0, 0, 0),
-(37, '', 1, 0, NULL, NULL, NULL, '', '25', '1', 'category', 0, 1, 'menu', 0, 1, 0, 6, 0, '', NULL, 0, 'top', '', NULL, '', '', 0, 0, 0),
-(38, '', 1, 0, NULL, NULL, NULL, '', '57', '1', 'category', 0, 1, 'menu', 0, 1, 0, 7, 0, '', NULL, 0, 'top', '', NULL, '', '', 0, 0, 0),
-(40, '', 1, 0, NULL, NULL, NULL, '', '', '1', 'url', 0, 1, 'menu', 0, 1, 0, 1, 0, '?route=common/home', NULL, 0, 'top', 'home', NULL, '', '', 0, 0, 0);
-
--- --------------------------------------------------------
-
---
--- 表的结构 `yk_megamenu_description`
---
-
-CREATE TABLE IF NOT EXISTS `yk_megamenu_description` (
-  `megamenu_id` int(11) NOT NULL,
-  `language_id` int(11) NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `description` text NOT NULL,
-  PRIMARY KEY (`megamenu_id`,`language_id`),
-  KEY `name` (`title`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `yk_megamenu_description`
---
-
-INSERT INTO `yk_megamenu_description` (`megamenu_id`, `language_id`, `title`, `description`) VALUES
-(4, 2, 'Watches', ''),
-(4, 1, 'Watches', ''),
-(5, 2, 'Books', ''),
-(5, 1, 'Books', ''),
-(37, 2, 'Watches', ''),
-(7, 2, 'Office', ''),
-(7, 1, 'Office', ''),
-(10, 2, 'Duis tempor', ''),
-(10, 1, 'Duis tempor', ''),
-(11, 2, 'Pellentesque eget', ''),
-(11, 1, 'Pellentesque eget ', ''),
-(12, 2, 'Nam nunc ante', ''),
-(12, 1, 'Nam nunc ante', ''),
-(13, 2, 'Condimentum eu', ''),
-(13, 1, 'Condimentum eu', ''),
-(14, 2, 'Lehicula lorem', ''),
-(14, 1, 'Lehicula lorem', ''),
-(15, 2, 'Integer semper', ''),
-(15, 1, 'Integer semper', ''),
-(16, 2, 'Sollicitudin lacus', ''),
-(16, 1, 'Sollicitudin lacus', ''),
-(17, 2, 'Nam ipsum ', ''),
-(17, 1, 'Nam ipsum ', ''),
-(18, 2, 'Curabitur turpis ', ''),
-(18, 1, 'Curabitur turpis ', ''),
-(19, 1, 'Molestie eu mattis ', ''),
-(19, 2, 'Molestie eu mattis ', ''),
-(20, 1, 'Suspendisse eu ', ''),
-(20, 2, 'Suspendisse eu ', ''),
-(21, 1, 'Nunc imperdiet ', ''),
-(21, 2, 'Nunc imperdiet ', ''),
-(22, 1, 'Mauris mattis', ''),
-(22, 2, 'Mauris mattis', ''),
-(23, 1, 'Lacus sed iaculis ', ''),
-(23, 2, 'Lacus sed iaculis ', ''),
-(24, 2, 'Lorem ipsum dolor sit ', ''),
-(24, 1, 'Lorem ipsum dolor sit ', ''),
-(37, 1, 'Watches', ''),
-(25, 1, 'Aliquam', ''),
-(25, 2, 'Aliquam', ''),
-(26, 1, 'Claritas', ''),
-(26, 2, 'Claritas', ''),
-(27, 2, 'Consectetuer', ''),
-(27, 1, 'Consectetuer', ''),
-(28, 1, 'Hendrerit', ''),
-(28, 2, 'Hendrerit', ''),
-(29, 1, 'Litterarum', ''),
-(29, 2, 'Litterarum', ''),
-(30, 1, 'Macs', ''),
-(30, 2, 'Macs', ''),
-(31, 1, 'Sollemnes', ''),
-(31, 2, 'Sollemnes', ''),
-(32, 1, 'Tempor', ''),
-(32, 2, 'Tempor', ''),
-(33, 1, 'Vulputate', ''),
-(33, 2, 'Vulputate', ''),
-(34, 1, 'Vulputate', ''),
-(34, 2, 'Vulputate', ''),
-(35, 1, 'Windows', ''),
-(35, 2, 'Windows', ''),
-(36, 1, 'Windows', ''),
-(36, 2, 'Windows', ''),
-(38, 1, 'Tablets', ''),
-(38, 2, 'Tablets', ''),
-(40, 2, 'Home', ''),
-(40, 1, 'Home', '');
-
--- --------------------------------------------------------
-
---
 -- 表的结构 `yk_option`
 --
 
@@ -23242,6 +23070,7 @@ INSERT INTO `yk_option_value_description` (`option_value_id`, `language_id`, `op
 
 CREATE TABLE IF NOT EXISTS `yk_order` (
   `order_id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_sn` varchar(32) DEFAULT NULL,
   `invoice_no` int(11) NOT NULL DEFAULT '0',
   `invoice_prefix` varchar(26) NOT NULL,
   `store_id` int(11) NOT NULL DEFAULT '0',
@@ -23249,22 +23078,20 @@ CREATE TABLE IF NOT EXISTS `yk_order` (
   `store_url` varchar(255) NOT NULL,
   `customer_id` int(11) NOT NULL DEFAULT '0',
   `customer_group_id` int(11) NOT NULL DEFAULT '0',
-  `nickname` varchar(64) DEFAULT NULL,
-  `firstname` varchar(32) NOT NULL,
-  `lastname` varchar(32) NOT NULL,
+  `fullname` varchar(64) DEFAULT NULL,
   `mobile_phone` varchar(16) NOT NULL,
-  `telephone` varchar(32) NOT NULL,
+  `telephone` varchar(32) DEFAULT NULL,
+  `email` varchar(128) NOT NULL,
   `fax` varchar(32) NOT NULL,
   `payment_method` varchar(128) NOT NULL,
   `payment_code` varchar(128) NOT NULL,
-  `shipping_nickname` varchar(64) DEFAULT NULL,
-  `shipping_mobile_phone` varchar(16) DEFAULT NULL,
+  `shipping_fullname` varchar(64) DEFAULT NULL,
+  `shipping_telephone` varchar(16) DEFAULT NULL,
   `shipping_company` varchar(32) NOT NULL,
-  `shipping_address_1` varchar(128) NOT NULL,
-  `shipping_address_2` varchar(128) NOT NULL,
+  `shipping_address` varchar(128) NOT NULL,
   `shipping_postcode` varchar(10) NOT NULL,
-  `shipping_zone` varchar(128) NOT NULL,
-  `shipping_zone_id` int(11) NOT NULL,
+  `shipping_province` varchar(128) NOT NULL,
+  `shipping_province_id` int(11) NOT NULL,
   `shipping_areas` varchar(64) DEFAULT NULL,
   `shipping_method` varchar(128) NOT NULL,
   `shipping_code` varchar(128) NOT NULL,
@@ -23317,69 +23144,6 @@ CREATE TABLE IF NOT EXISTS `yk_order_field` (
   `value` text NOT NULL,
   `sort_order` int(3) NOT NULL,
   PRIMARY KEY (`order_id`,`custom_field_id`,`custom_field_value_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- 表的结构 `yk_order_fraud`
---
-
-CREATE TABLE IF NOT EXISTS `yk_order_fraud` (
-  `order_id` int(11) NOT NULL,
-  `customer_id` int(11) NOT NULL,
-  `country_match` varchar(3) NOT NULL,
-  `country_code` varchar(2) NOT NULL,
-  `high_risk_country` varchar(3) NOT NULL,
-  `distance` int(11) NOT NULL,
-  `ip_region` varchar(255) NOT NULL,
-  `ip_city` varchar(255) NOT NULL,
-  `ip_latitude` decimal(10,6) NOT NULL,
-  `ip_longitude` decimal(10,6) NOT NULL,
-  `ip_isp` varchar(255) NOT NULL,
-  `ip_org` varchar(255) NOT NULL,
-  `ip_asnum` int(11) NOT NULL,
-  `ip_user_type` varchar(255) NOT NULL,
-  `ip_country_confidence` varchar(3) NOT NULL,
-  `ip_region_confidence` varchar(3) NOT NULL,
-  `ip_city_confidence` varchar(3) NOT NULL,
-  `ip_postal_confidence` varchar(3) NOT NULL,
-  `ip_postal_code` varchar(10) NOT NULL,
-  `ip_accuracy_radius` int(11) NOT NULL,
-  `ip_net_speed_cell` varchar(255) NOT NULL,
-  `ip_metro_code` int(3) NOT NULL,
-  `ip_area_code` int(3) NOT NULL,
-  `ip_time_zone` varchar(255) NOT NULL,
-  `ip_region_name` varchar(255) NOT NULL,
-  `ip_domain` varchar(255) NOT NULL,
-  `ip_country_name` varchar(255) NOT NULL,
-  `ip_continent_code` varchar(2) NOT NULL,
-  `ip_corporate_proxy` varchar(3) NOT NULL,
-  `anonymous_proxy` varchar(3) NOT NULL,
-  `proxy_score` int(3) NOT NULL,
-  `is_trans_proxy` varchar(3) NOT NULL,
-  `free_mail` varchar(3) NOT NULL,
-  `carder_email` varchar(3) NOT NULL,
-  `high_risk_username` varchar(3) NOT NULL,
-  `high_risk_password` varchar(3) NOT NULL,
-  `bin_match` varchar(10) NOT NULL,
-  `bin_country` varchar(2) NOT NULL,
-  `bin_name_match` varchar(3) NOT NULL,
-  `bin_name` varchar(255) NOT NULL,
-  `bin_phone_match` varchar(3) NOT NULL,
-  `bin_phone` varchar(32) NOT NULL,
-  `customer_phone_in_billing_location` varchar(8) NOT NULL,
-  `ship_forward` varchar(3) NOT NULL,
-  `city_postal_match` varchar(3) NOT NULL,
-  `ship_city_postal_match` varchar(3) NOT NULL,
-  `score` decimal(10,5) NOT NULL,
-  `explanation` text NOT NULL,
-  `risk_score` decimal(10,5) NOT NULL,
-  `queries_remaining` int(11) NOT NULL,
-  `maxmind_id` varchar(8) NOT NULL,
-  `error` text NOT NULL,
-  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`order_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -23514,8 +23278,6 @@ CREATE TABLE IF NOT EXISTS `yk_product` (
   `model` varchar(64) NOT NULL,
   `sku` varchar(64) NOT NULL,
   `upc` varchar(12) NOT NULL,
-  `ean` varchar(14) NOT NULL,
-  `jan` varchar(13) NOT NULL,
   `isbn` varchar(13) NOT NULL,
   `mpn` varchar(64) NOT NULL,
   `location` varchar(128) NOT NULL,
@@ -23550,13 +23312,13 @@ CREATE TABLE IF NOT EXISTS `yk_product` (
 -- 转存表中的数据 `yk_product`
 --
 
-INSERT INTO `yk_product` (`product_id`, `model`, `sku`, `upc`, `ean`, `jan`, `isbn`, `mpn`, `location`, `quantity`, `stock_status_id`, `image`, `manufacturer_id`, `shipping`, `price`, `market`, `points`, `tax_class_id`, `date_available`, `weight`, `weight_class_id`, `length`, `width`, `height`, `length_class_id`, `subtract`, `minimum`, `sort_order`, `status`, `date_added`, `date_modified`, `viewed`, `sales`) VALUES
-(50, '132143', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic1.jpg', 0, 1, '126.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-26 13:00:31', '2015-06-16 16:23:34', 65, 0),
-(51, 'ae123213', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic2.jpg', 0, 1, '123.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-23 07:23:47', '0000-00-00 00:00:00', 31, 0),
-(52, '123123', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic4.jpg', 0, 1, '123.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-07-20 23:44:32', '0000-00-00 00:00:00', 24, 0),
-(53, '231414', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic3.jpg', 0, 1, '125.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-26 13:13:01', '0000-00-00 00:00:00', 141, 0),
-(54, '2144232', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic5.jpg', 0, 1, '128.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-16 09:03:38', '0000-00-00 00:00:00', 6, 0),
-(55, 'xf1325324', '', '', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic6.jpg', 0, 1, '158.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-16 09:05:42', '0000-00-00 00:00:00', 3, 0);
+INSERT INTO `yk_product` (`product_id`, `model`, `sku`, `upc`, `isbn`, `mpn`, `location`, `quantity`, `stock_status_id`, `image`, `manufacturer_id`, `shipping`, `price`, `market`, `points`, `tax_class_id`, `date_available`, `weight`, `weight_class_id`, `length`, `width`, `height`, `length_class_id`, `subtract`, `minimum`, `sort_order`, `status`, `date_added`, `date_modified`, `viewed`, `sales`) VALUES
+(50, '132143', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic1.jpg', 0, 1, '126.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-26 13:00:31', '2015-06-16 16:23:34', 65, 0),
+(51, 'ae123213', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic2.jpg', 0, 1, '123.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-23 07:23:47', '0000-00-00 00:00:00', 31, 0),
+(52, '123123', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic4.jpg', 0, 1, '123.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-07-20 23:44:32', '0000-00-00 00:00:00', 24, 0),
+(53, '231414', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic3.jpg', 0, 1, '125.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-26 13:13:01', '0000-00-00 00:00:00', 141, 0),
+(54, '2144232', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic5.jpg', 0, 1, '128.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-16 09:03:38', '0000-00-00 00:00:00', 6, 0),
+(55, 'xf1325324', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic6.jpg', 0, 1, '158.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-16 09:05:42', '0000-00-00 00:00:00', 3, 0);
 
 -- --------------------------------------------------------
 
@@ -24048,7 +23810,7 @@ CREATE TABLE IF NOT EXISTS `yk_setting` (
   `value` text NOT NULL,
   `serialized` tinyint(1) NOT NULL,
   PRIMARY KEY (`setting_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1861 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1866 ;
 
 --
 -- 转存表中的数据 `yk_setting`
@@ -24069,12 +23831,12 @@ INSERT INTO `yk_setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `se
 (15, 0, 'shipping', 'shipping_estimator', '1', 0),
 (27, 0, 'coupon', 'coupon_sort_order', '4', 0),
 (28, 0, 'coupon', 'coupon_status', '1', 0),
-(1758, 0, 'flat', 'flat_sort_order', '1', 0),
-(1757, 0, 'flat', 'flat_status', '1', 0),
-(1756, 0, 'flat', 'flat_geo_zone_id', '0', 0),
-(1755, 0, 'flat', 'flat_tax_class_id', '0', 0),
+(1865, 0, 'flat', 'flat_sort_order', '1', 0),
+(1864, 0, 'flat', 'flat_status', '1', 0),
+(1863, 0, 'flat', 'flat_area_geo_id', '0', 0),
+(1862, 0, 'flat', 'flat_tax_class_id', '0', 0),
 (1280, 0, 'carousel', 'carousel_module', 'a:1:{i:0;a:8:{s:5:"limit";s:1:"5";s:6:"scroll";s:1:"3";s:5:"width";s:2:"80";s:6:"height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:14:"content_bottom";s:6:"status";s:1:"0";s:10:"sort_order";i:1;}}', 1),
-(1754, 0, 'flat', 'flat_cost', '50.00', 0),
+(1861, 0, 'flat', 'flat_cost', '50.00', 0),
 (42, 0, 'credit', 'credit_sort_order', '7', 0),
 (43, 0, 'credit', 'credit_status', '1', 0),
 (53, 0, 'reward', 'reward_sort_order', '2', 0),

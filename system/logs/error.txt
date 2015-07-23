@@ -1015,3 +1015,199 @@
 2015-07-23 0:41:27 - PHP Notice:  Trying to get property of non-object in E:\wamp\www\yuankong\backend\model\localisation\area_geo.php on line 104
 2015-07-23 0:41:27 - PHP Warning:  Invalid argument supplied for foreach() in E:\wamp\www\yuankong\backend\view\template\localisation\area_geo_form.tpl on line 43
 2015-07-23 0:41:27 - PHP Warning:  Invalid argument supplied for foreach() in E:\wamp\www\yuankong\backend\view\template\localisation\area_geo_form.tpl on line 69
+2015-07-23 11:58:21 - PHP Notice:  Undefined index: ean in D:\wamp\www\yuankong\market\model\catalog\product.php on line 28
+2015-07-23 11:58:21 - PHP Notice:  Undefined index: jan in D:\wamp\www\yuankong\market\model\catalog\product.php on line 29
+2015-07-23 11:58:21 - PHP Notice:  Undefined index: ean in D:\wamp\www\yuankong\market\model\catalog\product.php on line 28
+2015-07-23 11:58:21 - PHP Notice:  Undefined index: jan in D:\wamp\www\yuankong\market\model\catalog\product.php on line 29
+2015-07-23 11:58:21 - PHP Notice:  Undefined index: ean in D:\wamp\www\yuankong\market\model\catalog\product.php on line 28
+2015-07-23 11:58:21 - PHP Notice:  Undefined index: jan in D:\wamp\www\yuankong\market\model\catalog\product.php on line 29
+2015-07-23 11:58:21 - PHP Notice:  Undefined index: ean in D:\wamp\www\yuankong\market\model\catalog\product.php on line 28
+2015-07-23 11:58:21 - PHP Notice:  Undefined index: jan in D:\wamp\www\yuankong\market\model\catalog\product.php on line 29
+2015-07-23 11:58:21 - PHP Notice:  Undefined index: ean in D:\wamp\www\yuankong\market\model\catalog\product.php on line 28
+2015-07-23 11:58:21 - PHP Notice:  Undefined index: jan in D:\wamp\www\yuankong\market\model\catalog\product.php on line 29
+2015-07-23 11:58:21 - PHP Notice:  Undefined index: ean in D:\wamp\www\yuankong\market\model\catalog\product.php on line 28
+2015-07-23 11:58:21 - PHP Notice:  Undefined index: jan in D:\wamp\www\yuankong\market\model\catalog\product.php on line 29
+2015-07-23 11:58:21 - PHP Notice:  Undefined index: ean in D:\wamp\www\yuankong\market\model\catalog\product.php on line 28
+2015-07-23 11:58:21 - PHP Notice:  Undefined index: jan in D:\wamp\www\yuankong\market\model\catalog\product.php on line 29
+2015-07-23 11:58:21 - PHP Notice:  Undefined index: ean in D:\wamp\www\yuankong\market\model\catalog\product.php on line 28
+2015-07-23 11:58:21 - PHP Notice:  Undefined index: jan in D:\wamp\www\yuankong\market\model\catalog\product.php on line 29
+2015-07-23 11:58:21 - PHP Notice:  Undefined index: ean in D:\wamp\www\yuankong\market\model\catalog\product.php on line 28
+2015-07-23 11:58:21 - PHP Notice:  Undefined index: jan in D:\wamp\www\yuankong\market\model\catalog\product.php on line 29
+2015-07-23 11:58:21 - PHP Notice:  Undefined index: ean in D:\wamp\www\yuankong\market\model\catalog\product.php on line 28
+2015-07-23 11:58:21 - PHP Notice:  Undefined index: jan in D:\wamp\www\yuankong\market\model\catalog\product.php on line 29
+2015-07-23 11:58:21 - PHP Notice:  Undefined index: ean in D:\wamp\www\yuankong\market\model\catalog\product.php on line 28
+2015-07-23 11:58:21 - PHP Notice:  Undefined index: jan in D:\wamp\www\yuankong\market\model\catalog\product.php on line 29
+2015-07-23 11:58:21 - PHP Notice:  Undefined index: ean in D:\wamp\www\yuankong\market\model\catalog\product.php on line 28
+2015-07-23 11:58:21 - PHP Notice:  Undefined index: jan in D:\wamp\www\yuankong\market\model\catalog\product.php on line 29
+2015-07-23 12:01:20 - PHP Notice:  Undefined index: ean in D:\wamp\www\yuankong\market\model\catalog\product.php on line 28
+2015-07-23 12:01:20 - PHP Notice:  Undefined index: jan in D:\wamp\www\yuankong\market\model\catalog\product.php on line 29
+2015-07-23 12:01:21 - PHP Notice:  Undefined index: ean in D:\wamp\www\yuankong\market\model\catalog\product.php on line 28
+2015-07-23 12:01:21 - PHP Notice:  Undefined index: jan in D:\wamp\www\yuankong\market\model\catalog\product.php on line 29
+2015-07-23 12:01:21 - PHP Notice:  Undefined index: ean in D:\wamp\www\yuankong\market\model\catalog\product.php on line 28
+2015-07-23 12:01:21 - PHP Notice:  Undefined index: jan in D:\wamp\www\yuankong\market\model\catalog\product.php on line 29
+2015-07-23 12:01:23 - PHP Notice:  Undefined index: ean in D:\wamp\www\yuankong\market\model\catalog\product.php on line 28
+2015-07-23 12:01:23 - PHP Notice:  Undefined index: jan in D:\wamp\www\yuankong\market\model\catalog\product.php on line 29
+2015-07-23 12:01:23 - PHP Notice:  Undefined index: ean in D:\wamp\www\yuankong\market\model\catalog\product.php on line 28
+2015-07-23 12:01:23 - PHP Notice:  Undefined index: jan in D:\wamp\www\yuankong\market\model\catalog\product.php on line 29
+2015-07-23 12:01:23 - PHP Notice:  Undefined index: ean in D:\wamp\www\yuankong\market\model\catalog\product.php on line 28
+2015-07-23 12:01:23 - PHP Notice:  Undefined index: jan in D:\wamp\www\yuankong\market\model\catalog\product.php on line 29
+2015-07-23 12:01:23 - PHP Notice:  Undefined index: ean in D:\wamp\www\yuankong\market\model\catalog\product.php on line 28
+2015-07-23 12:01:23 - PHP Notice:  Undefined index: jan in D:\wamp\www\yuankong\market\model\catalog\product.php on line 29
+2015-07-23 12:01:23 - PHP Notice:  Undefined index: ean in D:\wamp\www\yuankong\market\model\catalog\product.php on line 28
+2015-07-23 12:01:23 - PHP Notice:  Undefined index: jan in D:\wamp\www\yuankong\market\model\catalog\product.php on line 29
+2015-07-23 12:01:23 - PHP Notice:  Undefined index: ean in D:\wamp\www\yuankong\market\model\catalog\product.php on line 28
+2015-07-23 12:01:23 - PHP Notice:  Undefined index: jan in D:\wamp\www\yuankong\market\model\catalog\product.php on line 29
+2015-07-23 12:01:23 - PHP Notice:  Undefined index: ean in D:\wamp\www\yuankong\market\model\catalog\product.php on line 28
+2015-07-23 12:01:23 - PHP Notice:  Undefined index: jan in D:\wamp\www\yuankong\market\model\catalog\product.php on line 29
+2015-07-23 12:01:23 - PHP Notice:  Undefined index: ean in D:\wamp\www\yuankong\market\model\catalog\product.php on line 28
+2015-07-23 12:01:23 - PHP Notice:  Undefined index: jan in D:\wamp\www\yuankong\market\model\catalog\product.php on line 29
+2015-07-23 12:01:23 - PHP Notice:  Undefined index: ean in D:\wamp\www\yuankong\market\model\catalog\product.php on line 28
+2015-07-23 12:01:23 - PHP Notice:  Undefined index: jan in D:\wamp\www\yuankong\market\model\catalog\product.php on line 29
+2015-07-23 12:01:43 - PHP Notice:  Undefined index: country_id in D:\wamp\www\yuankong\market\controller\account\login.php on line 103
+2015-07-23 12:01:43 - PHP Notice:  Undefined index: zone_id in D:\wamp\www\yuankong\market\controller\account\login.php on line 104
+2015-07-23 12:02:02 - PHP Notice:  Undefined variable: entry_zone in D:\wamp\www\yuankong\market\view\theme\yuankong\template\account\address_form.tpl on line 53
+2015-07-23 12:07:32 - PHP Notice:  Undefined index: ean in D:\wamp\www\yuankong\market\model\catalog\product.php on line 28
+2015-07-23 12:07:32 - PHP Notice:  Undefined index: jan in D:\wamp\www\yuankong\market\model\catalog\product.php on line 29
+2015-07-23 12:07:32 - PHP Notice:  Undefined index: ean in D:\wamp\www\yuankong\market\model\catalog\product.php on line 28
+2015-07-23 12:07:32 - PHP Notice:  Undefined index: jan in D:\wamp\www\yuankong\market\model\catalog\product.php on line 29
+2015-07-23 12:07:32 - PHP Notice:  Undefined index: ean in D:\wamp\www\yuankong\market\model\catalog\product.php on line 28
+2015-07-23 12:07:32 - PHP Notice:  Undefined index: jan in D:\wamp\www\yuankong\market\model\catalog\product.php on line 29
+2015-07-23 12:07:32 - PHP Notice:  Undefined index: ean in D:\wamp\www\yuankong\market\model\catalog\product.php on line 28
+2015-07-23 12:07:32 - PHP Notice:  Undefined index: jan in D:\wamp\www\yuankong\market\model\catalog\product.php on line 29
+2015-07-23 12:07:32 - PHP Notice:  Undefined index: ean in D:\wamp\www\yuankong\market\model\catalog\product.php on line 28
+2015-07-23 12:07:32 - PHP Notice:  Undefined index: jan in D:\wamp\www\yuankong\market\model\catalog\product.php on line 29
+2015-07-23 12:07:32 - PHP Notice:  Undefined index: ean in D:\wamp\www\yuankong\market\model\catalog\product.php on line 28
+2015-07-23 12:07:32 - PHP Notice:  Undefined index: jan in D:\wamp\www\yuankong\market\model\catalog\product.php on line 29
+2015-07-23 12:07:32 - PHP Notice:  Undefined index: ean in D:\wamp\www\yuankong\market\model\catalog\product.php on line 28
+2015-07-23 12:07:32 - PHP Notice:  Undefined index: jan in D:\wamp\www\yuankong\market\model\catalog\product.php on line 29
+2015-07-23 12:07:32 - PHP Notice:  Undefined index: ean in D:\wamp\www\yuankong\market\model\catalog\product.php on line 28
+2015-07-23 12:07:32 - PHP Notice:  Undefined index: jan in D:\wamp\www\yuankong\market\model\catalog\product.php on line 29
+2015-07-23 12:07:32 - PHP Notice:  Undefined index: ean in D:\wamp\www\yuankong\market\model\catalog\product.php on line 28
+2015-07-23 12:07:32 - PHP Notice:  Undefined index: jan in D:\wamp\www\yuankong\market\model\catalog\product.php on line 29
+2015-07-23 12:07:32 - PHP Notice:  Undefined index: ean in D:\wamp\www\yuankong\market\model\catalog\product.php on line 28
+2015-07-23 12:07:32 - PHP Notice:  Undefined index: jan in D:\wamp\www\yuankong\market\model\catalog\product.php on line 29
+2015-07-23 12:07:32 - PHP Notice:  Undefined index: ean in D:\wamp\www\yuankong\market\model\catalog\product.php on line 28
+2015-07-23 12:07:32 - PHP Notice:  Undefined index: jan in D:\wamp\www\yuankong\market\model\catalog\product.php on line 29
+2015-07-23 12:07:32 - PHP Notice:  Undefined index: ean in D:\wamp\www\yuankong\market\model\catalog\product.php on line 28
+2015-07-23 12:07:32 - PHP Notice:  Undefined index: jan in D:\wamp\www\yuankong\market\model\catalog\product.php on line 29
+2015-07-23 12:52:41 - PHP Notice:  Undefined index: zone_id in D:\wamp\www\yuankong\market\model\shipping\flat.php on line 6
+2015-07-23 12:52:42 - PHP Notice:  Error: Table 'yuankong.yk_zone_to_geo_zone' doesn't exist<br />Error No: 1146<br />SELECT * FROM yk_zone_to_geo_zone WHERE geo_zone_id = '0' AND (zone_id = '0' OR zone_id = '0') in D:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-07-23 12:52:42 - PHP Notice:  Undefined index: address_1 in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 103
+2015-07-23 12:52:42 - PHP Notice:  Undefined index: mobile_phone in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 104
+2015-07-23 12:52:42 - PHP Notice:  Undefined index: nickname in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 105
+2015-07-23 12:52:42 - PHP Notice:  Undefined index: address_1 in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 103
+2015-07-23 12:52:42 - PHP Notice:  Undefined index: mobile_phone in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 104
+2015-07-23 12:52:42 - PHP Notice:  Undefined index: nickname in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 105
+2015-07-23 12:52:42 - PHP Notice:  Undefined index: address_1 in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 103
+2015-07-23 12:52:42 - PHP Notice:  Undefined index: mobile_phone in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 104
+2015-07-23 12:52:42 - PHP Notice:  Undefined index: nickname in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 105
+2015-07-23 12:52:42 - PHP Notice:  Undefined variable: continue in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 296
+2015-07-23 13:06:44 - PHP Notice:  Error: Unknown column 'o.firstname' in 'field list'<br />Error No: 1054<br />SELECT o.order_id, CONCAT(o.firstname, ' ', o.lastname) AS customer, (SELECT os.name FROM yk_order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '2') AS status, o.total, o.currency_code, o.currency_value, o.date_added, o.date_modified FROM `yk_order` o WHERE o.order_status_id > '0' ORDER BY o.date_added DESC LIMIT 0,10 in D:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-07-23 13:06:44 - PHP Notice:  Trying to get property of non-object in D:\wamp\www\yuankong\backend\model\sale\order.php on line 413
+2015-07-23 13:06:44 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\controller\common\home.php on line 172
+2015-07-23 13:14:22 - PHP Notice:  Error: Unknown column 'o.firstname' in 'field list'<br />Error No: 1054<br />SELECT o.order_id, CONCAT(o.firstname, ' ', o.lastname) AS customer, (SELECT os.name FROM yk_order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '2') AS status, o.total, o.currency_code, o.currency_value, o.date_added, o.date_modified FROM `yk_order` o WHERE o.order_status_id > '0' ORDER BY o.date_added DESC LIMIT 0,10 in D:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-07-23 13:14:22 - PHP Notice:  Trying to get property of non-object in D:\wamp\www\yuankong\backend\model\sale\order.php on line 413
+2015-07-23 13:14:22 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\controller\common\home.php on line 172
+2015-07-23 13:24:32 - PHP Notice:  Error: Column 'name' in order clause is ambiguous<br />Error No: 1052<br />SELECT *, c.fullname AS name, cgd.name AS customer_group FROM yk_customer c LEFT JOIN yk_customer_group_description cgd ON (c.customer_group_id = cgd.customer_group_id) WHERE cgd.language_id = '2' ORDER BY name ASC LIMIT 0,20 in D:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-07-23 13:24:32 - PHP Notice:  Trying to get property of non-object in D:\wamp\www\yuankong\backend\model\sale\customer.php on line 152
+2015-07-23 13:24:32 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\controller\sale\customer.php on line 418
+2015-07-23 13:27:46 - PHP Notice:  Error: Column 'name' in order clause is ambiguous<br />Error No: 1052<br />SELECT *, c.fullname AS name, cgd.name AS customer_group FROM yk_customer c LEFT JOIN yk_customer_group_description cgd ON (c.customer_group_id = cgd.customer_group_id) WHERE cgd.language_id = '2' ORDER BY name ASC LIMIT 0,20 in D:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-07-23 13:27:46 - PHP Notice:  Trying to get property of non-object in D:\wamp\www\yuankong\backend\model\sale\customer.php on line 152
+2015-07-23 13:27:46 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\controller\sale\customer.php on line 418
+2015-07-23 13:29:11 - PHP Notice:  Error: Unknown column 'c.name' in 'order clause'<br />Error No: 1054<br />SELECT *, c.fullname AS name, cgd.name AS customer_group FROM yk_customer c LEFT JOIN yk_customer_group_description cgd ON (c.customer_group_id = cgd.customer_group_id) WHERE cgd.language_id = '2' ORDER BY c.name ASC LIMIT 0,20 in D:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-07-23 13:29:11 - PHP Notice:  Trying to get property of non-object in D:\wamp\www\yuankong\backend\model\sale\customer.php on line 152
+2015-07-23 13:29:11 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\controller\sale\customer.php on line 418
+2015-07-23 13:29:59 - PHP Notice:  Undefined index: nickname in D:\wamp\www\yuankong\backend\controller\sale\customer.php on line 429
+2015-07-23 13:29:59 - PHP Notice:  Undefined index: nickname in D:\wamp\www\yuankong\backend\controller\sale\customer.php on line 429
+2015-07-23 13:36:41 - PHP Notice:  Undefined index: nickname in D:\wamp\www\yuankong\backend\controller\sale\customer.php on line 429
+2015-07-23 13:36:41 - PHP Notice:  Undefined index: nickname in D:\wamp\www\yuankong\backend\controller\sale\customer.php on line 429
+2015-07-23 13:36:41 - PHP Notice:  Undefined variable: filter_name in D:\wamp\www\yuankong\backend\view\template\sale\customer_list.tpl on line 73
+2015-07-23 13:37:05 - PHP Notice:  Undefined variable: filter_name in D:\wamp\www\yuankong\backend\view\template\sale\customer_list.tpl on line 73
+2015-07-23 13:42:56 - PHP Notice:  Undefined variable: filter_name in D:\wamp\www\yuankong\backend\view\template\sale\customer_list.tpl on line 73
+2015-07-23 13:44:01 - PHP Notice:  Undefined variable: error_fullname in D:\wamp\www\yuankong\backend\view\template\sale\customer_form.tpl on line 55
+2015-07-23 13:44:01 - PHP Notice:  Undefined variable: entry_province in D:\wamp\www\yuankong\backend\view\template\sale\customer_form.tpl on line 333
+2015-07-23 13:44:25 - PHP Notice:  Undefined variable: entry_province in D:\wamp\www\yuankong\backend\view\template\sale\customer_form.tpl on line 333
+2015-07-23 13:47:04 - PHP Notice:  Undefined variable: entry_firstname in D:\wamp\www\yuankong\backend\view\template\sale\customer_form.tpl on line 131
+2015-07-23 13:47:04 - PHP Notice:  Undefined index: city in D:\wamp\www\yuankong\backend\view\template\sale\customer_form.tpl on line 158
+2015-07-23 13:47:04 - PHP Notice:  Undefined variable: entry_firstname in D:\wamp\www\yuankong\backend\view\template\sale\customer_form.tpl on line 131
+2015-07-23 13:47:04 - PHP Notice:  Undefined index: city in D:\wamp\www\yuankong\backend\view\template\sale\customer_form.tpl on line 158
+2015-07-23 13:47:04 - PHP Notice:  Undefined variable: entry_firstname in D:\wamp\www\yuankong\backend\view\template\sale\customer_form.tpl on line 131
+2015-07-23 13:47:04 - PHP Notice:  Undefined index: city in D:\wamp\www\yuankong\backend\view\template\sale\customer_form.tpl on line 158
+2015-07-23 13:48:31 - PHP Notice:  Undefined index: city in D:\wamp\www\yuankong\backend\view\template\sale\customer_form.tpl on line 158
+2015-07-23 13:48:31 - PHP Notice:  Undefined index: city in D:\wamp\www\yuankong\backend\view\template\sale\customer_form.tpl on line 158
+2015-07-23 13:48:31 - PHP Notice:  Undefined index: city in D:\wamp\www\yuankong\backend\view\template\sale\customer_form.tpl on line 158
+2015-07-23 13:53:06 - PHP Notice:  Undefined index: area_id in D:\wamp\www\yuankong\market\model\shipping\flat.php on line 6
+2015-07-23 13:53:06 - PHP Notice:  Error: Unknown column 'area_geo_id' in 'where clause'<br />Error No: 1054<br />SELECT * FROM yk_area_to_area_geo WHERE area_geo_id = '0' AND (area_id = '0' OR area_id = '0') in D:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-07-23 13:53:07 - PHP Notice:  Undefined index: address_1 in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 103
+2015-07-23 13:53:07 - PHP Notice:  Undefined index: mobile_phone in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 104
+2015-07-23 13:53:07 - PHP Notice:  Undefined index: nickname in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 105
+2015-07-23 13:53:07 - PHP Notice:  Undefined index: address_1 in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 103
+2015-07-23 13:53:07 - PHP Notice:  Undefined index: mobile_phone in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 104
+2015-07-23 13:53:07 - PHP Notice:  Undefined index: nickname in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 105
+2015-07-23 13:53:07 - PHP Notice:  Undefined index: address_1 in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 103
+2015-07-23 13:53:07 - PHP Notice:  Undefined index: mobile_phone in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 104
+2015-07-23 13:53:07 - PHP Notice:  Undefined index: nickname in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 105
+2015-07-23 13:53:07 - PHP Notice:  Undefined variable: continue in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 296
+2015-07-23 13:56:03 - PHP Notice:  Undefined index: area_id in D:\wamp\www\yuankong\market\model\shipping\flat.php on line 6
+2015-07-23 13:56:04 - PHP Notice:  Undefined index: address_1 in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 103
+2015-07-23 13:56:04 - PHP Notice:  Undefined index: mobile_phone in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 104
+2015-07-23 13:56:04 - PHP Notice:  Undefined index: nickname in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 105
+2015-07-23 13:56:04 - PHP Notice:  Undefined index: address_1 in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 103
+2015-07-23 13:56:04 - PHP Notice:  Undefined index: mobile_phone in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 104
+2015-07-23 13:56:04 - PHP Notice:  Undefined index: nickname in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 105
+2015-07-23 13:56:04 - PHP Notice:  Undefined index: address_1 in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 103
+2015-07-23 13:56:04 - PHP Notice:  Undefined index: mobile_phone in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 104
+2015-07-23 13:56:04 - PHP Notice:  Undefined index: nickname in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 105
+2015-07-23 13:56:04 - PHP Notice:  Undefined variable: continue in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 296
+2015-07-23 13:57:21 - PHP Notice:  Undefined index: area_id in D:\wamp\www\yuankong\market\model\shipping\flat.php on line 9
+2015-07-23 13:57:21 - PHP Notice:  Undefined index: address_1 in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 103
+2015-07-23 13:57:21 - PHP Notice:  Undefined index: mobile_phone in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 104
+2015-07-23 13:57:21 - PHP Notice:  Undefined index: nickname in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 105
+2015-07-23 13:57:21 - PHP Notice:  Undefined index: address_1 in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 103
+2015-07-23 13:57:21 - PHP Notice:  Undefined index: mobile_phone in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 104
+2015-07-23 13:57:21 - PHP Notice:  Undefined index: nickname in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 105
+2015-07-23 13:57:21 - PHP Notice:  Undefined index: address_1 in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 103
+2015-07-23 13:57:21 - PHP Notice:  Undefined index: mobile_phone in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 104
+2015-07-23 13:57:21 - PHP Notice:  Undefined index: nickname in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 105
+2015-07-23 13:57:21 - PHP Notice:  Undefined variable: continue in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 296
+2015-07-23 13:58:31 - PHP Notice:  Undefined index: address_1 in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 103
+2015-07-23 13:58:31 - PHP Notice:  Undefined index: mobile_phone in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 104
+2015-07-23 13:58:31 - PHP Notice:  Undefined index: nickname in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 105
+2015-07-23 13:58:31 - PHP Notice:  Undefined index: address_1 in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 103
+2015-07-23 13:58:31 - PHP Notice:  Undefined index: mobile_phone in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 104
+2015-07-23 13:58:31 - PHP Notice:  Undefined index: nickname in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 105
+2015-07-23 13:58:31 - PHP Notice:  Undefined index: address_1 in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 103
+2015-07-23 13:58:31 - PHP Notice:  Undefined index: mobile_phone in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 104
+2015-07-23 13:58:31 - PHP Notice:  Undefined index: nickname in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 105
+2015-07-23 13:58:31 - PHP Notice:  Undefined variable: continue in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 296
+2015-07-23 14:05:16 - PHP Notice:  Undefined index: address_1 in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 103
+2015-07-23 14:05:16 - PHP Notice:  Undefined index: mobile_phone in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 104
+2015-07-23 14:05:16 - PHP Notice:  Undefined index: nickname in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 105
+2015-07-23 14:05:16 - PHP Notice:  Undefined index: address_1 in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 103
+2015-07-23 14:05:16 - PHP Notice:  Undefined index: mobile_phone in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 104
+2015-07-23 14:05:16 - PHP Notice:  Undefined index: nickname in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 105
+2015-07-23 14:05:16 - PHP Notice:  Undefined index: address_1 in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 103
+2015-07-23 14:05:16 - PHP Notice:  Undefined index: mobile_phone in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 104
+2015-07-23 14:05:16 - PHP Notice:  Undefined index: nickname in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 105
+2015-07-23 14:05:16 - PHP Notice:  Undefined variable: continue in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 296
+2015-07-23 14:06:38 - PHP Notice:  Undefined variable: continue in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 296
+2015-07-23 14:09:44 - PHP Notice:  Undefined variable: continue in D:\wamp\www\yuankong\market\view\theme\yuankong\template\checkout\checkout.tpl on line 296
+2015-07-23 14:11:18 - PHP Notice:  Undefined index: city in D:\wamp\www\yuankong\backend\view\template\sale\customer_form.tpl on line 165
+2015-07-23 14:11:18 - PHP Notice:  Undefined index: city in D:\wamp\www\yuankong\backend\view\template\sale\customer_form.tpl on line 165
+2015-07-23 14:11:18 - PHP Notice:  Undefined index: city in D:\wamp\www\yuankong\backend\view\template\sale\customer_form.tpl on line 165
+2015-07-23 14:11:18 - PHP Notice:  Undefined variable: entry_areas in D:\wamp\www\yuankong\backend\view\template\sale\customer_form.tpl on line 297
+2015-07-23 14:11:25 - PHP Notice:  Undefined variable: entry_areas in D:\wamp\www\yuankong\backend\view\template\sale\customer_form.tpl on line 297
+2015-07-23 14:17:52 - PHP Notice:  Undefined variable: entry_areas in D:\wamp\www\yuankong\backend\view\template\sale\customer_form.tpl on line 295
+2015-07-23 14:19:14 - PHP Notice:  Undefined variable: entry_areas in D:\wamp\www\yuankong\backend\view\template\sale\customer_form.tpl on line 295
+2015-07-23 14:21:08 - PHP Notice:  Undefined variable: entry_areas in D:\wamp\www\yuankong\backend\view\template\sale\customer_form.tpl on line 296
+2015-07-23 14:21:46 - PHP Notice:  Undefined variable: entry_areas in D:\wamp\www\yuankong\backend\view\template\sale\customer_form.tpl on line 296
+2015-07-23 14:22:40 - PHP Notice:  Undefined variable: entry_areas in D:\wamp\www\yuankong\backend\view\template\sale\customer_form.tpl on line 296
+2015-07-23 14:23:17 - PHP Notice:  Undefined variable: entry_areas in D:\wamp\www\yuankong\backend\view\template\sale\customer_form.tpl on line 296
+2015-07-23 14:38:19 - PHP Warning:  file_put_contents(/asset/javascript/area.js): failed to open stream: No such file or directory in D:\wamp\www\yuankong\backend\controller\sale\customer.php on line 1361
+2015-07-23 15:15:48 - PHP Notice:  Array to string conversion in D:\wamp\www\yuankong\backend\view\template\sale\customer_form.tpl on line 304
+2015-07-23 15:47:08 - PHP Notice:  Array to string conversion in D:\wamp\www\yuankong\backend\view\template\sale\customer_form.tpl on line 258
+2015-07-23 15:48:01 - PHP Notice:  Array to string conversion in D:\wamp\www\yuankong\backend\view\template\sale\customer_form.tpl on line 258
+2015-07-23 15:50:01 - PHP Notice:  Array to string conversion in D:\wamp\www\yuankong\backend\view\template\sale\customer_form.tpl on line 258
+2015-07-23 15:50:47 - PHP Notice:  Array to string conversion in D:\wamp\www\yuankong\backend\view\template\sale\customer_form.tpl on line 258
+2015-07-23 16:00:34 - PHP Notice:  Array to string conversion in D:\wamp\www\yuankong\backend\view\template\sale\customer_form.tpl on line 258
+2015-07-23 16:04:39 - PHP Notice:  Array to string conversion in D:\wamp\www\yuankong\backend\view\template\sale\customer_form.tpl on line 257

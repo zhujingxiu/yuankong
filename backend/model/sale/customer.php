@@ -1,42 +1,51 @@
 <?php
 class ModelSaleCustomer extends Model {
 	public function addCustomer($data) {
-      	$this->db->query("INSERT INTO " . DB_PREFIX . "customer SET mobile_phone = '".$this->db->escape($data['mobile_phone'])."', nickname = '" . $this->db->escape($data['nickname']) . "', firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "', newsletter = '" . (int)$data['newsletter'] . "', customer_group_id = '" . (int)$data['customer_group_id'] . "', salt = '" . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . "', status = '" . (int)$data['status'] . "', date_added = NOW()");
+      	$this->db->query("INSERT INTO " . DB_PREFIX . "customer SET mobile_phone = '".$this->db->escape($data['mobile_phone'])."', fullname = '" . $this->db->escape($data['fullname']) . "',  email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "', newsletter = '" . (int)$data['newsletter'] . "', customer_group_id = '" . (int)$data['customer_group_id'] . "', salt = '" . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . "', status = '" . (int)$data['status'] . "', date_added = NOW()");
       	
       	$customer_id = $this->db->getLastId();
-      	
-      	if (isset($data['address'])) {		
-      		foreach ($data['address'] as $address) {	
-      			$this->db->query("INSERT INTO " . DB_PREFIX . "address SET customer_id = '" . (int)$customer_id . "',nickname = '" . $this->db->escape($data['nickname']) . "', firstname = '" . $this->db->escape($address['firstname']) . "', lastname = '" . $this->db->escape($address['lastname']) . "', company = '" . $this->db->escape($address['company']) . "', company_id = '" . $this->db->escape($address['company_id']) . "', tax_id = '" . $this->db->escape($address['tax_id']) . "', address_1 = '" . $this->db->escape($address['address_1']) . "', address_2 = '" . $this->db->escape($address['address_2']) . "', city = '" . $this->db->escape($address['city']) . "', postcode = '" . $this->db->escape($address['postcode']) . "',  province_id = '" . (int)$address['province_id'] . "'");
-				
-				if (isset($address['default'])) {
-					$address_id = $this->db->getLastId();
-					
-					$this->db->query("UPDATE " . DB_PREFIX . "customer SET address_id = '" . $address_id . "' WHERE customer_id = '" . (int)$customer_id . "'");
-				}
-			}
-		}
+
 	}
 	
 	public function editCustomer($customer_id, $data) {
-		$this->db->query("UPDATE " . DB_PREFIX . "customer SET mobile_phone = '".$this->db->escape($data['mobile_phone'])."', nickname = '" . $this->db->escape($data['nickname']) . "',firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "', newsletter = '" . (int)$data['newsletter'] . "', customer_group_id = '" . (int)$data['customer_group_id'] . "', status = '" . (int)$data['status'] . "' WHERE customer_id = '" . (int)$customer_id . "'");
+		$this->db->query("UPDATE " . DB_PREFIX . "customer SET mobile_phone = '".$this->db->escape($data['mobile_phone'])."', fullname = '" . $this->db->escape($data['fullname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "', newsletter = '" . (int)$data['newsletter'] . "', customer_group_id = '" . (int)$data['customer_group_id'] . "', status = '" . (int)$data['status'] . "' WHERE customer_id = '" . (int)$customer_id . "'");
 	
       	if ($data['password']) {
         	$this->db->query("UPDATE " . DB_PREFIX . "customer SET salt = '" . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . "' WHERE customer_id = '" . (int)$customer_id . "'");
-      	}
-      	
-      	$this->db->query("DELETE FROM " . DB_PREFIX . "address WHERE customer_id = '" . (int)$customer_id . "'");
-      	
-      	if (isset($data['address'])) {
-      		foreach ($data['address'] as $address) {
-				$this->db->query("INSERT INTO " . DB_PREFIX . "address SET address_id = '" . (int)$address['address_id'] . "', customer_id = '" . (int)$customer_id . "', nickname = '" . $this->db->escape($data['nickname']) . "', firstname = '" . $this->db->escape($address['firstname']) . "', lastname = '" . $this->db->escape($address['lastname']) . "', company = '" . $this->db->escape($address['company']) . "', company_id = '" . $this->db->escape($address['company_id']) . "', tax_id = '" . $this->db->escape($address['tax_id']) . "', address_1 = '" . $this->db->escape($address['address_1']) . "', address_2 = '" . $this->db->escape($address['address_2']) . "', city = '" . $this->db->escape($address['city']) . "', postcode = '" . $this->db->escape($address['postcode']) . "',  province_id = '" . (int)$address['province_id'] . "'");
-					
-				if (isset($address['default'])) {
-					$address_id = $this->db->getLastId();
-						
-					$this->db->query("UPDATE " . DB_PREFIX . "customer SET address_id = '" . (int)$address_id . "' WHERE customer_id = '" . (int)$customer_id . "'");
-				}
+      	}      	
+	}
+
+	public function saveAddress($customer_id ,$address_id=null,$data=array()){
+		$area_zone = array();
+		if(isset($data['area']) && is_array($data['area'])){
+			foreach ($data['area'] as $area_id) {
+				$_area_info = $this->db->fetch('area',array('condiftion'=> array('area_id'=>$area_id)));
+				if(!empty($_area_info['name'])){
+					$area_zone[] = $_area_info['name'];
+				}				
 			}
+		}
+		$fields = array(
+			'customer_id' 	=> (int)$customer_id , 
+			'fullname' 		=> $data['fullname'],  
+			'telephone' 	=> $data['telephone'],  
+			'company' 		=> $data['company'],   
+			'address' 		=> $data['address'],
+			'areas' 		=> implode("|",$data['area']), 
+			'area_zone' 	=> $area_zone,  
+			'postcode' 		=> $data['postcode'],  
+			'province_id' 	=> (int)$data['province_id']
+		);
+		if($address_id){
+			$this->db->update('address',array('address_id'=>$address_id),$fields);
+		}else{
+			$this->db->insert('address',$fields);
+		}
+      			
+		if (isset($data['default'])) {
+			$address_id = $this->db->getLastId();
+				
+			$this->db->query("UPDATE " . DB_PREFIX . "customer SET address_id = '" . (int)$address_id . "' WHERE customer_id = '" . (int)$customer_id . "'");
 		}
 	}
 
@@ -71,14 +80,14 @@ class ModelSaleCustomer extends Model {
 	}
 			
 	public function getCustomers($data = array()) {
-		$sql = "SELECT *, CONCAT(c.lastname, ' ', c.firstname) AS name, cgd.name AS customer_group FROM " . DB_PREFIX . "customer c LEFT JOIN " . DB_PREFIX . "customer_group_description cgd ON (c.customer_group_id = cgd.customer_group_id) WHERE cgd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
+		$sql = "SELECT *, c.fullname AS customer, cgd.name AS customer_group FROM " . DB_PREFIX . "customer c LEFT JOIN " . DB_PREFIX . "customer_group_description cgd ON (c.customer_group_id = cgd.customer_group_id) WHERE cgd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 
 		$implode = array();
 		if (!empty($data['filter_mobile_phone'])) {
 			$implode[] = "c.mobile_phone LIKE '" . $this->db->escape($data['filter_mobile_phone']) . "%'";
 		}
 		if (!empty($data['filter_name'])) {
-			$implode[] = "CONCAT(c.lastname, ' ', c.firstname) LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
+			$implode[] = "c.fullname LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
 		}
 		
 		if (!empty($data['filter_email'])) {
@@ -114,7 +123,7 @@ class ModelSaleCustomer extends Model {
 		}
 		
 		$sort_data = array(
-			'name',
+			'customer',
 			'c.email',
 			'customer_group',
 			'c.status',
@@ -126,7 +135,7 @@ class ModelSaleCustomer extends Model {
 		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
 			$sql .= " ORDER BY " . $data['sort'];	
 		} else {
-			$sql .= " ORDER BY name";	
+			$sql .= " ORDER BY customer";	
 		}
 			
 		if (isset($data['order']) && ($data['order'] == 'DESC')) {
@@ -201,28 +210,17 @@ class ModelSaleCustomer extends Model {
 
 		if ($address_query->num_rows) {
 			
-			$area_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "area` WHERE province_id = '" . (int)$address_query->row['province_id'] . "'");
-			
-			if ($area_query->num_rows) {
-				$area = $area_query->row['name'];
-			} else {
-				$area = '';
-			}		
-		
 			return array(
 				'address_id'     => $address_query->row['address_id'],
 				'customer_id'    => $address_query->row['customer_id'],
-				'firstname'      => $address_query->row['firstname'],
-				'lastname'       => $address_query->row['lastname'],
+				'fullname'       => $address_query->row['fullname'],
+				'telephone'      => $address_query->row['telephone'],
 				'company'        => $address_query->row['company'],
-				'company_id'     => $address_query->row['company_id'],
-				'tax_id'         => $address_query->row['tax_id'],
-				'address_1'      => $address_query->row['address_1'],
-				'address_2'      => $address_query->row['address_2'],
+				'address'        => $address_query->row['address'],
 				'postcode'       => $address_query->row['postcode'],
-				'city'           => $address_query->row['city'],
+				'area_zone'      => $address_query->row['area_zone'],
 				'province_id'    => $address_query->row['province_id'],
-				'province'       => $province,
+				'areas'       	 => $address_query->row['areas']
 			);
 		}
 	}
@@ -251,7 +249,7 @@ class ModelSaleCustomer extends Model {
 			$implode[] = "mobile_phone LIKE '" . $this->db->escape($data['filter_mobile_phone']) . "%'";
 		}
 		if (!empty($data['filter_name'])) {
-			$implode[] = "CONCAT(c.lastname, ' ', c.firstname) LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
+			$implode[] = "c.fullname LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
 		}
 		
 		if (!empty($data['filter_email'])) {

@@ -70,7 +70,7 @@
             <tr class="filter">
               <td></td>
               <td><input type="text" name="filter_mobile_phone" value="<?php echo $filter_mobile_phone; ?>" /></td>
-              <td><input type="text" name="filter_name" value="<?php echo $filter_name; ?>" /></td>
+              <td><input type="text" name="filter_customer" value="<?php echo $filter_customer; ?>" /></td>
               <td><input type="text" name="filter_email" value="<?php echo $filter_email; ?>" /></td>
               <td><select name="filter_customer_group_id">
                   <option value="*"></option>

@@ -106,8 +106,7 @@ class ControllerCheckoutConfirm extends Controller {
 			if ($this->customer->isLogged()) {
 				$data['customer_id'] = $this->customer->getId();
 				$data['customer_group_id'] = $this->customer->getCustomerGroupId();
-				$data['firstname'] = $this->customer->getFirstName();
-				$data['lastname'] = $this->customer->getLastName();
+				$data['fullname'] = $this->customer->getFullName();
 				$data['email'] = $this->customer->getEmail();
 				$data['telephone'] = $this->customer->getTelephone();
 				$data['fax'] = $this->customer->getFax();
@@ -135,16 +134,13 @@ class ControllerCheckoutConfirm extends Controller {
 					$shipping_address = $this->model_account_address->getAddress($this->session->data['shipping_address_id']);	
 				} 			
 				
-				$data['shipping_firstname'] = $shipping_address['firstname'];
-				$data['shipping_lastname'] = $shipping_address['lastname'];	
+				$data['shipping_fullname'] = $shipping_address['fullname'];
+				$data['shipping_telephone'] = $shipping_address['telephone'];
 				$data['shipping_company'] = $shipping_address['company'];	
-				$data['shipping_address_1'] = $shipping_address['address_1'];
-				$data['shipping_address_2'] = $shipping_address['address_2'];
-				$data['shipping_city'] = $shipping_address['city'];
+				$data['shipping_address'] = $shipping_address['address'];
 				$data['shipping_postcode'] = $shipping_address['postcode'];
-				$data['shipping_zone'] = $shipping_address['zone'];
-				$data['shipping_zone_id'] = $shipping_address['zone_id'];
-				$data['shipping_address_format'] = $shipping_address['address_format'];
+				$data['shipping_province'] = $shipping_address['province'];
+				$data['shipping_province_id'] = $shipping_address['province_id'];
 			
 				if (isset($this->session->data['shipping_method']['title'])) {
 					$data['shipping_method'] = $this->session->data['shipping_method']['title'];
@@ -158,15 +154,13 @@ class ControllerCheckoutConfirm extends Controller {
 					$data['shipping_code'] = '';
 				}				
 			} else {
-				$data['shipping_firstname'] = '';
-				$data['shipping_lastname'] = '';	
+				$data['shipping_fullname'] = '';
+				$data['shipping_telephone'] = '';
 				$data['shipping_company'] = '';	
-				$data['shipping_address_1'] = '';
-				$data['shipping_address_2'] = '';
-				$data['shipping_city'] = '';
+				$data['shipping_address'] = '';
 				$data['shipping_postcode'] = '';
-				$data['shipping_zone'] = '';
-				$data['shipping_zone_id'] = '';
+				$data['shipping_province'] = '';
+				$data['shipping_province_id'] = '';
 				$data['shipping_method'] = '';
 				$data['shipping_code'] = '';
 			}
@@ -351,25 +345,21 @@ class ControllerCheckoutConfirm extends Controller {
   	}
 
   	protected function validateAddress() {
-		if ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32)) {
-			$json['error']['firstname'] = $this->language->get('error_firstname');
+		if ((utf8_strlen($this->request->post['fullname']) < 1) || (utf8_strlen($this->request->post['fullname']) > 32)) {
+			$json['error']['fullname'] = $this->language->get('error_fullname');
 		}
 
-		if ((utf8_strlen($this->request->post['lastname']) < 1) || (utf8_strlen($this->request->post['lastname']) > 32)) {
-			$json['error']['lastname'] = $this->language->get('error_lastname');
+		if ((utf8_strlen($this->request->post['address']) < 3) || (utf8_strlen($this->request->post['address']) > 128)) {
+			$json['error']['address'] = $this->language->get('error_address');
 		}
 
-		if ((utf8_strlen($this->request->post['address_1']) < 3) || (utf8_strlen($this->request->post['address_1']) > 128)) {
-			$json['error']['address_1'] = $this->language->get('error_address_1');
-		}
-
-		if ((utf8_strlen($this->request->post['city']) < 2) || (utf8_strlen($this->request->post['city']) > 128)) {
-			$json['error']['city'] = $this->language->get('error_city');
+		if ((utf8_strlen($this->request->post['telephone']) < 2) || (utf8_strlen($this->request->post['telephone']) > 128)) {
+			$json['error']['telephone'] = $this->language->get('error_telephone');
 		}
 		
 		
-		if (!isset($this->request->post['zone_id']) || $this->request->post['zone_id'] == '') {
-			$json['error']['zone'] = $this->language->get('error_zone');
+		if (!isset($this->request->post['province_id']) || $this->request->post['province_id'] == '') {
+			$json['error']['province'] = $this->language->get('error_province');
 		}
 		
 		if (!$json) {						
@@ -377,7 +367,7 @@ class ControllerCheckoutConfirm extends Controller {
 			$this->load->model('account/address');		
 			
 			$this->session->data['shipping_address_id'] = $this->model_account_address->addAddress($this->request->post);
-			$this->session->data['shipping_zone_id'] = $this->request->post['zone_id'];
+			$this->session->data['shipping_province_id'] = $this->request->post['province_id'];
 			$this->session->data['shipping_postcode'] = $this->request->post['postcode'];
 							
 			unset($this->session->data['shipping_method']);						

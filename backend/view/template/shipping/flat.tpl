@@ -34,14 +34,14 @@
                 </select></td>
           </tr>
           <tr>
-            <td><?php echo $entry_geo_zone; ?></td>
-            <td><select name="flat_geo_zone_id">
+            <td><?php echo $entry_area_geo; ?></td>
+            <td><select name="flat_area_geo_id">
                 <option value="0"><?php echo $text_all_zones; ?></option>
-                <?php foreach ($geo_zones as $geo_zone) { ?>
-                <?php if ($geo_zone['geo_zone_id'] == $flat_geo_zone_id) { ?>
-                <option value="<?php echo $geo_zone['geo_zone_id']; ?>" selected="selected"><?php echo $geo_zone['name']; ?></option>
+                <?php foreach ($area_geos as $item) { ?>
+                <?php if ($item['area_geo_id'] == $flat_area_geo_id) { ?>
+                <option value="<?php echo $item['area_geo_id']; ?>" selected="selected"><?php echo $item['name']; ?></option>
                 <?php } else { ?>
-                <option value="<?php echo $geo_zone['geo_zone_id']; ?>"><?php echo $geo_zone['name']; ?></option>
+                <option value="<?php echo $item['area_geo_id']; ?>"><?php echo $item['name']; ?></option>
                 <?php } ?>
                 <?php } ?>
               </select></td>

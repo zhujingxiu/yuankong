@@ -15,8 +15,8 @@
     </div>
     <div class="content">
       <div class="vtabs"><a href="#tab-general"><?php echo $tab_general; ?></a>
-        <?php foreach ($geo_zones as $geo_zone) { ?>
-        <a href="#tab-geo-zone<?php echo $geo_zone['geo_zone_id']; ?>"><?php echo $geo_zone['name']; ?></a>
+        <?php foreach ($area_geos as $area_geo) { ?>
+        <a href="#tab-area-geo<?php echo $area_geo['area_geo_id']; ?>"><?php echo $area_geo['name']; ?></a>
         <?php } ?>
       </div>
       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
@@ -53,17 +53,17 @@
             </tr>
           </table>
         </div>
-        <?php foreach ($geo_zones as $geo_zone) { ?>
-        <div id="tab-geo-zone<?php echo $geo_zone['geo_zone_id']; ?>" class="vtabs-content">
+        <?php foreach ($area_geos as $item) { ?>
+        <div id="tab-area-geo<?php echo $item['area_geo_id']; ?>" class="vtabs-content">
           <table class="form">
             <tr>
               <td><?php echo $entry_rate; ?></td>
-              <td><textarea name="weight_<?php echo $geo_zone['geo_zone_id']; ?>_rate" cols="40" rows="5"><?php echo ${'weight_' . $geo_zone['geo_zone_id'] . '_rate'}; ?></textarea></td>
+              <td><textarea name="weight_<?php echo $item['area_geo_id']; ?>_rate" cols="40" rows="5"><?php echo ${'weight_' . $item['area_geo_id'] . '_rate'}; ?></textarea></td>
             </tr>
             <tr>
               <td><?php echo $entry_status; ?></td>
-              <td><select name="weight_<?php echo $geo_zone['geo_zone_id']; ?>_status">
-                  <?php if (${'weight_' . $geo_zone['geo_zone_id'] . '_status'}) { ?>
+              <td><select name="weight_<?php echo $item['area_geo_id']; ?>_status">
+                  <?php if (${'weight_' . $item['area_geo_id'] . '_status'}) { ?>
                   <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
                   <option value="0"><?php echo $text_disabled; ?></option>
                   <?php } else { ?>

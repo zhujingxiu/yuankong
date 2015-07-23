@@ -100,9 +100,9 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
                 <label>寄送至</label>
                 <div class="adress-new">
                     <input type="radio" class="adress-radio" name="shipping_address_id" value="<?php echo $item['address_id'] ?>" <?php echo !$n ? 'checked="checked"' : '' ?>/>
-                    <?php echo $item['areas'] ?> <?php echo $item['address_1'] ?>
-                    <em class="pl10 c8"><?php echo $item['mobile_phone'] ?></em>
-                    <em class="pl10 c8"><?php echo $item['nickname'] ?></em>
+                    <?php echo $item['area_zone'] ?> <?php echo $item['address'] ?>
+                    <em class="pl10 c8"><?php echo $item['telephone'] ?></em>
+                    <em class="pl10 c8"><?php echo $item['fullname'] ?></em>
                 </div>
             </li>
             <?php $n++;}?>
@@ -119,15 +119,15 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
                     </li>
                     <li class="item-adress">
                         <label>详细地址：</label>
-                        <input type="text" class="text-box w350" value="" name="address_1" />
+                        <input type="text" class="text-box w350" value="" name="address" />
                     </li>
                     <li class="item-adress">
                         <label>收货人姓名：</label>
-                        <input type="text" class="text-box w210" name="nickname" value="" />
+                        <input type="text" class="text-box w210" name="fullname" value="" />
                     </li>
                     <li class="item-adress">
                         <label>手机号码：</label>
-                        <input type="text" class="text-box w210" name="mobile_phone" value="<?php echo $this->customer->getMobilePhone() ?>" />
+                        <input type="text" class="text-box w210" name="telephone" value="<?php echo $this->customer->getMobilePhone() ?>" />
                     </li>
                 </ul>
             </div>
