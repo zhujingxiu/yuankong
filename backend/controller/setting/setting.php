@@ -1167,22 +1167,5 @@ class ControllerSettingSetting extends Controller {
 			return false;
 		}
 	}
-	
-	public function template() {
-		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
-			$server = HTTPS_CATALOG;
-		} else {
-			$server = HTTP_CATALOG;
-		}
 		
-		if (file_exists(DIR_IMAGE . 'templates/' . basename($this->request->get['template']) . '.png')) {
-			$image = $server . 'image/templates/' . basename($this->request->get['template']) . '.png';
-		} else {
-			$image = $server . 'image/no_image.jpg';
-		}
-		
-		$this->response->setOutput('<img src="' . $image . '" alt="" title="" style="border: 1px solid #EEEEEE;" />');
-	}		
-		
-
 }

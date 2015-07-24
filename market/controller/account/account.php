@@ -36,7 +36,8 @@ class ControllerAccountAccount extends Controller {
     	$this->data['heading_title'] = $this->language->get('heading_title');
 
     	$this->data['text_my_account'] = $this->language->get('text_my_account');
-		$this->data['text_my_orders'] = $this->language->get('text_my_orders');
+        $this->data['text_my_orders'] = $this->language->get('text_my_orders');
+		$this->data['text_recently'] = $this->language->get('text_recently');
 		$this->data['text_my_newsletter'] = $this->language->get('text_my_newsletter');
     	$this->data['text_edit'] = $this->language->get('text_edit');
     	$this->data['text_password'] = $this->language->get('text_password');
@@ -57,7 +58,35 @@ class ControllerAccountAccount extends Controller {
     	$this->data['download'] = $this->url->link('account/download', '', 'SSL');
 		$this->data['return'] = $this->url->link('account/return', '', 'SSL');
 		$this->data['transaction'] = $this->url->link('account/transaction', '', 'SSL');
-		$this->data['newsletter'] = $this->url->link('account/newsletter', '', 'SSL');
+        $this->data['newsletter'] = $this->url->link('account/newsletter', '', 'SSL');
+        $this->data['finish'] = $this->url->link('account/order', 'status=finished', 'SSL');
+		$this->data['fullname'] = $this->customer->getFullname();
+        $this->load->model('account/order');
+        $this->load->model('catalog/product');
+        $this->data['recently'] = array();
+        $results = $this->model_account_order->getOrders(0,5);
+
+        foreach ($results as $result) {
+            $product = '';
+            $products = $this->model_account_order->getOrderProducts($result['order_id']);
+            foreach ($products as $item) {
+                $parent_id = $this->model_catalog_product->getProductCategories($item['product_id']);
+            
+                $path = $this->model_catalog_product->getCategoryPath($parent_id);
+                
+                $path_param = empty($path) ? '' : '&path='.$path;
+                $product[] = array('name'=>$item['name'],'link'=> $this->url->link('product/product', $path_param.'&product_id=' . $item['product_id'] ) );
+            }
+            $this->data['recently'][] = array(
+                'date_added'=> date('Y-m-d',strtotime($result['date_added'])),
+                'products'  => $product,
+                'total'     => $this->currency->format($result['total']),
+                'status'    => $result['status'],
+                'link'      => $this->url->link('account/order/info', 'order_id=' . $item['order_id'],'SSL')
+            );
+        }
+        $this->data['totals'] = $this->model_account_order->getTotalOrders();
+        $this->data['finished'] = $this->model_account_order->getTotalFinishedOrders();
 
 		if ($this->config->get('reward_status')) {
 			$this->data['reward'] = $this->url->link('account/reward', '', 'SSL');

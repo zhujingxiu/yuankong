@@ -25,8 +25,6 @@ class ModelCatalogProduct extends Model {
 				'model'            => $query->row['model'],
 				'sku'              => $query->row['sku'],
 				'upc'              => $query->row['upc'],
-				'ean'              => $query->row['ean'],
-				'jan'              => $query->row['jan'],
 				'isbn'             => $query->row['isbn'],
 				'mpn'              => $query->row['mpn'],
 				'location'         => $query->row['location'],
@@ -150,14 +148,6 @@ class ModelCatalogProduct extends Model {
 			if (!empty($data['filter_name'])) {
 				$sql .= " OR LCASE(p.upc) = '" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "'";
 			}		
-
-			if (!empty($data['filter_name'])) {
-				$sql .= " OR LCASE(p.ean) = '" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "'";
-			}
-
-			if (!empty($data['filter_name'])) {
-				$sql .= " OR LCASE(p.jan) = '" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "'";
-			}
 			
 			if (!empty($data['filter_name'])) {
 				$sql .= " OR LCASE(p.isbn) = '" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "'";
@@ -578,14 +568,6 @@ class ModelCatalogProduct extends Model {
 			if (!empty($data['filter_name'])) {
 				$sql .= " OR LCASE(p.upc) = '" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "'";
 			}		
-
-			if (!empty($data['filter_name'])) {
-				$sql .= " OR LCASE(p.ean) = '" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "'";
-			}
-
-			if (!empty($data['filter_name'])) {
-				$sql .= " OR LCASE(p.jan) = '" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "'";
-			}
 			
 			if (!empty($data['filter_name'])) {
 				$sql .= " OR LCASE(p.isbn) = '" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "'";

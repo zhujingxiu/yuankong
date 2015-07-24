@@ -16,17 +16,24 @@
 	  	<div class="userbox2">
 			<div class="userer">
 				<div class="userleft">
-                	<p class="userpic"><img src="yk_img/adimg/touxiang.png" width="112" height="112" /></p>
+                	<p class="userpic">
+                        <img src="yk_img/adimg/touxiang.png" width="112" height="112" />
+                    </p>
                 </div>
                 <ul class="fl pad20 uname">
-                	<li class="uname1">欢迎您！<strong>liu417288184</strong></li>
+                	<li class="uname1">欢迎您！<strong><?php echo $fullname ?></strong></li>
                 	<li>为了账户安全，请您尽快完善资料</li>
                     <li>
-                    	<a class="pad15" href="#">完善资料</a><a href="#">编辑头像</a>
+                    	<a class="pad15" href="<?php echo $edit ?>">完善资料</a>
+                        <a href="#">编辑头像</a>
                     </li>
                     <li class="uxxjs">
-                    	<span>总订单（<a href="#">10</a>）</span>
-                    	<span>成功订单（<a href="#">2</a>）</span>
+                    	<span><?php echo $text_my_orders ?>
+                            （<a href="<?php echo $order ?>"><?php echo $totals ?></a>）
+                        </span>
+                    	<span>成功订单
+                            （<a href="<?php echo $finish ?>"><?php echo $finished ?></a>）
+                        </span>
                     </li>
                 </ul>
                 <dl class="fl pad20 unameer">
@@ -39,7 +46,7 @@
 	  	</div>
 	  	<div class="left">
 			<div class="jqdingdan">
-            	<b class="jqtittle">近期订单</b>
+            	<b class="jqtittle"><?php echo $text_recently ?></b>
             	<table class="jqxldd">
                 	<thead>
                     	<tr>
@@ -49,13 +56,24 @@
                             <th width="80px">操作</th>
                         </tr>
                     </thead>
+
                     <tbody>
+                        <?php if($recently){ ?>
+                        <?php foreach ($recently as $item): ?>
                     	<tr>
-                        	<td align="center">2012-05-06 </td>
-                            <td ><a href="#">嵌入式插电安全出口疏散指示灯</a></td>
-                            <td align="center"><strong>￥1250</strong></td>
-                            <td align="center"><a href="#">查看</a></td>
+                        	<td align="center"><?php echo $item['date_added'] ?></td>
+                            <td >
+                                <?php if($item['products']){ ?>
+                                <?php foreach ($item['products'] as $product) {?>
+                                <a href="<?php echo $product['link'] ?>"><?php echo truncate_string($product['name'],20) ?></a>
+                                <?php }?>
+                                <?php }?>
+                            </td>
+                            <td align="center"><strong><?php echo $item['total'] ?></strong></td>
+                            <td align="center"><a href="<?php echo $item['link'] ?>">查看</a></td>
                         </tr>
+                        <?php endforeach ?>
+                        <?php }?>
                     </tbody>
                 </table>
             </div>

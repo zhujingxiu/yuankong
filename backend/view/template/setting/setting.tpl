@@ -17,7 +17,16 @@
       <div class="buttons"><a onclick="$('#form').submit();" class="button"><?php echo $button_save; ?></a><a href="<?php echo $cancel; ?>" class="button"><?php echo $button_cancel; ?></a></div>
     </div>
     <div class="content">
-      <div id="tabs" class="htabs"><a href="#tab-general"><?php echo $tab_general; ?></a><a href="#tab-store"><?php echo $tab_store; ?></a><a href="#tab-local"><?php echo $tab_local; ?></a><a href="#tab-option"><?php echo $tab_option; ?></a><a href="#tab-image"><?php echo $tab_image; ?></a><a href="#tab-ftp"><?php echo $tab_ftp; ?></a><a href="#tab-mail"><?php echo $tab_mail; ?></a><a href="#tab-fraud"><?php echo $tab_fraud; ?></a><a href="#tab-server"><?php echo $tab_server; ?></a></div>
+      <div id="tabs" class="htabs">
+        <a href="#tab-general"><?php echo $tab_general; ?></a>
+        <a href="#tab-store"><?php echo $tab_store; ?></a>
+        <a href="#tab-local"><?php echo $tab_local; ?></a>
+        <a href="#tab-option"><?php echo $tab_option; ?></a>
+        <a href="#tab-image"><?php echo $tab_image; ?></a>
+        <a href="#tab-ftp"><?php echo $tab_ftp; ?></a>
+        <a href="#tab-mail"><?php echo $tab_mail; ?></a>
+        <a href="#tab-server"><?php echo $tab_server; ?></a>
+      </div>
       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
         <div id="tab-general">
           <table class="form">
@@ -77,7 +86,7 @@
             </tr>
             <tr>
               <td><?php echo $entry_template; ?></td>
-              <td><select name="config_template" onchange="$('#template').load('index.php?route=setting/setting/template&token=<?php echo $token; ?>&template=' + encodeURIComponent(this.value));">
+              <td><select name="config_template" >
                   <?php foreach ($templates as $template) { ?>
                   <?php if ($template == $config_template) { ?>
                   <option value="<?php echo $template; ?>" selected="selected"><?php echo $template; ?></option>
@@ -87,10 +96,7 @@
                   <?php } ?>
                 </select></td>
             </tr>
-            <tr>
-              <td></td>
-              <td id="template"></td>
-            </tr>
+
             <tr>
               <td><?php echo $entry_layout; ?></td>
               <td><select name="config_layout_id">
@@ -822,44 +828,7 @@
             </tr>
           </table>
         </div>
-        <div id="tab-fraud">
-          <table class="form">
-            <tr>
-              <td><?php echo $entry_fraud_detection; ?></td>
-              <td><?php if ($config_fraud_detection) { ?>
-                <input type="radio" name="config_fraud_detection" value="1" checked="checked" />
-                <?php echo $text_yes; ?>
-                <input type="radio" name="config_fraud_detection" value="0" />
-                <?php echo $text_no; ?>
-                <?php } else { ?>
-                <input type="radio" name="config_fraud_detection" value="1" />
-                <?php echo $text_yes; ?>
-                <input type="radio" name="config_fraud_detection" value="0" checked="checked" />
-                <?php echo $text_no; ?>
-                <?php } ?></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_fraud_key; ?></td>
-              <td><input type="text" name="config_fraud_key" value="<?php echo $config_fraud_key; ?>" /></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_fraud_score; ?></td>
-              <td><input type="text" name="config_fraud_score" value="<?php echo $config_fraud_score; ?>" /></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_fraud_status; ?></td>
-              <td><select name="config_fraud_status_id">
-                  <?php foreach ($order_statuses as $order_status) { ?>
-                  <?php if ($order_status['order_status_id'] == $config_fraud_status_id) { ?>
-                  <option value="<?php echo $order_status['order_status_id']; ?>" selected="selected"><?php echo $order_status['name']; ?></option>
-                  <?php } else { ?>
-                  <option value="<?php echo $order_status['order_status_id']; ?>"><?php echo $order_status['name']; ?></option>
-                  <?php } ?>
-                  <?php } ?>
-                </select></td>
-            </tr>
-          </table>
-        </div>
+
         <div id="tab-server">
           <table class="form">
             <tr>
@@ -1000,9 +969,6 @@
     </div>
   </div>
 </div>
-<script type="text/javascript"><!--
-$('#template').load('index.php?route=setting/setting/template&token=<?php echo $token; ?>&template=' + encodeURIComponent($('select[name=\'config_template\']').attr('value')));
-//--></script> 
 
 <script type="text/javascript"><!--
 function image_upload(field, thumb) {

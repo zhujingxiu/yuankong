@@ -24,17 +24,18 @@
                 <table class="userddnav1" width="100%">
                     <tr>
                         <td width="40%">产品名称</td>
-                        <td width="15%">规格型号</td>
-                        <td width="15%">总价格</td>
+                        <td width="15%">规格型号</td>                        
                         <td width="10%">数量</td>
+                        <td width="15%">总价格</td>
                         <td width="10%">订单状态</td>
                         <td width="10%">操作</td>
                     </tr>
                 </table>
             </div>
             <?php if ($orders) { ?>
+            <?php foreach ($orders as $order) { ?>
             <table class="userxldd">
-              <?php foreach ($orders as $order) { ?>
+              
                 <tr>
                     <td class="xlddtop" colspan="6">
                         <input class="xlddcheck" type="checkbox" name="xldd" />
@@ -42,45 +43,56 @@
                         <span>下单时间：<?php echo $order['date_added']; ?></span>
                     </td>
                 </tr>
+                <?php if($order['products']){?>
+                <?php foreach ($order['products'] as $key => $product): ?>               
                 <tr class="jtuserdd">
                     <td style="text-align:left;" width="40%">
                         <div class="ovh">
                             <a class="shop-pic" href="#">
-                                <img src="imgs/adimg/shoppic7.jpg" />
+                                <img src="<?php echo $product['thumb'] ?>" />
                             </a>
                             <span class="shop-name">
-                                <a href="#">【果郡王】海南妃子笑荔枝3斤装 新鲜荔枝 国产水果</a>
+                                <a href="#"><?php echo $product['name'] ?></a>
                             </span>
                         </div>
                     </td>
-                    <td width="15%">T2250<br />红色</td>
-                    <td width="15%"><strong><?php echo $order['total']; ?></strong></td>
-                    <td width="10%">2</td>
-                    <td width="10%"><?php echo $order['status']; ?></td>
+                    <td width="15%"><?php echo $product['model'] ?></td>
+                    <td width="10%"><?php echo $product['quantity']; ?></td>
+                    <?php// if(!$key){ ?>
+                    <td width="15%">
+                        <strong><?php echo $product['total']; ?></strong>
+                    </td>                    
+                    <?php// }?>                    
+                    <?php if(!$key){ ?>
+                    <td width="10%" rowspan="<?php echo count($order['products']) ?>">
+                        <?php echo $order['status']; ?>
+                    </td>
+                    <?php }?>
                     <td width="10%">
-                      <a href="#">取消</a><br />
+                      <a href="<?php echo $product['return'] ?>">取消</a><br />
                       <a href="<?php echo $order['href']; ?>"><?php echo $button_view; ?></a>
                     </td>
                 </tr>
-
-              <?php } ?>
-              <div class="pagination"><?php echo $pagination; ?></div>
+                <?php endforeach ?>
+                <?php } ?>
             </table>
+            <?php } ?>
+            <div class="fy">
+                <?php echo $pagination; ?>
+                <input type="checkbox" id="selected">
+                <label>全选</label>
+                <input type="button" class="dingdan" value="删除订单">
+            </div>
             <?php } else { ?>
             <div class="content"><?php echo $text_empty; ?></div>
             <?php } ?>
-            <div class="buttons">
-                <div class="right">
-                    <a href="<?php echo $continue; ?>" class="button"><?php echo $button_continue; ?></a>
-                </div>
-            </div>
         </div>
         <?php echo $content_bottom; ?>
     </div>
 </div> 
 <?php if( $SPAN[2] ): ?>
 <div class="<?php echo $SPAN[2];?>">	
-	  <?php echo $column_right; ?>
+	<?php echo $column_right; ?>
 </div>
 <?php endif; ?>
 </div>

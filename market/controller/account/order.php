@@ -94,7 +94,7 @@ class ControllerAccountOrder extends Controller {
 		}
 		
 		$this->data['orders'] = array();
-		
+		$this->load->model('tool/image');
 		$order_total = $this->model_account_order->getTotalOrders();
 		
 		$results = $this->model_account_order->getOrders(($page - 1) * 10, 10);
@@ -102,19 +102,53 @@ class ControllerAccountOrder extends Controller {
 		foreach ($results as $result) {
 			$product_total = $this->model_account_order->getTotalOrderProductsByOrderId($result['order_id']);
 			$voucher_total = $this->model_account_order->getTotalOrderVouchersByOrderId($result['order_id']);
+            $products = array();
+            $_products = $this->model_account_order->getOrderProducts($result['order_id']);
+            foreach ($_products as $product) {
+                $option_data = array();
+                
+                $options = $this->model_account_order->getOrderOptions($result['order_id'], $product['order_product_id']);
 
+                foreach ($options as $option) {
+                    if ($option['type'] != 'file') {
+                        $value = $option['value'];
+                    } else {
+                        $value = utf8_substr($option['value'], 0, utf8_strrpos($option['value'], '.'));
+                    }
+                    
+                    $option_data[] = array(
+                        'name'  => $option['name'],
+                        'value' => (utf8_strlen($value) > 20 ? utf8_substr($value, 0, 20) . '..' : $value)
+                    );                  
+                }
+                if ($product['image']) {
+                    $image = $this->model_tool_image->resize($product['image'], $this->config->get('config_image_cart_width'), $this->config->get('config_image_cart_height'));
+                } else {
+                    $image = '';
+                }
+                $products[] = array(
+                    'name'     => $product['name'],
+                    'thumb'    => $image,
+                    'model'    => $product['model'],
+                    'option'   => $option_data,
+                    'quantity' => $product['quantity'],
+                    'price'    => $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $result['currency_code'], $result['currency_value']),
+                    'total'    => $this->currency->format($product['total'] + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), $result['currency_code'], $result['currency_value']),
+                    'return'   => $this->url->link('account/return/insert', 'order_id=' . $result['order_id'] . '&product_id=' . $product['product_id'], 'SSL')
+                );
+            }
 			$this->data['orders'][] = array(
 				'order_id'   => $result['order_id'],
-				'name'       => $result['firstname'] . ' ' . $result['lastname'],
+				'name'       => $result['fullname'] ,
 				'status'     => $result['status'],
-				'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
-				'products'   => ($product_total + $voucher_total),
+				'date_added' => date('Y-m-d H:i', strtotime($result['date_added'])),
+                'quantity'   => ($product_total + $voucher_total),
+				'products'   => $products,
 				'total'      => $this->currency->format($result['total'], $result['currency_code'], $result['currency_value']),
 				'href'       => $this->url->link('account/order/info', 'order_id=' . $result['order_id'], 'SSL'),
 				'reorder'    => $this->url->link('account/order', 'order_id=' . $result['order_id'], 'SSL')
 			);
 		}
-
 		$pagination = new Pagination();
 		$pagination->total = $order_total;
 		$pagination->page = $page;
@@ -122,7 +156,7 @@ class ControllerAccountOrder extends Controller {
 		$pagination->text = $this->language->get('text_pagination');
 		$pagination->url = $this->url->link('account/order', 'page={page}', 'SSL');
 		
-		$this->data['pagination'] = $pagination->render();
+		$this->data['pagination'] = $pagination->render_list();
 
 		$this->data['continue'] = $this->url->link('account/account', '', 'SSL');
 
@@ -440,4 +474,3 @@ class ControllerAccountOrder extends Controller {
     	}
   	}
 }
-?>
