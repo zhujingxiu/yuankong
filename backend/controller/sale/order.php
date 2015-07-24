@@ -499,8 +499,8 @@ class ControllerSaleOrder extends Controller {
 		$this->data['entry_store'] = $this->language->get('entry_store');
 		$this->data['entry_customer'] = $this->language->get('entry_customer');
 		$this->data['entry_customer_group'] = $this->language->get('entry_customer_group');
-		$this->data['entry_firstname'] = $this->language->get('entry_firstname');
-		$this->data['entry_lastname'] = $this->language->get('entry_lastname');
+		$this->data['entry_fullname'] = $this->language->get('entry_fullname');
+		$this->data['entry_mobile_phone'] = $this->language->get('entry_mobile_phone');
 		$this->data['entry_email'] = $this->language->get('entry_email');
 		$this->data['entry_telephone'] = $this->language->get('entry_telephone');
 		$this->data['entry_fax'] = $this->language->get('entry_fax');
@@ -509,11 +509,8 @@ class ControllerSaleOrder extends Controller {
 		$this->data['entry_affiliate'] = $this->language->get('entry_affiliate');
 		$this->data['entry_address'] = $this->language->get('entry_address');
 		$this->data['entry_company'] = $this->language->get('entry_company');
-		$this->data['entry_company_id'] = $this->language->get('entry_company_id');
-		$this->data['entry_tax_id'] = $this->language->get('entry_tax_id');
-		$this->data['entry_address_1'] = $this->language->get('entry_address_1');
-		$this->data['entry_address_2'] = $this->language->get('entry_address_2');
-		$this->data['entry_city'] = $this->language->get('entry_city');
+		$this->data['entry_address'] = $this->language->get('entry_address');
+		$this->data['entry_area_zone'] = $this->language->get('entry_area_zone');
 		$this->data['entry_postcode'] = $this->language->get('entry_postcode');
 		$this->data['entry_province'] = $this->language->get('entry_province');
 		$this->data['entry_product'] = $this->language->get('entry_product');
@@ -560,16 +557,16 @@ class ControllerSaleOrder extends Controller {
 			$this->data['error_warning'] = '';
 		}
 		
- 		if (isset($this->error['firstname'])) {
-			$this->data['error_firstname'] = $this->error['firstname'];
+ 		if (isset($this->error['fullname'])) {
+			$this->data['error_fullname'] = $this->error['fullname'];
 		} else {
-			$this->data['error_firstname'] = '';
+			$this->data['error_fullname'] = '';
 		}
 
- 		if (isset($this->error['lastname'])) {
-			$this->data['error_lastname'] = $this->error['lastname'];
+ 		if (isset($this->error['mobile_phone'])) {
+			$this->data['error_mobile_phone'] = $this->error['mobile_phone'];
 		} else {
-			$this->data['error_lastname'] = '';
+			$this->data['error_mobile_phone'] = '';
 		}
 		
  		if (isset($this->error['email'])) {
@@ -591,28 +588,28 @@ class ControllerSaleOrder extends Controller {
 			$this->data['error_payment_method'] = '';
 		}
 
- 		if (isset($this->error['shipping_firstname'])) {
-			$this->data['error_shipping_firstname'] = $this->error['shipping_firstname'];
+ 		if (isset($this->error['shipping_fullname'])) {
+			$this->data['error_shipping_fullname'] = $this->error['shipping_fullname'];
 		} else {
-			$this->data['error_shipping_firstname'] = '';
+			$this->data['error_shipping_fullname'] = '';
 		}
 
- 		if (isset($this->error['shipping_lastname'])) {
-			$this->data['error_shipping_lastname'] = $this->error['shipping_lastname'];
+ 		if (isset($this->error['shipping_telephone'])) {
+			$this->data['error_shipping_telephone'] = $this->error['shipping_telephone'];
 		} else {
-			$this->data['error_shipping_lastname'] = '';
+			$this->data['error_shipping_telephone'] = '';
 		}
 				
-		if (isset($this->error['shipping_address_1'])) {
-			$this->data['error_shipping_address_1'] = $this->error['shipping_address_1'];
+		if (isset($this->error['shipping_address'])) {
+			$this->data['error_shipping_address'] = $this->error['shipping_address'];
 		} else {
-			$this->data['error_shipping_address_1'] = '';
+			$this->data['error_shipping_address'] = '';
 		}
 		
-		if (isset($this->error['shipping_city'])) {
-			$this->data['error_shipping_city'] = $this->error['shipping_city'];
+		if (isset($this->error['shipping_area_zone'])) {
+			$this->data['error_shipping_area_zone'] = $this->error['shipping_area_zone'];
 		} else {
-			$this->data['error_shipping_city'] = '';
+			$this->data['error_shipping_area_zone'] = '';
 		}
 		
 		if (isset($this->error['shipping_postcode'])) {
@@ -751,25 +748,25 @@ class ControllerSaleOrder extends Controller {
 		
 		$this->data['customer_groups'] = $this->model_sale_customer_group->getCustomerGroups();
 								
-    	if (isset($this->request->post['firstname'])) {
-      		$this->data['firstname'] = $this->request->post['firstname'];
-		} elseif (!empty($order_info)) { 
-			$this->data['firstname'] = $order_info['firstname'];
+    	if (isset($this->request->post['fullname'])) {
+      		$this->data['fullname'] = $this->request->post['fullname'];
+		} elseif (!empty($order_info['fullname'])) { 
+			$this->data['fullname'] = $order_info['fullname'];
 		} else {
-      		$this->data['firstname'] = '';
+      		$this->data['fullname'] = '';
     	}
 
-    	if (isset($this->request->post['lastname'])) {
-      		$this->data['lastname'] = $this->request->post['lastname'];
-    	} elseif (!empty($order_info)) { 
-			$this->data['lastname'] = $order_info['lastname'];
+    	if (isset($this->request->post['mobile_phone'])) {
+      		$this->data['mobile_phone'] = $this->request->post['mobile_phone'];
+    	} elseif (!empty($order_info['mobile_phone'])) { 
+			$this->data['mobile_phone'] = $order_info['mobile_phone'];
 		} else {
-      		$this->data['lastname'] = '';
+      		$this->data['mobile_phone'] = '';
     	}
 
     	if (isset($this->request->post['email'])) {
       		$this->data['email'] = $this->request->post['email'];
-    	} elseif (!empty($order_info)) { 
+    	} elseif (!empty($order_info['email'])) { 
 			$this->data['email'] = $order_info['email'];
 		} else {
       		$this->data['email'] = '';
@@ -777,7 +774,7 @@ class ControllerSaleOrder extends Controller {
 				
     	if (isset($this->request->post['telephone'])) {
       		$this->data['telephone'] = $this->request->post['telephone'];
-    	} elseif (!empty($order_info)) { 
+    	} elseif (!empty($order_info['telephone'])) { 
 			$this->data['telephone'] = $order_info['telephone'];
 		} else {
       		$this->data['telephone'] = '';
@@ -785,7 +782,7 @@ class ControllerSaleOrder extends Controller {
 		
     	if (isset($this->request->post['fax'])) {
       		$this->data['fax'] = $this->request->post['fax'];
-    	} elseif (!empty($order_info)) { 
+    	} elseif (!empty($order_info['fax'])) { 
 			$this->data['fax'] = $order_info['fax'];
 		} else {
       		$this->data['fax'] = '';
@@ -793,7 +790,7 @@ class ControllerSaleOrder extends Controller {
 		
 		if (isset($this->request->post['affiliate_id'])) {
       		$this->data['affiliate_id'] = $this->request->post['affiliate_id'];
-    	} elseif (!empty($order_info)) { 
+    	} elseif (!empty($order_info['affiliate_id'])) { 
 			$this->data['affiliate_id'] = $order_info['affiliate_id'];
 		} else {
       		$this->data['affiliate_id'] = '';
@@ -801,7 +798,7 @@ class ControllerSaleOrder extends Controller {
 		
 		if (isset($this->request->post['affiliate'])) {
       		$this->data['affiliate'] = $this->request->post['affiliate'];
-    	} elseif (!empty($order_info)) { 
+    	} elseif (!empty($order_info['affiliate_id'])) { 
 			$this->data['affiliate'] = ($order_info['affiliate_id'] ? $order_info['affiliate_firstname'] . ' ' . $order_info['affiliate_lastname'] : '');
 		} else {
       		$this->data['affiliate'] = '';
@@ -809,7 +806,7 @@ class ControllerSaleOrder extends Controller {
 				
 		if (isset($this->request->post['order_status_id'])) {
       		$this->data['order_status_id'] = $this->request->post['order_status_id'];
-    	} elseif (!empty($order_info)) { 
+    	} elseif (!empty($order_info['order_status_id'])) { 
 			$this->data['order_status_id'] = $order_info['order_status_id'];
 		} else {
       		$this->data['order_status_id'] = '';
@@ -821,7 +818,7 @@ class ControllerSaleOrder extends Controller {
 			
     	if (isset($this->request->post['comment'])) {
       		$this->data['comment'] = $this->request->post['comment'];
-    	} elseif (!empty($order_info)) { 
+    	} elseif (!empty($order_info['comment'])) { 
 			$this->data['comment'] = $order_info['comment'];
 		} else {
       		$this->data['comment'] = '';
@@ -853,20 +850,20 @@ class ControllerSaleOrder extends Controller {
       		$this->data['payment_code'] = '';
     	}			
 			
-    	if (isset($this->request->post['shipping_firstname'])) {
-      		$this->data['shipping_firstname'] = $this->request->post['shipping_firstname'];
+    	if (isset($this->request->post['shipping_fullname'])) {
+      		$this->data['shipping_fullname'] = $this->request->post['shipping_fullname'];
 		} elseif (!empty($order_info)) { 
-			$this->data['shipping_firstname'] = $order_info['shipping_firstname'];
+			$this->data['shipping_fullname'] = $order_info['shipping_fullname'];
 		} else {
-      		$this->data['shipping_firstname'] = '';
+      		$this->data['shipping_fullname'] = '';
     	}
 
-    	if (isset($this->request->post['shipping_lastname'])) {
-      		$this->data['shipping_lastname'] = $this->request->post['shipping_lastname'];
+    	if (isset($this->request->post['shipping_telephone'])) {
+      		$this->data['shipping_telephone'] = $this->request->post['shipping_telephone'];
     	} elseif (!empty($order_info)) { 
-			$this->data['shipping_lastname'] = $order_info['shipping_lastname'];
+			$this->data['shipping_telephone'] = $order_info['shipping_telephone'];
 		} else {
-      		$this->data['shipping_lastname'] = '';
+      		$this->data['shipping_telephone'] = '';
     	}
 
     	if (isset($this->request->post['shipping_company'])) {
@@ -877,23 +874,14 @@ class ControllerSaleOrder extends Controller {
       		$this->data['shipping_company'] = '';
     	}
 
-    	if (isset($this->request->post['shipping_address_1'])) {
-      		$this->data['shipping_address_1'] = $this->request->post['shipping_address_1'];
+    	if (isset($this->request->post['shipping_address'])) {
+      		$this->data['shipping_address'] = $this->request->post['shipping_address'];
     	} elseif (!empty($order_info)) { 
-			$this->data['shipping_address_1'] = $order_info['shipping_address_1'];
+			$this->data['shipping_address'] = $order_info['shipping_address'];
 		} else {
-      		$this->data['shipping_address_1'] = '';
+      		$this->data['shipping_address'] = '';
     	}
 
-    	if (isset($this->request->post['shipping_address_2'])) {
-      		$this->data['shipping_address_2'] = $this->request->post['shipping_address_2'];
-    	} elseif (!empty($order_info)) { 
-			$this->data['shipping_address_2'] = $order_info['shipping_address_2'];
-		} else {
-      		$this->data['shipping_address_2'] = '';
-    	}
-		
-		
     	if (isset($this->request->post['shipping_postcode'])) {
       		$this->data['shipping_postcode'] = $this->request->post['shipping_postcode'];
     	} elseif (!empty($order_info)) { 
@@ -901,7 +889,20 @@ class ControllerSaleOrder extends Controller {
 		} else {
       		$this->data['shipping_postcode'] = '';
     	}
-				
+    	if (isset($this->request->post['shipping_province'])) {
+      		$this->data['shipping_province'] = $this->request->post['shipping_province'];
+    	} elseif (!empty($order_info)) { 
+			$this->data['shipping_province'] = $order_info['shipping_province'];
+		} else {
+      		$this->data['shipping_province'] = '';
+    	}
+    	if (isset($this->request->post['shipping_area_zone'])) {
+      		$this->data['shipping_area_zone'] = $this->request->post['shipping_area_zone'];
+    	} elseif (!empty($order_info)) { 
+			$this->data['shipping_area_zone'] = $order_info['shipping_area_zone'];
+		} else {
+      		$this->data['shipping_area_zone'] = '';
+    	}
 		if (isset($this->request->post['shipping_province_id'])) {
       		$this->data['shipping_province_id'] = $this->request->post['shipping_province_id'];
     	} elseif (!empty($order_info)) { 
@@ -1054,18 +1055,13 @@ class ControllerSaleOrder extends Controller {
 			if ((utf8_strlen($this->request->post['shipping_address_1']) < 3) || (utf8_strlen($this->request->post['shipping_address_1']) > 128)) {
 				$this->error['shipping_address_1'] = $this->language->get('error_address_1');
 			}
-	
-
-	
 
 			if ((utf8_strlen($this->request->post['shipping_postcode']) < 2) || (utf8_strlen($this->request->post['shipping_postcode']) > 10)) {
 				$this->error['shipping_postcode'] = $this->language->get('error_postcode');
 			}
 	
-
-			
-			if (!isset($this->request->post['shipping_zone_id']) || $this->request->post['shipping_zone_id'] == '') {
-				$this->error['shipping_zone'] = $this->language->get('error_zone');
+			if (!isset($this->request->post['shipping_province_id']) || $this->request->post['shipping_province_id'] == '') {
+				$this->error['shipping_province'] = $this->language->get('error_province');
 			}
 			
 			if (!$this->request->post['shipping_method']) {
@@ -1324,12 +1320,11 @@ class ControllerSaleOrder extends Controller {
 			$this->data['date_added'] = date($this->language->get('date_format_short'), strtotime($order_info['date_added']));
 			$this->data['date_modified'] = date($this->language->get('date_format_short'), strtotime($order_info['date_modified']));		
 		
-			$this->data['shipping_firstname'] = $order_info['shipping_firstname'];
-			$this->data['shipping_lastname'] = $order_info['shipping_lastname'];
+			$this->data['shipping_fullname'] = $order_info['shipping_fullname'];
+			$this->data['shipping_telephone'] = $order_info['shipping_telephone'];
 			$this->data['shipping_company'] = $order_info['shipping_company'];
-			$this->data['shipping_address_1'] = $order_info['shipping_address_1'];
-			$this->data['shipping_address_2'] = $order_info['shipping_address_2'];
-			$this->data['shipping_city'] = $order_info['shipping_city'];
+			$this->data['shipping_address'] = $order_info['shipping_address'];
+			$this->data['shipping_area_zone'] = $order_info['shipping_area_zone'];
 			$this->data['shipping_postcode'] = $order_info['shipping_postcode'];
 			$this->data['shipping_province'] = $order_info['shipping_province'];
 
@@ -1403,213 +1398,6 @@ class ControllerSaleOrder extends Controller {
 			$this->data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
 
 			$this->data['order_status_id'] = $order_info['order_status_id'];
-
-			// Fraud
-			$this->load->model('sale/fraud');
-			
-			$fraud_info = $this->model_sale_fraud->getFraud($order_info['order_id']);
-			
-			if ($fraud_info) {
-				$this->data['country_match'] = $fraud_info['country_match'];
-				
-				if ($fraud_info['country_code']) {
-					$this->data['country_code'] = $fraud_info['country_code'];
-				} else {
-					$this->data['country_code'] = '';
-				}
-				
-				$this->data['high_risk_country'] = $fraud_info['high_risk_country'];
-				$this->data['distance'] = $fraud_info['distance'];
-				
-				if ($fraud_info['ip_region']) {
-					$this->data['ip_region'] = $fraud_info['ip_region'];
-				} else {
-					$this->data['ip_region'] = '';
-				}
-								
-				if ($fraud_info['ip_city']) {
-					$this->data['ip_city'] = $fraud_info['ip_city'];
-				} else {
-					$this->data['ip_city'] = '';
-				}
-				
-				$this->data['ip_latitude'] = $fraud_info['ip_latitude'];
-				$this->data['ip_longitude'] = $fraud_info['ip_longitude'];
-
-				if ($fraud_info['ip_isp']) {
-					$this->data['ip_isp'] = $fraud_info['ip_isp'];
-				} else {
-					$this->data['ip_isp'] = '';
-				}
-				
-				if ($fraud_info['ip_org']) {
-					$this->data['ip_org'] = $fraud_info['ip_org'];
-				} else {
-					$this->data['ip_org'] = '';
-				}
-								
-				$this->data['ip_asnum'] = $fraud_info['ip_asnum'];
-				
-				if ($fraud_info['ip_user_type']) {
-					$this->data['ip_user_type'] = $fraud_info['ip_user_type'];
-				} else {
-					$this->data['ip_user_type'] = '';
-				}
-				
-				if ($fraud_info['ip_country_confidence']) {
-					$this->data['ip_country_confidence'] = $fraud_info['ip_country_confidence'];
-				} else {
-					$this->data['ip_country_confidence'] = '';
-				}
-												
-				if ($fraud_info['ip_region_confidence']) {
-					$this->data['ip_region_confidence'] = $fraud_info['ip_region_confidence'];
-				} else {
-					$this->data['ip_region_confidence'] = '';
-				}
-				
-				if ($fraud_info['ip_city_confidence']) {
-					$this->data['ip_city_confidence'] = $fraud_info['ip_city_confidence'];
-				} else {
-					$this->data['ip_city_confidence'] = '';
-				}
-				
-				if ($fraud_info['ip_postal_confidence']) {
-					$this->data['ip_postal_confidence'] = $fraud_info['ip_postal_confidence'];
-				} else {
-					$this->data['ip_postal_confidence'] = '';
-				}
-				
-				if ($fraud_info['ip_postal_code']) {
-					$this->data['ip_postal_code'] = $fraud_info['ip_postal_code'];
-				} else {
-					$this->data['ip_postal_code'] = '';
-				}
-								
-				$this->data['ip_accuracy_radius'] = $fraud_info['ip_accuracy_radius'];
-				
-				if ($fraud_info['ip_net_speed_cell']) {
-					$this->data['ip_net_speed_cell'] = $fraud_info['ip_net_speed_cell'];
-				} else {
-					$this->data['ip_net_speed_cell'] = '';
-				}
-								
-				$this->data['ip_metro_code'] = $fraud_info['ip_metro_code'];
-				$this->data['ip_area_code'] = $fraud_info['ip_area_code'];
-				
-				if ($fraud_info['ip_time_zone']) {
-					$this->data['ip_time_zone'] = $fraud_info['ip_time_zone'];
-				} else {
-					$this->data['ip_time_zone'] = '';
-				}
-
-				if ($fraud_info['ip_region_name']) {
-					$this->data['ip_region_name'] = $fraud_info['ip_region_name'];
-				} else {
-					$this->data['ip_region_name'] = '';
-				}				
-				
-				if ($fraud_info['ip_domain']) {
-					$this->data['ip_domain'] = $fraud_info['ip_domain'];
-				} else {
-					$this->data['ip_domain'] = '';
-				}
-				
-				if ($fraud_info['ip_country_name']) {
-					$this->data['ip_country_name'] = $fraud_info['ip_country_name'];
-				} else {
-					$this->data['ip_country_name'] = '';
-				}	
-								
-				if ($fraud_info['ip_continent_code']) {
-					$this->data['ip_continent_code'] = $fraud_info['ip_continent_code'];
-				} else {
-					$this->data['ip_continent_code'] = '';
-				}
-				
-				if ($fraud_info['ip_corporate_proxy']) {
-					$this->data['ip_corporate_proxy'] = $fraud_info['ip_corporate_proxy'];
-				} else {
-					$this->data['ip_corporate_proxy'] = '';
-				}
-								
-				$this->data['anonymous_proxy'] = $fraud_info['anonymous_proxy'];
-				$this->data['proxy_score'] = $fraud_info['proxy_score'];
-				
-				if ($fraud_info['is_trans_proxy']) {
-					$this->data['is_trans_proxy'] = $fraud_info['is_trans_proxy'];
-				} else {
-					$this->data['is_trans_proxy'] = '';
-				}	
-							
-				$this->data['free_mail'] = $fraud_info['free_mail'];
-				$this->data['carder_email'] = $fraud_info['carder_email'];
-				
-				if ($fraud_info['high_risk_username']) {
-					$this->data['high_risk_username'] = $fraud_info['high_risk_username'];
-				} else {
-					$this->data['high_risk_username'] = '';
-				}
-							
-				if ($fraud_info['high_risk_password']) {
-					$this->data['high_risk_password'] = $fraud_info['high_risk_password'];
-				} else {
-					$this->data['high_risk_password'] = '';
-				}		
-				
-				$this->data['bin_match'] = $fraud_info['bin_match'];
-
-				if ($fraud_info['bin_country']) {
-					$this->data['bin_country'] = $fraud_info['bin_country'];
-				} else {
-					$this->data['bin_country'] = '';
-				}	
-								
-				$this->data['bin_name_match'] = $fraud_info['bin_name_match'];
-				
-				if ($fraud_info['bin_name']) {
-					$this->data['bin_name'] = $fraud_info['bin_name'];
-				} else {
-					$this->data['bin_name'] = '';
-				}	
-								
-				$this->data['bin_phone_match'] = $fraud_info['bin_phone_match'];
-
-				if ($fraud_info['bin_phone']) {
-					$this->data['bin_phone'] = $fraud_info['bin_phone'];
-				} else {
-					$this->data['bin_phone'] = '';
-				}	
-				
-				if ($fraud_info['customer_phone_in_billing_location']) {
-					$this->data['customer_phone_in_billing_location'] = $fraud_info['customer_phone_in_billing_location'];
-				} else {
-					$this->data['customer_phone_in_billing_location'] = '';
-				}	
-												
-				$this->data['ship_forward'] = $fraud_info['ship_forward'];
-
-				if ($fraud_info['city_postal_match']) {
-					$this->data['city_postal_match'] = $fraud_info['city_postal_match'];
-				} else {
-					$this->data['city_postal_match'] = '';
-				}	
-				
-				if ($fraud_info['ship_city_postal_match']) {
-					$this->data['ship_city_postal_match'] = $fraud_info['ship_city_postal_match'];
-				} else {
-					$this->data['ship_city_postal_match'] = '';
-				}	
-								
-				$this->data['score'] = $fraud_info['score'];
-				$this->data['explanation'] = $fraud_info['explanation'];
-				$this->data['risk_score'] = $fraud_info['risk_score'];
-				$this->data['queries_remaining'] = $fraud_info['queries_remaining'];
-				$this->data['maxmind_id'] = $fraud_info['maxmind_id'];
-				$this->data['error'] = $fraud_info['error'];
-			} else {
-				$this->data['maxmind_id'] = '';
-			}
 			
 			$this->template = 'sale/order_info.tpl';
 			$this->children = array(
@@ -2109,35 +1897,28 @@ class ControllerSaleOrder extends Controller {
 				} else {
 					$invoice_no = '';
 				}
-				
 
-				$format = '{firstname} {lastname}' . "\n" . '{company}' . "\n" . '{address_1}' . "\n" . '{address_2}' . "\n" . '{city} {postcode}' . "\n" . '{province}';
-
-
-				$find = array(
-					'{firstname}',
-					'{lastname}',
-					'{company}',
-					'{address_1}',
-					'{address_2}',
-					'{city}',
-					'{postcode}',
-					'{province}',
+				$format = '{area_zone}'  . "\n" . '{address}' . "\n" . '{company}'  . "\n" . '{postcode}' . "\n" .'{fullname}' . "\n" .'{telephone} '  ;
+		
+	    		$find = array(
+		  			'{area_zone}',	  			
+	      			'{address}',
+	                '{company}',
+	      			'{postcode}',
+	                '{fullname}',
+	      			'{telephone}',
 				);
-
+		
 				$replace = array(
-					'firstname' => $order_info['shipping_firstname'],
-					'lastname'  => $order_info['shipping_lastname'],
-					'company'   => $order_info['shipping_company'],
-					'address_1' => $order_info['shipping_address_1'],
-					'address_2' => $order_info['shipping_address_2'],
-					'city'      => $order_info['shipping_city'],
-					'postcode'  => $order_info['shipping_postcode'],
-					'province'      => $order_info['shipping_province'],
+	                'area_zone' => $order_info['shipping_area_zone'],
+	                'address'   => $order_info['shipping_address'],
+	                'company'   => $order_info['shipping_company'],
+	      			'postcode'  => $order_info['shipping_postcode'],
+	                'fullname'  => $order_info['shipping_fullname'],                 
+	                'telephone' => $order_info['shipping_telephone'],      			
 				);
 
 				$shipping_address = str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format))));
-
 
 				$product_data = array();
 

@@ -36,6 +36,7 @@
 
         <button onclick="price_filter();" class="price-sub"><?php echo $button_submit ?></button>
     </p>
+    <?php if($total_page){?>
     <p class="top-page">
         <a href="<?php echo $prev_link ?>" class="icon2 page-l"></a>
         <span class="pl10 pr10">
@@ -43,7 +44,7 @@
         </span>
         <a href="<?php echo $next_link ?>" class="icon2 page-r"></a>
     </p>
-  
+    <?php }?>
 </div>
 <script type="text/javascript">
   function price_filter(){

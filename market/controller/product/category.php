@@ -198,12 +198,12 @@ class ControllerProductCategory extends Controller {
 			$results = $this->model_catalog_category->getCategories($category_id);
 			
 			foreach ($results as $result) {
-				$filter = array(
+				$filter_data = array(
 					'filter_category_id'  => $result['category_id'],
 					'filter_sub_category' => true
 				);
 				
-				$product_total = $this->model_catalog_product->getTotalProducts($filter);				
+				$product_total = $this->model_catalog_product->getTotalProducts($filter_data);				
 				
 				$this->data['categories'][] = array(
 					'name'  => $result['name'] . ($this->config->get('config_product_count') ? ' (' . $product_total . ')' : ''),
@@ -211,8 +211,9 @@ class ControllerProductCategory extends Controller {
 				);
 			}
 			
-			$filter = array(
+			$filter_data = array(
 				'filter_category_id' => $category_id,
+				'filter_sub_category' => true,
 				'filter_filter'      => $filter, 
 				'filter_min_price'   => $min_price, 
 				'filter_max_price'   => $max_price, 
@@ -233,7 +234,7 @@ class ControllerProductCategory extends Controller {
 				'href'      => 'javascript:;',
 				'separator' => $this->language->get('text_separator')
 			);
-    		$filter = array(				
+    		$filter_data = array(				
 				'filter_filter'      => $filter, 
 				'filter_min_price'   => $min_price, 
 				'filter_max_price'   => $max_price, 
@@ -245,10 +246,10 @@ class ControllerProductCategory extends Controller {
     	}
     	$this->data['categories'] = array();
     	$this->data['products'] = array();
-		$product_total = $this->model_catalog_product->getTotalProducts($filter); 
+
+		$product_total = $this->model_catalog_product->getTotalProducts($filter_data); 
 		
-		$results = $this->model_catalog_product->getProducts($filter);
-		
+		$results = $this->model_catalog_product->getProducts($filter_data);
 		foreach ($results as $result) {
 			if ($result['image']) {
 				$image = $this->model_tool_image->resize($result['image'], $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
@@ -295,6 +296,7 @@ class ControllerProductCategory extends Controller {
 				'special'     => $special,
 				'tax'         => $tax,
 				'rating'      => $result['rating'],
+				'sales'       => $result['sales'],
 				'reviews'     => sprintf($this->language->get('text_reviews'), (int)$result['reviews']),
 				'href'        => $this->url->link('product/product', $path_param.'&product_id=' . $result['product_id'] )
 			);

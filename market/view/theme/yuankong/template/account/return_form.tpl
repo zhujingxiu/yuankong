@@ -3,35 +3,35 @@
 <?php if ($error_warning) { ?>
 <div class="warning"><?php echo $error_warning; ?></div>
 <?php } ?>
-<?php require( DIR_TEMPLATE.$this->config->get('config_template')."/template/common/breadcrumb.tpl" ); ?>
-<div>
-<?php if( $SPAN[0] ): ?>
-	<div class="span<?php echo $SPAN[0];?>">
-		<?php echo $column_left; ?>
-	</div>
-<?php endif; ?> 
-<div class="span<?php echo $SPAN[1];?>">
-
-<div id="content" class="page"><?php echo $content_top; ?>
-
-  <h1 class="page-title"><?php echo $heading_title; ?></h1>
+<div class="register-w f_s fix" id="main">
+    <?php if( $SPAN[0] ): ?>
+  	<div class="<?php echo $SPAN[0];?> aside">
+  		<?php echo $column_left; ?>
+  	</div>
+    <?php endif; ?> 
+    <div class="<?php echo $SPAN[1];?> article">
+        <?php echo $content_top; ?>
+        <div id="content" class="userbox2">
+            <div class="userboxtop">
+              <?php require( DIR_TEMPLATE.$this->config->get('config_template')."/template/common/breadcrumb.tpl" ); ?>
+            </div>
   <div class="page-content">
   <?php echo $text_description; ?>
   <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
     <h2><?php echo $text_order; ?></h2>
     <div class="content">
-      <div class="left"><span class="required">*</span> <?php echo $entry_firstname; ?><br />
-        <input type="text" name="firstname" value="<?php echo $firstname; ?>" class="large-field" />
+      <div class="left"><span class="required">*</span> <?php echo $entry_fullname; ?><br />
+        <input type="text" name="fullname" value="<?php echo $fullname; ?>" class="large-field" />
         <br />
-        <?php if ($error_firstname) { ?>
-        <span class="error"><?php echo $error_firstname; ?></span>
+        <?php if ($error_fullname) { ?>
+        <span class="error"><?php echo $error_fullname; ?></span>
         <?php } ?>
         <br />
-        <span class="required">*</span> <?php echo $entry_lastname; ?><br />
-        <input type="text" name="lastname" value="<?php echo $lastname; ?>" class="large-field" />
+        <span class="required">*</span> <?php echo $entry_mobile_phone; ?><br />
+        <input type="text" name="mobile_phone" value="<?php echo $mobile_phone; ?>" class="large-field" />
         <br />
-        <?php if ($error_lastname) { ?>
-        <span class="error"><?php echo $error_lastname; ?></span>
+        <?php if ($error_mobile_phone) { ?>
+        <span class="error"><?php echo $error_mobile_phone; ?></span>
         <?php } ?>
         <br />
         <span class="required">*</span> <?php echo $entry_email; ?><br />
@@ -135,7 +135,6 @@
     </div>
     <?php if ($text_agree) { ?>
     <div class="buttons">
-      <div class="left"><a href="<?php echo $back; ?>" class="button"><?php echo $button_back; ?></a></div>
       <div class="right"><?php echo $text_agree; ?>
         <?php if ($agree) { ?>
         <input type="checkbox" name="agree" value="1" checked="checked" />
@@ -145,17 +144,12 @@
         <input type="submit" value="<?php echo $button_continue; ?>" class="button" />
       </div>
     </div>
-    <?php } else { ?>
-    <div class="buttons">
-      <div class="left"><a href="<?php echo $back; ?>" class="button"><?php echo $button_back; ?></a></div>
-      <div class="right">
-        <input type="submit" value="<?php echo $button_continue; ?>" class="button" />
-      </div>
-    </div>
+
     <?php } ?>
   </form>
   </div>
-  <?php echo $content_bottom; ?></div>
+  <?php echo $content_bottom; ?>
+</div>
 <script type="text/javascript"><!--
 $(document).ready(function() {
 	$('.date').datepicker({dateFormat: 'yy-mm-dd'});
@@ -171,7 +165,7 @@ $(document).ready(function() {
 //--></script> 
 </div>
 <?php if( $SPAN[2] ): ?>
-<div class="span<?php echo $SPAN[2];?>">	
+<div class="<?php echo $SPAN[2];?>">	
 	<?php echo $column_right; ?>
 </div>
 <?php endif; ?>

@@ -64,8 +64,6 @@ class ControllerModuleCategory extends Controller {
 					);
 					$_product_total = $this->model_catalog_product->getTotalProducts($data);
 
-					
-
 					$_children_data[] = array(
 						'category_id' => $_child['category_id'],
 						'name'        => $_child['name']. ($this->config->get('config_product_count') ? ' <em class="shopnum">(' . $_product_total . ')</em>' : ''),

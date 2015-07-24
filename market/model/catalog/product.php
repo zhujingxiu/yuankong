@@ -54,7 +54,8 @@ class ModelCatalogProduct extends Model {
 				'status'           => $query->row['status'],
 				'date_added'       => $query->row['date_added'],
 				'date_modified'    => $query->row['date_modified'],
-				'viewed'           => $query->row['viewed']
+				'viewed'           => $query->row['viewed'],
+				'sales'            => $query->row['sales'],
 			);
 		} else {
 			return false;
@@ -218,7 +219,6 @@ class ModelCatalogProduct extends Model {
 		$product_data = array();
 				
 		$query = $this->db->query($sql);
-	
 		foreach ($query->rows as $result) {
 			$product_data[$result['product_id']] = $this->getProduct($result['product_id']);
 		}
@@ -482,12 +482,12 @@ class ModelCatalogProduct extends Model {
 	}	
 		
 	public function getTotalProducts($data = array()) {
+
 		if ($this->customer->isLogged()) {
 			$customer_group_id = $this->customer->getCustomerGroupId();
 		} else {
 			$customer_group_id = $this->config->get('config_customer_group_id');
 		}	
-
 		$sql = "SELECT COUNT(DISTINCT p.product_id) AS total"; 
 		
 		if (!empty($data['filter_category_id'])) {
@@ -517,7 +517,6 @@ class ModelCatalogProduct extends Model {
 		
 			if (!empty($data['filter_filter'])) {
 				$implode = array();
-				
 				$filters = explode(',', $data['filter_filter']);
 				
 				foreach ($filters as $filter_id) {

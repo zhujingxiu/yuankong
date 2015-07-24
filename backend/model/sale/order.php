@@ -314,7 +314,7 @@ class ModelSaleOrder extends Model {
 				'shipping_postcode'       => $order_query->row['shipping_postcode'],
 				'shipping_province_id'    => $order_query->row['shipping_province_id'],
 				'shipping_province'       => $order_query->row['shipping_province'],
-				'shipping_areas' 		  => $order_query->row['shipping_areas'],
+				'shipping_area_zone' 	  => $order_query->row['shipping_area_zone'],
 				'shipping_method'         => $order_query->row['shipping_method'],
 				'shipping_code'           => $order_query->row['shipping_code'],
 				'comment'                 => $order_query->row['comment'],

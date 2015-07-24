@@ -26,21 +26,22 @@
                         <td width="40%">产品名称</td>
                         <td width="15%">规格型号</td>                        
                         <td width="10%">数量</td>
+                        <td width="10%">商品操作</td>
                         <td width="15%">总价格</td>
                         <td width="10%">订单状态</td>
-                        <td width="10%">操作</td>
+                        
                     </tr>
                 </table>
             </div>
             <?php if ($orders) { ?>
             <?php foreach ($orders as $order) { ?>
-            <table class="userxldd">
-              
+            <table class="userxldd">              
                 <tr>
                     <td class="xlddtop" colspan="6">
                         <input class="xlddcheck" type="checkbox" name="xldd" />
                         <span>订单编号：#<?php echo $order['order_id']; ?></span>
                         <span>下单时间：<?php echo $order['date_added']; ?></span>
+                        <span><a class="detail-view" href="<?php echo $order['href']; ?>"><?php echo $button_view; ?></a></span>
                     </td>
                 </tr>
                 <?php if($order['products']){?>
@@ -58,20 +59,21 @@
                     </td>
                     <td width="15%"><?php echo $product['model'] ?></td>
                     <td width="10%"><?php echo $product['quantity']; ?></td>
-                    <?php// if(!$key){ ?>
-                    <td width="15%">
-                        <strong><?php echo $product['total']; ?></strong>
+                    <td width="10%">
+                      <a href="<?php echo $product['return'] ?>">退款/退货</a><br />
+                      
+                    </td>
+                    <?php if(!$key){ ?>
+                    <td width="15%" rowspan="<?php echo count($order['products']) ?>">
+                        <strong><?php echo $order['total']; ?></strong>
                     </td>                    
-                    <?php// }?>                    
+                    <?php }?>                    
                     <?php if(!$key){ ?>
                     <td width="10%" rowspan="<?php echo count($order['products']) ?>">
                         <?php echo $order['status']; ?>
                     </td>
                     <?php }?>
-                    <td width="10%">
-                      <a href="<?php echo $product['return'] ?>">取消</a><br />
-                      <a href="<?php echo $order['href']; ?>"><?php echo $button_view; ?></a>
-                    </td>
+                    
                 </tr>
                 <?php endforeach ?>
                 <?php } ?>

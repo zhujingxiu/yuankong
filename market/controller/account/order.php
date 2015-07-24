@@ -267,79 +267,18 @@ class ControllerAccountOrder extends Controller {
 			$this->data['order_id'] = $this->request->get['order_id'];
 			$this->data['date_added'] = date($this->language->get('date_format_short'), strtotime($order_info['date_added']));
 			
-			if ($order_info['payment_address_format']) {
-      			$format = $order_info['payment_address_format'];
-    		} else {
-				$format = '{firstname} {lastname}' . "\n" . '{company}' . "\n" . '{address_1}' . "\n" . '{address_2}' . "\n" . '{city} {postcode}' . "\n" . '{zone}' . "\n" . '{country}';
-			}
-		
-    		$find = array(
-	  			'{firstname}',
-	  			'{lastname}',
-	  			'{company}',
-      			'{address_1}',
-      			'{address_2}',
-     			'{city}',
-      			'{postcode}',
-      			'{zone}',
-				'{zone_code}',
-      			'{country}'
-			);
-	
-			$replace = array(
-	  			'firstname' => $order_info['payment_firstname'],
-	  			'lastname'  => $order_info['payment_lastname'],
-	  			'company'   => $order_info['payment_company'],
-      			'address_1' => $order_info['payment_address_1'],
-      			'address_2' => $order_info['payment_address_2'],
-      			'city'      => $order_info['payment_city'],
-      			'postcode'  => $order_info['payment_postcode'],
-      			'zone'      => $order_info['payment_zone'],
-				'zone_code' => $order_info['payment_zone_code'],
-      			'country'   => $order_info['payment_country']  
-			);
-			
-			$this->data['payment_address'] = str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format))));
-
       		$this->data['payment_method'] = $order_info['payment_method'];
-			
-			if ($order_info['shipping_address_format']) {
-      			$format = $order_info['shipping_address_format'];
-    		} else {
-				$format = '{firstname} {lastname}' . "\n" . '{company}' . "\n" . '{address_1}' . "\n" . '{address_2}' . "\n" . '{city} {postcode}' . "\n" . '{zone}' . "\n" . '{country}';
-			}
-		
-    		$find = array(
-	  			'{firstname}',
-	  			'{lastname}',
-	  			'{company}',
-      			'{address_1}',
-      			'{address_2}',
-     			'{city}',
-      			'{postcode}',
-      			'{zone}',
-				'{zone_code}',
-      			'{country}'
-			);
-	
-			$replace = array(
-	  			'firstname' => $order_info['shipping_firstname'],
-	  			'lastname'  => $order_info['shipping_lastname'],
-	  			'company'   => $order_info['shipping_company'],
-      			'address_1' => $order_info['shipping_address_1'],
-      			'address_2' => $order_info['shipping_address_2'],
-      			'city'      => $order_info['shipping_city'],
-      			'postcode'  => $order_info['shipping_postcode'],
-      			'zone'      => $order_info['shipping_zone'],
-				'zone_code' => $order_info['shipping_zone_code'],
-      			'country'   => $order_info['shipping_country']  
-			);
-
-			$this->data['shipping_address'] = str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format))));
-
+      		$this->data['shipping_area_zone'] = $order_info['shipping_area_zone'];
+      		$this->data['shipping_address'] = $order_info['shipping_address'];
+      		$this->data['shipping_company'] = $order_info['shipping_company'];
+      		$this->data['shipping_postcode'] = $order_info['shipping_postcode'];
+      		$this->data['shipping_fullname'] = $order_info['shipping_fullname'];
+      		$this->data['shipping_telephone'] = $order_info['shipping_telephone'];
 			$this->data['shipping_method'] = $order_info['shipping_method'];
 			
 			$this->data['products'] = array();
+
+			$this->load->model('tool/image');
 			
 			$products = $this->model_account_order->getOrderProducts($this->request->get['order_id']);
 
@@ -361,8 +300,15 @@ class ControllerAccountOrder extends Controller {
 					);					
         		}
 
+        		if ($product['image']) {
+                    $image = $this->model_tool_image->resize($product['image'], $this->config->get('config_image_cart_width'), $this->config->get('config_image_cart_height'));
+                } else {
+                    $image = '';
+                }
+
         		$this->data['products'][] = array(
           			'name'     => $product['name'],
+          			'thumb'    => $image,
           			'model'    => $product['model'],
           			'option'   => $option_data,
           			'quantity' => $product['quantity'],

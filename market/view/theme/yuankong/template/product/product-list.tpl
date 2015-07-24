@@ -16,7 +16,7 @@
 			<p class="lh30 plr">
 				<em class="r">
 					<?php echo $text_sales ?>
-					<i class="c_red">8789</i>
+					<i class="c_red"><?php echo $product['sales'] ?></i>
 				</em>
 			  <?php if ($product['price']) { ?>
 				<?php if (!$product['special']) { ?>

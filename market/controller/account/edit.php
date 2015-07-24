@@ -47,7 +47,7 @@ class ControllerAccountEdit extends Controller {
 
 		$this->data['text_your_details'] = $this->language->get('text_your_details');
 
-		$this->data['entry_firstname'] = $this->language->get('entry_firstname');
+		$this->data['entry_fullname'] = $this->language->get('entry_fullname');
 		$this->data['entry_lastname'] = $this->language->get('entry_lastname');
 		$this->data['entry_email'] = $this->language->get('entry_email');
 		$this->data['entry_telephone'] = $this->language->get('entry_telephone');
@@ -62,16 +62,10 @@ class ControllerAccountEdit extends Controller {
 			$this->data['error_warning'] = '';
 		}
 
-		if (isset($this->error['firstname'])) {
-			$this->data['error_firstname'] = $this->error['firstname'];
+		if (isset($this->error['fullname'])) {
+			$this->data['error_fullname'] = $this->error['fullname'];
 		} else {
-			$this->data['error_firstname'] = '';
-		}
-
-		if (isset($this->error['lastname'])) {
-			$this->data['error_lastname'] = $this->error['lastname'];
-		} else {
-			$this->data['error_lastname'] = '';
+			$this->data['error_fullname'] = '';
 		}
 		
 		if (isset($this->error['email'])) {
@@ -92,20 +86,12 @@ class ControllerAccountEdit extends Controller {
 			$customer_info = $this->model_account_customer->getCustomer($this->customer->getId());
 		}
 
-		if (isset($this->request->post['firstname'])) {
-			$this->data['firstname'] = $this->request->post['firstname'];
+		if (isset($this->request->post['fullname'])) {
+			$this->data['fullname'] = $this->request->post['fullname'];
 		} elseif (isset($customer_info)) {
-			$this->data['firstname'] = $customer_info['firstname'];
+			$this->data['fullname'] = $customer_info['fullname'];
 		} else {
-			$this->data['firstname'] = '';
-		}
-
-		if (isset($this->request->post['lastname'])) {
-			$this->data['lastname'] = $this->request->post['lastname'];
-		} elseif (isset($customer_info)) {
-			$this->data['lastname'] = $customer_info['lastname'];
-		} else {
-			$this->data['lastname'] = '';
+			$this->data['fullname'] = '';
 		}
 
 		if (isset($this->request->post['email'])) {

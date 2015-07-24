@@ -2397,3 +2397,122 @@
 2015-07-24 16:55:21 - PHP Notice:  Undefined index: firstname in D:\wamp\www\yuankong\market\controller\account\return.php on line 450
 2015-07-24 16:55:21 - PHP Notice:  Undefined index: lastname in D:\wamp\www\yuankong\market\controller\account\return.php on line 458
 2015-07-24 16:55:21 - PHP Notice:  Undefined index: email in D:\wamp\www\yuankong\market\controller\account\return.php on line 466
+2015-07-24 20:39:37 - PHP Notice:  Undefined index: country_id in E:\wamp\www\yuankong\market\controller\account\login.php on line 103
+2015-07-24 20:39:37 - PHP Notice:  Undefined index: zone_id in E:\wamp\www\yuankong\market\controller\account\login.php on line 104
+2015-07-24 20:39:42 - PHP Notice:  Undefined index: firstname in E:\wamp\www\yuankong\market\controller\account\edit.php on line 98
+2015-07-24 20:39:42 - PHP Notice:  Undefined index: lastname in E:\wamp\www\yuankong\market\controller\account\edit.php on line 106
+2015-07-24 20:55:19 - PHP Notice:  Undefined index: firstname in E:\wamp\www\yuankong\market\controller\account\return.php on line 450
+2015-07-24 20:55:19 - PHP Notice:  Undefined index: lastname in E:\wamp\www\yuankong\market\controller\account\return.php on line 458
+2015-07-24 20:55:19 - PHP Notice:  Undefined index: email in E:\wamp\www\yuankong\market\controller\account\return.php on line 466
+2015-07-24 21:03:38 - PHP Notice:  Undefined index: payment_address_format in E:\wamp\www\yuankong\market\controller\account\order.php on line 270
+2015-07-24 21:03:38 - PHP Notice:  Undefined index: payment_firstname in E:\wamp\www\yuankong\market\controller\account\order.php on line 290
+2015-07-24 21:03:38 - PHP Notice:  Undefined index: payment_lastname in E:\wamp\www\yuankong\market\controller\account\order.php on line 291
+2015-07-24 21:03:38 - PHP Notice:  Undefined index: payment_company in E:\wamp\www\yuankong\market\controller\account\order.php on line 292
+2015-07-24 21:03:38 - PHP Notice:  Undefined index: payment_address_1 in E:\wamp\www\yuankong\market\controller\account\order.php on line 293
+2015-07-24 21:03:38 - PHP Notice:  Undefined index: payment_address_2 in E:\wamp\www\yuankong\market\controller\account\order.php on line 294
+2015-07-24 21:03:38 - PHP Notice:  Undefined index: payment_city in E:\wamp\www\yuankong\market\controller\account\order.php on line 295
+2015-07-24 21:03:38 - PHP Notice:  Undefined index: payment_postcode in E:\wamp\www\yuankong\market\controller\account\order.php on line 296
+2015-07-24 21:03:38 - PHP Notice:  Undefined index: payment_zone in E:\wamp\www\yuankong\market\controller\account\order.php on line 297
+2015-07-24 21:03:38 - PHP Notice:  Undefined index: payment_zone_code in E:\wamp\www\yuankong\market\controller\account\order.php on line 298
+2015-07-24 21:03:38 - PHP Notice:  Undefined index: payment_country in E:\wamp\www\yuankong\market\controller\account\order.php on line 299
+2015-07-24 21:03:38 - PHP Notice:  Undefined index: shipping_address_format in E:\wamp\www\yuankong\market\controller\account\order.php on line 306
+2015-07-24 21:03:38 - PHP Notice:  Undefined index: shipping_firstname in E:\wamp\www\yuankong\market\controller\account\order.php on line 326
+2015-07-24 21:03:38 - PHP Notice:  Undefined index: shipping_lastname in E:\wamp\www\yuankong\market\controller\account\order.php on line 327
+2015-07-24 21:03:38 - PHP Notice:  Undefined index: shipping_address_1 in E:\wamp\www\yuankong\market\controller\account\order.php on line 329
+2015-07-24 21:03:38 - PHP Notice:  Undefined index: shipping_address_2 in E:\wamp\www\yuankong\market\controller\account\order.php on line 330
+2015-07-24 21:03:38 - PHP Notice:  Undefined index: shipping_city in E:\wamp\www\yuankong\market\controller\account\order.php on line 331
+2015-07-24 21:03:38 - PHP Notice:  Undefined index: shipping_zone in E:\wamp\www\yuankong\market\controller\account\order.php on line 333
+2015-07-24 21:03:38 - PHP Notice:  Undefined index: shipping_zone_code in E:\wamp\www\yuankong\market\controller\account\order.php on line 334
+2015-07-24 21:03:38 - PHP Notice:  Undefined index: shipping_country in E:\wamp\www\yuankong\market\controller\account\order.php on line 335
+2015-07-24 21:08:14 - PHP Notice:  Undefined index: payment_address_format in E:\wamp\www\yuankong\market\controller\account\order.php on line 270
+2015-07-24 21:08:14 - PHP Notice:  Undefined index: payment_firstname in E:\wamp\www\yuankong\market\controller\account\order.php on line 290
+2015-07-24 21:08:14 - PHP Notice:  Undefined index: payment_lastname in E:\wamp\www\yuankong\market\controller\account\order.php on line 291
+2015-07-24 21:08:14 - PHP Notice:  Undefined index: payment_company in E:\wamp\www\yuankong\market\controller\account\order.php on line 292
+2015-07-24 21:08:14 - PHP Notice:  Undefined index: payment_address_1 in E:\wamp\www\yuankong\market\controller\account\order.php on line 293
+2015-07-24 21:08:14 - PHP Notice:  Undefined index: payment_address_2 in E:\wamp\www\yuankong\market\controller\account\order.php on line 294
+2015-07-24 21:08:14 - PHP Notice:  Undefined index: payment_city in E:\wamp\www\yuankong\market\controller\account\order.php on line 295
+2015-07-24 21:08:14 - PHP Notice:  Undefined index: payment_postcode in E:\wamp\www\yuankong\market\controller\account\order.php on line 296
+2015-07-24 21:08:14 - PHP Notice:  Undefined index: payment_zone in E:\wamp\www\yuankong\market\controller\account\order.php on line 297
+2015-07-24 21:08:14 - PHP Notice:  Undefined index: payment_zone_code in E:\wamp\www\yuankong\market\controller\account\order.php on line 298
+2015-07-24 21:08:14 - PHP Notice:  Undefined index: payment_country in E:\wamp\www\yuankong\market\controller\account\order.php on line 299
+2015-07-24 21:08:14 - PHP Notice:  Undefined index: shipping_address_format in E:\wamp\www\yuankong\market\controller\account\order.php on line 306
+2015-07-24 21:08:14 - PHP Notice:  Undefined index: shipping_firstname in E:\wamp\www\yuankong\market\controller\account\order.php on line 326
+2015-07-24 21:08:14 - PHP Notice:  Undefined index: shipping_lastname in E:\wamp\www\yuankong\market\controller\account\order.php on line 327
+2015-07-24 21:08:14 - PHP Notice:  Undefined index: shipping_address_1 in E:\wamp\www\yuankong\market\controller\account\order.php on line 329
+2015-07-24 21:08:14 - PHP Notice:  Undefined index: shipping_address_2 in E:\wamp\www\yuankong\market\controller\account\order.php on line 330
+2015-07-24 21:08:14 - PHP Notice:  Undefined index: shipping_city in E:\wamp\www\yuankong\market\controller\account\order.php on line 331
+2015-07-24 21:08:14 - PHP Notice:  Undefined index: shipping_zone in E:\wamp\www\yuankong\market\controller\account\order.php on line 333
+2015-07-24 21:08:14 - PHP Notice:  Undefined index: shipping_zone_code in E:\wamp\www\yuankong\market\controller\account\order.php on line 334
+2015-07-24 21:08:14 - PHP Notice:  Undefined index: shipping_country in E:\wamp\www\yuankong\market\controller\account\order.php on line 335
+2015-07-24 21:26:25 - PHP Notice:  Undefined index: payment_address_format in E:\wamp\www\yuankong\market\controller\account\order.php on line 270
+2015-07-24 21:26:25 - PHP Notice:  Undefined index: payment_firstname in E:\wamp\www\yuankong\market\controller\account\order.php on line 290
+2015-07-24 21:26:25 - PHP Notice:  Undefined index: payment_lastname in E:\wamp\www\yuankong\market\controller\account\order.php on line 291
+2015-07-24 21:26:25 - PHP Notice:  Undefined index: payment_company in E:\wamp\www\yuankong\market\controller\account\order.php on line 292
+2015-07-24 21:26:25 - PHP Notice:  Undefined index: payment_address_1 in E:\wamp\www\yuankong\market\controller\account\order.php on line 293
+2015-07-24 21:26:25 - PHP Notice:  Undefined index: payment_address_2 in E:\wamp\www\yuankong\market\controller\account\order.php on line 294
+2015-07-24 21:26:25 - PHP Notice:  Undefined index: payment_city in E:\wamp\www\yuankong\market\controller\account\order.php on line 295
+2015-07-24 21:26:25 - PHP Notice:  Undefined index: payment_postcode in E:\wamp\www\yuankong\market\controller\account\order.php on line 296
+2015-07-24 21:26:25 - PHP Notice:  Undefined index: payment_zone in E:\wamp\www\yuankong\market\controller\account\order.php on line 297
+2015-07-24 21:26:25 - PHP Notice:  Undefined index: payment_zone_code in E:\wamp\www\yuankong\market\controller\account\order.php on line 298
+2015-07-24 21:26:25 - PHP Notice:  Undefined index: payment_country in E:\wamp\www\yuankong\market\controller\account\order.php on line 299
+2015-07-24 21:26:25 - PHP Notice:  Undefined index: shipping_address_format in E:\wamp\www\yuankong\market\controller\account\order.php on line 306
+2015-07-24 21:26:25 - PHP Notice:  Undefined index: shipping_firstname in E:\wamp\www\yuankong\market\controller\account\order.php on line 326
+2015-07-24 21:26:25 - PHP Notice:  Undefined index: shipping_lastname in E:\wamp\www\yuankong\market\controller\account\order.php on line 327
+2015-07-24 21:26:25 - PHP Notice:  Undefined index: shipping_address_1 in E:\wamp\www\yuankong\market\controller\account\order.php on line 329
+2015-07-24 21:26:25 - PHP Notice:  Undefined index: shipping_address_2 in E:\wamp\www\yuankong\market\controller\account\order.php on line 330
+2015-07-24 21:26:25 - PHP Notice:  Undefined index: shipping_city in E:\wamp\www\yuankong\market\controller\account\order.php on line 331
+2015-07-24 21:26:25 - PHP Notice:  Undefined index: shipping_zone in E:\wamp\www\yuankong\market\controller\account\order.php on line 333
+2015-07-24 21:26:25 - PHP Notice:  Undefined index: shipping_zone_code in E:\wamp\www\yuankong\market\controller\account\order.php on line 334
+2015-07-24 21:26:25 - PHP Notice:  Undefined index: shipping_country in E:\wamp\www\yuankong\market\controller\account\order.php on line 335
+2015-07-24 21:38:30 - PHP Notice:  Undefined variable: payment_address in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\order_info.tpl on line 49
+2015-07-24 21:48:25 - PHP Notice:  Undefined variable: payment_address in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\order_info.tpl on line 49
+2015-07-24 21:50:35 - PHP Notice:  Undefined variable: payment_address in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\order_info.tpl on line 51
+2015-07-24 21:50:54 - PHP Notice:  Undefined variable: payment_address in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\order_info.tpl on line 51
+2015-07-24 22:37:05 - PHP Notice:  Undefined index: firstname in E:\wamp\www\yuankong\market\controller\account\edit.php on line 98
+2015-07-24 22:37:05 - PHP Notice:  Undefined index: lastname in E:\wamp\www\yuankong\market\controller\account\edit.php on line 106
+2015-07-24 22:38:02 - PHP Notice:  Undefined variable: firstname in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\edit.tpl on line 25
+2015-07-24 22:38:02 - PHP Notice:  Undefined variable: error_firstname in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\edit.tpl on line 26
+2015-07-24 22:38:02 - PHP Notice:  Undefined variable: lastname in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\edit.tpl on line 33
+2015-07-24 22:38:02 - PHP Notice:  Undefined variable: error_lastname in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\edit.tpl on line 34
+2015-07-24 22:38:46 - PHP Notice:  Undefined variable: entry_fullname in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\edit.tpl on line 24
+2015-07-24 22:44:07 - PHP Notice:  Undefined index: firstname in E:\wamp\www\yuankong\market\controller\account\return.php on line 450
+2015-07-24 22:44:07 - PHP Notice:  Undefined index: lastname in E:\wamp\www\yuankong\market\controller\account\return.php on line 458
+2015-07-24 22:44:07 - PHP Notice:  Undefined index: email in E:\wamp\www\yuankong\market\controller\account\return.php on line 466
+2015-07-24 22:46:30 - PHP Notice:  Undefined index: firstname in E:\wamp\www\yuankong\market\controller\account\return.php on line 450
+2015-07-24 22:46:30 - PHP Notice:  Undefined index: lastname in E:\wamp\www\yuankong\market\controller\account\return.php on line 458
+2015-07-24 22:46:30 - PHP Notice:  Undefined index: email in E:\wamp\www\yuankong\market\controller\account\return.php on line 466
+2015-07-24 22:47:13 - PHP Notice:  Undefined index: firstname in E:\wamp\www\yuankong\market\controller\account\return.php on line 450
+2015-07-24 22:47:13 - PHP Notice:  Undefined index: lastname in E:\wamp\www\yuankong\market\controller\account\return.php on line 458
+2015-07-24 22:47:13 - PHP Notice:  Undefined index: email in E:\wamp\www\yuankong\market\controller\account\return.php on line 466
+2015-07-24 22:48:33 - PHP Notice:  Undefined index: firstname in E:\wamp\www\yuankong\market\controller\account\return.php on line 450
+2015-07-24 22:48:33 - PHP Notice:  Undefined index: lastname in E:\wamp\www\yuankong\market\controller\account\return.php on line 458
+2015-07-24 22:48:33 - PHP Notice:  Undefined index: email in E:\wamp\www\yuankong\market\controller\account\return.php on line 466
+2015-07-24 22:54:52 - PHP Warning:  explode() expects parameter 2 to be string, array given in E:\wamp\www\yuankong\market\model\catalog\product.php on line 521
+2015-07-24 22:54:52 - PHP Warning:  Invalid argument supplied for foreach() in E:\wamp\www\yuankong\market\model\catalog\product.php on line 523
+2015-07-24 22:54:52 - PHP Notice:  Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1<br />Error No: 1064<br />SELECT COUNT(DISTINCT p.product_id) AS total FROM yk_product_to_category p2c LEFT JOIN yk_product_filter pf ON (p2c.product_id = pf.product_id) LEFT JOIN yk_product p ON (pf.product_id = p.product_id) LEFT JOIN yk_product_description pd ON (p.product_id = pd.product_id) LEFT JOIN yk_product_to_store p2s ON (p.product_id = p2s.product_id) WHERE pd.language_id = '2' AND p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '0' AND p2c.category_id = '59' AND pf.filter_id IN () in E:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-07-24 22:54:52 - PHP Notice:  Trying to get property of non-object in E:\wamp\www\yuankong\market\model\catalog\product.php on line 596
+2015-07-24 22:54:52 - PHP Warning:  explode() expects parameter 2 to be string, array given in E:\wamp\www\yuankong\market\model\catalog\product.php on line 101
+2015-07-24 22:54:52 - PHP Warning:  Invalid argument supplied for foreach() in E:\wamp\www\yuankong\market\model\catalog\product.php on line 103
+2015-07-24 22:54:52 - PHP Notice:  Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') GROUP BY p.product_id ORDER BY p.sort_order ASC, LCASE(pd.name) ASC LIMIT 0,15' at line 1<br />Error No: 1064<br />SELECT p.product_id, (SELECT AVG(rating) AS total FROM yk_review r1 WHERE r1.product_id = p.product_id AND r1.status = '1' GROUP BY r1.product_id) AS rating, (SELECT price FROM yk_product_discount pd2 WHERE pd2.product_id = p.product_id AND pd2.customer_group_id = '1' AND pd2.quantity = '1' AND ((pd2.date_start = '0000-00-00' OR pd2.date_start < NOW()) AND (pd2.date_end = '0000-00-00' OR pd2.date_end > NOW())) ORDER BY pd2.priority ASC, pd2.price ASC LIMIT 1) AS discount, (SELECT price FROM yk_product_special ps WHERE ps.product_id = p.product_id AND ps.customer_group_id = '1' AND ((ps.date_start = '0000-00-00' OR ps.date_start < NOW()) AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())) ORDER BY ps.priority ASC, ps.price ASC LIMIT 1) AS special FROM yk_product_to_category p2c LEFT JOIN yk_product_filter pf ON (p2c.product_id = pf.product_id) LEFT JOIN yk_product p ON (pf.product_id = p.product_id) LEFT JOIN yk_product_description pd ON (p.product_id = pd.product_id) LEFT JOIN yk_product_to_store p2s ON (p.product_id = p2s.product_id) WHERE pd.language_id = '2' AND p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '0' AND p2c.category_id = '59' AND pf.filter_id IN () GROUP BY p.product_id ORDER BY p.sort_order ASC, LCASE(pd.name) ASC LIMIT 0,15 in E:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-07-24 22:54:52 - PHP Notice:  Trying to get property of non-object in E:\wamp\www\yuankong\market\model\catalog\product.php on line 222
+2015-07-24 22:54:52 - PHP Warning:  Invalid argument supplied for foreach() in E:\wamp\www\yuankong\market\model\catalog\product.php on line 222
+2015-07-24 22:56:53 - PHP Warning:  explode() expects parameter 2 to be string, array given in E:\wamp\www\yuankong\market\model\catalog\product.php on line 521
+2015-07-24 22:56:53 - PHP Warning:  Invalid argument supplied for foreach() in E:\wamp\www\yuankong\market\model\catalog\product.php on line 523
+2015-07-24 22:56:53 - PHP Notice:  Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1<br />Error No: 1064<br />SELECT COUNT(DISTINCT p.product_id) AS total FROM yk_product_to_category p2c LEFT JOIN yk_product_filter pf ON (p2c.product_id = pf.product_id) LEFT JOIN yk_product p ON (pf.product_id = p.product_id) LEFT JOIN yk_product_description pd ON (p.product_id = pd.product_id) LEFT JOIN yk_product_to_store p2s ON (p.product_id = p2s.product_id) WHERE pd.language_id = '2' AND p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '0' AND p2c.category_id = '59' AND pf.filter_id IN () in E:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-07-24 22:56:53 - PHP Notice:  Trying to get property of non-object in E:\wamp\www\yuankong\market\model\catalog\product.php on line 596
+2015-07-24 22:56:53 - PHP Warning:  explode() expects parameter 2 to be string, array given in E:\wamp\www\yuankong\market\model\catalog\product.php on line 101
+2015-07-24 22:56:53 - PHP Warning:  Invalid argument supplied for foreach() in E:\wamp\www\yuankong\market\model\catalog\product.php on line 103
+2015-07-24 22:56:53 - PHP Notice:  Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') GROUP BY p.product_id ORDER BY p.sort_order ASC, LCASE(pd.name) ASC LIMIT 0,15' at line 1<br />Error No: 1064<br />SELECT p.product_id, (SELECT AVG(rating) AS total FROM yk_review r1 WHERE r1.product_id = p.product_id AND r1.status = '1' GROUP BY r1.product_id) AS rating, (SELECT price FROM yk_product_discount pd2 WHERE pd2.product_id = p.product_id AND pd2.customer_group_id = '1' AND pd2.quantity = '1' AND ((pd2.date_start = '0000-00-00' OR pd2.date_start < NOW()) AND (pd2.date_end = '0000-00-00' OR pd2.date_end > NOW())) ORDER BY pd2.priority ASC, pd2.price ASC LIMIT 1) AS discount, (SELECT price FROM yk_product_special ps WHERE ps.product_id = p.product_id AND ps.customer_group_id = '1' AND ((ps.date_start = '0000-00-00' OR ps.date_start < NOW()) AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())) ORDER BY ps.priority ASC, ps.price ASC LIMIT 1) AS special FROM yk_product_to_category p2c LEFT JOIN yk_product_filter pf ON (p2c.product_id = pf.product_id) LEFT JOIN yk_product p ON (pf.product_id = p.product_id) LEFT JOIN yk_product_description pd ON (p.product_id = pd.product_id) LEFT JOIN yk_product_to_store p2s ON (p.product_id = p2s.product_id) WHERE pd.language_id = '2' AND p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '0' AND p2c.category_id = '59' AND pf.filter_id IN () GROUP BY p.product_id ORDER BY p.sort_order ASC, LCASE(pd.name) ASC LIMIT 0,15 in E:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-07-24 22:56:53 - PHP Notice:  Trying to get property of non-object in E:\wamp\www\yuankong\market\model\catalog\product.php on line 222
+2015-07-24 22:56:53 - PHP Warning:  Invalid argument supplied for foreach() in E:\wamp\www\yuankong\market\model\catalog\product.php on line 222
+2015-07-24 22:57:40 - PHP Warning:  explode() expects parameter 2 to be string, array given in E:\wamp\www\yuankong\market\model\catalog\product.php on line 524
+2015-07-24 22:57:40 - PHP Warning:  Invalid argument supplied for foreach() in E:\wamp\www\yuankong\market\model\catalog\product.php on line 526
+2015-07-24 22:57:40 - PHP Notice:  Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1<br />Error No: 1064<br />SELECT COUNT(DISTINCT p.product_id) AS total FROM yk_product_to_category p2c LEFT JOIN yk_product_filter pf ON (p2c.product_id = pf.product_id) LEFT JOIN yk_product p ON (pf.product_id = p.product_id) LEFT JOIN yk_product_description pd ON (p.product_id = pd.product_id) LEFT JOIN yk_product_to_store p2s ON (p.product_id = p2s.product_id) WHERE pd.language_id = '2' AND p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '0' AND p2c.category_id = '59' AND pf.filter_id IN () in E:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-07-24 22:57:40 - PHP Notice:  Trying to get property of non-object in E:\wamp\www\yuankong\market\model\catalog\product.php on line 599
+2015-07-24 22:57:40 - PHP Warning:  explode() expects parameter 2 to be string, array given in E:\wamp\www\yuankong\market\model\catalog\product.php on line 101
+2015-07-24 22:57:40 - PHP Warning:  Invalid argument supplied for foreach() in E:\wamp\www\yuankong\market\model\catalog\product.php on line 103
+2015-07-24 22:57:40 - PHP Notice:  Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') GROUP BY p.product_id ORDER BY p.sort_order ASC, LCASE(pd.name) ASC LIMIT 0,15' at line 1<br />Error No: 1064<br />SELECT p.product_id, (SELECT AVG(rating) AS total FROM yk_review r1 WHERE r1.product_id = p.product_id AND r1.status = '1' GROUP BY r1.product_id) AS rating, (SELECT price FROM yk_product_discount pd2 WHERE pd2.product_id = p.product_id AND pd2.customer_group_id = '1' AND pd2.quantity = '1' AND ((pd2.date_start = '0000-00-00' OR pd2.date_start < NOW()) AND (pd2.date_end = '0000-00-00' OR pd2.date_end > NOW())) ORDER BY pd2.priority ASC, pd2.price ASC LIMIT 1) AS discount, (SELECT price FROM yk_product_special ps WHERE ps.product_id = p.product_id AND ps.customer_group_id = '1' AND ((ps.date_start = '0000-00-00' OR ps.date_start < NOW()) AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())) ORDER BY ps.priority ASC, ps.price ASC LIMIT 1) AS special FROM yk_product_to_category p2c LEFT JOIN yk_product_filter pf ON (p2c.product_id = pf.product_id) LEFT JOIN yk_product p ON (pf.product_id = p.product_id) LEFT JOIN yk_product_description pd ON (p.product_id = pd.product_id) LEFT JOIN yk_product_to_store p2s ON (p.product_id = p2s.product_id) WHERE pd.language_id = '2' AND p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '0' AND p2c.category_id = '59' AND pf.filter_id IN () GROUP BY p.product_id ORDER BY p.sort_order ASC, LCASE(pd.name) ASC LIMIT 0,15 in E:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-07-24 22:57:40 - PHP Notice:  Trying to get property of non-object in E:\wamp\www\yuankong\market\model\catalog\product.php on line 222
+2015-07-24 22:57:40 - PHP Warning:  Invalid argument supplied for foreach() in E:\wamp\www\yuankong\market\model\catalog\product.php on line 222
+2015-07-24 23:36:04 - PHP Notice:  Undefined index: sales in E:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-list.tpl on line 19
+2015-07-24 23:37:02 - PHP Notice:  Undefined index: sales in E:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product-list.tpl on line 19

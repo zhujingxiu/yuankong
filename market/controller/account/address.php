@@ -172,7 +172,7 @@ class ControllerAccountAddress extends Controller {
 
     	foreach ($results as $result) {
 
-			$format = '{area_zone}'  . "\n" . '{address}' . "\n" . '{company}'  . "\n" . '{postcode}' . "\n" .'{fullname}' . "\n" .'{telephone} '  ;
+			$format = '{area_zone}' . "\n" . '{address}' . "\n" . '{company}'  . "\n" . '{postcode}' . "\n" .'{fullname}' . "\n" .'{telephone}';
 		
     		$find = array(
 	  			'{area_zone}',	  			

@@ -40,4 +40,4 @@ $_['column_comment']        = '备注';
 
 // Error
 $_['error_warning']         = '请选择商品及处理方式来完成操作！';
-?>
+$_['button_view']        	= '查看详情';
