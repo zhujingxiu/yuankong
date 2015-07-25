@@ -318,6 +318,10 @@
 			}
 		});
 	});
+    $('#tab-records').load('index.php?route=product/product/transaction&product_id=<?php echo $product_id ?>');
+    <?php if ($review_status) { ?>
+    $('#tab-review').load('index.php?route=product/product/review&product_id=<?php echo $product_id ?>');
+    <?php }?>
 //--></script>
 
 <script type="text/javascript"><!--    

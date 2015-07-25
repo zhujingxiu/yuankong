@@ -623,5 +623,26 @@ class ModelCatalogProduct extends Model {
 		$query = $this->db->query("SELECT GROUP_CONCAT(cd.category_id ORDER BY level SEPARATOR '_') AS path FROM " . DB_PREFIX . "category_path cp LEFT JOIN " . DB_PREFIX . "category_description cd ON (cp.path_id = cd.category_id ) WHERE cp.category_id = '".$category_id."' AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "' GROUP BY cp.category_id");
 		
 		return $query->num_rows ? $query->row['path'] : false;
-	} 
+	}
+
+	public function getTransactionByProductId($product_id, $start = 0, $limit = 20) {
+		if ($start < 0) {
+			$start = 0;
+		}
+		
+		if ($limit < 1) {
+			$limit = 20;
+		}		
+		$sql = "SELECT op.*,o.fullname, o.mobile_phone, o.date_added FROM " . DB_PREFIX . "order_product op 
+		LEFT JOIN " . DB_PREFIX . "product p ON (op.product_id = p.product_id) LEFT JOIN " . DB_PREFIX . "order o ON (o.order_id = op.order_id) 
+		WHERE p.product_id = '" . (int)$product_id . "' AND p.date_available <= NOW() AND p.status = '1' AND o.order_status_id = '" . (int)$this->config->get('config_complete_status_id') . "' ORDER BY o.date_added DESC LIMIT " . (int)$start . "," . (int)$limit;
+		$query = $this->db->query($sql);
+		return $query->rows;
+	}
+
+	public function getTotalTransactionByProductId($product_id) {
+		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "order_product op LEFT JOIN " . DB_PREFIX . "product p ON (p.product_id = op.product_id) LEFT JOIN " . DB_PREFIX . "order o ON (o.order_id = op.order_id) WHERE p.product_id = '" . (int)$product_id . "' AND p.date_available <= NOW() AND p.status = '1' AND o.order_status_id = '".$this->config->get('config_complete_status_id')."' ");
+		
+		return $query->row['total'];
+	}
 }

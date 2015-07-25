@@ -50,14 +50,9 @@
   </table>
   <table class="address">
     <tr class="heading">
-      <td width="50%"><b><?php echo $text_to; ?></b></td>
-      <td width="50%"><b><?php echo $text_ship_to; ?></b></td>
+      <td ><b><?php echo $text_ship_to; ?></b></td>
     </tr>
     <tr>
-      <td><?php echo $order['payment_address']; ?><br/>
-        <?php echo $order['email']; ?><br/>
-        <?php echo $order['telephone']; ?>
-      </td>
       <td><?php echo $order['shipping_address']; ?></td>
     </tr>
   </table>

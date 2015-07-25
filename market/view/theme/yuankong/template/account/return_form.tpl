@@ -155,14 +155,6 @@ $(document).ready(function() {
 	$('.date').datepicker({dateFormat: 'yy-mm-dd'});
 });
 //--></script> 
-<script type="text/javascript"><!--
-$(document).ready(function() {
-	$('.colorbox').colorbox({
-		width: 640,
-		height: 480
-	});
-});
-//--></script> 
 </div>
 <?php if( $SPAN[2] ): ?>
 <div class="<?php echo $SPAN[2];?>">	

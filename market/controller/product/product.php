@@ -576,6 +576,53 @@ class ControllerProductProduct extends Controller {
 			$this->response->setOutput($this->render());
     	}
   	}
+	public function transaction() {
+    	$this->language->load('product/product');
+		
+		$this->load->model('catalog/product');
+
+		$this->data['text_on'] = $this->language->get('text_on');
+		$this->data['text_no_records'] = $this->language->get('text_no_records');
+
+		if (isset($this->request->get['page'])) {
+			$page = $this->request->get['page'];
+		} else {
+			$page = 1;
+		}  
+		
+		$this->data['transactions'] = array();
+		
+		$transaction_total = $this->model_catalog_product->getTotalTransactionByProductId($this->request->get['product_id']);
+			
+		$results = $this->model_catalog_product->getTransactionByProductId($this->request->get['product_id'], ($page - 1) * 5, 5);
+
+		foreach ($results as $result) {
+        	$this->data['transactions'][] = array(
+        		'fullname'     => $result['fullname'],
+				'mobile_phone' => substr_replace($result['mobile_phone'], '****', 3,6),
+				'quantity'     => (int)$result['quantity'],
+				'price'        => $this->currency->format($result['price']),
+        		'date_added'   => date('Y-m-d', strtotime($result['date_added']))
+        	);
+      	}			
+			
+		$pagination = new Pagination();
+		$pagination->total = $transaction_total;
+		$pagination->page = $page;
+		$pagination->limit = 5; 
+		$pagination->text = $this->language->get('text_pagination');
+		$pagination->url = $this->url->link('product/product/transaction', 'product_id=' . $this->request->get['product_id'] . '&page={page}');
+			
+		$this->data['pagination'] = $pagination->render();
+		
+		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/product/transaction.tpl')) {
+			$this->template = $this->config->get('config_template') . '/template/product/transaction.tpl';
+		} else {
+			$this->template = 'default/template/product/transaction.tpl';
+		}
+		
+		$this->response->setOutput($this->render());
+	}  	
 	
 	public function review() {
     	$this->language->load('product/product');

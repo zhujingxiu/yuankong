@@ -21,6 +21,7 @@ $_['text_or']             = '- 或 -';
 $_['text_reviews']        = '%s 评价'; 
 $_['text_write']          = '如果您对本商品有什么问题或经验，请在此留下您的意见和建议！';
 $_['text_no_reviews']     = '此商品暂无评论。';
+$_['text_no_records']     = '此商品暂无成交记录。';
 $_['text_on']           = ' on ';
 $_['text_note']           = '<span style="color： #FF0000;">注意：</span> 评论内容不支持HTML代码！';
 $_['text_share']          = '分享';
@@ -42,7 +43,7 @@ $_['entry_captcha']       = '请在下框输入验证码：';
 // Tabs
 $_['tab_description']     = '产品详细介绍';
 $_['tab_attribute']       = '规格';
-$_['tab_review']          = '商品评价 (已有%s条评价)';
+$_['tab_review']          = '商品评价 (%s)';
 $_['tab_related']         = '关联商品'; 
 
 // Error

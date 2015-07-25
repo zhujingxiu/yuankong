@@ -72,14 +72,19 @@ $(document).ready(function(){
   <div id="menu">
     <ul class="left" style="display: none;">
       <li id="dashboard"><a href="<?php echo $home; ?>" class="top"><?php echo $text_dashboard; ?></a></li>
-      <li id="project"><a href="<?php echo $project; ?>" class="top"><?php echo $text_project; ?></a></li>
+      <li id="project"><a class="top"><?php echo $text_project; ?></a>
+          <ul>
+            <li><a href="<?php echo $project; ?>"><?php echo $text_project; ?></a></li>
+            <li><a href="<?php echo $project_group; ?>"><?php echo $text_project_group; ?></a></li>
+          </ul>
+      </li>
       <li id="order"><a class="top"><?php echo $text_order; ?></a>
         <ul>
           <li><a href="<?php echo $order; ?>"><?php echo $text_all_orders; ?></a></li>
           <li><a href="<?php echo $return; ?>"><?php echo $text_return; ?></a></li>
         </ul>
       </li>
-      <li><a href="<?php echo $module; ?>" class="top"><?php echo $text_module; ?></a></li>
+      <li id="module"><a href="<?php echo $module; ?>" class="top"><?php echo $text_module; ?></a></li>
       <li id="catalog"><a class="top"><?php echo $text_catalog; ?></a>
         <ul>
           <li><a href="<?php echo $category; ?>"><?php echo $text_category; ?></a></li>
@@ -97,8 +102,13 @@ $(document).ready(function(){
         </ul>
       </li>
       
-      <li id="wiki"><a href="<?php echo $wiki ?>" class="top"><?php echo $text_wiki; ?></a></li>
-
+      <li id="wiki"><a class="top"><?php echo $text_wiki; ?></a>
+          <ul>
+            <li><a href="<?php echo $wiki ?>"><?php echo $text_wiki; ?></a></li>
+            <li><a href="<?php echo $wiki_group; ?>"><?php echo $text_wiki_group; ?></a></li>
+          </ul>
+      </li>
+          
       <li id="customer"><a class="top"><?php echo $text_customer; ?></a>
         <ul>
           <li><a href="<?php echo $customer; ?>"><?php echo $text_customer; ?></a></li>
@@ -108,8 +118,11 @@ $(document).ready(function(){
       </li>
       <li id="review"><a href="<?php echo $review; ?>" class="top"><?php echo $text_review; ?></a></li>
       <li id="help"><a href="<?php echo $help ?>" class="top"><?php echo $text_help; ?></a></li>
-      <li id="affiliate">
-        <a href="<?php echo $affiliate; ?>" class="top"><?php echo $text_affiliate; ?></a>
+      <li id="affiliate"><a class="top"><?php echo $text_affiliate; ?></a>
+        <ul>
+          <li><a href="<?php echo $affiliate; ?>"><?php echo $text_affiliate; ?></a></li>
+          <li><a href="<?php echo $affiliate_group; ?>"><?php echo $text_affiliate_group; ?></a></li>
+        </ul>
       </li>
       <li id="link"><a href="<?php echo $link; ?>" class="top"><?php echo $text_link; ?></a></li>
       <?php if(false){?>
@@ -189,12 +202,9 @@ $(document).ready(function(){
               <li><a href="<?php echo $weight_class; ?>"><?php echo $text_weight_class; ?></a></li>
             </ul>
           </li>
-
           <li><a href="<?php echo $information; ?>"><?php echo $text_information; ?></a></li>
-          <li><a href="<?php echo $wiki_group; ?>"><?php echo $text_wiki_group; ?></a></li>
+          
           <li class="_hide"><a href="<?php echo $help_group; ?>"><?php echo $text_help_group; ?></a></li>
-          <li><a href="<?php echo $project_group; ?>"><?php echo $text_project_group; ?></a></li>
-          <li><a href="<?php echo $affiliate_group; ?>"><?php echo $text_affiliate_group; ?></a></li>
           <li><a class="parent"><?php echo $text_design; ?></a>
             <ul>
               <li><a href="<?php echo $banner; ?>"><?php echo $text_banner; ?></a></li>
@@ -211,7 +221,6 @@ $(document).ready(function(){
           <li><a href="<?php echo $payment; ?>"><?php echo $text_payment; ?></a></li>
           <li><a href="<?php echo $total; ?>"><?php echo $text_total; ?></a></li>
           <li><a href="<?php echo $feed; ?>"><?php echo $text_feed; ?></a></li>
-          <li><a href="<?php echo $api; ?>"><?php echo $text_api; ?></a></li>
           <li><a href="<?php echo $case; ?>"><?php echo $text_case; ?></a></li>
           <li><a href="<?php echo $coupon; ?>"><?php echo $text_coupon; ?></a></li>
           <li><a class="parent"><?php echo $text_voucher; ?></a>

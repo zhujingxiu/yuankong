@@ -319,14 +319,14 @@ class ControllerSaleOrder extends Controller {
 				'text' => $this->language->get('text_view'),
 				'href' => $this->url->link('sale/order/info', 'token=' . $this->session->data['token'] . '&order_id=' . $result['order_id'] . $url, 'SSL')
 			);
-			
+			/*
 			if (strtotime($result['date_added']) > strtotime('-' . (int)$this->config->get('config_order_edit') . ' day')) {
 				$action[] = array(
 					'text' => $this->language->get('text_edit'),
 					'href' => $this->url->link('sale/order/update', 'token=' . $this->session->data['token'] . '&order_id=' . $result['order_id'] . $url, 'SSL')
 				);
 			}
-			
+			*/
 			$this->data['orders'][] = array(
 				'order_id'      => $result['order_id'],
 				'customer'      => $result['customer'],
@@ -1007,12 +1007,12 @@ class ControllerSaleOrder extends Controller {
       		$this->error['warning'] = $this->language->get('error_permission');
     	}
 
-    	if ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32)) {
-      		$this->error['firstname'] = $this->language->get('error_firstname');
+    	if ((utf8_strlen($this->request->post['fullname']) < 1) || (utf8_strlen($this->request->post['fullname']) > 32)) {
+      		$this->error['fullname'] = $this->language->get('error_fullname');
     	}
 
-    	if ((utf8_strlen($this->request->post['lastname']) < 1) || (utf8_strlen($this->request->post['lastname']) > 32)) {
-      		$this->error['lastname'] = $this->language->get('error_lastname');
+    	if ((utf8_strlen($this->request->post['mobile_phone']) < 1) || (!isMobile($this->request->post['mobile_phone']))) {
+      		$this->error['mobile_phone'] = $this->language->get('error_mobile_phone');
     	}
 
     	if ((utf8_strlen($this->request->post['email']) > 96) || (!preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $this->request->post['email']))) {
@@ -1044,16 +1044,16 @@ class ControllerSaleOrder extends Controller {
 		}
 		
 		if ($shipping) {
-			if ((utf8_strlen($this->request->post['shipping_firstname']) < 1) || (utf8_strlen($this->request->post['shipping_firstname']) > 32)) {
-				$this->error['shipping_firstname'] = $this->language->get('error_firstname');
+			if ((utf8_strlen($this->request->post['shipping_fullname']) < 1) || (utf8_strlen($this->request->post['shipping_fullname']) > 32)) {
+				$this->error['shipping_fullname'] = $this->language->get('error_fullname');
 			}
 	
-			if ((utf8_strlen($this->request->post['shipping_lastname']) < 1) || (utf8_strlen($this->request->post['shipping_lastname']) > 32)) {
-				$this->error['shipping_lastname'] = $this->language->get('error_lastname');
+			if ((utf8_strlen($this->request->post['shipping_telephone']) < 1) || (!isMobile($this->request->post['shipping_telephone']))) {
+				$this->error['shipping_telephone'] = $this->language->get('error_telephone');
 			}
 			
-			if ((utf8_strlen($this->request->post['shipping_address_1']) < 3) || (utf8_strlen($this->request->post['shipping_address_1']) > 128)) {
-				$this->error['shipping_address_1'] = $this->language->get('error_address_1');
+			if ((utf8_strlen($this->request->post['shipping_address']) < 3) || (utf8_strlen($this->request->post['shipping_address']) > 128)) {
+				$this->error['shipping_address'] = $this->language->get('error_address');
 			}
 
 			if ((utf8_strlen($this->request->post['shipping_postcode']) < 2) || (utf8_strlen($this->request->post['shipping_postcode']) > 10)) {
@@ -1133,14 +1133,12 @@ class ControllerSaleOrder extends Controller {
 			$this->data['text_accept_language'] = $this->language->get('text_accept_language');
 			$this->data['text_date_added'] = $this->language->get('text_date_added');
 			$this->data['text_date_modified'] = $this->language->get('text_date_modified');			
-			$this->data['text_firstname'] = $this->language->get('text_firstname');
-			$this->data['text_lastname'] = $this->language->get('text_lastname');
+			$this->data['text_fullname'] = $this->language->get('text_fullname');
+			$this->data['text_mobile_phone'] = $this->language->get('text_mobile_phone');
 			$this->data['text_company'] = $this->language->get('text_company');
-			$this->data['text_company_id'] = $this->language->get('text_company_id');
 			$this->data['text_tax_id'] = $this->language->get('text_tax_id');
-			$this->data['text_address_1'] = $this->language->get('text_address_1');
-			$this->data['text_address_2'] = $this->language->get('text_address_2');
-			$this->data['text_city'] = $this->language->get('text_city');
+			$this->data['text_address'] = $this->language->get('text_address');
+			$this->data['text_area_zone'] = $this->language->get('text_area_zone');
 			$this->data['text_postcode'] = $this->language->get('text_postcode');
 			$this->data['text_province'] = $this->language->get('text_province');
 			$this->data['text_shipping_method'] = $this->language->get('text_shipping_method');
@@ -1178,7 +1176,6 @@ class ControllerSaleOrder extends Controller {
 			$this->data['tab_shipping'] = $this->language->get('tab_shipping');
 			$this->data['tab_product'] = $this->language->get('tab_product');
 			$this->data['tab_history'] = $this->language->get('tab_history');
-			$this->data['tab_fraud'] = $this->language->get('tab_fraud');
 		
 			$this->data['token'] = $this->session->data['token'];
 
@@ -1247,8 +1244,8 @@ class ControllerSaleOrder extends Controller {
 			
 			$this->data['store_name'] = $order_info['store_name'];
 			$this->data['store_url'] = $order_info['store_url'];
-			$this->data['firstname'] = $order_info['firstname'];
-			$this->data['lastname'] = $order_info['lastname'];
+			$this->data['fullname'] = $order_info['fullname'];
+			$this->data['mobile_phone'] = $order_info['mobile_phone'];
 						
 			if ($order_info['customer_id']) {
 				$this->data['customer'] = $this->url->link('sale/customer/update', 'token=' . $this->session->data['token'] . '&customer_id=' . $order_info['customer_id'], 'SSL');
