@@ -411,7 +411,7 @@ class ControllerCheckoutConfirm extends Controller {
 					
 					$this->session->data['shipping_address_id'] = $this->model_account_address->addAddress($this->request->post);
 					$this->session->data['shipping_province_id'] = is_array($this->request->post['area']) ? current($this->request->post['area']) : 0;
-					$this->session->data['shipping_postcode'] = $this->request->post['postcode'];
+					$this->session->data['shipping_postcode'] = isset($this->request->post['postcode']) ? $this->request->post['postcode'] : '';
 									
 				}
 			}

@@ -82,7 +82,7 @@ class ControllerAccountAccount extends Controller {
                 'products'  => $product,
                 'total'     => $this->currency->format($result['total']),
                 'status'    => $result['status'],
-                'link'      => $this->url->link('account/order/info', 'order_id=' . $item['order_id'],'SSL')
+                'link'      => $this->url->link('account/order/info', 'order_id=' . $result['order_id'],'SSL')
             );
         }
         $this->data['totals'] = $this->model_account_order->getTotalOrders();

@@ -2601,3 +2601,7 @@
 2015-07-25 17:35:13 - PHP Notice:  Undefined index: rating in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\transaction.tpl on line 16
 2015-07-25 17:35:13 - PHP Notice:  Undefined index: reviews in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\transaction.tpl on line 16
 2015-07-25 17:35:13 - PHP Notice:  Undefined index: text in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\transaction.tpl on line 17
+2015-07-26 22:01:30 - PHP Notice:  Undefined variable: projects in E:\wamp\www\yuankong\market\view\theme\yuankong\template\service\company.tpl on line 99
+2015-07-26 22:01:30 - PHP Warning:  Invalid argument supplied for foreach() in E:\wamp\www\yuankong\market\view\theme\yuankong\template\service\company.tpl on line 99
+2015-07-26 22:08:46 - PHP Notice:  Undefined index: country_id in E:\wamp\www\yuankong\market\controller\account\login.php on line 103
+2015-07-26 22:08:46 - PHP Notice:  Undefined index: zone_id in E:\wamp\www\yuankong\market\controller\account\login.php on line 104

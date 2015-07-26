@@ -1,6 +1,6 @@
 
 <?php echo $header; ?>
-
+<?php require( DIR_TEMPLATE.$this->config->get('config_template')."/template/common/breadcrumb.tpl" ); ?>
 <div class="mt10 zt-bannerbox">
     <div class="w fix">
         <div class="l">

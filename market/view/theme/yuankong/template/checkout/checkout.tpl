@@ -181,9 +181,7 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
                         <td class="price"><p class="tc"><?php echo $product['price']; ?></p></td>
                         <td class="quantity">
                             <div class="tc ovh">
-                                <span class="icon2 janbtn"></span>
-                                <input type="text" name="quantity[<?php echo $product['key']; ?>]" value="<?php echo $product['quantity']; ?>" class="jiajiantext"  />
-                                <span class="icon2 jabtn"></span>                                
+                                <span class="icon2 janbtn"></span><input type="text" name="quantity[<?php echo $product['key']; ?>]" value="<?php echo $product['quantity']; ?>" class="jiajiantext"  /><span class="icon2 jabtn"></span>                                
                                 <input type="hidden" name="price[<?php echo $product['key']; ?>]" value="<?php echo $product['_price'] ?>"/>
                             </div>
                         </td>
@@ -301,10 +299,9 @@ $('#button-confirm').bind('click', function() {
     $.ajax({ 
         type: 'post',
         url: 'index.php?route=checkout/confirm',
-        data:$('#checkout-form input[type="radio"]:checked,#checkout-form select,#checkout-form textarea,#checkout-form input[type="hidden"]'),
+        data:$('#checkout-form input[type="radio"]:checked,#checkout-form select,#checkout-form textarea,#checkout-form input[type="hidden"],#checkout-form input[type="text"]'),
         dataType:'json',
         success: function(json) {
-            console.info(json)
             if(json.status==1){
                 location.href = json.redirect;
             }else{

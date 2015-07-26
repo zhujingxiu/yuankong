@@ -4,7 +4,7 @@ class ModelAccountAddress extends Model {
 		$area_zone = array();
 		if(isset($data['area']) && is_array($data['area'])){
 			foreach ($data['area'] as $area_id) {
-				$_area_info = $this->db->fetch('area',array('condiftion'=> array('area_id'=>$area_id)));
+				$_area_info = $this->db->fetch('area',array('one'=>true,'condition'=> array('area_id'=>$area_id)));
 				if(!empty($_area_info['name'])){
 					$area_zone[] = $_area_info['name'];
 				}				
@@ -22,9 +22,6 @@ class ModelAccountAddress extends Model {
 			'area_zone'		=> implode(" ", $area_zone),
 			'areas'			=> isset($data['area']) && is_array($data['area']) ? implode("|", $data['area']) : '',
 		);
-		echo "<pre>";
-		print_r($fields );
-		echo "</pre>";exit;
 		$this->db->insert("address", $fields);
 		
 		$address_id = $this->db->getLastId();

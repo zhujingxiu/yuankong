@@ -146,9 +146,7 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
               <td class="price"><p class="tc"><?php echo $product['price']; ?></p></td>
               <td class="quantity">
                 <div class="tc ovh">
-                  <span class="icon2 janbtn"></span>
-                  <input type="text" name="quantity[<?php echo $product['key']; ?>]" value="<?php echo $product['quantity']; ?>" class="jiajiantext"  />
-                  <span class="icon2 jabtn"></span>
+                  <span class="icon2 janbtn"></span><input type="text" name="quantity[<?php echo $product['key']; ?>]" value="<?php echo $product['quantity']; ?>" class="jiajiantext"  /><span class="icon2 jabtn"></span>
                   <input type="hidden" name="price[<?php echo $product['key']; ?>]" value="<?php echo $product['_price'] ?>"/>
                 </div>
               </td>
