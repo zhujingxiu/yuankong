@@ -8,7 +8,19 @@ class ControllerAccountOrder extends Controller {
 
 	  		$this->redirect($this->url->link('account/login', '', 'SSL'));
     	}
-		
+		$status = isset($this->request->get['status']) ? strtolower(trim($this->request->get['status'])) : 'all';
+		$filter_status = array();
+		switch ($status) {
+			case 'success':
+				$filter_status = array($this->config->get('config_complete_status_id'));
+				break;
+			case 'cancel':
+				$filter_status = array(6,7);
+				break;
+			case 'processing':
+				$filter_status = array(1,2,3);
+				break;
+		}
 		$this->language->load('account/order');
 		
 		$this->load->model('account/order');
@@ -95,9 +107,9 @@ class ControllerAccountOrder extends Controller {
 		
 		$this->data['orders'] = array();
 		$this->load->model('tool/image');
-		$order_total = $this->model_account_order->getTotalOrders();
+		$order_total = $this->model_account_order->getTotalOrders($filter_status);
 		
-		$results = $this->model_account_order->getOrders(($page - 1) * 10, 10);
+		$results = $this->model_account_order->getOrders(($page - 1) * 10, 10,$filter_status);
 		
 		foreach ($results as $result) {
 			$product_total = $this->model_account_order->getTotalOrderProductsByOrderId($result['order_id']);
@@ -158,7 +170,11 @@ class ControllerAccountOrder extends Controller {
 		
 		$this->data['pagination'] = $pagination->render_list();
 
-		$this->data['continue'] = $this->url->link('account/account', '', 'SSL');
+		$this->data['all'] = $this->url->link('account/order', '', 'SSL');
+		$this->data['processing'] = $this->url->link('account/order', 'status=processing', 'SSL');
+		$this->data['success'] = $this->url->link('account/order', 'status=success', 'SSL');
+		$this->data['cancel'] = $this->url->link('account/order', 'status=cancel', 'SSL');
+		$this->data['status'] = $status;
 
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/order_list.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/account/order_list.tpl';

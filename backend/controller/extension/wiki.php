@@ -262,7 +262,7 @@ class ControllerExtensionWiki extends Controller {
 		} elseif (!empty($news)) {
 			$this->data['is_top'] = $news['is_top'];
 		} else {
-			$this->data['is_top'] = '';
+			$this->data['is_top'] = 0;
 		}
 
 		if (isset($this->request->post['group_id'])) {
@@ -278,7 +278,7 @@ class ControllerExtensionWiki extends Controller {
 		} elseif (!empty($news)) {
 			$this->data['status'] = $news['status'];
 		} else {
-			$this->data['status'] = '';
+			$this->data['status'] = 1;
 		}
 
 		if (isset($this->request->post['sort_order'])) {
@@ -286,7 +286,7 @@ class ControllerExtensionWiki extends Controller {
 		} elseif (!empty($news)) {
 			$this->data['sort_order'] = $news['sort_order'];
 		} else {
-			$this->data['sort_order'] = '';
+			$this->data['sort_order'] = 1;
 		}
 
 		$this->load->model('extension/wiki_group');

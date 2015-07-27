@@ -24,8 +24,10 @@ class ControllerModuleWiki extends Controller {
         $this->data['text_tag_school'] = $this->language->get('text_tag_school');
         $this->data['text_wiki_help'] = $this->language->get('text_wiki_help');
 
-        $this->data['wiki_help'] = $this->url->link('wiki/help','','');
-                        
+        $this->data['wiki_help'] = $this->url->link('information/wiki','wiki_group=help','');
+        if(isset($this->request->get['wiki_group']) && strtolower($this->request->get['wiki_group'])=='help'){
+            $this->data['group'] = 'help';
+        }
         $this->template = $this->config->get('config_template') . '/template/module/wiki.tpl';
         
         $this->render();

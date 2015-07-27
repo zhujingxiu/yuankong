@@ -32,49 +32,84 @@ class ControllerInformationWiki extends Controller {
             'href'      => $this->url->link('information/wiki'),
             'separator' => $this->language->get('text_separator')
         );
-        if (isset($this->request->get['wiki_group'])) {
+
+        if(isset($this->request->get['wiki_group']) && is_numeric($this->request->get['wiki_group'])) {
             $wiki_group = (int)$this->request->get['wiki_group'];
-        } else {
+        }else if (isset($this->request->get['wiki_group']) && is_string($this->request->get['wiki_group'])) {
+            $wiki_group = strtolower($this->request->get['wiki_group']) == 'help' ? false : 0 ;
+        } else  {
             $wiki_group = 0;
         }
+        $this->data['wikis'] = array();
 
-        $group_info = $this->model_catalog_information->getWikiGroup($wiki_group);
-            
-        if($group_info){
-            if(isset($group_info['tag']) && $group_info['tag']==2){
-                $text_tag = $this->language->get('text_tag_school');
-            }else{
-                $text_tag = $this->language->get('text_tag_information');
-            }
+        if($wiki_group===false){
+            $wiki_name = $this->language->get('text_wiki_help');
             $this->data['breadcrumbs'][] = array(
-                'text'      => $text_tag,
+                'text'      => $this->language->get('text_tag_school'),
                 'href'      => 'javascript:;',
                 'separator' => $this->language->get('text_separator')
             );
             $this->data['breadcrumbs'][] = array(
-                'text'      => $group_info['name'],
-                'href'      => $this->url->link('information/wiki','wiki_group='.$group_info['group_id']),
+                'text'      => $wiki_name,
+                'href'      => $this->url->link('information/wiki','wiki_group=help','SSL'),
                 'separator' => $this->language->get('text_separator')
             );
-        }
-        $this->data['continue'] = $this->url->link('common/home');
-        $this->data['wikis'] = array();
-        $filter = array(
-            'filter_group'  => $wiki_group,
-            'start'         => 0,
-            'limit'         => 10,
-            'sort'          => $sort,
-            'order'         => $order,
-        );        
-        $total = $this->model_catalog_information->getTotalWiki($filter);
-        
-        $results = $this->model_catalog_information->getWikis($filter);
-        
-        foreach ($results as $result) {
+            $filter = array(                
+                'start'         => 0,
+                'limit'         => 10,
+                'sort'          => $sort,
+                'order'         => $order,
+            );
+            $total = $this->model_catalog_information->getTotalHelp($filter);
+            
+            $results = $this->model_catalog_information->getHelps($filter);
 
-            $result['date_added'] = date('Y-m-d',strtotime($result['name']));
-            $this->data['wikis'][] = $result;
+            foreach ($results as $result) {
+                $result['title'] = $result['text'];
+                $result['text'] = $result['reply'];
+                $result['date_added'] = date('Y-m-d',strtotime($result['date_added']));
+                $this->data['wikis'][] = $result;
+            }
+        }else{
+            $wiki_name = $this->language->get('heading_title');
+            $group_info = $this->model_catalog_information->getWikiGroup($wiki_group);
+                
+            if($group_info){
+                if(isset($group_info['tag']) && $group_info['tag']==2){
+                    $text_tag = $this->language->get('text_tag_school');
+                }else{
+                    $text_tag = $this->language->get('text_tag_information');
+                }
+                $this->data['breadcrumbs'][] = array(
+                    'text'      => $text_tag,
+                    'href'      => 'javascript:;',
+                    'separator' => $this->language->get('text_separator')
+                );
+                $this->data['breadcrumbs'][] = array(
+                    'text'      => $group_info['name'],
+                    'href'      => $this->url->link('information/wiki','wiki_group='.$group_info['group_id']),
+                    'separator' => $this->language->get('text_separator')
+                );
+                $wiki_name = $group_info['name'];
+            }
+            $filter = array(
+                'filter_group'  => $wiki_group,
+                'start'         => 0,
+                'limit'         => 10,
+                'sort'          => $sort,
+                'order'         => $order,
+            );        
+            $total = $this->model_catalog_information->getTotalWiki($filter);
+            
+            $results = $this->model_catalog_information->getWikis($filter);
+
+            foreach ($results as $result) {
+                $result['date_added'] = date('Y-m-d',strtotime($result['date_added']));
+                $result['link'] = $this->url->link('information/wiki/info','wiki_group='.$wiki_group.'&wiki_id='.$result['wiki_id'],'SSL');
+                $this->data['wikis'][] = $result;
+            }
         }
+        $this->data['wiki_name'] = $wiki_name;
 
         $pagination = new Pagination();
         $pagination->total = $total;
@@ -83,7 +118,7 @@ class ControllerInformationWiki extends Controller {
         $pagination->text = $this->language->get('text_pagination');
         $pagination->url = $this->url->link('service/project', 'page={page}', 'SSL');
         
-        $this->data['pagination'] = $pagination->render();
+        $this->data['pagination'] = $pagination->render_list();
         $this->data['totals'] = $total;
 
         $this->template = $this->config->get('config_template') . '/template/information/wiki.tpl';

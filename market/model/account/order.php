@@ -42,7 +42,7 @@ class ModelAccountOrder extends Model {
 		}
 	}
 
-	public function getOrders($start = 0, $limit = 20) {
+	public function getOrders($start = 0, $limit = 20,$filter_status=array()) {
 		if ($start < 0) {
 			$start = 0;
 		}
@@ -50,8 +50,16 @@ class ModelAccountOrder extends Model {
 		if ($limit < 1) {
 			$limit = 1;
 		}	
+		$sql = "SELECT o.order_id, o.fullname, os.name as status, o.date_added, o.total, o.currency_code, o.currency_value FROM `" . DB_PREFIX . "order` o LEFT JOIN " . DB_PREFIX . "order_status os ON (o.order_status_id = os.order_status_id) WHERE o.customer_id = '" . (int)$this->customer->getId() . "' AND ";
 		
-		$query = $this->db->query("SELECT o.order_id, o.fullname, os.name as status, o.date_added, o.total, o.currency_code, o.currency_value FROM `" . DB_PREFIX . "order` o LEFT JOIN " . DB_PREFIX . "order_status os ON (o.order_status_id = os.order_status_id) WHERE o.customer_id = '" . (int)$this->customer->getId() . "' AND o.order_status_id > '0' AND os.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY o.order_id DESC,o.date_added DESC LIMIT " . (int)$start . "," . (int)$limit);	
+		if($filter_status && is_array($filter_status) && count($filter_status)){
+			$sql .= " o.order_status_id IN (".implode(",", $filter_status).")";
+		}else{
+			$sql .= " o.order_status_id > '0' ";
+		}
+
+		$sql .= " AND os.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY o.order_id DESC,o.date_added DESC LIMIT " . (int)$start . "," . (int)$limit;
+		$query = $this->db->query($sql);	
 	
 		return $query->rows;
 	}
@@ -84,16 +92,15 @@ class ModelAccountOrder extends Model {
 		$query = $this->db->query("SELECT date_added, os.name AS status, oh.comment, oh.notify FROM " . DB_PREFIX . "order_history oh LEFT JOIN " . DB_PREFIX . "order_status os ON oh.order_status_id = os.order_status_id WHERE oh.order_id = '" . (int)$order_id . "' AND oh.notify = '1' AND os.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY oh.date_added");
 	
 		return $query->rows;
-	}	
+	}		
 
-	public function getOrderDownloads($order_id) {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_download WHERE order_id = '" . (int)$order_id . "' ORDER BY name");
-	
-		return $query->rows; 
-	}	
-
-	public function getTotalOrders() {
-      	$query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "order` WHERE customer_id = '" . (int)$this->customer->getId() . "' AND order_status_id > '0'");
+	public function getTotalOrders($filter_status=array()) {
+		if($filter_status && is_array($filter_status) && count($filter_status)){
+			$sql = "SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "order` WHERE customer_id = '" . (int)$this->customer->getId() . "' AND order_status_id IN (".implode(",", $filter_status).")";
+		}else{
+			$sql = "SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "order` WHERE customer_id = '" . (int)$this->customer->getId() . "' AND order_status_id > '0'";
+		}
+      	$query = $this->db->query($sql);
 		
 		return $query->row['total'];
 	}

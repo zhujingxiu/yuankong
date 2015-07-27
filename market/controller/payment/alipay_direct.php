@@ -4,7 +4,7 @@ class ControllerPaymentAlipayDirect extends Controller {
 	public function index() {
 		
 		$this->load->model('checkout/order');
-
+		$this->checkout->clear();
 		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
 		
 		/**************************请求参数**************************/
@@ -90,7 +90,7 @@ class ControllerPaymentAlipayDirect extends Controller {
 		//建立请求
 		$alipaySubmit = new AlipaySubmit($alipay_config);
 		$html_text = $alipaySubmit->buildRequestForm($parameter,"get", " 确认支付 ");
-		//echo $html_text;
+		die($html_text);
 		
 		$this->data['button_confirm'] = $html_text;
 

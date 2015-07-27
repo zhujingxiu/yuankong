@@ -146,7 +146,7 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
               <td class="price"><p class="tc"><?php echo $product['price']; ?></p></td>
               <td class="quantity">
                 <div class="tc ovh">
-                  <span class="icon2 janbtn"></span><input type="text" name="quantity[<?php echo $product['key']; ?>]" value="<?php echo $product['quantity']; ?>" class="jiajiantext"  /><span class="icon2 jabtn"></span>
+                  <span class="icon2 janbtn minus-qty"></span><input type="text" name="quantity[<?php echo $product['key']; ?>]" value="<?php echo $product['quantity']; ?>" class="jiajiantext"  /><span class="icon2 jabtn plus-qty"></span>
                   <input type="hidden" name="price[<?php echo $product['key']; ?>]" value="<?php echo $product['_price'] ?>"/>
                 </div>
               </td>
@@ -292,6 +292,29 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
       }
 
     <?php }?>
+  });
+  $('input[name^="quantity"]').change(function(){
+    changeQty(this);
+  })
+  function changeQty(el){
+    $.ajax({
+      url:'index.php?route=checkout/cart',
+      type:'post',
+      data:$(el),
+      success:function(){
+        location.reload();
+      }
+    });
+  }
+  $('.plus-qty').click(function(){
+    var obj = $(this).parent('.tc').find('input[name^=quantity]');
+    obj.val(parseInt(obj.val())+1);
+    changeQty(obj);
+  });
+  $('.minus-qty').click(function(){
+    var obj = $(this).parent('.tc').find('input[name^=quantity]');
+    obj.val(parseInt(obj.val())-1 ? parseInt(obj.val())-1 : 1);
+    changeQty(obj);
   });
 </script>
 

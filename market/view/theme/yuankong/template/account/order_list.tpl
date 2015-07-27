@@ -15,10 +15,18 @@
         </div>
         <div class="userboxcen">
             <ul class="userdd-zt martop">
-                <li class="userdd-zton">所有订单</li>
-                <li>进行中的订单</li>
-                <li>成功订单</li>
-                <li>已取消订单</li>
+                <li <?php echo $status=='all' ? 'class="userdd-zton"' : '' ?>>
+                    <a href="<?php echo $all ?>">所有订单</a>
+                </li>
+                <li <?php echo $status=='processing' ? 'class="userdd-zton"' : '' ?>>
+                    <a href="<?php echo $processing ?>">进行中的订单</a>
+                </li>
+                <li <?php echo $status=='success' ? 'class="userdd-zton"' : '' ?>>
+                    <a href="<?php echo $success ?>">成功订单</a>
+                </li>
+                <li <?php echo $status=='cancel' ? 'class="userdd-zton"' : '' ?>>
+                    <a href="<?php echo $cancel ?>">已取消订单</a>
+                </li>
             </ul>
             <div class="userddnav">
                 <table class="userddnav1" width="100%">

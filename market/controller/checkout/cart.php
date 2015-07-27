@@ -645,17 +645,9 @@ class ControllerCheckoutCart extends Controller {
 		if (!isset($this->request->post['province_id']) || $this->request->post['province_id'] == '') {
 			$json['error']['province'] = $this->language->get('error_province');
 		}
-			
-		$this->load->model('localisation/country');
-		
-		$country_info = $this->model_localisation_country->getCountry($this->request->post['country_id']);
-		
-		if ($country_info && $country_info['postcode_required'] && (utf8_strlen($this->request->post['postcode']) < 2) || (utf8_strlen($this->request->post['postcode']) > 10)) {
-			$json['error']['postcode'] = $this->language->get('error_postcode');
-		}
 						
 		if (!$json) {		
-			$this->tax->setShippingAddress(0, $this->request->post['province_id']);
+			$this->tax->setShippingAddress( $this->request->post['province_id']);
 		
 			// Default Shipping Address
 			$this->session->data['shipping_province_id'] = $this->request->post['province_id'];
