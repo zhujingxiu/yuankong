@@ -1,6 +1,6 @@
 <?php
-$column_left  = trim($column_left);
-$column_right  = trim($column_right);
+$column_left  = isset($column_left) ? trim($column_left) : '';
+$column_right  = isset($column_right) ? trim($column_right) : '';
  
 if( !empty($column_left) && !empty($column_right) ){
 		$layout = 'full';
@@ -12,8 +12,8 @@ if( !empty($column_left) && !empty($column_right) ){
 		$layout = 'center';
 	}
 	
-	$spans = array( 'full' 			=> array(3,6,3),
-					'center-right'  => array('',' l w980 ',' r w210 '), 
+	$spans = array( 'full' 			=> array('l w210','','r 290'),
+					'center-right'  => array('',' l w900 ',' r w290 '), 
 					'center-left'   => array(' l w210',' r w980 ',''),
 					'center'		=> array('',' w ','')
 	);

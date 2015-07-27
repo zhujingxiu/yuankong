@@ -184,6 +184,7 @@ class ControllerCatalogOption extends Controller {
 			$this->data['options'][] = array(
 				'option_id'  => $result['option_id'],
 				'name'       => $result['name'],
+				'remark'       => $result['remark'],
 				'sort_order' => $result['sort_order'],
 				'selected'   => isset($this->request->post['selected']) && in_array($result['option_id'], $this->request->post['selected']),
 				'action'     => $action
@@ -195,6 +196,7 @@ class ControllerCatalogOption extends Controller {
 		$this->data['text_no_results'] = $this->language->get('text_no_results');
 		
 		$this->data['column_name'] = $this->language->get('column_name');
+		$this->data['column_remark'] = $this->language->get('column_remark');
 		$this->data['column_sort_order'] = $this->language->get('column_sort_order');
 		$this->data['column_action'] = $this->language->get('column_action');	
 
@@ -228,6 +230,7 @@ class ControllerCatalogOption extends Controller {
 		}
 		
 		$this->data['sort_name'] = $this->url->link('catalog/option', 'token=' . $this->session->data['token'] . '&sort=od.name' . $url, 'SSL');
+		$this->data['sort_remark'] = $this->url->link('catalog/option', 'token=' . $this->session->data['token'] . '&sort=o.remark' . $url, 'SSL');
 		$this->data['sort_sort_order'] = $this->url->link('catalog/option', 'token=' . $this->session->data['token'] . '&sort=o.sort_order' . $url, 'SSL');
 		
 		$url = '';
@@ -281,6 +284,7 @@ class ControllerCatalogOption extends Controller {
 		$this->data['text_clear'] = $this->language->get('text_clear');	
 		
 		$this->data['entry_name'] = $this->language->get('entry_name');
+		$this->data['entry_remark'] = $this->language->get('entry_remark');
 		$this->data['entry_type'] = $this->language->get('entry_type');
 		$this->data['entry_option_value'] = $this->language->get('entry_option_value');
 		$this->data['entry_image'] = $this->language->get('entry_image');
@@ -365,7 +369,7 @@ class ControllerCatalogOption extends Controller {
 
 		if (isset($this->request->post['type'])) {
 			$this->data['type'] = $this->request->post['type'];
-		} elseif (!empty($option_info)) {
+		} elseif (!empty($option_info['type'])) {
 			$this->data['type'] = $option_info['type'];
 		} else {
 			$this->data['type'] = '';
@@ -373,10 +377,18 @@ class ControllerCatalogOption extends Controller {
 		
 		if (isset($this->request->post['sort_order'])) {
 			$this->data['sort_order'] = $this->request->post['sort_order'];
-		} elseif (!empty($option_info)) {
+		} elseif (!empty($option_info['sort_order'])) {
 			$this->data['sort_order'] = $option_info['sort_order'];
 		} else {
 			$this->data['sort_order'] = '';
+		}
+
+		if (isset($this->request->post['remark'])) {
+			$this->data['remark'] = $this->request->post['remark'];
+		} elseif (!empty($option_info['remark'])) {
+			$this->data['remark'] = $option_info['remark'];
+		} else {
+			$this->data['remark'] = '';
 		}
 		
 		if (isset($this->request->post['option_value'])) {
@@ -540,6 +552,7 @@ class ControllerCatalogOption extends Controller {
 				$json[] = array(
 					'option_id'    => $option['option_id'],
 					'name'         => strip_tags(html_entity_decode($option['name'], ENT_QUOTES, 'UTF-8')),
+					'remark'       => strip_tags(html_entity_decode($option['remark'], ENT_QUOTES, 'UTF-8')),
 					'category'     => $type,
 					'type'         => $option['type'],
 					'option_value' => $option_value_data

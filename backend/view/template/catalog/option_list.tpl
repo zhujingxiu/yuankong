@@ -27,6 +27,11 @@
                 <?php } else { ?>
                 <a href="<?php echo $sort_name; ?>"><?php echo $column_name; ?></a>
                 <?php } ?></td>
+              <td class="left"><?php if ($sort == 'o.remark') { ?>
+                <a href="<?php echo $sort_remark; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_remark; ?></a>
+                <?php } else { ?>
+                <a href="<?php echo $sort_remark; ?>"><?php echo $column_remark; ?></a>
+                <?php } ?></td>
               <td class="right"><?php if ($sort == 'o.sort_order') { ?>
                 <a href="<?php echo $sort_sort_order; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_sort_order; ?></a>
                 <?php } else { ?>
@@ -45,6 +50,7 @@
                 <input type="checkbox" name="selected[]" value="<?php echo $option['option_id']; ?>" />
                 <?php } ?></td>
               <td class="left"><?php echo $option['name']; ?></td>
+              <td class="left"><?php echo $option['remark']; ?></td>
               <td class="right"><?php echo $option['sort_order']; ?></td>
               <td class="right"><?php foreach ($option['action'] as $action) { ?>
                 [ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
@@ -53,7 +59,7 @@
             <?php } ?>
             <?php } else { ?>
             <tr>
-              <td class="center" colspan="4"><?php echo $text_no_results; ?></td>
+              <td class="center" colspan="5"><?php echo $text_no_results; ?></td>
             </tr>
             <?php } ?>
           </tbody>

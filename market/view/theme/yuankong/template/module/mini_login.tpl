@@ -13,6 +13,7 @@
         <div class="mt15">
             <input type="submit" class="gc-tab-sub" value="<?php echo $button_login; ?>" />
         </div>
+        <input name="redirect" value="" type="hidden">
         <?php if($oauth_html){ ?>
         <div class="mt15">
             <?php echo $oauth_html ?>

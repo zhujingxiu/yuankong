@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2015 年 07 月 26 日 15:24
+-- 生成日期: 2015 年 07 月 27 日 09:39
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.4.3
 
@@ -22221,7 +22221,7 @@ CREATE TABLE IF NOT EXISTS `yk_customer` (
 
 INSERT INTO `yk_customer` (`customer_id`, `store_id`, `mobile_phone`, `fullname`, `email`, `telephone`, `fax`, `avatar`, `password`, `salt`, `cart`, `wishlist`, `viewed`, `newsletter`, `address_id`, `customer_group_id`, `ip`, `status`, `approved`, `token`, `date_added`) VALUES
 (1, 0, '18959526595', NULL, 'zhangwuji@yitiantulong.cn', '123123', '', NULL, '3838e00e6e59c95a65bc786ff38d303252338a3f', '7abf86dd9', 'a:0:{}', '', '', 0, 0, 1, '127.0.0.1', 1, 0, '', '2015-06-12 17:34:52'),
-(2, 0, '18850911766', 'yk18850911766', '', '', '', NULL, 'e8a75e331334d9ce78c228afc59c485d99e4a9b3', '2f645ca7b', 'a:3:{s:31:"53:YToxOntpOjIyNztzOjI6IjIxIjt9";i:1;s:31:"53:YToxOntpOjIyNztzOjI6IjE5Ijt9";i:1;i:55;i:1;}', '', NULL, 0, 1, 1, '127.0.0.1', 1, 1, '', '2015-07-16 13:38:42');
+(2, 0, '18850911766', 'yk18850911766', '', '', '', NULL, 'e8a75e331334d9ce78c228afc59c485d99e4a9b3', '2f645ca7b', 'a:3:{s:31:"53:YToxOntpOjIyNztzOjI6IjIxIjt9";i:2;s:31:"53:YToxOntpOjIyNztzOjI6IjE5Ijt9";i:2;i:55;i:2;}', '', 'a:1:{i:0;s:2:"51";}', 0, 1, 1, '127.0.0.1', 1, 1, '', '2015-07-16 13:38:42');
 
 -- --------------------------------------------------------
 
@@ -22388,34 +22388,6 @@ CREATE TABLE IF NOT EXISTS `yk_customer_transaction` (
 -- --------------------------------------------------------
 
 --
--- 表的结构 `yk_download`
---
-
-CREATE TABLE IF NOT EXISTS `yk_download` (
-  `download_id` int(11) NOT NULL AUTO_INCREMENT,
-  `filename` varchar(128) NOT NULL,
-  `mask` varchar(128) NOT NULL,
-  `remaining` int(11) NOT NULL DEFAULT '0',
-  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`download_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- 表的结构 `yk_download_description`
---
-
-CREATE TABLE IF NOT EXISTS `yk_download_description` (
-  `download_id` int(11) NOT NULL,
-  `language_id` int(11) NOT NULL,
-  `name` varchar(64) NOT NULL,
-  PRIMARY KEY (`download_id`,`language_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- 表的结构 `yk_extension`
 --
 
@@ -22424,7 +22396,7 @@ CREATE TABLE IF NOT EXISTS `yk_extension` (
   `type` varchar(32) NOT NULL,
   `code` varchar(32) NOT NULL,
   PRIMARY KEY (`extension_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=473 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=474 ;
 
 --
 -- 转存表中的数据 `yk_extension`
@@ -22466,7 +22438,8 @@ INSERT INTO `yk_extension` (`extension_id`, `type`, `code`) VALUES
 (469, 'module', 'oauth'),
 (470, 'payment', 'alipay_direct'),
 (471, 'module', 'ykliked'),
-(472, 'shipping', 'weight');
+(472, 'shipping', 'weight'),
+(473, 'module', 'ykconsult');
 
 -- --------------------------------------------------------
 
@@ -22547,9 +22520,9 @@ CREATE TABLE IF NOT EXISTS `yk_help` (
 --
 
 INSERT INTO `yk_help` (`help_id`, `group_id`, `account`, `telephone`, `text`, `is_top`, `sort_order`, `reply`, `user_id`, `status`, `date_replied`, `date_added`) VALUES
-(1, 0, '宝马为740i准备了代号B58的新一代直列六缸涡轮增压汽油发动机', '12312312', 'asdsadasdasdas', 0, 0, 'asdsadasdsa', 1, 1, '2015-06-10 06:14:38', '2015-06-10 06:14:38'),
+(1, 0, '宝马740i', '12312312', 'asdsadasdasdas', 0, 0, 'asdsadasdsa', 1, 1, '2015-06-10 06:14:38', '2015-06-10 06:14:38'),
 (2, 0, 'asdsafafasdasd', '12321321312', 'adasdasdsadassa', 0, 0, NULL, 0, 1, NULL, '2015-05-25 07:37:26'),
-(3, 0, '汉武帝开拓疆域：中国国家雏形形成', '1312434243', '汉代建立起中原王朝的一个初步形态，尤以汉武帝对\r\n\r\n疆域的拓展最具开创意义。[详细]', 1, 2, '在李莎与李立三的后代看来，李莎"为了爱情的远行"\r\n\r\n，虽然为此付出了巨大的代价，但终生无悔。[详', 1, 1, NULL, '2015-06-10 08:25:06');
+(3, 0, '汉武帝', '1312434243', '汉代建立起中原王朝的一个初步形态，尤以汉武帝对\r\n\r\n疆域的拓展最具开创意义。[详细]', 1, 2, '在李莎与李立三的后代看来，李莎"为了爱情的远行"\r\n\r\n，虽然为此付出了巨大的代价，但终生无悔。[详', 1, 1, NULL, '2015-06-10 08:25:06');
 
 -- --------------------------------------------------------
 
@@ -22840,16 +22813,19 @@ CREATE TABLE IF NOT EXISTS `yk_manufacturer_to_store` (
 CREATE TABLE IF NOT EXISTS `yk_option` (
   `option_id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(32) NOT NULL,
+  `remark` varchar(128) DEFAULT NULL,
   `sort_order` int(3) NOT NULL,
   PRIMARY KEY (`option_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
 
 --
 -- 转存表中的数据 `yk_option`
 --
 
-INSERT INTO `yk_option` (`option_id`, `type`, `sort_order`) VALUES
-(13, 'image', 1);
+INSERT INTO `yk_option` (`option_id`, `type`, `remark`, `sort_order`) VALUES
+(13, 'image', '灭火器箱', 1),
+(14, 'image', '源控灭火器', 2),
+(15, 'image', '灭火器箱', 0);
 
 -- --------------------------------------------------------
 
@@ -22869,7 +22845,9 @@ CREATE TABLE IF NOT EXISTS `yk_option_description` (
 --
 
 INSERT INTO `yk_option_description` (`option_id`, `language_id`, `name`) VALUES
-(13, 2, '规格型号');
+(13, 2, '规格型号'),
+(14, 2, '图片规格'),
+(15, 2, '规格型号');
 
 -- --------------------------------------------------------
 
@@ -22883,18 +22861,20 @@ CREATE TABLE IF NOT EXISTS `yk_option_value` (
   `image` varchar(255) NOT NULL,
   `sort_order` int(3) NOT NULL,
   PRIMARY KEY (`option_value_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=54 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=56 ;
 
 --
 -- 转存表中的数据 `yk_option_value`
 --
 
 INSERT INTO `yk_option_value` (`option_value_id`, `option_id`, `image`, `sort_order`) VALUES
-(52, 13, 'data/case/logopic5.jpg', 4),
-(51, 13, 'data/case/logopic6.jpg', 3),
-(50, 13, 'data/case/logopic2.jpg', 2),
 (49, 13, 'data/case/logopic1.jpg', 1),
-(53, 13, 'data/case/logopic3.jpg', 0);
+(50, 13, 'data/case/logopic2.jpg', 2),
+(51, 13, 'data/case/logopic6.jpg', 3),
+(52, 13, 'data/case/logopic5.jpg', 4),
+(53, 13, 'data/case/logopic3.jpg', 0),
+(54, 14, 'data/logopic5.jpg', 1),
+(55, 15, 'data/logopic5.jpg', 0);
 
 -- --------------------------------------------------------
 
@@ -22915,11 +22895,13 @@ CREATE TABLE IF NOT EXISTS `yk_option_value_description` (
 --
 
 INSERT INTO `yk_option_value_description` (`option_value_id`, `language_id`, `option_id`, `name`) VALUES
-(53, 2, 13, 'Model-5-7XT'),
-(52, 2, 13, 'Model-4-WEM'),
-(51, 2, 13, 'Model-3-DRF'),
+(49, 2, 13, 'Model-1-KFC'),
 (50, 2, 13, 'Model-2-SUBWAY'),
-(49, 2, 13, 'Model-1-KFC');
+(51, 2, 13, 'Model-3-DRF'),
+(52, 2, 13, 'Model-4-WEM'),
+(53, 2, 13, 'Model-5-7XT'),
+(54, 2, 14, 'asdas'),
+(55, 2, 15, 'adasda');
 
 -- --------------------------------------------------------
 
@@ -22987,23 +22969,6 @@ INSERT INTO `yk_order` (`order_id`, `order_sn`, `invoice_no`, `invoice_prefix`, 
 (8, '', 0, 'INV-2015-00', 0, '源控智能', 'http://www.yk119.com/', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '323.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-24 00:21:59', '2015-07-24 00:21:59'),
 (9, '', 0, 'INV-2015-00', 0, '源控智能', 'http://www.yk119.com/', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '323.0000', 2, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-24 00:28:39', '2015-07-24 00:28:39'),
 (10, '', 1, 'INV-2015-00', 0, '源控智能', 'http://www.yk119.com/', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '323.0000', 3, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-24 00:31:04', '2015-07-24 00:31:04');
-
--- --------------------------------------------------------
-
---
--- 表的结构 `yk_order_download`
---
-
-CREATE TABLE IF NOT EXISTS `yk_order_download` (
-  `order_download_id` int(11) NOT NULL AUTO_INCREMENT,
-  `order_id` int(11) NOT NULL,
-  `order_product_id` int(11) NOT NULL,
-  `name` varchar(64) NOT NULL,
-  `filename` varchar(128) NOT NULL,
-  `mask` varchar(128) NOT NULL,
-  `remaining` int(3) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`order_download_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -23249,8 +23214,8 @@ CREATE TABLE IF NOT EXISTS `yk_product` (
 --
 
 INSERT INTO `yk_product` (`product_id`, `model`, `sku`, `upc`, `isbn`, `mpn`, `location`, `quantity`, `stock_status_id`, `image`, `manufacturer_id`, `shipping`, `price`, `market`, `points`, `tax_class_id`, `date_available`, `weight`, `weight_class_id`, `length`, `width`, `height`, `length_class_id`, `subtract`, `minimum`, `sort_order`, `status`, `date_added`, `date_modified`, `viewed`, `sales`) VALUES
-(50, '132143', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic1.jpg', 0, 1, '126.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-26 13:00:31', '2015-06-16 16:23:34', 81, 0),
-(51, 'ae123213', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic2.jpg', 0, 1, '123.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-23 07:23:47', '0000-00-00 00:00:00', 31, 0),
+(50, '132143', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic1.jpg', 0, 1, '126.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-26 13:00:31', '2015-06-16 16:23:34', 85, 0),
+(51, 'ae123213', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic2.jpg', 0, 1, '123.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-23 07:23:47', '0000-00-00 00:00:00', 36, 0),
 (52, '123123', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic4.jpg', 0, 1, '123.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-07-20 23:44:32', '0000-00-00 00:00:00', 24, 0),
 (53, '231414', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic3.jpg', 0, 1, '125.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-26 13:13:01', '0000-00-00 00:00:00', 147, 0),
 (54, '2144232', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic5.jpg', 0, 1, '128.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-16 09:03:38', '0000-00-00 00:00:00', 6, 0),
@@ -23495,18 +23460,6 @@ INSERT INTO `yk_product_to_category` (`product_id`, `category_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- 表的结构 `yk_product_to_download`
---
-
-CREATE TABLE IF NOT EXISTS `yk_product_to_download` (
-  `product_id` int(11) NOT NULL,
-  `download_id` int(11) NOT NULL,
-  PRIMARY KEY (`product_id`,`download_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- 表的结构 `yk_product_to_layout`
 --
 
@@ -23746,7 +23699,7 @@ CREATE TABLE IF NOT EXISTS `yk_setting` (
   `value` text NOT NULL,
   `serialized` tinyint(1) NOT NULL,
   PRIMARY KEY (`setting_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2074 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2069 ;
 
 --
 -- 转存表中的数据 `yk_setting`
@@ -23851,7 +23804,6 @@ INSERT INTO `yk_setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `se
 (1619, 0, 'yknews', 'yknews_module', 'a:1:{i:0;a:8:{s:9:"layout_id";s:1:"1";s:8:"position";s:9:"slideshow";s:8:"group_id";s:1:"2";s:5:"title";s:10:"e站快报";s:5:"limit";s:1:"5";s:11:"first_class";s:3:"cff";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"3";}}', 1),
 (1396, 0, 'ykproject', 'ykproject_module', 'a:1:{i:0;a:4:{s:9:"layout_id";s:1:"1";s:8:"position";s:9:"slideshow";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"1";}}', 1),
 (1397, 0, 'ykcarousel', 'ykcarousel_module', 'a:1:{i:0;a:5:{s:9:"layout_id";s:5:"99999";s:8:"position";s:9:"slideshow";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"1";s:12:"banner_image";a:3:{i:1;a:4:{s:5:"image";s:16:"data/banner2.jpg";s:4:"link";s:17:" www.yk119.com.cn";s:5:"title";a:1:{i:2;s:0:"";}s:11:"description";a:1:{i:2;s:31:"&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n";}}i:2;a:4:{s:5:"image";s:16:"data/banner1.jpg";s:4:"link";s:17:" www.yk119.com.cn";s:5:"title";a:1:{i:2;s:0:"";}s:11:"description";a:1:{i:2;s:31:"&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n";}}i:3;a:4:{s:5:"image";s:16:"data/banner3.jpg";s:4:"link";s:17:" www.yk119.com.cn";s:5:"title";a:1:{i:2;s:0:"";}s:11:"description";a:1:{i:2;s:31:"&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n";}}}}}', 1),
-(1281, 0, 'affiliate', 'affiliate_module', 'a:2:{i:0;a:4:{s:9:"layout_id";s:2:"10";s:8:"position";s:12:"column_right";s:6:"status";s:1:"0";s:10:"sort_order";s:1:"1";}i:1;a:4:{s:9:"layout_id";s:1:"1";s:8:"position";s:12:"column_right";s:6:"status";s:1:"0";s:10:"sort_order";i:1;}}', 1),
 (1993, 0, 'config', 'config_vat', '0', 0),
 (1992, 0, 'config', 'config_tax', '0', 0),
 (1991, 0, 'config', 'config_voucher_max', '1000', 0),
@@ -23860,7 +23812,7 @@ INSERT INTO `yk_setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `se
 (1625, 0, 'ykwiki', 'ykwiki_module', 'a:1:{i:1;a:9:{s:5:"title";a:1:{i:2;s:12:"消防百科";}s:9:"layout_id";s:1:"1";s:8:"position";s:11:"mass_bottom";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"4";s:13:"category_tabs";a:6:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";i:3;s:1:"0";i:4;s:1:"4";i:5;s:1:"5";}s:5:"limit";a:6:{i:0;s:1:"5";i:1;s:1:"5";i:2;s:1:"5";i:3;s:1:"5";i:4;s:1:"5";i:5;s:1:"5";}s:5:"image";a:6:{i:0;s:24:"data/yuankong/bkpic1.jpg";i:1;s:24:"data/yuankong/bkpic2.jpg";i:2;s:24:"data/yuankong/bkpic3.jpg";i:3;s:24:"data/yuankong/bkpic4.jpg";i:4;s:24:"data/yuankong/bkpic5.jpg";i:5;s:24:"data/yuankong/bkpic6.jpg";}s:4:"sort";a:6:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";i:3;s:1:"4";i:4;s:1:"5";i:5;s:1:"6";}}}', 1),
 (1284, 0, 'ykaffiliate', 'ykaffiliate_module', 'a:1:{i:1;a:10:{s:5:"title";a:1:{i:2;s:12:"消防公司";}s:9:"layout_id";s:1:"1";s:8:"position";s:11:"mass_bottom";s:6:"status";s:1:"1";s:7:"lateast";s:1:"5";s:10:"sort_order";i:3;s:13:"category_tabs";a:4:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";i:3;s:1:"4";}s:5:"limit";a:4:{i:0;s:1:"5";i:1;s:1:"5";i:2;s:1:"5";i:3;s:1:"5";}s:10:"icon_class";a:4:{i:0;s:14:"icon design-gs";i:1;s:10:"icon jc-gs";i:2;s:10:"icon wb-gs";i:3;s:10:"icon gc-gs";}s:4:"sort";a:4:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";i:3;s:1:"4";}}}', 1),
 (1283, 0, 'ykproduct', 'ykproduct_module', 'a:2:{i:1;a:10:{s:5:"title";a:1:{i:2;s:12:"消防器材";}s:9:"layout_id";s:1:"1";s:8:"position";s:11:"mass_bottom";s:6:"status";s:1:"1";s:11:"title_class";s:14:"index-t l-blue";s:16:"additional_class";s:0:"";s:10:"sort_order";s:1:"1";s:13:"category_tabs";a:3:{s:8:"category";a:6:{i:0;s:2:"61";i:1;s:2:"69";i:2;s:2:"75";i:3;s:2:"84";i:4;s:2:"89";i:5;s:2:"94";}s:5:"limit";a:6:{i:0;s:1:"3";i:1;s:1:"2";i:2;s:1:"2";i:3;s:1:"3";i:4;s:1:"2";i:5;s:1:"3";}s:4:"sort";a:6:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";i:3;s:1:"4";i:4;s:1:"5";i:5;s:1:"6";}}s:12:"product_tabs";a:3:{s:7:"product";a:6:{i:0;s:2:"53";i:1;s:2:"52";i:2;s:2:"55";i:3;s:2:"54";i:4;s:2:"50";i:5;s:2:"51";}s:5:"image";a:6:{i:0;s:26:"data/yuankong/shoppic3.jpg";i:1;s:26:"data/yuankong/shoppic4.jpg";i:2;s:26:"data/yuankong/shoppic6.jpg";i:3;s:26:"data/yuankong/shoppic5.jpg";i:4;s:26:"data/yuankong/shoppic1.jpg";i:5;s:26:"data/yuankong/shoppic2.jpg";}s:4:"sort";a:6:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";i:3;s:1:"4";i:4;s:1:"5";i:5;s:1:"6";}}s:11:"banner_tabs";a:3:{s:5:"image";a:3:{i:0;s:25:"data/yuankong/banner4.jpg";i:1;s:25:"data/yuankong/banner5.jpg";i:2;s:25:"data/yuankong/banner6.jpg";}s:4:"link";a:3:{i:0;s:18:"www.yk119.com.cn/1";i:1;s:18:"www.yk119.com.cn/2";i:2;s:18:"www.yk119.com.cn/3";}s:4:"sort";a:3:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";}}}i:2;a:10:{s:5:"title";a:1:{i:2;s:12:"消防装备";}s:9:"layout_id";s:1:"1";s:8:"position";s:11:"mass_bottom";s:6:"status";s:1:"1";s:11:"title_class";s:15:"index-t l-zongs";s:16:"additional_class";s:6:"shebei";s:10:"sort_order";i:2;s:13:"category_tabs";a:3:{s:8:"category";a:4:{i:0;s:2:"97";i:1;s:3:"109";i:2;s:3:"115";i:3;s:3:"128";}s:5:"limit";a:4:{i:0;s:1:"6";i:1;s:1:"5";i:2;s:1:"6";i:3;s:1:"5";}s:4:"sort";a:4:{i:0;s:1:"0";i:1;s:1:"0";i:2;s:1:"0";i:3;s:1:"0";}}s:12:"product_tabs";a:3:{s:7:"product";a:6:{i:0;s:2:"50";i:1;s:2:"51";i:2;s:2:"54";i:3;s:2:"53";i:4;s:2:"55";i:5;s:2:"52";}s:5:"image";a:6:{i:0;s:26:"data/yuankong/shoppic1.jpg";i:1;s:26:"data/yuankong/shoppic2.jpg";i:2;s:26:"data/yuankong/shoppic5.jpg";i:3;s:26:"data/yuankong/shoppic3.jpg";i:4;s:26:"data/yuankong/shoppic6.jpg";i:5;s:26:"data/yuankong/shoppic4.jpg";}s:4:"sort";a:6:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";i:3;s:1:"4";i:4;s:1:"5";i:5;s:1:"6";}}s:11:"banner_tabs";a:3:{s:5:"image";a:3:{i:0;s:25:"data/yuankong/banner6.jpg";i:1;s:25:"data/yuankong/banner5.jpg";i:2;s:25:"data/yuankong/banner4.jpg";}s:4:"link";a:3:{i:0;s:24:"http://www.yuankong.com/";i:1;s:24:"http://www.yuankong.com/";i:2;s:24:"http://www.yuankong.com/";}s:4:"sort";a:3:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";}}}}', 1),
-(2066, 0, 'yknavigation', 'yknavigation_module', 'a:1:{i:0;a:5:{s:9:"layout_id";s:5:"99999";s:8:"position";s:8:"mainmenu";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"0";s:9:"navigator";a:6:{i:0;a:8:{s:5:"title";s:6:"首页";s:5:"route";s:11:"common/home";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:0:"";s:6:"status";s:1:"1";s:8:"selected";s:1:"1";s:4:"sort";s:1:"1";}i:1;a:8:{s:5:"title";s:12:"消防商城";s:5:"route";s:16:"product/category";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:0:"";s:6:"status";s:1:"1";s:8:"selected";s:1:"0";s:4:"sort";s:1:"2";}i:2;a:8:{s:5:"title";s:13:"报价-设计";s:5:"route";s:15:"service/project";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:10:"icon freem";s:6:"status";s:1:"1";s:8:"selected";s:1:"0";s:4:"sort";s:1:"3";}i:3;a:8:{s:5:"title";s:12:"精选案例";s:5:"route";s:12:"service/case";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:0:"";s:6:"status";s:1:"1";s:8:"selected";s:1:"0";s:4:"sort";s:1:"4";}i:4;a:8:{s:5:"title";s:12:"消防公司";s:5:"route";s:15:"service/company";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:0:"";s:6:"status";s:1:"1";s:8:"selected";s:1:"0";s:4:"sort";s:1:"5";}i:5;a:8:{s:5:"title";s:12:"消防百科";s:5:"route";s:16:"information/wiki";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:0:"";s:6:"status";s:1:"1";s:8:"selected";s:1:"0";s:4:"sort";s:1:"6";}}}}', 1),
+(2068, 0, 'yknavigation', 'yknavigation_module', 'a:1:{i:0;a:5:{s:9:"layout_id";s:5:"99999";s:8:"position";s:8:"mainmenu";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"0";s:9:"navigator";a:6:{i:0;a:8:{s:5:"title";s:6:"首页";s:5:"route";s:11:"common/home";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:0:"";s:6:"status";s:1:"1";s:8:"selected";s:1:"1";s:4:"sort";s:1:"1";}i:1;a:8:{s:5:"title";s:12:"消防商城";s:5:"route";s:16:"product/category";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:0:"";s:6:"status";s:1:"1";s:8:"selected";s:1:"0";s:4:"sort";s:1:"2";}i:2;a:8:{s:5:"title";s:13:"报价-设计";s:5:"route";s:15:"service/project";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:10:"icon freem";s:6:"status";s:1:"1";s:8:"selected";s:1:"0";s:4:"sort";s:1:"3";}i:3;a:8:{s:5:"title";s:12:"精选案例";s:5:"route";s:12:"service/case";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:0:"";s:6:"status";s:1:"1";s:8:"selected";s:1:"0";s:4:"sort";s:1:"4";}i:4;a:8:{s:5:"title";s:12:"消防公司";s:5:"route";s:15:"service/company";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:0:"";s:6:"status";s:1:"1";s:8:"selected";s:1:"0";s:4:"sort";s:1:"5";}i:5;a:8:{s:5:"title";s:12:"消防百科";s:5:"route";s:16:"information/wiki";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:0:"";s:6:"status";s:1:"1";s:8:"selected";s:1:"0";s:4:"sort";s:1:"6";}}}}', 1),
 (1989, 0, 'config', 'config_download', '1', 0),
 (1988, 0, 'config', 'config_review_status', '1', 0),
 (1987, 0, 'config', 'config_product_count', '1', 0),
@@ -23888,12 +23840,13 @@ INSERT INTO `yk_setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `se
 (1976, 0, 'config', 'config_template', 'yuankong', 0),
 (1975, 0, 'config', 'config_meta_description', '苏州源控', 0),
 (1732, 0, 'ykliked', 'ykliked_module', 'a:1:{i:0;a:8:{s:5:"limit";s:1:"6";s:11:"image_width";s:3:"160";s:12:"image_height";s:2:"92";s:9:"layout_id";s:1:"7";s:8:"position";s:14:"content_bottom";s:6:"status";s:1:"1";s:16:"additional_class";s:4:"mt10";s:10:"sort_order";s:1:"1";}}', 1),
-(2072, 0, 'alipay_direct', 'alipay_direct_note', '（支持全国85家银行、信用卡、网银在线支付）', 0),
-(2071, 0, 'alipay_direct', 'alipay_direct_status', '1', 0),
-(2070, 0, 'alipay_direct', 'alipay_direct_order_status_id', '2', 0),
-(2069, 0, 'alipay_direct', 'alipay_direct_cod', 'nzf9w1uvx4htg71u5qhy1092vdwvk7qi', 0),
-(2068, 0, 'alipay_direct', 'alipay_direct_account', '3197104626@qq.com', 0),
-(2067, 0, 'alipay_direct', 'alipay_direct_partner_id', '208811547979441', 0),
+(1743, 0, 'alipay_direct', 'alipay_direct_order_status_id', '15', 0),
+(1742, 0, 'alipay_direct', 'alipay_direct_cod', '121ea23443sadse2wq21322qw1w32w45235', 0),
+(1741, 0, 'alipay_direct', 'alipay_direct_account', '3197104626@qq.com', 0),
+(1740, 0, 'alipay_direct', 'alipay_direct_partner_id', '208811547979441', 0),
+(1744, 0, 'alipay_direct', 'alipay_direct_status', '1', 0),
+(1745, 0, 'alipay_direct', 'alipay_direct_note', '（支持全国85家银行、信用卡、网银在线支付）', 0),
+(1746, 0, 'alipay_direct', 'alipay_direct_sort_order', '1', 0),
 (1974, 0, 'config', 'config_title', '消防器材_消防装备_消防公司_消防网上商城【消防E站官网】', 0),
 (1973, 0, 'config', 'config_fax', '', 0),
 (1972, 0, 'config', 'config_telephone', '123456789', 0),
@@ -23908,7 +23861,7 @@ INSERT INTO `yk_setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `se
 (2063, 0, 'config', 'config_error_log', '1', 0),
 (2064, 0, 'config', 'config_error_filename', 'error.txt', 0),
 (2065, 0, 'config', 'config_google_analytics', '', 0),
-(2073, 0, 'alipay_direct', 'alipay_direct_sort_order', '1', 0);
+(2067, 0, 'ykconsult', 'ykconsult_module', 'a:1:{i:0;a:4:{s:9:"layout_id";s:2:"12";s:8:"position";s:12:"column_right";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"1";}}', 1);
 
 -- --------------------------------------------------------
 
@@ -24111,7 +24064,7 @@ CREATE TABLE IF NOT EXISTS `yk_user_group` (
 --
 
 INSERT INTO `yk_user_group` (`user_group_id`, `name`, `permission`) VALUES
-(1, '超级管理员', 'a:2:{s:6:"access";a:113:{i:0;s:17:"catalog/attribute";i:1;s:23:"catalog/attribute_group";i:2;s:16:"catalog/category";i:3;s:16:"catalog/download";i:4;s:14:"catalog/filter";i:5;s:19:"catalog/information";i:6;s:20:"catalog/manufacturer";i:7;s:14:"catalog/option";i:8;s:15:"catalog/product";i:9;s:14:"catalog/review";i:10;s:18:"common/filemanager";i:11;s:13:"design/banner";i:12;s:13:"design/layout";i:13;s:14:"extension/feed";i:14;s:17:"extension/manager";i:15;s:16:"extension/module";i:16;s:17:"extension/payment";i:17;s:18:"extension/shipping";i:18;s:15:"extension/total";i:19;s:16:"feed/google_base";i:20;s:19:"feed/google_sitemap";i:21;s:20:"localisation/country";i:22;s:21:"localisation/currency";i:23;s:21:"localisation/geo_zone";i:24;s:21:"localisation/language";i:25;s:25:"localisation/length_class";i:26;s:25:"localisation/order_status";i:27;s:26:"localisation/return_action";i:28;s:26:"localisation/return_reason";i:29;s:26:"localisation/return_status";i:30;s:25:"localisation/stock_status";i:31;s:22:"localisation/tax_class";i:32;s:21:"localisation/tax_rate";i:33;s:25:"localisation/weight_class";i:34;s:17:"localisation/zone";i:35;s:14:"module/account";i:36;s:16:"module/affiliate";i:37;s:13:"module/banner";i:38;s:17:"module/bestseller";i:39;s:15:"module/carousel";i:40;s:15:"module/category";i:41;s:15:"module/featured";i:42;s:13:"module/filter";i:43;s:18:"module/information";i:44;s:13:"module/latest";i:45;s:12:"module/oauth";i:46;s:14:"module/special";i:47;s:19:"module/themecontrol";i:48;s:14:"module/welcome";i:49;s:11:"module/wiki";i:50;s:18:"module/ykaffiliate";i:51;s:13:"module/ykcase";i:52;s:15:"module/ykcustom";i:53;s:14:"module/ykliked";i:54;s:13:"module/yklink";i:55;s:19:"module/yknavigation";i:56;s:13:"module/yknews";i:57;s:18:"module/ykprocedure";i:58;s:16:"module/ykproduct";i:59;s:16:"module/ykproject";i:60;s:18:"module/ykslideshow";i:61;s:15:"module/ykviewed";i:62;s:13:"module/ykwiki";i:63;s:21:"payment/alipay_direct";i:64;s:21:"payment/bank_transfer";i:65;s:11:"payment/cod";i:66;s:21:"payment/free_checkout";i:67;s:14:"payment/pp_pro";i:68;s:27:"report/affiliate_commission";i:69;s:22:"report/customer_credit";i:70;s:22:"report/customer_online";i:71;s:21:"report/customer_order";i:72;s:22:"report/customer_reward";i:73;s:24:"report/product_purchased";i:74;s:21:"report/product_viewed";i:75;s:18:"report/sale_coupon";i:76;s:17:"report/sale_order";i:77;s:18:"report/sale_return";i:78;s:20:"report/sale_shipping";i:79;s:15:"report/sale_tax";i:80;s:14:"sale/affiliate";i:81;s:12:"sale/contact";i:82;s:11:"sale/coupon";i:83;s:13:"sale/customer";i:84;s:20:"sale/customer_ban_ip";i:85;s:19:"sale/customer_group";i:86;s:10:"sale/order";i:87;s:11:"sale/return";i:88;s:12:"sale/voucher";i:89;s:18:"sale/voucher_theme";i:90;s:15:"setting/setting";i:91;s:13:"setting/store";i:92;s:14:"shipping/fedex";i:93;s:13:"shipping/flat";i:94;s:13:"shipping/free";i:95;s:13:"shipping/item";i:96;s:15:"shipping/pickup";i:97;s:12:"shipping/ups";i:98;s:15:"shipping/weight";i:99;s:11:"tool/backup";i:100;s:14:"tool/error_log";i:101;s:12:"total/coupon";i:102;s:12:"total/credit";i:103;s:14:"total/handling";i:104;s:12:"total/reward";i:105;s:14:"total/shipping";i:106;s:15:"total/sub_total";i:107;s:9:"total/tax";i:108;s:11:"total/total";i:109;s:13:"total/voucher";i:110;s:9:"user/user";i:111;s:20:"user/user_permission";i:112;s:15:"shipping/weight";}s:6:"modify";a:113:{i:0;s:17:"catalog/attribute";i:1;s:23:"catalog/attribute_group";i:2;s:16:"catalog/category";i:3;s:16:"catalog/download";i:4;s:14:"catalog/filter";i:5;s:19:"catalog/information";i:6;s:20:"catalog/manufacturer";i:7;s:14:"catalog/option";i:8;s:15:"catalog/product";i:9;s:14:"catalog/review";i:10;s:18:"common/filemanager";i:11;s:13:"design/banner";i:12;s:13:"design/layout";i:13;s:14:"extension/feed";i:14;s:17:"extension/manager";i:15;s:16:"extension/module";i:16;s:17:"extension/payment";i:17;s:18:"extension/shipping";i:18;s:15:"extension/total";i:19;s:16:"feed/google_base";i:20;s:19:"feed/google_sitemap";i:21;s:20:"localisation/country";i:22;s:21:"localisation/currency";i:23;s:21:"localisation/geo_zone";i:24;s:21:"localisation/language";i:25;s:25:"localisation/length_class";i:26;s:25:"localisation/order_status";i:27;s:26:"localisation/return_action";i:28;s:26:"localisation/return_reason";i:29;s:26:"localisation/return_status";i:30;s:25:"localisation/stock_status";i:31;s:22:"localisation/tax_class";i:32;s:21:"localisation/tax_rate";i:33;s:25:"localisation/weight_class";i:34;s:17:"localisation/zone";i:35;s:14:"module/account";i:36;s:16:"module/affiliate";i:37;s:13:"module/banner";i:38;s:17:"module/bestseller";i:39;s:15:"module/carousel";i:40;s:15:"module/category";i:41;s:15:"module/featured";i:42;s:13:"module/filter";i:43;s:18:"module/information";i:44;s:13:"module/latest";i:45;s:12:"module/oauth";i:46;s:14:"module/special";i:47;s:19:"module/themecontrol";i:48;s:14:"module/welcome";i:49;s:11:"module/wiki";i:50;s:18:"module/ykaffiliate";i:51;s:13:"module/ykcase";i:52;s:15:"module/ykcustom";i:53;s:14:"module/ykliked";i:54;s:13:"module/yklink";i:55;s:19:"module/yknavigation";i:56;s:13:"module/yknews";i:57;s:18:"module/ykprocedure";i:58;s:16:"module/ykproduct";i:59;s:16:"module/ykproject";i:60;s:18:"module/ykslideshow";i:61;s:15:"module/ykviewed";i:62;s:13:"module/ykwiki";i:63;s:21:"payment/alipay_direct";i:64;s:21:"payment/bank_transfer";i:65;s:11:"payment/cod";i:66;s:21:"payment/free_checkout";i:67;s:14:"payment/pp_pro";i:68;s:27:"report/affiliate_commission";i:69;s:22:"report/customer_credit";i:70;s:22:"report/customer_online";i:71;s:21:"report/customer_order";i:72;s:22:"report/customer_reward";i:73;s:24:"report/product_purchased";i:74;s:21:"report/product_viewed";i:75;s:18:"report/sale_coupon";i:76;s:17:"report/sale_order";i:77;s:18:"report/sale_return";i:78;s:20:"report/sale_shipping";i:79;s:15:"report/sale_tax";i:80;s:14:"sale/affiliate";i:81;s:12:"sale/contact";i:82;s:11:"sale/coupon";i:83;s:13:"sale/customer";i:84;s:20:"sale/customer_ban_ip";i:85;s:19:"sale/customer_group";i:86;s:10:"sale/order";i:87;s:11:"sale/return";i:88;s:12:"sale/voucher";i:89;s:18:"sale/voucher_theme";i:90;s:15:"setting/setting";i:91;s:13:"setting/store";i:92;s:14:"shipping/fedex";i:93;s:13:"shipping/flat";i:94;s:13:"shipping/free";i:95;s:13:"shipping/item";i:96;s:15:"shipping/pickup";i:97;s:12:"shipping/ups";i:98;s:15:"shipping/weight";i:99;s:11:"tool/backup";i:100;s:14:"tool/error_log";i:101;s:12:"total/coupon";i:102;s:12:"total/credit";i:103;s:14:"total/handling";i:104;s:12:"total/reward";i:105;s:14:"total/shipping";i:106;s:15:"total/sub_total";i:107;s:9:"total/tax";i:108;s:11:"total/total";i:109;s:13:"total/voucher";i:110;s:9:"user/user";i:111;s:20:"user/user_permission";i:112;s:15:"shipping/weight";}}'),
+(1, '超级管理员', 'a:2:{s:6:"access";a:114:{i:0;s:17:"catalog/attribute";i:1;s:23:"catalog/attribute_group";i:2;s:16:"catalog/category";i:3;s:16:"catalog/download";i:4;s:14:"catalog/filter";i:5;s:19:"catalog/information";i:6;s:20:"catalog/manufacturer";i:7;s:14:"catalog/option";i:8;s:15:"catalog/product";i:9;s:14:"catalog/review";i:10;s:18:"common/filemanager";i:11;s:13:"design/banner";i:12;s:13:"design/layout";i:13;s:14:"extension/feed";i:14;s:17:"extension/manager";i:15;s:16:"extension/module";i:16;s:17:"extension/payment";i:17;s:18:"extension/shipping";i:18;s:15:"extension/total";i:19;s:16:"feed/google_base";i:20;s:19:"feed/google_sitemap";i:21;s:20:"localisation/country";i:22;s:21:"localisation/currency";i:23;s:21:"localisation/geo_zone";i:24;s:21:"localisation/language";i:25;s:25:"localisation/length_class";i:26;s:25:"localisation/order_status";i:27;s:26:"localisation/return_action";i:28;s:26:"localisation/return_reason";i:29;s:26:"localisation/return_status";i:30;s:25:"localisation/stock_status";i:31;s:22:"localisation/tax_class";i:32;s:21:"localisation/tax_rate";i:33;s:25:"localisation/weight_class";i:34;s:17:"localisation/zone";i:35;s:14:"module/account";i:36;s:16:"module/affiliate";i:37;s:13:"module/banner";i:38;s:17:"module/bestseller";i:39;s:15:"module/carousel";i:40;s:15:"module/category";i:41;s:15:"module/featured";i:42;s:13:"module/filter";i:43;s:18:"module/information";i:44;s:13:"module/latest";i:45;s:12:"module/oauth";i:46;s:14:"module/special";i:47;s:19:"module/themecontrol";i:48;s:14:"module/welcome";i:49;s:11:"module/wiki";i:50;s:18:"module/ykaffiliate";i:51;s:13:"module/ykcase";i:52;s:15:"module/ykcustom";i:53;s:14:"module/ykliked";i:54;s:13:"module/yklink";i:55;s:19:"module/yknavigation";i:56;s:13:"module/yknews";i:57;s:18:"module/ykprocedure";i:58;s:16:"module/ykproduct";i:59;s:16:"module/ykproject";i:60;s:18:"module/ykslideshow";i:61;s:15:"module/ykviewed";i:62;s:13:"module/ykwiki";i:63;s:21:"payment/alipay_direct";i:64;s:21:"payment/bank_transfer";i:65;s:11:"payment/cod";i:66;s:21:"payment/free_checkout";i:67;s:14:"payment/pp_pro";i:68;s:27:"report/affiliate_commission";i:69;s:22:"report/customer_credit";i:70;s:22:"report/customer_online";i:71;s:21:"report/customer_order";i:72;s:22:"report/customer_reward";i:73;s:24:"report/product_purchased";i:74;s:21:"report/product_viewed";i:75;s:18:"report/sale_coupon";i:76;s:17:"report/sale_order";i:77;s:18:"report/sale_return";i:78;s:20:"report/sale_shipping";i:79;s:15:"report/sale_tax";i:80;s:14:"sale/affiliate";i:81;s:12:"sale/contact";i:82;s:11:"sale/coupon";i:83;s:13:"sale/customer";i:84;s:20:"sale/customer_ban_ip";i:85;s:19:"sale/customer_group";i:86;s:10:"sale/order";i:87;s:11:"sale/return";i:88;s:12:"sale/voucher";i:89;s:18:"sale/voucher_theme";i:90;s:15:"setting/setting";i:91;s:13:"setting/store";i:92;s:14:"shipping/fedex";i:93;s:13:"shipping/flat";i:94;s:13:"shipping/free";i:95;s:13:"shipping/item";i:96;s:15:"shipping/pickup";i:97;s:12:"shipping/ups";i:98;s:15:"shipping/weight";i:99;s:11:"tool/backup";i:100;s:14:"tool/error_log";i:101;s:12:"total/coupon";i:102;s:12:"total/credit";i:103;s:14:"total/handling";i:104;s:12:"total/reward";i:105;s:14:"total/shipping";i:106;s:15:"total/sub_total";i:107;s:9:"total/tax";i:108;s:11:"total/total";i:109;s:13:"total/voucher";i:110;s:9:"user/user";i:111;s:20:"user/user_permission";i:112;s:15:"shipping/weight";i:113;s:16:"module/ykconsult";}s:6:"modify";a:114:{i:0;s:17:"catalog/attribute";i:1;s:23:"catalog/attribute_group";i:2;s:16:"catalog/category";i:3;s:16:"catalog/download";i:4;s:14:"catalog/filter";i:5;s:19:"catalog/information";i:6;s:20:"catalog/manufacturer";i:7;s:14:"catalog/option";i:8;s:15:"catalog/product";i:9;s:14:"catalog/review";i:10;s:18:"common/filemanager";i:11;s:13:"design/banner";i:12;s:13:"design/layout";i:13;s:14:"extension/feed";i:14;s:17:"extension/manager";i:15;s:16:"extension/module";i:16;s:17:"extension/payment";i:17;s:18:"extension/shipping";i:18;s:15:"extension/total";i:19;s:16:"feed/google_base";i:20;s:19:"feed/google_sitemap";i:21;s:20:"localisation/country";i:22;s:21:"localisation/currency";i:23;s:21:"localisation/geo_zone";i:24;s:21:"localisation/language";i:25;s:25:"localisation/length_class";i:26;s:25:"localisation/order_status";i:27;s:26:"localisation/return_action";i:28;s:26:"localisation/return_reason";i:29;s:26:"localisation/return_status";i:30;s:25:"localisation/stock_status";i:31;s:22:"localisation/tax_class";i:32;s:21:"localisation/tax_rate";i:33;s:25:"localisation/weight_class";i:34;s:17:"localisation/zone";i:35;s:14:"module/account";i:36;s:16:"module/affiliate";i:37;s:13:"module/banner";i:38;s:17:"module/bestseller";i:39;s:15:"module/carousel";i:40;s:15:"module/category";i:41;s:15:"module/featured";i:42;s:13:"module/filter";i:43;s:18:"module/information";i:44;s:13:"module/latest";i:45;s:12:"module/oauth";i:46;s:14:"module/special";i:47;s:19:"module/themecontrol";i:48;s:14:"module/welcome";i:49;s:11:"module/wiki";i:50;s:18:"module/ykaffiliate";i:51;s:13:"module/ykcase";i:52;s:15:"module/ykcustom";i:53;s:14:"module/ykliked";i:54;s:13:"module/yklink";i:55;s:19:"module/yknavigation";i:56;s:13:"module/yknews";i:57;s:18:"module/ykprocedure";i:58;s:16:"module/ykproduct";i:59;s:16:"module/ykproject";i:60;s:18:"module/ykslideshow";i:61;s:15:"module/ykviewed";i:62;s:13:"module/ykwiki";i:63;s:21:"payment/alipay_direct";i:64;s:21:"payment/bank_transfer";i:65;s:11:"payment/cod";i:66;s:21:"payment/free_checkout";i:67;s:14:"payment/pp_pro";i:68;s:27:"report/affiliate_commission";i:69;s:22:"report/customer_credit";i:70;s:22:"report/customer_online";i:71;s:21:"report/customer_order";i:72;s:22:"report/customer_reward";i:73;s:24:"report/product_purchased";i:74;s:21:"report/product_viewed";i:75;s:18:"report/sale_coupon";i:76;s:17:"report/sale_order";i:77;s:18:"report/sale_return";i:78;s:20:"report/sale_shipping";i:79;s:15:"report/sale_tax";i:80;s:14:"sale/affiliate";i:81;s:12:"sale/contact";i:82;s:11:"sale/coupon";i:83;s:13:"sale/customer";i:84;s:20:"sale/customer_ban_ip";i:85;s:19:"sale/customer_group";i:86;s:10:"sale/order";i:87;s:11:"sale/return";i:88;s:12:"sale/voucher";i:89;s:18:"sale/voucher_theme";i:90;s:15:"setting/setting";i:91;s:13:"setting/store";i:92;s:14:"shipping/fedex";i:93;s:13:"shipping/flat";i:94;s:13:"shipping/free";i:95;s:13:"shipping/item";i:96;s:15:"shipping/pickup";i:97;s:12:"shipping/ups";i:98;s:15:"shipping/weight";i:99;s:11:"tool/backup";i:100;s:14:"tool/error_log";i:101;s:12:"total/coupon";i:102;s:12:"total/credit";i:103;s:14:"total/handling";i:104;s:12:"total/reward";i:105;s:14:"total/shipping";i:106;s:15:"total/sub_total";i:107;s:9:"total/tax";i:108;s:11:"total/total";i:109;s:13:"total/voucher";i:110;s:9:"user/user";i:111;s:20:"user/user_permission";i:112;s:15:"shipping/weight";i:113;s:16:"module/ykconsult";}}'),
 (10, '源控管理组', 'a:2:{s:6:"access";a:65:{i:0;s:16:"catalog/category";i:1;s:19:"catalog/information";i:2;s:20:"catalog/manufacturer";i:3;s:14:"catalog/option";i:4;s:15:"catalog/product";i:5;s:14:"catalog/review";i:6;s:18:"common/filemanager";i:7;s:14:"common/profile";i:8;s:13:"common/upload";i:9;s:13:"design/banner";i:10;s:19:"design/custom_field";i:11;s:13:"design/layout";i:12;s:25:"extension/affiliate_group";i:13;s:14:"extension/case";i:14;s:14:"extension/help";i:15;s:20:"extension/help_group";i:16;s:14:"extension/link";i:17;s:17:"extension/manager";i:18;s:16:"extension/module";i:19;s:15:"extension/total";i:20;s:14:"extension/wiki";i:21;s:20:"extension/wiki_group";i:22;s:14:"module/account";i:23;s:16:"module/affiliate";i:24;s:13:"module/banner";i:25;s:17:"module/bestseller";i:26;s:15:"module/carousel";i:27;s:15:"module/category";i:28;s:15:"module/featured";i:29;s:13:"module/filter";i:30;s:18:"module/information";i:31;s:13:"module/latest";i:32;s:12:"module/oauth";i:33;s:14:"module/special";i:34;s:19:"module/themecontrol";i:35;s:14:"module/welcome";i:36;s:11:"module/wiki";i:37;s:18:"module/ykaffiliate";i:38;s:13:"module/ykcase";i:39;s:15:"module/ykcustom";i:40;s:14:"module/ykliked";i:41;s:13:"module/yklink";i:42;s:19:"module/yknavigation";i:43;s:13:"module/yknews";i:44;s:18:"module/ykprocedure";i:45;s:16:"module/ykproduct";i:46;s:16:"module/ykproject";i:47;s:18:"module/ykslideshow";i:48;s:15:"module/ykviewed";i:49;s:13:"module/ykwiki";i:50;s:14:"sale/affiliate";i:51;s:12:"sale/contact";i:52;s:11:"sale/coupon";i:53;s:13:"sale/customer";i:54;s:20:"sale/customer_ban_ip";i:55;s:19:"sale/customer_group";i:56;s:10:"sale/order";i:57;s:12:"sale/project";i:58;s:18:"sale/project_group";i:59;s:11:"sale/return";i:60;s:12:"sale/voucher";i:61;s:18:"sale/voucher_theme";i:62;s:11:"setting/api";i:63;s:9:"user/user";i:64;s:20:"user/user_permission";}s:6:"modify";a:66:{i:0;s:16:"catalog/category";i:1;s:16:"catalog/download";i:2;s:19:"catalog/information";i:3;s:20:"catalog/manufacturer";i:4;s:14:"catalog/option";i:5;s:15:"catalog/product";i:6;s:14:"catalog/review";i:7;s:18:"common/filemanager";i:8;s:14:"common/profile";i:9;s:13:"common/upload";i:10;s:13:"design/banner";i:11;s:19:"design/custom_field";i:12;s:13:"design/layout";i:13;s:25:"extension/affiliate_group";i:14;s:14:"extension/case";i:15;s:14:"extension/feed";i:16;s:14:"extension/help";i:17;s:20:"extension/help_group";i:18;s:14:"extension/link";i:19;s:17:"extension/manager";i:20;s:16:"extension/module";i:21;s:15:"extension/total";i:22;s:14:"extension/wiki";i:23;s:20:"extension/wiki_group";i:24;s:14:"module/account";i:25;s:16:"module/affiliate";i:26;s:13:"module/banner";i:27;s:17:"module/bestseller";i:28;s:15:"module/carousel";i:29;s:15:"module/category";i:30;s:15:"module/featured";i:31;s:13:"module/filter";i:32;s:18:"module/information";i:33;s:13:"module/latest";i:34;s:12:"module/oauth";i:35;s:14:"module/special";i:36;s:19:"module/themecontrol";i:37;s:14:"module/welcome";i:38;s:11:"module/wiki";i:39;s:18:"module/ykaffiliate";i:40;s:13:"module/ykcase";i:41;s:15:"module/ykcustom";i:42;s:14:"module/ykliked";i:43;s:13:"module/yklink";i:44;s:19:"module/yknavigation";i:45;s:13:"module/yknews";i:46;s:18:"module/ykprocedure";i:47;s:16:"module/ykproduct";i:48;s:16:"module/ykproject";i:49;s:18:"module/ykslideshow";i:50;s:15:"module/ykviewed";i:51;s:13:"module/ykwiki";i:52;s:14:"sale/affiliate";i:53;s:12:"sale/contact";i:54;s:11:"sale/coupon";i:55;s:13:"sale/customer";i:56;s:20:"sale/customer_ban_ip";i:57;s:19:"sale/customer_group";i:58;s:10:"sale/order";i:59;s:12:"sale/project";i:60;s:18:"sale/project_group";i:61;s:11:"sale/return";i:62;s:12:"sale/voucher";i:63;s:18:"sale/voucher_theme";i:64;s:9:"user/user";i:65;s:20:"user/user_permission";}}');
 
 -- --------------------------------------------------------

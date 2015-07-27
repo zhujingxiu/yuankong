@@ -90,6 +90,10 @@
               </select></td>
           </tr>
           <tr>
+            <td><?php echo $entry_remark; ?></td>
+            <td><input type="text" name="remark" value="<?php echo $remark; ?>" /></td>
+          </tr>
+          <tr>
             <td><?php echo $entry_sort_order; ?></td>
             <td><input type="text" name="sort_order" value="<?php echo $sort_order; ?>" size="1" /></td>
           </tr>

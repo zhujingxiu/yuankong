@@ -756,22 +756,6 @@ class ControllerCatalogProduct extends Controller {
       		$this->data['upc'] = '';
     	}
 		
-		if (isset($this->request->post['ean'])) {
-      		$this->data['ean'] = $this->request->post['ean'];
-    	} elseif (!empty($product_info)) {
-			$this->data['ean'] = $product_info['ean'];
-		} else {
-      		$this->data['ean'] = '';
-    	}
-		
-		if (isset($this->request->post['jan'])) {
-      		$this->data['jan'] = $this->request->post['jan'];
-    	} elseif (!empty($product_info)) {
-			$this->data['jan'] = $product_info['jan'];
-		} else {
-      		$this->data['jan'] = '';
-    	}
-		
 		if (isset($this->request->post['isbn'])) {
       		$this->data['isbn'] = $this->request->post['isbn'];
     	} elseif (!empty($product_info)) {
@@ -1191,30 +1175,6 @@ class ControllerCatalogProduct extends Controller {
 		}
 
 		$this->data['no_image'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
-
-		// Downloads
-		$this->load->model('catalog/download');
-		
-		if (isset($this->request->post['product_download'])) {
-			$product_downloads = $this->request->post['product_download'];
-		} elseif (isset($this->request->get['product_id'])) {
-			$product_downloads = $this->model_catalog_product->getProductDownloads($this->request->get['product_id']);
-		} else {
-			$product_downloads = array();
-		}
-			
-		$this->data['product_downloads'] = array();
-		
-		foreach ($product_downloads as $download_id) {
-			$download_info = $this->model_catalog_download->getDownload($download_id);
-			
-			if ($download_info) {
-				$this->data['product_downloads'][] = array(
-					'download_id' => $download_info['download_id'],
-					'name'        => $download_info['name']
-				);
-			}
-		}
 		
 		if (isset($this->request->post['product_related'])) {
 			$products = $this->request->post['product_related'];

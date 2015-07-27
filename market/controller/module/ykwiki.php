@@ -34,7 +34,7 @@ class ControllerModuleYkwiki extends Controller {
                 $_wiki = $this->model_module_ykmodule->getWiki($config);
                 foreach ($_wiki as $i => $item) {
                     if($gid){
-                        $_wiki[$i]['link'] = $this->url->link('information/wiki','wiki_group='.$item['group_id'].'&wiki_id='.$item['wiki_id'],'SSL');
+                        $_wiki[$i]['link'] = $this->url->link('information/wiki/info','wiki_group='.$item['group_id'].'&wiki_id='.$item['wiki_id'],'SSL');
                     }else{
                         $_wiki[$i]['link'] = $this->url->link('information/help','help_id='.$item['help_id'],'SSL');
                     }

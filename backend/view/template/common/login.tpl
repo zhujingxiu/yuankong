@@ -22,12 +22,10 @@
             <dl class="login-box">
                 <dt class="login-dt t-c"><img src="view/image/logo.png" alt="消防E站" /></dt>
                 <dd class="login-dd">
-                    <span class="iconbox"><i class="icon icon-user"></i></span>
-                    <input type="text" class="login-text" name="username" value="<?php echo $username; ?>" placeholder="<?php echo $entry_username; ?>" />
+                    <span class="iconbox"><i class="icon icon-user"></i></span><input type="text" class="login-text" name="username" value="<?php echo $username; ?>" placeholder="<?php echo $entry_username; ?>" />
                 </dd>
                 <dd class="login-dd">
-                      <span class="iconbox2"><i class="icon icon-pwd"></i></span>
-                      <input type="password" class="login-text" name="password" value="<?php echo $password; ?>" placeholder="<?php echo $entry_password; ?>" />
+                      <span class="iconbox2"><i class="icon icon-pwd"></i></span><input type="password" class="login-text" name="password" value="<?php echo $password; ?>" placeholder="<?php echo $entry_password; ?>" />
                 </dd>
                 <?php if ($error_warning) { ?>
                 <dd class="f12 cf" id="error-ts"><?php echo $error_warning; ?></dd>

@@ -282,12 +282,18 @@
 						}
 					}
 				} 
-
-				if(json['redirect']){
-					location.href = json['redirect'];
-				}
+                if(json['redirect']){
+                <?php if(!$this->customer->isLogged()){?>
+			        $('#tm-mask').show();
+                    $('.iframe-login').show().focus();
+                    $('#mini-login input[name="redirect"]').val(json['redirect'])
+                <?php }else{?>                
+                    location.href = json['redirect'];                
+                <?php }?>
+                }
 			}
 		});
+
 	});
 	$('#button-cart').bind('click', function() {
 		$.ajax({
@@ -357,4 +363,23 @@
 </div>
 <?php endif; ?>
 </div>
+
+<div class="tm-mask" id="tm-mask" style="display:none;"></div>
+<div class="iframe-login" style="display:none;">
+  <?php echo $mini_login ?>
+</div>
+<script type="text/javascript">
+$(document).on('click','#tm-mask',function(){
+    $('.iframe-login').hide();
+    $('#tm-mask').hide();
+  }).on('keydown',function(e){
+    if(e.which === 27) {
+      $('.iframe-login').hide();
+      $('#tm-mask').hide();
+    }
+    if (e.keyCode == 13) {
+      $('#mini-login').submit();
+    }
+  });
+</script>
 <?php echo $footer; ?>

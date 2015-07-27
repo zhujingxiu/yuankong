@@ -33,4 +33,53 @@ class ModelCatalogInformation extends Model {
 	
 		return $query->row;
 	}
+
+	public function getWikis($data=array()){
+		$sql= "SELECT * FROM ".DB_PREFIX."wiki WHERE 1";
+		if(isset($data['filter_group'])){
+			$sql .= " AND group_id = '".(int)$data['filter_group']."'";
+		}
+
+		$sort_data = array(
+			'viewed',
+			'sort_order',
+			'date_added'
+		);
+		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
+			
+		} else {
+			$sql .= " ORDER BY p.sort_order";	
+		}
+		if (isset($data['start']) || isset($data['limit'])) {
+			if ($data['start'] < 0) {
+				$data['start'] = 0;
+			}				
+
+			if ($data['limit'] < 1) {
+				$data['limit'] = 20;
+			}	
+		
+			$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
+		} 
+		$query = $this->db->query($sql);
+		return $query->rows;
+	}
+
+	public function getTotalWiki($data=array()){
+		$sql= "SELECT COUNT(wiki_id) total FROM ".DB_PREFIX."wiki WHERE 1";
+		
+		if(isset($data['filter_group'])){
+			$sql .= " AND group_id = '".(int)$data['filter_group']."'";
+		}
+
+		$query = $this->db->query($sql);
+
+		return $query->row['total'];
+	}
+
+	public function addWikiViewed($wiki_id){
+		if((int)$wiki_id){
+			$this->db->query("UPDATE ".DB_PREFIX."wiki SET viewed = viewed + 1 WHERE wiki_id = '".(int)$wiki_id."'");
+		}
+	}
 }

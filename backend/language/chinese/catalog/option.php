@@ -22,11 +22,13 @@ $_['text_clear']          = '清除图片';
 
 // Column
 $_['column_name']         = '售价选项名称';
+$_['column_remark']         = '备注';
 $_['column_sort_order']   = '排序';
 $_['column_action']       = '管理';
 
 // Entry
 $_['entry_name']         = '售价选项名称：';
+$_['entry_remark']         = '备注：';
 $_['entry_type']         = '&nbsp;&nbsp;类型：';
 $_['entry_option_value'] = '售价选项值：';
 $_['entry_image']        = '图片：';

@@ -404,7 +404,7 @@ class ControllerProductProduct extends Controller {
 			$this->data['rating'] = (int)$product_info['rating'];
 			$this->data['description'] = html_entity_decode($product_info['description'], ENT_QUOTES, 'UTF-8');
 			$this->data['attribute_groups'] = $this->model_catalog_product->getProductAttributes($this->request->get['product_id']);
-			
+			$this->data['quickconfirm'] = $this->url->link('checkout/checkout','','SSL');
 			$this->data['text_category_related'] = $this->language->get('text_category_related');
 			$this->data['categories'] = array();
 			$_categories = $this->model_catalog_product->getCategories($product_info['product_id']);
@@ -486,6 +486,7 @@ class ControllerProductProduct extends Controller {
 				'common/column_right',
 				'common/content_top',
 				'common/content_bottom',
+				'module/mini_login',
 				'common/footer',
 				'common/header'
 			);

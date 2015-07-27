@@ -198,20 +198,6 @@ class Cart {
 						$reward = 0;
 					}
 					
-					// Downloads		
-					$download_data = array();     		
-					
-					$download_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_to_download p2d LEFT JOIN " . DB_PREFIX . "download d ON (p2d.download_id = d.download_id) LEFT JOIN " . DB_PREFIX . "download_description dd ON (d.download_id = dd.download_id) WHERE p2d.product_id = '" . (int)$product_id . "' AND dd.language_id = '" . (int)$this->config->get('config_language_id') . "'");
-				
-					foreach ($download_query->rows as $download) {
-						$download_data[] = array(
-							'download_id' => $download['download_id'],
-							'name'        => $download['name'],
-							'filename'    => $download['filename'],
-							'mask'        => $download['mask'],
-							'remaining'   => $download['remaining']
-						);
-					}
 					
 					// Stock
 					if (!$product_query->row['quantity'] || ($product_query->row['quantity'] < $quantity)) {
@@ -226,7 +212,6 @@ class Cart {
 						'shipping'        => $product_query->row['shipping'],
 						'image'           => $product_query->row['image'],
 						'option'          => $option_data,
-						'download'        => $download_data,
 						'quantity'        => $quantity,
 						'minimum'         => $product_query->row['minimum'],
 						'subtract'        => $product_query->row['subtract'],
@@ -394,18 +379,5 @@ class Cart {
 		
 		return $shipping;
 	}
-	
-  	public function hasDownload() {
-		$download = false;
 		
-		foreach ($this->getProducts() as $product) {
-	  		if ($product['download']) {
-	    		$download = true;
-				
-				break;
-	  		}		
-		}
-		
-		return $download;
-	}	
 }

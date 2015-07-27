@@ -2605,3 +2605,172 @@
 2015-07-26 22:01:30 - PHP Warning:  Invalid argument supplied for foreach() in E:\wamp\www\yuankong\market\view\theme\yuankong\template\service\company.tpl on line 99
 2015-07-26 22:08:46 - PHP Notice:  Undefined index: country_id in E:\wamp\www\yuankong\market\controller\account\login.php on line 103
 2015-07-26 22:08:46 - PHP Notice:  Undefined index: zone_id in E:\wamp\www\yuankong\market\controller\account\login.php on line 104
+2015-07-27 9:50:01 - PHP Notice:  Undefined variable: ean in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 145
+2015-07-27 9:50:01 - PHP Notice:  Undefined variable: jan in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 149
+2015-07-27 10:10:39 - PHP Notice:  Undefined variable: ean in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 145
+2015-07-27 10:10:39 - PHP Notice:  Undefined variable: jan in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 149
+2015-07-27 10:15:28 - PHP Notice:  Undefined variable: ean in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 145
+2015-07-27 10:15:28 - PHP Notice:  Undefined variable: jan in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 149
+2015-07-27 10:16:30 - PHP Notice:  Undefined variable: ean in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 145
+2015-07-27 10:16:30 - PHP Notice:  Undefined variable: jan in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 149
+2015-07-27 10:17:31 - PHP Notice:  Undefined variable: ean in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 145
+2015-07-27 10:17:31 - PHP Notice:  Undefined variable: jan in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 149
+2015-07-27 10:18:29 - PHP Notice:  Undefined variable: ean in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 145
+2015-07-27 10:18:29 - PHP Notice:  Undefined variable: jan in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 149
+2015-07-27 10:21:53 - PHP Notice:  Undefined variable: ean in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 145
+2015-07-27 10:21:53 - PHP Notice:  Undefined variable: jan in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 149
+2015-07-27 10:28:58 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 20
+2015-07-27 10:28:58 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 25
+2015-07-27 10:28:58 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 26
+2015-07-27 10:28:58 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 27
+2015-07-27 10:28:58 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 29
+2015-07-27 10:28:58 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 30
+2015-07-27 10:31:18 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 20
+2015-07-27 10:31:18 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 25
+2015-07-27 10:31:18 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 26
+2015-07-27 10:31:18 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 27
+2015-07-27 10:31:18 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 29
+2015-07-27 10:31:18 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 30
+2015-07-27 10:31:58 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 20
+2015-07-27 10:31:58 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 25
+2015-07-27 10:31:58 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 26
+2015-07-27 10:31:58 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 27
+2015-07-27 10:31:58 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 29
+2015-07-27 10:31:58 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 30
+2015-07-27 10:37:40 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 20
+2015-07-27 10:37:40 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 25
+2015-07-27 10:37:40 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 26
+2015-07-27 10:37:40 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 27
+2015-07-27 10:37:40 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 29
+2015-07-27 10:37:40 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 30
+2015-07-27 11:01:15 - PHP Notice:  Error: Could not load language module/ykconsult! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-07-27 11:01:56 - PHP Notice:  Error: Could not load language module/ykconsult! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-07-27 11:03:32 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 20
+2015-07-27 11:03:32 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 25
+2015-07-27 11:03:32 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 26
+2015-07-27 11:03:32 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 27
+2015-07-27 11:03:32 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 29
+2015-07-27 11:03:32 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 30
+2015-07-27 11:05:05 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 20
+2015-07-27 11:05:05 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 25
+2015-07-27 11:05:05 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 26
+2015-07-27 11:05:05 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 27
+2015-07-27 11:05:05 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 29
+2015-07-27 11:05:05 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 30
+2015-07-27 11:06:46 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 20
+2015-07-27 11:06:46 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 25
+2015-07-27 11:06:46 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 26
+2015-07-27 11:06:46 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 27
+2015-07-27 11:06:46 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 29
+2015-07-27 11:06:46 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 30
+2015-07-27 11:06:46 - PHP Notice:  Error: Could not load language module/ykconsult! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-07-27 11:06:46 - PHP Notice:  Error: Could not load language module/ykconsult! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-07-27 11:09:30 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 20
+2015-07-27 11:09:30 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 25
+2015-07-27 11:09:30 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 26
+2015-07-27 11:09:30 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 27
+2015-07-27 11:09:30 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 29
+2015-07-27 11:09:30 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 30
+2015-07-27 11:09:30 - PHP Notice:  Error: Could not load language module/ykconsult! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-07-27 11:09:30 - PHP Notice:  Error: Could not load language module/ykconsult! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-07-27 11:09:45 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 20
+2015-07-27 11:09:45 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 25
+2015-07-27 11:09:45 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 26
+2015-07-27 11:09:45 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 27
+2015-07-27 11:09:45 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 29
+2015-07-27 11:09:45 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 30
+2015-07-27 11:09:45 - PHP Notice:  Error: Could not load language module/ykconsult! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-07-27 11:09:45 - PHP Notice:  Error: Could not load language module/ykconsult! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-07-27 11:10:07 - PHP Notice:  Error: Could not load language module/ykconsult! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-07-27 11:10:08 - PHP Notice:  Error: Could not load language module/ykconsult! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-07-27 11:11:52 - PHP Notice:  Error: Could not load language module/ykconsult! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-07-27 11:11:52 - PHP Notice:  Error: Could not load language module/ykconsult! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-07-27 11:12:29 - PHP Notice:  Error: Could not load language module/ykconsult! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-07-27 11:12:29 - PHP Notice:  Error: Could not load language module/ykconsult! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-07-27 11:13:45 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 20
+2015-07-27 11:13:45 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 25
+2015-07-27 11:13:45 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 26
+2015-07-27 11:13:45 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 27
+2015-07-27 11:13:45 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 29
+2015-07-27 11:13:45 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 30
+2015-07-27 11:14:23 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 20
+2015-07-27 11:14:23 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 25
+2015-07-27 11:14:23 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 26
+2015-07-27 11:14:23 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 27
+2015-07-27 11:14:23 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 29
+2015-07-27 11:14:23 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 30
+2015-07-27 11:14:57 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 20
+2015-07-27 11:14:57 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 25
+2015-07-27 11:14:57 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 26
+2015-07-27 11:14:57 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 27
+2015-07-27 11:14:57 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 29
+2015-07-27 11:14:57 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 30
+2015-07-27 11:18:35 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 20
+2015-07-27 11:18:35 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 25
+2015-07-27 11:18:35 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 26
+2015-07-27 11:18:35 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 27
+2015-07-27 11:18:35 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 29
+2015-07-27 11:18:35 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 30
+2015-07-27 11:18:42 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 20
+2015-07-27 11:18:42 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 25
+2015-07-27 11:18:42 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 26
+2015-07-27 11:18:42 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 27
+2015-07-27 11:18:42 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 29
+2015-07-27 11:18:42 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 30
+2015-07-27 11:25:18 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 20
+2015-07-27 11:25:18 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 25
+2015-07-27 11:25:18 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 26
+2015-07-27 11:25:18 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 27
+2015-07-27 11:25:18 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 29
+2015-07-27 11:25:18 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 30
+2015-07-27 11:25:27 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 20
+2015-07-27 11:25:27 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 25
+2015-07-27 11:25:27 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 26
+2015-07-27 11:25:27 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 27
+2015-07-27 11:25:27 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 29
+2015-07-27 11:25:27 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 30
+2015-07-27 11:25:55 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 20
+2015-07-27 11:25:55 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 25
+2015-07-27 11:25:55 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 26
+2015-07-27 11:25:55 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 27
+2015-07-27 11:25:55 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 29
+2015-07-27 11:25:55 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 30
+2015-07-27 11:26:07 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 20
+2015-07-27 11:26:07 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 25
+2015-07-27 11:26:07 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 26
+2015-07-27 11:26:07 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 27
+2015-07-27 11:26:07 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 29
+2015-07-27 11:26:07 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 30
+2015-07-27 11:26:20 - PHP Notice:  Undefined variable: column_right in D:\wamp\www\yuankong\market\view\theme\yuankong\template\common\config.tpl on line 3
+2015-07-27 11:27:54 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 20
+2015-07-27 11:27:54 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 25
+2015-07-27 11:27:54 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 26
+2015-07-27 11:27:54 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 27
+2015-07-27 11:27:54 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 29
+2015-07-27 11:27:54 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 30
+2015-07-27 11:29:04 - PHP Notice:  Undefined variable: wiki_info in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 20
+2015-07-27 14:34:31 - PHP Notice:  Error: Could not load model catalog/download! in D:\wamp\www\yuankong\system\engine\loader.php on line 48
+2015-07-27 14:35:17 - PHP Notice:  Undefined variable: ean in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 145
+2015-07-27 14:35:17 - PHP Notice:  Undefined variable: jan in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 149
+2015-07-27 14:35:17 - PHP Notice:  Undefined variable: product_downloads in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 345
+2015-07-27 14:35:17 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 345
+2015-07-27 14:39:47 - PHP Notice:  Undefined variable: ean in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 145
+2015-07-27 14:39:47 - PHP Notice:  Undefined variable: jan in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 149
+2015-07-27 14:41:53 - PHP Notice:  Undefined variable: ean in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 145
+2015-07-27 14:41:53 - PHP Notice:  Undefined variable: jan in D:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 149
+2015-07-27 15:53:10 - PHP Notice:  Undefined index: name in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 57
+2015-07-27 15:53:10 - PHP Notice:  Undefined index: name in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 58
+2015-07-27 15:53:10 - PHP Notice:  Undefined variable: page in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 64
+2015-07-27 15:53:10 - PHP Notice:  Undefined variable: date_added in D:\wamp\www\yuankong\market\view\theme\yuankong\template\information\wiki.tpl on line 28
+2015-07-27 15:53:10 - PHP Notice:  Undefined variable: pagenation in D:\wamp\www\yuankong\market\view\theme\yuankong\template\information\wiki.tpl on line 38
+2015-07-27 15:53:56 - PHP Notice:  Undefined index: name in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 57
+2015-07-27 15:53:56 - PHP Notice:  Undefined variable: page in D:\wamp\www\yuankong\market\controller\information\wiki.php on line 63
+2015-07-27 15:53:56 - PHP Notice:  Undefined variable: date_added in D:\wamp\www\yuankong\market\view\theme\yuankong\template\information\wiki.tpl on line 28
+2015-07-27 15:53:56 - PHP Notice:  Undefined variable: pagenation in D:\wamp\www\yuankong\market\view\theme\yuankong\template\information\wiki.tpl on line 38
+2015-07-27 17:15:59 - PHP Notice:  Error: Table 'yuankong.yk_product_to_download' doesn't exist<br />Error No: 1146<br />SELECT * FROM yk_product_to_download p2d LEFT JOIN yk_download d ON (p2d.download_id = d.download_id) LEFT JOIN yk_download_description dd ON (d.download_id = dd.download_id) WHERE p2d.product_id = '51' AND dd.language_id = '2' in D:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-07-27 17:15:59 - PHP Notice:  Trying to get property of non-object in D:\wamp\www\yuankong\system\library\checkout.php on line 206
+2015-07-27 17:15:59 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\system\library\checkout.php on line 206
+2015-07-27 17:24:55 - PHP Notice:  Undefined index: country_id in D:\wamp\www\yuankong\market\controller\account\login.php on line 103
+2015-07-27 17:24:55 - PHP Notice:  Undefined index: zone_id in D:\wamp\www\yuankong\market\controller\account\login.php on line 104
+2015-07-27 17:36:57 - PHP Notice:  Undefined index: country_id in D:\wamp\www\yuankong\market\controller\account\login.php on line 103
+2015-07-27 17:36:57 - PHP Notice:  Undefined index: zone_id in D:\wamp\www\yuankong\market\controller\account\login.php on line 104

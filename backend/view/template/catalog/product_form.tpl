@@ -334,22 +334,6 @@
                   <?php } ?>
                 </div></td>
             </tr>
-            <tr class="hide-item">
-              <td><?php echo $entry_download; ?></td>
-              <td><input type="text" name="download" value="" /></td>
-            </tr>			
-            <tr class="hide-item">
-              <td>&nbsp;</td>
-              <td><div id="product-download" class="scrollbox">
-                  <?php $class = 'odd'; ?>
-                  <?php foreach ($product_downloads as $product_download) { ?>
-                  <?php $class = ($class == 'even' ? 'odd' : 'even'); ?>
-                  <div id="product-download<?php echo $product_download['download_id']; ?>" class="<?php echo $class; ?>"> <?php echo $product_download['name']; ?><img src="view/image/delete.png" alt="" />
-                    <input type="hidden" name="product_download[]" value="<?php echo $product_download['download_id']; ?>" />
-                  </div>
-                  <?php } ?>
-                </div></td>
-            </tr>
             <tr>
               <td><?php echo $entry_related; ?></td>
               <td><input type="text" name="related" value="" /></td>
@@ -938,45 +922,6 @@ $('#product-filter div img').live('click', function() {
 	$('#product-filter div:even').attr('class', 'even');	
 });
 
-// Downloads
-$('input[name=\'download\']').autocomplete({
-	delay: 500,
-	source: function(request, response) {
-		$.ajax({
-			url: 'index.php?route=catalog/download/autocomplete&token=<?php echo $token; ?>&filter_name=' +  encodeURIComponent(request.term),
-			dataType: 'json',
-			success: function(json) {		
-				response($.map(json, function(item) {
-					return {
-						label: item.name,
-						value: item.download_id
-					}
-				}));
-			}
-		});
-	}, 
-	select: function(event, ui) {
-		$('#product-download' + ui.item.value).remove();
-		
-		$('#product-download').append('<div id="product-download' + ui.item.value + '">' + ui.item.label + '<img src="view/image/delete.png" alt="" /><input type="hidden" name="product_download[]" value="' + ui.item.value + '" /></div>');
-
-		$('#product-download div:odd').attr('class', 'odd');
-		$('#product-download div:even').attr('class', 'even');
-				
-		return false;
-	},
-	focus: function(event, ui) {
-      return false;
-   }
-});
-
-$('#product-download div img').live('click', function() {
-	$(this).parent().remove();
-	
-	$('#product-download div:odd').attr('class', 'odd');
-	$('#product-download div:even').attr('class', 'even');	
-});
-
 // Related
 $('input[name=\'related\']').autocomplete({
 	delay: 500,
@@ -1086,7 +1031,7 @@ $('input[name=\'option\']').catcomplete({
 				response($.map(json, function(item) {
 					return {
 						category: item.category,
-						label: item.name,
+						label: item.remark+':'+item.name,
 						value: item.option_id,
 						type: item.type,
 						option_value: item.option_value
