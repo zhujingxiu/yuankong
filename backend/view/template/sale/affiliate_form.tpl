@@ -33,22 +33,26 @@
                 </td>
             </tr>
             <tr>
-              <td><span class="required">*</span> <?php echo $entry_firstname; ?></td>
-              <td><input type="text" name="firstname" value="<?php echo $firstname; ?>" />
-                <?php if ($error_firstname) { ?>
-                <span class="error"><?php echo $error_firstname; ?></span>
+              <td><span class="required">*</span> <?php echo $entry_company; ?></td>
+              <td><input type="text" name="company" value="<?php echo $company; ?>" size="50"/></td>
+            </tr>
+            <tr>
+              <td><span class="required">*</span> <?php echo $entry_fullname; ?></td>
+              <td><input type="text" name="fullname" value="<?php echo $fullname; ?>" />
+                <?php if ($error_fullname) { ?>
+                <span class="error"><?php echo $error_fullname; ?></span>
                 <?php } ?></td>
             </tr>
             <tr>
-              <td><span class="required">*</span> <?php echo $entry_lastname; ?></td>
-              <td><input type="text" name="lastname" value="<?php echo $lastname; ?>" />
-                <?php if ($error_lastname) { ?>
-                <span class="error"><?php echo $error_lastname; ?></span>
+              <td><span class="required">*</span> <?php echo $entry_mobile_phone; ?></td>
+              <td><input type="text" name="mobile_phone" value="<?php echo $mobile_phone; ?>" />
+                <?php if ($error_mobile_phone) { ?>
+                <span class="error"><?php echo $error_mobile_phone; ?></span>
                 <?php } ?></td>
             </tr>
             <tr>
               <td><span class="required">*</span> <?php echo $entry_email; ?></td>
-              <td><input type="text" name="email" value="<?php echo $email; ?>" />
+              <td><input type="text" name="email" value="<?php echo $email; ?>" size="50"/>
                 <?php if ($error_email) { ?>
                 <span class="error"><?php echo $error_email; ?></span>
                 <?php  } ?></td>
@@ -64,42 +68,27 @@
               <td><?php echo $entry_fax; ?></td>
               <td><input type="text" name="fax" value="<?php echo $fax; ?>" /></td>
             </tr>
+            
             <tr>
-              <td><?php echo $entry_company; ?></td>
-              <td><input type="text" name="company" value="<?php echo $company; ?>" /></td>
-            </tr>
-            <tr>
-              <td><span class="required">*</span> <?php echo $entry_address_1; ?></td>
-              <td><input type="text" name="address_1" value="<?php echo $address_1; ?>" />
-                <?php if ($error_address_1) { ?>
-                <span class="error"><?php echo $error_address_1; ?></span>
+              <td><span class="required">*</span> <?php echo $entry_address; ?></td>
+              <td><input type="text" name="address" value="<?php echo $address; ?>" />
+                <?php if ($error_address) { ?>
+                <span class="error"><?php echo $error_address; ?></span>
                 <?php  } ?></td>
             </tr>
+
             <tr>
-              <td><?php echo $entry_address_2; ?></td>
-              <td><input type="text" name="address_2" value="<?php echo $address_2; ?>" /></td>
-            </tr>
-            <tr>
-              <td><span class="required">*</span> <?php echo $entry_city; ?></td>
-              <td><input type="text" name="city" value="<?php echo $city; ?>" />
-                <?php if ($error_city) { ?>
-                <span class="error"><?php echo $error_city ?></span>
-                <?php  } ?></td>
+              <td><span class="required">*</span> <?php echo $entry_area_zone; ?></td>
+              <td><input type="text" name="area_zone" value="<?php echo $area_zone; ?>" /></td>
             </tr>
             <tr>
               <td><span id="postcode-required" class="required">*</span> <?php echo $entry_postcode; ?></td>
-              <td><input type="text" name="postcode" value="<?php echo $postcode; ?>" />
-                <?php if ($error_postcode) { ?>
-                <span class="error"><?php echo $error_postcode ?></span>
-                <?php  } ?></td>
+              <td><input type="text" name="postcode" value="<?php echo $postcode; ?>" /></td>
             </tr>
             <tr>
               <td><span class="required">*</span> <?php echo $entry_province; ?></td>
               <td><select name="province_id">
-                </select>
-                <?php if ($error_province) { ?>
-                <span class="error"><?php echo $error_province; ?></span>
-                <?php } ?></td>
+                </select></td>
             </tr>
             <tr>
               <td><span class="required">*</span> <?php echo $entry_code; ?></td>
@@ -155,12 +144,7 @@
                   <input type="radio" name="payment" value="cheque" id="cheque" />
                   <?php } ?>
                   <label for="cheque"><?php echo $text_cheque; ?></label>
-                  <?php if ($payment == 'paypal') { ?>
-                  <input type="radio" name="payment" value="paypal" id="paypal" checked="checked" />
-                  <?php } else { ?>
-                  <input type="radio" name="payment" value="paypal" id="paypal" />
-                  <?php } ?>
-                  <label for="paypal"><?php echo $text_paypal; ?></label>
+
                   <?php if ($payment == 'bank') { ?>
                   <input type="radio" name="payment" value="bank" id="bank" checked="checked" />
                   <?php } else { ?>
@@ -175,12 +159,7 @@
                 <td><input type="text" name="cheque" value="<?php echo $cheque; ?>" /></td>
               </tr>
             </tbody>
-            <tbody id="payment-paypal" class="payment">
-              <tr>
-                <td><?php echo $entry_paypal; ?></td>
-                <td><input type="text" name="paypal" value="<?php echo $paypal; ?>" /></td>
-              </tr>
-            </tbody>
+
             <tbody id="payment-bank" class="payment">
               <tr>
                 <td><?php echo $entry_bank_name; ?></td>
@@ -269,8 +248,6 @@ function addTransaction() {
 		}
 	});
 }
-//--></script> 
-<script type="text/javascript"><!--
 $('.htabs a').tabs();
 //--></script> 
 <?php echo $footer; ?>

@@ -949,22 +949,13 @@ class ControllerSaleOrder extends Controller {
 			} else {
 				$order_option = array();
 			}
-
-			if (isset($order_product['order_download'])) {
-				$order_download = $order_product['order_download'];
-			} elseif (isset($this->request->get['order_id'])) {
-				$order_download = $this->model_sale_order->getOrderDownloads($this->request->get['order_id'], $order_product['order_product_id']);
-			} else {
-				$order_download = array();
-			}
-							
+						
 			$this->data['order_products'][] = array(
 				'order_product_id' => $order_product['order_product_id'],
 				'product_id'       => $order_product['product_id'],
 				'name'             => $order_product['name'],
 				'model'            => $order_product['model'],
 				'option'           => $order_option,
-				'download'         => $order_download,
 				'quantity'         => $order_product['quantity'],
 				'price'            => $order_product['price'],
 				'total'            => $order_product['total'],

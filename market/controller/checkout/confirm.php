@@ -255,61 +255,7 @@ class ControllerCheckoutConfirm extends Controller {
 			$this->load->model('checkout/order');
 			$data['order_status_id'] = $this->config->get('config_order_status_id');
 			$this->session->data['order_id'] = $this->model_checkout_order->addOrder($data);
-			/*
-			$this->data['column_name'] = $this->language->get('column_name');
-			$this->data['column_model'] = $this->language->get('column_model');
-			$this->data['column_quantity'] = $this->language->get('column_quantity');
-			$this->data['column_price'] = $this->language->get('column_price');
-			$this->data['column_total'] = $this->language->get('column_total');
-            
-            $this->data['products'] = array();
 
-            foreach ($this->checkout->getProducts() as $product) {
-                $option_data = array();
-
-                foreach ($product['option'] as $option) {
-                    if ($option['type'] != 'file') {
-                        $value = $option['option_value'];
-                    } else {
-                        $filename = $this->encryption->decrypt($option['option_value']);
-
-                        $value = utf8_substr($filename, 0, utf8_strrpos($filename, '.'));
-                    }
-
-                    $option_data[] = array(
-                        'name'  => $option['name'],
-                        'value' => (utf8_strlen($value) > 20 ? utf8_substr($value, 0, 20) . '..' : $value)
-                    );
-                }
-
-                $this->data['products'][] = array(
-                    'key'                 => $product['key'],
-                    'product_id'          => $product['product_id'],
-                    'name'                => $product['name'],
-                    'model'               => $product['model'],
-                    'option'              => $option_data,
-                    'quantity'            => $product['quantity'],
-                    'subtract'            => $product['subtract'],
-                    'price'               => $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax'))),
-                    'total'               => $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax')) * $product['quantity']),
-                    'href'                => $this->url->link('product/product', 'product_id=' . $product['product_id']),
-                );
-            }
-            
-            // Gift Voucher
-			$this->data['vouchers'] = array();
-			
-			if (!empty($this->session->data['vouchers'])) {
-				foreach ($this->session->data['vouchers'] as $voucher) {
-					$this->data['vouchers'][] = array(
-						'description' => $voucher['description'],
-						'amount'      => $this->currency->format($voucher['amount'])
-					);
-				}
-			}  
-						
-			$this->data['totals'] = $total_data;
-			*/
 			$json['status'] = 1;
 			$json['redirect'] = $this->url->link('payment/'.$data['payment_code'], '', 'SSL');
 		} else {
@@ -367,7 +313,6 @@ class ControllerCheckoutConfirm extends Controller {
 				if (!in_array($this->request->post['shipping_address_id'], array_keys($this->model_account_address->getAddresses()))) {
 					$json['error']['warning'] = $this->language->get('error_address');
 				}
-						
 				if (!$json) {			
 					$this->session->data['shipping_address_id'] = $this->request->post['shipping_address_id'];
 					

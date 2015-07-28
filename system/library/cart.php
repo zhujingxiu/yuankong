@@ -379,5 +379,16 @@ class Cart {
 		
 		return $shipping;
 	}
+
+	public function getProductIds(){
+		$ids = array();
+		foreach ($this->getProducts() as $product) {
+	  		if ($product['product_id']) {
+	    		$ids[] = $product['product_id'];
+	  		}		
+		}
+		
+		return $ids;
+	}
 		
 }

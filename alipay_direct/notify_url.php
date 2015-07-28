@@ -18,11 +18,14 @@ define('APP_PATH', rtrim(dirname(__FILE__),"/")."/");
 require_once('../config.php');
 
 // Environment
+/*
 if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
     defined('APP_ENV')  || define('APP_ENV',  'development' );
 } else {
     defined('APP_ENV')  || define('APP_ENV',  'production' );
 }
+*/
+defined('APP_ENV')  || define('APP_ENV',  'production' );
 // Startup
 require_once(DIR_SYSTEM . 'startup.php');
 require_once(DIR_SYSTEM . "alipay/alipay_notify.class.php");
@@ -47,7 +50,6 @@ $query = $db->query("SELECT * FROM `" . DB_PREFIX . "setting` WHERE group = 'ali
 foreach($query->rows as $result){
 	$config->set($result['key'], $result['value']);
 }
-
 
 //↓↓↓↓↓↓↓↓↓↓请在这里配置您的基本信息↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 //合作身份者id，以2088开头的16位纯数字
@@ -133,6 +135,7 @@ if($verify_result) {//验证成功
         //调试用，写文本函数记录程序运行情况是否正常
         //logResult("这里写入想要调试的代码变量值，或其他运行的结果记录");
 		$db->query("UPDATE `" . DB_PREFIX . "order` SET order_status_id = '".$order_status_id."' WHERE order_id = '".$out_trade_no."' ");
+        
 		logResult('TRADE_SUCCESS');
     }
 

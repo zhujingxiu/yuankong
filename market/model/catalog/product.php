@@ -645,4 +645,11 @@ class ModelCatalogProduct extends Model {
 		
 		return $query->row['total'];
 	}
+
+	public function getLikedProducts($data=array()){
+		$sql = "SELECT product_id FROM ".DB_PREFIX."product_to_category WHERE category_id = '".$data['category_id']."' ".(isset($data['not_ids']) && is_array($data['not_ids']) ? "AND product_id NOT IN (".implode(",", $data['not_ids']) .")": '' );
+		$query = $this->db->query($sql);
+
+		return $query->rows;
+	}
 }

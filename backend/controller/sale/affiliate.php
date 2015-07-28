@@ -541,22 +541,21 @@ class ControllerSaleAffiliate extends Controller {
 		$this->data['text_bank'] = $this->language->get('text_bank');
 		$this->data['text_group'] = $this->language->get('text_group');
 				
-    	$this->data['entry_firstname'] = $this->language->get('entry_firstname');
-    	$this->data['entry_lastname'] = $this->language->get('entry_lastname');
+    	$this->data['entry_fullname'] = $this->language->get('entry_fullname');
+    	$this->data['entry_mobile_phone'] = $this->language->get('entry_mobile_phone');
     	$this->data['entry_email'] = $this->language->get('entry_email');
     	$this->data['entry_telephone'] = $this->language->get('entry_telephone');
     	$this->data['entry_fax'] = $this->language->get('entry_fax');
     	$this->data['entry_company'] = $this->language->get('entry_company');
-		$this->data['entry_address_1'] = $this->language->get('entry_address_1');
-		$this->data['entry_address_2'] = $this->language->get('entry_address_2');
-		$this->data['entry_city'] = $this->language->get('entry_city');
+		$this->data['entry_address'] = $this->language->get('entry_address');
+		$this->data['entry_area_zone'] = $this->language->get('entry_area_zone');
 		$this->data['entry_postcode'] = $this->language->get('entry_postcode');
 		$this->data['entry_province'] = $this->language->get('entry_province');
 		$this->data['entry_commission'] = $this->language->get('entry_commission');
 		$this->data['entry_tax'] = $this->language->get('entry_tax');
+		$this->data['entry_code'] = $this->language->get('entry_code');
 		$this->data['entry_payment'] = $this->language->get('entry_payment');
 		$this->data['entry_cheque'] = $this->language->get('entry_cheque');
-		$this->data['entry_paypal'] = $this->language->get('entry_paypal');
 		$this->data['entry_bank_name'] = $this->language->get('entry_bank_name');
 		$this->data['entry_bank_branch_number'] = $this->language->get('entry_bank_branch_number');
 		$this->data['entry_bank_swift_code'] = $this->language->get('entry_bank_swift_code');
@@ -583,16 +582,16 @@ class ControllerSaleAffiliate extends Controller {
 			$this->data['error_warning'] = '';
 		}
 
- 		if (isset($this->error['firstname'])) {
-			$this->data['error_firstname'] = $this->error['firstname'];
+ 		if (isset($this->error['fullname'])) {
+			$this->data['error_fullname'] = $this->error['fullname'];
 		} else {
-			$this->data['error_firstname'] = '';
+			$this->data['error_fullname'] = '';
 		}
 
- 		if (isset($this->error['lastname'])) {
-			$this->data['error_lastname'] = $this->error['lastname'];
+ 		if (isset($this->error['mobile_phone'])) {
+			$this->data['error_mobile_phone'] = $this->error['mobile_phone'];
 		} else {
-			$this->data['error_lastname'] = '';
+			$this->data['error_mobile_phone'] = '';
 		}
 		
  		if (isset($this->error['email'])) {
@@ -619,16 +618,16 @@ class ControllerSaleAffiliate extends Controller {
 			$this->data['error_confirm'] = '';
 		}
 		
-		if (isset($this->error['address_1'])) {
-			$this->data['error_address_1'] = $this->error['address_1'];
+		if (isset($this->error['address'])) {
+			$this->data['error_address'] = $this->error['address'];
 		} else {
-			$this->data['error_address_1'] = '';
+			$this->data['error_address'] = '';
 		}
 		
-		if (isset($this->error['city'])) {
-			$this->data['error_city'] = $this->error['city'];
+		if (isset($this->error['area'])) {
+			$this->data['error_area'] = $this->error['area'];
 		} else {
-			$this->data['error_city'] = '';
+			$this->data['error_area'] = '';
 		}
 		
 		if (isset($this->error['postcode'])) {
@@ -718,25 +717,25 @@ class ControllerSaleAffiliate extends Controller {
 			$this->data['affiliate_id'] = 0;
 		}
 					
-    	if (isset($this->request->post['firstname'])) {
-      		$this->data['firstname'] = $this->request->post['firstname'];
-		} elseif (!empty($affiliate_info)) { 
-			$this->data['firstname'] = $affiliate_info['firstname'];
+    	if (isset($this->request->post['fullname'])) {
+      		$this->data['fullname'] = $this->request->post['fullname'];
+		} elseif (!empty($affiliate_info['fullname'])) { 
+			$this->data['fullname'] = $affiliate_info['fullname'];
 		} else {
-      		$this->data['firstname'] = '';
+      		$this->data['fullname'] = '';
     	}
 
-    	if (isset($this->request->post['lastname'])) {
-      		$this->data['lastname'] = $this->request->post['lastname'];
-    	} elseif (!empty($affiliate_info)) { 
-			$this->data['lastname'] = $affiliate_info['lastname'];
+    	if (isset($this->request->post['mobile_phone'])) {
+      		$this->data['mobile_phone'] = $this->request->post['mobile_phone'];
+    	} elseif (!empty($affiliate_info['mobile_phone'])) { 
+			$this->data['mobile_phone'] = $affiliate_info['mobile_phone'];
 		} else {
-      		$this->data['lastname'] = '';
+      		$this->data['mobile_phone'] = '';
     	}
 
     	if (isset($this->request->post['group_id'])) {
       		$this->data['group_id'] = $this->request->post['group_id'];
-    	} elseif (!empty($affiliate_info)) { 
+    	} elseif (!empty($affiliate_info['group_id'])) { 
 			$this->data['group_id'] = $affiliate_info['group_id'];
 		} else {
       		$this->data['group_id'] = '';
@@ -774,39 +773,29 @@ class ControllerSaleAffiliate extends Controller {
       		$this->data['company'] = '';
     	}
 		
-    	if (isset($this->request->post['address_1'])) {
-      		$this->data['address_1'] = $this->request->post['address_1'];
-    	} elseif (!empty($affiliate_info)) { 
-			$this->data['address_1'] = $affiliate_info['address_1'];
+    	if (isset($this->request->post['address'])) {
+      		$this->data['address'] = $this->request->post['address'];
+    	} elseif (!empty($affiliate_info['address'])) { 
+			$this->data['address'] = $affiliate_info['address'];
 		} else {
-      		$this->data['address_1'] = '';
-    	}
-				
-    	if (isset($this->request->post['address_2'])) {
-      		$this->data['address_2'] = $this->request->post['address_2'];
-    	} elseif (!empty($affiliate_info)) { 
-			$this->data['address_2'] = $affiliate_info['address_2'];
-		} else {
-      		$this->data['address_2'] = '';
+      		$this->data['address'] = '';
     	}
 
-    	if (isset($this->request->post['city'])) {
-      		$this->data['city'] = $this->request->post['city'];
-    	} elseif (!empty($affiliate_info)) { 
-			$this->data['city'] = $affiliate_info['city'];
+    	if (isset($this->request->post['area_zone'])) {
+      		$this->data['area_zone'] = $this->request->post['area_zone'];
+    	} elseif (!empty($affiliate_info['area_zone'])) { 
+			$this->data['area_zone'] = $affiliate_info['area_zone'];
 		} else {
-      		$this->data['city'] = '';
+      		$this->data['area_zone'] = '';
     	}
 
     	if (isset($this->request->post['postcode'])) {
       		$this->data['postcode'] = $this->request->post['postcode'];
-    	} elseif (!empty($affiliate_info)) { 
+    	} elseif (!empty($affiliate_info['postcode'])) { 
 			$this->data['postcode'] = $affiliate_info['postcode'];
 		} else {
       		$this->data['postcode'] = '';
     	}
-    	
-
 				
 		if (isset($this->request->post['province_id'])) {
       		$this->data['province_id'] = $this->request->post['province_id'];
@@ -854,14 +843,6 @@ class ControllerSaleAffiliate extends Controller {
 			$this->data['cheque'] = $affiliate_info['cheque'];
 		} else {
       		$this->data['cheque'] = '';
-    	}	
-
-		if (isset($this->request->post['paypal'])) {
-      		$this->data['paypal'] = $this->request->post['paypal'];
-    	} elseif (!empty($affiliate_info)) { 
-			$this->data['paypal'] = $affiliate_info['paypal'];
-		} else {
-      		$this->data['paypal'] = '';
     	}	
 
 		if (isset($this->request->post['bank_name'])) {
@@ -940,12 +921,12 @@ class ControllerSaleAffiliate extends Controller {
       		$this->error['warning'] = $this->language->get('error_permission');
     	}
 
-    	if ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32)) {
-      		$this->error['firstname'] = $this->language->get('error_firstname');
+    	if ((utf8_strlen($this->request->post['fullname']) < 1) || (utf8_strlen($this->request->post['fullname']) > 32)) {
+      		$this->error['fullname'] = $this->language->get('error_fullname');
     	}
 
-    	if ((utf8_strlen($this->request->post['lastname']) < 1) || (utf8_strlen($this->request->post['lastname']) > 32)) {
-      		$this->error['lastname'] = $this->language->get('error_lastname');
+    	if ((utf8_strlen($this->request->post['mobile_phone']) < 1) || !isMobile($this->request->post['mobile_phone'])) {
+      		$this->error['mobile_phone'] = $this->language->get('error_mobile_phone');
     	}
 
 		if ((utf8_strlen($this->request->post['email']) > 96) || (!preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $this->request->post['email']))) {
@@ -978,17 +959,10 @@ class ControllerSaleAffiliate extends Controller {
 	  		}
     	}
 		
-    	if ((utf8_strlen($this->request->post['address_1']) < 3) || (utf8_strlen($this->request->post['address_1']) > 128)) {
-      		$this->error['address_1'] = $this->language->get('error_address_1');
+    	if ((utf8_strlen($this->request->post['address']) < 3) || (utf8_strlen($this->request->post['address']) > 128)) {
+      		$this->error['address'] = $this->language->get('error_address');
     	}
 
-    	if ((utf8_strlen($this->request->post['city']) < 2) || (utf8_strlen($this->request->post['city']) > 128)) {
-      		$this->error['city'] = $this->language->get('error_city');
-    	}
-		
-		if ( (utf8_strlen($this->request->post['postcode']) < 2) || (utf8_strlen($this->request->post['postcode']) > 10)) {
-			$this->error['postcode'] = $this->language->get('error_postcode');
-		}
 		
     	if (!isset($this->request->post['province_id']) || $this->request->post['province_id'] == '') {
       		$this->error['province'] = $this->language->get('error_province');
@@ -1104,4 +1078,3 @@ class ControllerSaleAffiliate extends Controller {
 		$this->response->setOutput(json_encode($affiliate_data));
 	}		
 }
-?>

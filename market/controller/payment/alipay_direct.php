@@ -71,14 +71,14 @@ class ControllerPaymentAlipayDirect extends Controller {
 		
 		//构造要请求的参数数组，无需改动
 		$parameter = array(
-			"service"         => "create_direct_pay_by_user",
-			"partner"         => trim($this->config->get('alipay_direct_partner_id')),
-			"seller_email"    => trim($this->config->get('alipay_direct_account')),
-			"payment_type"	  => $payment_type,
-			"notify_url"	    => $notify_url,
-			"return_url"	    => $return_url,
-			"out_trade_no"	    => $out_trade_no,
-			"subject"	        => $subject,
+			"service"            => "create_direct_pay_by_user",
+			"partner"            => trim($this->config->get('alipay_direct_partner_id')),
+			"seller_email"       => trim($this->config->get('alipay_direct_account')),
+			"payment_type"	     => $payment_type,
+			"notify_url"	     => $notify_url,
+			"return_url"	     => $return_url,
+			"out_trade_no"	     => $out_trade_no,
+			"subject"	         => $subject,
 			"total_fee"	         => $total_fee,
 			"body"	             => $body,
 			"show_url"	         => $show_url,
@@ -86,9 +86,9 @@ class ControllerPaymentAlipayDirect extends Controller {
 			"exter_invoke_ip"	 => $exter_invoke_ip,
 			"_input_charset"	 => trim(strtolower($alipay_config['input_charset']))
 		);
-		
 		//建立请求
 		$alipaySubmit = new AlipaySubmit($alipay_config);
+
 		$html_text = $alipaySubmit->buildRequestForm($parameter,"get", " 确认支付 ");
 		die($html_text);
 		

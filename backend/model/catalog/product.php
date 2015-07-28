@@ -106,11 +106,6 @@ class ModelCatalogProduct extends Model {
 			}
 		}
 		
-		if (isset($data['product_download'])) {
-			foreach ($data['product_download'] as $download_id) {
-				$this->db->query("INSERT INTO " . DB_PREFIX . "product_to_download SET product_id = '" . (int)$product_id . "', download_id = '" . (int)$download_id . "'");
-			}
-		}
 		
 		if (isset($data['product_category'])) {
 			foreach ($data['product_category'] as $category_id) {
@@ -274,13 +269,6 @@ class ModelCatalogProduct extends Model {
 			}
 		}
 		
-		$this->db->query("DELETE FROM " . DB_PREFIX . "product_to_download WHERE product_id = '" . (int)$product_id . "'");
-		
-		if (isset($data['product_download'])) {
-			foreach ($data['product_download'] as $download_id) {
-				$this->db->query("INSERT INTO " . DB_PREFIX . "product_to_download SET product_id = '" . (int)$product_id . "', download_id = '" . (int)$download_id . "'");
-			}
-		}
 		
 		$this->db->query("DELETE FROM " . DB_PREFIX . "product_to_category WHERE product_id = '" . (int)$product_id . "'");
 		
@@ -361,7 +349,6 @@ class ModelCatalogProduct extends Model {
 			$data = array_merge($data, array('product_reward' => $this->getProductRewards($product_id)));
 			$data = array_merge($data, array('product_special' => $this->getProductSpecials($product_id)));
 			$data = array_merge($data, array('product_category' => $this->getProductCategories($product_id)));
-			$data = array_merge($data, array('product_download' => $this->getProductDownloads($product_id)));
 			$data = array_merge($data, array('product_layout' => $this->getProductLayouts($product_id)));
 			$data = array_merge($data, array('product_store' => $this->getProductStores($product_id)));
 			
@@ -607,18 +594,6 @@ class ModelCatalogProduct extends Model {
 		}
 		
 		return $product_reward_data;
-	}
-		
-	public function getProductDownloads($product_id) {
-		$product_download_data = array();
-		
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_to_download WHERE product_id = '" . (int)$product_id . "'");
-		
-		foreach ($query->rows as $result) {
-			$product_download_data[] = $result['download_id'];
-		}
-		
-		return $product_download_data;
 	}
 
 	public function getProductStores($product_id) {

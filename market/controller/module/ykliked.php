@@ -12,13 +12,49 @@ class ControllerModuleYkliked extends Controller {
         $this->load->model('tool/image');
 
         $this->data['additional_class'] = $setting['additional_class'];
-
+        $liked = array();
         $this->data['products'] = array();
-        
-        
-        if(isset($this->session->data['liked']) && is_array($this->session->data['liked'])){
-            krsort($this->session->data['liked']) ;
-            foreach ($this->session->data['liked'] as $key => $product_id) {
+        if($this->cart->countProducts()){
+            foreach ($this->cart->getProducts() as $product) {
+                $relateds = $this->model_catalog_product->getProductRelated($product['product_id']);
+                if($relateds){
+                    foreach ($relateds as $item) {
+                        $liked[] = $item['product_id'];
+                    }
+                }else{
+                    $category_id = $this->model_catalog_product->getProductCategories($product['product_id']);
+                    if($category_id){
+                        $category_data = $this->model_catalog_product->getCategoryRelated($category_id);
+                        if($category_data){
+                            foreach ($category_data as $item) {
+                                $filter = array(
+                                    'category_id' => $item['category_id'],
+                                    'not_ids' => $this->cart->getProductIds()
+                                );
+                                $tmp = $this->model_catalog_product->getLikedProducts($filter);
+                                foreach ($tmp as $item) {
+                                    $liked[] = $item['product_id'];
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        if(count($liked)<5){
+            $products = explode(',', $this->config->get('featured_product'));       
+
+            if (empty($setting['limit'])) {
+                $setting['limit'] = 5-count($liked) ;
+            }
+            
+            $products = array_slice($products, 0, (int)$setting['limit']);
+            $liked = array_merge($liked,$products);
+        }
+        $liked = array_unique($liked);
+        if($liked){
+            foreach ($liked as $product_id) {
                 if(count($this->data['products']) > $setting['limit']){
                     continue;
                 }
@@ -48,7 +84,9 @@ class ControllerModuleYkliked extends Controller {
                     } else {
                         $rating = false;
                     }
-                    
+                    $category_id = $this->model_catalog_product->getProductCategories($product_id);
+                    $path = $this->model_catalog_product->getCategoryPath($category_id);            
+                    $path_param = empty($path) ? '' : '&path='.$path;
                     $this->data['products'][] = array(
                         'product_id' => $product_info['product_id'],
                         'thumb'      => $image,
@@ -57,10 +95,8 @@ class ControllerModuleYkliked extends Controller {
                         'special'    => $special,
                         'rating'     => $rating,
                         'reviews'    => sprintf($this->language->get('text_reviews'), (int)$product_info['reviews']),
-                        'href'       => $this->url->link('product/product', 'product_id=' . $product_info['product_id']),
+                        'href'       => $this->url->link('product/product', 'product_id=' . $product_info['product_id'].$path_param),
                     );
-                }else{
-                    unset($this->session->data['liked'][$key]);
                 }
             }
         }

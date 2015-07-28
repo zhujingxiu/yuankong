@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2015 年 07 月 27 日 15:54
+-- 生成日期: 2015 年 07 月 28 日 09:34
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.4.3
 
@@ -22221,7 +22221,7 @@ CREATE TABLE IF NOT EXISTS `yk_customer` (
 
 INSERT INTO `yk_customer` (`customer_id`, `store_id`, `mobile_phone`, `fullname`, `email`, `telephone`, `fax`, `avatar`, `password`, `salt`, `cart`, `wishlist`, `viewed`, `newsletter`, `address_id`, `customer_group_id`, `ip`, `status`, `approved`, `token`, `date_added`) VALUES
 (1, 0, '18959526595', NULL, 'zhangwuji@yitiantulong.cn', '123123', '', NULL, '3838e00e6e59c95a65bc786ff38d303252338a3f', '7abf86dd9', 'a:0:{}', '', '', 0, 0, 1, '127.0.0.1', 1, 0, '', '2015-06-12 17:34:52'),
-(2, 0, '18850911766', 'yk18850911766', '', '', '', NULL, 'e8a75e331334d9ce78c228afc59c485d99e4a9b3', '2f645ca7b', 'a:2:{i:51;i:1;i:50;i:2;}', '', 'a:1:{i:0;s:2:"51";}', 0, 1, 1, '127.0.0.1', 1, 1, '', '2015-07-16 13:38:42');
+(2, 0, '18850911766', 'yk18850911766', '', '', '', NULL, 'e8a75e331334d9ce78c228afc59c485d99e4a9b3', '2f645ca7b', 'a:2:{i:50;i:3;i:51;i:1;}', '', 'a:1:{i:0;s:2:"51";}', 0, 1, 1, '127.0.0.1', 1, 1, '', '2015-07-16 13:38:42');
 
 -- --------------------------------------------------------
 
@@ -22927,6 +22927,8 @@ CREATE TABLE IF NOT EXISTS `yk_order` (
   `fax` varchar(32) NOT NULL,
   `payment_method` varchar(128) NOT NULL,
   `payment_code` varchar(128) NOT NULL,
+  `payment_trade_no` varchar(64) DEFAULT NULL,
+  `payment_trade_status` varchar(32) DEFAULT NULL,
   `shipping_fullname` varchar(64) DEFAULT NULL,
   `shipping_telephone` varchar(16) DEFAULT NULL,
   `shipping_company` varchar(32) NOT NULL,
@@ -22953,28 +22955,29 @@ CREATE TABLE IF NOT EXISTS `yk_order` (
   `date_added` datetime NOT NULL,
   `date_modified` datetime NOT NULL,
   PRIMARY KEY (`order_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
 
 --
 -- 转存表中的数据 `yk_order`
 --
 
-INSERT INTO `yk_order` (`order_id`, `order_sn`, `invoice_no`, `invoice_prefix`, `store_id`, `store_name`, `store_url`, `customer_id`, `customer_group_id`, `fullname`, `mobile_phone`, `telephone`, `email`, `fax`, `payment_method`, `payment_code`, `shipping_fullname`, `shipping_telephone`, `shipping_company`, `shipping_address`, `shipping_postcode`, `shipping_province`, `shipping_province_id`, `shipping_area_zone`, `shipping_method`, `shipping_code`, `comment`, `total`, `order_status_id`, `affiliate_id`, `commission`, `language_id`, `currency_id`, `currency_code`, `currency_value`, `ip`, `forwarded_ip`, `user_agent`, `accept_language`, `date_added`, `date_modified`) VALUES
-(1, NULL, 0, 'INV-2015-00', 0, '源控智能', 'http://www.yk119.com/', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '323.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-23 23:56:13', '2015-07-23 23:56:13'),
-(2, '', 0, 'INV-2015-00', 0, '源控智能', 'http://www.yk119.com/', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '323.0000', 2, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-24 00:09:31', '2015-07-24 00:09:31'),
-(3, '', 0, 'INV-2015-00', 0, '源控智能', 'http://www.yk119.com/', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '323.0000', 3, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-24 00:10:40', '2015-07-24 00:10:40'),
-(4, '', 0, 'INV-2015-00', 0, '源控智能', 'http://www.yk119.com/', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '323.0000', 4, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-24 00:14:33', '2015-07-24 00:14:33'),
-(5, '', 0, 'INV-2015-00', 0, '源控智能', 'http://www.yk119.com/', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '323.0000', 5, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-24 00:15:13', '2015-07-24 00:15:13'),
-(6, '', 0, 'INV-2015-00', 0, '源控智能', 'http://www.yk119.com/', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '323.0000', 6, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-24 00:17:34', '2015-07-24 00:17:34'),
-(7, '', 0, 'INV-2015-00', 0, '源控智能', 'http://www.yk119.com/', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '323.0000', 7, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-24 00:20:05', '2015-07-24 00:20:05'),
-(8, '', 0, 'INV-2015-00', 0, '源控智能', 'http://www.yk119.com/', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '323.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-24 00:21:59', '2015-07-24 00:21:59'),
-(9, '', 0, 'INV-2015-00', 0, '源控智能', 'http://www.yk119.com/', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '323.0000', 2, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-24 00:28:39', '2015-07-24 00:28:39'),
-(10, '', 1, 'INV-2015-00', 0, '源控智能', 'http://www.yk119.com/', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '323.0000', 3, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-24 00:31:04', '2015-07-24 00:31:04'),
-(11, '', 0, 'YK119-2015-00', 0, '源控智能', 'http://www.yk119.com/', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '425.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-27 23:20:51', '2015-07-27 23:20:51'),
-(12, '', 0, 'YK119-2015-00', 0, '源控智能', 'http://www.yk119.com/', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '425.0000', 2, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-27 23:21:04', '2015-07-27 23:21:04'),
-(13, '', 0, 'YK119-2015-00', 0, '源控智能', 'http://www.yk119.com/', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '425.0000', 3, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-27 23:27:39', '2015-07-27 23:27:39'),
-(14, '', 0, 'YK119-2015-00', 0, '源控智能', 'http://www.yk119.com/', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '425.0000', 4, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-27 23:28:21', '2015-07-27 23:28:21'),
-(15, '', 0, 'YK119-2015-00', 0, '源控智能', 'http://www.yk119.com/', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '425.0000', 2, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-27 23:31:04', '2015-07-27 23:31:04');
+INSERT INTO `yk_order` (`order_id`, `order_sn`, `invoice_no`, `invoice_prefix`, `store_id`, `store_name`, `store_url`, `customer_id`, `customer_group_id`, `fullname`, `mobile_phone`, `telephone`, `email`, `fax`, `payment_method`, `payment_code`, `payment_trade_no`, `payment_trade_status`, `shipping_fullname`, `shipping_telephone`, `shipping_company`, `shipping_address`, `shipping_postcode`, `shipping_province`, `shipping_province_id`, `shipping_area_zone`, `shipping_method`, `shipping_code`, `comment`, `total`, `order_status_id`, `affiliate_id`, `commission`, `language_id`, `currency_id`, `currency_code`, `currency_value`, `ip`, `forwarded_ip`, `user_agent`, `accept_language`, `date_added`, `date_modified`) VALUES
+(1, NULL, 0, 'INV-2015-00', 0, '源控智能', 'http://www.yk119.com/', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '323.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-23 23:56:13', '2015-07-23 23:56:13'),
+(2, '', 0, 'INV-2015-00', 0, '源控智能', 'http://www.yk119.com/', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '323.0000', 2, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-24 00:09:31', '2015-07-24 00:09:31'),
+(3, '', 0, 'INV-2015-00', 0, '源控智能', 'http://www.yk119.com/', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '323.0000', 3, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-24 00:10:40', '2015-07-24 00:10:40'),
+(4, '', 0, 'INV-2015-00', 0, '源控智能', 'http://www.yk119.com/', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '323.0000', 4, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-24 00:14:33', '2015-07-24 00:14:33'),
+(5, '', 0, 'INV-2015-00', 0, '源控智能', 'http://www.yk119.com/', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '323.0000', 5, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-24 00:15:13', '2015-07-24 00:15:13'),
+(6, '', 0, 'INV-2015-00', 0, '源控智能', 'http://www.yk119.com/', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '323.0000', 6, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-24 00:17:34', '2015-07-24 00:17:34'),
+(7, '', 0, 'INV-2015-00', 0, '源控智能', 'http://www.yk119.com/', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '323.0000', 7, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-24 00:20:05', '2015-07-24 00:20:05'),
+(8, '', 0, 'INV-2015-00', 0, '源控智能', 'http://www.yk119.com/', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '323.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-24 00:21:59', '2015-07-24 00:21:59'),
+(9, '', 0, 'INV-2015-00', 0, '源控智能', 'http://www.yk119.com/', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '323.0000', 2, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-24 00:28:39', '2015-07-24 00:28:39'),
+(10, '', 1, 'INV-2015-00', 0, '源控智能', 'http://www.yk119.com/', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '323.0000', 3, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-24 00:31:04', '2015-07-24 00:31:04'),
+(11, '', 0, 'YK119-2015-00', 0, '源控智能', 'http://www.yk119.com/', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '425.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-27 23:20:51', '2015-07-27 23:20:51'),
+(12, '', 0, 'YK119-2015-00', 0, '源控智能', 'http://www.yk119.com/', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '425.0000', 2, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-27 23:21:04', '2015-07-27 23:21:04'),
+(13, '', 0, 'YK119-2015-00', 0, '源控智能', 'http://www.yk119.com/', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '425.0000', 3, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-27 23:27:39', '2015-07-27 23:27:39'),
+(14, '', 0, 'YK119-2015-00', 0, '源控智能', 'http://www.yk119.com/', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '425.0000', 4, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-27 23:28:21', '2015-07-27 23:28:21'),
+(15, '', 0, 'YK119-2015-00', 0, '源控智能', 'http://www.yk119.com/', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '425.0000', 2, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-27 23:31:04', '2015-07-27 23:31:04'),
+(16, '', 0, 'YK119-2015-00', 0, '源控智能', 'http://www.yk119.com/', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '178.0000', 0, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; rv:39.0) Gecko/20100101 Firefox/39.0', 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3', '2015-07-28 16:23:22', '2015-07-28 16:23:22');
 
 -- --------------------------------------------------------
 
@@ -23044,7 +23047,7 @@ CREATE TABLE IF NOT EXISTS `yk_order_product` (
   `tax` decimal(15,4) NOT NULL DEFAULT '0.0000',
   `reward` int(8) NOT NULL,
   PRIMARY KEY (`order_product_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=79 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=80 ;
 
 --
 -- 转存表中的数据 `yk_order_product`
@@ -23080,7 +23083,8 @@ INSERT INTO `yk_order_product` (`order_product_id`, `order_id`, `product_id`, `n
 (75, 14, 51, '消防应急照明灯具', 'ae123213', 1, '123.0000', '123.0000', '0.0000', 0),
 (76, 14, 50, '嵌入式插电安全出口疏散指示灯', '132143', 2, '126.0000', '252.0000', '0.0000', 0),
 (77, 15, 51, '消防应急照明灯具', 'ae123213', 1, '123.0000', '123.0000', '0.0000', 0),
-(78, 15, 50, '嵌入式插电安全出口疏散指示灯', '132143', 2, '126.0000', '252.0000', '0.0000', 0);
+(78, 15, 50, '嵌入式插电安全出口疏散指示灯', '132143', 2, '126.0000', '252.0000', '0.0000', 0),
+(79, 16, 54, '源控灭火器', '2144232', 1, '128.0000', '128.0000', '0.0000', 0);
 
 -- --------------------------------------------------------
 
@@ -23124,7 +23128,7 @@ CREATE TABLE IF NOT EXISTS `yk_order_total` (
   `sort_order` int(3) NOT NULL,
   PRIMARY KEY (`order_total_id`),
   KEY `idx_orders_total_orders_id` (`order_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=98 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=101 ;
 
 --
 -- 转存表中的数据 `yk_order_total`
@@ -23175,7 +23179,10 @@ INSERT INTO `yk_order_total` (`order_total_id`, `order_id`, `code`, `title`, `te
 (94, 14, 'total', '您需支付', '￥425.00', '425.0000', 9),
 (95, 15, 'sub_total', '商品应付金额', '￥375.00', '375.0000', 1),
 (96, 15, 'shipping', '固定运费率', '￥50.00', '50.0000', 3),
-(97, 15, 'total', '您需支付', '￥425.00', '425.0000', 9);
+(97, 15, 'total', '您需支付', '￥425.00', '425.0000', 9),
+(98, 16, 'sub_total', '商品应付金额', '￥128.00', '128.0000', 1),
+(99, 16, 'shipping', '固定运费率', '￥50.00', '50.0000', 3),
+(100, 16, 'total', '您需支付', '￥178.00', '178.0000', 9);
 
 -- --------------------------------------------------------
 
@@ -23245,11 +23252,11 @@ CREATE TABLE IF NOT EXISTS `yk_product` (
 --
 
 INSERT INTO `yk_product` (`product_id`, `model`, `sku`, `upc`, `isbn`, `mpn`, `location`, `quantity`, `stock_status_id`, `image`, `manufacturer_id`, `shipping`, `price`, `market`, `points`, `tax_class_id`, `date_available`, `weight`, `weight_class_id`, `length`, `width`, `height`, `length_class_id`, `subtract`, `minimum`, `sort_order`, `status`, `date_added`, `date_modified`, `viewed`, `sales`) VALUES
-(50, '132143', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic1.jpg', 0, 1, '126.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-26 13:00:31', '2015-06-16 16:23:34', 88, 0),
-(51, 'ae123213', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic2.jpg', 0, 1, '123.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-23 07:23:47', '0000-00-00 00:00:00', 38, 0),
-(52, '123123', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic4.jpg', 0, 1, '123.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-07-20 23:44:32', '0000-00-00 00:00:00', 24, 0),
+(50, '132143', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic1.jpg', 0, 1, '126.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-26 13:00:31', '2015-06-16 16:23:34', 90, 0),
+(51, 'ae123213', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic2.jpg', 0, 1, '123.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-23 07:23:47', '0000-00-00 00:00:00', 42, 0),
+(52, '123123', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic4.jpg', 0, 1, '123.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-07-20 23:44:32', '0000-00-00 00:00:00', 25, 0),
 (53, '231414', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic3.jpg', 0, 1, '125.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-26 13:13:01', '0000-00-00 00:00:00', 148, 0),
-(54, '2144232', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic5.jpg', 0, 1, '128.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-16 09:03:38', '0000-00-00 00:00:00', 6, 0),
+(54, '2144232', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic5.jpg', 0, 1, '128.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-16 09:03:38', '0000-00-00 00:00:00', 7, 0),
 (55, 'xf1325324', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic6.jpg', 0, 1, '158.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-16 09:05:42', '0000-00-00 00:00:00', 3, 0);
 
 -- --------------------------------------------------------
@@ -23480,7 +23487,6 @@ CREATE TABLE IF NOT EXISTS `yk_product_to_category` (
 --
 
 INSERT INTO `yk_product_to_category` (`product_id`, `category_id`) VALUES
-(1, 95),
 (50, 96),
 (51, 95),
 (52, 64),
@@ -23730,7 +23736,7 @@ CREATE TABLE IF NOT EXISTS `yk_setting` (
   `value` text NOT NULL,
   `serialized` tinyint(1) NOT NULL,
   PRIMARY KEY (`setting_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2069 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2083 ;
 
 --
 -- 转存表中的数据 `yk_setting`
@@ -23871,13 +23877,10 @@ INSERT INTO `yk_setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `se
 (1976, 0, 'config', 'config_template', 'yuankong', 0),
 (1975, 0, 'config', 'config_meta_description', '苏州源控', 0),
 (1732, 0, 'ykliked', 'ykliked_module', 'a:1:{i:0;a:8:{s:5:"limit";s:1:"6";s:11:"image_width";s:3:"160";s:12:"image_height";s:2:"92";s:9:"layout_id";s:1:"7";s:8:"position";s:14:"content_bottom";s:6:"status";s:1:"1";s:16:"additional_class";s:4:"mt10";s:10:"sort_order";s:1:"1";}}', 1),
-(1743, 0, 'alipay_direct', 'alipay_direct_order_status_id', '15', 0),
-(1742, 0, 'alipay_direct', 'alipay_direct_cod', '121ea23443sadse2wq21322qw1w32w45235', 0),
-(1741, 0, 'alipay_direct', 'alipay_direct_account', '3197104626@qq.com', 0),
-(1740, 0, 'alipay_direct', 'alipay_direct_partner_id', '208811547979441', 0),
-(1744, 0, 'alipay_direct', 'alipay_direct_status', '1', 0),
-(1745, 0, 'alipay_direct', 'alipay_direct_note', '（支持全国85家银行、信用卡、网银在线支付）', 0),
-(1746, 0, 'alipay_direct', 'alipay_direct_sort_order', '1', 0),
+(2080, 0, 'alipay_direct', 'alipay_direct_status', '1', 0),
+(2079, 0, 'alipay_direct', 'alipay_direct_order_status_id', '2', 0),
+(2077, 0, 'alipay_direct', 'alipay_direct_account', '3197104626@qq.com', 0),
+(2078, 0, 'alipay_direct', 'alipay_direct_cod', 'nzf9w1uvx4htg71u5qhy1092vdwvk7qi', 0),
 (1974, 0, 'config', 'config_title', '消防器材_消防装备_消防公司_消防网上商城【消防E站官网】', 0),
 (1973, 0, 'config', 'config_fax', '', 0),
 (1972, 0, 'config', 'config_telephone', '123456789', 0),
@@ -23892,7 +23895,10 @@ INSERT INTO `yk_setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `se
 (2063, 0, 'config', 'config_error_log', '1', 0),
 (2064, 0, 'config', 'config_error_filename', 'error.txt', 0),
 (2065, 0, 'config', 'config_google_analytics', '', 0),
-(2067, 0, 'ykconsult', 'ykconsult_module', 'a:1:{i:0;a:4:{s:9:"layout_id";s:2:"12";s:8:"position";s:12:"column_right";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"1";}}', 1);
+(2067, 0, 'ykconsult', 'ykconsult_module', 'a:1:{i:0;a:4:{s:9:"layout_id";s:2:"12";s:8:"position";s:12:"column_right";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"1";}}', 1),
+(2081, 0, 'alipay_direct', 'alipay_direct_note', '（支持全国85家银行、信用卡、网银在线支付）', 0),
+(2076, 0, 'alipay_direct', 'alipay_direct_partner_id', '2088811547979441', 0),
+(2082, 0, 'alipay_direct', 'alipay_direct_sort_order', '1', 0);
 
 -- --------------------------------------------------------
 

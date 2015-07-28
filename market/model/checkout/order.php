@@ -253,12 +253,6 @@ class ModelCheckoutOrder extends Model {
 				$template->data['customer_id'] = $order_info['customer_id'];
 				$template->data['link'] = $order_info['store_url'] . 'index.php?route=account/order/info&order_id=' . $order_id;
 				
-				if ($order_download_query->num_rows) {
-					$template->data['download'] = $order_info['store_url'] . 'index.php?route=account/download';
-				} else {
-					$template->data['download'] = '';
-				}
-				
 				$template->data['order_id'] = $order_id;
 				$template->data['date_added'] = date($language->get('date_format_short'), strtotime($order_info['date_added']));    	
 				$template->data['payment_method'] = $order_info['payment_method'];
@@ -396,11 +390,6 @@ class ModelCheckoutOrder extends Model {
 	                if ($order_info['customer_id']) {
 	                    $text .= $language->get('text_new_link') . "\n";
 	                    $text .= $order_info['store_url'] . 'index.php?route=account/order/info&order_id=' . $order_id . "\n\n";
-	                }
-
-	                if ($order_download_query->num_rows) {
-	                    $text .= $language->get('text_new_download') . "\n";
-	                    $text .= $order_info['store_url'] . 'index.php?route=account/download' . "\n\n";
 	                }
 
 	                // Comment
