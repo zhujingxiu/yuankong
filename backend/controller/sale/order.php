@@ -701,24 +701,6 @@ class ControllerSaleOrder extends Controller {
 		} else {
 			$this->data['order_id'] = 0;
 		}
-					
-    	if (isset($this->request->post['store_id'])) {
-      		$this->data['store_id'] = $this->request->post['store_id'];
-    	} elseif (!empty($order_info)) { 
-			$this->data['store_id'] = $order_info['store_id'];
-		} else {
-      		$this->data['store_id'] = '';
-    	}
-		
-		$this->load->model('setting/store');
-		
-		$this->data['stores'] = $this->model_setting_store->getStores();
-		
-		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
-			$this->data['store_url'] = HTTPS_CATALOG;
-		} else {
-			$this->data['store_url'] = HTTP_CATALOG;
-		}
 		
 		if (isset($this->request->post['customer'])) {
 			$this->data['customer'] = $this->request->post['customer'];
@@ -1866,19 +1848,11 @@ class ControllerSaleOrder extends Controller {
 			$order_info = $this->model_sale_order->getOrder($order_id);
 
 			if ($order_info) {
-				$store_info = $this->model_setting_setting->getSetting('config', $order_info['store_id']);
 				
-				if ($store_info) {
-					$store_address = $store_info['config_address'];
-					$store_email = $store_info['config_email'];
-					$store_telephone = $store_info['config_telephone'];
-					$store_fax = $store_info['config_fax'];
-				} else {
-					$store_address = $this->config->get('config_address');
-					$store_email = $this->config->get('config_email');
-					$store_telephone = $this->config->get('config_telephone');
-					$store_fax = $this->config->get('config_fax');
-				}
+				$store_address = $this->config->get('config_address');
+				$store_email = $this->config->get('config_email');
+				$store_telephone = $this->config->get('config_telephone');
+				$store_fax = $this->config->get('config_fax');
 				
 				if ($order_info['invoice_no']) {
 					$invoice_no = $order_info['invoice_prefix'] . $order_info['invoice_no'];

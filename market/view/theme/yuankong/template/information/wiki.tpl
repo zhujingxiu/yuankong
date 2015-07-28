@@ -41,7 +41,7 @@
                 <?php echo $pagination; ?>
             </div>
         </div>  
-      <?php echo $content_bottom; ?>
+        <?php echo $content_bottom; ?>
     </div> 
     <?php if( $SPAN[2] ): ?>
     <div class="<?php echo $SPAN[2];?>">    

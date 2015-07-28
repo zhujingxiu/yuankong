@@ -8,12 +8,6 @@ class ControllerProductCategory extends Controller {
 		$this->load->model('catalog/product');
 		
 		$this->load->model('tool/image'); 
-		
-		if (isset($this->request->get['filter'])) {
-			$filter = $this->request->get['filter'];
-		} else {
-			$filter = '';
-		}
 
 		if (isset($this->request->get['min_price'])) {
 			$min_price = $this->request->get['min_price'];
@@ -175,11 +169,7 @@ class ControllerProductCategory extends Controller {
 			$this->data['description'] = html_entity_decode($category_info['description'], ENT_QUOTES, 'UTF-8');
 			$this->data['compare'] = $this->url->link('product/compare');
 			
-			$url = '';
-			
-			if (isset($this->request->get['filter'])) {
-				$url .= '&filter=' . $this->request->get['filter'];
-			}	
+			$url = '';	
 						
 			if (isset($this->request->get['sort'])) {
 				$url .= '&sort=' . $this->request->get['sort'];
@@ -214,7 +204,6 @@ class ControllerProductCategory extends Controller {
 			$filter_data = array(
 				'filter_category_id' => $category_id,
 				'filter_sub_category' => true,
-				'filter_filter'      => $filter, 
 				'filter_min_price'   => $min_price, 
 				'filter_max_price'   => $max_price, 
 				'sort'               => $sort,
@@ -235,7 +224,6 @@ class ControllerProductCategory extends Controller {
 				'separator' => $this->language->get('text_separator')
 			);
     		$filter_data = array(				
-				'filter_filter'      => $filter, 
 				'filter_min_price'   => $min_price, 
 				'filter_max_price'   => $max_price, 
 				'sort'               => $sort,

@@ -26,7 +26,7 @@ class ControllerCheckoutManual extends Controller {
 			// Settings
 			$this->load->model('setting/setting');
 			
-			$settings = $this->model_setting_setting->getSetting('config', $this->request->post['store_id']);
+			$settings = $this->model_setting_setting->getSetting('config');
 			
 			foreach ($settings as $key => $value) {
 				$this->config->set($key, $value);

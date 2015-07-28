@@ -301,4 +301,14 @@ o.dbclicked={
         });
 
     }
+};
+//点击增加class，同级去除class
+o.silbings={
+    init:function(sel,dom){
+        var sel=$(sel);
+        sel.on("click",function(){
+            $(this).siblings().removeClass(dom);
+            $(this).addClass(dom);
+        });
+    }
 }

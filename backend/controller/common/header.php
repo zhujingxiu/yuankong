@@ -23,8 +23,6 @@ class ControllerCommonHeader extends Controller {
 		
 		$this->data['text_affiliate'] = $this->language->get('text_affiliate');
 		$this->data['text_affiliate_group'] = $this->language->get('text_affiliate_group');
-		$this->data['text_attribute'] = $this->language->get('text_attribute');
-		$this->data['text_attribute_group'] = $this->language->get('text_attribute_group');
 		$this->data['text_backup'] = $this->language->get('text_backup');
 		$this->data['text_banner'] = $this->language->get('text_banner');
 		$this->data['text_catalog'] = $this->language->get('text_catalog');
@@ -121,8 +119,6 @@ class ControllerCommonHeader extends Controller {
 			$this->data['home'] = $this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['affiliate'] = $this->url->link('sale/affiliate', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['affiliate_group'] = $this->url->link('extension/affiliate_group', 'token=' . $this->session->data['token'], 'SSL');
-			$this->data['attribute'] = $this->url->link('catalog/attribute', 'token=' . $this->session->data['token'], 'SSL');
-			$this->data['attribute_group'] = $this->url->link('catalog/attribute_group', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['backup'] = $this->url->link('tool/backup', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['banner'] = $this->url->link('design/banner', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['category'] = $this->url->link('catalog/category', 'token=' . $this->session->data['token'], 'SSL');
@@ -132,13 +128,10 @@ class ControllerCommonHeader extends Controller {
 			$this->data['customer_fields'] = $this->url->link('sale/customer_field', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['customer_group'] = $this->url->link('sale/customer_group', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['customer_ban_ip'] = $this->url->link('sale/customer_ban_ip', 'token=' . $this->session->data['token'], 'SSL');
-			$this->data['download'] = $this->url->link('catalog/download', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['error_log'] = $this->url->link('tool/error_log', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['feed'] = $this->url->link('extension/feed', 'token=' . $this->session->data['token'], 'SSL');	
-			$this->data['filter'] = $this->url->link('catalog/filter', 'token=' . $this->session->data['token'], 'SSL');			
 			$this->data['area_geo'] = $this->url->link('localisation/area_geo', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['help'] = $this->url->link('extension/help', 'token=' . $this->session->data['token'], 'SSL');
-			$this->data['help_group'] = $this->url->link('extension/help_group', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['information'] = $this->url->link('catalog/information', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['language'] = $this->url->link('localisation/language', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['layout'] = $this->url->link('design/layout', 'token=' . $this->session->data['token'], 'SSL');
@@ -172,7 +165,6 @@ class ControllerCommonHeader extends Controller {
 			$this->data['shipping'] = $this->url->link('extension/shipping', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['setting'] = $this->url->link('setting/store', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['api'] = $this->url->link('setting/api', 'token=' . $this->session->data['token'], 'SSL');
-			$this->data['store'] = HTTP_CATALOG;
 			$this->data['stock_status'] = $this->url->link('localisation/stock_status', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['tax_class'] = $this->url->link('localisation/tax_class', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['tax_rate'] = $this->url->link('localisation/tax_rate', 'token=' . $this->session->data['token'], 'SSL');
@@ -191,20 +183,6 @@ class ControllerCommonHeader extends Controller {
 			$this->data['link'] = $this->url->link('extension/link', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['case'] = $this->url->link('extension/case', 'token=' . $this->session->data['token'], 'SSL');
 			
-			$this->data['stores'] = array();
-			
-			$this->load->model('setting/store');
-			
-			$results = $this->model_setting_store->getStores();
-			
-			foreach ($results as $result) {
-				$this->data['stores'][] = array(
-					'name' => $result['name'],
-					'href' => $result['url']
-				);
-			}	
-
-
 			$this->data['text_messages'] = sprintf($this->language->get('text_messages'),0);
 			$this->data['text_new_orders'] = sprintf($this->language->get('text_new_orders'),0);
 			$this->data['text_new_projects'] = sprintf($this->language->get('text_new_projects'),0);

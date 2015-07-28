@@ -42,7 +42,6 @@ $_['entry_captcha']       = '请在下框输入验证码：';
 
 // Tabs
 $_['tab_description']     = '产品详细介绍';
-$_['tab_attribute']       = '规格';
 $_['tab_review']          = '商品评价 (%s)';
 $_['tab_related']         = '关联商品'; 
 

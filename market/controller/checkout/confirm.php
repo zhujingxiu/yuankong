@@ -73,14 +73,6 @@ class ControllerCheckoutConfirm extends Controller {
 			$data = array();
 			
 			$data['invoice_prefix'] = $this->config->get('config_invoice_prefix');
-			$data['store_id'] = $this->config->get('config_store_id');
-			$data['store_name'] = $this->config->get('config_name');
-			
-			if ($data['store_id']) {
-				$data['store_url'] = $this->config->get('config_url');		
-			} else {
-				$data['store_url'] = HTTP_SERVER;	
-			}
 			
 			if ($this->customer->isLogged()) {
 				$data['customer_id'] = $this->customer->getId();

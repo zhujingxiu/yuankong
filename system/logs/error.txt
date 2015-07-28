@@ -2907,3 +2907,6 @@
 2015-07-28 14:12:53 - PHP Notice:  Trying to get property of non-object in D:\wamp\www\yuankong\market\model\catalog\product.php on line 653
 2015-07-28 16:23:15 - PHP Notice:  Undefined index: country_id in D:\wamp\www\yuankong\market\controller\account\login.php on line 103
 2015-07-28 16:23:15 - PHP Notice:  Undefined index: zone_id in D:\wamp\www\yuankong\market\controller\account\login.php on line 104
+2015-07-28 21:45:41 - PHP Notice:  Error: Could not load controller module/ykbookproject! in E:\wamp\www\yuankong\system\engine\controller.php on line 47
+2015-07-28 21:56:00 - PHP Notice:  Error: Could not load language module/ykbookproject! in E:\wamp\www\yuankong\system\library\language.php on line 39
+2015-07-28 21:57:24 - PHP Notice:  Error: Could not load language module/ykbookproject! in E:\wamp\www\yuankong\system\library\language.php on line 39

@@ -245,9 +245,6 @@
     </div>
   </div>
   <div id="tabs" class="htabs"><a href="#tab-description"><?php echo $tab_description; ?></a>
-    <?php if ($attribute_groups) { ?>
-    <a href="#tab-attribute"><?php echo $tab_attribute; ?></a>
-    <?php } ?>
     <?php if ($review_status) { ?>
     <a href="#tab-review"><?php echo $tab_review; ?></a>
     <?php } ?>

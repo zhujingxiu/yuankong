@@ -82,56 +82,6 @@
         </div>
         <div id="tab-data">
           <table class="form">
-            <?php if(false){?>
-            <tr>
-              <td><?php echo $entry_parent; ?></td>
-              <td><input type="text" name="path" value="<?php echo $path; ?>" size="100" />
-                <input type="hidden" name="parent_id" value="<?php echo $parent_id; ?>" /></td>
-            </tr>
-            <?php }?>
-            <tr>
-              <td><?php echo $entry_filter; ?></td>
-              <td><input type="text" name="filter" value="" /></td>
-            </tr>
-            <tr>
-              <td>&nbsp;</td>
-              <td><div id="category-filter" class="scrollbox">
-                  <?php $class = 'odd'; ?>
-                  <?php foreach ($category_filters as $category_filter) { ?>
-                  <?php $class = ($class == 'even' ? 'odd' : 'even'); ?>
-                  <div id="category-filter<?php echo $category_filter['filter_id']; ?>" class="<?php echo $class; ?>"><?php echo $category_filter['name']; ?><img src="view/image/delete.png" alt="" />
-                    <input type="hidden" name="category_filter[]" value="<?php echo $category_filter['filter_id']; ?>" />
-                  </div>
-                  <?php } ?>
-                </div></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_store; ?></td>
-              <td><div class="scrollbox">
-                  <?php $class = 'even'; ?>
-                  <div class="<?php echo $class; ?>">
-                    <?php if (in_array(0, $category_store)) { ?>
-                    <input type="checkbox" name="category_store[]" value="0" checked="checked" />
-                    <?php echo $text_default; ?>
-                    <?php } else { ?>
-                    <input type="checkbox" name="category_store[]" value="0" />
-                    <?php echo $text_default; ?>
-                    <?php } ?>
-                  </div>
-                  <?php foreach ($stores as $store) { ?>
-                  <?php $class = ($class == 'even' ? 'odd' : 'even'); ?>
-                  <div class="<?php echo $class; ?>">
-                    <?php if (in_array($store['store_id'], $category_store)) { ?>
-                    <input type="checkbox" name="category_store[]" value="<?php echo $store['store_id']; ?>" checked="checked" />
-                    <?php echo $store['name']; ?>
-                    <?php } else { ?>
-                    <input type="checkbox" name="category_store[]" value="<?php echo $store['store_id']; ?>" />
-                    <?php echo $store['name']; ?>
-                    <?php } ?>
-                  </div>
-                  <?php } ?>
-                </div></td>
-            </tr>
             <tr>
               <td><?php echo $entry_keyword; ?></td>
               <td><input type="text" name="keyword" value="<?php echo $keyword; ?>" /></td>
@@ -193,17 +143,15 @@
           <table class="list">
             <thead>
               <tr>
-                <td class="left"><?php echo $entry_store; ?></td>
                 <td class="left"><?php echo $entry_layout; ?></td>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td class="left"><?php echo $text_default; ?></td>
-                <td class="left"><select name="category_layout[0][layout_id]">
+                <td class="left"><select name="category_layout[layout_id]">
                     <option value=""></option>
                     <?php foreach ($layouts as $layout) { ?>
-                    <?php if (isset($category_layout[0]) && $category_layout[0] == $layout['layout_id']) { ?>
+                    <?php if (isset($category_layout) && $category_layout == $layout['layout_id']) { ?>
                     <option value="<?php echo $layout['layout_id']; ?>" selected="selected"><?php echo $layout['name']; ?></option>
                     <?php } else { ?>
                     <option value="<?php echo $layout['layout_id']; ?>"><?php echo $layout['name']; ?></option>
@@ -212,23 +160,6 @@
                   </select></td>
               </tr>
             </tbody>
-            <?php foreach ($stores as $store) { ?>
-            <tbody>
-              <tr>
-                <td class="left"><?php echo $store['name']; ?></td>
-                <td class="left"><select name="category_layout[<?php echo $store['store_id']; ?>][layout_id]">
-                    <option value=""></option>
-                    <?php foreach ($layouts as $layout) { ?>
-                    <?php if (isset($category_layout[$store['store_id']]) && $category_layout[$store['store_id']] == $layout['layout_id']) { ?>
-                    <option value="<?php echo $layout['layout_id']; ?>" selected="selected"><?php echo $layout['name']; ?></option>
-                    <?php } else { ?>
-                    <option value="<?php echo $layout['layout_id']; ?>"><?php echo $layout['name']; ?></option>
-                    <?php } ?>
-                    <?php } ?>
-                  </select></td>
-              </tr>
-            </tbody>
-            <?php } ?>
           </table>
         </div>
       </form>
@@ -280,48 +211,7 @@ $('input[name=\'path\']').autocomplete({
       	return false;
    	}
 });
-//--></script> 
-<script type="text/javascript"><!--
-// Filter
-$('input[name=\'filter\']').autocomplete({
-	delay: 500,
-	source: function(request, response) {
-		$.ajax({
-			url: 'index.php?route=catalog/filter/autocomplete&token=<?php echo $token; ?>&filter_name=' +  encodeURIComponent(request.term),
-			dataType: 'json',
-			success: function(json) {		
-				response($.map(json, function(item) {
-					return {
-						label: item.name,
-						value: item.filter_id
-					}
-				}));
-			}
-		});
-	}, 
-	select: function(event, ui) {
-		$('#category-filter' + ui.item.value).remove();
-		
-		$('#category-filter').append('<div id="category-filter' + ui.item.value + '">' + ui.item.label + '<img src="view/image/delete.png" alt="" /><input type="hidden" name="category_filter[]" value="' + ui.item.value + '" /></div>');
 
-		$('#category-filter div:odd').attr('class', 'odd');
-		$('#category-filter div:even').attr('class', 'even');
-				
-		return false;
-	},
-	focus: function(event, ui) {
-      return false;
-   }
-});
-
-$('#category-filter div img').live('click', function() {
-	$(this).parent().remove();
-	
-	$('#category-filter div:odd').attr('class', 'odd');
-	$('#category-filter div:even').attr('class', 'even');	
-});
-//--></script> 
-<script type="text/javascript"><!--
 function image_upload(field, thumb) {
 	$('#dialog').remove();
 	

@@ -1027,21 +1027,7 @@ class ControllerSaleCustomer extends Controller {
 			
 			$this->model_sale_customer->editToken($customer_id, $token);
 			
-			if (isset($this->request->get['store_id'])) {
-				$store_id = $this->request->get['store_id'];
-			} else {
-				$store_id = 0;
-			}
-					
-			$this->load->model('setting/store');
-			
-			$store_info = $this->model_setting_store->getStore($store_id);
-			
-			if ($store_info) {
-				$this->redirect($store_info['url'] . 'index.php?route=account/login&token=' . $token);
-			} else { 
-				$this->redirect(HTTP_CATALOG . 'index.php?route=account/login&token=' . $token);
-			}
+			$this->redirect(HTTP_CATALOG . 'index.php?route=account/login&token=' . $token);
 		} else {
 			$this->language->load('error/not_found');
 

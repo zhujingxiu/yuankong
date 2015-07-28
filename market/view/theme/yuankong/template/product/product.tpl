@@ -212,11 +212,11 @@
 		<ul class="detail-n-title fix">
             <li class="taboff tabon"><?php echo $tab_description; ?></li>
             <li class="taboff">成交记录</li>
-            <?php if ($attribute_groups) { ?>
-		    <li class="taboff"><?php echo $tab_attribute; ?></li>
-		    <?php } ?>
 		    <?php if ($review_status) { ?>
 		    <li class="taboff"><?php echo $tab_review; ?></li>
+		    <?php } ?>
+		    <?php if ($tags) { ?>
+		    <li class="taboff"><?php echo $text_tags; ?></li>
 		    <?php } ?>
         </ul>
 
@@ -225,32 +225,12 @@
 				<?php echo $description; ?>
 			</div>
 			<div id="tab-records" class="d-boxes"></div>
-			<?php if ($attribute_groups) { ?>
-		  	<div id="tab-attribute" class="d-boxes">
-			    <table class="attribute">
-			      <?php foreach ($attribute_groups as $attribute_group) { ?>
-			      <thead>
-			        <tr>
-			          <td colspan="2"><?php echo $attribute_group['name']; ?></td>
-			        </tr>
-			      </thead>
-			      <tbody>
-			        <?php foreach ($attribute_group['attribute'] as $attribute) { ?>
-			        <tr>
-			          <td><?php echo $attribute['name']; ?></td>
-			          <td><?php echo $attribute['text']; ?></td>
-			        </tr>
-			        <?php } ?>
-			      </tbody>
-			      <?php } ?>
-			    </table>
-		  	</div>
-		  	<?php } ?>
 			<?php if ($review_status) { ?>
-		    <div id="tab-review" class="d-boxes"></div>
+		    <div id="tab-reviews" class="d-boxes"></div>
 		    <?php } ?>	
 		  	<?php if ($tags) { ?>
-		  	<div class="tags"><b><?php echo $text_tags; ?></b>
+		  	<div id="tab-tags" class="d-boxes">
+		  		<b><?php echo $text_tags; ?></b>
 			    <?php for ($i = 0; $i < count($tags); $i++) { ?>
 			    <?php if ($i < (count($tags) - 1)) { ?>
 			    <a href="<?php echo $tags[$i]['href']; ?>"><?php echo $tags[$i]['tag']; ?></a>,
@@ -326,7 +306,7 @@
 	});
     $('#tab-records').load('index.php?route=product/product/transaction&product_id=<?php echo $product_id ?>');
     <?php if ($review_status) { ?>
-    $('#tab-review').load('index.php?route=product/product/review&product_id=<?php echo $product_id ?>');
+    $('#tab-reviews').load('index.php?route=product/product/review&product_id=<?php echo $product_id ?>');
     <?php }?>
 //--></script>
 

@@ -7,7 +7,7 @@ class ModelDesignLayout extends Model {
 		
 		if (isset($data['layout_route'])) {
 			foreach ($data['layout_route'] as $layout_route) {
-				$this->db->query("INSERT INTO " . DB_PREFIX . "layout_route SET layout_id = '" . (int)$layout_id . "', store_id = '" . (int)$layout_route['store_id'] . "', route = '" . $this->db->escape($layout_route['route']) . "'");
+				$this->db->query("INSERT INTO " . DB_PREFIX . "layout_route SET layout_id = '" . (int)$layout_id . "', route = '" . $this->db->escape($layout_route['route']) . "'");
 			}	
 		}
 	}
@@ -19,7 +19,7 @@ class ModelDesignLayout extends Model {
 		
 		if (isset($data['layout_route'])) {
 			foreach ($data['layout_route'] as $layout_route) {
-				$this->db->query("INSERT INTO " . DB_PREFIX . "layout_route SET layout_id = '" . (int)$layout_id . "', store_id = '" . (int)$layout_route['store_id'] . "', route = '" . $this->db->escape($layout_route['route']) . "'");
+				$this->db->query("INSERT INTO " . DB_PREFIX . "layout_route SET layout_id = '" . (int)$layout_id . "', route = '" . $this->db->escape($layout_route['route']) . "'");
 			}
 		}
 	}
@@ -41,12 +41,12 @@ class ModelDesignLayout extends Model {
 	public function getLayouts($data = array()) {
 		$sql = "SELECT * FROM " . DB_PREFIX . "layout";
 		
-		$sort_data = array('name');	
+		$sort_data = array('layout_id');	
 		
 		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
 			$sql .= " ORDER BY " . $data['sort'];	
 		} else {
-			$sql .= " ORDER BY name";	
+			$sql .= " ORDER BY layout_id";	
 		}
 		
 		if (isset($data['order']) && ($data['order'] == 'DESC')) {

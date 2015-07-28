@@ -1,8 +1,14 @@
-
+<?php require( DIR_TEMPLATE.$this->config->get('config_template')."/template/common/config.tpl" ); ?>
 <?php echo $header; ?>
-
+<?php require( DIR_TEMPLATE.$this->config->get('config_template')."/template/common/breadcrumb.tpl" ); ?>
 <div class="w mt10 fix">
-    <div class="l w900">
+    <?php if( $SPAN[0] ): ?>
+    <div class="<?php echo $SPAN[0];?>">
+        <?php echo $column_left; ?>
+    </div>
+    <?php endif; ?>
+    <div class="<?php echo $SPAN[1];?>">
+        <?php echo $content_top; ?>
         <div class="xfgs-chose-box">
             <div class="xfgs-ad">
                 <span class="gs-dz-c">苏州<i class="icon2 h-down"></i></span>共有<i class="c_red"> 3234 </i>家消防服务公司
@@ -21,7 +27,7 @@
             <div class="p10">
                 <ul class="gongslist">
                     <li class="item">
-                        <p class="gspic"><a href="#"><img src="imgs/adimg/nopic.jpg"></a></p>
+                        <p class="gspic"><a href="#"><img src="<?php echo TPL_IMG."nopic.jpg" ?>"></a></p>
                         <div class="ovh gsjj">
                             <h3><a href="#">苏州源控智能有限公司</a></h3>
                             <p class="lh30 c9 f_m"><i class="icon2 dezbtn"></i>太仓市北京西路6号创业园主楼406</p>
@@ -33,7 +39,7 @@
                         </p>
                     </li>
                     <li class="item">
-                        <p class="gspic"><a href="#"><img src="imgs/adimg/nopic.jpg"></a></p>
+                        <p class="gspic"><a href="#"><img src="<?php echo TPL_IMG."nopic.jpg" ?>"></a></p>
                         <div class="ovh gsjj">
                             <h3><a href="#">苏州源控智能有限公司</a></h3>
                             <p class="lh30 c9 f_m"><i class="icon2 dezbtn"></i>太仓市北京西路6号创业园主楼406</p>
@@ -45,7 +51,7 @@
                         </p>
                     </li>
                     <li class="item">
-                        <p class="gspic"><a href="#"><img src="imgs/adimg/nopic.jpg"></a></p>
+                        <p class="gspic"><a href="#"><img src="<?php echo TPL_IMG."nopic.jpg" ?>"></a></p>
                         <div class="ovh gsjj">
                             <h3><a href="#">苏州源控智能有限公司</a></h3>
                             <p class="lh30 c9 f_m"><i class="icon2 dezbtn"></i>太仓市北京西路6号创业园主楼406</p>
@@ -73,51 +79,14 @@
                 </div>
             </div>
         </div>
+        <?php echo $content_bottom; ?>
     </div>
     <!--right-->
-    <div class="r w290">
-        <div class="gssqbox">
-            <div class="zt-gcsq-dj">
-                <h2>免费登记预约项目</h2>
-                <div class="gcsq-style">
-                    <label>选择项目</label>
-                    <dl class="chose-xm">
-                        <dt class="c-xm-dt"><span>消防设计</span></dt>
-                        <dd class="c-xm-dd">
-                            <span>消防设计</span>
-                            <span>消防检测</span>
-                            <span>消防工程</span>
-                            <span>消防维保</span>
-                        </dd>
-                    </dl>
-                </div>
-                <div class="gc-b-detail">
-                    <p class="f_s"></p>
-                    <input type="text" class="gc-tab-text gcname" value="" placeholder="您的姓名">
-                    <input type="text" class="gc-tab-text mt15 gctel" value="" placeholder="您的手机号">
-                    <input type="submit" class="gc-tab-sub mt15" value="立即申请">
-                </div>
-                <div class="tel-phone mt15">
-                    <i class="icon telphone"></i>服务热线:400-883-4119
-                </div>
-            </div>
-        </div>
-        <div class="mt10">
-            <img src="imgs/adimg/adpic3.jpg">
-        </div>
-        <div class="xg-style mt10">
-            <h3 class="title f_l">苏州消防公司排行</h3>
-            <div class="p10">
-                <ul class="ovh">
-                    <li class="new-gs txt_clip"><i class="r-bg-b">1</i><a href="#">苏州水电费卡拉胶</a></li>
-                    <li class="new-gs txt_clip"><i class="r-bg-b">2</i><a href="#">苏州水电费卡拉胶</a></li>
-                    <li class="new-gs txt_clip"><i class="r-bg-b">3</i><a href="#">苏州水电费卡拉胶</a></li>
-                    <li class="new-gs txt_clip"><i class="b-bg-b">4</i><a href="#">苏州水电费卡拉胶</a></li>
-                    <li class="new-gs txt_clip"><i class="b-bg-b">5</i><a href="#">苏州水电费卡拉胶</a></li>
-                </ul>
-            </div>
-        </div>
+    <?php if( $SPAN[2] ): ?>
+    <div class="<?php echo $SPAN[2];?>">    
+    <?php echo $column_right; ?>
     </div>
+    <?php endif; ?>
 </div>
 
 <?php echo $footer; ?>

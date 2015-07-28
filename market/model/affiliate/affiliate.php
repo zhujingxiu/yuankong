@@ -3,9 +3,8 @@ class ModelAffiliateAffiliate extends Model {
 	public function addAffiliate($data,$mail=false) {
 		$salt = substr(md5(uniqid(rand(), true)), 0, 9);
 		$fields = array(
-			'store_id' 		=> (int)$this->config->get('config_store_id') ,
 			'mobile_phone'	=> $data['mobile_phone'],
-			'nickname'		=> $data['nickname'],
+			'fullname'		=> $data['fullname'],
 			'company'		=> $data['company'],
 			'salt' 			=> $salt, 
 			'password' 		=> sha1($salt . sha1($salt . sha1($data['password']))), 
@@ -18,15 +17,10 @@ class ModelAffiliateAffiliate extends Model {
 		if(isset($data['email'])){
 			$fields['email'] = $data['email'];
 		}
-		if(isset($data['address_1'])){
-			$fields['address_1'] = $data['address_1'];
+		if(isset($data['address'])){
+			$fields['address'] = $data['address'];
 		}
-		if(isset($data['firstname'])){
-			$fields['firstname'] = $data['firstname'];
-		}
-		if(isset($data['lastname'])){
-			$fields['lastname'] = $data['lastname'];
-		}
+
 		if(isset($data['telephone'])){
 			$fields['telephone'] = $data['telephone'];
 		}
@@ -36,10 +30,9 @@ class ModelAffiliateAffiliate extends Model {
 		if(isset($data['newsletter'])){
 			$fields['newsletter'] = $data['newsletter'];
 		}
-      	$this->db->insert("affiliate",$fields);
+      	$customer_id = $this->db->insert("affiliate",$fields);
       	
-		$customer_id = $this->db->getLastId();
-      	$this->db->query(" code = '" . $this->db->escape(uniqid()) . "', commission = '" . (float)$this->config->get('config_commission') . "', tax = '" . $this->db->escape($data['tax']) . "', payment = '" . $this->db->escape($data['payment']) . "', cheque = '" . $this->db->escape($data['cheque']) . "', paypal = '" . $this->db->escape($data['paypal']) . "', bank_name = '" . $this->db->escape($data['bank_name']) . "', bank_branch_number = '" . $this->db->escape($data['bank_branch_number']) . "', bank_swift_code = '" . $this->db->escape($data['bank_swift_code']) . "', bank_account_name = '" . $this->db->escape($data['bank_account_name']) . "', bank_account_number = '" . $this->db->escape($data['bank_account_number']) . "', status = '1', date_added = NOW()");
+      	$this->db->query(" code = '" . $this->db->escape(uniqid()) . "', commission = '" . (float)$this->config->get('config_commission') . "', tax = '" . $this->db->escape($data['tax']) . "', payment = '" . $this->db->escape($data['payment']) . "', cheque = '" . $this->db->escape($data['cheque']) . "', bank_name = '" . $this->db->escape($data['bank_name']) . "', bank_branch_number = '" . $this->db->escape($data['bank_branch_number']) . "', bank_swift_code = '" . $this->db->escape($data['bank_swift_code']) . "', bank_account_name = '" . $this->db->escape($data['bank_account_name']) . "', bank_account_number = '" . $this->db->escape($data['bank_account_number']) . "', status = '1', date_added = NOW()");
 		if($mail){
 			$this->language->load('mail/affiliate');
 			
@@ -74,7 +67,7 @@ class ModelAffiliateAffiliate extends Model {
 		$fields = array(
 			'store_id' 		=> (int)$this->config->get('config_store_id') ,
 			'mobile_phone'	=> $data['mobile_phone'],
-			'nickname'		=> $data['nickname'],
+			'fullname'		=> $data['fullname'],
 			'company'		=> $data['company'],
 			'group_id' 		=> (int)$data['group_id'] , 
 			'ip' 			=> $this->request->server['REMOTE_ADDR'], 
@@ -85,14 +78,8 @@ class ModelAffiliateAffiliate extends Model {
 		if(isset($data['email'])){
 			$fields['email'] = $data['email'];
 		}
-		if(isset($data['address_1'])){
-			$fields['address_1'] = $data['address_1'];
-		}
-		if(isset($data['firstname'])){
-			$fields['firstname'] = $data['firstname'];
-		}
-		if(isset($data['lastname'])){
-			$fields['lastname'] = $data['lastname'];
+		if(isset($data['address'])){
+			$fields['address'] = $data['address'];
 		}
 		if(isset($data['telephone'])){
 			$fields['telephone'] = $data['telephone'];

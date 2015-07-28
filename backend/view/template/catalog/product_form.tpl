@@ -17,7 +17,6 @@
       <div id="tabs" class="htabs">
         <a href="#tab-data"><?php echo $tab_data; ?></a>
         <a href="#tab-links"><?php echo $tab_links; ?></a>
-        <a href="#tab-attribute"><?php echo $tab_attribute; ?></a>
         <a href="#tab-option"><?php echo $tab_option; ?></a>
         <?php if(false){?>
         <a href="#tab-discount"><?php echo $tab_discount; ?></a>
@@ -69,8 +68,6 @@
                   <?php } ?>
                 </div></td>
             </tr> 
-
-            
             <tr>
               <td><span class="required">*</span><?php echo $entry_price; ?></td>
               <td><input type="text" name="price" value="<?php echo $price; ?>" /></td>
@@ -139,14 +136,6 @@
             <tr class="hide-item">
               <td><?php echo $entry_upc; ?></td>
               <td><input type="text" name="upc" value="<?php echo $upc; ?>" /></td>
-            </tr>
-            <tr class="hide-item">
-              <td><?php echo $entry_ean; ?></td>
-              <td><input type="text" name="ean" value="<?php echo $ean; ?>" /></td>
-            </tr>
-            <tr class="hide-item">
-              <td><?php echo $entry_jan; ?></td>
-              <td><input type="text" name="jan" value="<?php echo $jan; ?>" /></td>
             </tr>
             <tr class="hide-item">
               <td><?php echo $entry_isbn; ?></td>
@@ -289,51 +278,7 @@
             <tr>
               <td><?php echo $entry_manufacturer; ?></td>
               <td><input type="text" name="manufacturer" value="<?php echo $manufacturer ?>" /><input type="hidden" name="manufacturer_id" value="<?php echo $manufacturer_id; ?>" /></td>
-            </tr>
-
-            <tr>
-              <td><?php echo $entry_filter; ?></td>
-              <td><input type="text" name="filter" value="" /></td>
-            </tr>
-            <tr>
-              <td>&nbsp;</td>
-              <td><div id="product-filter" class="scrollbox">
-                  <?php $class = 'odd'; ?>
-                  <?php foreach ($product_filters as $product_filter) { ?>
-                  <?php $class = ($class == 'even' ? 'odd' : 'even'); ?>
-                  <div id="product-filter<?php echo $product_filter['filter_id']; ?>" class="<?php echo $class; ?>"><?php echo $product_filter['name']; ?><img src="view/image/delete.png" alt="" />
-                    <input type="hidden" name="product_filter[]" value="<?php echo $product_filter['filter_id']; ?>" />
-                  </div>
-                  <?php } ?>
-                </div></td>
-            </tr>                       
-            <tr class="hide-item">
-              <td><?php echo $entry_store; ?></td>
-              <td><div class="scrollbox">
-                  <?php $class = 'even'; ?>
-                  <div class="<?php echo $class; ?>">
-                    <?php if (in_array(0, $product_store)) { ?>
-                    <input type="checkbox" name="product_store[]" value="0" checked="checked" />
-                    <?php echo $text_default; ?>
-                    <?php } else { ?>
-                    <input type="checkbox" name="product_store[]" value="0" />
-                    <?php echo $text_default; ?>
-                    <?php } ?>
-                  </div>
-                  <?php foreach ($stores as $store) { ?>
-                  <?php $class = ($class == 'even' ? 'odd' : 'even'); ?>
-                  <div class="<?php echo $class; ?>">
-                    <?php if (in_array($store['store_id'], $product_store)) { ?>
-                    <input type="checkbox" name="product_store[]" value="<?php echo $store['store_id']; ?>" checked="checked" />
-                    <?php echo $store['name']; ?>
-                    <?php } else { ?>
-                    <input type="checkbox" name="product_store[]" value="<?php echo $store['store_id']; ?>" />
-                    <?php echo $store['name']; ?>
-                    <?php } ?>
-                  </div>
-                  <?php } ?>
-                </div></td>
-            </tr>
+            </tr>                      
             <tr>
               <td><?php echo $entry_related; ?></td>
               <td><input type="text" name="related" value="" /></td>
@@ -352,38 +297,7 @@
             </tr>
           </table>
         </div>
-        <div id="tab-attribute">
-          <table id="attribute" class="list">
-            <thead>
-              <tr>
-                <td class="left"><?php echo $entry_attribute; ?></td>
-                <td class="left"><?php echo $entry_text; ?></td>
-                <td></td>
-              </tr>
-            </thead>
-            <?php $attribute_row = 0; ?>
-            <?php foreach ($product_attributes as $product_attribute) { ?>
-            <tbody id="attribute-row<?php echo $attribute_row; ?>">
-              <tr>
-                <td class="left"><input type="text" name="product_attribute[<?php echo $attribute_row; ?>][name]" value="<?php echo $product_attribute['name']; ?>" />
-                  <input type="hidden" name="product_attribute[<?php echo $attribute_row; ?>][attribute_id]" value="<?php echo $product_attribute['attribute_id']; ?>" /></td>
-                <td class="left"><?php foreach ($languages as $language) { ?>
-                  <textarea name="product_attribute[<?php echo $attribute_row; ?>][product_attribute_description][<?php echo $language['language_id']; ?>][text]" cols="40" rows="5"><?php echo isset($product_attribute['product_attribute_description'][$language['language_id']]) ? $product_attribute['product_attribute_description'][$language['language_id']]['text'] : ''; ?></textarea>
-                  <img src="<?php echo TPL_IMG?>flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" align="top" /><br />
-                  <?php } ?></td>
-                <td class="left"><a onclick="$('#attribute-row<?php echo $attribute_row; ?>').remove();" class="button"><?php echo $button_remove; ?></a></td>
-              </tr>
-            </tbody>
-            <?php $attribute_row++; ?>
-            <?php } ?>
-            <tfoot>
-              <tr>
-                <td colspan="2"></td>
-                <td class="left"><a onclick="addAttribute();" class="button"><?php echo $button_add_attribute; ?></a></td>
-              </tr>
-            </tfoot>
-          </table>
-        </div>
+
         <div id="tab-option">
           <div id="vtab-option" class="vtabs">
             <?php $option_row = 0; ?>
@@ -702,17 +616,15 @@
           <table class="list">
             <thead>
               <tr>
-                <td class="left"><?php echo $entry_store; ?></td>
                 <td class="left"><?php echo $entry_layout; ?></td>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td class="left"><?php echo $text_default; ?></td>
-                <td class="left"><select name="product_layout[0][layout_id]">
+                <td class="left"><select name="layout_id">
                     <option value=""></option>
                     <?php foreach ($layouts as $layout) { ?>
-                    <?php if (isset($product_layout[0]) && $product_layout[0] == $layout['layout_id']) { ?>
+                    <?php if (isset($layout_id) && $layout_id == $layout['layout_id']) { ?>
                     <option value="<?php echo $layout['layout_id']; ?>" selected="selected"><?php echo $layout['name']; ?></option>
                     <?php } else { ?>
                     <option value="<?php echo $layout['layout_id']; ?>"><?php echo $layout['name']; ?></option>
@@ -721,23 +633,6 @@
                   </select></td>
               </tr>
             </tbody>
-            <?php foreach ($stores as $store) { ?>
-            <tbody>
-              <tr>
-                <td class="left"><?php echo $store['name']; ?></td>
-                <td class="left"><select name="product_layout[<?php echo $store['store_id']; ?>][layout_id]">
-                    <option value=""></option>
-                    <?php foreach ($layouts as $layout) { ?>
-                    <?php if (isset($product_layout[$store['store_id']]) && $product_layout[$store['store_id']] == $layout['layout_id']) { ?>
-                    <option value="<?php echo $layout['layout_id']; ?>" selected="selected"><?php echo $layout['name']; ?></option>
-                    <?php } else { ?>
-                    <option value="<?php echo $layout['layout_id']; ?>"><?php echo $layout['name']; ?></option>
-                    <?php } ?>
-                    <?php } ?>
-                  </select></td>
-              </tr>
-            </tbody>
-            <?php } ?>
           </table>
         </div>
         
@@ -883,45 +778,6 @@ $('#product-category div img').live('click', function() {
 	$('#product-category div:even').attr('class', 'even');	
 });
 
-// Filter
-$('input[name=\'filter\']').autocomplete({
-	delay: 500,
-	source: function(request, response) {
-		$.ajax({
-			url: 'index.php?route=catalog/filter/autocomplete&token=<?php echo $token; ?>&filter_name=' +  encodeURIComponent(request.term),
-			dataType: 'json',
-			success: function(json) {		
-				response($.map(json, function(item) {
-					return {
-						label: item.name,
-						value: item.filter_id
-					}
-				}));
-			}
-		});
-	}, 
-	select: function(event, ui) {
-		$('#product-filter' + ui.item.value).remove();
-		
-		$('#product-filter').append('<div id="product-filter' + ui.item.value + '">' + ui.item.label + '<img src="view/image/delete.png" alt="" /><input type="hidden" name="product_filter[]" value="' + ui.item.value + '" /></div>');
-
-		$('#product-filter div:odd').attr('class', 'odd');
-		$('#product-filter div:even').attr('class', 'even');
-				
-		return false;
-	},
-	focus: function(event, ui) {
-      return false;
-   }
-});
-
-$('#product-filter div img').live('click', function() {
-	$(this).parent().remove();
-	
-	$('#product-filter div:odd').attr('class', 'odd');
-	$('#product-filter div:even').attr('class', 'even');	
-});
-
 // Related
 $('input[name=\'related\']').autocomplete({
 	delay: 500,
@@ -961,63 +817,7 @@ $('#product-related div img').live('click', function() {
 	$('#product-related div:even').attr('class', 'even');	
 });
 //--></script> 
-<script type="text/javascript"><!--
-var attribute_row = <?php echo $attribute_row; ?>;
 
-function addAttribute() {
-	html  = '<tbody id="attribute-row' + attribute_row + '">';
-    html += '  <tr>';
-	html += '    <td class="left"><input type="text" name="product_attribute[' + attribute_row + '][name]" value="" /><input type="hidden" name="product_attribute[' + attribute_row + '][attribute_id]" value="" /></td>';
-	html += '    <td class="left">';
-	<?php foreach ($languages as $language) { ?>
-	html += '<textarea name="product_attribute[' + attribute_row + '][product_attribute_description][<?php echo $language['language_id']; ?>][text]" cols="40" rows="5"></textarea><img src="<?php echo TPL_IMG?>flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" align="top" /><br />';
-    <?php } ?>
-	html += '    </td>';
-	html += '    <td class="left"><a onclick="$(\'#attribute-row' + attribute_row + '\').remove();" class="button"><?php echo $button_remove; ?></a></td>';
-    html += '  </tr>';	
-    html += '</tbody>';
-	
-	$('#attribute tfoot').before(html);
-	
-	attributeautocomplete(attribute_row);
-	
-	attribute_row++;
-}
-
-function attributeautocomplete(attribute_row) {
-	$('input[name=\'product_attribute[' + attribute_row + '][name]\']').catcomplete({
-		delay: 500,
-		source: function(request, response) {
-			$.ajax({
-				url: 'index.php?route=catalog/attribute/autocomplete&token=<?php echo $token; ?>&filter_name=' +  encodeURIComponent(request.term),
-				dataType: 'json',
-				success: function(json) {	
-					response($.map(json, function(item) {
-						return {
-							category: item.attribute_group,
-							label: item.name,
-							value: item.attribute_id
-						}
-					}));
-				}
-			});
-		}, 
-		select: function(event, ui) {
-			$('input[name=\'product_attribute[' + attribute_row + '][name]\']').attr('value', ui.item.label);
-			$('input[name=\'product_attribute[' + attribute_row + '][attribute_id]\']').attr('value', ui.item.value);
-			
-			return false;
-		},
-		focus: function(event, ui) {
-      		return false;
-   		}
-	});
-}
-
-$('#attribute tbody').each(function(index, element) {
-	attributeautocomplete(index);
-});
-//--></script> 
 <script type="text/javascript"><!--	
 var option_row = <?php echo $option_row; ?>;
 

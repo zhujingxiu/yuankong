@@ -1,6 +1,6 @@
 <?php
 // Heading 
-$_['heading_title']         = '工程设计';
+$_['heading_title']         = '消防公司';
 
 // Text
 $_['text_account']          = '账号';

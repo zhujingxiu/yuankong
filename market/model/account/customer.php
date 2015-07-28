@@ -12,9 +12,8 @@ class ModelAccountCustomer extends Model {
 		$customer_group_info = $this->model_account_customer_group->getCustomerGroup($customer_group_id);
 		$salt = substr(md5(uniqid(rand(), true)), 0, 9);
 		$fields = array(
-			'store_id' 		=> (int)$this->config->get('config_store_id') ,
 			'mobile_phone'	=> $data['mobile_phone'],
-			'nickname'		=> empty($data['nickname']) ? 'yk'.$data['mobile_phone'] : $data['nickname'],
+			'fullname'		=> empty($data['fullname']) ? 'yk'.$data['mobile_phone'] : $data['fullname'],
 			'salt' 			=> $salt, 
 			'password' 		=> sha1($salt . sha1($salt . sha1($data['password']))), 
 			'customer_group_id' => (int)$customer_group_id , 
@@ -26,12 +25,7 @@ class ModelAccountCustomer extends Model {
 		if(isset($data['email'])){
 			$fields['email'] = $data['email'];
 		}
-		if(isset($data['firstname'])){
-			$fields['firstname'] = $data['firstname'];
-		}
-		if(isset($data['lastname'])){
-			$fields['lastname'] = $data['lastname'];
-		}
+
 		if(isset($data['telephone'])){
 			$fields['telephone'] = $data['telephone'];
 		}
@@ -41,16 +35,9 @@ class ModelAccountCustomer extends Model {
 		if(isset($data['newsletter'])){
 			$fields['newsletter'] = $data['newsletter'];
 		}
-      	$this->db->insert("customer",$fields);
       	
-		$customer_id = $this->db->getLastId();
+		$customer_id = $this->db->insert("customer",$fields);
 		
-      	$this->db->query("INSERT INTO " . DB_PREFIX . "address SET customer_id = '" . (int)$customer_id . "', firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', company = '" . $this->db->escape($data['company']) . "', company_id = '" . $this->db->escape($data['company_id']) . "', tax_id = '" . $this->db->escape($data['tax_id']) . "', address_1 = '" . $this->db->escape($data['address_1']) . "', address_2 = '" . $this->db->escape($data['address_2']) . "', city = '" . $this->db->escape($data['city']) . "', postcode = '" . $this->db->escape($data['postcode']) . "', country_id = '" . (int)$data['country_id'] . "', zone_id = '" . (int)$data['zone_id'] . "'");
-		
-		$address_id = $this->db->getLastId();
-
-      	$this->db->query("UPDATE " . DB_PREFIX . "customer SET address_id = '" . (int)$address_id . "' WHERE customer_id = '" . (int)$customer_id . "'");
-
 		if($mail){
 			$this->language->load('mail/customer');
 			
@@ -118,7 +105,7 @@ class ModelAccountCustomer extends Model {
 	}
 	
 	public function editCustomer($data) {
-		$this->db->query("UPDATE " . DB_PREFIX . "customer SET nickname = '" . $this->db->escape($data['nickname']) . "', firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "' WHERE customer_id = '" . (int)$this->customer->getId() . "'");
+		$this->db->query("UPDATE " . DB_PREFIX . "customer SET fullname = '" . $this->db->escape($data['fullname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "' WHERE customer_id = '" . (int)$this->customer->getId() . "'");
 	}
 
 	public function editPassword($mobile_phone, $password) {
@@ -159,7 +146,7 @@ class ModelAccountCustomer extends Model {
 		$implode = array();
 		
 		if (isset($data['filter_name']) && !is_null($data['filter_name'])) {
-			$implode[] = "LCASE(CONCAT(c.firstname, ' ', c.lastname)) LIKE '" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "%'";
+			$implode[] = "LCASE(c.fullname) LIKE '" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "%'";
 		}
 		
 		if (isset($data['filter_email']) && !is_null($data['filter_email'])) {

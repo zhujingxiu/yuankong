@@ -34,7 +34,7 @@ $db = new DB(DB_DRIVER, DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 $registry->set('db', $db);
 		
 // Settings
-$query = $db->query("SELECT * FROM " . DB_PREFIX . "setting WHERE store_id = '0'");
+$query = $db->query("SELECT * FROM " . DB_PREFIX . "setting ");
  
 foreach ($query->rows as $setting) {
 	if (!$setting['serialized']) {

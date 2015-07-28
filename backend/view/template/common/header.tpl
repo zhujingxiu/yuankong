@@ -89,13 +89,6 @@ $(document).ready(function(){
         <ul>
           <li><a href="<?php echo $category; ?>"><?php echo $text_category; ?></a></li>
           <li><a href="<?php echo $product; ?>"><?php echo $text_product; ?></a></li>
-          <li style="display:none;"><a href="<?php echo $filter; ?>"><?php echo $text_filter; ?></a></li>
-          <li><a class="parent"><?php echo $text_attribute; ?></a>
-            <ul>
-              <li><a href="<?php echo $attribute; ?>"><?php echo $text_attribute; ?></a></li>
-              <li><a href="<?php echo $attribute_group; ?>"><?php echo $text_attribute_group; ?></a></li>
-            </ul>
-          </li>
           <li><a href="<?php echo $option; ?>"><?php echo $text_option; ?></a></li>
           <li><a href="<?php echo $manufacturer; ?>"><?php echo $text_manufacturer; ?></a></li>
         </ul>
@@ -203,7 +196,6 @@ $(document).ready(function(){
           </li>
           <li><a href="<?php echo $information; ?>"><?php echo $text_information; ?></a></li>
           
-          <li class="_hide"><a href="<?php echo $help_group; ?>"><?php echo $text_help_group; ?></a></li>
           <li><a class="parent"><?php echo $text_design; ?></a>
             <ul>
               <li><a href="<?php echo $banner; ?>"><?php echo $text_banner; ?></a></li>

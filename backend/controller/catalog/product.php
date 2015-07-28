@@ -584,7 +584,6 @@ class ControllerCatalogProduct extends Controller {
     	$this->data['entry_category'] = $this->language->get('entry_category');
 		$this->data['entry_filter'] = $this->language->get('entry_filter');
 		$this->data['entry_related'] = $this->language->get('entry_related');
-		$this->data['entry_attribute'] = $this->language->get('entry_attribute');
 		$this->data['entry_text'] = $this->language->get('entry_text');
 		$this->data['entry_option'] = $this->language->get('entry_option');
 		$this->data['entry_option_value'] = $this->language->get('entry_option_value');
@@ -602,7 +601,6 @@ class ControllerCatalogProduct extends Controller {
 				
     	$this->data['button_save'] = $this->language->get('button_save');
     	$this->data['button_cancel'] = $this->language->get('button_cancel');
-		$this->data['button_add_attribute'] = $this->language->get('button_add_attribute');
 		$this->data['button_add_option'] = $this->language->get('button_add_option');
 		$this->data['button_add_option_value'] = $this->language->get('button_add_option_value');
 		$this->data['button_add_discount'] = $this->language->get('button_add_discount');
@@ -613,7 +611,6 @@ class ControllerCatalogProduct extends Controller {
 		
     	$this->data['tab_general'] = $this->language->get('tab_general');
     	$this->data['tab_data'] = $this->language->get('tab_data');
-		$this->data['tab_attribute'] = $this->language->get('tab_attribute');
 		$this->data['tab_option'] = $this->language->get('tab_option');		
 		$this->data['tab_discount'] = $this->language->get('tab_discount');
 		$this->data['tab_special'] = $this->language->get('tab_special');
@@ -1017,55 +1014,7 @@ class ControllerCatalogProduct extends Controller {
 				);
 			}
 		}
-		$this->data['top_categories'] = $this->model_catalog_category->getSelectionCategories(null);
-		// Filters
-		$this->load->model('catalog/filter');
-		
-		if (isset($this->request->post['product_filter'])) {
-			$filters = $this->request->post['product_filter'];
-		} elseif (isset($this->request->get['product_id'])) {
-			$filters = $this->model_catalog_product->getProductFilters($this->request->get['product_id']);
-		} else {
-			$filters = array();
-		}
-		
-		$this->data['product_filters'] = array();
-		
-		foreach ($filters as $filter_id) {
-			$filter_info = $this->model_catalog_filter->getFilter($filter_id);
-			
-			if ($filter_info) {
-				$this->data['product_filters'][] = array(
-					'filter_id' => $filter_info['filter_id'],
-					'name'      => $filter_info['group'] . ' &gt; ' . $filter_info['name']
-				);
-			}
-		}		
-		
-		// Attributes
-		$this->load->model('catalog/attribute');
-		
-		if (isset($this->request->post['product_attribute'])) {
-			$product_attributes = $this->request->post['product_attribute'];
-		} elseif (isset($this->request->get['product_id'])) {
-			$product_attributes = $this->model_catalog_product->getProductAttributes($this->request->get['product_id']);
-		} else {
-			$product_attributes = array();
-		}
-		
-		$this->data['product_attributes'] = array();
-		
-		foreach ($product_attributes as $product_attribute) {
-			$attribute_info = $this->model_catalog_attribute->getAttribute($product_attribute['attribute_id']);
-			
-			if ($attribute_info) {
-				$this->data['product_attributes'][] = array(
-					'attribute_id'                  => $product_attribute['attribute_id'],
-					'name'                          => $attribute_info['name'],
-					'product_attribute_description' => $product_attribute['product_attribute_description']
-				);
-			}
-		}		
+		$this->data['top_categories'] = $this->model_catalog_category->getSelectionCategories(null);		
 		
 		// Options
 		$this->load->model('catalog/option');

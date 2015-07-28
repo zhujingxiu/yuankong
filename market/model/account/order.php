@@ -7,10 +7,7 @@ class ModelAccountOrder extends Model {
 			return array(
 				'order_id'                => $order_query->row['order_id'],
 				'invoice_no'              => $order_query->row['invoice_no'],
-				'invoice_prefix'          => $order_query->row['invoice_prefix'],
-				'store_id'                => $order_query->row['store_id'],
-				'store_name'              => $order_query->row['store_name'],
-				'store_url'               => $order_query->row['store_url'],				
+				'invoice_prefix'          => $order_query->row['invoice_prefix'],				
 				'customer_id'             => $order_query->row['customer_id'],
 				'fullname'                => $order_query->row['fullname'],
 				'telephone'               => $order_query->row['telephone'],

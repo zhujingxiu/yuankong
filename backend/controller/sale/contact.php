@@ -86,13 +86,7 @@ class ControllerSaleContact extends Controller {
 			if (!$json) {
 				$this->load->model('setting/store');
 			
-				$store_info = $this->model_setting_store->getStore($this->request->post['store_id']);			
-				
-				if ($store_info) {
-					$store_name = $store_info['name'];
-				} else {
-					$store_name = $this->config->get('config_name');
-				}
+				$store_name = $this->config->get('config_name');
 	
 				$this->load->model('sale/customer');
 				
