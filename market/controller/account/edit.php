@@ -12,7 +12,8 @@ class ControllerAccountEdit extends Controller {
 		$this->language->load('account/edit');
 		
 		$this->document->setTitle($this->language->get('heading_title'));
-		
+		$this->document->addScript('market/view/theme/yuankong/javascript/click.js');
+		$this->document->addScript($this->area_js());
 		$this->load->model('account/customer');
 		
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
@@ -85,10 +86,15 @@ class ControllerAccountEdit extends Controller {
 		if ($this->request->server['REQUEST_METHOD'] != 'POST') {
 			$customer_info = $this->model_account_customer->getCustomer($this->customer->getId());
 		}
+		if (isset($customer_info['mobile_phone'])) {
+			$this->data['mobile_phone'] = $customer_info['mobile_phone'];
+		} else {
+			$this->data['mobile_phone'] = '';
+		}
 
 		if (isset($this->request->post['fullname'])) {
 			$this->data['fullname'] = $this->request->post['fullname'];
-		} elseif (isset($customer_info)) {
+		} elseif (isset($customer_info['fullname'])) {
 			$this->data['fullname'] = $customer_info['fullname'];
 		} else {
 			$this->data['fullname'] = '';
@@ -96,7 +102,7 @@ class ControllerAccountEdit extends Controller {
 
 		if (isset($this->request->post['email'])) {
 			$this->data['email'] = $this->request->post['email'];
-		} elseif (isset($customer_info)) {
+		} elseif (isset($customer_info['email'])) {
 			$this->data['email'] = $customer_info['email'];
 		} else {
 			$this->data['email'] = '';
@@ -104,7 +110,7 @@ class ControllerAccountEdit extends Controller {
 
 		if (isset($this->request->post['telephone'])) {
 			$this->data['telephone'] = $this->request->post['telephone'];
-		} elseif (isset($customer_info)) {
+		} elseif (isset($customer_info['telephone'])) {
 			$this->data['telephone'] = $customer_info['telephone'];
 		} else {
 			$this->data['telephone'] = '';
@@ -112,7 +118,7 @@ class ControllerAccountEdit extends Controller {
 
 		if (isset($this->request->post['fax'])) {
 			$this->data['fax'] = $this->request->post['fax'];
-		} elseif (isset($customer_info)) {
+		} elseif (isset($customer_info['fax'])) {
 			$this->data['fax'] = $customer_info['fax'];
 		} else {
 			$this->data['fax'] = '';
@@ -165,5 +171,52 @@ class ControllerAccountEdit extends Controller {
 			return false;
 		}
 	}
+
+	private function area_js(){
+        $file = TPL_JS.'area.js';
+        if(!file_exists($file)){
+            $this->load->model('localisation/area');
+            $areas = $this->model_localisation_area->getAreas();
+            $area_rows_group_by_pid = $this->array_group($areas, 'pid');
+
+            $address = array();
+            foreach ($area_rows_group_by_pid as $pid => $item) {
+                if ($pid == 0) {
+                    
+                    $item = array_filter($item, function($item){
+                        return $item['pid'] == 0;
+                    });
+                }
+                $address['name'.$pid] = array_keys($this->array_group($item, 'name'));
+                $address['code'.$pid] = array_keys($this->array_group($item, 'area_id'));
+            }
+            file_put_contents($file, 'var area = ' . json_encode_ex($address) . ';');
+            
+        }
+        return $file;
+    } 
+
+    private function array_group($array, $key, $limit = false){
+        if (empty ($array) || !is_array($array)){
+            return $array;
+        }
+
+        $_result = array ();
+        foreach ($array as $item) {
+            if ((isset($item[$key]))) {
+                $_result[(string)$item[$key]][] = $item;
+            } else {
+                $_result[count($_result)][] = $item;
+            }
+        }
+        if (!$limit) {
+            return $_result;
+        }
+
+        $result = array ();
+        foreach ($_result as $k => $item) {
+            $result[$k] = $item[0];
+        }
+        return $result;
+    } 
 }
-?>

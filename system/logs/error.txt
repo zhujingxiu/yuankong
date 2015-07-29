@@ -239,3 +239,6 @@
 2015-07-29 17:18:57 - PHP Notice:  Undefined index: affiliate_mobile_phone in D:\wamp\www\yuankong\backend\controller\sale\order.php on line 1262
 2015-07-29 17:45:21 - PHP Notice:  Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'show =1  ORDER BY sort_order ASC' at line 1<br />Error No: 1064<br />SELECT * FROM yk_project_group WHERE show =1  ORDER BY sort_order ASC  in D:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
 2015-07-29 17:45:21 - PHP Notice:  Trying to get property of non-object in D:\wamp\www\yuankong\market\model\module\ykmodule.php on line 81
+2015-07-29 21:12:06 - PHP Notice:  Undefined variable: sort_group in E:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 39
+2015-07-29 21:12:06 - PHP Notice:  Undefined variable: sort_account in E:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 44
+2015-07-29 21:12:06 - PHP Notice:  Undefined variable: sort_telephone in E:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 49

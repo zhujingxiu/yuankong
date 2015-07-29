@@ -60,7 +60,7 @@ $(function(){ $('input, textarea').placeholder(); });
 
 <link rel="stylesheet" type="text/css" href="market/view/theme/<?php echo $themeName;?>/stylesheet/yk.css" />
 </head>
-<body class="b_fa">
+<body>
 <!--Top-->
 
 <?php echo $top ?>
