@@ -10,24 +10,19 @@
                         <i class="<?php echo $item['icon_class'] ?>"></i>
                         <?php echo $item['title'] ?>
                     </dt>
-
                     <?php if(isset($item['data']) && is_array($item['data'])){?>
-                    <?php foreach ($item['data'] as $info): ?>
+                    <?php  foreach ($item['data'] as $info): ?>
                     <dd class="gs-l-dd">
                         <a href="<?php echo $info['link'] ?>">
-                            <?php if(!empty($info['title'])){
-                                echo truncate_string($info['title']);
-                            }else if(!empty($info['text'])){
-                                echo truncate_string($info['text']);
+                            <?php if(!empty($info['company'])){
+                                echo truncate_string($info['company'],30);
                             }?>
                         </a>
                     </dd>
                     <?php endforeach ?>
                     <?php }?>
-
                 </dl>
-                <?php endforeach ?>
-                
+                <?php endforeach ?>                
             </div>
         </div>
         <div class="r-gs-list btb3">
@@ -49,10 +44,12 @@
                         <?php foreach ($lateast as $key => $item): ?>
                         <li class="new-gs txt_clip">
                             <i class="r-bg-b"><?php echo $key+1 ?></i>
-                            <a href="<?php echo $item['link'] ?>"><?php echo $item['account'] ?></a></li>    
+                            <a href="<?php echo $item['link'] ?>"><?php echo truncate_string($item['company'],30) ?></a></li>    
                         <?php endforeach ?>
                     </ul>
+                    <?php if(count($lateast) > 5){ ?>
                     <p class="tr"><a href="<?php echo $more ?>" class="more"><?php echo $text_more ?></a></p>
+                    <?php }?>
                 </div>
             </div>
         </div>

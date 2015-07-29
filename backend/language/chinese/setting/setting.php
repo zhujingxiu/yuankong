@@ -46,7 +46,6 @@ $_['entry_catalog_limit']        = '每页默认商品数量 (前台管理)：<b
 $_['entry_admin_limit']          = '每页默认商品数量 (后台管理)：<br /><span class="help">确定每页显示多少管理项目（订单，客户等）</span>';
 $_['entry_product_count']        = '前台商品计数：<br /><span class="help">显示页面上类别菜单中子类别内的产品数量。</span>';
 $_['entry_review']               = '允许商品评论：<br /><span class="help">启用或停用新商品评论的增加及显示原有商品评论</span>';
-$_['entry_download']             = '允许下载：';
 $_['entry_upload_allowed']       = '允许上传文件的种类：<br /><span class="help">设置对允许上传的文件格式。 使用逗号分开。</span>';
 $_['entry_voucher_min']          = '最小礼品券数：<br /><span class="help">客户可以购买优惠券的最低金额。</span>';
 $_['entry_voucher_max']          = '最大礼品券数：<br /><span class="help">客户可以购买优惠券的最商金额。</span>';
@@ -101,10 +100,6 @@ $_['entry_smtp_timeout']         = 'SMTP 超时：';
 $_['entry_account_mail']         = '发送新注册用户邮件：<br /><span class="help">当有新用户注册时，发送邮件通知店主。</span>';
 $_['entry_alert_mail']           = '通知邮件：<br /><span class="help">创建新订单时给店主发送邮件。</span>';
 $_['entry_alert_emails']         = '附加通知邮箱：<br /><span class="help">任何您想收到本站邮件的额外信箱。 (请用逗号分开)</span>';
-$_['entry_fraud_detection']      = '使用MaxMind欺诈检测系统：<br /><span class="help">MaxMind是一个欺诈检测服务。如果你没有一个许可证密钥，您可以<a onclick="window.open(\'http://www.maxmind.com/?rId=opencart\');"><u>注册这里</u></a>。一旦你已经获得了Key，请复制并粘贴到下面。</span>';
-$_['entry_fraud_key']            = 'MaxMind许可证密钥：</span>';
-$_['entry_fraud_score']          = 'MaxMind风险得分：<br /><span class="help">得分越高风险越大。设置一个介于0 - 100的得分。</span>';
-$_['entry_fraud_status']         = 'MaxMind欺诈订单状态：<br /><span class="help">MaxMind风险得分超过您所设定的得分订单将被分配到的状态，超过得分的订单将不能成功结算。</span>';
 $_['entry_secure']                 = '使用 SSL：<br /><span class="help">检查你的服务器是否安装了SSL认证，如果安装了，可以使用SSL。</span>';
 $_['entry_shared']                 = '多网店共享Sessions：<br /><span class="help">你可以让各个网店之间的购物车共享数据。</span>';
 $_['entry_robots']                 = '爬虫/机器人：<br /><span class="help">加入不受欢迎的爬虫/机器人。</span>';
@@ -119,7 +114,7 @@ $_['entry_compression']          = '输出压缩等级：<br /><span class="help
 $_['entry_error_display']        = '显示错误：';
 $_['entry_error_log']            = '日志错误：';
 $_['entry_error_filename']       = '错误日志文件名：';
-$_['entry_google_analytics']     = 'Google Analytics Code：<br /><span class="help">登录您的<a onclick="window.open(\'http：//www.google.com/analytics/\');"><u>Google Analytics</u></a>账户，后创建您的网店概述拷贝粘贴统计代码到框内。</span>';
+$_['entry_baidu_analytics']     = 'Baidu Analytics Code：<br /><span class="help">登录您的<a onclick="window.open(\'http://tongji.baidu.com/\');"><u>Baidu Analytics</u></a>账户，后创建您的网店概述拷贝粘贴统计代码到框内。</span>';
 $_['entry_invoice']              = '起始发票号：<br /><span class="help">请设置发票的启始号。</span>';
 
 // Error

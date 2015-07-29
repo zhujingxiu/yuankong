@@ -269,6 +269,7 @@ class ControllerSaleProjectGroup extends Controller {
 
     	$this->data['entry_name'] = $this->language->get('entry_name');
     	$this->data['entry_show'] = $this->language->get('entry_show');
+    	$this->data['entry_remark'] = $this->language->get('entry_remark');
 		$this->data['entry_sort_order'] = $this->language->get('entry_sort_order');
 
 		$this->data['text_yes'] = $this->language->get('text_yes');
@@ -332,7 +333,7 @@ class ControllerSaleProjectGroup extends Controller {
 	
 		if (isset($this->request->post['name'])) {
 			$this->data['name'] = $this->request->post['name'];
-		} elseif (!empty($project_group_info)) {
+		} elseif (!empty($project_group_info['name'])) {
 			$this->data['name'] = $project_group_info['name'];
 		} else {
 			$this->data['name'] = '';
@@ -340,15 +341,23 @@ class ControllerSaleProjectGroup extends Controller {
 
 		if (isset($this->request->post['show'])) {
 			$this->data['show'] = $this->request->post['show'];
-		} elseif (!empty($project_group_info)) {
+		} elseif (!empty($project_group_info['show'])) {
 			$this->data['show'] = $project_group_info['show'];
 		} else {
 			$this->data['show'] = '';
 		}
 
+		if (isset($this->request->post['remark'])) {
+			$this->data['remark'] = $this->request->post['remark'];
+		} elseif (!empty($project_group_info['remark'])) {
+			$this->data['remark'] = $project_group_info['remark'];
+		} else {
+			$this->data['remark'] = '';
+		}
+
 		if (isset($this->request->post['sort_order'])) {
 			$this->data['sort_order'] = $this->request->post['sort_order'];
-		} elseif (!empty($project_group_info)) {
+		} elseif (!empty($project_group_info['sort_order'])) {
 			$this->data['sort_order'] = $project_group_info['sort_order'];
 		} else {
 			$this->data['sort_order'] = '';
@@ -368,12 +377,10 @@ class ControllerSaleProjectGroup extends Controller {
       		$this->error['warning'] = $this->language->get('error_permission');
     	}
 	
-    	
   		if ((utf8_strlen($this->request->post['name']) < 3) || (utf8_strlen($this->request->post['name']) > 64)) {
     		$this->error['name'] = $this->language->get('error_name');
   		}
     	
-		
 		if (!$this->error) {
 	  		return true;
 		} else {
@@ -393,4 +400,3 @@ class ControllerSaleProjectGroup extends Controller {
 		}
   	}	  
 }
-?>

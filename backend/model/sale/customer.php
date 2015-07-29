@@ -168,18 +168,9 @@ class ModelSaleCustomer extends Model {
 			$this->db->query("UPDATE " . DB_PREFIX . "customer SET approved = '1' WHERE customer_id = '" . (int)$customer_id . "'");
 
 			$this->language->load('mail/customer');
-			
-			$this->load->model('setting/store');
-						
-			$store_info = $this->model_setting_store->getStore($customer_info['store_id']);
-			
-			if ($store_info) {
-				$store_name = $store_info['name'];
-				$store_url = $store_info['url'] . 'index.php?route=account/login';
-			} else {
-				$store_name = $this->config->get('config_name');
-				$store_url = HTTP_CATALOG . 'index.php?route=account/login';
-			}
+
+			$store_name = $this->config->get('config_name');
+			$store_url = HTTP_CATALOG . 'index.php?route=account/login';
 	
 			$message  = sprintf($this->language->get('text_approve_welcome'), $store_name) . "\n\n";
 			$message .= $this->language->get('text_approve_login') . "\n";
@@ -411,19 +402,7 @@ class ModelSaleCustomer extends Model {
 
 			$this->language->load('mail/customer');
 			
-			if ($order_id) {
-				$this->load->model('sale/order');
-		
-				$order_info = $this->model_sale_order->getOrder($order_id);
-				
-				if ($order_info) {
-					$store_name = $order_info['store_name'];
-				} else {
-					$store_name = $this->config->get('config_name');
-				}	
-			} else {
-				$store_name = $this->config->get('config_name');
-			}		
+			$store_name = $this->config->get('config_name');		
 				
 			$message  = sprintf($this->language->get('text_reward_received'), $points) . "\n\n";
 			$message .= sprintf($this->language->get('text_reward_total'), $this->getRewardTotal($customer_id));

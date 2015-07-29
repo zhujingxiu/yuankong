@@ -498,6 +498,7 @@ $(function(){ $('input, textarea').placeholder(); });
 	$('.hq-yzm').bind('click',function(){
 		var send = true;
 		var $that = $(this);
+		$('#'+$(this).attr('data-rel')+'-form').submit();
 		var items = $('#'+$(this).attr('data-rel')+'-form .form-group').length,
 		valids = $('#'+$(this).attr('data-rel')+'-form .form-group.valid').length;
 		if(items - valids == 1){

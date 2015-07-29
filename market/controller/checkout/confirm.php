@@ -1,7 +1,41 @@
 <?php 
 class ControllerCheckoutConfirm extends Controller { 
+	protected $error= array();
 	public function index() {
 		$redirect = '';
+		// Validate if customer is logged in.
+		if (!$this->customer->isLogged()) {
+			$redirect = $this->url->link('checkout/checkout', '', 'SSL');
+		}
+		
+		// Validate if shipping is required. If not the customer should not have reached this page.
+		if (!$this->checkout->hasShipping()) {
+			$redirect = $this->url->link('checkout/checkout', '', 'SSL');
+		}
+		
+		// Validate check has products and has stock.		
+		if ((!$this->checkout->hasProducts() && empty($this->session->data['vouchers'])) || (!$this->checkout->hasStock() && !$this->config->get('config_stock_checkout'))) {
+			$redirect = $this->url->link('checkout/cart');
+		}
+				// Validate minimum quantity requirments.			
+		$products = $this->checkout->getProducts();
+				
+		foreach ($products as $product) {
+			$product_total = 0;
+				
+			foreach ($products as $product_2) {
+				if ($product_2['product_id'] == $product['product_id']) {
+					$product_total += $product_2['quantity'];
+				}
+			}		
+			
+			if ($product['minimum'] > $product_total) {
+				$redirect = $this->url->link('checkout/cart');
+				
+				break;
+			}				
+		}
+		$json = array();
 		if($this->validateShipping()){
 			if ($this->checkout->hasShipping()) {
 				// Validate if shipping address has been set.		
@@ -26,6 +60,11 @@ class ControllerCheckoutConfirm extends Controller {
 			
 			// Validate if payment address has been set.
 			$this->load->model('account/address');		
+		}else{
+			$redirect = $this->url->link('checkout/checkout', '', 'SSL');
+			$json['status'] = 0;
+			$json['error_shipping'] = isset($this->error['shipping']) ? $this->error['shipping'] : array();
+			$json['redirect'] = $redirect;
 		}
 
 		if($this->validatePayment()){
@@ -33,6 +72,11 @@ class ControllerCheckoutConfirm extends Controller {
 			if (!isset($this->session->data['payment_method'])) {
 				$redirect = $this->url->link('checkout/checkout', '', 'SSL');
 			}
+		}else{
+			$redirect = $this->url->link('checkout/checkout', '', 'SSL');
+			$json['status'] = 0;
+			$json['error_payment'] = isset($this->error['payment']) ? $this->error['payment'] : array();
+			$json['redirect'] = $redirect;
 		}
 
 		if (!$redirect) {
@@ -260,160 +304,84 @@ class ControllerCheckoutConfirm extends Controller {
 
   	protected function validateShipping() {
 		$this->language->load('checkout/checkout');
-		
-		$json = array();
-		
-		// Validate if customer is logged in.
-		if (!$this->customer->isLogged()) {
-			$json['redirect'] = $this->url->link('checkout/checkout', '', 'SSL');
-		}
-		
-		// Validate if shipping is required. If not the customer should not have reached this page.
-		if (!$this->checkout->hasShipping()) {
-			$json['redirect'] = $this->url->link('checkout/checkout', '', 'SSL');
-		}
-		
-		// Validate check has products and has stock.		
-		if ((!$this->checkout->hasProducts() && empty($this->session->data['vouchers'])) || (!$this->checkout->hasStock() && !$this->config->get('config_stock_checkout'))) {
-			$json['redirect'] = $this->url->link('checkout/cart');
-		}	
 
-		// Validate minimum quantity requirments.			
-		$products = $this->checkout->getProducts();
-				
-		foreach ($products as $product) {
-			$product_total = 0;
-				
-			foreach ($products as $product_2) {
-				if ($product_2['product_id'] == $product['product_id']) {
-					$product_total += $product_2['quantity'];
-				}
-			}		
+		if (isset($this->request->post['shipping_address_id']) && $this->request->post['shipping_address_id']) {
+			$this->load->model('account/address');
 			
-			if ($product['minimum'] > $product_total) {
-				$json['redirect'] = $this->url->link('checkout/cart');
+			if (!in_array($this->request->post['shipping_address_id'], array_keys($this->model_account_address->getAddresses()))) {
+				$this->error['shipping']['warning'] = $this->language->get('error_address');
+			}
+			if (!$this->error) {			
+				$this->session->data['shipping_address_id'] = $this->request->post['shipping_address_id'];
 				
-				break;
-			}				
-		}
-								
-		if (!$json) {
-
-			if (isset($this->request->post['shipping_address_id']) && $this->request->post['shipping_address_id']) {
+				// Default Shipping Address
 				$this->load->model('account/address');
-				
-				if (!in_array($this->request->post['shipping_address_id'], array_keys($this->model_account_address->getAddresses()))) {
-					$json['error']['warning'] = $this->language->get('error_address');
-				}
-				if (!$json) {			
-					$this->session->data['shipping_address_id'] = $this->request->post['shipping_address_id'];
-					
-					// Default Shipping Address
-					$this->load->model('account/address');
 
-					$address_info = $this->model_account_address->getAddress($this->request->post['shipping_address_id']);
-					
-					if ($address_info) {
-						$this->session->data['shipping_province_id'] = $address_info['province_id'];
-						$this->session->data['shipping_postcode'] = $address_info['postcode'];						
-					} else {
-						unset($this->session->data['shipping_province_id']);	
-						unset($this->session->data['shipping_postcode']);
-					}
-				}
-			} else {
-				if ((utf8_strlen($this->request->post['fullname']) < 1) || (utf8_strlen($this->request->post['fullname']) > 32)) {
-					$json['error']['fullname'] = $this->language->get('error_fullname');
-				}
-		
-				if ((utf8_strlen($this->request->post['telephone']) < 1) || !isMobile(utf8_strlen($this->request->post['telephone']))) {
-					$json['error']['telephone'] = $this->language->get('error_telephone');
-				}
-		
-				if ((utf8_strlen($this->request->post['address']) < 3) || (utf8_strlen($this->request->post['address']) > 128)) {
-					$json['error']['address'] = $this->language->get('error_address');
-				}				
-
-				if ( (utf8_strlen($this->request->post['postcode']) < 2) || (utf8_strlen($this->request->post['postcode']) > 10)) {
-					$json['error']['postcode'] = $this->language->get('error_postcode');
-				}				
+				$address_info = $this->model_account_address->getAddress($this->request->post['shipping_address_id']);
 				
-				if (!isset($this->request->post['area_id']) || $this->request->post['area_id'] == '') {
-					$json['error']['area'] = $this->language->get('error_area');
-				}
-				
-				if (!$json) {						
-					// Default Shipping Address
-					$this->load->model('account/address');		
-					
-					$this->session->data['shipping_address_id'] = $this->model_account_address->addAddress($this->request->post);
-					$this->session->data['shipping_province_id'] = is_array($this->request->post['area']) ? current($this->request->post['area']) : 0;
-					$this->session->data['shipping_postcode'] = isset($this->request->post['postcode']) ? $this->request->post['postcode'] : '';
-									
+				if ($address_info) {
+					$this->session->data['shipping_province_id'] = $address_info['province_id'];
+					$this->session->data['shipping_postcode'] = $address_info['postcode'];						
+				} else {
+					unset($this->session->data['shipping_province_id']);	
+					unset($this->session->data['shipping_postcode']);
 				}
 			}
+		} else {
+			if ((utf8_strlen($this->request->post['fullname']) < 1) || (utf8_strlen($this->request->post['fullname']) > 32)) {
+				$this->error['shipping']['fullname'] = $this->language->get('error_fullname');
+			}
+	
+			if ((utf8_strlen($this->request->post['telephone']) < 1) || !isMobile($this->request->post['telephone'])) {
+				$this->error['shipping']['telephone'] = $this->language->get('error_telephone');
+			}
+	
+			if ((utf8_strlen($this->request->post['address']) < 3) || (utf8_strlen($this->request->post['address']) > 128)) {
+				$this->error['shipping']['address'] = $this->language->get('error_address');
+			}							
+			
+			if (!isset($this->request->post['area']) || !is_array($this->request->post['area']) || !current($this->request->post['area'])) {
+				$this->error['shipping']['area'] = $this->language->get('error_area');
+			}
+			
+			if (!isset($this->error['shipping'])) {						
+				// Default Shipping Address
+				$this->load->model('account/address');		
+				
+				$this->session->data['shipping_address_id'] = $this->model_account_address->addAddress($this->request->post);
+				$this->session->data['shipping_province_id'] = is_array($this->request->post['area']) ? current($this->request->post['area']) : 0;
+				$this->session->data['shipping_postcode'] = isset($this->request->post['postcode']) ? $this->request->post['postcode'] : '';
+			}
 		}
-		
-		$this->response->setOutput(json_encode($json));
+
+		return !isset($this->error['shipping']);
 	}
 	
 	public function validatePayment() {
 		$this->language->load('checkout/checkout');
 		
-		$json = array();
-		
-		// Validate if payment address has been set.
-		$this->load->model('account/address');
-		
-		// Validate cart has products and has stock.			
-		if ((!$this->checkout->hasProducts() && empty($this->session->data['vouchers'])) || (!$this->checkout->hasStock() && !$this->config->get('config_stock_checkout'))) {
-			$json['redirect'] = $this->url->link('checkout/cart');				
+		if (!isset($this->request->post['payment_method'])) {
+			$this->error['payment']['warning'] = $this->language->get('error_payment');
+		} elseif (!isset($this->session->data['payment_methods'][$this->request->post['payment_method']])) {
+			$this->error['payment']['warning'] = $this->language->get('error_payment');
 		}	
-		
-		// Validate minimum quantity requirments.			
-		$products = $this->checkout->getProducts();
-				
-		foreach ($products as $product) {
-			$product_total = 0;
-				
-			foreach ($products as $product_2) {
-				if ($product_2['product_id'] == $product['product_id']) {
-					$product_total += $product_2['quantity'];
-				}
-			}		
+						
+		if ($this->config->get('config_checkout_id')) {
+			$this->load->model('catalog/information');
 			
-			if ($product['minimum'] > $product_total) {
-				$json['redirect'] = $this->url->link('checkout/cart');
-				
-				break;
-			}				
-		}
-											
-		if (!$json) {
-
-			if (!isset($this->request->post['payment_method'])) {
-				$json['error']['warning'] = $this->language->get('error_payment');
-			} elseif (!isset($this->session->data['payment_methods'][$this->request->post['payment_method']])) {
-				$json['error']['warning'] = $this->language->get('error_payment');
-			}	
-							
-			if ($this->config->get('config_checkout_id')) {
-				$this->load->model('catalog/information');
-				
-				$information_info = $this->model_catalog_information->getInformation($this->config->get('config_checkout_id'));
-				
-				if ($information_info && !isset($this->request->post['agree'])) {
-					$json['error']['warning'] = sprintf($this->language->get('error_agree'), $information_info['title']);
-				}
+			$information_info = $this->model_catalog_information->getInformation($this->config->get('config_checkout_id'));
+			
+			if ($information_info && !isset($this->request->post['agree'])) {
+				$this->error['payment']['warning'] = sprintf($this->language->get('error_agree'), $information_info['title']);
 			}
-			
-			if (!$json) {
-				$this->session->data['payment_method'] = $this->session->data['payment_methods'][$this->request->post['payment_method']];
-			  
-				$this->session->data['comment'] = strip_tags($this->request->post['comment']);
-			}							
 		}
 		
-		$this->response->setOutput(json_encode($json));
+		if (!isset($this->error['payment'])) {
+			$this->session->data['payment_method'] = $this->session->data['payment_methods'][$this->request->post['payment_method']];
+		  
+			$this->session->data['comment'] = strip_tags($this->request->post['comment']);
+		}							
+		
+		return !isset($this->error['payment']);
 	}
 }

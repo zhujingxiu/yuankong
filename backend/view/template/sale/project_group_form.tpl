@@ -42,6 +42,10 @@
             </td>
           </tr>
           <tr>
+            <td><?php echo $entry_remark; ?></td>
+            <td><textarea name="remark"><?php echo $remark; ?></textarea></td>
+          </tr>
+          <tr>
             <td><?php echo $entry_sort_order; ?></td>
             <td><input type="text" name="sort_order" value="<?php echo $sort_order; ?>" size="1" /></td>
           </tr>

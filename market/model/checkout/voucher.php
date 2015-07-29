@@ -92,8 +92,8 @@ class ModelCheckoutVoucher extends Model {
 					$template->data['image'] = '';
 				}
 				
-				$template->data['store_name'] = $order_info['store_name'];
-				$template->data['store_url'] = $order_info['store_url'];
+				$template->data['store_name'] = $this->config->get('config_name');
+				$template->data['store_url'] = HTTP_CATALOG;
 				$template->data['message'] = nl2br($voucher['message']);
 			
 				if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/mail/voucher.tpl')) {
@@ -112,7 +112,7 @@ class ModelCheckoutVoucher extends Model {
 				$mail->timeout = $this->config->get('config_smtp_timeout');			
 				$mail->setTo($voucher['to_email']);
 				$mail->setFrom($this->config->get('config_email'));
-				$mail->setSender($order_info['store_name']);
+				$mail->setSender($this->config->get('config_name'));
 				$mail->setSubject(html_entity_decode(sprintf($language->get('text_subject'), $voucher['from_name']), ENT_QUOTES, 'UTF-8'));
 				$mail->setHtml($html);				
 				$mail->send();		

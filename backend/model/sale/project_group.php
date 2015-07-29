@@ -4,6 +4,7 @@ class ModelSaleProjectGroup extends Model {
 		$fields = array(
 			'name' => isset($data['name']) ? strip_tags(trim($data['name'])) : '',
 			'show' => isset($data['show']) ? (int)$data['show'] : 0,
+			'remark' => isset($data['remark']) ? $data['remark'] : '',
 			'sort_order' => isset($data['sort_order']) ? (int)$data['sort_order'] : 0
 		);
 
@@ -14,6 +15,7 @@ class ModelSaleProjectGroup extends Model {
 		$fields = array(
 			'name' => isset($data['name']) ? strip_tags(trim($data['name'])) : 0,
 			'show' => isset($data['show']) ? (int)$data['show'] : 0,
+			'remark' => isset($data['remark']) ? $data['remark'] : '',
 			'sort_order' => isset($data['sort_order']) ? (int)$data['sort_order'] : 0
 		);
 

@@ -57,16 +57,6 @@ $(function(){ $('input, textarea').placeholder(); });
 <![endif]-->
 <script type="text/javascript" src="market/view/theme/<?php echo $themeName;?>/javascript/index.js"></script>
 
-<?php if ( isset($stores) && $stores ) { ?>
-<script type="text/javascript"><!--
-$(document).ready(function() {
-<?php foreach ($stores as $store) { ?>
-$('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></iframe>');
-<?php } ?>
-});
-//--></script>
-<?php } ?>
-<?php //echo $google_analytics; ?>
 </head>
 <body>
 <!--Top-->
@@ -97,8 +87,10 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
             <?php $n=0; foreach ($addresses as $key => $item) { ?>
             <?php 
                 $checked = false;
-                if(isset($this->session->data['shipping_address_id']) && $this->session->data['shipping_address_id'] == $item['address_id']){
-                    $checked = true;
+                if(isset($this->session->data['shipping_address_id'])){                    
+                    if($this->session->data['shipping_address_id'] == $item['address_id']){
+                       $checked = true; 
+                    }
                 }else if(!$n){
                     $checked = true;
                 }
@@ -115,9 +107,9 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
             </li>
             <?php $n++;}?>
         </ul>
-        <div class="new-adress">
+        <div class="new-adress <?php echo count($addresses) ? '' : 'adressbox' ?>">            
             <div class="ovh">
-                <input type="radio" class="adress-radio" name="shipping_address_id" value="0" />
+                <input type="radio" name="shipping_address_id" value="0" class="adress-radio" <?php echo count($addresses) ? '' : 'checked="checked"' ?> />
                 <label><?php echo $text_address_new ?></label>
             </div>
             <div class="newadress-box">
@@ -326,12 +318,31 @@ $('#button-confirm').bind('click', function() {
             if(json.status==1){
                 location.href = json.redirect;
             }else{
-
+                $('.invalid').remove();
+                if(json['error_shipping']){
+                    if(json['error_shipping']['address']){
+                        $('input[name="address"]').after('<div class="invalid">'+json['error_shipping']['address']+'</div>');
+                    }
+                    if(json['error_shipping']['fullname']){
+                        $('input[name="fullname"]').after('<div class="invalid">'+json['error_shipping']['fullname']+'</div>');
+                    }
+                    if(json['error_shipping']['mobile_phone']){
+                        $('input[name="mobile_phone"]').after('<div class="invalid">'+json['error_shipping']['mobile_phone']+'</div>');
+                    }
+                    if(json['error_shipping']['area']){
+                        $('select[name^="area"]').after('<div class="invalid">'+json['error_shipping']['area']+'</div>');
+                    }
+                    if($('.order-w').find('.invalid').length){
+                        $('html, body').animate({ scrollTop: 10 }, 'slow'); 
+                    }                    
+                }
             }
             
         }       
     });
 });
 //--></script> 
-
+<style type="text/css">
+    .invalid{float:right;color:red;margin-left:20px; }
+</style>
 <?php echo $footer; ?>

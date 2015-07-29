@@ -60,7 +60,6 @@ class ControllerCheckoutCheckout extends Controller {
         $this->data['scripts'] = $this->document->getScripts();
         $this->data['lang'] = $this->language->get('code');
         $this->data['direction'] = $this->language->get('direction');
-        $this->data['google_analytics'] = html_entity_decode($this->config->get('config_google_analytics'), ENT_QUOTES, 'UTF-8');
         $this->data['name'] = $this->config->get('config_name');
         
         if ($this->config->get('config_icon') && file_exists(DIR_IMAGE . $this->config->get('config_icon'))) {
@@ -292,7 +291,7 @@ class ControllerCheckoutCheckout extends Controller {
 			foreach ($results as $result) {
 				if ($this->config->get($result['code'] . '_status')) {
 					$this->load->model('total/' . $result['code']);
-					$this->{'model_total_' . $result['code']}->getCheckoutTotal($total_data, $total, $taxes,true);
+					$this->{'model_total_' . $result['code']}->getCheckoutTotal($total_data, $total, $taxes);
 				}
 				
 				$sort_order = array(); 
@@ -319,38 +318,36 @@ class ControllerCheckoutCheckout extends Controller {
 		$this->data['other_totals'] = $totals;
 
 		//payment
-		$payment_address = $this->model_account_address->getAddress($this->data['address_id']);		
 
-		if (!empty($payment_address)) {
-			
-			// Payment Methods
-			$method_data = array();
-						
-			$results = $this->model_setting_extension->getExtensions('payment');
-
-			foreach ($results as $result) {
-				if ($this->config->get($result['code'] . '_status')) {
-					$this->load->model('payment/' . $result['code']);
+		// Payment Methods
+		$method_data = array();
 					
-					$method = $this->{'model_payment_' . $result['code']}->getMethod($payment_address, $total);
-					
-					if ($method) {
-                        $method_data[$result['code']] = $method;                        
-					}					
+		$results = $this->model_setting_extension->getExtensions('payment');
 
-				}
+		foreach ($results as $result) {
+			if ($this->config->get($result['code'] . '_status')) {
+				$this->load->model('payment/' . $result['code']);
+				
+				$method = $this->{'model_payment_' . $result['code']}->getMethod($total);
+				
+				if ($method) {
+                    $method_data[$result['code']] = $method;                        
+				}					
+                if (!isset($this->session->data['payment_method'])) {
+                    $this->session->data['payment_method'] = $method;
+                }
 			}
-
-			$sort_order = array(); 
-		  
-			foreach ($method_data as $key => $value) {
-				$sort_order[$key] = $value['sort_order'];
-			}
-	
-			array_multisort($sort_order, SORT_ASC, $method_data);			
-
-			$this->session->data['payment_methods'] = $method_data;	
 		}
+
+		$sort_order = array(); 
+	  
+		foreach ($method_data as $key => $value) {
+			$sort_order[$key] = $value['sort_order'];
+		}
+
+		array_multisort($sort_order, SORT_ASC, $method_data);			
+
+		$this->session->data['payment_methods'] = $method_data;	
 
 		if (isset($this->session->data['payment_methods'])) {
 			$this->data['payment_methods'] = $this->session->data['payment_methods']; 
@@ -517,46 +514,6 @@ class ControllerCheckoutCheckout extends Controller {
 		
 		$this->session->data['success'] = $this->language->get('text_remove_success');
 		$this->response->redirect($this->url->link('checkout/checkout', '', 'SSL'));
-	}
-
-	public function validateAddress() {
-		if ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32)) {
-			$json['error']['firstname'] = $this->language->get('error_firstname');
-		}
-
-		if ((utf8_strlen($this->request->post['lastname']) < 1) || (utf8_strlen($this->request->post['lastname']) > 32)) {
-			$json['error']['lastname'] = $this->language->get('error_lastname');
-		}
-
-		if ((utf8_strlen($this->request->post['address_1']) < 3) || (utf8_strlen($this->request->post['address_1']) > 128)) {
-			$json['error']['address_1'] = $this->language->get('error_address_1');
-		}
-
-		if ((utf8_strlen($this->request->post['city']) < 2) || (utf8_strlen($this->request->post['city']) > 128)) {
-			$json['error']['city'] = $this->language->get('error_city');
-		}
-		
-
-		if ((utf8_strlen($this->request->post['postcode']) < 2) || (utf8_strlen($this->request->post['postcode']) > 10)) {
-			$json['error']['postcode'] = $this->language->get('error_postcode');
-		}
-		
-	
-		if (!isset($this->request->post['province_id']) || $this->request->post['province_id'] == '') {
-			$json['error']['province'] = $this->language->get('error_province');
-		}
-		
-		if (!$json) {						
-			// Default Shipping Address
-			$this->load->model('account/address');		
-			
-			$this->session->data['shipping_address_id'] = $this->model_account_address->addAddress($this->request->post);
-			$this->session->data['shipping_province_id'] = $this->request->post['province_id'];
-			$this->session->data['shipping_postcode'] = $this->request->post['postcode'];
-							
-			unset($this->session->data['shipping_method']);						
-			unset($this->session->data['shipping_methods']);
-		}
 	}
 	
     private function area_js(){

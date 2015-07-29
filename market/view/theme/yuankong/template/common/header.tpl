@@ -58,16 +58,6 @@ $(function(){ $('input, textarea').placeholder(); });
 <![endif]-->
 <script type="text/javascript" src="market/view/theme/<?php echo $themeName;?>/javascript/index.js"></script>
 
-<?php if ( isset($stores) && $stores ) { ?>
-<script type="text/javascript"><!--
-$(document).ready(function() {
-<?php foreach ($stores as $store) { ?>
-$('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></iframe>');
-<?php } ?>
-});
-//--></script>
-<?php } ?>
-<?php //echo $google_analytics; ?>
 <link rel="stylesheet" type="text/css" href="market/view/theme/<?php echo $themeName;?>/stylesheet/yk.css" />
 </head>
 <body class="b_fa">

@@ -378,7 +378,6 @@ class ControllerLocalisationProvince extends Controller {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 		
-		$this->load->model('setting/store');
 		$this->load->model('sale/customer');
 		$this->load->model('sale/affiliate');
 		$this->load->model('localisation/area_geo');
@@ -386,12 +385,6 @@ class ControllerLocalisationProvince extends Controller {
 		foreach ($this->request->post['selected'] as $area_id) {
 			if ($this->config->get('config_province_id') == $area_id) {
 				$this->error['warning'] = $this->language->get('error_default');
-			}
-			
-			$store_total = $this->model_setting_store->getTotalStoresByProvinceId($area_id);
-
-			if ($store_total) {
-				$this->error['warning'] = sprintf($this->language->get('error_store'), $store_total);
 			}
 		
 			$address_total = $this->model_sale_customer->getTotalAddressesByProvinceId($area_id);

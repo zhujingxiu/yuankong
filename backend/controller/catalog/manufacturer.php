@@ -347,18 +347,6 @@ class ControllerCatalogManufacturer extends Controller {
       		$this->data['name'] = '';
     	}
 		
-		$this->load->model('setting/store');
-		
-		$this->data['stores'] = $this->model_setting_store->getStores();
-		
-		if (isset($this->request->post['manufacturer_store'])) {
-			$this->data['manufacturer_store'] = $this->request->post['manufacturer_store'];
-		} elseif (isset($this->request->get['manufacturer_id'])) {
-			$this->data['manufacturer_store'] = $this->model_catalog_manufacturer->getManufacturerStores($this->request->get['manufacturer_id']);
-		} else {
-			$this->data['manufacturer_store'] = array(0);
-		}	
-		
 		if (isset($this->request->post['keyword'])) {
 			$this->data['keyword'] = $this->request->post['keyword'];
 		} elseif (!empty($manufacturer_info)) {

@@ -148,10 +148,10 @@
             </thead>
             <tbody>
               <tr>
-                <td class="left"><select name="category_layout[layout_id]">
+                <td class="left"><select name="layout_id">
                     <option value=""></option>
                     <?php foreach ($layouts as $layout) { ?>
-                    <?php if (isset($category_layout) && $category_layout == $layout['layout_id']) { ?>
+                    <?php if ( in_array($layout['layout_id'], $layout_id)) { ?>
                     <option value="<?php echo $layout['layout_id']; ?>" selected="selected"><?php echo $layout['name']; ?></option>
                     <?php } else { ?>
                     <option value="<?php echo $layout['layout_id']; ?>"><?php echo $layout['name']; ?></option>

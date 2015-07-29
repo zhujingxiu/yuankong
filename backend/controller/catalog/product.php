@@ -776,18 +776,6 @@ class ControllerCatalogProduct extends Controller {
 		} else {
       		$this->data['location'] = '';
     	}
-
-		$this->load->model('setting/store');
-		
-		$this->data['stores'] = $this->model_setting_store->getStores();
-		
-		if (isset($this->request->post['product_store'])) {
-			$this->data['product_store'] = $this->request->post['product_store'];
-		} elseif (isset($this->request->get['product_id'])) {
-			$this->data['product_store'] = $this->model_catalog_product->getProductStores($this->request->get['product_id']);
-		} else {
-			$this->data['product_store'] = array(0);
-		}	
 		
 		if (isset($this->request->post['keyword'])) {
 			$this->data['keyword'] = $this->request->post['keyword'];
@@ -1162,12 +1150,12 @@ class ControllerCatalogProduct extends Controller {
 			$this->data['product_reward'] = array();
 		}
 		
-		if (isset($this->request->post['product_layout'])) {
-			$this->data['product_layout'] = $this->request->post['product_layout'];
+		if (isset($this->request->post['layout_id'])) {
+			$this->data['layout_id'] = $this->request->post['layout_id'];
 		} elseif (isset($this->request->get['product_id'])) {
-			$this->data['product_layout'] = $this->model_catalog_product->getProductLayouts($this->request->get['product_id']);
+			$this->data['layout_id'] = $this->model_catalog_product->getProductLayouts($this->request->get['product_id']);
 		} else {
-			$this->data['product_layout'] = array();
+			$this->data['layout_id'] = array();
 		}
 
 		$this->load->model('design/layout');

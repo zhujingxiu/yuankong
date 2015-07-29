@@ -12,14 +12,14 @@
   <h1><?php echo $text_invoice; ?></h1>
   <table class="store">
     <tr>
-      <td><?php echo $order['store_name']; ?><br />
+      <td><?php echo $this->config->get('config_name'); ?><br />
         <?php echo $order['store_address']; ?><br />
         <?php echo $text_telephone; ?> <?php echo $order['store_telephone']; ?><br />
         <?php if ($order['store_fax']) { ?>
         <?php echo $text_fax; ?> <?php echo $order['store_fax']; ?><br />
         <?php } ?>
         <?php echo $order['store_email']; ?><br />
-        <?php echo $order['store_url']; ?></td>
+        <?php echo HTTP_CATALOG; ?></td>
       <td align="right" valign="top"><table>
           <tr>
             <td><b><?php echo $text_date_added; ?></b></td>

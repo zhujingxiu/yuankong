@@ -332,10 +332,6 @@ class ControllerDesignLayout extends Controller {
 			$this->data['name'] = '';
 		}
 		
-		$this->load->model('setting/store');
-		
-		$this->data['stores'] = $this->model_setting_store->getStores();
-		
 		if (isset($this->request->post['layout_route'])) {
 			$this->data['layout_routes'] = $this->request->post['layout_route'];
 		} elseif (isset($this->request->get['layout_id'])) {
@@ -374,7 +370,6 @@ class ControllerDesignLayout extends Controller {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 		
-		$this->load->model('setting/store');
 		$this->load->model('catalog/product');
 		$this->load->model('catalog/category');
 		$this->load->model('catalog/information');
@@ -382,12 +377,6 @@ class ControllerDesignLayout extends Controller {
 		foreach ($this->request->post['selected'] as $layout_id) {
 			if ($this->config->get('config_layout_id') == $layout_id) {
 				$this->error['warning'] = $this->language->get('error_default');
-			}
-			
-			$store_total = $this->model_setting_store->getTotalStoresByLayoutId($layout_id);
-
-			if ($store_total) {
-				$this->error['warning'] = sprintf($this->language->get('error_store'), $store_total);
 			}
 			
 			$product_total = $this->model_catalog_product->getTotalProductsByLayoutId($layout_id);
@@ -416,4 +405,3 @@ class ControllerDesignLayout extends Controller {
 		}
 	}
 }
-?>

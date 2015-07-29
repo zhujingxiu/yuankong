@@ -530,7 +530,7 @@ class ControllerSaleAffiliate extends Controller {
   
   	protected function getForm() {
     	$this->data['heading_title'] = $this->language->get('heading_title');
- 
+ 		$this->document->addScript($this->area_js());
     	$this->data['text_enabled'] = $this->language->get('text_enabled');
     	$this->data['text_disabled'] = $this->language->get('text_disabled');
 		$this->data['text_select'] = $this->language->get('text_select');
@@ -630,24 +630,6 @@ class ControllerSaleAffiliate extends Controller {
 			$this->data['error_area'] = '';
 		}
 		
-		if (isset($this->error['postcode'])) {
-			$this->data['error_postcode'] = $this->error['postcode'];
-		} else {
-			$this->data['error_postcode'] = '';
-		}
-		
-		
-		if (isset($this->error['province'])) {
-			$this->data['error_province'] = $this->error['province'];
-		} else {
-			$this->data['error_province'] = '';
-		}
-
-		if (isset($this->error['code'])) {
-			$this->data['error_code'] = $this->error['code'];
-		} else {
-			$this->data['error_code'] = '';
-		}
 						
 		$url = '';
 		
@@ -944,10 +926,6 @@ class ControllerSaleAffiliate extends Controller {
 				$this->error['warning'] = $this->language->get('error_exists');
 			}
 		}
-		
-    	if ((utf8_strlen($this->request->post['telephone']) < 3) || (utf8_strlen($this->request->post['telephone']) > 32)) {
-      		$this->error['telephone'] = $this->language->get('error_telephone');
-    	}
 
     	if ($this->request->post['password'] || (!isset($this->request->get['affiliate_id']))) {
       		if ((utf8_strlen($this->request->post['password']) < 4) || (utf8_strlen($this->request->post['password']) > 20)) {
@@ -964,14 +942,10 @@ class ControllerSaleAffiliate extends Controller {
     	}
 
 		
-    	if (!isset($this->request->post['province_id']) || $this->request->post['province_id'] == '') {
-      		$this->error['province'] = $this->language->get('error_province');
+    	if (!isset($this->request->post['area']) || !is_array($this->request->post['area']) || !current($this->request->post['area'])) {
+      		$this->error['area'] = $this->language->get('error_area');
     	}
 
-    	if (!$this->request->post['code']) {
-      		$this->error['code'] = $this->language->get('error_code');
-    	}
-					
 		if (!$this->error) {
 	  		return true;
 		} else {
@@ -1076,5 +1050,50 @@ class ControllerSaleAffiliate extends Controller {
 		}
 		
 		$this->response->setOutput(json_encode($affiliate_data));
-	}		
+	}	
+
+	private function area_js(){
+        $file = '..'.TPL_JS.'area.js';
+        if(!file_exists($file)){
+            $this->load->model('localisation/area');
+            $areas = $this->model_localisation_area->getAreas();
+            $area_rows_group_by_pid = $this->array_group($areas, 'pid');
+            $address = array();
+            foreach ($area_rows_group_by_pid as $pid => $item) {
+                if ($pid == 0) {                    
+                    $item = array_filter($item, function($item){
+                        return $item['pid'] == 0;
+                    });
+                }
+                $address['name'.$pid] = array_keys($this->array_group($item, 'name'));
+                $address['code'.$pid] = array_keys($this->array_group($item, 'area_id'));
+            }
+            file_put_contents($file, 'var area = ' . json_encode_ex($address) . ';');            
+        }
+        return $file;
+    }  
+
+    private function array_group($array, $key, $limit = false){
+        if (empty ($array) || !is_array($array)){
+            return $array;
+        }
+
+        $_result = array ();
+        foreach ($array as $item) {
+            if ((isset($item[$key]))) {
+                $_result[(string)$item[$key]][] = $item;
+            } else {
+                $_result[count($_result)][] = $item;
+            }
+        }
+        if (!$limit) {
+            return $_result;
+        }
+
+        $result = array ();
+        foreach ($_result as $k => $item) {
+            $result[$k] = $item[0];
+        }
+        return $result;
+    } 	
 }

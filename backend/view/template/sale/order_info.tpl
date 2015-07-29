@@ -249,27 +249,6 @@
           </tbody>
           <?php } ?>
         </table>
-        <?php if ($downloads) { ?>
-        <h3><?php echo $text_download; ?></h3>
-        <table class="list">
-          <thead>
-            <tr>
-              <td class="left"><b><?php echo $column_download; ?></b></td>
-              <td class="left"><b><?php echo $column_filename; ?></b></td>
-              <td class="right"><b><?php echo $column_remaining; ?></b></td>
-            </tr>
-          </thead>
-          <tbody>
-            <?php foreach ($downloads as $download) { ?>
-            <tr>
-              <td class="left"><?php echo $download['name']; ?></td>
-              <td class="left"><?php echo $download['filename']; ?></td>
-              <td class="right"><?php echo $download['remaining']; ?></td>
-            </tr>
-            <?php } ?>
-          </tbody>
-        </table>
-        <?php } ?>
       </div>
       <div id="tab-history" class="vtabs-content">
         <div id="history"></div>

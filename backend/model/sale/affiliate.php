@@ -1,11 +1,67 @@
 <?php
 class ModelSaleAffiliate extends Model {
 	public function addAffiliate($data) {
-      	$this->db->query("INSERT INTO " . DB_PREFIX . "affiliate SET group_id = '".(int)$data['group_id']."', fullname = '" . $this->db->escape($data['fullname']) . "', mobile_phone = '" . $this->db->escape($data['mobile_phone']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "', salt = '" . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . "', company = '" . $this->db->escape($data['company']) . "', address = '" . $this->db->escape($data['address']) . "', area_zone = '" . $this->db->escape($data['area_zone']) . "', postcode = '" . $this->db->escape($data['postcode']) . "', province_id = '" . (int)$data['province_id'] . "', areas = '" . implode("|",$data['area']) . "', code = '" . $this->db->escape($data['code']) . "', commission = '" . (float)$data['commission'] . "', tax = '" . $this->db->escape($data['tax']) . "', payment = '" . $this->db->escape($data['payment']) . "', cheque = '" . $this->db->escape($data['cheque']) . "',  bank_name = '" . $this->db->escape($data['bank_name']) . "', bank_branch_number = '" . $this->db->escape($data['bank_branch_number']) . "', bank_swift_code = '" . $this->db->escape($data['bank_swift_code']) . "', bank_account_name = '" . $this->db->escape($data['bank_account_name']) . "', bank_account_number = '" . $this->db->escape($data['bank_account_number']) . "', status = '" . (int)$data['status'] . "', date_added = NOW()");       	
+		$area_zone = array();
+		if(isset($data['area']) && is_array($data['area'])){
+			foreach ($data['area'] as $area_id) {
+				$_area_info = $this->db->fetch('area',array('one'=>true,'condition'=> array('area_id'=>$area_id)));
+				if(!empty($_area_info['name'])){
+					$area_zone[] = $_area_info['name'];
+				}				
+			}
+		}
+		reset($data['area']);
+		$salt = substr(md5(uniqid(rand(), true)), 0, 9);
+		$fileds = array(
+			'group_id' 		=> $data['group_id'],
+			'fullname' 		=> $data['fullname'],
+			'mobile_phone' 	=> $data['mobile_phone'],
+			'email' 		=> $data['email'],
+			'telephone' 	=> $data['telephone'],
+			'fax' 			=> $data['fax'],
+			'salt' 			=> $salt,
+			'password' 		=> sha1($salt . sha1($salt . sha1($data['password']))),
+			'company' 		=> $data['company'],
+			'area_zone' 	=> implode(" ", $area_zone),
+			'areas' 		=> implode("|",$data['area']),
+			'postcode' 		=> isset($data['postcode']) ? $data['postcode'] : '',
+			'province_id' 	=> current($data['area']),
+			'code' 			=> isset($data['code']) ? $data['code'] : '',
+			
+		);
+      	$this->db->insert("affiliate",$fileds);       	
 	}
 	
 	public function editAffiliate($affiliate_id, $data) {
-		$this->db->query("UPDATE " . DB_PREFIX . "affiliate SET group_id = '".(int)$data['group_id']."', fullname = '" . $this->db->escape($data['fullname']) . "', mobile_phone = '" . $this->db->escape($data['mobile_phone']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "', company = '" . $this->db->escape($data['company']) . "', address = '" . $this->db->escape($data['address']) . "', area_zone = '" . $this->db->escape($data['area_zone']) . "', postcode = '" . $this->db->escape($data['postcode']) . "', province_id = '" . (int)$data['province_id'] . "', areas = '" . implode("|",$data['area']) . "', code = '" . $this->db->escape($data['code']) . "', commission = '" . (float)$data['commission'] . "', tax = '" . $this->db->escape($data['tax']) . "', payment = '" . $this->db->escape($data['payment']) . "', cheque = '" . $this->db->escape($data['cheque']) . "',  bank_name = '" . $this->db->escape($data['bank_name']) . "', bank_branch_number = '" . $this->db->escape($data['bank_branch_number']) . "', bank_swift_code = '" . $this->db->escape($data['bank_swift_code']) . "', bank_account_name = '" . $this->db->escape($data['bank_account_name']) . "', bank_account_number = '" . $this->db->escape($data['bank_account_number']) . "', status = '" . (int)$data['status'] . "' WHERE affiliate_id = '" . (int)$affiliate_id . "'");
+		$area_zone = array();
+		if(isset($data['area']) && is_array($data['area'])){
+			foreach ($data['area'] as $area_id) {
+				$_area_info = $this->db->fetch('area',array('one'=>true,'condition'=> array('area_id'=>$area_id)));
+				if(!empty($_area_info['name'])){
+					$area_zone[] = $_area_info['name'];
+				}				
+			}
+		}
+		reset($data['area']);
+		$salt = substr(md5(uniqid(rand(), true)), 0, 9);
+		$fileds = array(
+			'group_id' 		=> $data['group_id'],
+			'fullname' 		=> $data['fullname'],
+			'mobile_phone' 	=> $data['mobile_phone'],
+			'email' 		=> $data['email'],
+			'telephone' 	=> $data['telephone'],
+			'fax' 			=> $data['fax'],
+			'salt' 			=> $salt,
+			'password' 		=> sha1($salt . sha1($salt . sha1($data['password']))),
+			'company' 		=> $data['company'],
+			'area_zone' 	=> implode(" ", $area_zone),
+			'areas' 		=> implode("|",$data['area']),
+			'postcode' 		=> isset($data['postcode']) ? $data['postcode'] : '',
+			'province_id' 	=> current($data['area']),
+			'code' 			=> isset($data['code']) ? $data['code'] : '',
+			
+		);
+		$this->db->update("affiliate", array('affiliate_id' => (int)$affiliate_id),$fileds);
 	
       	if ($data['password']) {
         	$this->db->query("UPDATE " . DB_PREFIX . "affiliate SET salt = '" . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . "' WHERE affiliate_id = '" . (int)$affiliate_id . "'");
@@ -29,8 +85,6 @@ class ModelSaleAffiliate extends Model {
 		return $query->row;
 	}
 
-
-			
 	public function getAffiliates($data = array()) {
 		$sql = "SELECT a.*,ag.name group_name, a.fullname AS name, (SELECT SUM(at.amount) FROM " . DB_PREFIX . "affiliate_transaction at WHERE at.affiliate_id = a.affiliate_id GROUP BY at.affiliate_id) AS balance FROM " . DB_PREFIX . "affiliate a LEFT JOIN ".DB_PREFIX."affiliate_group ag ON a.group_id = ag.group_id ";
 

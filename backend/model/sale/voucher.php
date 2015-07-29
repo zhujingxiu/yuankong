@@ -82,7 +82,7 @@ class ModelSaleVoucher extends Model {
 			$this->load->model('sale/order');
 			
 			$order_info = $this->model_sale_order->getOrder($order_id);
-			
+			$store_name = $this->config->get('config_name');
 			// If voucher belongs to an order
 			if ($order_info) {
 				$this->load->model('localisation/language');
@@ -112,8 +112,8 @@ class ModelSaleVoucher extends Model {
 					$template->data['image'] = '';
 				}
 				
-				$template->data['store_name'] = $order_info['store_name'];
-				$template->data['store_url'] = $order_info['store_url'];
+				$template->data['store_name'] = $store_name;
+				$template->data['store_url'] = HTTP_CATALOG;
 				$template->data['message'] = nl2br($voucher_info['message']);
 	
 				$mail = new Mail(); 
@@ -126,7 +126,7 @@ class ModelSaleVoucher extends Model {
 				$mail->timeout = $this->config->get('config_smtp_timeout');			
 				$mail->setTo($voucher_info['to_email']);
 				$mail->setFrom($this->config->get('config_email'));
-				$mail->setSender($order_info['store_name']);
+				$mail->setSender($store_name);
 				$mail->setSubject(html_entity_decode(sprintf($language->get('text_subject'), $voucher_info['from_name']), ENT_QUOTES, 'UTF-8'));
 				$mail->setHtml($template->fetch('mail/voucher.tpl'));				
 				$mail->send();
@@ -155,7 +155,7 @@ class ModelSaleVoucher extends Model {
 					$template->data['image'] = '';
 				}
 				
-				$template->data['store_name'] = $this->config->get('config_name');
+				$template->data['store_name'] = $store_name;
 				$template->data['store_url'] = HTTP_CATALOG;
 				$template->data['message'] = nl2br($voucher_info['message']);
 	

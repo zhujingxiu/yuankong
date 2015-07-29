@@ -592,10 +592,6 @@ class ControllerSaleCustomer extends Controller {
 		$this->load->model('sale/customer_group');
 		
     	$this->data['customer_groups'] = $this->model_sale_customer_group->getCustomerGroups();
-
-		$this->load->model('setting/store');
-		
-		$this->data['stores'] = $this->model_setting_store->getStores();
 				
 		$this->data['sort'] = $sort;
 		$this->data['order'] = $order;

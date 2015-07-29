@@ -13,6 +13,7 @@ if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
 } else {
 	defined('APP_ENV')  || define('APP_ENV',  'production' );
 }
+//defined('APP_ENV')  || define('APP_ENV',  'production' );
 // Startup
 require_once(DIR_SYSTEM . 'startup.php');
 
@@ -43,10 +44,8 @@ foreach ($query->rows as $setting) {
 	}
 }
 
-if (!$store_query->num_rows) {
-	$config->set('config_url', HTTP_SERVER);
-	$config->set('config_ssl', HTTPS_SERVER);	
-}
+$config->set('config_url', HTTP_SERVER);
+$config->set('config_ssl', HTTPS_SERVER);
 
 // Url
 $url = new Url($config->get('config_url'), $config->get('config_secure') ? $config->get('config_ssl') : $config->get('config_url'));	

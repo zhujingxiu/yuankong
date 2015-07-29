@@ -57,17 +57,7 @@
                 <span class="error"><?php echo $error_email; ?></span>
                 <?php  } ?></td>
             </tr>
-            <tr>
-              <td><span class="required">*</span> <?php echo $entry_telephone; ?></td>
-              <td><input type="text" name="telephone" value="<?php echo $telephone; ?>" />
-                <?php if ($error_telephone) { ?>
-                <span class="error"><?php echo $error_telephone; ?></span>
-                <?php  } ?></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_fax; ?></td>
-              <td><input type="text" name="fax" value="<?php echo $fax; ?>" /></td>
-            </tr>
+
             
             <tr>
               <td><span class="required">*</span> <?php echo $entry_address; ?></td>
@@ -76,27 +66,14 @@
                 <span class="error"><?php echo $error_address; ?></span>
                 <?php  } ?></td>
             </tr>
-
-            <tr>
-              <td><span class="required">*</span> <?php echo $entry_area_zone; ?></td>
-              <td><input type="text" name="area_zone" value="<?php echo $area_zone; ?>" /></td>
-            </tr>
-            <tr>
-              <td><span id="postcode-required" class="required">*</span> <?php echo $entry_postcode; ?></td>
-              <td><input type="text" name="postcode" value="<?php echo $postcode; ?>" /></td>
-            </tr>
+            
             <tr>
               <td><span class="required">*</span> <?php echo $entry_province; ?></td>
-              <td><select name="province_id">
-                </select></td>
+              <td><div id="area-zone"><?php echo $area_zone ?></div><div class="item-adress" id="area"></div><?php if ($error_area) { ?>
+                <span class="error"><?php echo $error_area; ?></span>
+                <?php  } ?></td>
             </tr>
-            <tr>
-              <td><span class="required">*</span> <?php echo $entry_code; ?></td>
-              <td><input type="code" name="code" value="<?php echo $code; ?>"  />
-                <?php if ($error_code) { ?>
-                <span class="error"><?php echo $error_code; ?></span>
-                <?php } ?></td>
-            </tr>
+
             <tr>
               <td><?php echo $entry_password; ?></td>
               <td><input type="password" name="password" value="<?php echo $password; ?>"  />
@@ -110,6 +87,22 @@
                 <?php if ($error_confirm) { ?>
                 <span class="error"><?php echo $error_confirm; ?></span>
                 <?php  } ?></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_telephone; ?></td>
+              <td><input type="text" name="telephone" value="<?php echo $telephone; ?>" /></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_fax; ?></td>
+              <td><input type="text" name="fax" value="<?php echo $fax; ?>" /></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_postcode; ?></td>
+              <td><input type="text" name="postcode" value="<?php echo $postcode; ?>" /></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_code; ?></td>
+              <td><input type="code" name="code" value="<?php echo $code; ?>"  /></td>
             </tr>
             <tr>
               <td><?php echo $entry_status; ?></td>
@@ -206,7 +199,44 @@
     </div>
   </div>
 </div>
+<script type="text/javascript"><!--
+    $(function(){
+        add_select(0);
+        $('body').on('change', '#area select', function() {
+            var $me = $(this);
+            var $next = $me.next();
 
+            if ($me.val() == $next.data('pid')) {
+                return;
+            }
+            $me.nextAll().remove();
+            add_select($me.val());
+        });
+
+        function add_select(pid) {
+            var area_names = area['name'+pid];
+            if (!area_names) {
+                return false;
+            }
+            var area_codes = area['code'+pid];
+            var $select = $('<select >');
+            $select.attr('name', 'area[]');
+            $select.attr('class', 'adress-sec');
+            $select.data('pid', pid);
+            if (area_codes[0] != -1) {
+                area_names.unshift('请选择');
+                area_codes.unshift(0);
+            }
+            for (var idx in area_codes) {
+                var $option = $('<option>');
+                $option.attr('value', area_codes[idx]);
+                $option.text(area_names[idx]);
+                $select.append($option);
+            }
+            $('#area').append($select);
+        };
+    });
+//--></script> 
 <script type="text/javascript"><!--
 $('input[name=\'payment\']').bind('change', function() {
 	$('.payment').hide();

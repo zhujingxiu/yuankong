@@ -65,7 +65,6 @@ class ModelAffiliateAffiliate extends Model {
 	public function editAffiliate($data) {
 
 		$fields = array(
-			'store_id' 		=> (int)$this->config->get('config_store_id') ,
 			'mobile_phone'	=> $data['mobile_phone'],
 			'fullname'		=> $data['fullname'],
 			'company'		=> $data['company'],

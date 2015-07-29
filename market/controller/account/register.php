@@ -20,7 +20,7 @@ class ControllerAccountRegister extends Controller {
 		$this->data['scripts'] = $this->document->getScripts();
 		$this->data['lang'] = $this->language->get('code');
 		$this->data['direction'] = $this->language->get('direction');
-		$this->data['google_analytics'] = html_entity_decode($this->config->get('config_google_analytics'), ENT_QUOTES, 'UTF-8');
+		$this->data['baidu_analytics'] = html_entity_decode($this->config->get('config_baidu_analytics'), ENT_QUOTES, 'UTF-8');
 		$this->data['name'] = $this->config->get('config_name');
 		
 		if ($this->config->get('config_icon') && file_exists(DIR_IMAGE . $this->config->get('config_icon'))) {
@@ -61,7 +61,7 @@ class ControllerAccountRegister extends Controller {
 				$this->session->data['payment_zone_id'] = $this->request->post['zone_id'];			
 			}
 							  	  
-	  		$this->redirect($this->url->link('account/success'));
+	  		$this->redirect($this->url->link('account/account'));
     	}
       	$this->data['breadcrumbs'] = array();
 
@@ -102,7 +102,7 @@ class ControllerAccountRegister extends Controller {
 		$this->data['text_none'] = $this->language->get('text_none');
 						
     	$this->data['entry_mobile_phone'] = $this->language->get('entry_mobile_phone');
-    	$this->data['entry_nickname'] = $this->language->get('entry_nickname');
+    	$this->data['entry_fullname'] = $this->language->get('entry_fullname');
     	$this->data['entry_email'] = $this->language->get('entry_email');
 		$this->data['entry_captcha'] = $this->language->get('entry_captcha');
 		$this->data['entry_input_sms'] = $this->language->get('entry_input_sms');
@@ -159,10 +159,10 @@ class ControllerAccountRegister extends Controller {
 			$this->data['mobile_phone'] = '';
 		}
 
-		if (isset($this->request->post['nickname'])) {
-    		$this->data['nickname'] = $this->request->post['nickname'];
+		if (isset($this->request->post['fullname'])) {
+    		$this->data['fullname'] = $this->request->post['fullname'];
 		} else {
-			$this->data['nickname'] = '';
+			$this->data['fullname'] = '';
 		}
 
 		if (isset($this->request->post['email'])) {
@@ -278,6 +278,7 @@ class ControllerAccountRegister extends Controller {
   	}
 
   	public function getSMS(){
+        $this->language->load('account/register');
   		$json = array();	
 
   		if(empty($this->session->data['captcha']) || ($this->session->data['captcha'] != $this->request->post['captcha'])) {

@@ -354,18 +354,6 @@ class ControllerCatalogInformation extends Controller {
 			$this->data['information_description'] = $this->model_catalog_information->getInformationDescriptions($this->request->get['information_id']);
 		} else {
 			$this->data['information_description'] = array();
-		}
-
-		$this->load->model('setting/store');
-		
-		$this->data['stores'] = $this->model_setting_store->getStores();
-		
-		if (isset($this->request->post['information_store'])) {
-			$this->data['information_store'] = $this->request->post['information_store'];
-		} elseif (isset($this->request->get['information_id'])) {
-			$this->data['information_store'] = $this->model_catalog_information->getInformationStores($this->request->get['information_id']);
-		} else {
-			$this->data['information_store'] = array(0);
 		}		
 		
 		if (isset($this->request->post['keyword'])) {
@@ -400,12 +388,12 @@ class ControllerCatalogInformation extends Controller {
 			$this->data['sort_order'] = '';
 		}
 		
-		if (isset($this->request->post['information_layout'])) {
-			$this->data['information_layout'] = $this->request->post['information_layout'];
+		if (isset($this->request->post['layout_id'])) {
+			$this->data['layout_id'] = $this->request->post['layout_id'];
 		} elseif (isset($this->request->get['information_id'])) {
-			$this->data['information_layout'] = $this->model_catalog_information->getInformationLayouts($this->request->get['information_id']);
+			$this->data['layout_id'] = $this->model_catalog_information->getInformationLayouts($this->request->get['information_id']);
 		} else {
-			$this->data['information_layout'] = array();
+			$this->data['layout_id'] = array();
 		}
 
 		$this->load->model('design/layout');
@@ -452,7 +440,6 @@ class ControllerCatalogInformation extends Controller {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 
-		$this->load->model('setting/store');
 		
 		foreach ($this->request->post['selected'] as $information_id) {
 			if ($this->config->get('config_account_id') == $information_id) {
@@ -467,11 +454,6 @@ class ControllerCatalogInformation extends Controller {
 				$this->error['warning'] = $this->language->get('error_affiliate');
 			}
 						
-			$store_total = $this->model_setting_store->getTotalStoresByInformationId($information_id);
-
-			if ($store_total) {
-				$this->error['warning'] = sprintf($this->language->get('error_store'), $store_total);
-			}
 		}
 
 		if (!$this->error) {
@@ -481,4 +463,3 @@ class ControllerCatalogInformation extends Controller {
 		}
 	}
 }
-?>

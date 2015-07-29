@@ -274,7 +274,7 @@ class ModelCatalogProduct extends Model {
 			$customer_group_id = $this->config->get('config_customer_group_id');
 		}	
 				
-		$product_data = $this->cache->get('product.latest.' . (int)$this->config->get('config_language_id') . '.' . (int)$this->config->get('config_store_id') . '.' . $customer_group_id . '.' . (int)$limit);
+		$product_data = $this->cache->get('product.latest.' . (int)$this->config->get('config_language_id') .  '.' . $customer_group_id . '.' . (int)$limit);
 
 		if (!$product_data) { 
 			$query = $this->db->query("SELECT p.product_id FROM " . DB_PREFIX . "product p  WHERE p.status = '1' AND p.date_available <= NOW()  ORDER BY p.date_added DESC LIMIT " . (int)$limit);
@@ -283,7 +283,7 @@ class ModelCatalogProduct extends Model {
 				$product_data[$result['product_id']] = $this->getProduct($result['product_id']);
 			}
 			
-			$this->cache->set('product.latest.' . (int)$this->config->get('config_language_id') . '.' . (int)$this->config->get('config_store_id'). '.' . $customer_group_id . '.' . (int)$limit, $product_data);
+			$this->cache->set('product.latest.' . (int)$this->config->get('config_language_id') .  '.' . $customer_group_id . '.' . (int)$limit, $product_data);
 		}
 		
 		return $product_data;
@@ -308,7 +308,7 @@ class ModelCatalogProduct extends Model {
 			$customer_group_id = $this->config->get('config_customer_group_id');
 		}	
 				
-		$product_data = $this->cache->get('product.bestseller.' . (int)$this->config->get('config_language_id') . '.' . (int)$this->config->get('config_store_id'). '.' . $customer_group_id . '.' . (int)$limit);
+		$product_data = $this->cache->get('product.bestseller.' . (int)$this->config->get('config_language_id') . '.' . $customer_group_id . '.' . (int)$limit);
 
 		if (!$product_data) { 
 			$product_data = array();
@@ -319,7 +319,7 @@ class ModelCatalogProduct extends Model {
 				$product_data[$result['product_id']] = $this->getProduct($result['product_id']);
 			}
 			
-			$this->cache->set('product.bestseller.' . (int)$this->config->get('config_language_id') . '.' . (int)$this->config->get('config_store_id'). '.' . $customer_group_id . '.' . (int)$limit, $product_data);
+			$this->cache->set('product.bestseller.' . (int)$this->config->get('config_language_id') . '.' . $customer_group_id . '.' . (int)$limit, $product_data);
 		}
 		
 		return $product_data;
@@ -407,7 +407,7 @@ class ModelCatalogProduct extends Model {
 	public function getCategoryRelated($category_id) {
 
 		$category_data = array();
-		$sql = "SELECT c.category_id,cd.name FROM " . DB_PREFIX . "category c LEFT JOIN ".DB_PREFIX."category c1 ON c.parent_id = c1.parent_id LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) LEFT JOIN " . DB_PREFIX . "category_description cd ON (cd.category_id = c.category_id) WHERE c.category_id != '" . (int)$category_id . "' AND c1.category_id = '" . (int)$category_id . "' AND c.status = '1' AND c2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
+		$sql = "SELECT c.category_id,cd.name FROM " . DB_PREFIX . "category c LEFT JOIN ".DB_PREFIX."category c1 ON c.parent_id = c1.parent_id LEFT JOIN " . DB_PREFIX . "category_description cd ON (cd.category_id = c.category_id) WHERE c.category_id != '" . (int)$category_id . "' AND c1.category_id = '" . (int)$category_id . "' AND c.status = '1' AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 		$query = $this->db->query($sql);
 
 		foreach ($query->rows as $result) { 
@@ -423,7 +423,7 @@ class ModelCatalogProduct extends Model {
 	}
 		
 	public function getProductLayoutId($product_id) {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_to_layout WHERE product_id = '" . (int)$product_id . "' AND store_id = '" . (int)$this->config->get('config_store_id') . "'");
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_to_layout WHERE product_id = '" . (int)$product_id . "' ");
 		
 		if ($query->num_rows) {
 			return $query->row['layout_id'];

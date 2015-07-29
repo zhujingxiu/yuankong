@@ -89,22 +89,7 @@
             <span class="error"><?php echo $error_postcode; ?></span>
             <?php } ?></td>
         </tr>
-        <tr>
-          <td><span class="required">*</span> <?php echo $entry_country; ?></td>
-          <td><select name="country_id">
-              <option value="false"><?php echo $text_select; ?></option>
-              <?php foreach ($countries as $country) { ?>
-              <?php if ($country['country_id'] == $country_id) { ?>
-              <option value="<?php echo $country['country_id']; ?>" selected="selected"><?php echo $country['name']; ?></option>
-              <?php } else { ?>
-              <option value="<?php echo $country['country_id']; ?>"><?php echo $country['name']; ?></option>
-              <?php } ?>
-              <?php } ?>
-            </select>
-            <?php if ($error_country) { ?>
-            <span class="error"><?php echo $error_country; ?></span>
-            <?php } ?></td>
-        </tr>
+
         <tr>
           <td><span class="required">*</span> <?php echo $entry_zone; ?></td>
           <td><select name="zone_id">
@@ -123,50 +108,7 @@
     </div>
   </form>
   <?php echo $content_bottom; ?></div>
-<script type="text/javascript"><!--
-$('select[name=\'country_id\']').bind('change', function() {
-	$.ajax({
-		url: 'index.php?route=affiliate/edit/country&country_id=' + this.value,
-		dataType: 'json',
-		beforeSend: function() {
-			$('select[name=\'country_id\']').after('<span class="wait">&nbsp;<img src="market/view/theme/default/image/loading.gif" alt="" /></span>');
-		},
-		complete: function() {
-			$('.wait').remove();
-		},			
-		success: function(json) {
-			if (json['postcode_required'] == '1') {
-				$('#postcode-required').show();
-			} else {
-				$('#postcode-required').hide();
-			}
-			
-			html = '<option value=""><?php echo $text_select; ?></option>';
-			
-			if (json['zone'] != '') {
-				for (i = 0; i < json['zone'].length; i++) {
-        			html += '<option value="' + json['zone'][i]['zone_id'] + '"';
-	    			
-					if (json['zone'][i]['zone_id'] == '<?php echo $zone_id; ?>') {
-	      				html += ' selected="selected"';
-	    			}
-	
-	    			html += '>' + json['zone'][i]['name'] + '</option>';
-				}
-			} else {
-				html += '<option value="0" selected="selected"><?php echo $text_none; ?></option>';
-			}
-			
-			$('select[name=\'zone_id\']').html(html);
-		},
-		error: function(xhr, ajaxOptions, thrownError) {
-			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-		}
-	});
-});
 
-$('select[name=\'country_id\']').trigger('change');
-//--></script>
 </div>
 <?php if( $SPAN[2] ): ?>
 <div class="span<?php echo $SPAN[2];?>">	

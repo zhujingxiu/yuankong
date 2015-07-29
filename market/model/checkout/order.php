@@ -201,6 +201,7 @@ class ModelCheckoutOrder extends Model {
 					$this->{'model_total_' . $order_total['code']}->confirm($order_info, $order_total);
 				}
 			}
+			$store_name = $this->config->get('config_name');
 			if($notify){
 				// Send out order confirmation mail
 				$language = new Language($order_info['language_directory']);
@@ -215,14 +216,14 @@ class ModelCheckoutOrder extends Model {
 					$order_status = '';
 				}
 				
-				$subject = sprintf($language->get('text_new_subject'), $order_info['store_name'], $order_id);
+				$subject = sprintf($language->get('text_new_subject'), $this->config->get('config_name'), $order_id);
 			
 				// HTML Mail
 				$template = new Template();
 				
-				$template->data['title'] = sprintf($language->get('text_new_subject'), html_entity_decode($order_info['store_name'], ENT_QUOTES, 'UTF-8'), $order_id);
+				$template->data['title'] = sprintf($language->get('text_new_subject'), html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'), $order_id);
 				
-				$template->data['text_greeting'] = sprintf($language->get('text_new_greeting'), html_entity_decode($order_info['store_name'], ENT_QUOTES, 'UTF-8'));
+				$template->data['text_greeting'] = sprintf($language->get('text_new_greeting'), html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
 				$template->data['text_link'] = $language->get('text_new_link');
 				$template->data['text_download'] = $language->get('text_new_download');
 				$template->data['text_order_detail'] = $language->get('text_new_order_detail');
@@ -245,10 +246,10 @@ class ModelCheckoutOrder extends Model {
 				$template->data['text_powered'] = $language->get('text_new_powered');
 				
 				$template->data['logo'] = $this->config->get('config_url') . 'image/' . $this->config->get('config_logo');		
-				$template->data['store_name'] = $order_info['store_name'];
-				$template->data['store_url'] = $order_info['store_url'];
+				$template->data['store_name'] = $this->config->get('config_name');
+				$template->data['store_url'] = HTTP_CATALOG;
 				$template->data['customer_id'] = $order_info['customer_id'];
-				$template->data['link'] = $order_info['store_url'] . 'index.php?route=account/order/info&order_id=' . $order_id;
+				$template->data['link'] = HTTP_CATALOG . 'index.php?route=account/order/info&order_id=' . $order_id;
 				
 				$template->data['order_id'] = $order_id;
 				$template->data['date_added'] = date($language->get('date_format_short'), strtotime($order_info['date_added']));    	
@@ -272,23 +273,22 @@ class ModelCheckoutOrder extends Model {
 					}
 				}			
 					
-				$format = '{nickname} {mobile_phone}' . "\n" . '{areas}' .  '{address_1}' .  '{address_2}' ;
+				$format = '{area_zone} {address} {postcode} {mobile_phone} {fullname}' ;
 				
 				$find = array(
-					'{nickname}',
+					'{area_zone}',
+					'{address}',
+					'{postcode}',
 					'{mobile_phone}',
-					'{areas}',
-					'{address_1}',
-					'{address_2}',
-					'{areas}'
+					'{fullname}'
 				);
 			
 				$replace = array(
-					'nickname' => $order_info['shipping_nickname'],
-					'mobile_phone' => $order_info['shipping_mobile_phone'],
-					'areas'   => implode(" ", $area),
-					'address_1' => $order_info['shipping_address_1'],
-					'address_2' => $order_info['shipping_address_2']
+					'area_zone'   	=> implode(" ", $area),					
+					'address' 		=> $order_info['shipping_address'],
+					'postcode' 		=> $order_info['shipping_postcode'],
+					'mobile_phone' 	=> $order_info['shipping_mobile_phone'],
+					'fullname' 		=> $order_info['shipping_fullname'],
 				);
 			
 				$template->data['shipping_address'] = str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format))));
@@ -347,7 +347,7 @@ class ModelCheckoutOrder extends Model {
 	            $this->load->model('payment/amazon_checkout');
 	            if (!$this->model_payment_amazon_checkout->isAmazonOrder($order_info['order_id'])) {
 	                // Text Mail
-	                $text = sprintf($language->get('text_new_greeting'), html_entity_decode($order_info['store_name'], ENT_QUOTES, 'UTF-8')) . "\n\n";
+	                $text = sprintf($language->get('text_new_greeting'), html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8')) . "\n\n";
 	                $text .= $language->get('text_new_order_id') . ' ' . $order_id . "\n";
 	                $text .= $language->get('text_new_date_added') . ' ' . date($language->get('date_format_short'), strtotime($order_info['date_added'])) . "\n";
 	                $text .= $language->get('text_new_order_status') . ' ' . $order_status . "\n\n";
@@ -386,7 +386,7 @@ class ModelCheckoutOrder extends Model {
 
 	                if ($order_info['customer_id']) {
 	                    $text .= $language->get('text_new_link') . "\n";
-	                    $text .= $order_info['store_url'] . 'index.php?route=account/order/info&order_id=' . $order_id . "\n\n";
+	                    $text .= HTTP_CATALOG . 'index.php?route=account/order/info&order_id=' . $order_id . "\n\n";
 	                }
 
 	                // Comment
@@ -407,7 +407,7 @@ class ModelCheckoutOrder extends Model {
 	                $mail->timeout = $this->config->get('config_smtp_timeout');
 	                $mail->setTo($order_info['email']);
 	                $mail->setFrom($this->config->get('config_email'));
-	                $mail->setSender($order_info['store_name']);
+	                $mail->setSender($this->config->get('config_name'));
 	                $mail->setSubject(html_entity_decode($subject, ENT_QUOTES, 'UTF-8'));
 	                $mail->setHtml($html);
 	                $mail->setText(html_entity_decode($text, ENT_QUOTES, 'UTF-8'));
@@ -471,7 +471,7 @@ class ModelCheckoutOrder extends Model {
 					$mail->timeout = $this->config->get('config_smtp_timeout');
 					$mail->setTo($this->config->get('config_email'));
 					$mail->setFrom($this->config->get('config_email'));
-					$mail->setSender($order_info['store_name']);
+					$mail->setSender($this->config->get('config_name'));
 					$mail->setSubject(html_entity_decode($subject, ENT_QUOTES, 'UTF-8'));
 					$mail->setText(html_entity_decode($text, ENT_QUOTES, 'UTF-8'));
 					$mail->send();
@@ -535,7 +535,7 @@ class ModelCheckoutOrder extends Model {
 				$language->load($order_info['language_filename']);
 				$language->load('mail/order');
 			
-				$subject = sprintf($language->get('text_update_subject'), html_entity_decode($order_info['store_name'], ENT_QUOTES, 'UTF-8'), $order_id);
+				$subject = sprintf($language->get('text_update_subject'), html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'), $order_id);
 	
 				$message  = $language->get('text_update_order') . ' ' . $order_id . "\n";
 				$message .= $language->get('text_update_date_added') . ' ' . date($language->get('date_format_short'), strtotime($order_info['date_added'])) . "\n\n";
@@ -549,7 +549,7 @@ class ModelCheckoutOrder extends Model {
 				
 				if ($order_info['customer_id']) {
 					$message .= $language->get('text_update_link') . "\n";
-					$message .= $order_info['store_url'] . 'index.php?route=account/order/info&order_id=' . $order_id . "\n\n";
+					$message .= HTTP_CATALOG . 'index.php?route=account/order/info&order_id=' . $order_id . "\n\n";
 				}
 				
 				if ($comment) { 
@@ -569,7 +569,7 @@ class ModelCheckoutOrder extends Model {
 				$mail->timeout = $this->config->get('config_smtp_timeout');				
 				$mail->setTo($order_info['email']);
 				$mail->setFrom($this->config->get('config_email'));
-				$mail->setSender($order_info['store_name']);
+				$mail->setSender($this->config->get('config_name'));
 				$mail->setSubject(html_entity_decode($subject, ENT_QUOTES, 'UTF-8'));
 				$mail->setText(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));
 				$mail->send();

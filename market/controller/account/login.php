@@ -18,7 +18,6 @@ class ControllerAccountLogin extends Controller {
 		$this->data['scripts'] = $this->document->getScripts();
 		$this->data['lang'] = $this->language->get('code');
 		$this->data['direction'] = $this->language->get('direction');
-		$this->data['google_analytics'] = html_entity_decode($this->config->get('config_google_analytics'), ENT_QUOTES, 'UTF-8');
 		$this->data['name'] = $this->config->get('config_name');
 		
 		if ($this->config->get('config_icon') && file_exists(DIR_IMAGE . $this->config->get('config_icon'))) {
@@ -67,14 +66,12 @@ class ControllerAccountLogin extends Controller {
 										
 				if ($address_info) {
 					if ($this->config->get('config_tax_customer') == 'shipping') {
-						$this->session->data['shipping_country_id'] = $address_info['country_id'];
-						$this->session->data['shipping_zone_id'] = $address_info['zone_id'];
+						$this->session->data['shipping_province_id'] = $address_info['province_id'];
 						$this->session->data['shipping_postcode'] = $address_info['postcode'];	
 					}
 					
 				} else {
-					unset($this->session->data['shipping_country_id']);	
-					unset($this->session->data['shipping_zone_id']);	
+					unset($this->session->data['shipping_province_id']);	
 					unset($this->session->data['shipping_postcode']);
 				}
 									
@@ -100,14 +97,12 @@ class ControllerAccountLogin extends Controller {
 									
 			if ($address_info) {
 				if ($this->config->get('config_tax_customer') == 'shipping') {
-					$this->session->data['shipping_country_id'] = $address_info['country_id'];
-					$this->session->data['shipping_zone_id'] = $address_info['zone_id'];
+					$this->session->data['shipping_province_id'] = $address_info['province_id'];
 					$this->session->data['shipping_postcode'] = $address_info['postcode'];	
 				}
 
 			} else {
-				unset($this->session->data['shipping_country_id']);	
-				unset($this->session->data['shipping_zone_id']);	
+				unset($this->session->data['shipping_province_id']);	
 				unset($this->session->data['shipping_postcode']);
 			}
 							

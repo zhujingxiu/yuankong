@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2015 年 07 月 28 日 16:31
+-- 生成日期: 2015 年 07 月 29 日 09:46
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.4.3
 
@@ -39,16 +39,14 @@ CREATE TABLE IF NOT EXISTS `yk_address` (
   `areas` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`address_id`),
   KEY `customer_id` (`customer_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- 转存表中的数据 `yk_address`
 --
 
 INSERT INTO `yk_address` (`address_id`, `customer_id`, `fullname`, `telephone`, `company`, `address`, `postcode`, `province_id`, `area_zone`, `areas`) VALUES
-(1, 2, '朱景修', '18850911766', '', '黄石镇丁庄村', '', 16, '', '16|1329|46147'),
-(2, 2, '朱景修', '18959526595', '', '黄石镇定庄村浊影中', '', 16, '', '16|1329|46147'),
-(3, 2, '林琼', '18959526595', '', '黄石镇定庄村浊影中', '', 16, '', '16|1329|46147');
+(1, 1, '太容易', '18850911766', '', '规划快结婚', '', 12, '江苏省 苏州市 沧浪区', '12|988|3088');
 
 -- --------------------------------------------------------
 
@@ -89,7 +87,14 @@ CREATE TABLE IF NOT EXISTS `yk_affiliate` (
   `approved` tinyint(1) NOT NULL,
   `date_added` datetime NOT NULL,
   PRIMARY KEY (`affiliate_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- 转存表中的数据 `yk_affiliate`
+--
+
+INSERT INTO `yk_affiliate` (`affiliate_id`, `group_id`, `zone_id`, `fullname`, `mobile_phone`, `email`, `telephone`, `fax`, `password`, `salt`, `company`, `website`, `address`, `area_zone`, `areas`, `postcode`, `province_id`, `code`, `commission`, `tax`, `payment`, `cheque`, `bank_name`, `bank_branch_number`, `bank_swift_code`, `bank_account_name`, `bank_account_number`, `ip`, `status`, `approved`, `date_added`) VALUES
+(1, 1, 0, '是的撒旦', '18260051051', '18260051051@139.com', '111111', '', '754ea0bbb4f796c1794f9639a8085ac106a8e2d5', '137c6a924', '企鹅王企鹅王企鹅完全委屈额', '', '去问问企鹅王企鹅王', '江苏省 苏州市 虎丘区', '12|988|3085', '', 12, '55b88477d5f55', '5.00', '', 'cheque', '', '', '', '', '', '', '', 1, 0, '2015-07-29 15:47:53');
 
 -- --------------------------------------------------------
 
@@ -21484,8 +21489,8 @@ INSERT INTO `yk_category` (`category_id`, `image`, `parent_id`, `top`, `column`,
 (78, '', 75, 0, 1, 0, 1, '2015-06-10 17:32:09', '2015-06-10 17:32:09'),
 (77, '', 75, 0, 1, 0, 1, '2015-06-10 17:31:33', '2015-06-10 17:31:33'),
 (75, '', 59, 0, 1, 0, 1, '2015-06-10 17:15:02', '2015-06-10 17:15:02'),
-(61, '', 59, 0, 1, 0, 1, '2015-06-10 16:58:03', '2015-06-10 16:58:03'),
-(62, '', 61, 0, 1, 0, 1, '2015-06-10 16:59:08', '2015-06-10 16:59:08'),
+(61, '', 59, 0, 1, 0, 1, '2015-06-10 16:58:03', '2015-07-29 16:09:55'),
+(62, '', 61, 0, 1, 0, 1, '2015-06-10 16:59:08', '2015-07-29 16:10:10'),
 (60, '', 0, 0, 1, 0, 1, '2015-06-10 16:55:53', '2015-06-10 16:55:53'),
 (76, '', 75, 0, 1, 0, 1, '2015-06-10 17:28:06', '2015-06-10 17:28:06'),
 (81, '', 75, 0, 1, 0, 1, '2015-06-10 17:33:14', '2015-06-10 17:33:14'),
@@ -21585,7 +21590,7 @@ CREATE TABLE IF NOT EXISTS `yk_category_description` (
 
 INSERT INTO `yk_category_description` (`category_id`, `language_id`, `name`, `description`, `meta_description`, `meta_keyword`) VALUES
 (60, 2, '消防装备', '', '', ''),
-(61, 2, '消火栓系统', '', '', ''),
+(61, 2, '消火栓系统', '&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n', '', ''),
 (62, 2, '消火栓', '', '', ''),
 (63, 2, '消防水带', '', '', ''),
 (64, 2, '消火栓箱', '', '', ''),
@@ -21746,8 +21751,8 @@ INSERT INTO `yk_category_path` (`category_id`, `path_id`, `level`) VALUES
 (63, 59, 0),
 (63, 61, 1),
 (63, 63, 2),
-(62, 59, 0),
 (62, 61, 1),
+(62, 59, 0),
 (62, 62, 2),
 (61, 59, 0),
 (59, 59, 0),
@@ -21922,6 +21927,14 @@ CREATE TABLE IF NOT EXISTS `yk_category_to_layout` (
   PRIMARY KEY (`category_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+--
+-- 转存表中的数据 `yk_category_to_layout`
+--
+
+INSERT INTO `yk_category_to_layout` (`category_id`, `layout_id`) VALUES
+(61, 0),
+(62, 4);
+
 -- --------------------------------------------------------
 
 --
@@ -22048,8 +22061,8 @@ CREATE TABLE IF NOT EXISTS `yk_customer` (
 --
 
 INSERT INTO `yk_customer` (`customer_id`, `mobile_phone`, `fullname`, `email`, `telephone`, `fax`, `avatar`, `password`, `salt`, `cart`, `wishlist`, `viewed`, `newsletter`, `address_id`, `customer_group_id`, `ip`, `status`, `approved`, `token`, `date_added`) VALUES
-(1, '18959526595', NULL, 'zhangwuji@yitiantulong.cn', '123123', '', NULL, '3838e00e6e59c95a65bc786ff38d303252338a3f', '7abf86dd9', 'a:0:{}', '', '', 0, 0, 1, '127.0.0.1', 1, 0, '', '2015-06-12 17:34:52'),
-(2, '18850911766', 'yk18850911766', '', '', '', NULL, 'e8a75e331334d9ce78c228afc59c485d99e4a9b3', '2f645ca7b', 'a:0:{}', '', 'a:1:{i:0;s:2:"51";}', 0, 1, 1, '127.0.0.1', 1, 1, '', '2015-07-16 13:38:42');
+(1, '18850911766', 'yk18850911766', '', '', '', NULL, 'ffc368401010c7db72d3f6b27275bf050e0ac391', 'b1076f96b', 'a:2:{i:55;i:1;s:31:"53:YToxOntpOjIyNztzOjI6IjIxIjt9";i:2;}', '', 'a:5:{i:4;s:2:"53";i:3;s:2:"51";i:2;s:2:"52";i:1;s:2:"55";i:0;s:2:"50";}', 0, 0, 1, '127.0.0.1', 1, 1, '', '2015-07-29 11:31:25'),
+(2, '18959526595', '是的撒旦', '', '', '', NULL, 'ce8cc6dc288e7c92dbde66d27e828f2ef496dc78', '748e6de48', NULL, NULL, NULL, 0, 0, 1, '0', 1, 0, '', '2015-07-29 15:26:24');
 
 -- --------------------------------------------------------
 
@@ -22322,8 +22335,7 @@ CREATE TABLE IF NOT EXISTS `yk_information` (
 INSERT INTO `yk_information` (`information_id`, `bottom`, `sort_order`, `status`) VALUES
 (3, 1, 3, 1),
 (4, 1, 1, 1),
-(5, 1, 4, 1),
-(6, 1, 2, 1);
+(5, 1, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -22344,10 +22356,9 @@ CREATE TABLE IF NOT EXISTS `yk_information_description` (
 --
 
 INSERT INTO `yk_information_description` (`information_id`, `language_id`, `title`, `description`) VALUES
-(4, 2, 'About Us', '&lt;p&gt;\r\n	About Us&lt;/p&gt;\r\n'),
+(4, 2, '关于我们', '&lt;p&gt;\r\n	关于我们&lt;/p&gt;'),
 (5, 2, '政策&amp; 条款', '&lt;p&gt;&lt;a alt=&quot;政策&amp;amp; 条款&quot; class=&quot;colorbox cboxElement&quot; href=&quot;http://www.opencart.cn/app/information/information/info/%E6%94%BF%E7%AD%96and-%E6%9D%A1%E6%AC%BE.html&quot; style=&quot;font-size: 12px; color: rgb(56, 176, 227); text-decoration: underline; cursor: pointer; font-family: Arial, Helvetica, sans-serif; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: right; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);&quot;&gt;&lt;b style=&quot;color: rgb(56, 176, 227); text-decoration: underline; cursor: pointer;&quot;&gt;政策&amp;amp; 条款&lt;/b&gt;&lt;/a&gt;&lt;/p&gt;\r\n'),
-(3, 2, 'Privacy Policy', '&lt;p&gt;\r\n	Privacy Policy&lt;/p&gt;\r\n'),
-(6, 2, 'Delivery Information', '&lt;p&gt;\r\n	Delivery Information&lt;/p&gt;\r\n');
+(3, 2, '隐私策略', '&lt;p&gt;\r\n	隐私策略&lt;/p&gt;');
 
 -- --------------------------------------------------------
 
@@ -22360,6 +22371,14 @@ CREATE TABLE IF NOT EXISTS `yk_information_to_layout` (
   `layout_id` int(11) NOT NULL,
   PRIMARY KEY (`information_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `yk_information_to_layout`
+--
+
+INSERT INTO `yk_information_to_layout` (`information_id`, `layout_id`) VALUES
+(4, 0),
+(3, 0);
 
 -- --------------------------------------------------------
 
@@ -22680,7 +22699,7 @@ CREATE TABLE IF NOT EXISTS `yk_order` (
   `date_added` datetime NOT NULL,
   `date_modified` datetime NOT NULL,
   PRIMARY KEY (`order_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=25 ;
 
 --
 -- 转存表中的数据 `yk_order`
@@ -22702,7 +22721,15 @@ INSERT INTO `yk_order` (`order_id`, `order_sn`, `invoice_no`, `invoice_prefix`, 
 (13, '', 0, 'YK119-2015-00', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '425.0000', 3, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-27 23:27:39', '2015-07-27 23:27:39'),
 (14, '', 0, 'YK119-2015-00', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '425.0000', 4, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-27 23:28:21', '2015-07-27 23:28:21'),
 (15, '', 0, 'YK119-2015-00', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '425.0000', 2, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-27 23:31:04', '2015-07-27 23:31:04'),
-(16, '', 0, 'YK119-2015-00', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '178.0000', 0, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; rv:39.0) Gecko/20100101 Firefox/39.0', 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3', '2015-07-28 16:23:22', '2015-07-28 16:23:22');
+(16, '', 0, 'YK119-2015-00', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '178.0000', 0, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; rv:39.0) Gecko/20100101 Firefox/39.0', 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3', '2015-07-28 16:23:22', '2015-07-28 16:23:22'),
+(17, '', 0, 'YK119-2015-00', 1, 1, 'yk18850911766', '18850911766', '', '', '', '', '', NULL, NULL, '', '', '', '', '', '', 0, NULL, '', '', '', '123.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; rv:39.0) Gecko/20100101 Firefox/39.0', 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3', '2015-07-29 11:46:19', '2015-07-29 11:46:19'),
+(18, '', 0, 'YK119-2015-00', 1, 1, 'yk18850911766', '18850911766', '', '', '', '', '', NULL, NULL, '', '', '', '', '', '', 0, NULL, '', '', '', '123.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; rv:39.0) Gecko/20100101 Firefox/39.0', 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3', '2015-07-29 11:47:22', '2015-07-29 11:47:22'),
+(19, '', 0, 'YK119-2015-00', 1, 1, 'yk18850911766', '18850911766', '', '', '', '', '', NULL, NULL, '', '', '', '', '', '', 0, NULL, '', '', '', '123.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; rv:39.0) Gecko/20100101 Firefox/39.0', 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3', '2015-07-29 12:00:33', '2015-07-29 12:00:33'),
+(20, '', 0, 'YK119-2015-00', 1, 1, 'yk18850911766', '18850911766', '', '', '', '', '', NULL, NULL, '', '18850911766', '', '', '', '', 0, NULL, '', '', '', '123.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; rv:39.0) Gecko/20100101 Firefox/39.0', 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3', '2015-07-29 12:02:56', '2015-07-29 12:02:56'),
+(21, '', 0, 'YK119-2015-00', 1, 1, 'yk18850911766', '18850911766', '', '', '', '', '', NULL, NULL, '', '18850911766', '', '', '', '', 0, NULL, '', '', '', '123.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; rv:39.0) Gecko/20100101 Firefox/39.0', 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3', '2015-07-29 12:07:33', '2015-07-29 12:07:33'),
+(22, '', 0, 'YK119-2015-00', 1, 1, 'yk18850911766', '18850911766', '', '', '', '', '', NULL, NULL, '', '18850911766', '', '', '', '', 0, NULL, '固定运费率', 'flat.flat', '', '173.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; rv:39.0) Gecko/20100101 Firefox/39.0', 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3', '2015-07-29 13:18:06', '2015-07-29 13:18:06'),
+(23, '', 0, 'YK119-2015-00', 1, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '', '18850911766', '', '', '', '', 0, NULL, '固定运费率', 'flat.flat', '', '173.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; rv:39.0) Gecko/20100101 Firefox/39.0', 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3', '2015-07-29 13:22:40', '2015-07-29 13:22:40'),
+(24, '', 0, 'YK119-2015-00', 1, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '太容易', '18850911766', '', '规划快结婚', '', '江苏省', 12, NULL, '固定运费率', 'flat.flat', '', '323.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; rv:39.0) Gecko/20100101 Firefox/39.0', 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3', '2015-07-29 15:15:11', '2015-07-29 15:15:11');
 
 -- --------------------------------------------------------
 
@@ -22736,7 +22763,7 @@ CREATE TABLE IF NOT EXISTS `yk_order_option` (
   `value` text NOT NULL,
   `type` varchar(32) NOT NULL,
   PRIMARY KEY (`order_option_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=35 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=36 ;
 
 --
 -- 转存表中的数据 `yk_order_option`
@@ -22752,7 +22779,8 @@ INSERT INTO `yk_order_option` (`order_option_id`, `order_id`, `order_product_id`
 (31, 7, 61, 227, 21, '规格型号', 'Model-5-7XT', 'image'),
 (32, 8, 63, 227, 21, '规格型号', 'Model-5-7XT', 'image'),
 (33, 9, 65, 227, 21, '规格型号', 'Model-5-7XT', 'image'),
-(34, 10, 67, 227, 21, '规格型号', 'Model-5-7XT', 'image');
+(34, 10, 67, 227, 21, '规格型号', 'Model-5-7XT', 'image'),
+(35, 24, 88, 227, 21, '规格型号', 'Model-5-7XT', 'image');
 
 -- --------------------------------------------------------
 
@@ -22772,7 +22800,7 @@ CREATE TABLE IF NOT EXISTS `yk_order_product` (
   `tax` decimal(15,4) NOT NULL DEFAULT '0.0000',
   `reward` int(8) NOT NULL,
   PRIMARY KEY (`order_product_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=80 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=89 ;
 
 --
 -- 转存表中的数据 `yk_order_product`
@@ -22809,7 +22837,16 @@ INSERT INTO `yk_order_product` (`order_product_id`, `order_id`, `product_id`, `n
 (76, 14, 50, '嵌入式插电安全出口疏散指示灯', '132143', 2, '126.0000', '252.0000', '0.0000', 0),
 (77, 15, 51, '消防应急照明灯具', 'ae123213', 1, '123.0000', '123.0000', '0.0000', 0),
 (78, 15, 50, '嵌入式插电安全出口疏散指示灯', '132143', 2, '126.0000', '252.0000', '0.0000', 0),
-(79, 16, 54, '源控灭火器', '2144232', 1, '128.0000', '128.0000', '0.0000', 0);
+(79, 16, 54, '源控灭火器', '2144232', 1, '128.0000', '128.0000', '0.0000', 0),
+(80, 17, 51, '消防应急照明灯具', 'ae123213', 1, '123.0000', '123.0000', '0.0000', 0),
+(81, 18, 51, '消防应急照明灯具', 'ae123213', 1, '123.0000', '123.0000', '0.0000', 0),
+(82, 19, 51, '消防应急照明灯具', 'ae123213', 1, '123.0000', '123.0000', '0.0000', 0),
+(83, 20, 51, '消防应急照明灯具', 'ae123213', 1, '123.0000', '123.0000', '0.0000', 0),
+(84, 21, 51, '消防应急照明灯具', 'ae123213', 1, '123.0000', '123.0000', '0.0000', 0),
+(85, 22, 51, '消防应急照明灯具', 'ae123213', 1, '123.0000', '123.0000', '0.0000', 0),
+(86, 23, 51, '消防应急照明灯具', 'ae123213', 1, '123.0000', '123.0000', '0.0000', 0),
+(87, 24, 55, '源控消防泵', 'xf1325324', 1, '158.0000', '158.0000', '0.0000', 0),
+(88, 24, 53, '源控消防水带', '231414', 1, '115.0000', '115.0000', '0.0000', 0);
 
 -- --------------------------------------------------------
 
@@ -22853,7 +22890,7 @@ CREATE TABLE IF NOT EXISTS `yk_order_total` (
   `sort_order` int(3) NOT NULL,
   PRIMARY KEY (`order_total_id`),
   KEY `idx_orders_total_orders_id` (`order_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=101 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=120 ;
 
 --
 -- 转存表中的数据 `yk_order_total`
@@ -22907,7 +22944,26 @@ INSERT INTO `yk_order_total` (`order_total_id`, `order_id`, `code`, `title`, `te
 (97, 15, 'total', '您需支付', '￥425.00', '425.0000', 9),
 (98, 16, 'sub_total', '商品应付金额', '￥128.00', '128.0000', 1),
 (99, 16, 'shipping', '固定运费率', '￥50.00', '50.0000', 3),
-(100, 16, 'total', '您需支付', '￥178.00', '178.0000', 9);
+(100, 16, 'total', '您需支付', '￥178.00', '178.0000', 9),
+(101, 17, 'sub_total', '商品应付金额', '￥123.00', '123.0000', 1),
+(102, 17, 'total', '您需支付', '￥123.00', '123.0000', 9),
+(103, 18, 'sub_total', '商品应付金额', '￥123.00', '123.0000', 1),
+(104, 18, 'total', '您需支付', '￥123.00', '123.0000', 9),
+(105, 19, 'sub_total', '商品应付金额', '￥123.00', '123.0000', 1),
+(106, 19, 'total', '您需支付', '￥123.00', '123.0000', 9),
+(107, 20, 'sub_total', '商品应付金额', '￥123.00', '123.0000', 1),
+(108, 20, 'total', '您需支付', '￥123.00', '123.0000', 9),
+(109, 21, 'sub_total', '商品应付金额', '￥123.00', '123.0000', 1),
+(110, 21, 'total', '您需支付', '￥123.00', '123.0000', 9),
+(111, 22, 'sub_total', '商品应付金额', '￥123.00', '123.0000', 1),
+(112, 22, 'shipping', '固定运费率', '￥50.00', '50.0000', 3),
+(113, 22, 'total', '您需支付', '￥173.00', '173.0000', 9),
+(114, 23, 'sub_total', '商品应付金额', '￥123.00', '123.0000', 1),
+(115, 23, 'shipping', '固定运费率', '￥50.00', '50.0000', 3),
+(116, 23, 'total', '您需支付', '￥173.00', '173.0000', 9),
+(117, 24, 'sub_total', '商品应付金额', '￥273.00', '273.0000', 1),
+(118, 24, 'shipping', '固定运费率', '￥50.00', '50.0000', 3),
+(119, 24, 'total', '您需支付', '￥323.00', '323.0000', 9);
 
 -- --------------------------------------------------------
 
@@ -22977,12 +23033,12 @@ CREATE TABLE IF NOT EXISTS `yk_product` (
 --
 
 INSERT INTO `yk_product` (`product_id`, `model`, `sku`, `upc`, `isbn`, `mpn`, `location`, `quantity`, `stock_status_id`, `image`, `manufacturer_id`, `shipping`, `price`, `market`, `points`, `tax_class_id`, `date_available`, `weight`, `weight_class_id`, `length`, `width`, `height`, `length_class_id`, `subtract`, `minimum`, `sort_order`, `status`, `date_added`, `date_modified`, `viewed`, `sales`) VALUES
-(50, '132143', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic1.jpg', 0, 1, '126.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-26 13:00:31', '2015-06-16 16:23:34', 90, 0),
-(51, 'ae123213', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic2.jpg', 0, 1, '123.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-23 07:23:47', '0000-00-00 00:00:00', 42, 0),
-(52, '123123', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic4.jpg', 0, 1, '123.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-07-20 23:44:32', '0000-00-00 00:00:00', 25, 0),
-(53, '231414', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic3.jpg', 0, 1, '125.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-26 13:13:01', '0000-00-00 00:00:00', 148, 0),
+(50, '132143', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic1.jpg', 0, 1, '126.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-26 13:00:31', '2015-06-16 16:23:34', 91, 0),
+(51, 'ae123213', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic2.jpg', 0, 1, '123.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-23 07:23:47', '0000-00-00 00:00:00', 43, 0),
+(52, '123123', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic4.jpg', 0, 1, '123.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-07-29 16:18:27', '0000-00-00 00:00:00', 29, 0),
+(53, '231414', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic3.jpg', 0, 1, '125.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-26 13:13:01', '0000-00-00 00:00:00', 150, 0),
 (54, '2144232', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic5.jpg', 0, 1, '128.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-16 09:03:38', '0000-00-00 00:00:00', 7, 0),
-(55, 'xf1325324', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic6.jpg', 0, 1, '158.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-16 09:05:42', '0000-00-00 00:00:00', 3, 0);
+(55, 'xf1325324', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic6.jpg', 0, 1, '158.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-16 09:05:42', '0000-00-00 00:00:00', 4, 0);
 
 -- --------------------------------------------------------
 
@@ -23248,6 +23304,7 @@ CREATE TABLE IF NOT EXISTS `yk_project_group` (
   `group_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) DEFAULT NULL,
   `show` tinyint(4) NOT NULL DEFAULT '0',
+  `remark` varchar(256) NOT NULL,
   `sort_order` int(3) NOT NULL,
   PRIMARY KEY (`group_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
@@ -23256,11 +23313,11 @@ CREATE TABLE IF NOT EXISTS `yk_project_group` (
 -- 转存表中的数据 `yk_project_group`
 --
 
-INSERT INTO `yk_project_group` (`group_id`, `name`, `show`, `sort_order`) VALUES
-(1, '消防设计', 0, 1),
-(2, '消防检测', 0, 2),
-(3, '消防工程', 0, 3),
-(4, '消防维保', 0, 4);
+INSERT INTO `yk_project_group` (`group_id`, `name`, `show`, `remark`, `sort_order`) VALUES
+(1, '消防设计', 1, '十秒登记，免费获取专业消防设计案例', 1),
+(2, '消防检测', 1, '十秒登记，免费获取专业消防检测', 2),
+(3, '消防工程', 1, '十秒登记，免费获取专业消防工程案例', 3),
+(4, '消防维保', 1, '十秒登记，免费获取专业消防维保服务', 4);
 
 -- --------------------------------------------------------
 
@@ -23591,7 +23648,8 @@ CREATE TABLE IF NOT EXISTS `yk_sms` (
 
 INSERT INTO `yk_sms` (`phone_number`, `sms`, `time`) VALUES
 ('18850911769', '564821', 1436972876),
-('18850911766', '838374', 1437199884);
+('18850911766', '230990', 1438140326),
+('18850911765', '230990', 1438146326);
 
 -- --------------------------------------------------------
 
@@ -23702,14 +23760,14 @@ CREATE TABLE IF NOT EXISTS `yk_url_alias` (
   `query` varchar(255) NOT NULL,
   `keyword` varchar(255) NOT NULL,
   PRIMARY KEY (`url_alias_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=774 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=775 ;
 
 --
 -- 转存表中的数据 `yk_url_alias`
 --
 
 INSERT INTO `yk_url_alias` (`url_alias_id`, `query`, `keyword`) VALUES
-(772, 'information_id=4', 'about_us');
+(774, 'information_id=4', 'about_us');
 
 -- --------------------------------------------------------
 
@@ -23898,12 +23956,12 @@ CREATE TABLE IF NOT EXISTS `yk_wiki` (
 --
 
 INSERT INTO `yk_wiki` (`wiki_id`, `group_id`, `user_id`, `title`, `subtitle`, `text`, `status`, `is_top`, `from`, `viewed`, `sort_order`, `date_added`) VALUES
-(2, 2, 1, '新闻测试数据标题', '新闻测试数据副本标题', '&lt;span style=&quot;font-family:Tahoma, Helvetica, Arial, 宋体, sans-serif;font-size:14px;line-height:30px;&quot;&gt;2015年5月初，美国数字地球公司拍摄的卫星照片显示越南非法建岛行为，在非法侵占我南沙岛礁上大规模填海造地。越南非法建岛激起了中方愤慨，我外交部发言人洪磊表示，中国要求有关国家立即停止一切侵犯中国主权和权益的言行。洪磊还揭露，越南非法建岛，共计侵占20多个岛礁，填海造地的同时还设立了机场、港池，甚至还有导弹阵地，中国外交部严厉指责越南非法建岛行为。&lt;/span&gt;', 1, 0, '腾讯新闻', 5, 0, '2015-05-24 21:37:30'),
+(2, 2, 1, '新闻测试数据标题', '新闻测试数据副本标题', '&lt;span style=&quot;font-family:Tahoma, Helvetica, Arial, 宋体, sans-serif;font-size:14px;line-height:30px;&quot;&gt;2015年5月初，美国数字地球公司拍摄的卫星照片显示越南非法建岛行为，在非法侵占我南沙岛礁上大规模填海造地。越南非法建岛激起了中方愤慨，我外交部发言人洪磊表示，中国要求有关国家立即停止一切侵犯中国主权和权益的言行。洪磊还揭露，越南非法建岛，共计侵占20多个岛礁，填海造地的同时还设立了机场、港池，甚至还有导弹阵地，中国外交部严厉指责越南非法建岛行为。&lt;/span&gt;', 1, 0, '腾讯新闻', 6, 0, '2015-05-24 21:37:30'),
 (3, 3, 1, '最新款式灭火器', '5.1日家用汽载灭火器全场5折', '&lt;span style=&quot;color:#CC0000;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;&quot;&gt;齐齐哈尔&lt;/span&gt;&lt;span style=&quot;color:#333333;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;&quot;&gt;警方与绑架案犯发生激烈&lt;/span&gt;&lt;span style=&quot;color:#CC0000;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;&quot;&gt;枪战&lt;/span&gt;&lt;span style=&quot;color:#333333;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;&quot;&gt;&amp;nbsp;一民警头部中弹&lt;/span&gt;', 1, 0, '消防e站', 5, 2, '0000-00-00 00:00:00'),
 (4, 1, 1, '新一代宝马7系官网曝光 6月10日首发', '新一代宝马7系官网曝光', '<p>车型代号G11的新一代宝马7系的官图和部分信息在宝马奥地利官网曝光，新车将在6月10日正式发布，10月上市销售。新一代7系在奥地利市场的起价为100445欧元(约合人民币69.2万元)。<img alt="" src="http://www.yuankong.com/image/data/demo/apple_logo.jpg" />12321312</p>', 1, 0, '新浪汽车', 2, 0, '2015-06-10 05:20:56'),
 (5, 2, 1, '4S店卖旧车', '法院判决：赔偿车主三倍车款！', '<p><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">山东济宁的刘女士，在当地名为“安斯达”的菲亚特4S店，以128000元买下了菲亚特轿车，就在提车40天后，刘女士发现，这辆车竟然被补过漆！经法院裁判，4S店隐瞒了该车曾经出售的事实，应退回刘女士购车款，并按购车款的3倍赔偿，总计38.4万。（央视）</span><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">山东济宁的刘女士，在当地名为“安斯达”的菲亚特4S店，以128000元买下了菲亚特轿车，就在提车40天后，刘女士发现，这辆车竟然被补过漆！经法院裁判，4S店隐瞒了该车曾经出售的事实，应退回刘女士购车款，并按购车款的3倍赔偿，总计38.4万。（央视）</span></p>', 1, 0, 'http://d.weibo.com/', 0, 0, '2015-07-27 20:57:57'),
 (6, 2, 1, '港囧》首支正式预告片 9月25日爆笑', '港囧》首支正式预告片 9月25日爆笑', '<p><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">《港囧》发布首支正式预告片，简单粗暴地曝光了电影的正片画面：小舅子</span><a target="_blank" render="ext" extra-data="type=atname" href="http://weibo.com/n/%E5%8C%85%E8%B4%9D%E5%B0%94?from=feed&loc=at" usercard="name=包贝尔" style="color: rgb(235, 115, 80); text-decoration: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">@包贝尔</a><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">&nbsp;为保护姐姐</span><a target="_blank" render="ext" extra-data="type=atname" href="http://weibo.com/n/%E8%B5%B5%E8%96%87?from=feed&loc=at" usercard="name=赵薇" style="color: rgb(235, 115, 80); text-decoration: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">@赵薇</a><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">&nbsp;化身名侦探，对姐夫</span><a target="_blank" render="ext" extra-data="type=atname" href="http://weibo.com/n/%E5%BE%90%E5%B3%A5?from=feed&loc=at" usercard="name=徐峥" style="color: rgb(235, 115, 80); text-decoration: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">@徐峥</a><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">&nbsp;进行史上最残酷拷问！逼得徐峥仓惶逃窜，两人在街头展开一场枪战、爆炸、飞车、坠楼、街头火拼组成追击战。更有徐峥高楼勇救赵薇的感人桥段。</span></p>', 1, 0, '', 0, 0, '2015-07-27 20:58:53'),
-(7, 4, 1, '想知道真相', '想知道真相', '<p><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">今天，中国游泳队抵达俄罗斯喀山，孙杨、宁泽涛等队员露面时都显得比较轻松，心情不错的孙杨还比出剪刀手。本届世锦赛游泳比赛将于8月2日开始，孙杨将参加200、400、800、1500米自由泳四个单项比赛，外媒预测他能包揽四金。转发，为中国游泳健儿们加油！</span><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">今天，中国游泳队抵达俄罗斯喀山，孙杨、宁泽涛等队员露面时都显得比较轻松，心情不错的孙杨还比出剪刀手。本届世锦赛游泳比赛将于8月2日开始，孙杨将参加200、400、800、1500米自由泳四个单项比赛，外媒预测他能包揽四金。转发，为中国游泳健儿们加油！</span><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">今天，中国游泳队抵达俄罗斯喀山，孙杨、宁泽涛等队员露面时都显得比较轻松，心情不错的孙杨还比出剪刀手。本届世锦赛游泳比赛将于8月2日开始，孙杨将参加200、400、800、1500米自由泳四个单项比赛，外媒预测他能包揽四金。转发，为中国游泳健儿们加油！</span></p>', 1, 0, '', 3, 1, '2015-07-27 21:14:19');
+(7, 4, 1, '想知道真相', '想知道真相', '<p><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">今天，中国游泳队抵达俄罗斯喀山，孙杨、宁泽涛等队员露面时都显得比较轻松，心情不错的孙杨还比出剪刀手。本届世锦赛游泳比赛将于8月2日开始，孙杨将参加200、400、800、1500米自由泳四个单项比赛，外媒预测他能包揽四金。转发，为中国游泳健儿们加油！</span><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">今天，中国游泳队抵达俄罗斯喀山，孙杨、宁泽涛等队员露面时都显得比较轻松，心情不错的孙杨还比出剪刀手。本届世锦赛游泳比赛将于8月2日开始，孙杨将参加200、400、800、1500米自由泳四个单项比赛，外媒预测他能包揽四金。转发，为中国游泳健儿们加油！</span><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">今天，中国游泳队抵达俄罗斯喀山，孙杨、宁泽涛等队员露面时都显得比较轻松，心情不错的孙杨还比出剪刀手。本届世锦赛游泳比赛将于8月2日开始，孙杨将参加200、400、800、1500米自由泳四个单项比赛，外媒预测他能包揽四金。转发，为中国游泳健儿们加油！</span></p>', 1, 0, '', 4, 1, '2015-07-27 21:14:19');
 
 -- --------------------------------------------------------
 

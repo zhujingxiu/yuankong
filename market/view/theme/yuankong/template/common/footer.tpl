@@ -54,4 +54,5 @@ if( count($modules) ){ ?>
     o.mous.init(".my-ezhan","hov");
     o.dlist.init(".s-select",".search-dt",".search-dd");
 </script>
+<?php echo $baidu_analytics;?>
 </body></html>

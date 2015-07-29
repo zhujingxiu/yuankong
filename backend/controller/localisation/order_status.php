@@ -358,7 +358,6 @@ class ControllerLocalisationOrderStatus extends Controller {
       		$this->error['warning'] = $this->language->get('error_permission');
     	}
 		
-		$this->load->model('setting/store');
 		$this->load->model('sale/order');
 		
 		foreach ($this->request->post['selected'] as $order_status_id) {
@@ -369,12 +368,7 @@ class ControllerLocalisationOrderStatus extends Controller {
     		if ($this->config->get('config_download_status_id') == $order_status_id) {
 	  			$this->error['warning'] = $this->language->get('error_download');	
 			}  
-			
-			$store_total = $this->model_setting_store->getTotalStoresByOrderStatusId($order_status_id);
 
-			if ($store_total) {
-				$this->error['warning'] = sprintf($this->language->get('error_store'), $store_total);
-			}
 			
 			$order_total = $this->model_sale_order->getTotalOrderHistoriesByOrderStatusId($order_status_id);
 		

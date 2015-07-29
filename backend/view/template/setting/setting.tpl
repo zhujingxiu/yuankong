@@ -250,20 +250,7 @@
                 <?php echo $text_no; ?>
                 <?php } ?></td>
             </tr>
-            <tr>
-              <td><?php echo $entry_download; ?></td>
-              <td><?php if ($config_download) { ?>
-                <input type="radio" name="config_download" value="1" checked="checked" />
-                <?php echo $text_yes; ?>
-                <input type="radio" name="config_download" value="0" />
-                <?php echo $text_no; ?>
-                <?php } else { ?>
-                <input type="radio" name="config_download" value="1" />
-                <?php echo $text_yes; ?>
-                <input type="radio" name="config_download" value="0" checked="checked" />
-                <?php echo $text_no; ?>
-                <?php } ?></td>
-            </tr>          
+         
           </table>
           <h2><?php echo $text_voucher; ?></h2>
           <table class="form">
@@ -960,8 +947,8 @@
                 <?php } ?></td>
             </tr>
             <tr>
-              <td><?php echo $entry_google_analytics; ?></td>
-              <td><textarea name="config_google_analytics" cols="40" rows="5"><?php echo $config_google_analytics; ?></textarea></td>
+              <td><?php echo $entry_baidu_analytics; ?></td>
+              <td><textarea name="config_baidu_analytics" cols="40" rows="5"><?php echo $config_baidu_analytics; ?></textarea></td>
             </tr>
           </table>
         </div>

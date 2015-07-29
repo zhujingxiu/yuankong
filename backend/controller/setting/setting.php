@@ -67,7 +67,6 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_admin_limit'] = $this->language->get('entry_admin_limit');
 		$this->data['entry_product_count'] = $this->language->get('entry_product_count');
 		$this->data['entry_review'] = $this->language->get('entry_review');
-		$this->data['entry_download'] = $this->language->get('entry_download');
 		$this->data['entry_voucher_min'] = $this->language->get('entry_voucher_min');
 		$this->data['entry_voucher_max'] = $this->language->get('entry_voucher_max');
 		$this->data['entry_tax'] = $this->language->get('entry_tax');
@@ -121,10 +120,6 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_alert_mail'] = $this->language->get('entry_alert_mail');
 		$this->data['entry_account_mail'] = $this->language->get('entry_account_mail');
 		$this->data['entry_alert_emails'] = $this->language->get('entry_alert_emails');
-		$this->data['entry_fraud_detection'] = $this->language->get('entry_fraud_detection');
-		$this->data['entry_fraud_key'] = $this->language->get('entry_fraud_key');
-		$this->data['entry_fraud_score'] = $this->language->get('entry_fraud_score');
-		$this->data['entry_fraud_status'] = $this->language->get('entry_fraud_status');
 		$this->data['entry_secure'] = $this->language->get('entry_secure');
 		$this->data['entry_shared'] = $this->language->get('entry_shared');
 		$this->data['entry_robots'] = $this->language->get('entry_robots');
@@ -138,7 +133,7 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_error_display'] = $this->language->get('entry_error_display');
 		$this->data['entry_error_log'] = $this->language->get('entry_error_log');
 		$this->data['entry_error_filename'] = $this->language->get('entry_error_filename');
-		$this->data['entry_google_analytics'] = $this->language->get('entry_google_analytics');
+		$this->data['entry_baidu_analytics'] = $this->language->get('entry_baidu_analytics');
 		
 		$this->data['button_save'] = $this->language->get('button_save');
 		$this->data['button_cancel'] = $this->language->get('button_cancel');
@@ -150,7 +145,6 @@ class ControllerSettingSetting extends Controller {
 		$this->data['tab_image'] = $this->language->get('tab_image');
 		$this->data['tab_ftp'] = $this->language->get('tab_ftp');
 		$this->data['tab_mail'] = $this->language->get('tab_mail');
-		$this->data['tab_fraud'] = $this->language->get('tab_fraud');
 		$this->data['tab_server'] = $this->language->get('tab_server');
 
  		if (isset($this->error['warning'])) {
@@ -339,7 +333,7 @@ class ControllerSettingSetting extends Controller {
 
 		$this->data['action'] = $this->url->link('setting/setting', 'token=' . $this->session->data['token'], 'SSL');
 		
-		$this->data['cancel'] = $this->url->link('setting/store', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['cancel'] = $this->url->link('setting/setting', 'token=' . $this->session->data['token'], 'SSL');
 		
 		$this->data['token'] = $this->session->data['token'];
 
@@ -497,12 +491,6 @@ class ControllerSettingSetting extends Controller {
 			$this->data['config_review_status'] = $this->request->post['config_review_status'];
 		} else {
 			$this->data['config_review_status'] = $this->config->get('config_review_status');
-		}
-		
-		if (isset($this->request->post['config_download'])) {
-			$this->data['config_download'] = $this->request->post['config_download'];
-		} else {
-			$this->data['config_download'] = $this->config->get('config_download');
 		}
 		
 		if (isset($this->request->post['config_voucher_min'])) {
@@ -927,30 +915,6 @@ class ControllerSettingSetting extends Controller {
 			$this->data['config_alert_emails'] = $this->request->post['config_alert_emails'];
 		} else {
 			$this->data['config_alert_emails'] = $this->config->get('config_alert_emails');
-		}
-		
-		if (isset($this->request->post['config_fraud_detection'])) {
-			$this->data['config_fraud_detection'] = $this->request->post['config_fraud_detection']; 
-		} else {
-			$this->data['config_fraud_detection'] = $this->config->get('config_fraud_detection');
-		}	
-				
-		if (isset($this->request->post['config_fraud_key'])) {
-			$this->data['config_fraud_key'] = $this->request->post['config_fraud_key']; 
-		} else {
-			$this->data['config_fraud_key'] = $this->config->get('config_fraud_key');
-		}		
-
-		if (isset($this->request->post['config_fraud_score'])) {
-			$this->data['config_fraud_score'] = $this->request->post['config_fraud_score']; 
-		} else {
-			$this->data['config_fraud_score'] = $this->config->get('config_fraud_score');
-		}	
-			
-		if (isset($this->request->post['config_fraud_status_id'])) {
-			$this->data['config_fraud_status_id'] = $this->request->post['config_fraud_status_id']; 
-		} else {
-			$this->data['config_fraud_status_id'] = $this->config->get('config_fraud_status_id');
 		}		
 				
 		if (isset($this->request->post['config_secure'])) {
@@ -1031,10 +995,10 @@ class ControllerSettingSetting extends Controller {
 			$this->data['config_error_filename'] = $this->config->get('config_error_filename');
 		}
 				
-		if (isset($this->request->post['config_google_analytics'])) {
-			$this->data['config_google_analytics'] = $this->request->post['config_google_analytics']; 
+		if (isset($this->request->post['config_baidu_analytics'])) {
+			$this->data['config_baidu_analytics'] = $this->request->post['config_baidu_analytics']; 
 		} else {
-			$this->data['config_google_analytics'] = $this->config->get('config_google_analytics');
+			$this->data['config_baidu_analytics'] = $this->config->get('config_baidu_analytics');
 		}
 						
 		$this->template = 'setting/setting.tpl';

@@ -8,8 +8,7 @@ class ControllerAccountLogout extends Controller {
 			unset($this->session->data['wishlist']);
 			unset($this->session->data['viewed']);
 			unset($this->session->data['shipping_address_id']);
-			unset($this->session->data['shipping_country_id']);
-			unset($this->session->data['shipping_zone_id']);
+			unset($this->session->data['shipping_province_id']);
 			unset($this->session->data['shipping_postcode']);
 			unset($this->session->data['shipping_method']);
 			unset($this->session->data['shipping_methods']);
@@ -75,4 +74,3 @@ class ControllerAccountLogout extends Controller {
 		$this->response->setOutput($this->render());	
   	}
 }
-?>

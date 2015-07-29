@@ -1215,8 +1215,8 @@ class ControllerSaleOrder extends Controller {
 				$this->data['invoice_no'] = '';
 			}
 			
-			$this->data['store_name'] = $order_info['store_name'];
-			$this->data['store_url'] = $order_info['store_url'];
+			$this->data['store_name'] = $this->config->get('config_name');
+			$this->data['store_url'] = $this->config->get('config_url');
 			$this->data['fullname'] = $order_info['fullname'];
 			$this->data['mobile_phone'] = $order_info['mobile_phone'];
 						
@@ -1258,8 +1258,8 @@ class ControllerSaleOrder extends Controller {
 						
 			$this->data['reward_total'] = $this->model_sale_customer->getTotalCustomerRewardsByOrderId($this->request->get['order_id']);
 
-			$this->data['affiliate_firstname'] = $order_info['affiliate_firstname'];
-			$this->data['affiliate_lastname'] = $order_info['affiliate_lastname'];
+			$this->data['affiliate_fullname'] = $order_info['affiliate_fullname'];
+			$this->data['affiliate_mobile_phone'] = $order_info['affiliate_mobile_phone'];
 			
 			if ($order_info['affiliate_id']) {
 				$this->data['affiliate'] = $this->url->link('sale/affiliate/update', 'token=' . $this->session->data['token'] . '&affiliate_id=' . $order_info['affiliate_id'], 'SSL');
@@ -1350,20 +1350,6 @@ class ControllerSaleOrder extends Controller {
 			}
 		
 			$this->data['totals'] = $this->model_sale_order->getOrderTotals($this->request->get['order_id']);
-
-			$this->data['downloads'] = array();
-
-			foreach ($products as $product) {
-				$results = $this->model_sale_order->getOrderDownloads($this->request->get['order_id'], $product['order_product_id']);
-	
-				foreach ($results as $result) {
-					$this->data['downloads'][] = array(
-						'name'      => $result['name'],
-						'filename'  => $result['mask'],
-						'remaining' => $result['remaining']
-					);
-				}
-			}
 			
 			$this->data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
 
@@ -1931,8 +1917,8 @@ class ControllerSaleOrder extends Controller {
 					'order_id'	         => $order_id,
 					'invoice_no'         => $invoice_no,
 					'date_added'         => date($this->language->get('date_format_short'), strtotime($order_info['date_added'])),
-					'store_name'         => $order_info['store_name'],
-					'store_url'          => rtrim($order_info['store_url'], '/'),
+					'store_name'         => $this->config->get('config_name'),
+					'store_url'          => rtrim($this->config->get('config_url'), '/'),
 					'store_address'      => nl2br($store_address),
 					'store_email'        => $store_email,
 					'store_telephone'    => $store_telephone,

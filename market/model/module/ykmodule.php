@@ -72,4 +72,12 @@ class ModelModuleYkmodule extends Model {
 		$query = $this->db->query($sql);
 		return $query->rows;
 	}
+
+	public function getProjectGroups(){
+		$sql = "SELECT * FROM ".DB_PREFIX."project_group WHERE `show` =1  ORDER BY sort_order ASC ";
+
+
+		$query = $this->db->query($sql);
+		return $query->rows;
+	}
 }

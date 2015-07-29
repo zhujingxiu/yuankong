@@ -58,7 +58,7 @@
             </tr>
             <tr>
               <td>&nbsp;</td>
-              <td><div id="product-category" class="scrollbox" style="width:390px;">
+              <td><div id="product-category" class="scrollbox" style="width:500px;height:80px;">
                   <?php $class = 'odd'; ?>
                   <?php foreach ($product_categories as $product_category) { ?>
                   <?php $class = ($class == 'even' ? 'odd' : 'even'); ?>
@@ -624,7 +624,7 @@
                 <td class="left"><select name="layout_id">
                     <option value=""></option>
                     <?php foreach ($layouts as $layout) { ?>
-                    <?php if (isset($layout_id) && $layout_id == $layout['layout_id']) { ?>
+                    <?php if (in_array($layout['layout_id'], $layout_id)) { ?>
                     <option value="<?php echo $layout['layout_id']; ?>" selected="selected"><?php echo $layout['name']; ?></option>
                     <?php } else { ?>
                     <option value="<?php echo $layout['layout_id']; ?>"><?php echo $layout['name']; ?></option>

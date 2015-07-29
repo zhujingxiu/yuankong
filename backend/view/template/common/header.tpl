@@ -62,7 +62,7 @@ $(document).ready(function(){
       &nbsp;
       <?php echo $logged; ?>
       &nbsp;
-      <a href="<?php echo $store; ?>" target="_blank" class="top"><?php echo $text_front; ?></a>
+      <a href="<?php echo HTTP_CATALOG ?>" target="_blank" class="top"><?php echo $text_front; ?></a>
       &nbsp;
       <a class="top" href="<?php echo $logout; ?>"><?php echo $text_logout; ?></a>
     </div>
@@ -114,6 +114,7 @@ $(document).ready(function(){
         <ul>
           <li><a href="<?php echo $affiliate; ?>"><?php echo $text_affiliate; ?></a></li>
           <li><a href="<?php echo $affiliate_group; ?>"><?php echo $text_affiliate_group; ?></a></li>
+          <li><a href="<?php echo $case; ?>"><?php echo $text_case; ?></a></li>
         </ul>
       </li>
       <li id="link"><a href="<?php echo $link; ?>" class="top"><?php echo $text_link; ?></a></li>
@@ -212,7 +213,7 @@ $(document).ready(function(){
           <li><a href="<?php echo $payment; ?>"><?php echo $text_payment; ?></a></li>
           <li><a href="<?php echo $total; ?>"><?php echo $text_total; ?></a></li>
           <li><a href="<?php echo $feed; ?>"><?php echo $text_feed; ?></a></li>
-          <li><a href="<?php echo $case; ?>"><?php echo $text_case; ?></a></li>
+          
           <li><a href="<?php echo $coupon; ?>"><?php echo $text_coupon; ?></a></li>
           <li><a class="parent"><?php echo $text_voucher; ?></a>
             <ul>

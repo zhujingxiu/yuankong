@@ -1,6 +1,6 @@
 <?php
 class ModelPaymentAlipayDirect extends Model {
-	public function getMethod($address, $total) {
+	public function getMethod($total) {
 		$this->load->language('payment/alipay_direct');
 
 		if ($this->config->get('alipay_direct_status')) {

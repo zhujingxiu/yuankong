@@ -18,7 +18,7 @@ class ControllerAffiliateRegister extends Controller {
 
 			$this->affiliate->login($this->request->post['email'], $this->request->post['password']);
 
-	  		$this->redirect($this->url->link('affiliate/success'));
+	  		$this->redirect($this->url->link('affiliate/account'));
     	} 
 
       	$this->data['breadcrumbs'] = array();
@@ -88,16 +88,16 @@ class ControllerAffiliateRegister extends Controller {
 			$this->data['error_warning'] = '';
 		}
 		
-		if (isset($this->error['nickname'])) {
-			$this->data['error_nickname'] = $this->error['nickname'];
+		if (isset($this->error['fullname'])) {
+			$this->data['error_fullname'] = $this->error['fullname'];
 		} else {
-			$this->data['error_nickname'] = '';
+			$this->data['error_fullname'] = '';
 		}	
 		
-		if (isset($this->error['lastname'])) {
-			$this->data['error_lastname'] = $this->error['lastname'];
+		if (isset($this->error['company'])) {
+			$this->data['error_company'] = $this->error['company'];
 		} else {
-			$this->data['error_lastname'] = '';
+			$this->data['error_company'] = '';
 		}		
 	
 		if (isset($this->error['email'])) {
@@ -107,7 +107,7 @@ class ControllerAffiliateRegister extends Controller {
 		}
 		
 		if (isset($this->error['mobile_phone'])) {
-			$this->data['error_mobile_phone'] = this->error['mobile_phone'];
+			$this->data['error_mobile_phone'] = $this->error['mobile_phone'];
 		} else {
 			$this->data['error_mobile_phone'] = '';
 		}
@@ -124,29 +124,18 @@ class ControllerAffiliateRegister extends Controller {
 			$this->data['error_confirm'] = '';
 		}
 		
-  		if (isset($this->error['address_1'])) {
-			$this->data['error_address_1'] = $this->error['address_1'];
+  		if (isset($this->error['address'])) {
+			$this->data['error_address'] = $this->error['address'];
 		} else {
-			$this->data['error_address_1'] = '';
+			$this->data['error_address'] = '';
 		}
    		
 							
     	$this->data['action'] = $this->url->link('affiliate/register', '', 'SSL');
-		if (isset($this->request->post['nickname'])) {
-    		$this->data['nickname'] = $this->request->post['nickname'];
+		if (isset($this->request->post['fullname'])) {
+    		$this->data['fullname'] = $this->request->post['fullname'];
 		} else {
-			$this->data['nickname'] = '';
-		}
-		if (isset($this->request->post['firstname'])) {
-    		$this->data['firstname'] = $this->request->post['firstname'];
-		} else {
-			$this->data['firstname'] = '';
-		}
-
-		if (isset($this->request->post['lastname'])) {
-    		$this->data['lastname'] = $this->request->post['lastname'];
-		} else {
-			$this->data['lastname'] = '';
+			$this->data['fullname'] = '';
 		}
 		
 		if (isset($this->request->post['email'])) {
@@ -185,36 +174,17 @@ class ControllerAffiliateRegister extends Controller {
 			$this->data['website'] = '';
 		}
 				
-		if (isset($this->request->post['address_1'])) {
-    		$this->data['address_1'] = $this->request->post['address_1'];
+		if (isset($this->request->post['address'])) {
+    		$this->data['address'] = $this->request->post['address'];
 		} else {
-			$this->data['address_1'] = '';
-		}
-
-		if (isset($this->request->post['address_2'])) {
-    		$this->data['address_2'] = $this->request->post['address_2'];
-		} else {
-			$this->data['address_2'] = '';
+			$this->data['address'] = '';
 		}
 
 		if (isset($this->request->post['postcode'])) {
     		$this->data['postcode'] = $this->request->post['postcode'];
 		} else {
 			$this->data['postcode'] = '';
-		}
-		
-		if (isset($this->request->post['city'])) {
-    		$this->data['city'] = $this->request->post['city'];
-		} else {
-			$this->data['city'] = '';
-		}
-
-    	if (isset($this->request->post['province_id'])) {
-      		$this->data['province_id'] = $this->request->post['province_id']; 	
-		} else {
-      		$this->data['province_id'] = '';
-    	}
-		
+		}		
 
 		if (isset($this->request->post['tax'])) {
     		$this->data['tax'] = $this->request->post['tax'];
@@ -232,12 +202,6 @@ class ControllerAffiliateRegister extends Controller {
     		$this->data['cheque'] = $this->request->post['cheque'];
 		} else {
 			$this->data['cheque'] = '';
-		}
-
-		if (isset($this->request->post['paypal'])) {
-    		$this->data['paypal'] = $this->request->post['paypal'];
-		} else {
-			$this->data['paypal'] = '';
 		}
 
 		if (isset($this->request->post['bank_name'])) {
@@ -324,8 +288,8 @@ class ControllerAffiliateRegister extends Controller {
         if (empty($this->session->data['captcha']) || ($this->session->data['captcha'] != $this->request->post['captcha'])) {
             $this->error['error'] = $this->language->get('error_captcha');
         }
-    	if ((utf8_strlen($this->request->post['nickname']) < 1) || (utf8_strlen($this->request->post['nickname']) > 32)) {
-      		$this->error['nickname'] = $this->language->get('error_nickname');
+    	if ((utf8_strlen($this->request->post['company']) < 1) || (utf8_strlen($this->request->post['company']) > 32)) {
+      		$this->error['company'] = $this->language->get('error_company');
     	}
 
     	if ((utf8_strlen($this->request->post['email']) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $this->request->post['email'])) {
@@ -340,8 +304,8 @@ class ControllerAffiliateRegister extends Controller {
       		$this->error['mobile_phone'] = $this->language->get('error_mobile_phone');
     	}
 
-    	if ((utf8_strlen($this->request->post['address_1']) < 3) || (utf8_strlen($this->request->post['address_1']) > 128)) {
-      		$this->error['address_1'] = $this->language->get('error_address_1');
+    	if ((utf8_strlen($this->request->post['address']) < 3) || (utf8_strlen($this->request->post['address']) > 128)) {
+      		$this->error['address'] = $this->language->get('error_address');
     	}
 
     	if ((utf8_strlen($this->request->post['password']) < 4) || (utf8_strlen($this->request->post['password']) > 20)) {

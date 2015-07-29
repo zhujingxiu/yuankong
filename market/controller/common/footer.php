@@ -44,7 +44,7 @@ class ControllerCommonFooter extends Controller {
 		$this->data['newsletter'] = $this->url->link('account/newsletter', '', 'SSL');		
 
 		$this->data['powered'] = sprintf($this->language->get('text_powered'), $this->config->get('config_name'), date('Y', time()));
-		
+		$this->data['baidu_analytics'] = html_entity_decode($this->config->get('config_baidu_analytics'), ENT_QUOTES, 'UTF-8');
 		// Whos Online
 		if ($this->config->get('config_customer_online')) {
 			$this->load->model('tool/online');

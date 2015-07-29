@@ -149,11 +149,11 @@ class ModelSaleOrder extends Model {
 			$affiliate_info = $this->model_sale_affiliate->getAffiliate($affiliate_id);
 				
 			if ($affiliate_info) {
-				$affiliate_firstname = $affiliate_info['firstname'];
-				$affiliate_lastname = $affiliate_info['lastname'];
+				$affiliate_fullname = $affiliate_info['fullname'];
+				$affiliate_mobile_phone = $affiliate_info['mobile_phone'];
 			} else {
-				$affiliate_firstname = '';
-				$affiliate_lastname = '';				
+				$affiliate_fullname = '';
+				$affiliate_mobile_phone = '';				
 			}
 
 			$this->load->model('localisation/language');
@@ -202,8 +202,8 @@ class ModelSaleOrder extends Model {
 				'reward'                  => $reward,
 				'order_status_id'         => $order_query->row['order_status_id'],
 				'affiliate_id'            => $order_query->row['affiliate_id'],
-				'affiliate_firstname'     => $affiliate_firstname,
-				'affiliate_lastname'      => $affiliate_lastname,
+				'affiliate_fullname'      => $affiliate_fullname,
+				'affiliate_mobile_phone'  => $affiliate_mobile_phone,
 				'commission'              => $order_query->row['commission'],
 				'language_id'             => $order_query->row['language_id'],
 				'language_code'           => $language_code,
@@ -431,8 +431,8 @@ class ModelSaleOrder extends Model {
 			$language = new Language($order_info['language_directory']);
 			$language->load($order_info['language_filename']);
 			$language->load('mail/order');
-
-			$subject = sprintf($language->get('text_subject'), $order_info['store_name'], $order_id);
+			$store_name = $this->config->get('config_name');
+			$subject = sprintf($language->get('text_subject'),$store_name, $order_id);
 
 			$message  = $language->get('text_order') . ' ' . $order_id . "\n";
 			$message .= $language->get('text_date_added') . ' ' . date($language->get('date_format_short'), strtotime($order_info['date_added'])) . "\n\n";
@@ -446,7 +446,7 @@ class ModelSaleOrder extends Model {
 			
 			if ($order_info['customer_id']) {
 				$message .= $language->get('text_link') . "\n";
-				$message .= html_entity_decode($order_info['store_url'] . 'index.php?route=account/order/info&order_id=' . $order_id, ENT_QUOTES, 'UTF-8') . "\n\n";
+				$message .= html_entity_decode(HTTP_CATALOG . 'index.php?route=account/order/info&order_id=' . $order_id, ENT_QUOTES, 'UTF-8') . "\n\n";
 			}
 			
 			if ($data['comment']) {
@@ -466,7 +466,7 @@ class ModelSaleOrder extends Model {
 			$mail->timeout = $this->config->get('config_smtp_timeout');
 			$mail->setTo($order_info['email']);
 			$mail->setFrom($this->config->get('config_email'));
-			$mail->setSender($order_info['store_name']);
+			$mail->setSender($store_name);
 			$mail->setSubject(html_entity_decode($subject, ENT_QUOTES, 'UTF-8'));
 			$mail->setText(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));
 			$mail->send();

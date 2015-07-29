@@ -48,9 +48,6 @@ class ControllerSaleContact extends Controller {
 				
     	$this->data['cancel'] = $this->url->link('sale/contact', 'token=' . $this->session->data['token'], 'SSL');
 		
-		$this->load->model('setting/store');
-		
-		$this->data['stores'] = $this->model_setting_store->getStores();
 		
 		$this->load->model('sale/customer_group');
 				
@@ -84,7 +81,7 @@ class ControllerSaleContact extends Controller {
 			}
 			
 			if (!$json) {
-				$this->load->model('setting/store');
+				
 			
 				$store_name = $this->config->get('config_name');
 	

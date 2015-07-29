@@ -27,6 +27,33 @@ class ModelTotalShipping extends Model {
 	}
 
 	public function getCheckoutTotal(&$total_data, &$total, &$taxes) {
+		if(!isset($this->session->data['shipping_method'])){
+			$quote_data = array();
+			
+			$this->load->model('setting/extension');
+			
+			$results = $this->model_setting_extension->getExtensions('shipping');
+			
+			foreach ($results as $result) {
+				if ($this->config->get($result['code'] . '_status')) {
+					$this->load->model('shipping/' . $result['code']);
+					
+					$quote = $this->{'model_shipping_' . $result['code']}->getQuote(array('province_id'=>0)); 
+		
+					if ($quote) {
+						$quote_data[$result['code']] = array( 
+							'title'      => $quote['title'],
+							'quote'      => $quote['quote'], 
+							'sort_order' => $quote['sort_order'],
+							'error'      => $quote['error']
+						);
+						if(!isset($this->session->data['shipping_method']) || !$this->session->data['shipping_method']){
+							$this->session->data['shipping_method'] = $quote['quote'][$result['code']];
+						}
+					}
+				}
+			}
+		}
 		if ($this->checkout->hasShipping() && isset($this->session->data['shipping_method'])) {
 			$total_data[] = array( 
 				'code'       => 'shipping',
@@ -49,6 +76,6 @@ class ModelTotalShipping extends Model {
 			}
 			
 			$total += $this->session->data['shipping_method']['cost'];
-		}			
+		}		
 	}
 }

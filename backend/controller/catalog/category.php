@@ -375,18 +375,6 @@ class ControllerCatalogCategory extends Controller {
 		} else {
 			$this->data['parent_id'] = 0;
 		}	
-										
-		$this->load->model('setting/store');
-		
-		$this->data['stores'] = $this->model_setting_store->getStores();
-		
-		if (isset($this->request->post['category_store'])) {
-			$this->data['category_store'] = $this->request->post['category_store'];
-		} elseif (isset($this->request->get['category_id'])) {
-			$this->data['category_store'] = $this->model_catalog_category->getCategoryStores($this->request->get['category_id']);
-		} else {
-			$this->data['category_store'] = array(0);
-		}			
 		
 		if (isset($this->request->post['keyword'])) {
 			$this->data['keyword'] = $this->request->post['keyword'];
@@ -448,12 +436,12 @@ class ControllerCatalogCategory extends Controller {
 			$this->data['status'] = 1;
 		}
 				
-		if (isset($this->request->post['category_layout'])) {
-			$this->data['category_layout'] = $this->request->post['category_layout'];
+		if (isset($this->request->post['layout_id'])) {
+			$this->data['layout_id'] = $this->request->post['layout_id'];
 		} elseif (isset($this->request->get['category_id'])) {
-			$this->data['category_layout'] = $this->model_catalog_category->getCategoryLayouts($this->request->get['category_id']);
+			$this->data['layout_id'] = $this->model_catalog_category->getCategoryLayouts($this->request->get['category_id']);
 		} else {
-			$this->data['category_layout'] = array();
+			$this->data['layout_id'] = array();
 		}
 
 		$this->load->model('design/layout');

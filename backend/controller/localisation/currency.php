@@ -434,7 +434,6 @@ class ControllerLocalisationCurrency extends Controller {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 
-		$this->load->model('setting/store');
 		$this->load->model('sale/order');
 		
 		foreach ($this->request->post['selected'] as $currency_id) {
@@ -444,12 +443,7 @@ class ControllerLocalisationCurrency extends Controller {
 				if ($this->config->get('config_currency') == $currency_info['code']) {
 					$this->error['warning'] = $this->language->get('error_default');
 				}
-				
-				$store_total = $this->model_setting_store->getTotalStoresByCurrency($currency_info['code']);
-	
-				if ($store_total) {
-					$this->error['warning'] = sprintf($this->language->get('error_store'), $store_total);
-				}					
+								
 			}
 			
 			$order_total = $this->model_sale_order->getTotalOrdersByCurrencyId($currency_id);

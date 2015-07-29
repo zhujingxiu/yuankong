@@ -14,7 +14,8 @@ $_['column_action']     = '管理';
 // Entry
 $_['entry_name']        = '类别名称：';
 $_['entry_show']        = '前台显示：';
-$_['entry_sort_order']  = '&nbsp;&nbsp;排序：';
+$_['entry_remark']      = '备注：';
+$_['entry_sort_order']  = '排序：';
 
 // Error
 $_['error_permission']  = '警告：您没有权限修改工程类别！';

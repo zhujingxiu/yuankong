@@ -134,7 +134,7 @@ if($verify_result) {//验证成功
 
         //调试用，写文本函数记录程序运行情况是否正常
         //logResult("这里写入想要调试的代码变量值，或其他运行的结果记录");
-		$db->query("UPDATE `" . DB_PREFIX . "order` SET order_status_id = '".$order_status_id."' WHERE order_id = '".$out_trade_no."' ");
+		$db->query("UPDATE `" . DB_PREFIX . "order` SET payment_trade_no = '".$db->escape($trade_no)."',payment_trade_status = '".$db->escape($trade_status)."' ,order_status_id = '".$order_status_id."' WHERE order_id = '".$out_trade_no."' ");
         
 		logResult('TRADE_SUCCESS');
     }
