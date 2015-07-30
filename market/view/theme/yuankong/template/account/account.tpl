@@ -17,7 +17,7 @@
 			<div class="userer">
 				<div class="userleft">
                 	<p class="userpic">
-                        <img src="yk_img/adimg/touxiang.png" width="112" height="112" />
+                        <img src="<?php echo $avatar ?>" width="112" height="112" />
                     </p>
                 </div>
                 <ul class="fl pad20 uname">

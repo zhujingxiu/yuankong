@@ -6,7 +6,8 @@ class Customer {
 	private $mobile_phone;
 	private $telephone;
 	private $fax;
-	private $newsletter;
+    private $newsletter;
+	private $avatar;
 	private $customer_group_id;
 	private $address_id;
 	
@@ -26,7 +27,8 @@ class Customer {
 				$this->email = $customer_query->row['email'];
 				$this->telephone = $customer_query->row['telephone'];
 				$this->fax = $customer_query->row['fax'];
-				$this->newsletter = $customer_query->row['newsletter'];
+                $this->newsletter = $customer_query->row['newsletter'];
+				$this->avatar = $customer_query->row['avatar'];
 				$this->customer_group_id = $customer_query->row['customer_group_id'];
 				$this->address_id = $customer_query->row['address_id'];
 							
@@ -88,7 +90,7 @@ class Customer {
 			$this->newsletter = $customer_query->row['newsletter'];
 			$this->customer_group_id = $customer_query->row['customer_group_id'];
 			$this->address_id = $customer_query->row['address_id'];
-          	
+          	$this->avatar = $customer_query->row['avatar'];
 			$this->db->query("UPDATE " . DB_PREFIX . "customer SET ip = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "' WHERE customer_id = '" . (int)$this->customer_id . "'");
 
 			if($remember){
@@ -147,7 +149,7 @@ class Customer {
 			$this->newsletter = $customer_query->row['newsletter'];
 			$this->customer_group_id = $customer_query->row['customer_group_id'];
 			$this->address_id = $customer_query->row['address_id'];
-          	
+          	$this->avatar = $customer_query->row['avatar'];
 			$this->db->query("UPDATE " . DB_PREFIX . "customer SET ip = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "' WHERE customer_id = '" . (int)$this->customer_id . "'");
 			
 	  		return true;
@@ -171,7 +173,8 @@ class Customer {
         $this->fullname = '';
 		$this->email = '';
 		$this->telephone = '';
-		$this->fax = '';
+        $this->fax = '';
+		$this->avatar = '';
 		$this->newsletter = '';
 		$this->customer_group_id = '';
 		$this->address_id = '';
@@ -208,6 +211,10 @@ class Customer {
   	public function getNewsletter() {
 		return $this->newsletter;	
   	}
+
+    public function getAvatar() {
+        return $this->avatar;   
+    }
 
   	public function getCustomerGroupId() {
 		return $this->customer_group_id;	

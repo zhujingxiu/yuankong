@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2015 年 07 月 29 日 15:39
+-- 生成日期: 2015 年 07 月 30 日 09:42
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.4.3
 
@@ -22039,6 +22039,7 @@ CREATE TABLE IF NOT EXISTS `yk_customer` (
   `email` varchar(96) NOT NULL,
   `telephone` varchar(32) NOT NULL,
   `fax` varchar(32) NOT NULL,
+  `gender` tinyint(4) NOT NULL DEFAULT '0',
   `avatar` varchar(128) DEFAULT NULL,
   `password` varchar(40) NOT NULL,
   `salt` varchar(9) NOT NULL,
@@ -22060,9 +22061,9 @@ CREATE TABLE IF NOT EXISTS `yk_customer` (
 -- 转存表中的数据 `yk_customer`
 --
 
-INSERT INTO `yk_customer` (`customer_id`, `mobile_phone`, `fullname`, `email`, `telephone`, `fax`, `avatar`, `password`, `salt`, `cart`, `wishlist`, `viewed`, `newsletter`, `address_id`, `customer_group_id`, `ip`, `status`, `approved`, `token`, `date_added`) VALUES
-(1, '18850911766', 'yk18850911766', '', '', '', NULL, 'ffc368401010c7db72d3f6b27275bf050e0ac391', 'b1076f96b', 'a:2:{i:55;i:1;s:31:"53:YToxOntpOjIyNztzOjI6IjIxIjt9";i:2;}', '', 'a:5:{i:4;s:2:"53";i:3;s:2:"51";i:2;s:2:"52";i:1;s:2:"55";i:0;s:2:"50";}', 0, 0, 1, '127.0.0.1', 1, 1, '', '2015-07-29 11:31:25'),
-(2, '18959526595', '是的撒旦', '', '', '', NULL, 'ce8cc6dc288e7c92dbde66d27e828f2ef496dc78', '748e6de48', 'a:0:{}', '', NULL, 0, 0, 1, '127.0.0.1', 1, 0, '', '2015-07-29 15:26:24');
+INSERT INTO `yk_customer` (`customer_id`, `mobile_phone`, `fullname`, `email`, `telephone`, `fax`, `gender`, `avatar`, `password`, `salt`, `cart`, `wishlist`, `viewed`, `newsletter`, `address_id`, `customer_group_id`, `ip`, `status`, `approved`, `token`, `date_added`) VALUES
+(1, '18850911766', 'yk18850911766', '', '', '', 0, NULL, 'ffc368401010c7db72d3f6b27275bf050e0ac391', 'b1076f96b', 'a:2:{i:55;i:1;s:31:"53:YToxOntpOjIyNztzOjI6IjIxIjt9";i:2;}', '', 'a:5:{i:4;s:2:"53";i:3;s:2:"51";i:2;s:2:"52";i:1;s:2:"55";i:0;s:2:"50";}', 0, 0, 1, '127.0.0.1', 1, 1, '', '2015-07-29 11:31:25'),
+(2, '18959526595', '是的撒旦', '', '', '', 0, NULL, 'ce8cc6dc288e7c92dbde66d27e828f2ef496dc78', '748e6de48', 'a:0:{}', '', NULL, 0, 0, 1, '127.0.0.1', 1, 0, '', '2015-07-29 15:26:24');
 
 -- --------------------------------------------------------
 
@@ -22146,6 +22147,7 @@ CREATE TABLE IF NOT EXISTS `yk_customer_ip` (
   `customer_ip_id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) NOT NULL,
   `ip` varchar(40) NOT NULL,
+  `area_zone` varchar(256) DEFAULT NULL,
   `date_added` datetime NOT NULL,
   PRIMARY KEY (`customer_ip_id`),
   KEY `ip` (`ip`)
@@ -22155,9 +22157,9 @@ CREATE TABLE IF NOT EXISTS `yk_customer_ip` (
 -- 转存表中的数据 `yk_customer_ip`
 --
 
-INSERT INTO `yk_customer_ip` (`customer_ip_id`, `customer_id`, `ip`, `date_added`) VALUES
-(1, 1, '127.0.0.1', '2015-06-12 17:35:00'),
-(2, 2, '127.0.0.1', '2015-07-16 13:38:42');
+INSERT INTO `yk_customer_ip` (`customer_ip_id`, `customer_id`, `ip`, `area_zone`, `date_added`) VALUES
+(1, 1, '127.0.0.1', NULL, '2015-06-12 17:35:00'),
+(2, 2, '127.0.0.1', NULL, '2015-07-16 13:38:42');
 
 -- --------------------------------------------------------
 

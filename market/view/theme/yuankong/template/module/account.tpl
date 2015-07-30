@@ -7,16 +7,13 @@
     </dl>
     <dl class="userxinxi">
         <dt>我的活动</dt>
-        <dd><a href="#">订单点评</a></dd>
-        <dd><a href="#">我的提问</a></dd>
+        <dd><a href="<?php echo $reviews ?>">订单点评</a></dd>
+        <dd><a href="<?php echo $helps ?>">我的提问</a></dd>
     </dl>
     <dl class="userxinxi">
         <dt><?php echo $text_account; ?></dt>
         <dd><a href="<?php echo $edit; ?>"><?php echo $text_edit; ?></a></dd>
-        <dd><a href="<?php echo $address; ?>"><?php echo $text_address; ?></a></dd>
-        <dd><a href="<?php echo $password; ?>"><?php echo $text_password; ?></a></dd>
-        <dd><a href="<?php echo $transaction; ?>"><?php echo $text_transaction; ?></a></dd>
-        <dd><a href="<?php echo $newsletter; ?>"><?php echo $text_newsletter; ?></a></dd>
+        <dd><a href="<?php echo $messages; ?>">站内信息</a></dd>
     </dl>
     
     <!-- 我的应用 -->

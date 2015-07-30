@@ -87,6 +87,8 @@ class ControllerAccountAccount extends Controller {
         }
         $this->data['totals'] = $this->model_account_order->getTotalOrders();
         $this->data['finished'] = $this->model_account_order->getTotalFinishedOrders();
+        $avatar = $this->customer->getAvatar();
+        $this->data['avatar'] = empty($avatar) ? TPL_IMG.'avatar/default.jpg' : $avatar;
 
 		if ($this->config->get('reward_status')) {
 			$this->data['reward'] = $this->url->link('account/reward', '', 'SSL');

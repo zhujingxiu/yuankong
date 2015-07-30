@@ -2,7 +2,7 @@
     <?php if($groups){?>
     <ul class="gc-table" id="tab">
         <?php $n=0;foreach ($groups as $item): ?>
-        <li class="taboff <?php echo !$n ? 'tabon' : '' ?>"><?php echo $item['name'] ?><i class="icon s-down"></i></li>
+        <li class="taboff <?php echo !$n ? 'tabon' : '' ?>"><span class="group-txt"><?php echo $item['name'] ?></span><i class="icon s-down"></i></li>
         <?php $n++; endforeach ?>
         
     </ul>
@@ -28,7 +28,9 @@
     <p class="e-cnuo">
         <em class="c46">郑重承诺:</em>所有与e站签约客户消防服务项目均实行先办理后付费，同时免费享有一年消防后续服务；若未在约定时间内办理，e站将双倍退款。
     </p>
-
+    <style type="text/css">
+        .group-txt{width: 38px;word-break:break-all;display: inline-block; }
+    </style>
     <script type="text/javascript">
         o.moushov.init("#tab li",".gc-b-detail");
     </script>

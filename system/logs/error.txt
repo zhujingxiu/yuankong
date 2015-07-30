@@ -242,3 +242,10 @@
 2015-07-29 21:12:06 - PHP Notice:  Undefined variable: sort_group in E:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 39
 2015-07-29 21:12:06 - PHP Notice:  Undefined variable: sort_account in E:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 44
 2015-07-29 21:12:06 - PHP Notice:  Undefined variable: sort_telephone in E:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 49
+2015-07-30 11:26:00 - PHP Notice:  Undefined index: mobile_phone in D:\wamp\www\yuankong\market\view\theme\yuankong\template\account\edit.tpl on line 122
+2015-07-30 14:05:50 - PHP Notice:  Undefined variable: reviews in D:\wamp\www\yuankong\market\view\theme\yuankong\template\module\account.tpl on line 10
+2015-07-30 14:05:50 - PHP Notice:  Undefined variable: helps in D:\wamp\www\yuankong\market\view\theme\yuankong\template\module\account.tpl on line 11
+2015-07-30 14:05:50 - PHP Notice:  Undefined variable: reviews in D:\wamp\www\yuankong\market\view\theme\yuankong\template\module\account.tpl on line 10
+2015-07-30 14:05:50 - PHP Notice:  Undefined variable: helps in D:\wamp\www\yuankong\market\view\theme\yuankong\template\module\account.tpl on line 11
+2015-07-30 14:10:35 - PHP Notice:  Undefined variable: helps in D:\wamp\www\yuankong\market\view\theme\yuankong\template\module\account.tpl on line 11
+2015-07-30 14:10:35 - PHP Notice:  Undefined variable: helps in D:\wamp\www\yuankong\market\view\theme\yuankong\template\module\account.tpl on line 11
