@@ -249,3 +249,14 @@
 2015-07-30 14:05:50 - PHP Notice:  Undefined variable: helps in D:\wamp\www\yuankong\market\view\theme\yuankong\template\module\account.tpl on line 11
 2015-07-30 14:10:35 - PHP Notice:  Undefined variable: helps in D:\wamp\www\yuankong\market\view\theme\yuankong\template\module\account.tpl on line 11
 2015-07-30 14:10:35 - PHP Notice:  Undefined variable: helps in D:\wamp\www\yuankong\market\view\theme\yuankong\template\module\account.tpl on line 11
+2015-07-30 22:37:39 - PHP Notice:  Undefined variable: languages in E:\wamp\www\yuankong\backend\view\template\extension\help_form.tpl on line 78
+2015-07-30 22:37:39 - PHP Warning:  Invalid argument supplied for foreach() in E:\wamp\www\yuankong\backend\view\template\extension\help_form.tpl on line 78
+2015-07-30 23:23:55 - PHP Notice:  Undefined variable: status in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\review.tpl on line 18
+2015-07-30 23:23:55 - PHP Notice:  Undefined variable: all in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\review.tpl on line 19
+2015-07-30 23:23:55 - PHP Notice:  Undefined variable: status in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\review.tpl on line 21
+2015-07-30 23:23:55 - PHP Notice:  Undefined variable: processing in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\review.tpl on line 22
+2015-07-30 23:23:55 - PHP Notice:  Undefined variable: status in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\review.tpl on line 24
+2015-07-30 23:23:55 - PHP Notice:  Undefined variable: success in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\review.tpl on line 25
+2015-07-30 23:23:55 - PHP Notice:  Undefined variable: status in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\review.tpl on line 27
+2015-07-30 23:23:55 - PHP Notice:  Undefined variable: cancel in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\review.tpl on line 28
+2015-07-30 23:23:55 - PHP Notice:  Undefined variable: orders in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\review.tpl on line 44

@@ -398,7 +398,7 @@ class ControllerExtensionHelp extends Controller {
 		} elseif (!empty($help_info['status'])) {
 			$this->data['status'] = $help_info['status'];
 		} else {
-			$this->data['status'] = '';
+			$this->data['status'] = 1;
 		}
 
 		if (isset($this->request->post['is_top'])) {
@@ -414,7 +414,7 @@ class ControllerExtensionHelp extends Controller {
 		} elseif (!empty($help_info['sort_order'])) {
 			$this->data['sort_order'] = $help_info['sort_order'];
 		} else {
-			$this->data['sort_order'] = '';
+			$this->data['sort_order'] = 1;
 		}
 		$this->template = 'extension/help_form.tpl';
 		$this->children = array(

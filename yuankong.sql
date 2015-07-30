@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2015 年 07 月 30 日 09:42
+-- 生成日期: 2015 年 07 月 30 日 15:49
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.4.3
 
@@ -22293,6 +22293,7 @@ INSERT INTO `yk_extension` (`extension_id`, `type`, `code`) VALUES
 
 CREATE TABLE IF NOT EXISTS `yk_help` (
   `help_id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_id` int(11) NOT NULL DEFAULT '0',
   `account` varchar(128) NOT NULL,
   `telephone` varchar(16) NOT NULL,
   `text` varchar(512) DEFAULT NULL,
@@ -22311,10 +22312,10 @@ CREATE TABLE IF NOT EXISTS `yk_help` (
 -- 转存表中的数据 `yk_help`
 --
 
-INSERT INTO `yk_help` (`help_id`, `account`, `telephone`, `text`, `is_top`, `sort_order`, `reply`, `user_id`, `status`, `date_replied`, `date_added`, `viewed`) VALUES
-(1, '宝马740i', '12312312', 'asdsadasdasdas', 0, 0, 'asdsadasdsa', 1, 1, '2015-06-10 06:14:38', '2015-06-10 06:14:38', 0),
-(2, 'asdsafafasdasd', '12321321312', 'adasdasdsadassa', 0, 0, NULL, 0, 1, NULL, '2015-05-25 07:37:26', 0),
-(3, '汉武帝', '1312434243', '汉代建立起中原王朝的一个初步形态，尤以汉武帝对\r\n\r\n疆域的拓展最具开创意义。[详细]', 1, 2, '在李莎与李立三的后代看来，李莎"为了爱情的远行"\r\n\r\n，虽然为此付出了巨大的代价，但终生无悔。[详', 1, 1, NULL, '2015-06-10 08:25:06', 0);
+INSERT INTO `yk_help` (`help_id`, `customer_id`, `account`, `telephone`, `text`, `is_top`, `sort_order`, `reply`, `user_id`, `status`, `date_replied`, `date_added`, `viewed`) VALUES
+(1, 0, '宝马740i', '12312312', 'asdsadasdasdas', 0, 0, 'asdsadasdsa', 1, 1, '2015-06-10 06:14:38', '2015-06-10 06:14:38', 0),
+(2, 0, 'asdsafafasdasd', '12321321312', 'adasdasdsadassa', 0, 0, NULL, 0, 1, NULL, '2015-05-25 07:37:26', 0),
+(3, 0, '汉武帝', '1312434243', '汉代建立起中原王朝的一个初步形态，尤以汉武帝对\r\n\r\n疆域的拓展最具开创意义。[详细]', 1, 2, '在李莎与李立三的后代看来，李莎"为了爱情的远行"\r\n\r\n，虽然为此付出了巨大的代价，但终生无悔。[详', 1, 1, NULL, '2015-06-10 08:25:06', 0);
 
 -- --------------------------------------------------------
 
@@ -22553,6 +22554,26 @@ CREATE TABLE IF NOT EXISTS `yk_manufacturer` (
   `sort_order` int(3) NOT NULL,
   PRIMARY KEY (`manufacturer_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `yk_message`
+--
+
+CREATE TABLE IF NOT EXISTS `yk_message` (
+  `message_id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_id` int(11) NOT NULL DEFAULT '0',
+  `text` varchar(512) DEFAULT NULL,
+  `is_top` tinyint(4) NOT NULL DEFAULT '0',
+  `sort_order` smallint(6) NOT NULL DEFAULT '0',
+  `reply` text,
+  `user_id` int(11) NOT NULL DEFAULT '0',
+  `status` tinyint(4) NOT NULL DEFAULT '1',
+  `date_replied` datetime DEFAULT NULL,
+  `date_added` datetime DEFAULT NULL,
+  PRIMARY KEY (`message_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -23037,7 +23058,7 @@ CREATE TABLE IF NOT EXISTS `yk_product` (
 INSERT INTO `yk_product` (`product_id`, `model`, `sku`, `upc`, `isbn`, `mpn`, `location`, `quantity`, `stock_status_id`, `image`, `manufacturer_id`, `shipping`, `price`, `market`, `points`, `tax_class_id`, `date_available`, `weight`, `weight_class_id`, `length`, `width`, `height`, `length_class_id`, `subtract`, `minimum`, `sort_order`, `status`, `date_added`, `date_modified`, `viewed`, `sales`) VALUES
 (50, '132143', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic1.jpg', 0, 1, '126.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-26 13:00:31', '2015-06-16 16:23:34', 91, 0),
 (51, 'ae123213', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic2.jpg', 0, 1, '123.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-23 07:23:47', '0000-00-00 00:00:00', 43, 0),
-(52, '123123', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic4.jpg', 0, 1, '123.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-07-29 16:18:27', '0000-00-00 00:00:00', 29, 0),
+(52, '123123', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic4.jpg', 0, 1, '123.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-07-29 16:18:27', '0000-00-00 00:00:00', 30, 0),
 (53, '231414', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic3.jpg', 0, 1, '125.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-26 13:13:01', '0000-00-00 00:00:00', 150, 0),
 (54, '2144232', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic5.jpg', 0, 1, '128.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-16 09:03:38', '0000-00-00 00:00:00', 7, 0),
 (55, 'xf1325324', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic6.jpg', 0, 1, '158.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-16 09:05:42', '0000-00-00 00:00:00', 4, 0);
@@ -23444,6 +23465,7 @@ CREATE TABLE IF NOT EXISTS `yk_review` (
   `review_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL DEFAULT '0',
   `author` varchar(64) NOT NULL,
   `text` text NOT NULL,
   `rating` int(1) NOT NULL,
@@ -23960,10 +23982,10 @@ CREATE TABLE IF NOT EXISTS `yk_wiki` (
 INSERT INTO `yk_wiki` (`wiki_id`, `group_id`, `user_id`, `title`, `subtitle`, `text`, `status`, `is_top`, `from`, `viewed`, `sort_order`, `date_added`) VALUES
 (2, 2, 1, '新闻测试数据标题', '新闻测试数据副本标题', '&lt;span style=&quot;font-family:Tahoma, Helvetica, Arial, 宋体, sans-serif;font-size:14px;line-height:30px;&quot;&gt;2015年5月初，美国数字地球公司拍摄的卫星照片显示越南非法建岛行为，在非法侵占我南沙岛礁上大规模填海造地。越南非法建岛激起了中方愤慨，我外交部发言人洪磊表示，中国要求有关国家立即停止一切侵犯中国主权和权益的言行。洪磊还揭露，越南非法建岛，共计侵占20多个岛礁，填海造地的同时还设立了机场、港池，甚至还有导弹阵地，中国外交部严厉指责越南非法建岛行为。&lt;/span&gt;', 1, 0, '腾讯新闻', 6, 0, '2015-05-24 21:37:30'),
 (3, 3, 1, '最新款式灭火器', '5.1日家用汽载灭火器全场5折', '&lt;span style=&quot;color:#CC0000;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;&quot;&gt;齐齐哈尔&lt;/span&gt;&lt;span style=&quot;color:#333333;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;&quot;&gt;警方与绑架案犯发生激烈&lt;/span&gt;&lt;span style=&quot;color:#CC0000;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;&quot;&gt;枪战&lt;/span&gt;&lt;span style=&quot;color:#333333;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;&quot;&gt;&amp;nbsp;一民警头部中弹&lt;/span&gt;', 1, 0, '消防e站', 5, 2, '0000-00-00 00:00:00'),
-(4, 1, 1, '新一代宝马7系官网曝光 6月10日首发', '新一代宝马7系官网曝光', '<p>车型代号G11的新一代宝马7系的官图和部分信息在宝马奥地利官网曝光，新车将在6月10日正式发布，10月上市销售。新一代7系在奥地利市场的起价为100445欧元(约合人民币69.2万元)。<img alt="" src="http://www.yuankong.com/image/data/demo/apple_logo.jpg" />12321312</p>', 1, 0, '新浪汽车', 2, 0, '2015-06-10 05:20:56'),
-(5, 2, 1, '4S店卖旧车', '法院判决：赔偿车主三倍车款！', '<p><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">山东济宁的刘女士，在当地名为“安斯达”的菲亚特4S店，以128000元买下了菲亚特轿车，就在提车40天后，刘女士发现，这辆车竟然被补过漆！经法院裁判，4S店隐瞒了该车曾经出售的事实，应退回刘女士购车款，并按购车款的3倍赔偿，总计38.4万。（央视）</span><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">山东济宁的刘女士，在当地名为“安斯达”的菲亚特4S店，以128000元买下了菲亚特轿车，就在提车40天后，刘女士发现，这辆车竟然被补过漆！经法院裁判，4S店隐瞒了该车曾经出售的事实，应退回刘女士购车款，并按购车款的3倍赔偿，总计38.4万。（央视）</span></p>', 1, 0, 'http://d.weibo.com/', 0, 0, '2015-07-27 20:57:57'),
-(6, 2, 1, '港囧》首支正式预告片 9月25日爆笑', '港囧》首支正式预告片 9月25日爆笑', '<p><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">《港囧》发布首支正式预告片，简单粗暴地曝光了电影的正片画面：小舅子</span><a target="_blank" render="ext" extra-data="type=atname" href="http://weibo.com/n/%E5%8C%85%E8%B4%9D%E5%B0%94?from=feed&loc=at" usercard="name=包贝尔" style="color: rgb(235, 115, 80); text-decoration: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">@包贝尔</a><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">&nbsp;为保护姐姐</span><a target="_blank" render="ext" extra-data="type=atname" href="http://weibo.com/n/%E8%B5%B5%E8%96%87?from=feed&loc=at" usercard="name=赵薇" style="color: rgb(235, 115, 80); text-decoration: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">@赵薇</a><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">&nbsp;化身名侦探，对姐夫</span><a target="_blank" render="ext" extra-data="type=atname" href="http://weibo.com/n/%E5%BE%90%E5%B3%A5?from=feed&loc=at" usercard="name=徐峥" style="color: rgb(235, 115, 80); text-decoration: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">@徐峥</a><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">&nbsp;进行史上最残酷拷问！逼得徐峥仓惶逃窜，两人在街头展开一场枪战、爆炸、飞车、坠楼、街头火拼组成追击战。更有徐峥高楼勇救赵薇的感人桥段。</span></p>', 1, 0, '', 0, 0, '2015-07-27 20:58:53'),
-(7, 4, 1, '想知道真相', '想知道真相', '<p><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">今天，中国游泳队抵达俄罗斯喀山，孙杨、宁泽涛等队员露面时都显得比较轻松，心情不错的孙杨还比出剪刀手。本届世锦赛游泳比赛将于8月2日开始，孙杨将参加200、400、800、1500米自由泳四个单项比赛，外媒预测他能包揽四金。转发，为中国游泳健儿们加油！</span><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">今天，中国游泳队抵达俄罗斯喀山，孙杨、宁泽涛等队员露面时都显得比较轻松，心情不错的孙杨还比出剪刀手。本届世锦赛游泳比赛将于8月2日开始，孙杨将参加200、400、800、1500米自由泳四个单项比赛，外媒预测他能包揽四金。转发，为中国游泳健儿们加油！</span><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">今天，中国游泳队抵达俄罗斯喀山，孙杨、宁泽涛等队员露面时都显得比较轻松，心情不错的孙杨还比出剪刀手。本届世锦赛游泳比赛将于8月2日开始，孙杨将参加200、400、800、1500米自由泳四个单项比赛，外媒预测他能包揽四金。转发，为中国游泳健儿们加油！</span></p>', 1, 0, '', 4, 1, '2015-07-27 21:14:19');
+(4, 1, 1, '新一代宝马7系官网曝光 6月10日首发', '新一代宝马7系官网曝光', '<p>车型代号G11的新一代宝马7系的官图和部分信息在宝马奥地利官网曝光，新车将在6月10日正式发布，10月上市销售。新一代7系在奥地利市场的起价为100445欧元(约合人民币69.2万元)。<img alt="" src="http://www.yuankong.com/image/data/demo/apple_logo.jpg" />12321312</p>', 1, 0, '新浪汽车', 3, 0, '2015-06-10 05:20:56'),
+(5, 2, 1, '4S店卖旧车', '法院判决：赔偿车主三倍车款！', '<p><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">山东济宁的刘女士，在当地名为“安斯达”的菲亚特4S店，以128000元买下了菲亚特轿车，就在提车40天后，刘女士发现，这辆车竟然被补过漆！经法院裁判，4S店隐瞒了该车曾经出售的事实，应退回刘女士购车款，并按购车款的3倍赔偿，总计38.4万。（央视）</span><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">山东济宁的刘女士，在当地名为“安斯达”的菲亚特4S店，以128000元买下了菲亚特轿车，就在提车40天后，刘女士发现，这辆车竟然被补过漆！经法院裁判，4S店隐瞒了该车曾经出售的事实，应退回刘女士购车款，并按购车款的3倍赔偿，总计38.4万。（央视）</span></p>', 1, 0, 'http://d.weibo.com/', 1, 0, '2015-07-27 20:57:57'),
+(6, 2, 1, '港囧》首支正式预告片 9月25日爆笑', '港囧》首支正式预告片 9月25日爆笑', '<p><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">《港囧》发布首支正式预告片，简单粗暴地曝光了电影的正片画面：小舅子</span><a target="_blank" render="ext" extra-data="type=atname" href="http://weibo.com/n/%E5%8C%85%E8%B4%9D%E5%B0%94?from=feed&loc=at" usercard="name=包贝尔" style="color: rgb(235, 115, 80); text-decoration: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">@包贝尔</a><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">&nbsp;为保护姐姐</span><a target="_blank" render="ext" extra-data="type=atname" href="http://weibo.com/n/%E8%B5%B5%E8%96%87?from=feed&loc=at" usercard="name=赵薇" style="color: rgb(235, 115, 80); text-decoration: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">@赵薇</a><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">&nbsp;化身名侦探，对姐夫</span><a target="_blank" render="ext" extra-data="type=atname" href="http://weibo.com/n/%E5%BE%90%E5%B3%A5?from=feed&loc=at" usercard="name=徐峥" style="color: rgb(235, 115, 80); text-decoration: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">@徐峥</a><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">&nbsp;进行史上最残酷拷问！逼得徐峥仓惶逃窜，两人在街头展开一场枪战、爆炸、飞车、坠楼、街头火拼组成追击战。更有徐峥高楼勇救赵薇的感人桥段。</span></p>', 1, 0, '', 1, 0, '2015-07-27 20:58:53'),
+(7, 4, 1, '想知道真相', '想知道真相', '<p><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">今天，中国游泳队抵达俄罗斯喀山，孙杨、宁泽涛等队员露面时都显得比较轻松，心情不错的孙杨还比出剪刀手。本届世锦赛游泳比赛将于8月2日开始，孙杨将参加200、400、800、1500米自由泳四个单项比赛，外媒预测他能包揽四金。转发，为中国游泳健儿们加油！</span><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">今天，中国游泳队抵达俄罗斯喀山，孙杨、宁泽涛等队员露面时都显得比较轻松，心情不错的孙杨还比出剪刀手。本届世锦赛游泳比赛将于8月2日开始，孙杨将参加200、400、800、1500米自由泳四个单项比赛，外媒预测他能包揽四金。转发，为中国游泳健儿们加油！</span><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">今天，中国游泳队抵达俄罗斯喀山，孙杨、宁泽涛等队员露面时都显得比较轻松，心情不错的孙杨还比出剪刀手。本届世锦赛游泳比赛将于8月2日开始，孙杨将参加200、400、800、1500米自由泳四个单项比赛，外媒预测他能包揽四金。转发，为中国游泳健儿们加油！</span></p>', 1, 0, '', 6, 1, '2015-07-27 21:14:19');
 
 -- --------------------------------------------------------
 

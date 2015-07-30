@@ -146,6 +146,8 @@ class ControllerAccountEdit extends Controller {
 	}
 
     public function info(){
+        $this->load->language('account/customer');
+        $this->load->model('account/customer');
         $json = array('status'=>0,'msg'=>$this->language->get('text_exception'));
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateInfo()) {
             $this->model_account_customer->editCustomer($this->request->post);
@@ -157,6 +159,8 @@ class ControllerAccountEdit extends Controller {
         $this->response->setOutput(json_encode($json));
     }
     public function avatar(){
+        $this->load->language('account/customer');
+        $this->load->model('account/customer');
         $json = array('status'=>0,'msg'=>$this->language->get('text_exception'));
         if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
             $this->model_account_customer->editAvatar($this->request->post);
@@ -169,9 +173,12 @@ class ControllerAccountEdit extends Controller {
     }    
 
     public function address(){
+        
+        $this->load->model('account/address');
+        $this->load->language('account/customer');
         $json = array('status'=>0,'msg'=>$this->language->get('text_exception'));
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateAddress()) {
-            $this->model_account_customer->addAddress($this->request->post);
+            $this->model_account_address->addAddress($this->request->post);
             
             $this->session->data['success'] = $this->language->get('text_success_address');
 
@@ -181,6 +188,9 @@ class ControllerAccountEdit extends Controller {
     }    
 
     public function password(){
+        
+        $this->load->model('account/customer');
+        $this->load->language('account/customer');
         $json = array('status'=>0,'msg'=>$this->language->get('text_exception'));
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validatePassword()) {
             $this->model_account_customer->editPassword($this->request->post);
@@ -192,6 +202,8 @@ class ControllerAccountEdit extends Controller {
         $this->response->setOutput(json_encode($json));
     }
 	protected function validateInfo() {
+        $this->load->model('account/customer');
+        $this->load->language('account/customer');
 		if ((utf8_strlen($this->request->post['fullname']) < 1) || (utf8_strlen($this->request->post['fullname']) > 32)) {
 			$this->error['fullname'] = $this->language->get('error_fullname');
 		}
@@ -237,6 +249,9 @@ class ControllerAccountEdit extends Controller {
         }
         if ((utf8_strlen($this->request->post['address']) > 3) || utf8_strlen($this->request->post['address']) > 64) {
             $this->error['address'] = $this->language->get('error_address');
+        }
+        if (!isset($this->request->post['area']) || !is_array($this->request->post['area']) || !current($this->request->post['area'])) {
+            $this->error['area'] = $this->language->get('error_area');
         }
         if (!$this->error) {
             return true;

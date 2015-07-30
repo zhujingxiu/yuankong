@@ -108,8 +108,8 @@ class ModelAccountCustomer extends Model {
 		$this->db->query("UPDATE " . DB_PREFIX . "customer SET fullname = '" . $this->db->escape($data['fullname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "' WHERE customer_id = '" . (int)$this->customer->getId() . "'");
 	}
 
-	public function editPassword($mobile_phone, $password) {
-      	$this->db->query("UPDATE " . DB_PREFIX . "customer SET salt = '" . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($password)))) . "' WHERE mobile_phone = '" . $this->db->escape($mobile_phone) . "'");
+	public function editPassword($password) {
+      	$this->db->query("UPDATE " . DB_PREFIX . "customer SET salt = '" . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($password)))) . "' WHERE customer_id = '" . $this->customer->getId() . "'");
 	}
 
 	public function editNewsletter($newsletter) {
