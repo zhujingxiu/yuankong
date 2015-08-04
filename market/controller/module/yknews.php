@@ -10,7 +10,7 @@ class ControllerModuleYknews extends Controller {
         $news = $this->model_module_ykmodule->getNewses($setting['group_id'],$setting['limit']);
         foreach ($news as $k => $value) {
             if(!empty($value['wiki_id'])){
-                $news[$k]['link'] = $this->url->link('information/wiki','wiki_group='.$value['group_id'].'&wiki_id='.$value['wiki_id'],'SSL');
+                $news[$k]['link'] = $this->url->link('information/wiki/info','wiki_group='.$value['group_id'].'&wiki_id='.$value['wiki_id'],'SSL');
             }
         }
         $this->data['newses'] = $news;

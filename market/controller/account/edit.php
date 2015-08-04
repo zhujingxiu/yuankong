@@ -13,7 +13,8 @@ class ControllerAccountEdit extends Controller {
 		
 		$this->document->setTitle($this->language->get('heading_title'));
         $this->document->addScript('market/view/theme/yuankong/javascript/click.js');
-		$this->document->addScript(TPL_JS.'ajaxupload.js');
+        $this->document->addScript(TPL_JS.'ajaxupload.js');
+		$this->document->addScript(TPL_JS.'form.js');
 		$this->document->addScript($this->area_js());
         $this->load->model('account/customer');
 		$this->load->model('account/address');
@@ -118,7 +119,7 @@ class ControllerAccountEdit extends Controller {
 
         if (isset($this->request->post['avatar'])) {
             $this->data['avatar'] = $this->request->post['avatar'];
-        } else if (isset($customer_info['avatar'])) {
+        } else if (isset($customer_info['avatar']) && file_exists($customer_info['avatar'])) {
             $this->data['avatar'] = $customer_info['avatar'];
         } else {
             $this->data['avatar'] = TPL_IMG.'avatar/default.jpg';
@@ -146,26 +147,27 @@ class ControllerAccountEdit extends Controller {
 	}
 
     public function info(){
-        $this->load->language('account/customer');
+        $this->load->language('account/edit');
         $this->load->model('account/customer');
         $json = array('status'=>0,'msg'=>$this->language->get('text_exception'));
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateInfo()) {
             $this->model_account_customer->editCustomer($this->request->post);
             
-            $this->session->data['success'] = $this->language->get('text_success_customer');
+            //$this->session->data['success'] = $this->language->get('text_success_customer');
             $json = array('status'=>1,'msg'=>$this->language->get('text_success_customer'));
             
         }
         $this->response->setOutput(json_encode($json));
     }
     public function avatar(){
-        $this->load->language('account/customer');
+        $this->load->language('account/edit');
         $this->load->model('account/customer');
         $json = array('status'=>0,'msg'=>$this->language->get('text_exception'));
-        if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
-            $this->model_account_customer->editAvatar($this->request->post);
+        
+        if (($this->request->server['REQUEST_METHOD'] == 'POST') && isset($this->request->post['avatar'])) {
+            $this->model_account_customer->editAvatar(htmlspecialchars_decode($this->request->post['avatar']));
             
-            $this->session->data['success'] = $this->language->get('text_success_avatar');
+            //$this->session->data['success'] = $this->language->get('text_success_avatar');
 
             $json = array('status'=>1,'msg'=>$this->language->get('text_success_avatar'));
         }
@@ -175,14 +177,16 @@ class ControllerAccountEdit extends Controller {
     public function address(){
         
         $this->load->model('account/address');
-        $this->load->language('account/customer');
+        $this->load->language('account/edit');
         $json = array('status'=>0,'msg'=>$this->language->get('text_exception'));
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateAddress()) {
             $this->model_account_address->addAddress($this->request->post);
             
-            $this->session->data['success'] = $this->language->get('text_success_address');
+            //$this->session->data['success'] = $this->language->get('text_success_address');
 
             $json = array('status'=>1,'msg'=>$this->language->get('text_success_address'));
+        }else{
+            $json = array('status' =>0 , 'error'=>$this->error);
         }
         $this->response->setOutput(json_encode($json));
     }    
@@ -190,20 +194,22 @@ class ControllerAccountEdit extends Controller {
     public function password(){
         
         $this->load->model('account/customer');
-        $this->load->language('account/customer');
+        $this->load->language('account/edit');
         $json = array('status'=>0,'msg'=>$this->language->get('text_exception'));
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validatePassword()) {
             $this->model_account_customer->editPassword($this->request->post);
             
-            $this->session->data['success'] = $this->language->get('text_success_password');
+            //$this->session->data['success'] = $this->language->get('text_success_password');
 
             $json = array('status'=>1,'msg'=>$this->language->get('text_success_password'));
+        }else{
+            $json = array('status'=>0,'error'=>$this->error);
         }
         $this->response->setOutput(json_encode($json));
     }
 	protected function validateInfo() {
         $this->load->model('account/customer');
-        $this->load->language('account/customer');
+        $this->load->language('account/edit');
 		if ((utf8_strlen($this->request->post['fullname']) < 1) || (utf8_strlen($this->request->post['fullname']) > 32)) {
 			$this->error['fullname'] = $this->language->get('error_fullname');
 		}
@@ -225,6 +231,9 @@ class ControllerAccountEdit extends Controller {
 	}
 
     protected function validatePassword(){
+        if(!isset($this->request->post['password']) || !$this->model_account_customer->validatePassword($this->request->post['password'])){
+            $this->error['password'] = $this->language->get('error_password');
+        }
         if ((utf8_strlen($this->request->post['newpwd']) < 1) || (utf8_strlen($this->request->post['newpwd']) > 32)) {
             $this->error['newpwd'] = $this->language->get('error_newpwd');
         }else{
@@ -244,10 +253,10 @@ class ControllerAccountEdit extends Controller {
         if ((utf8_strlen($this->request->post['fullname']) < 1) || (utf8_strlen($this->request->post['fullname']) > 32)) {
             $this->error['fullname'] = $this->language->get('error_fullname');
         }
-        if ((utf8_strlen($this->request->post['telephone']) > 3) || !isMobile($this->request->post['telephone'])) {
+        if ((utf8_strlen($this->request->post['telephone']) < 3) || !isMobile($this->request->post['telephone'])) {
             $this->error['telephone'] = $this->language->get('error_telephone');
         }
-        if ((utf8_strlen($this->request->post['address']) > 3) || utf8_strlen($this->request->post['address']) > 64) {
+        if ((utf8_strlen($this->request->post['address']) < 1) || utf8_strlen($this->request->post['address']) > 64) {
             $this->error['address'] = $this->language->get('error_address');
         }
         if (!isset($this->request->post['area']) || !is_array($this->request->post['area']) || !current($this->request->post['area'])) {

@@ -7,7 +7,7 @@
             <?php if( count($newses) ) { ?>
              <?php foreach ($newses as $i => $item) {  ?>
                 <li class="txt_clip">
-                    <em>[<?php echo $item['group_name'] ?>]</em>
+                    <em>[公告]</em>
                     <a href="<?php echo $item['link']; ?>" <?php echo !$i ? 'class="'.$first_class.'"' : '' ?>><?php echo $item['title']; ?></a>
                 </li>
             <?php } ?>

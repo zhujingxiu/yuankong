@@ -260,3 +260,209 @@
 2015-07-30 23:23:55 - PHP Notice:  Undefined variable: status in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\review.tpl on line 27
 2015-07-30 23:23:55 - PHP Notice:  Undefined variable: cancel in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\review.tpl on line 28
 2015-07-30 23:23:55 - PHP Notice:  Undefined variable: orders in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\review.tpl on line 44
+2015-07-31 19:07:46 - PHP Notice:  Error: Could not load language account/customer! in E:\wamp\www\yuankong\system\library\language.php on line 39
+2015-07-31 19:07:51 - PHP Notice:  Error: Could not load language account/customer! in E:\wamp\www\yuankong\system\library\language.php on line 39
+2015-07-31 19:07:52 - PHP Notice:  Error: Could not load language account/customer! in E:\wamp\www\yuankong\system\library\language.php on line 39
+2015-07-31 19:07:53 - PHP Notice:  Error: Could not load language account/customer! in E:\wamp\www\yuankong\system\library\language.php on line 39
+2015-07-31 19:07:53 - PHP Notice:  Error: Could not load language account/customer! in E:\wamp\www\yuankong\system\library\language.php on line 39
+2015-07-31 19:07:54 - PHP Notice:  Error: Could not load language account/customer! in E:\wamp\www\yuankong\system\library\language.php on line 39
+2015-07-31 19:07:54 - PHP Notice:  Error: Could not load language account/customer! in E:\wamp\www\yuankong\system\library\language.php on line 39
+2015-07-31 19:07:54 - PHP Notice:  Error: Could not load language account/customer! in E:\wamp\www\yuankong\system\library\language.php on line 39
+2015-07-31 19:07:54 - PHP Notice:  Error: Could not load language account/customer! in E:\wamp\www\yuankong\system\library\language.php on line 39
+2015-07-31 19:07:55 - PHP Notice:  Error: Could not load language account/customer! in E:\wamp\www\yuankong\system\library\language.php on line 39
+2015-07-31 19:07:55 - PHP Notice:  Error: Could not load language account/customer! in E:\wamp\www\yuankong\system\library\language.php on line 39
+2015-07-31 19:07:55 - PHP Notice:  Error: Could not load language account/customer! in E:\wamp\www\yuankong\system\library\language.php on line 39
+2015-07-31 19:07:58 - PHP Notice:  Error: Could not load language account/customer! in E:\wamp\www\yuankong\system\library\language.php on line 39
+2015-07-31 19:07:58 - PHP Notice:  Error: Could not load language account/customer! in E:\wamp\www\yuankong\system\library\language.php on line 39
+2015-07-31 19:07:59 - PHP Notice:  Error: Could not load language account/customer! in E:\wamp\www\yuankong\system\library\language.php on line 39
+2015-07-31 19:41:51 - PHP Notice:  Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1<br />Error No: 1064<br />SELECT customer_id FROM yk_customer WHERE customer_id = '1' AND (password = SHA1(CONCAT(salt, SHA1(CONCAT(salt, SHA1('1234'))))) in E:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-07-31 19:41:51 - PHP Notice:  Trying to get property of non-object in E:\wamp\www\yuankong\market\model\account\customer.php on line 122
+2015-07-31 20:01:54 - PHP Warning:  sha1() expects parameter 1 to be string, array given in E:\wamp\www\yuankong\market\model\account\customer.php on line 116
+2015-08-01 10:04:19 - PHP Notice:  Error: Unknown column 'help_id' in 'field list'<br />Error No: 1054<br />SELECT COUNT(help_id) total FROM yk_message WHERE customer_id = '1' in E:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-08-01 10:04:19 - PHP Notice:  Trying to get property of non-object in E:\wamp\www\yuankong\market\model\account\customer.php on line 277
+2015-08-01 10:04:19 - PHP Notice:  Error: Unknown column 'help_id' in 'field list'<br />Error No: 1054<br />SELECT COUNT(help_id) total FROM yk_review WHERE customer_id = '1' in E:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-08-01 10:04:19 - PHP Notice:  Trying to get property of non-object in E:\wamp\www\yuankong\market\model\account\customer.php on line 282
+2015-08-01 10:16:56 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\market\controller\account\account.php on line 118
+2015-08-01 10:16:56 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\market\controller\account\account.php on line 118
+2015-08-01 10:16:56 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\market\controller\account\account.php on line 118
+2015-08-01 10:16:56 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\market\controller\account\account.php on line 118
+2015-08-01 10:16:56 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\market\controller\account\account.php on line 118
+2015-08-01 10:16:56 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\market\controller\account\account.php on line 118
+2015-08-01 10:16:56 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\market\controller\account\account.php on line 118
+2015-08-01 10:16:56 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\market\controller\account\account.php on line 118
+2015-08-01 10:16:56 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\market\controller\account\account.php on line 118
+2015-08-01 10:16:56 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\market\controller\account\account.php on line 118
+2015-08-01 10:16:56 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\market\controller\account\account.php on line 118
+2015-08-01 10:16:56 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\market\controller\account\account.php on line 118
+2015-08-01 10:16:56 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\market\controller\account\account.php on line 118
+2015-08-01 10:16:56 - PHP Notice:  Undefined index: products in E:\wamp\www\yuankong\market\controller\account\account.php on line 121
+2015-08-01 10:16:56 - PHP Notice:  Undefined index: products in E:\wamp\www\yuankong\market\controller\account\account.php on line 121
+2015-08-01 10:17:26 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\market\controller\account\account.php on line 119
+2015-08-01 10:17:26 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\market\controller\account\account.php on line 119
+2015-08-01 10:17:26 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\market\controller\account\account.php on line 119
+2015-08-01 10:17:26 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\market\controller\account\account.php on line 119
+2015-08-01 10:17:26 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\market\controller\account\account.php on line 119
+2015-08-01 10:17:26 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\market\controller\account\account.php on line 119
+2015-08-01 10:17:26 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\market\controller\account\account.php on line 119
+2015-08-01 10:17:26 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\market\controller\account\account.php on line 119
+2015-08-01 10:17:26 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\market\controller\account\account.php on line 119
+2015-08-01 10:17:26 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\market\controller\account\account.php on line 119
+2015-08-01 10:17:26 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\market\controller\account\account.php on line 119
+2015-08-01 10:17:26 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\market\controller\account\account.php on line 119
+2015-08-01 10:17:26 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\market\controller\account\account.php on line 119
+2015-08-01 10:17:26 - PHP Notice:  Undefined index: products in E:\wamp\www\yuankong\market\controller\account\account.php on line 122
+2015-08-01 10:17:26 - PHP Notice:  Undefined index: products in E:\wamp\www\yuankong\market\controller\account\account.php on line 122
+2015-08-01 10:17:26 - PHP Notice:  Undefined index: image_width in E:\wamp\www\yuankong\market\controller\account\account.php on line 129
+2015-08-01 10:17:26 - PHP Notice:  Undefined index: image_height in E:\wamp\www\yuankong\market\controller\account\account.php on line 129
+2015-08-01 10:17:26 - PHP Warning:  imagecreatetruecolor(): Invalid image dimensions in E:\wamp\www\yuankong\system\library\image.php on line 96
+2015-08-01 10:17:26 - PHP Warning:  imagecolorallocate() expects parameter 1 to be resource, boolean given in E:\wamp\www\yuankong\system\library\image.php on line 104
+2015-08-01 10:17:26 - PHP Warning:  imagefilledrectangle() expects parameter 1 to be resource, boolean given in E:\wamp\www\yuankong\system\library\image.php on line 107
+2015-08-01 10:17:26 - PHP Warning:  imagecopyresampled() expects parameter 1 to be resource, boolean given in E:\wamp\www\yuankong\system\library\image.php on line 109
+2015-08-01 10:17:26 - PHP Notice:  Undefined index: products in E:\wamp\www\yuankong\market\controller\account\account.php on line 122
+2015-08-01 10:17:26 - PHP Notice:  Undefined index: image_width in E:\wamp\www\yuankong\market\controller\account\account.php on line 129
+2015-08-01 10:17:26 - PHP Notice:  Undefined index: image_height in E:\wamp\www\yuankong\market\controller\account\account.php on line 129
+2015-08-01 10:17:26 - PHP Warning:  imagecreatetruecolor(): Invalid image dimensions in E:\wamp\www\yuankong\system\library\image.php on line 96
+2015-08-01 10:17:26 - PHP Warning:  imagecolorallocate() expects parameter 1 to be resource, boolean given in E:\wamp\www\yuankong\system\library\image.php on line 104
+2015-08-01 10:17:26 - PHP Warning:  imagefilledrectangle() expects parameter 1 to be resource, boolean given in E:\wamp\www\yuankong\system\library\image.php on line 107
+2015-08-01 10:17:26 - PHP Warning:  imagecopyresampled() expects parameter 1 to be resource, boolean given in E:\wamp\www\yuankong\system\library\image.php on line 109
+2015-08-01 10:18:19 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\market\controller\account\account.php on line 120
+2015-08-01 10:18:19 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\market\controller\account\account.php on line 120
+2015-08-01 10:18:19 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\market\controller\account\account.php on line 120
+2015-08-01 10:18:19 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\market\controller\account\account.php on line 120
+2015-08-01 10:18:19 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\market\controller\account\account.php on line 120
+2015-08-01 10:18:19 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\market\controller\account\account.php on line 120
+2015-08-01 10:18:19 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\market\controller\account\account.php on line 120
+2015-08-01 10:18:19 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\market\controller\account\account.php on line 120
+2015-08-01 10:18:19 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\market\controller\account\account.php on line 120
+2015-08-01 10:18:19 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\market\controller\account\account.php on line 120
+2015-08-01 10:18:19 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\market\controller\account\account.php on line 120
+2015-08-01 10:18:19 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\market\controller\account\account.php on line 120
+2015-08-01 10:18:19 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\market\controller\account\account.php on line 120
+2015-08-01 10:18:19 - PHP Notice:  Undefined index: products in E:\wamp\www\yuankong\market\controller\account\account.php on line 123
+2015-08-01 10:18:19 - PHP Notice:  Undefined index: products in E:\wamp\www\yuankong\market\controller\account\account.php on line 123
+2015-08-01 10:18:19 - PHP Notice:  Undefined index: image_width in E:\wamp\www\yuankong\market\controller\account\account.php on line 130
+2015-08-01 10:18:19 - PHP Notice:  Undefined index: image_height in E:\wamp\www\yuankong\market\controller\account\account.php on line 130
+2015-08-01 10:18:19 - PHP Warning:  imagecreatetruecolor(): Invalid image dimensions in E:\wamp\www\yuankong\system\library\image.php on line 96
+2015-08-01 10:18:19 - PHP Warning:  imagecolorallocate() expects parameter 1 to be resource, boolean given in E:\wamp\www\yuankong\system\library\image.php on line 104
+2015-08-01 10:18:19 - PHP Warning:  imagefilledrectangle() expects parameter 1 to be resource, boolean given in E:\wamp\www\yuankong\system\library\image.php on line 107
+2015-08-01 10:18:19 - PHP Warning:  imagecopyresampled() expects parameter 1 to be resource, boolean given in E:\wamp\www\yuankong\system\library\image.php on line 109
+2015-08-01 10:18:19 - PHP Notice:  Undefined index: products in E:\wamp\www\yuankong\market\controller\account\account.php on line 123
+2015-08-01 10:18:19 - PHP Notice:  Undefined index: image_width in E:\wamp\www\yuankong\market\controller\account\account.php on line 130
+2015-08-01 10:18:19 - PHP Notice:  Undefined index: image_height in E:\wamp\www\yuankong\market\controller\account\account.php on line 130
+2015-08-01 10:18:19 - PHP Warning:  imagecreatetruecolor(): Invalid image dimensions in E:\wamp\www\yuankong\system\library\image.php on line 96
+2015-08-01 10:18:19 - PHP Warning:  imagecolorallocate() expects parameter 1 to be resource, boolean given in E:\wamp\www\yuankong\system\library\image.php on line 104
+2015-08-01 10:18:19 - PHP Warning:  imagefilledrectangle() expects parameter 1 to be resource, boolean given in E:\wamp\www\yuankong\system\library\image.php on line 107
+2015-08-01 10:18:19 - PHP Warning:  imagecopyresampled() expects parameter 1 to be resource, boolean given in E:\wamp\www\yuankong\system\library\image.php on line 109
+2015-08-01 10:21:00 - PHP Notice:  Undefined index: products in E:\wamp\www\yuankong\market\controller\account\account.php on line 123
+2015-08-01 10:21:00 - PHP Notice:  Undefined index: image_width in E:\wamp\www\yuankong\market\controller\account\account.php on line 130
+2015-08-01 10:21:00 - PHP Notice:  Undefined index: image_height in E:\wamp\www\yuankong\market\controller\account\account.php on line 130
+2015-08-01 10:21:00 - PHP Warning:  imagecreatetruecolor(): Invalid image dimensions in E:\wamp\www\yuankong\system\library\image.php on line 96
+2015-08-01 10:21:00 - PHP Warning:  imagecolorallocate() expects parameter 1 to be resource, boolean given in E:\wamp\www\yuankong\system\library\image.php on line 104
+2015-08-01 10:21:00 - PHP Warning:  imagefilledrectangle() expects parameter 1 to be resource, boolean given in E:\wamp\www\yuankong\system\library\image.php on line 107
+2015-08-01 10:21:00 - PHP Warning:  imagecopyresampled() expects parameter 1 to be resource, boolean given in E:\wamp\www\yuankong\system\library\image.php on line 109
+2015-08-01 10:21:00 - PHP Notice:  Undefined index: products in E:\wamp\www\yuankong\market\controller\account\account.php on line 123
+2015-08-01 10:21:00 - PHP Notice:  Undefined index: image_width in E:\wamp\www\yuankong\market\controller\account\account.php on line 130
+2015-08-01 10:21:00 - PHP Notice:  Undefined index: image_height in E:\wamp\www\yuankong\market\controller\account\account.php on line 130
+2015-08-01 10:21:00 - PHP Warning:  imagecreatetruecolor(): Invalid image dimensions in E:\wamp\www\yuankong\system\library\image.php on line 96
+2015-08-01 10:21:00 - PHP Warning:  imagecolorallocate() expects parameter 1 to be resource, boolean given in E:\wamp\www\yuankong\system\library\image.php on line 104
+2015-08-01 10:21:00 - PHP Warning:  imagefilledrectangle() expects parameter 1 to be resource, boolean given in E:\wamp\www\yuankong\system\library\image.php on line 107
+2015-08-01 10:21:00 - PHP Warning:  imagecopyresampled() expects parameter 1 to be resource, boolean given in E:\wamp\www\yuankong\system\library\image.php on line 109
+2015-08-01 10:21:00 - PHP Notice:  Undefined index: products in E:\wamp\www\yuankong\market\controller\account\account.php on line 123
+2015-08-01 10:21:00 - PHP Notice:  Undefined index: image_width in E:\wamp\www\yuankong\market\controller\account\account.php on line 130
+2015-08-01 10:21:00 - PHP Notice:  Undefined index: image_height in E:\wamp\www\yuankong\market\controller\account\account.php on line 130
+2015-08-01 10:21:00 - PHP Warning:  imagecreatetruecolor(): Invalid image dimensions in E:\wamp\www\yuankong\system\library\image.php on line 96
+2015-08-01 10:21:00 - PHP Warning:  imagecolorallocate() expects parameter 1 to be resource, boolean given in E:\wamp\www\yuankong\system\library\image.php on line 104
+2015-08-01 10:21:00 - PHP Warning:  imagefilledrectangle() expects parameter 1 to be resource, boolean given in E:\wamp\www\yuankong\system\library\image.php on line 107
+2015-08-01 10:21:00 - PHP Warning:  imagecopyresampled() expects parameter 1 to be resource, boolean given in E:\wamp\www\yuankong\system\library\image.php on line 109
+2015-08-01 10:21:00 - PHP Notice:  Undefined index: products in E:\wamp\www\yuankong\market\controller\account\account.php on line 123
+2015-08-01 10:21:00 - PHP Notice:  Undefined index: image_width in E:\wamp\www\yuankong\market\controller\account\account.php on line 130
+2015-08-01 10:21:00 - PHP Notice:  Undefined index: image_height in E:\wamp\www\yuankong\market\controller\account\account.php on line 130
+2015-08-01 10:21:00 - PHP Warning:  imagecreatetruecolor(): Invalid image dimensions in E:\wamp\www\yuankong\system\library\image.php on line 96
+2015-08-01 10:21:00 - PHP Warning:  imagecolorallocate() expects parameter 1 to be resource, boolean given in E:\wamp\www\yuankong\system\library\image.php on line 104
+2015-08-01 10:21:00 - PHP Warning:  imagefilledrectangle() expects parameter 1 to be resource, boolean given in E:\wamp\www\yuankong\system\library\image.php on line 107
+2015-08-01 10:21:00 - PHP Warning:  imagecopyresampled() expects parameter 1 to be resource, boolean given in E:\wamp\www\yuankong\system\library\image.php on line 109
+2015-08-01 10:21:36 - PHP Notice:  Undefined index: image_width in E:\wamp\www\yuankong\market\controller\account\account.php on line 128
+2015-08-01 10:21:36 - PHP Notice:  Undefined index: image_height in E:\wamp\www\yuankong\market\controller\account\account.php on line 128
+2015-08-01 10:21:36 - PHP Warning:  imagecreatetruecolor(): Invalid image dimensions in E:\wamp\www\yuankong\system\library\image.php on line 96
+2015-08-01 10:21:36 - PHP Warning:  imagecolorallocate() expects parameter 1 to be resource, boolean given in E:\wamp\www\yuankong\system\library\image.php on line 104
+2015-08-01 10:21:36 - PHP Warning:  imagefilledrectangle() expects parameter 1 to be resource, boolean given in E:\wamp\www\yuankong\system\library\image.php on line 107
+2015-08-01 10:21:36 - PHP Warning:  imagecopyresampled() expects parameter 1 to be resource, boolean given in E:\wamp\www\yuankong\system\library\image.php on line 109
+2015-08-01 10:21:36 - PHP Notice:  Undefined index: image_width in E:\wamp\www\yuankong\market\controller\account\account.php on line 128
+2015-08-01 10:21:36 - PHP Notice:  Undefined index: image_height in E:\wamp\www\yuankong\market\controller\account\account.php on line 128
+2015-08-01 10:21:36 - PHP Warning:  imagecreatetruecolor(): Invalid image dimensions in E:\wamp\www\yuankong\system\library\image.php on line 96
+2015-08-01 10:21:36 - PHP Warning:  imagecolorallocate() expects parameter 1 to be resource, boolean given in E:\wamp\www\yuankong\system\library\image.php on line 104
+2015-08-01 10:21:36 - PHP Warning:  imagefilledrectangle() expects parameter 1 to be resource, boolean given in E:\wamp\www\yuankong\system\library\image.php on line 107
+2015-08-01 10:21:36 - PHP Warning:  imagecopyresampled() expects parameter 1 to be resource, boolean given in E:\wamp\www\yuankong\system\library\image.php on line 109
+2015-08-01 10:21:36 - PHP Notice:  Undefined index: image_width in E:\wamp\www\yuankong\market\controller\account\account.php on line 128
+2015-08-01 10:21:36 - PHP Notice:  Undefined index: image_height in E:\wamp\www\yuankong\market\controller\account\account.php on line 128
+2015-08-01 10:21:37 - PHP Warning:  imagecreatetruecolor(): Invalid image dimensions in E:\wamp\www\yuankong\system\library\image.php on line 96
+2015-08-01 10:21:37 - PHP Warning:  imagecolorallocate() expects parameter 1 to be resource, boolean given in E:\wamp\www\yuankong\system\library\image.php on line 104
+2015-08-01 10:21:37 - PHP Warning:  imagefilledrectangle() expects parameter 1 to be resource, boolean given in E:\wamp\www\yuankong\system\library\image.php on line 107
+2015-08-01 10:21:37 - PHP Warning:  imagecopyresampled() expects parameter 1 to be resource, boolean given in E:\wamp\www\yuankong\system\library\image.php on line 109
+2015-08-01 10:21:37 - PHP Notice:  Undefined index: image_width in E:\wamp\www\yuankong\market\controller\account\account.php on line 128
+2015-08-01 10:21:37 - PHP Notice:  Undefined index: image_height in E:\wamp\www\yuankong\market\controller\account\account.php on line 128
+2015-08-01 10:21:37 - PHP Warning:  imagecreatetruecolor(): Invalid image dimensions in E:\wamp\www\yuankong\system\library\image.php on line 96
+2015-08-01 10:21:37 - PHP Warning:  imagecolorallocate() expects parameter 1 to be resource, boolean given in E:\wamp\www\yuankong\system\library\image.php on line 104
+2015-08-01 10:21:37 - PHP Warning:  imagefilledrectangle() expects parameter 1 to be resource, boolean given in E:\wamp\www\yuankong\system\library\image.php on line 107
+2015-08-01 10:21:37 - PHP Warning:  imagecopyresampled() expects parameter 1 to be resource, boolean given in E:\wamp\www\yuankong\system\library\image.php on line 109
+2015-08-01 10:26:08 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 88
+2015-08-01 10:26:08 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 90
+2015-08-01 10:26:08 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 88
+2015-08-01 10:26:08 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 90
+2015-08-01 10:26:08 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 88
+2015-08-01 10:26:08 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 90
+2015-08-01 10:26:08 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 88
+2015-08-01 10:26:08 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 90
+2015-08-01 10:29:01 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 88
+2015-08-01 10:29:01 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 90
+2015-08-01 10:29:01 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 88
+2015-08-01 10:29:01 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 90
+2015-08-01 10:29:01 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 88
+2015-08-01 10:29:01 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 90
+2015-08-01 10:30:39 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 88
+2015-08-01 10:30:39 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 90
+2015-08-01 10:30:39 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 88
+2015-08-01 10:30:39 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 90
+2015-08-01 10:30:39 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 88
+2015-08-01 10:30:39 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 90
+2015-08-01 10:37:15 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 88
+2015-08-01 10:37:15 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 90
+2015-08-01 10:37:15 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 88
+2015-08-01 10:37:15 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 90
+2015-08-01 10:37:15 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 88
+2015-08-01 10:37:15 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 90
+2015-08-01 10:37:22 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 88
+2015-08-01 10:37:22 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 90
+2015-08-01 10:37:22 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 88
+2015-08-01 10:37:22 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 90
+2015-08-01 10:37:22 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 88
+2015-08-01 10:37:22 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 90
+2015-08-01 10:43:17 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 88
+2015-08-01 10:43:17 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 90
+2015-08-01 10:43:17 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 88
+2015-08-01 10:43:17 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 90
+2015-08-01 10:43:17 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 88
+2015-08-01 10:43:17 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 90
+2015-08-01 10:43:43 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 88
+2015-08-01 10:43:43 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 90
+2015-08-01 10:43:43 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 88
+2015-08-01 10:43:43 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 90
+2015-08-01 10:43:43 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 88
+2015-08-01 10:43:43 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 90
+2015-08-01 10:45:29 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 88
+2015-08-01 10:45:29 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 90
+2015-08-01 10:45:29 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 88
+2015-08-01 10:45:29 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 90
+2015-08-01 10:45:29 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 88
+2015-08-01 10:45:29 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 90
+2015-08-02 9:13:40 - PHP Notice:  Undefined variable: sort_group in E:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 39
+2015-08-02 9:13:40 - PHP Notice:  Undefined variable: sort_account in E:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 44
+2015-08-02 9:13:40 - PHP Notice:  Undefined variable: sort_telephone in E:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 49
+2015-08-02 9:14:02 - PHP Notice:  Undefined variable: sort_group in E:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 39
+2015-08-02 9:14:02 - PHP Notice:  Undefined variable: sort_account in E:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 44
+2015-08-02 9:14:02 - PHP Notice:  Undefined variable: sort_telephone in E:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 49
+2015-08-02 9:23:07 - PHP Notice:  Error: Table 'yuankong.yk_project_group order by sort_order asc' doesn't exist<br />Error No: 1146<br />SELECT * FROM `yk_project_group ORDER BY sort_order ASC  in E:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-08-02 9:23:07 - PHP Notice:  Trying to get property of non-object in E:\wamp\www\yuankong\market\model\service\project.php on line 51
+2015-08-02 9:28:54 - PHP Notice:  Undefined variable: sort_group in E:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 39
+2015-08-02 9:28:54 - PHP Notice:  Undefined variable: sort_account in E:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 44
+2015-08-02 9:28:54 - PHP Notice:  Undefined variable: sort_telephone in E:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 49

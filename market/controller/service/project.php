@@ -99,7 +99,7 @@ class ControllerServiceProject extends Controller {
 		$pagination->url = $this->url->link('service/project', 'page={page}', 'SSL');
 		
 		$this->data['pagination'] = $pagination->render();
-
+		$this->data['groups'] = $this->model_service_project->getProjectGroups();
 
 		$this->template = $this->config->get('config_template') . '/template/service/project.tpl';
 		

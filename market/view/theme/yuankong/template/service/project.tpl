@@ -12,16 +12,17 @@
                 <h2>免费登记预约项目</h2>
                 <div class="gcsq-style">
                     <label>选择项目</label>
+                    <?php if ($groups): ?>                   
                     <dl class="chose-xm">
                         <dt class="c-xm-dt"><span>消防设计</span></dt>
                         <dd class="c-xm-dd">
-                            <span class="group-option" data-val="1">消防设计</span>
-                            <span class="group-option" data-val="2">消防检测</span>
-                            <span class="group-option" data-val="3">消防工程</span>
-                            <span class="group-option" data-val="4">消防维保</span>
+                            <?php foreach ($groups as $item): ?>
+                            <span class="group-option" data-val="<?php echo $item['group_id'] ?>"><?php echo $item['name'] ?></span>   
+                            <?php endforeach ?>
                         </dd>
                         <input type="hidden" name="group_id" value="1"/>
                     </dl>
+                    <?php endif ?>
                 </div>
                 <div class="gc-b-detail">
                     <p class="f_s"></p>

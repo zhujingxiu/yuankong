@@ -101,6 +101,8 @@ class ControllerModuleYkliked extends Controller {
             }
         }
 
+         $this->data['products'] = array_slice( $this->data['products'], 0,5);
+
         $this->template = $this->config->get('config_template') . '/template/module/ykliked.tpl';
 
         $this->render();

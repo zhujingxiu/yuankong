@@ -25,7 +25,7 @@
                 	<li>为了账户安全，请您尽快完善资料</li>
                     <li>
                     	<a class="pad15" href="<?php echo $edit ?>">完善资料</a>
-                        <a href="#">编辑头像</a>
+                        <a href="<?php echo $quickavatar ?>">编辑头像</a>
                     </li>
                     <li class="uxxjs">
                     	<span><?php echo $text_my_orders ?>
@@ -37,9 +37,9 @@
                     </li>
                 </ul>
                 <dl class="fl pad20 unameer">
-                	<dt>您有（<a href="#">2</a>）条站内信息</dt>
-                    <dd>共提问题：<a href="#">15</a>个</dd>
-                    <dd>共评价订单：<a href="#">15</a>个</dd>
+                	<dt>您有（<a href="<?php echo $message ?>"><?php echo $messages ?></a>）条站内信息</dt>
+                    <dd>共提问题：<a href="<?php echo $help ?>"><?php echo $helps ?></a>个</dd>
+                    <dd>共评价订单：<a href="<?php echo $review ?>"><?php echo $reviews ?></a>个</dd>
                 </dl>
 			</div>
 			<b class="box2bottom"></b>
@@ -78,14 +78,24 @@
                 </table>
             </div>
             <div class="jqdingdan martop20">
+                <?php if ($recomments): ?>
             	<p class="tuijian1">为您推荐的热门商品</p>
             	<table class="wntuijian">
                 	<tr>
-                    	<td><a class="tjpic" href="#"><img src="imgs/adimg/newspic.jpg" width="171" height="100" alt="" /></a><a href="#">嵌入式插电安全出口疏散指示灯</a><br />全场5折起售，10件更优惠<br />优惠价:<strong>￥1250</strong></td>
-                        <td><a class="tjpic" href="#"><img src="imgs/adimg/newspic.jpg" width="171" height="100" alt="" /></a><a href="#">嵌入式插电安全出口疏散指示灯</a><br />全场5折起售，10件更优惠<br />优惠价:<strong>￥1250</strong></td>
-                        <td><a class="tjpic" href="#"><img src="imgs/adimg/newspic.jpg" width="171" height="100" alt="" /></a><a href="#">嵌入式插电安全出口疏散指示灯</a><br />全场5折起售，10件更优惠<br />优惠价:<strong>￥1250</strong></td>
+                        <?php foreach ($recomments as $item): ?>
+                            
+                    	<td>
+                            <a class="tjpic" href="<?php echo $item['link'] ?>">
+                                <img src="<?php echo $item['thumb'] ?>" width="171" height="100" alt="" /></a>
+                            <a href="<?php echo $item['link'] ?>"><?php echo $item['name'] ?></a>
+                            <br />
+                            <?php echo $item['subtitle'] ?>
+                            <br />优惠价:<strong><?php echo $item['price'] ?></strong>
+                        </td>
+                        <?php endforeach ?>
                     </tr>
                 </table>
+                <?php endif ?>
             </div>
 	  	</div>
 	  	<div class="right">

@@ -4,13 +4,13 @@
 	require_once( DIR_TEMPLATE.$this->config->get('config_template')."/template/libs/module.php" );
 	$helper = ThemeControlHelper::getInstance( $this->registry, $themeName );
 ?>
-<!DOCTYPE html>
-<html dir="<?php echo $direction; ?>" lang="<?php echo $lang; ?>">
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
- 
-<meta name="viewport" content="width=device-width">
-<meta http-equiv="X-UA-Compatible"content="IE=9; IE=8; IE=7; IE=EDGE">
-<meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible"content="IE=9; IE=8; IE=7; IE=EDGE">
+
 <meta property="qc:admins" content="3557373151613111636" />
 <title><?php echo $title; ?></title>
 <base href="<?php echo $base; ?>" />
@@ -60,7 +60,7 @@ $(function(){ $('input, textarea').placeholder(); });
 
 <link rel="stylesheet" type="text/css" href="market/view/theme/<?php echo $themeName;?>/stylesheet/yk.css" />
 </head>
-<body>
+<body <?php echo $body_class ? 'class="'.$body_class.'"' : ''  ?>>
 <!--Top-->
 
 <?php echo $top ?>

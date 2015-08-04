@@ -1,7 +1,7 @@
 <?php
 class Sms {
 	private $target_url = "http://sms.chanzor.com:8001/sms.aspx";
-	private $account = 'wcs8695';
+	private $account = 'xiaofangezhan';
 	private $password = '152317';
 			
 	public function sendMsg($telephone,$msg) {

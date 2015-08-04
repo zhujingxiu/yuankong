@@ -36,15 +36,17 @@ class ModelServiceProject extends Model {
     
         return $query->rows;
     }
-    
-
 
     public function getTotalProjects() {
         $query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "project` ");
         
         return $query->row['total'];
     }
-        
 
+    public function getProjectGroups(){
+        $query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "project_group` ORDER BY sort_order ASC ");   
     
+        return $query->rows;
+    }
+
 }

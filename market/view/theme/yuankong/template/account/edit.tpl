@@ -1,6 +1,8 @@
 <?php require( DIR_TEMPLATE.$this->config->get('config_template')."/template/common/config.tpl" ); ?>
 <?php echo $header; ?>
-
+<?php 
+    $quick = isset($this->request->get['quick']) ? strtolower($this->request->get['quick']) : 'info';
+?>
 <div class="register-w f_s fix" id="main">
     <?php if( $SPAN[0] ): ?>
 	  <div class="<?php echo $SPAN[0];?> aside">
@@ -17,13 +19,13 @@
               <?php require( DIR_TEMPLATE.$this->config->get('config_template')."/template/common/breadcrumb.tpl" ); ?>
             </div>
             <ul class="xiaoxi martop20"  id="list0">
-                <li class="yes" onclick="list(this,0)">基本资料管理</li>
-                <li class="not" onclick="list(this,1)">形象标识</li>
-                <li class="not" onclick="list(this,2)">密码修改</li>
-                <li class="not" onclick="list(this,3)">收件地址</li>
+                <li class="<?php echo $quick == 'info' ? 'yes' : 'not' ?>" onclick="list(this,0)">基本资料管理</li>
+                <li class="<?php echo $quick == 'avatar' ? 'yes' : 'not' ?>" onclick="list(this,1)">形象标识</li>
+                <li class="<?php echo $quick == 'password' ? 'yes' : 'not' ?>" onclick="list(this,2)">密码修改</li>
+                <li class="<?php echo $quick == 'address' ? 'yes' : 'not' ?>" onclick="list(this,3)">收件地址</li>
             </ul>
                 
-            <div class="xinei martop"  id="list0_c_0" style="display:block;">
+            <div class="xinei martop"  id="list0_c_0" style="display:<?php echo $quick == 'info' ? 'block' : 'none' ?>;">
                 <form action="<?php echo $info_action; ?>" method="post" id="info-form">
                     <ul class="ziliao mt10">
                         <li class="none"><label>手机号：</label>
@@ -49,11 +51,12 @@
                     </ul>
                 </form>
             </div>
-            <div class="xinei martop20" id="list0_c_1" style="display:none;">
+            <div class="xinei martop20" id="list0_c_1" style="display::<?php echo $quick == 'avatar' ? 'block' : 'none' ?>;">
                 <form action="<?php echo $avatar_action; ?>" method="post" id="avatar-form">
                     <div class="biaozhi">
                         <input type="button" onclick="changec('bdpic');" value="从本地上传" class="dnsc" />
-                        <input type="button" value="确认保存" class="qrbc"  />
+                        <input type="button" value="确认保存" class="qrbc" id="save-avatar" />
+                        <input type="hidden" name="avatar" value="<?php echo $avatar ?>" />
                         <p> </p>
                     </div>
                     <div class="bdscpic" style="display:none;" id="bdpic">
@@ -63,6 +66,7 @@
                             <li>
                                 <div id="button-avatar" style="width:100px;height:26px; line-height:26px; display:inline;curse:pointer;">选择图片</div>
                                 <input type="button" value="上传" onclick="changec('bdpic');" id="button-upload"/>
+
                             </li>
                             <li style="padding-top:15px; color:#666;">
                                 支持JPG格式，图片大小不超过1MB<br />上传真实头像，将大大增加大家对您的关注度
@@ -87,7 +91,7 @@
                     <p>2. 请保证图片质量，图片大小至少为180×180 </p>
                 </form>
             </div>
-            <div class="xinei martop" id="list0_c_2" style="display:none;">
+            <div class="xinei martop" id="list0_c_2" style="display:<?php echo $quick == 'password' ? 'block' : 'none' ?>;">
                 <form method="post" id="password-form" action="<?php echo $password_action ?>">
                     <ul class="ziliao martop20">
                         <li>
@@ -104,12 +108,12 @@
                         </li>
                         <li class="tijiao martop20">
                             <label>&nbsp;</label>
-                            <input type="submit" value="提交新密码" class="baocun"/>
+                            <input type="button" value="提交新密码" class="baocun" id="save-password"/>
                         </li>
                     </ul>
                 </form>
             </div>
-            <div class="xinei martop" id="list0_c_3" style="display:none;">
+            <div class="xinei martop" id="list0_c_3" style="display:<?php echo $quick == 'address' ? 'block' : 'none' ?>;">
                 <div class="ovh p20">
                     <h3 class="f_m"><b>地址管理</b></h3>
                     <div class="default fix">
@@ -136,7 +140,7 @@
                                 </li>
                                 <li class="item-adress">
                                     <label>&nbsp;</label>
-                                    <input type="submit" value="添加地址" class="baocun" />
+                                    <input type="button" value="添加地址" class="baocun" id="save-address" />
                                 </li>
                             </ul>
                         </div>
@@ -170,6 +174,75 @@
 <?php endif; ?>
 </div>
 <script type="text/javascript">
+    $('#save-avatar').bind('click',function(){
+        $('#avatar-form').ajaxSubmit({
+            type:'post',
+            data:$('#avatar-form'),
+            dataType:'json',
+            success:function(json){
+                if(json.status==0){
+                    alert(json.msg)
+                }else{
+
+                }
+            }
+
+        })
+    });
+    $('#save-password').bind('click',function(){
+        $('#password-form').ajaxSubmit({
+            type:'post',
+            data:$(this),
+            dataType:'json',
+            success:function(json){
+                if(json.status==0){
+                    $('.invalid').remove();
+                    if(json['error']['password']){
+                        $('#password-form input[name="password"]').after('<div class="invalid">'+json['error']['password']+'</div>');
+                    }
+                    if(json['error']['newpwd']){
+                        $('#password-form input[name="newpwd"]').after('<div class="invalid">'+json['error']['newpwd']+'</div>');
+                    }
+                    if(json['error']['confirm']){
+                        $('#password-form input[name="confirm"]').after('<div class="invalid">'+json['error']['confirm']+'</div>');
+                    }
+                }else{
+
+                }
+            }
+        });
+
+    });
+    $('#save-address').bind('click',function(){
+        $('#address-form').ajaxSubmit({
+            type:'post',
+            data:$(this),
+            dataType:'json',
+            success:function(json){
+                if(json.status==0){
+                    $('.invalid').remove();
+                    if(json['error']){
+                        if(json['error']['address']){
+                            $('input[name="address"]').after('<div class="invalid">'+json['error']['address']+'</div>');
+                        }
+                        if(json['error']['fullname']){
+                            $('input[name="fullname"]').after('<div class="invalid">'+json['error']['fullname']+'</div>');
+                        }
+                        if(json['error']['telephone']){
+                            $('input[name="telephone"]').after('<div class="invalid">'+json['error']['telephone']+'</div>');
+                        }
+                        if(json['error']['area']){
+                            $('select[name^="area"]').after('<div class="invalid">'+json['error']['area']+'</div>');
+                        }
+                        if($('.order-w').find('.invalid').length){
+                            $('html, body').animate({ scrollTop: 10 }, 'slow'); 
+                        }                    
+                    }
+
+                }
+            }
+        })
+    })
     $(function(){
         add_select(0);
         $('body').on('change', '#area select', function() {
@@ -236,10 +309,10 @@
             $('.error').remove();
             if (json['success']) {
                 $('img.pre-avatar').attr('src',json['path']);
-                $('input[name="avatar"]').attr('value', json['file']);
+                $('#avatar-form input[name="avatar"]').attr('value',json['path']);
             }
             if (json['error']) {
-                alert(json['error']);
+                alert(json['error']); 
             }
             $('.loading').remove(); 
         }
@@ -249,5 +322,6 @@
 <style type="text/css">
     #button-avatar{width:60px; height:26px; margin-left:15px;cursor: pointer;text-decoration: underline;display: inline-block;}
     #button-upload{float: right;margin-right:10px; }
+    .invalid{color:red;margin-left:20px;padding-left: 10px }
 </style>
 <?php echo $footer; ?>

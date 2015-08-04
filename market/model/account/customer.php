@@ -103,6 +103,10 @@ class ModelAccountCustomer extends Model {
 			}
 		}
 	}
+
+	public function editAvatar($file){
+		$this->db->update('customer',array('customer_id'=>$this->customer->getId()),array('avatar'=>trim($file)));
+	}
 	
 	public function editCustomer($data) {
 		$this->db->query("UPDATE " . DB_PREFIX . "customer SET fullname = '" . $this->db->escape($data['fullname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "' WHERE customer_id = '" . (int)$this->customer->getId() . "'");
@@ -110,6 +114,12 @@ class ModelAccountCustomer extends Model {
 
 	public function editPassword($password) {
       	$this->db->query("UPDATE " . DB_PREFIX . "customer SET salt = '" . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($password)))) . "' WHERE customer_id = '" . $this->customer->getId() . "'");
+	}
+
+	public function validatePassword($password){
+		$sql = "SELECT customer_id FROM ".DB_PREFIX."customer WHERE customer_id = '".$this->customer->getId()."' AND password = SHA1(CONCAT(salt, SHA1(CONCAT(salt, SHA1('" . $this->db->escape($password) . "')))))";
+		$query = $this->db->query($sql);
+		return $query->num_rows;
 	}
 
 	public function editNewsletter($newsletter) {
@@ -254,4 +264,39 @@ class ModelAccountCustomer extends Model {
 	public function delSMS($mobile_phone){
 		return $this->db->delete('sms',array('phone_number'=>$mobile_phone));
 	}
+
+	public function getTotalHelps(){
+		$sql = "SELECT COUNT(help_id) total FROM ".DB_PREFIX."help WHERE customer_id = '".$this->customer->getId()."'";
+		$query = $this->db->query($sql);
+		return $query->row['total'];
+	}
+
+	public function getTotalMessages(){
+		$sql = "SELECT COUNT(message_id) total FROM ".DB_PREFIX."message WHERE customer_id = '".$this->customer->getId()."'";
+		$query = $this->db->query($sql);
+		return $query->row['total'];		
+	}
+	public function getTotalReviews(){
+		$sql = "SELECT COUNT(review_id) total FROM ".DB_PREFIX."review WHERE customer_id = '".$this->customer->getId()."'";
+		$query = $this->db->query($sql);
+		return $query->row['total'];
+	}
+
+	public function getRecomments($already = array(),$limit = 5){
+		$data = array();
+		$sql = "SELECT product_id FROM ".DB_PREFIX."product WHERE date_available < NOW() ";
+		if(count($already)){
+			$sql .= "AND product_id NOT IN (".implode(",", $already).") ";
+		}
+		$sql .= "ORDER BY sales DESC ,viewed DESC";
+		$query = $this->db->query($sql);
+		if($query->num_rows){
+			foreach ($query->rows as $item) {
+				$data[] = $item['product_id'];
+			}
+		}
+
+		return $data;
+	}
+
 }

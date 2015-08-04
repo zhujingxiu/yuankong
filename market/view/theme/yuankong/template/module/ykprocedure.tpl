@@ -12,7 +12,7 @@
                 <a href="#" class="lc-lia"><span class="icon xfsj"></span><br />消防设计</a>
             </li>
             <li class="lc-li">
-                <a href="#" class="lc-lia"><span class="icon xfsg"></span><br />消防施工</a>
+                <a href="#" class="lc-lia"><span class="icon xfsg"></span><br />消防工程</a>
             </li>
 
             <li class="lc-li">

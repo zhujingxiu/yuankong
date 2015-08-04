@@ -18,7 +18,16 @@ $_['entry_fax']           = '&nbsp;&nbsp;&nbsp;传真号码：';
 // Error
 $_['error_exists']        = '警告： 该邮箱地址已被注册，请换一个电子邮箱！';
 $_['error_firstname']     = '名字必须为1到32字符之间！';
-$_['error_lastname']      = '姓氏必须在1到32字节之间！';
+$_['error_address']      = '详细地址必须在1到64字符之间！';
 $_['error_email']         = '无效的邮箱地址！';
-$_['error_telephone']     = '电话号码必须在3到32字符之间！';
-?>
+$_['error_fullname']     = '姓名必须在2到32字符之间！';
+$_['error_telephone']     = '不是有效的联系电话！';
+$_['error_password']     = '原密码输入错误！';
+$_['error_newpwd']     		= '密码须在1到20个字符之间！';
+$_['error_confirm']     	= '确认密码与新密码不符！';
+
+
+$_['text_success_avatar'] 	= '用户头像设置成功';
+$_['text_success_info'] 	= '用户资料保存成功';
+$_['text_success_address'] 	= '收货地址保存成功';
+$_['text_success_password'] = '用户密码保存成功';

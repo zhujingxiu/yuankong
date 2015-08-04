@@ -33,8 +33,12 @@ class ControllerCommonHeader extends Controller {
 
 		$part = explode("/", $route);
 		$this->data['container_class'] = "w";
-		if(isset($part[0]) && $part[0] =='account'){
+		if(isset($part[0]) && (strtolower($part[0]) =='account' || strtolower($part[0]) =='affiliate')){
 			$this->data['container_class'] = "register-w";
+		}
+		$this->data['body_class'] = '';
+		if(isset($part[0]) && isset($part[1]) && strtolower($part[0].'/'.$part[1]) =='common/home'){
+			$this->data['body_class'] = "b_fa";
 		}
 
 		$this->data['base'] = $server;
