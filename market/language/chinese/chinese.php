@@ -28,7 +28,7 @@ $_['text_wiki_help']        = ' 消防问答 ';
 $_['text_search_product']   = '消防产品';
 $_['text_search_news']      = '消防资讯';
 $_['text_search_category']  = '商品分类';
-$_['text_search_affiliate'] = '消防公司';
+$_['text_search_company'] = '消防公司';
 $_['text_search_wiki']      = '消防百科';
 
 // Buttons

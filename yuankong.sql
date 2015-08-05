@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2015 年 08 月 04 日 13:00
+-- 生成日期: 2015 年 08 月 05 日 09:39
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.4.3
 
@@ -48,108 +48,6 @@ CREATE TABLE IF NOT EXISTS `yk_address` (
 INSERT INTO `yk_address` (`address_id`, `customer_id`, `fullname`, `telephone`, `company`, `address`, `postcode`, `province_id`, `area_zone`, `areas`) VALUES
 (1, 1, '太容易', '18850911766', '', '规划快结婚', '', 12, '江苏省 苏州市 沧浪区', '12|988|3088'),
 (2, 1, 'zjx', '18850911766', '', 'aaa', '', 1, '北京市 朝阳区 三环到四环之间', '1|72|2819');
-
--- --------------------------------------------------------
-
---
--- 表的结构 `yk_affiliate`
---
-
-CREATE TABLE IF NOT EXISTS `yk_affiliate` (
-  `affiliate_id` int(11) NOT NULL AUTO_INCREMENT,
-  `group_id` smallint(6) NOT NULL DEFAULT '0',
-  `zone_id` int(11) NOT NULL DEFAULT '0',
-  `fullname` varchar(64) DEFAULT NULL,
-  `mobile_phone` varchar(16) NOT NULL,
-  `email` varchar(96) NOT NULL,
-  `telephone` varchar(32) NOT NULL,
-  `fax` varchar(32) NOT NULL,
-  `password` varchar(40) NOT NULL,
-  `salt` varchar(9) NOT NULL,
-  `company` varchar(32) NOT NULL,
-  `website` varchar(255) NOT NULL,
-  `address` varchar(128) NOT NULL,
-  `area_zone` varchar(128) NOT NULL,
-  `areas` varchar(32) NOT NULL,
-  `postcode` varchar(10) NOT NULL,
-  `province_id` int(11) NOT NULL,
-  `code` varchar(64) NOT NULL,
-  `commission` decimal(4,2) NOT NULL DEFAULT '0.00',
-  `tax` varchar(64) NOT NULL,
-  `payment` varchar(6) NOT NULL,
-  `cheque` varchar(100) NOT NULL,
-  `bank_name` varchar(64) NOT NULL,
-  `bank_branch_number` varchar(64) NOT NULL,
-  `bank_swift_code` varchar(64) NOT NULL,
-  `bank_account_name` varchar(64) NOT NULL,
-  `bank_account_number` varchar(64) NOT NULL,
-  `ip` varchar(40) NOT NULL,
-  `status` tinyint(1) NOT NULL,
-  `approved` tinyint(1) NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`affiliate_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
-
---
--- 转存表中的数据 `yk_affiliate`
---
-
-INSERT INTO `yk_affiliate` (`affiliate_id`, `group_id`, `zone_id`, `fullname`, `mobile_phone`, `email`, `telephone`, `fax`, `password`, `salt`, `company`, `website`, `address`, `area_zone`, `areas`, `postcode`, `province_id`, `code`, `commission`, `tax`, `payment`, `cheque`, `bank_name`, `bank_branch_number`, `bank_swift_code`, `bank_account_name`, `bank_account_number`, `ip`, `status`, `approved`, `date_added`) VALUES
-(1, 1, 0, '是的撒旦', '18260051051', '18260051051@139.com', '111111', '', '754ea0bbb4f796c1794f9639a8085ac106a8e2d5', '137c6a924', '企鹅王企鹅王企鹅完全委屈额', '', '去问问企鹅王企鹅王', '江苏省 苏州市 虎丘区', '12|988|3085', '', 12, '55b88477d5f55', '5.00', '', 'cheque', '', '', '', '', '', '', '', 1, 0, '2015-07-29 15:47:53');
-
--- --------------------------------------------------------
-
---
--- 表的结构 `yk_affiliate_group`
---
-
-CREATE TABLE IF NOT EXISTS `yk_affiliate_group` (
-  `group_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(128) DEFAULT NULL,
-  `show` tinyint(4) NOT NULL DEFAULT '0',
-  `sort_order` int(3) NOT NULL,
-  PRIMARY KEY (`group_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
-
---
--- 转存表中的数据 `yk_affiliate_group`
---
-
-INSERT INTO `yk_affiliate_group` (`group_id`, `name`, `show`, `sort_order`) VALUES
-(1, '设计公司', 0, 1),
-(2, '检测公司', 0, 1),
-(3, '维保公司', 0, 1),
-(4, '工程公司', 0, 1);
-
--- --------------------------------------------------------
-
---
--- 表的结构 `yk_affiliate_transaction`
---
-
-CREATE TABLE IF NOT EXISTS `yk_affiliate_transaction` (
-  `affiliate_transaction_id` int(11) NOT NULL AUTO_INCREMENT,
-  `affiliate_id` int(11) NOT NULL,
-  `order_id` int(11) NOT NULL,
-  `description` text NOT NULL,
-  `amount` decimal(15,4) NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`affiliate_transaction_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- 表的结构 `yk_affiliate_zone`
---
-
-CREATE TABLE IF NOT EXISTS `yk_affiliate_zone` (
-  `zone_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(128) DEFAULT NULL,
-  `show` tinyint(4) NOT NULL DEFAULT '0',
-  `sort_order` int(3) NOT NULL,
-  PRIMARY KEY (`zone_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 -- --------------------------------------------------------
 
@@ -21960,6 +21858,79 @@ INSERT INTO `yk_category_to_layout` (`category_id`, `layout_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `yk_company`
+--
+
+CREATE TABLE IF NOT EXISTS `yk_company` (
+  `company_id` int(11) NOT NULL AUTO_INCREMENT,
+  `group_id` smallint(6) NOT NULL DEFAULT '0',
+  `zone_id` int(11) NOT NULL DEFAULT '0',
+  `fullname` varchar(64) DEFAULT NULL,
+  `mobile_phone` varchar(16) NOT NULL,
+  `email` varchar(96) NOT NULL,
+  `telephone` varchar(32) NOT NULL,
+  `fax` varchar(32) NOT NULL,
+  `password` varchar(40) NOT NULL,
+  `salt` varchar(9) NOT NULL,
+  `company` varchar(32) NOT NULL,
+  `website` varchar(255) NOT NULL,
+  `address` varchar(128) NOT NULL,
+  `area_zone` varchar(128) NOT NULL,
+  `areas` varchar(32) NOT NULL,
+  `postcode` varchar(10) NOT NULL,
+  `province_id` int(11) NOT NULL,
+  `code` varchar(64) NOT NULL,
+  `commission` decimal(4,2) NOT NULL DEFAULT '0.00',
+  `tax` varchar(64) NOT NULL,
+  `payment` varchar(6) NOT NULL,
+  `cheque` varchar(100) NOT NULL,
+  `bank_name` varchar(64) NOT NULL,
+  `bank_branch_number` varchar(64) NOT NULL,
+  `bank_swift_code` varchar(64) NOT NULL,
+  `bank_account_name` varchar(64) NOT NULL,
+  `bank_account_number` varchar(64) NOT NULL,
+  `ip` varchar(40) NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  `approved` tinyint(1) NOT NULL,
+  `date_added` datetime NOT NULL,
+  PRIMARY KEY (`company_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- 转存表中的数据 `yk_company`
+--
+
+INSERT INTO `yk_company` (`company_id`, `group_id`, `zone_id`, `fullname`, `mobile_phone`, `email`, `telephone`, `fax`, `password`, `salt`, `company`, `website`, `address`, `area_zone`, `areas`, `postcode`, `province_id`, `code`, `commission`, `tax`, `payment`, `cheque`, `bank_name`, `bank_branch_number`, `bank_swift_code`, `bank_account_name`, `bank_account_number`, `ip`, `status`, `approved`, `date_added`) VALUES
+(1, 1, 0, '是的撒旦', '18260051051', '18260051051@139.com', '111111', '', '754ea0bbb4f796c1794f9639a8085ac106a8e2d5', '137c6a924', '企鹅王企鹅王企鹅完全委屈额', '', '去问问企鹅王企鹅王', '江苏省 苏州市 虎丘区', '12|988|3085', '', 12, '55b88477d5f55', '5.00', '', 'cheque', '', '', '', '', '', '', '', 1, 0, '2015-07-29 15:47:53');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `yk_company_group`
+--
+
+CREATE TABLE IF NOT EXISTS `yk_company_group` (
+  `group_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(128) DEFAULT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT '1',
+  `show` tinyint(4) NOT NULL DEFAULT '0',
+  `sort_order` int(3) NOT NULL,
+  PRIMARY KEY (`group_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+--
+-- 转存表中的数据 `yk_company_group`
+--
+
+INSERT INTO `yk_company_group` (`group_id`, `name`, `status`, `show`, `sort_order`) VALUES
+(1, '设计公司', 1, 0, 1),
+(2, '检测公司', 1, 0, 1),
+(3, '维保公司', 1, 0, 1),
+(4, '工程公司', 1, 0, 1);
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `yk_coupon`
 --
 
@@ -22099,6 +22070,21 @@ CREATE TABLE IF NOT EXISTS `yk_customer_ban_ip` (
   PRIMARY KEY (`customer_ban_ip_id`),
   KEY `ip` (`ip`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `yk_customer_company_zone`
+--
+
+CREATE TABLE IF NOT EXISTS `yk_customer_company_zone` (
+  `zone_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(128) DEFAULT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT '1',
+  `show` tinyint(4) NOT NULL DEFAULT '0',
+  `sort_order` int(3) NOT NULL,
+  PRIMARY KEY (`zone_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 -- --------------------------------------------------------
 

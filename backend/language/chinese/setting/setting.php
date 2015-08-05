@@ -69,7 +69,7 @@ $_['entry_stock_display']        = '显示库存：<br /><span class="help">显�
 $_['entry_stock_warning']        = '显示脱销警告：<br /><span class="help">在购物车页面中显示脱销信息。 如果一个商品已经卖完了， 但‘脱销结账’是肯定的。(警告总在‘脱销结账’是否定时显示)</span>';
 $_['entry_stock_checkout']       = '脱销结账：<br /><span class="help">如果客户订购的商品不存在仓库，仍然允许结账。</span>';
 $_['entry_stock_status']         = '库存状态：<br /><span class="help">选择库存状态的默认设置。</span>';
-$_['entry_affiliate']            = '加盟条款：<br /><span class="help">创建加盟账户用户必须同意的条款。</span>';
+$_['entry_company']              = '商户入驻条款：<br /><span class="help">创建公司账户用户必须同意的条款。</span>';
 $_['entry_commission']           = '加盟佣金(%)：<br /><span class="help">默认加盟佣金百分比。</span>';
 $_['entry_return']               = '退换条款：<br /><span class="help">退货前客户必须同意该条款。</span>';
 $_['entry_return_status']        = '退换状态：<br /><span class="help">设置退换请求提交后默认的退换状态。</span>';

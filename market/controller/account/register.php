@@ -86,9 +86,9 @@ class ControllerAccountRegister extends Controller {
 		
 		$this->data['text_account_already'] = sprintf($this->language->get('text_account_already'), $this->url->link('account/login', '', 'SSL'));
 		$this->data['text_regs_customer'] = $this->language->get('text_regs_customer');
-    	$this->data['text_regs_affiliate'] = $this->language->get('text_regs_affiliate');
-    	$this->data['text_affiliate_name'] = $this->language->get('text_affiliate_name');
-    	$this->data['text_affiliate_email'] = $this->language->get('text_affiliate_email');
+    	$this->data['text_regs_company'] = $this->language->get('text_regs_company');
+    	$this->data['text_company_name'] = $this->language->get('text_company_name');
+    	$this->data['text_company_email'] = $this->language->get('text_company_email');
 		$this->data['text_qr_code'] = $this->language->get('text_qr_code');
 		$this->data['text_yes'] = $this->language->get('text_yes');
 		$this->data['text_no'] = $this->language->get('text_no');
@@ -102,12 +102,12 @@ class ControllerAccountRegister extends Controller {
 		$this->data['entry_input_sms'] = $this->language->get('entry_input_sms');
 		$this->data['text_captcha_change'] = $this->language->get('text_captcha_change');		
 		$this->data['text_get_sms'] = $this->language->get('text_get_sms');
-		$this->data['entry_affiliate_telephone'] = $this->language->get('entry_affiliate_telephone');
-		$this->data['entry_affiliate_name'] = $this->language->get('entry_affiliate_name');
-		$this->data['entry_affiliate_customer'] = $this->language->get('entry_affiliate_customer');
-		$this->data['entry_affiliate_company'] = $this->language->get('entry_affiliate_company');
-		$this->data['entry_affiliate_group'] = $this->language->get('entry_affiliate_group');
-		$this->data['entry_affiliate_address'] = $this->language->get('entry_affiliate_address');
+		$this->data['entry_company_telephone'] = $this->language->get('entry_company_telephone');
+		$this->data['entry_company_name'] = $this->language->get('entry_company_name');
+		$this->data['entry_company_customer'] = $this->language->get('entry_company_customer');
+		$this->data['entry_company_company'] = $this->language->get('entry_company_company');
+		$this->data['entry_company_group'] = $this->language->get('entry_company_group');
+		$this->data['entry_company_address'] = $this->language->get('entry_company_address');
     	$this->data['entry_password'] = $this->language->get('entry_password');
     	$this->data['entry_confirm'] = $this->language->get('entry_confirm');
 
@@ -145,7 +145,6 @@ class ControllerAccountRegister extends Controller {
 		}
 	
     	$this->data['customer_action'] = $this->url->link('account/register', '', 'SSL');
-    	$this->data['affiliate_action'] = $this->url->link('affiliate/register', '', 'SSL');
 		
 		if (isset($this->request->post['mobile_phone'])) {
     		$this->data['mobile_phone'] = $this->request->post['mobile_phone'];

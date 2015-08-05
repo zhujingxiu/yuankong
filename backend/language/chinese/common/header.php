@@ -3,8 +3,8 @@
 $_['heading_title']                    = '功能菜单';
 
 // Text
-$_['text_affiliate']                   = '商户管理';
-$_['text_affiliate_group']             = '商户类别';
+$_['text_company']                     = '商户管理';
+$_['text_company_group']               = '商户类别';
 $_['text_attribute']                   = '属性';
 $_['text_attribute_group']             = '属性组';
 $_['text_api']             			   = '平台账户';
@@ -56,8 +56,6 @@ $_['text_report_customer_online']      = '在线客户';
 $_['text_report_customer_order']       = '客户订单统计';
 $_['text_report_customer_reward']      = '奖励积分统计';
 $_['text_report_customer_credit']      = '商户信用统计';
-$_['text_report_affiliate_commission'] = '加盟佣金统计';
-$_['text_report_affiliate_purchased']  = '加盟商品统计';
 $_['text_review']                      = '评价管理';
 $_['text_return']                      = '退款/退货';
 $_['text_return_action']               = '退换管理';

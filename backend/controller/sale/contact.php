@@ -14,15 +14,15 @@ class ControllerSaleContact extends Controller {
 		$this->data['text_customer_all'] = $this->language->get('text_customer_all');	
 		$this->data['text_customer'] = $this->language->get('text_customer');	
 		$this->data['text_customer_group'] = $this->language->get('text_customer_group');
-		$this->data['text_affiliate_all'] = $this->language->get('text_affiliate_all');	
-		$this->data['text_affiliate'] = $this->language->get('text_affiliate');	
+		$this->data['text_company_all'] = $this->language->get('text_company_all');	
+		$this->data['text_company'] = $this->language->get('text_company');	
 		$this->data['text_product'] = $this->language->get('text_product');	
 
 		$this->data['entry_store'] = $this->language->get('entry_store');
 		$this->data['entry_to'] = $this->language->get('entry_to');
 		$this->data['entry_customer_group'] = $this->language->get('entry_customer_group');
 		$this->data['entry_customer'] = $this->language->get('entry_customer');
-		$this->data['entry_affiliate'] = $this->language->get('entry_affiliate');
+		$this->data['entry_company'] = $this->language->get('entry_company');
 		$this->data['entry_product'] = $this->language->get('entry_product');
 		$this->data['entry_subject'] = $this->language->get('entry_subject');
 		$this->data['entry_message'] = $this->language->get('entry_message');
@@ -89,7 +89,7 @@ class ControllerSaleContact extends Controller {
 				
 				$this->load->model('sale/customer_group');
 				
-				$this->load->model('sale/affiliate');
+				$this->load->model('sale/company');
 	
 				$this->load->model('sale/order');
 	
@@ -159,27 +159,27 @@ class ControllerSaleContact extends Controller {
 							}
 						}
 						break;	
-					case 'affiliate_all':
-						$affiliate_data = array(
+					case 'company_all':
+						$company_data = array(
 							'start'  => ($page - 1) * 10,
 							'limit'  => 10
 						);
 						
-						$email_total = $this->model_sale_affiliate->getTotalAffiliates($affiliate_data);		
+						$email_total = $this->model_sale_company->getTotalCompanys($company_data);		
 						
-						$results = $this->model_sale_affiliate->getAffiliates($affiliate_data);
+						$results = $this->model_sale_company->getCompanys($company_data);
 				
 						foreach ($results as $result) {
 							$emails[] = $result['email'];
 						}						
 						break;	
-					case 'affiliate':
-						if (!empty($this->request->post['affiliate'])) {					
-							foreach ($this->request->post['affiliate'] as $affiliate_id) {
-								$affiliate_info = $this->model_sale_affiliate->getAffiliate($affiliate_id);
+					case 'company':
+						if (!empty($this->request->post['company'])) {					
+							foreach ($this->request->post['company'] as $company_id) {
+								$company_info = $this->model_sale_company->getCompany($company_id);
 								
-								if ($affiliate_info) {
-									$emails[] = $affiliate_info['email'];
+								if ($company_info) {
+									$emails[] = $company_info['email'];
 								}
 							}
 						}

@@ -55,7 +55,7 @@ $_['text_search_option'] = '搜索栏显示类别';
 $_['text_search_product'] = '消防产品';
 $_['text_search_news'] = '消防资讯';
 $_['text_search_category'] = '商品分类';
-$_['text_search_affiliate'] = '消防公司';
+$_['text_search_company'] = '消防公司';
 $_['text_search_wiki'] = '消防百科';
 
 $_['text_search_placeholder'] = '搜索栏占位符';

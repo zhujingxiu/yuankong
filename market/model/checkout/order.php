@@ -28,8 +28,6 @@ class ModelCheckoutOrder extends Model {
 			'order_status_id'	=> isset($data['order_status_id']) ? $data['order_status_id'] : $this->config->get('config_status_id'),
 			'comment'			=> $data['comment'],
 			'total'				=> (float)$data['total'],
-			'affiliate_id'		=> (int)$data['affiliate_id'],
-			'commission'		=> (float)$data['commission'],
 			'language_id'		=> (int)$data['language_id'],
 			'currency_id'		=> (int)$data['currency_id'],
 			'currency_code'		=> $data['currency_code'],

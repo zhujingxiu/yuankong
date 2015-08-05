@@ -110,10 +110,10 @@ $(document).ready(function(){
       </li>
       <li id="review"><a href="<?php echo $review; ?>" class="top"><?php echo $text_review; ?></a></li>
       <li id="help"><a href="<?php echo $help ?>" class="top"><?php echo $text_help; ?></a></li>
-      <li id="affiliate"><a class="top"><?php echo $text_affiliate; ?></a>
+      <li id="company"><a class="top"><?php echo $text_company; ?></a>
         <ul>
-          <li><a href="<?php echo $affiliate; ?>"><?php echo $text_affiliate; ?></a></li>
-          <li><a href="<?php echo $affiliate_group; ?>"><?php echo $text_affiliate_group; ?></a></li>
+          <li><a href="<?php echo $company; ?>"><?php echo $text_company; ?></a></li>
+          <li><a href="<?php echo $company_group; ?>"><?php echo $text_company_group; ?></a></li>
           <li><a href="<?php echo $case; ?>"><?php echo $text_case; ?></a></li>
         </ul>
       </li>
@@ -142,11 +142,6 @@ $(document).ready(function(){
               <li><a href="<?php echo $report_customer_order; ?>"><?php echo $text_report_customer_order; ?></a></li>
               <li><a href="<?php echo $report_customer_reward; ?>"><?php echo $text_report_customer_reward; ?></a></li>
               <li><a href="<?php echo $report_customer_credit; ?>"><?php echo $text_report_customer_credit; ?></a></li>
-            </ul>
-          </li>
-          <li><a class="parent"><?php echo $text_affiliate; ?></a>
-            <ul>
-              <li><a href="<?php echo $report_affiliate_commission; ?>"><?php echo $text_report_affiliate_commission; ?></a></li>
             </ul>
           </li>
         </ul>

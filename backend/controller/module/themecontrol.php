@@ -197,7 +197,7 @@ class ControllerModuleThemeControl extends Controller {
 	 		'product' 	=> $this->language->get('text_search_product'),
 	 		'news' 		=> $this->language->get('text_search_news'),
 	 		'category' 	=> $this->language->get('text_search_category'),
-	 		'affiliate' => $this->language->get('text_search_affiliate'),
+	 		'company'   => $this->language->get('text_search_company'),
 	 		'wiki' 		=> $this->language->get('text_search_wiki'),
 	 	);
 

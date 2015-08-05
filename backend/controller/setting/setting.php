@@ -36,7 +36,6 @@ class ControllerSettingSetting extends Controller {
 		$this->data['text_account'] = $this->language->get('text_account');
 		$this->data['text_checkout'] = $this->language->get('text_checkout');
 		$this->data['text_stock'] = $this->language->get('text_stock');
-		$this->data['text_affiliate'] = $this->language->get('text_affiliate');
 		$this->data['text_return'] = $this->language->get('text_return');
 		$this->data['text_image_manager'] = $this->language->get('text_image_manager');
  		$this->data['text_browse'] = $this->language->get('text_browse');
@@ -81,6 +80,7 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_cart_weight'] = $this->language->get('entry_cart_weight');		
 		$this->data['entry_guest_checkout'] = $this->language->get('entry_guest_checkout');
 		$this->data['entry_checkout'] = $this->language->get('entry_checkout');		
+		$this->data['entry_company'] = $this->language->get('entry_company');		
 		$this->data['entry_order_edit'] = $this->language->get('entry_order_edit');
 		$this->data['entry_invoice_prefix'] = $this->language->get('entry_invoice_prefix');
 		$this->data['entry_order_status'] = $this->language->get('entry_order_status');
@@ -89,8 +89,6 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_stock_warning'] = $this->language->get('entry_stock_warning');
 		$this->data['entry_stock_checkout'] = $this->language->get('entry_stock_checkout');
 		$this->data['entry_stock_status'] = $this->language->get('entry_stock_status');
-		$this->data['entry_affiliate'] = $this->language->get('entry_affiliate');
-		$this->data['entry_commission'] = $this->language->get('entry_commission');
 		$this->data['entry_return'] = $this->language->get('entry_return');
 		$this->data['entry_return_status'] = $this->language->get('entry_return_status');
 		$this->data['entry_logo'] = $this->language->get('entry_logo');
@@ -104,12 +102,6 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_image_compare'] = $this->language->get('entry_image_compare');
 		$this->data['entry_image_wishlist'] = $this->language->get('entry_image_wishlist');
 		$this->data['entry_image_cart'] = $this->language->get('entry_image_cart');	
-		$this->data['entry_ftp_host'] = $this->language->get('entry_ftp_host');
-		$this->data['entry_ftp_port'] = $this->language->get('entry_ftp_port');
-		$this->data['entry_ftp_username'] = $this->language->get('entry_ftp_username');
-		$this->data['entry_ftp_password'] = $this->language->get('entry_ftp_password');
-		$this->data['entry_ftp_root'] = $this->language->get('entry_ftp_root');
-		$this->data['entry_ftp_status'] = $this->language->get('entry_ftp_status');
 		$this->data['entry_mail_protocol'] = $this->language->get('entry_mail_protocol');
 		$this->data['entry_mail_parameter'] = $this->language->get('entry_mail_parameter');
 		$this->data['entry_smtp_host'] = $this->language->get('entry_smtp_host');
@@ -143,7 +135,6 @@ class ControllerSettingSetting extends Controller {
 		$this->data['tab_local'] = $this->language->get('tab_local');
 		$this->data['tab_option'] = $this->language->get('tab_option');
 		$this->data['tab_image'] = $this->language->get('tab_image');
-		$this->data['tab_ftp'] = $this->language->get('tab_ftp');
 		$this->data['tab_mail'] = $this->language->get('tab_mail');
 		$this->data['tab_server'] = $this->language->get('tab_server');
 
@@ -207,29 +198,6 @@ class ControllerSettingSetting extends Controller {
 			$this->data['error_voucher_max'] = '';
 		}
 		
- 		if (isset($this->error['ftp_host'])) {
-			$this->data['error_ftp_host'] = $this->error['ftp_host'];
-		} else {
-			$this->data['error_ftp_host'] = '';
-		}
-		
- 		if (isset($this->error['ftp_port'])) {
-			$this->data['error_ftp_port'] = $this->error['ftp_port'];
-		} else {
-			$this->data['error_ftp_port'] = '';
-		}
-		
- 		if (isset($this->error['ftp_username'])) {
-			$this->data['error_ftp_username'] = $this->error['ftp_username'];
-		} else {
-			$this->data['error_ftp_username'] = '';
-		}
-		
- 		if (isset($this->error['ftp_password'])) {
-			$this->data['error_ftp_password'] = $this->error['ftp_password'];
-		} else {
-			$this->data['error_ftp_password'] = '';
-		}
 														
  		if (isset($this->error['image_category'])) {
 			$this->data['error_image_category'] = $this->error['image_category'];
@@ -587,6 +555,12 @@ class ControllerSettingSetting extends Controller {
 			$this->data['config_checkout_id'] = $this->config->get('config_checkout_id');		
 		}
 
+		if (isset($this->request->post['config_company_id'])) {
+			$this->data['config_company_id'] = $this->request->post['config_company_id'];
+		} else {
+			$this->data['config_company_id'] = $this->config->get('config_company_id');		
+		}
+
 		if (isset($this->request->post['config_order_edit'])) {
 			$this->data['config_order_edit'] = $this->request->post['config_order_edit'];
 		} elseif ($this->config->get('config_order_edit')) {
@@ -646,20 +620,6 @@ class ControllerSettingSetting extends Controller {
 		$this->load->model('localisation/stock_status');
 		
 		$this->data['stock_statuses'] = $this->model_localisation_stock_status->getStockStatuses();
-
-		if (isset($this->request->post['config_affiliate_id'])) {
-			$this->data['config_affiliate_id'] = $this->request->post['config_affiliate_id'];
-		} else {
-			$this->data['config_affiliate_id'] = $this->config->get('config_affiliate_id');		
-		}
-		
-		if (isset($this->request->post['config_commission'])) {
-			$this->data['config_commission'] = $this->request->post['config_commission'];
-		} elseif ($this->config->has('config_commission')) {
-			$this->data['config_commission'] = $this->config->get('config_commission');		
-		} else {
-			$this->data['config_commission'] = '5.00';
-		}
 
 		if (isset($this->request->post['config_return_id'])) {
 			$this->data['config_return_id'] = $this->request->post['config_return_id'];

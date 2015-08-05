@@ -466,3 +466,59 @@
 2015-08-02 9:28:54 - PHP Notice:  Undefined variable: sort_group in E:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 39
 2015-08-02 9:28:54 - PHP Notice:  Undefined variable: sort_account in E:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 44
 2015-08-02 9:28:54 - PHP Notice:  Undefined variable: sort_telephone in E:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 49
+2015-08-05 17:20:12 - PHP Notice:  Undefined variable: company_group in D:\wamp\www\yuankong\backend\view\template\common\header.tpl on line 116
+2015-08-05 17:20:12 - PHP Notice:  Undefined variable: text_total_company in D:\wamp\www\yuankong\backend\view\template\common\home.tpl on line 60
+2015-08-05 17:20:12 - PHP Notice:  Undefined variable: total_company in D:\wamp\www\yuankong\backend\view\template\common\home.tpl on line 61
+2015-08-05 17:20:12 - PHP Notice:  Undefined variable: text_total_company_approval in D:\wamp\www\yuankong\backend\view\template\common\home.tpl on line 64
+2015-08-05 17:20:12 - PHP Notice:  Undefined variable: total_company_approval in D:\wamp\www\yuankong\backend\view\template\common\home.tpl on line 65
+2015-08-05 17:22:28 - PHP Notice:  Error: Table 'yuankong.yk_affiliate' doesn't exist<br />Error No: 1146<br />SELECT COUNT(*) AS total FROM yk_affiliate in D:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-08-05 17:22:28 - PHP Notice:  Trying to get property of non-object in D:\wamp\www\yuankong\backend\model\sale\affiliate.php on line 236
+2015-08-05 17:22:28 - PHP Notice:  Error: Table 'yuankong.yk_affiliate' doesn't exist<br />Error No: 1146<br />SELECT COUNT(*) AS total FROM yk_affiliate WHERE status = '0' OR approved = '0' in D:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-08-05 17:22:28 - PHP Notice:  Trying to get property of non-object in D:\wamp\www\yuankong\backend\model\sale\affiliate.php on line 242
+2015-08-05 17:22:28 - PHP Notice:  Undefined variable: company_group in D:\wamp\www\yuankong\backend\view\template\common\header.tpl on line 116
+2015-08-05 17:22:28 - PHP Notice:  Undefined variable: text_total_company in D:\wamp\www\yuankong\backend\view\template\common\home.tpl on line 60
+2015-08-05 17:22:28 - PHP Notice:  Undefined variable: total_company in D:\wamp\www\yuankong\backend\view\template\common\home.tpl on line 61
+2015-08-05 17:22:28 - PHP Notice:  Undefined variable: text_total_company_approval in D:\wamp\www\yuankong\backend\view\template\common\home.tpl on line 64
+2015-08-05 17:22:28 - PHP Notice:  Undefined variable: total_company_approval in D:\wamp\www\yuankong\backend\view\template\common\home.tpl on line 65
+2015-08-05 17:23:21 - PHP Notice:  Error: Could not load model sale/company! in D:\wamp\www\yuankong\system\engine\loader.php on line 48
+2015-08-05 17:24:11 - PHP Notice:  Error: Could not load model sale/company! in D:\wamp\www\yuankong\system\engine\loader.php on line 48
+2015-08-05 17:24:14 - PHP Notice:  Error: Could not load model sale/company! in D:\wamp\www\yuankong\system\engine\loader.php on line 48
+2015-08-05 17:24:36 - PHP Notice:  Undefined variable: company_group in D:\wamp\www\yuankong\backend\view\template\common\header.tpl on line 116
+2015-08-05 17:25:54 - PHP Notice:  Error: Could not load language extension/company_group! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-08-05 17:25:54 - PHP Notice:  Error: Could not load model extension/company_group! in D:\wamp\www\yuankong\system\engine\loader.php on line 48
+2015-08-05 17:26:34 - PHP Notice:  Error: Could not load language extension/company_group! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-08-05 17:26:34 - PHP Notice:  Undefined variable: sort_status in D:\wamp\www\yuankong\backend\view\template\extension\company_group_list.tpl on line 33
+2015-08-05 17:26:34 - PHP Notice:  Undefined variable: column_status in D:\wamp\www\yuankong\backend\view\template\extension\company_group_list.tpl on line 33
+2015-08-05 17:26:34 - PHP Notice:  Undefined index: status_text in D:\wamp\www\yuankong\backend\view\template\extension\company_group_list.tpl on line 61
+2015-08-05 17:26:34 - PHP Notice:  Undefined index: status_text in D:\wamp\www\yuankong\backend\view\template\extension\company_group_list.tpl on line 61
+2015-08-05 17:26:34 - PHP Notice:  Undefined index: status_text in D:\wamp\www\yuankong\backend\view\template\extension\company_group_list.tpl on line 61
+2015-08-05 17:26:34 - PHP Notice:  Undefined index: status_text in D:\wamp\www\yuankong\backend\view\template\extension\company_group_list.tpl on line 61
+2015-08-05 17:27:33 - PHP Notice:  Undefined variable: sort_status in D:\wamp\www\yuankong\backend\view\template\extension\company_group_list.tpl on line 33
+2015-08-05 17:27:33 - PHP Notice:  Undefined variable: column_status in D:\wamp\www\yuankong\backend\view\template\extension\company_group_list.tpl on line 33
+2015-08-05 17:27:33 - PHP Notice:  Undefined index: status_text in D:\wamp\www\yuankong\backend\view\template\extension\company_group_list.tpl on line 61
+2015-08-05 17:27:33 - PHP Notice:  Undefined index: status_text in D:\wamp\www\yuankong\backend\view\template\extension\company_group_list.tpl on line 61
+2015-08-05 17:27:33 - PHP Notice:  Undefined index: status_text in D:\wamp\www\yuankong\backend\view\template\extension\company_group_list.tpl on line 61
+2015-08-05 17:27:33 - PHP Notice:  Undefined index: status_text in D:\wamp\www\yuankong\backend\view\template\extension\company_group_list.tpl on line 61
+2015-08-05 17:28:23 - PHP Notice:  Undefined variable: sort_status in D:\wamp\www\yuankong\backend\view\template\extension\company_group_list.tpl on line 33
+2015-08-05 17:28:23 - PHP Notice:  Undefined index: status_text in D:\wamp\www\yuankong\backend\view\template\extension\company_group_list.tpl on line 61
+2015-08-05 17:28:23 - PHP Notice:  Undefined index: status_text in D:\wamp\www\yuankong\backend\view\template\extension\company_group_list.tpl on line 61
+2015-08-05 17:28:23 - PHP Notice:  Undefined index: status_text in D:\wamp\www\yuankong\backend\view\template\extension\company_group_list.tpl on line 61
+2015-08-05 17:28:23 - PHP Notice:  Undefined index: status_text in D:\wamp\www\yuankong\backend\view\template\extension\company_group_list.tpl on line 61
+2015-08-05 17:29:08 - PHP Notice:  Undefined index: status in D:\wamp\www\yuankong\backend\controller\extension\company_group.php on line 188
+2015-08-05 17:29:08 - PHP Notice:  Undefined index: status in D:\wamp\www\yuankong\backend\controller\extension\company_group.php on line 188
+2015-08-05 17:29:08 - PHP Notice:  Undefined index: status in D:\wamp\www\yuankong\backend\controller\extension\company_group.php on line 188
+2015-08-05 17:29:08 - PHP Notice:  Undefined index: status in D:\wamp\www\yuankong\backend\controller\extension\company_group.php on line 188
+2015-08-05 17:29:08 - PHP Notice:  Undefined variable: sort_status in D:\wamp\www\yuankong\backend\view\template\extension\company_group_list.tpl on line 33
+2015-08-05 17:30:03 - PHP Notice:  Undefined variable: sort_status in D:\wamp\www\yuankong\backend\view\template\extension\company_group_list.tpl on line 33
+2015-08-05 17:30:43 - PHP Notice:  Undefined variable: sort_status in D:\wamp\www\yuankong\backend\view\template\extension\company_group_list.tpl on line 33
+2015-08-05 17:30:45 - PHP Notice:  Error: Could not load template D:\wamp\www\yuankong/backend/view/template/extension/company_group_form.tpl! in D:\wamp\www\yuankong\system\engine\controller.php on line 70
+2015-08-05 17:34:18 - PHP Notice:  Undefined variable: text_enabled in D:\wamp\www\yuankong\backend\view\template\extension\company_group_form.tpl on line 34
+2015-08-05 17:34:18 - PHP Notice:  Undefined variable: text_disabled in D:\wamp\www\yuankong\backend\view\template\extension\company_group_form.tpl on line 35
+2015-08-05 17:36:59 - PHP Notice:  Error: Table 'yuankong.yk_company_transaction' doesn't exist<br />Error No: 1146<br />SELECT a.*,ag.name group_name, a.fullname AS name, (SELECT SUM(at.amount) FROM yk_company_transaction at WHERE at.company_id = a.company_id GROUP BY at.company_id) AS balance FROM yk_company a LEFT JOIN yk_company_group ag ON a.group_id = ag.group_id  ORDER BY name ASC LIMIT 0,20 in D:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-08-05 17:36:59 - PHP Notice:  Trying to get property of non-object in D:\wamp\www\yuankong\backend\model\sale\company.php on line 162
+2015-08-05 17:36:59 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\controller\sale\company.php on line 367
+2015-08-05 17:36:59 - PHP Notice:  Error: Could not load template D:\wamp\www\yuankong/backend/view/template/sale/company_list.tpl! in D:\wamp\www\yuankong\system\engine\controller.php on line 70
+2015-08-05 17:38:35 - PHP Notice:  Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM yk_company a LEFT JOIN yk_company_group ag ON a.group_id = ag.group_id  ORD' at line 1<br />Error No: 1064<br />SELECT a.*,ag.name group_name, a.fullname AS name, FROM yk_company a LEFT JOIN yk_company_group ag ON a.group_id = ag.group_id  ORDER BY name ASC LIMIT 0,20 in D:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-08-05 17:38:35 - PHP Notice:  Trying to get property of non-object in D:\wamp\www\yuankong\backend\model\sale\company.php on line 161
+2015-08-05 17:38:35 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\controller\sale\company.php on line 367
+2015-08-05 17:38:35 - PHP Notice:  Error: Could not load template D:\wamp\www\yuankong/backend/view/template/sale/company_list.tpl! in D:\wamp\www\yuankong\system\engine\controller.php on line 70

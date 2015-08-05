@@ -176,13 +176,6 @@ $registry->set('document', new Document());
 
 // Customer
 $registry->set('customer', new Customer($registry));
-
-// Affiliate
-$registry->set('affiliate', new Affiliate($registry));
-
-if (isset($request->get['tracking'])) {
-	setcookie('tracking', $request->get['tracking'], time() + 3600 * 24 * 1000, '/');
-}
 		
 // Currency
 $registry->set('currency', new Currency($registry));

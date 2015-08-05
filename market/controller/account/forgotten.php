@@ -42,11 +42,9 @@ class ControllerAccountForgotten extends Controller {
 		$this->document->setTitle($this->language->get('heading_title'));
 		
 		$this->load->model('account/customer');
-		$this->load->model('affiliate/affiliate');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			$this->model_account_customer->editPassword($this->request->post['mobile_phone'], $this->request->post['password']);
-			$this->model_affiliate_affiliate->editPasswordByMobilePhone($this->request->post['mobile_phone'], $this->request->post['password']);
  
 			$this->session->data['success'] = $this->language->get('text_success');
 	  

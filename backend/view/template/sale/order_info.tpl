@@ -110,21 +110,7 @@
             <td><?php echo $comment; ?></td>
           </tr>
           <?php } ?>
-          <?php if ($affiliate) { ?>
-          <tr>
-            <td><?php echo $text_affiliate; ?></td>
-            <td><a href="<?php echo $affiliate; ?>"><?php echo $affiliate_firstname; ?> <?php echo $affiliate_lastname; ?></a></td>
-          </tr>
-          <tr>
-            <td><?php echo $text_commission; ?></td>
-            <td><?php echo $commission; ?>
-              <?php if (!$commission_total) { ?>
-              <span id="commission"><b>[</b> <a id="commission-add"><?php echo $text_commission_add; ?></a> <b>]</b></span>
-              <?php } else { ?>
-              <span id="commission"><b>[</b> <a id="commission-remove"><?php echo $text_commission_remove; ?></a> <b>]</b></span>
-              <?php } ?></td>
-          </tr>
-          <?php } ?>
+
           <?php if ($ip) { ?>
           <tr>
             <td><?php echo $text_ip; ?></td>

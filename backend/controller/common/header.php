@@ -21,8 +21,8 @@ class ControllerCommonHeader extends Controller {
 
 		$this->data['heading_title'] = $this->language->get('heading_title');
 		
-		$this->data['text_affiliate'] = $this->language->get('text_affiliate');
-		$this->data['text_affiliate_group'] = $this->language->get('text_affiliate_group');
+		$this->data['text_company'] = $this->language->get('text_company');
+		$this->data['text_company_group'] = $this->language->get('text_company_group');
 		$this->data['text_backup'] = $this->language->get('text_backup');
 		$this->data['text_banner'] = $this->language->get('text_banner');
 		$this->data['text_catalog'] = $this->language->get('text_catalog');
@@ -76,7 +76,7 @@ class ControllerCommonHeader extends Controller {
 		$this->data['text_report_customer_order'] = $this->language->get('text_report_customer_order');
 		$this->data['text_report_customer_reward'] = $this->language->get('text_report_customer_reward');
 		$this->data['text_report_customer_credit'] = $this->language->get('text_report_customer_credit');
-		$this->data['text_report_affiliate_commission'] = $this->language->get('text_report_affiliate_commission');
+		$this->data['text_report_company_commission'] = $this->language->get('text_report_company_commission');
 		$this->data['text_report_sale_return'] = $this->language->get('text_report_sale_return');
 		$this->data['text_report_product_viewed'] = $this->language->get('text_report_product_viewed');
 		$this->data['text_report_customer_order'] = $this->language->get('text_report_customer_order');
@@ -116,8 +116,8 @@ class ControllerCommonHeader extends Controller {
 			$this->data['logged'] = sprintf($this->language->get('text_logged'), $profile,$this->user->getNickName());
 	
 			$this->data['home'] = $this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL');
-			$this->data['affiliate'] = $this->url->link('sale/affiliate', 'token=' . $this->session->data['token'], 'SSL');
-			$this->data['affiliate_group'] = $this->url->link('extension/affiliate_group', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['company'] = $this->url->link('sale/company', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['company_group'] = $this->url->link('extension/company_group', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['backup'] = $this->url->link('tool/backup', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['banner'] = $this->url->link('design/banner', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['category'] = $this->url->link('catalog/category', 'token=' . $this->session->data['token'], 'SSL');
@@ -155,7 +155,6 @@ class ControllerCommonHeader extends Controller {
 			$this->data['report_customer_order'] = $this->url->link('report/customer_order', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['report_customer_reward'] = $this->url->link('report/customer_reward', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['report_customer_credit'] = $this->url->link('report/customer_credit', 'token=' . $this->session->data['token'], 'SSL');
-			$this->data['report_affiliate_commission'] = $this->url->link('report/affiliate_commission', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['review'] = $this->url->link('catalog/review', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['return'] = $this->url->link('sale/return', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['return_action'] = $this->url->link('localisation/return_action', 'token=' . $this->session->data['token'], 'SSL');

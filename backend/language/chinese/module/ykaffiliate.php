@@ -10,7 +10,7 @@ $_['all_page']              = '所有页面';
 
 $_['entry_icon_class']      = '图标样式类';
 $_['text_image_manager']    = '图片管理';
-$_['text_affiliate']        = '商户类别';
+$_['text_company']        = '商户类别';
 $_['entry_lateast_limit']    = '最新条目限制';
 
 $_['text_browse']           = '浏览';

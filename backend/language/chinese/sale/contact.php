@@ -10,8 +10,8 @@ $_['text_newsletter']      = '所有资讯订阅者';
 $_['text_customer_all']    = '所有客户';
 $_['text_customer_group']  = '客户组';
 $_['text_customer']        = '所有客户';
-$_['text_affiliate_all']   = '所有友情联接';
-$_['text_affiliate']       = '友情联接';
+$_['text_company_all']   = '所有友情联接';
+$_['text_company']       = '友情联接';
 $_['text_product']         = '商品';
 
 // Entry
@@ -19,7 +19,7 @@ $_['entry_store']          = '&nbsp;&nbsp;发件人：';
 $_['entry_to']             = '&nbsp;&nbsp;收件人：';
 $_['entry_customer_group'] = '客户组：';
 $_['entry_customer']       = '客户：<br /><span class="help">自动完成</span>';
-$_['entry_affiliate']      = '友情联接：<br /><span class="help">自动完成</span>';
+$_['entry_company']      = '友情联接：<br /><span class="help">自动完成</span>';
 $_['entry_product']        = '产品：<br /><span class="help">邮件发送给订购过此产品者。</span>';
 $_['entry_subject']        = '邮件标题：';
 $_['entry_message']        = '邮件内容：';

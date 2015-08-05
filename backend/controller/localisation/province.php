@@ -379,7 +379,6 @@ class ControllerLocalisationProvince extends Controller {
 		}
 		
 		$this->load->model('sale/customer');
-		$this->load->model('sale/affiliate');
 		$this->load->model('localisation/area_geo');
 		
 		foreach ($this->request->post['selected'] as $area_id) {
@@ -391,12 +390,6 @@ class ControllerLocalisationProvince extends Controller {
 
 			if ($address_total) {
 				$this->error['warning'] = sprintf($this->language->get('error_address'), $address_total);
-			}
-
-			$affiliate_total = $this->model_sale_affiliate->getTotalAffiliatesByProvinceId($area_id);
-
-			if ($affiliate_total) {
-				$this->error['warning'] = sprintf($this->language->get('error_affiliate'), $affiliate_total);
 			}
 					
 			$area_to_area_geo_total = $this->model_localisation_area_geo->getTotalAreaToAreaGeoByAreaId($area_id);

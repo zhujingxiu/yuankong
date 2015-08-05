@@ -33,7 +33,7 @@
                 <li>|</li>
                 <li class="my-ezhan rel">
                     <div class="hd">
-                        <a href="<?php echo $affiliate; ?>"><?php echo $text_affiliate; ?></a>
+                        <a href="<?php echo $company; ?>"><?php echo $text_company; ?></a>
                         <em class="icon2 h-down"></em>
                     </div>
                     <div class="bd">

@@ -41,7 +41,7 @@
             <table class="form">
               <tr>
                 <td><?php echo $entry_title; ?></td>
-                <td><input name="ykaffiliate_module[<?php echo $module_row; ?>][title][<?php echo $language['language_id']; ?>]" value="<?php echo isset($module['title'][$language['language_id']]) ? $module['title'][$language['language_id']] : ''; ?>" /></td>
+                <td><input name="ykcompany_module[<?php echo $module_row; ?>][title][<?php echo $language['language_id']; ?>]" value="<?php echo isset($module['title'][$language['language_id']]) ? $module['title'][$language['language_id']] : ''; ?>" /></td>
               </tr>
             </table>
           </div>
@@ -56,7 +56,7 @@
 
       <tr>
         <td><?php echo $entry_layout; ?></td>
-        <td><select name="ykaffiliate_module[<?php echo $module_row; ?>][layout_id]">
+        <td><select name="ykcompany_module[<?php echo $module_row; ?>][layout_id]">
            <?php foreach ($layouts as $layout) { ?>
             <?php if ($layout['layout_id'] == $module['layout_id']) { ?>
             <option value="<?php echo $layout['layout_id']; ?>" selected="selected"><?php echo $layout['name']; ?></option>
@@ -68,7 +68,7 @@
       </tr>
       <tr>
         <td><?php echo $entry_position; ?></td>
-        <td><select name="ykaffiliate_module[<?php echo $module_row; ?>][position]">
+        <td><select name="ykcompany_module[<?php echo $module_row; ?>][position]">
             <?php foreach( $positions as $pos ) { ?>
             <?php if ($module['position'] == $pos) { ?>
             <option value="<?php echo $pos;?>" selected="selected"><?php echo $this->language->get('text_'.$pos); ?></option>
@@ -80,7 +80,7 @@
       </tr>
       <tr>
         <td><?php echo $entry_status; ?></td>
-        <td><select name="ykaffiliate_module[<?php echo $module_row; ?>][status]">
+        <td><select name="ykcompany_module[<?php echo $module_row; ?>][status]">
             <?php if ($module['status']) { ?>
             <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
             <option value="0"><?php echo $text_disabled; ?></option>
@@ -92,11 +92,11 @@
       </tr>
       <tr>
         <td><?php echo $entry_lateast_limit; ?></td>
-        <td><input type="text" name="ykaffiliate_module[<?php echo $module_row; ?>][lateast]" value="<?php echo $module['lateast']; ?>" size="3" /></td>
+        <td><input type="text" name="ykcompany_module[<?php echo $module_row; ?>][lateast]" value="<?php echo $module['lateast']; ?>" size="3" /></td>
       </tr>
       <tr>
         <td><?php echo $entry_sort_order; ?></td>
-        <td><input type="text" name="ykaffiliate_module[<?php echo $module_row; ?>][sort_order]" value="<?php echo $module['sort_order']; ?>" size="3" /></td>
+        <td><input type="text" name="ykcompany_module[<?php echo $module_row; ?>][sort_order]" value="<?php echo $module['sort_order']; ?>" size="3" /></td>
       </tr>
     </table>
 
@@ -118,23 +118,23 @@
                 <td><?php echo $this->language->get('entry_category');?></td>
                 <td colspan="2">
 
-                  <select name="ykaffiliate_module[<?php echo $module_row;?>][category_tabs][]">
-                   <?php foreach( $affiliate_groups as $item){ ?>
+                  <select name="ykcompany_module[<?php echo $module_row;?>][category_tabs][]">
+                   <?php foreach( $company_groups as $item){ ?>
                    <option <?php if( $module['category_tabs'][$idx] == $item['group_id'] ) {?>selected="selected"<?php } ?> value="<?php echo $item['group_id'];?>"><?php echo addslashes($item['name']);?> [ID:<?php echo $item['group_id'];?>]</option>
                    <?php } ?>
                    </select>
                 </td>
                 <td><?php echo $this->language->get('entry_limit');?></td>
                 <td>
-                    <input type="text" name="ykaffiliate_module[<?php echo $module_row;?>][limit][]" value="<?php echo $module['limit'][$idx];?>" size="3">
+                    <input type="text" name="ykcompany_module[<?php echo $module_row;?>][limit][]" value="<?php echo $module['limit'][$idx];?>" size="3">
                 </td>
                 <td><?php echo $this->language->get( 'entry_icon_class' );?></td>
                 <td> 
-                  <input type="text" name="ykaffiliate_module[<?php echo $module_row;?>][icon_class][]" value="<?php echo $module['icon_class'][$idx];?>">
+                  <input type="text" name="ykcompany_module[<?php echo $module_row;?>][icon_class][]" value="<?php echo $module['icon_class'][$idx];?>">
                 </td>   
                 <td><?php echo $this->language->get('entry_sort_order');?></td>
                 <td>
-                    <input type="text" name="ykaffiliate_module[<?php echo $module_row;?>][sort][]" value="<?php echo $module['sort'][$idx];?>" size="3">
+                    <input type="text" name="ykcompany_module[<?php echo $module_row;?>][sort][]" value="<?php echo $module['sort'][$idx];?>" size="3">
                 </td>
                 <td size="4"><img src="view/image/delete.png" alt="" onclick="$('#category-tab-wrapper<?php echo $idx+1;?>').remove(); return false;" /></td>             
               </tr>
@@ -162,19 +162,19 @@
      html +=     '<tr>';
      html +=      '<td><?php echo $this->language->get("entry_category");?></td>';
      html +=       ' <td colspan="2">';
-     html += '<select name="ykaffiliate_module['+mid+'][category_tabs][]">';
-     <?php foreach( $affiliate_groups as $item){ ?>
+     html += '<select name="ykcompany_module['+mid+'][category_tabs][]">';
+     <?php foreach( $company_groups as $item){ ?>
       html +='<option value="<?php echo $item['group_id'];?>"><?php echo addslashes($item['name']);?> [ID:<?php echo $item['group_id'];?>]</option>';
      <?php } ?>
      html += '</select>';
      html += '</td>';
      html += '<td><?php echo $this->language->get("entry_limit");?></td>';
-     html += '<td><input type="text" name="ykaffiliate_module['+mid+'][limit][]" value="5" size="3"></td>';
+     html += '<td><input type="text" name="ykcompany_module['+mid+'][limit][]" value="5" size="3"></td>';
      html += '<td><?php echo $this->language->get( 'entry_icon_class' );?> </td>';
-     html += '<td><input type="text" name="ykaffiliate_module['+mid+'][icon_class][]"></td>'; 
+     html += '<td><input type="text" name="ykcompany_module['+mid+'][icon_class][]"></td>'; 
 
      html += '<td><?php echo $this->language->get("entry_sort_order");?></td>';
-     html += '<td><input type="text" name="ykaffiliate_module['+mid+'][sort][]" size="3"></td>';
+     html += '<td><input type="text" name="ykcompany_module['+mid+'][sort][]" size="3"></td>';
      html += '<td size="4"><img src="view/image/delete.png" alt="" onclick="$(\'#category-tab-wrapper'+index+'\').remove(); return false;" /></td>'; 
      html +=     '</tr>'
      html +=    '</table> ';
@@ -199,7 +199,7 @@ function addModule() {
   html += '      <table class="form">';
     html += '        <tr>';
   html += '          <td><?php echo $entry_title; ?></td>';
-  html += '          <td><input name="ykaffiliate_module[' + module_row + '][title][<?php echo $language['language_id']; ?>]" /></td>';
+  html += '          <td><input name="ykcompany_module[' + module_row + '][title][<?php echo $language['language_id']; ?>]" /></td>';
   html += '        </tr>';
   html += '      </table>';
   html += '    </div>';
@@ -208,7 +208,7 @@ function addModule() {
   html += '  <table class="form">';
   html += '    <tr>';
   html += '      <td><?php echo $entry_layout; ?></td>';
-  html += '      <td><select name="ykaffiliate_module[' + module_row + '][layout_id]">';
+  html += '      <td><select name="ykcompany_module[' + module_row + '][layout_id]">';
   <?php foreach ($layouts as $layout) { ?>
   html += '           <option value="<?php echo $layout['layout_id']; ?>"><?php echo addslashes($layout['name']); ?></option>';
   <?php } ?>
@@ -216,25 +216,25 @@ function addModule() {
   html += '    </tr>';
   html += '    <tr>';
   html += '      <td><?php echo $entry_position; ?></td>';
-  html += '      <td><select name="ykaffiliate_module[' + module_row + '][position]">';
+  html += '      <td><select name="ykcompany_module[' + module_row + '][position]">';
   <?php foreach( $positions as $pos ) { ?>
   html += '<option value="<?php echo $pos;?>"><?php echo $this->language->get('text_'.$pos); ?></option>';      
   <?php } ?>    html += '      </select></td>';
   html += '    </tr>';
   html += '    <tr>';
   html += '      <td><?php echo $entry_status; ?></td>';
-  html += '      <td><select name="ykaffiliate_module[' + module_row + '][status]">';
+  html += '      <td><select name="ykcompany_module[' + module_row + '][status]">';
   html += '        <option value="1"><?php echo $text_enabled; ?></option>';
   html += '        <option value="0"><?php echo $text_disabled; ?></option>';
   html += '      </select></td>';
   html += '    </tr>';
   html += '    <tr>';
   html += '      <td><?php echo $entry_lateast_limit; ?></td>';
-  html += '      <td><input type="text" name="ykaffiliate_module[' + module_row + '][lateast]" value="" size="3" /></td>';
+  html += '      <td><input type="text" name="ykcompany_module[' + module_row + '][lateast]" value="" size="3" /></td>';
   html += '    </tr>';  
   html += '    <tr>';
   html += '      <td><?php echo $entry_sort_order; ?></td>';
-  html += '      <td><input type="text" name="ykaffiliate_module[' + module_row + '][sort_order]" value="" size="3" /></td>';
+  html += '      <td><input type="text" name="ykcompany_module[' + module_row + '][sort_order]" value="" size="3" /></td>';
   html += '    </tr>';
   html += '  </table>'; 
 

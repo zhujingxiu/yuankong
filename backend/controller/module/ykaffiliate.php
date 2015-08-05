@@ -1,10 +1,10 @@
 <?php
-class ControllerModuleYkaffiliate extends Controller {
+class ControllerModuleYkcompany extends Controller {
     private $error = array(); 
     
     public function index() {   
         
-        $this->language->load('module/ykaffiliate');
+        $this->language->load('module/ykcompany');
         
         $this->document->setTitle($this->language->get('heading_title'));
         
@@ -13,7 +13,7 @@ class ControllerModuleYkaffiliate extends Controller {
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 
-            $this->model_setting_setting->editSetting('ykaffiliate', $this->request->post);     
+            $this->model_setting_setting->editSetting('ykcompany', $this->request->post);     
                     
             $this->session->data['success'] = $this->language->get('text_success');
 
@@ -102,27 +102,27 @@ class ControllerModuleYkaffiliate extends Controller {
         
         $this->data['breadcrumbs'][] = array(
             'text'      => $this->language->get('heading_title'),
-            'href'      => $this->url->link('module/ykaffiliate', 'token=' . $this->session->data['token'], 'SSL'),
+            'href'      => $this->url->link('module/ykcompany', 'token=' . $this->session->data['token'], 'SSL'),
             'separator' => ' :: '
         );
         
-        $this->data['action'] = $this->url->link('module/ykaffiliate', 'token=' . $this->session->data['token'], 'SSL');
+        $this->data['action'] = $this->url->link('module/ykcompany', 'token=' . $this->session->data['token'], 'SSL');
         
         $this->data['cancel'] = $this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL');
         
         $this->data['modules'] = array();
         
-        if (isset($this->request->post['ykaffiliate_module'])) {
-            $this->data['modules'] = $this->request->post['ykaffiliate_module'];
-        } elseif ($this->config->get('ykaffiliate_module')) { 
-            $this->data['modules'] = $this->config->get('ykaffiliate_module');
+        if (isset($this->request->post['ykcompany_module'])) {
+            $this->data['modules'] = $this->request->post['ykcompany_module'];
+        } elseif ($this->config->get('ykcompany_module')) { 
+            $this->data['modules'] = $this->config->get('ykcompany_module');
         }   
-        $this->load->model('extension/affiliate_group');
-        $affiliate_group = $this->model_extension_affiliate_group->getAffiliateGroups();
-        foreach ($affiliate_group as $key => $value) {
-            $affiliate_group[$key]['name'] = $this->language->get('text_affiliate').' -> '.$value['name'];
+        $this->load->model('extension/company_group');
+        $company_group = $this->model_extension_company_group->getCompanyGroups();
+        foreach ($company_group as $key => $value) {
+            $company_group[$key]['name'] = $this->language->get('text_company').' -> '.$value['name'];
         }
-        $this->data['affiliate_groups'] = $affiliate_group;
+        $this->data['company_groups'] = $company_group;
 
         $this->load->model('design/layout');
         
@@ -131,7 +131,7 @@ class ControllerModuleYkaffiliate extends Controller {
         
         $this->data['layouts'] = array_merge($this->data['layouts'],$this->model_design_layout->getLayouts());
 
-        $this->template = 'module/ykaffiliate.tpl';
+        $this->template = 'module/ykcompany.tpl';
         $this->children = array(
             'common/header',
             'common/footer'
@@ -141,7 +141,7 @@ class ControllerModuleYkaffiliate extends Controller {
     }
     
     protected function validate() {
-        if (!$this->user->hasPermission('modify', 'module/ykaffiliate')) {
+        if (!$this->user->hasPermission('modify', 'module/ykcompany')) {
             $this->error['warning'] = $this->language->get('error_permission');
         }
           

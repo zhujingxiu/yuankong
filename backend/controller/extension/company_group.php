@@ -1,26 +1,26 @@
 <?php 
-class ControllerExtensionAffiliateGroup extends Controller { 
+class ControllerExtensionCompanyGroup extends Controller { 
     private $error = array();
    
     public function index() {
-        $this->language->load('extension/affiliate_group');
+        $this->language->load('extension/company_group');
     
         $this->document->setTitle($this->language->get('heading_title'));
         
-        $this->load->model('extension/affiliate_group');
+        $this->load->model('extension/company_group');
         
         $this->getList();
     }
               
     public function insert() {
-        $this->language->load('extension/affiliate_group');
+        $this->language->load('extension/company_group');
     
         $this->document->setTitle($this->language->get('heading_title'));
         
-        $this->load->model('extension/affiliate_group');
+        $this->load->model('extension/company_group');
             
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-            $this->model_extension_affiliate_group->addAffiliateGroup($this->request->post);
+            $this->model_extension_company_group->addCompanyGroup($this->request->post);
             
             $this->session->data['success'] = $this->language->get('text_success');
 
@@ -38,21 +38,21 @@ class ControllerExtensionAffiliateGroup extends Controller {
                 $url .= '&page=' . $this->request->get['page'];
             }
                         
-            $this->redirect($this->url->link('extension/affiliate_group', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+            $this->redirect($this->url->link('extension/company_group', 'token=' . $this->session->data['token'] . $url, 'SSL'));
         }
     
         $this->getForm();
     }
 
     public function update() {
-        $this->language->load('extension/affiliate_group');
+        $this->language->load('extension/company_group');
     
         $this->document->setTitle($this->language->get('heading_title'));
         
-        $this->load->model('extension/affiliate_group');
+        $this->load->model('extension/company_group');
         
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-            $this->model_extension_affiliate_group->editAffiliateGroup($this->request->get['group_id'], $this->request->post);
+            $this->model_extension_company_group->editCompanyGroup($this->request->get['group_id'], $this->request->post);
             
             $this->session->data['success'] = $this->language->get('text_success');
 
@@ -70,22 +70,22 @@ class ControllerExtensionAffiliateGroup extends Controller {
                 $url .= '&page=' . $this->request->get['page'];
             }
             
-            $this->redirect($this->url->link('extension/affiliate_group', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+            $this->redirect($this->url->link('extension/company_group', 'token=' . $this->session->data['token'] . $url, 'SSL'));
         }
     
         $this->getForm();
     }
 
     public function delete() {
-        $this->language->load('extension/affiliate_group');
+        $this->language->load('extension/company_group');
     
         $this->document->setTitle($this->language->get('heading_title'));
         
-        $this->load->model('extension/affiliate_group');
+        $this->load->model('extension/company_group');
         
         if (isset($this->request->post['selected']) && $this->validateDelete()) {
             foreach ($this->request->post['selected'] as $group_id) {
-                $this->model_extension_affiliate_group->deleteAffiliateGroup($group_id);
+                $this->model_extension_company_group->deleteCompanyGroup($group_id);
             }
                         
             $this->session->data['success'] = $this->language->get('text_success');
@@ -104,7 +104,7 @@ class ControllerExtensionAffiliateGroup extends Controller {
                 $url .= '&page=' . $this->request->get['page'];
             }
             
-            $this->redirect($this->url->link('extension/affiliate_group', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+            $this->redirect($this->url->link('extension/company_group', 'token=' . $this->session->data['token'] . $url, 'SSL'));
         }
     
         $this->getList();
@@ -153,14 +153,14 @@ class ControllerExtensionAffiliateGroup extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text'      => $this->language->get('heading_title'),
-            'href'      => $this->url->link('extension/affiliate_group', 'token=' . $this->session->data['token'] . $url, 'SSL'),
+            'href'      => $this->url->link('extension/company_group', 'token=' . $this->session->data['token'] . $url, 'SSL'),
             'separator' => ' :: '
         );
                             
-        $this->data['insert'] = $this->url->link('extension/affiliate_group/insert', 'token=' . $this->session->data['token'] . $url, 'SSL');
-        $this->data['delete'] = $this->url->link('extension/affiliate_group/delete', 'token=' . $this->session->data['token'] . $url, 'SSL');    
+        $this->data['insert'] = $this->url->link('extension/company_group/insert', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        $this->data['delete'] = $this->url->link('extension/company_group/delete', 'token=' . $this->session->data['token'] . $url, 'SSL');    
 
-        $this->data['affiliate_groups'] = array();
+        $this->data['company_groups'] = array();
 
         $data = array(
             'sort'  => $sort,
@@ -169,22 +169,23 @@ class ControllerExtensionAffiliateGroup extends Controller {
             'limit' => $this->config->get('config_admin_limit')
         );
         
-        $affiliate_group_total = $this->model_extension_affiliate_group->getTotalAffiliateGroups();
+        $company_group_total = $this->model_extension_company_group->getTotalCompanyGroups();
     
-        $results = $this->model_extension_affiliate_group->getAffiliateGroups($data);
+        $results = $this->model_extension_company_group->getCompanyGroups($data);
  
         foreach ($results as $result) {
             $action = array();
             
             $action[] = array(
                 'text' => $this->language->get('text_edit'),
-                'href' => $this->url->link('extension/affiliate_group/update', 'token=' . $this->session->data['token'] . '&group_id=' . $result['group_id'] . $url, 'SSL')
+                'href' => $this->url->link('extension/company_group/update', 'token=' . $this->session->data['token'] . '&group_id=' . $result['group_id'] . $url, 'SSL')
             );
                         
-            $this->data['affiliate_groups'][] = array(
+            $this->data['company_groups'][] = array(
                 'group_id'           => $result['group_id'],
                 'name'               => $result['name'],
                 'show'               => $result['show'] ? $this->language->get('text_yes') : $this->language->get('text_no'),
+                'status_text'        => $result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
                 'sort_order'         => $result['sort_order'],
                 'selected'           => isset($this->request->post['selected']) && in_array($result['group_id'], $this->request->post['selected']),
                 'action'             => $action
@@ -197,6 +198,7 @@ class ControllerExtensionAffiliateGroup extends Controller {
 
         $this->data['column_name'] = $this->language->get('column_name');
         $this->data['column_show'] = $this->language->get('column_show');
+        $this->data['column_status'] = $this->language->get('column_status');
         $this->data['column_sort_order'] = $this->language->get('column_sort_order');
         $this->data['column_action'] = $this->language->get('column_action');       
         
@@ -229,9 +231,9 @@ class ControllerExtensionAffiliateGroup extends Controller {
             $url .= '&page=' . $this->request->get['page'];
         }
         
-        $this->data['sort_name'] = $this->url->link('extension/affiliate_group', 'token=' . $this->session->data['token'] . '&sort=name' . $url, 'SSL');
-        $this->data['sort_show'] = $this->url->link('extension/affiliate_group', 'token=' . $this->session->data['token'] . '&sort=show' . $url, 'SSL');
-        $this->data['sort_sort_order'] = $this->url->link('extension/affiliate_group', 'token=' . $this->session->data['token'] . '&sort=sort_order' . $url, 'SSL');
+        $this->data['sort_name'] = $this->url->link('extension/company_group', 'token=' . $this->session->data['token'] . '&sort=name' . $url, 'SSL');
+        $this->data['sort_show'] = $this->url->link('extension/company_group', 'token=' . $this->session->data['token'] . '&sort=show' . $url, 'SSL');
+        $this->data['sort_sort_order'] = $this->url->link('extension/company_group', 'token=' . $this->session->data['token'] . '&sort=sort_order' . $url, 'SSL');
         
         $url = '';
 
@@ -244,18 +246,18 @@ class ControllerExtensionAffiliateGroup extends Controller {
         }
 
         $pagination = new Pagination();
-        $pagination->total = $affiliate_group_total;
+        $pagination->total = $company_group_total;
         $pagination->page = $page;
         $pagination->limit = $this->config->get('config_admin_limit');
         $pagination->text = $this->language->get('text_pagination');
-        $pagination->url = $this->url->link('extension/affiliate_group', 'token=' . $this->session->data['token'] . $url . '&page={page}', 'SSL');
+        $pagination->url = $this->url->link('extension/company_group', 'token=' . $this->session->data['token'] . $url . '&page={page}', 'SSL');
             
         $this->data['pagination'] = $pagination->render();
 
         $this->data['sort'] = $sort;
         $this->data['order'] = $order;
 
-        $this->template = 'extension/affiliate_group_list.tpl';
+        $this->template = 'extension/company_group_list.tpl';
         $this->children = array(
             'common/header',
             'common/footer'
@@ -269,10 +271,13 @@ class ControllerExtensionAffiliateGroup extends Controller {
 
         $this->data['entry_name'] = $this->language->get('entry_name');
         $this->data['entry_show'] = $this->language->get('entry_show');
+        $this->data['entry_status'] = $this->language->get('entry_status');
         $this->data['entry_sort_order'] = $this->language->get('entry_sort_order');
 
         $this->data['text_yes'] = $this->language->get('text_yes');
         $this->data['text_no'] = $this->language->get('text_no');
+        $this->data['text_enabled'] = $this->language->get('text_enabled');
+        $this->data['text_disabled'] = $this->language->get('text_disabled');
 
         $this->data['button_save'] = $this->language->get('button_save');
         $this->data['button_cancel'] = $this->language->get('button_cancel');
@@ -313,48 +318,56 @@ class ControllerExtensionAffiliateGroup extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text'      => $this->language->get('heading_title'),
-            'href'      => $this->url->link('extension/affiliate_group', 'token=' . $this->session->data['token'] . $url, 'SSL'),
+            'href'      => $this->url->link('extension/company_group', 'token=' . $this->session->data['token'] . $url, 'SSL'),
             'separator' => ' :: '
         );
         
         if (!isset($this->request->get['group_id'])) {
-            $this->data['action'] = $this->url->link('extension/affiliate_group/insert', 'token=' . $this->session->data['token'] . $url, 'SSL');
+            $this->data['action'] = $this->url->link('extension/company_group/insert', 'token=' . $this->session->data['token'] . $url, 'SSL');
         } else {
-            $this->data['action'] = $this->url->link('extension/affiliate_group/update', 'token=' . $this->session->data['token'] . '&group_id=' . $this->request->get['group_id'] . $url, 'SSL');
+            $this->data['action'] = $this->url->link('extension/company_group/update', 'token=' . $this->session->data['token'] . '&group_id=' . $this->request->get['group_id'] . $url, 'SSL');
         }
             
-        $this->data['cancel'] = $this->url->link('extension/affiliate_group', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        $this->data['cancel'] = $this->url->link('extension/company_group', 'token=' . $this->session->data['token'] . $url, 'SSL');
 
         if (isset($this->request->get['group_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
-            $affiliate_group_info = $this->model_extension_affiliate_group->getAffiliateGroup($this->request->get['group_id']);
+            $company_group_info = $this->model_extension_company_group->getCompanyGroup($this->request->get['group_id']);
         }
                 
     
         if (isset($this->request->post['name'])) {
             $this->data['name'] = $this->request->post['name'];
-        } elseif (!empty($affiliate_group_info)) {
-            $this->data['name'] = $affiliate_group_info['name'];
+        } elseif (!empty($company_group_info)) {
+            $this->data['name'] = $company_group_info['name'];
         } else {
             $this->data['name'] = '';
         }
 
+        if (isset($this->request->post['status'])) {
+            $this->data['status'] = $this->request->post['status'];
+        } elseif (!empty($company_group_info['status'])) {
+            $this->data['status'] = $company_group_info['status'];
+        } else {
+            $this->data['status'] = 1;
+        }
+
         if (isset($this->request->post['show'])) {
             $this->data['show'] = $this->request->post['show'];
-        } elseif (!empty($affiliate_group_info)) {
-            $this->data['show'] = $affiliate_group_info['show'];
+        } elseif (!empty($company_group_info['show'])) {
+            $this->data['show'] = $company_group_info['show'];
         } else {
             $this->data['show'] = '';
         }
 
         if (isset($this->request->post['sort_order'])) {
             $this->data['sort_order'] = $this->request->post['sort_order'];
-        } elseif (!empty($affiliate_group_info)) {
-            $this->data['sort_order'] = $affiliate_group_info['sort_order'];
+        } elseif (!empty($company_group_info['sort_order'])) {
+            $this->data['sort_order'] = $company_group_info['sort_order'];
         } else {
             $this->data['sort_order'] = '';
         }
    
-        $this->template = 'extension/affiliate_group_form.tpl';
+        $this->template = 'extension/company_group_form.tpl';
         $this->children = array(
             'common/header',
             'common/footer'
@@ -364,7 +377,7 @@ class ControllerExtensionAffiliateGroup extends Controller {
     }
     
     protected function validateForm() {
-        if (!$this->user->hasPermission('modify', 'extension/affiliate_group')) {
+        if (!$this->user->hasPermission('modify', 'extension/company_group')) {
             $this->error['warning'] = $this->language->get('error_permission');
         }
     
@@ -382,7 +395,7 @@ class ControllerExtensionAffiliateGroup extends Controller {
     }
 
     protected function validateDelete() {
-        if (!$this->user->hasPermission('modify', 'extension/affiliate_group')) {
+        if (!$this->user->hasPermission('modify', 'extension/company_group')) {
             $this->error['warning'] = $this->language->get('error_permission');
         }
         

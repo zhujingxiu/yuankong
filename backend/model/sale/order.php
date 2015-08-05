@@ -32,7 +32,7 @@ class ModelSaleOrder extends Model {
 			}
 		}
 
-      	$this->db->query("UPDATE `" . DB_PREFIX . "order` SET fullname = '" . $this->db->escape($data['fullname']) . "', mobile_phone = '" . $this->db->escape($data['mobile_phone']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "', payment_method = '" . $this->db->escape($data['payment_method']) . "', payment_code = '" . $this->db->escape($data['payment_code']) . "', shipping_fullname = '" . $this->db->escape($data['shipping_fullname']) . "', shipping_telephone = '" . $this->db->escape($data['shipping_telephone']) . "',  shipping_company = '" . $this->db->escape($data['shipping_company']) . "', shipping_address = '" . $this->db->escape($data['shipping_address']) . "',  shipping_city = '" . $this->db->escape($data['shipping_city']) . "', shipping_postcode = '" . $this->db->escape($data['shipping_postcode']) . "',  shipping_province = '" . $this->db->escape($shipping_province) . "', shipping_province_id = '" . (int)$data['shipping_province_id'] . "', shipping_method = '" . $this->db->escape($data['shipping_method']) . "', shipping_code = '" . $this->db->escape($data['shipping_code']) . "', comment = '" . $this->db->escape($data['comment']) . "', order_status_id = '" . (int)$data['order_status_id'] . "', affiliate_id  = '" . (int)$data['affiliate_id'] . "', date_modified = NOW() WHERE order_id = '" . (int)$order_id . "'");
+      	$this->db->query("UPDATE `" . DB_PREFIX . "order` SET fullname = '" . $this->db->escape($data['fullname']) . "', mobile_phone = '" . $this->db->escape($data['mobile_phone']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "', payment_method = '" . $this->db->escape($data['payment_method']) . "', payment_code = '" . $this->db->escape($data['payment_code']) . "', shipping_fullname = '" . $this->db->escape($data['shipping_fullname']) . "', shipping_telephone = '" . $this->db->escape($data['shipping_telephone']) . "',  shipping_company = '" . $this->db->escape($data['shipping_company']) . "', shipping_address = '" . $this->db->escape($data['shipping_address']) . "',  shipping_city = '" . $this->db->escape($data['shipping_city']) . "', shipping_postcode = '" . $this->db->escape($data['shipping_postcode']) . "',  shipping_province = '" . $this->db->escape($shipping_province) . "', shipping_province_id = '" . (int)$data['shipping_province_id'] . "', shipping_method = '" . $this->db->escape($data['shipping_method']) . "', shipping_code = '" . $this->db->escape($data['shipping_code']) . "', comment = '" . $this->db->escape($data['comment']) . "', order_status_id = '" . (int)$data['order_status_id'] . "',  date_modified = NOW() WHERE order_id = '" . (int)$order_id . "'");
 				
 		$this->db->query("DELETE FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "'"); 
        	$this->db->query("DELETE FROM " . DB_PREFIX . "order_option WHERE order_id = '" . (int)$order_id . "'");
@@ -80,22 +80,7 @@ class ModelSaleOrder extends Model {
 			$total += $order_total['value'];
 		}
 		
-		// Affiliate
-		$affiliate_id = 0;
-		$commission = 0;
-		
-		if (!empty($this->request->post['affiliate_id'])) {
-			$this->load->model('sale/affiliate');
-			
-			$affiliate_info = $this->model_sale_affiliate->getAffiliate($this->request->post['affiliate_id']);
-			
-			if ($affiliate_info) {
-				$affiliate_id = $affiliate_info['affiliate_id']; 
-				$commission = ($total / 100) * $affiliate_info['commission']; 
-			}
-		}
-				 
-		$this->db->query("UPDATE `" . DB_PREFIX . "order` SET total = '" . (float)$total . "', affiliate_id = '" . (int)$affiliate_id . "', commission = '" . (float)$commission . "' WHERE order_id = '" . (int)$order_id . "'"); 
+		$this->db->query("UPDATE `" . DB_PREFIX . "order` SET total = '" . (float)$total . "' WHERE order_id = '" . (int)$order_id . "'"); 
 	}
 	
 	public function deleteOrder($order_id) {
@@ -123,7 +108,6 @@ class ModelSaleOrder extends Model {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "order_history WHERE order_id = '" . (int)$order_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "customer_transaction WHERE order_id = '" . (int)$order_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "customer_reward WHERE order_id = '" . (int)$order_id . "'");
-		$this->db->query("DELETE FROM " . DB_PREFIX . "affiliate_transaction WHERE order_id = '" . (int)$order_id . "'");
 	}
 
 	public function getOrder($order_id) {
@@ -137,24 +121,6 @@ class ModelSaleOrder extends Model {
 			foreach ($order_product_query->rows as $product) {
 				$reward += $product['reward'];
 			}			
-		
-			if ($order_query->row['affiliate_id']) {
-				$affiliate_id = $order_query->row['affiliate_id'];
-			} else {
-				$affiliate_id = 0;
-			}				
-				
-			$this->load->model('sale/affiliate');
-				
-			$affiliate_info = $this->model_sale_affiliate->getAffiliate($affiliate_id);
-				
-			if ($affiliate_info) {
-				$affiliate_fullname = $affiliate_info['fullname'];
-				$affiliate_mobile_phone = $affiliate_info['mobile_phone'];
-			} else {
-				$affiliate_fullname = '';
-				$affiliate_mobile_phone = '';				
-			}
 
 			$this->load->model('localisation/language');
 			
@@ -201,9 +167,6 @@ class ModelSaleOrder extends Model {
 				'total'                   => $order_query->row['total'],
 				'reward'                  => $reward,
 				'order_status_id'         => $order_query->row['order_status_id'],
-				'affiliate_id'            => $order_query->row['affiliate_id'],
-				'affiliate_fullname'      => $affiliate_fullname,
-				'affiliate_mobile_phone'  => $affiliate_mobile_phone,
 				'commission'              => $order_query->row['commission'],
 				'language_id'             => $order_query->row['language_id'],
 				'language_code'           => $language_code,

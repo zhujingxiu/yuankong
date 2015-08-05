@@ -244,24 +244,6 @@ class ControllerCheckoutConfirm extends Controller {
 			$data['comment'] = isset($this->session->data['comment']) ? $this->session->data['comment'] : '';
 			$data['total'] = $total;
 			
-			if (isset($this->request->cookie['tracking'])) {
-				$this->load->model('affiliate/affiliate');
-				
-				$affiliate_info = $this->model_affiliate_affiliate->getAffiliateByCode($this->request->cookie['tracking']);
-				$subtotal = $this->checkout->getSubTotal();
-				
-				if ($affiliate_info) {
-					$data['affiliate_id'] = $affiliate_info['affiliate_id']; 
-					$data['commission'] = ($subtotal / 100) * $affiliate_info['commission']; 
-				} else {
-					$data['affiliate_id'] = 0;
-					$data['commission'] = 0;
-				}
-			} else {
-				$data['affiliate_id'] = 0;
-				$data['commission'] = 0;
-			}
-			
 			$data['language_id'] = $this->config->get('config_language_id');
 			$data['currency_id'] = $this->currency->getId();
 			$data['currency_code'] = $this->currency->getCode();

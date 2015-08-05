@@ -23,7 +23,6 @@
         <a href="#tab-local"><?php echo $tab_local; ?></a>
         <a href="#tab-option"><?php echo $tab_option; ?></a>
         <a href="#tab-image"><?php echo $tab_image; ?></a>
-        <a href="#tab-ftp"><?php echo $tab_ftp; ?></a>
         <a href="#tab-mail"><?php echo $tab_mail; ?></a>
         <a href="#tab-server"><?php echo $tab_server; ?></a>
       </div>
@@ -453,6 +452,19 @@
                 </select></td>
             </tr>
             <tr>
+              <td><?php echo $entry_company; ?></td>
+              <td><select name="config_company_id">
+                  <option value="0"><?php echo $text_none; ?></option>
+                  <?php foreach ($informations as $information) { ?>
+                  <?php if ($information['information_id'] == $config_company_id) { ?>
+                  <option value="<?php echo $information['information_id']; ?>" selected="selected"><?php echo $information['title']; ?></option>
+                  <?php } else { ?>
+                  <option value="<?php echo $information['information_id']; ?>"><?php echo $information['title']; ?></option>
+                  <?php } ?>
+                  <?php } ?>
+                </select></td>
+            </tr>
+            <tr>
               <td><?php echo $entry_order_edit; ?></td>
               <td><input type="text" name="config_order_edit" value="<?php echo $config_order_edit; ?>" size="3" /></td>
             </tr>
@@ -542,14 +554,14 @@
                 </select></td>
             </tr>
           </table>
-          <h2><?php echo $text_affiliate; ?></h2>
+          <h2><?php echo $text_company; ?></h2>
           <table class="form">
             <tr>
-              <td><?php echo $entry_affiliate; ?></td>
-              <td><select name="config_affiliate_id">
+              <td><?php echo $entry_company; ?></td>
+              <td><select name="config_company_id">
                   <option value="0"><?php echo $text_none; ?></option>
                   <?php foreach ($informations as $information) { ?>
-                  <?php if ($information['information_id'] == $config_affiliate_id) { ?>
+                  <?php if ($information['information_id'] == $config_company_id) { ?>
                   <option value="<?php echo $information['information_id']; ?>" selected="selected"><?php echo $information['title']; ?></option>
                   <?php } else { ?>
                   <option value="<?php echo $information['information_id']; ?>"><?php echo $information['title']; ?></option>
@@ -557,10 +569,7 @@
                   <?php } ?>
                 </select></td>
             </tr>
-            <tr>
-              <td><?php echo $entry_commission; ?></td>
-              <td><input type="text" name="config_commission" value="<?php echo $config_commission; ?>" size="3" /></td>
-            </tr>
+
           </table>
           <h2><?php echo $text_return; ?></h2>
           <table class="form">
@@ -690,56 +699,7 @@
             </tr>
           </table>
         </div>
-        <div id="tab-ftp">
-          <table class="form">
-            <tr>
-              <td><?php echo $entry_ftp_host; ?></td>
-              <td><input type="text" name="config_ftp_host" value="<?php echo $config_ftp_host; ?>" />
-                <?php if ($error_ftp_host) { ?>
-                <span class="error"><?php echo $error_ftp_host; ?></span>
-                <?php } ?></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_ftp_port; ?></td>
-              <td><input type="text" name="config_ftp_port" value="<?php echo $config_ftp_port; ?>" />
-                <?php if ($error_ftp_port) { ?>
-                <span class="error"><?php echo $error_ftp_port; ?></span>
-                <?php } ?></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_ftp_username; ?></td>
-              <td><input type="text" name="config_ftp_username" value="<?php echo $config_ftp_username; ?>" />
-                <?php if ($error_ftp_username) { ?>
-                <span class="error"><?php echo $error_ftp_username; ?></span>
-                <?php } ?></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_ftp_password; ?></td>
-              <td><input type="text" name="config_ftp_password" value="<?php echo $config_ftp_password; ?>" />
-                <?php if ($error_ftp_password) { ?>
-                <span class="error"><?php echo $error_ftp_password; ?></span>
-                <?php } ?></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_ftp_root; ?></td>
-              <td><input type="text" name="config_ftp_root" value="<?php echo $config_ftp_root; ?>" /></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_ftp_status; ?></td>
-              <td><?php if ($config_ftp_status) { ?>
-                <input type="radio" name="config_ftp_status" value="1" checked="checked" />
-                <?php echo $text_yes; ?>
-                <input type="radio" name="config_ftp_status" value="0" />
-                <?php echo $text_no; ?>
-                <?php } else { ?>
-                <input type="radio" name="config_ftp_status" value="1" />
-                <?php echo $text_yes; ?>
-                <input type="radio" name="config_ftp_status" value="0" checked="checked" />
-                <?php echo $text_no; ?>
-                <?php } ?></td>
-            </tr>
-          </table>
-        </div>
+
         <div id="tab-mail">
           <table class="form">
             <tr>

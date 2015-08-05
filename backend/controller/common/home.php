@@ -16,8 +16,8 @@ class ControllerCommonHome extends Controller {
 		$this->data['text_total_customer'] = $this->language->get('text_total_customer');
 		$this->data['text_total_customer_approval'] = $this->language->get('text_total_customer_approval');
 		$this->data['text_total_review_approval'] = $this->language->get('text_total_review_approval');
-		$this->data['text_total_affiliate'] = $this->language->get('text_total_affiliate');
-		$this->data['text_total_affiliate_approval'] = $this->language->get('text_total_affiliate_approval');
+		$this->data['text_total_company'] = $this->language->get('text_total_company');
+		$this->data['text_total_company_approval'] = $this->language->get('text_total_company_approval');
 		$this->data['text_day'] = $this->language->get('text_day');
 		$this->data['text_week'] = $this->language->get('text_week');
 		$this->data['text_month'] = $this->language->get('text_month');
@@ -153,10 +153,10 @@ class ControllerCommonHome extends Controller {
 		$this->data['total_review'] = $this->model_catalog_review->getTotalReviews();
 		$this->data['total_review_approval'] = $this->model_catalog_review->getTotalReviewsAwaitingApproval();
 		
-		$this->load->model('sale/affiliate');
+		$this->load->model('sale/company');
 		
-		$this->data['total_affiliate'] = $this->model_sale_affiliate->getTotalAffiliates();
-		$this->data['total_affiliate_approval'] = $this->model_sale_affiliate->getTotalAffiliatesAwaitingApproval();
+		$this->data['total_company'] = $this->model_sale_company->getTotalCompanys();
+		$this->data['total_company_approval'] = $this->model_sale_company->getTotalCompanysAwaitingApproval();
 				
 		$this->data['orders'] = array(); 
 		

@@ -423,11 +423,7 @@
                 <td class="left"><?php echo $entry_comment; ?></td>
                 <td class="left"><textarea name="comment" cols="40" rows="5"><?php echo $comment; ?></textarea></td>
               </tr>
-              <tr>
-                <td class="left"><?php echo $entry_affiliate; ?></td>
-                <td class="left"><input type="text" name="affiliate" value="<?php echo $affiliate; ?>" />
-                  <input type="hidden" name="affiliate_id" value="<?php echo $affiliate_id; ?>" /></td>
-              </tr>
+
             </tbody>
             <tfoot>
               <tr>
@@ -554,32 +550,6 @@ $('select[id=\'customer_group_id\']').live('change', function() {
 
 $('select[id=\'customer_group_id\']').trigger('change');
 
-$('input[name=\'affiliate\']').autocomplete({
-	delay: 500,
-	source: function(request, response) {
-		$.ajax({
-			url: 'index.php?route=sale/affiliate/autocomplete&token=<?php echo $token; ?>&filter_name=' +  encodeURIComponent(request.term),
-			dataType: 'json',
-			success: function(json) {	
-				response($.map(json, function(item) {
-					return {
-						label: item['name'],
-						value: item['affiliate_id'],
-					}
-				}));
-			}
-		});
-	}, 
-	select: function(event, ui) { 
-		$('input[name=\'affiliate\']').attr('value', ui.item['label']);
-		$('input[name=\'affiliate_id\']').attr('value', ui.item['value']);
-			
-		return false; 
-	},
-	focus: function(event, ui) {
-      	return false;
-   	}
-});
 
 var shipping_zone_id = '<?php echo $shipping_zone_id; ?>';
 

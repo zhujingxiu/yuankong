@@ -18,7 +18,7 @@ class ControllerCommonTop extends Controller {
         $this->data['text_order'] = $this->language->get('text_order');
         $this->data['text_profile'] = $this->language->get('text_profile');
         $this->data['text_message'] = $this->language->get('text_message');
-        $this->data['text_affiliate'] = $this->language->get('text_affiliate');
+        $this->data['text_company'] = $this->language->get('text_company');
         $this->data['text_upload'] = $this->language->get('text_upload');
         $this->data['text_perfact'] = $this->language->get('text_perfact');
         $this->data['text_hotline'] = $this->language->get('text_hotline');
@@ -35,9 +35,9 @@ class ControllerCommonTop extends Controller {
         $this->data['profile'] = $this->url->link('account/edit', '', 'SSL');
         $this->data['message'] = $this->url->link('account/message', '', 'SSL');
         $this->data['help'] = $this->url->link('information/help', '', 'SSL');
-        $this->data['affiliate'] = $this->url->link('affiliate/affiliate', '', 'SSL');
-        $this->data['upload'] = $this->url->link('affiliate/account', '', 'SSL');
-        $this->data['perfact'] = $this->url->link('affiliate/edit', '', 'SSL');
+        $this->data['company'] = $this->url->link('account/company', '', 'SSL');
+        $this->data['upload'] = $this->url->link('account/account', '', 'SSL');
+        $this->data['perfact'] = $this->url->link('account/edit', '', 'SSL');
         
         if (isset($this->request->get['route'])) {
             $route = (string)$this->request->get['route'];

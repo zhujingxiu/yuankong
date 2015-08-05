@@ -439,21 +439,17 @@ class ControllerCatalogInformation extends Controller {
 		if (!$this->user->hasPermission('modify', 'catalog/information')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
-
 		
 		foreach ($this->request->post['selected'] as $information_id) {
 			if ($this->config->get('config_account_id') == $information_id) {
 				$this->error['warning'] = $this->language->get('error_account');
 			}
-			
+			if ($this->config->get('config_company_id') == $information_id) {
+				$this->error['warning'] = $this->language->get('error_company');
+			}
 			if ($this->config->get('config_checkout_id') == $information_id) {
 				$this->error['warning'] = $this->language->get('error_checkout');
-			}
-			
-			if ($this->config->get('config_affiliate_id') == $information_id) {
-				$this->error['warning'] = $this->language->get('error_affiliate');
-			}
-						
+			}						
 		}
 
 		if (!$this->error) {
