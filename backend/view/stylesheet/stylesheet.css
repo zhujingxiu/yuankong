@@ -405,7 +405,7 @@ table.form {
 	margin-bottom: 20px;
 }
 table.form > tbody > tr > td:first-child {
-	width: 200px;
+	width: 180px;
 }
 table.form > tbody > tr > td {
 	padding: 10px;
@@ -453,7 +453,7 @@ table.form > tbody > tr > td {
 .vtabs {
 	width: 190px;
 	padding: 10px 0px;
-	min-height: 300px;
+	height: auto;
 	float: left;
 	display: block;
 	border-right: 1px solid #DDDDDD;

@@ -529,7 +529,7 @@ class ControllerCatalogProduct extends Controller {
 
   	protected function getForm() {
     	$this->data['heading_title'] = $this->language->get('heading_title');
- 
+ 		$this->document->addScript(TPL_JS.'form.js');
     	$this->data['text_enabled'] = $this->language->get('text_enabled');
     	$this->data['text_disabled'] = $this->language->get('text_disabled');
     	$this->data['text_none'] = $this->language->get('text_none');
@@ -542,7 +542,11 @@ class ControllerCatalogProduct extends Controller {
 		$this->data['text_browse'] = $this->language->get('text_browse');
 		$this->data['text_clear'] = $this->language->get('text_clear');
 		$this->data['text_option'] = $this->language->get('text_option');
+		$this->data['text_option_new'] = $this->language->get('text_option_new');
 		$this->data['text_option_value'] = $this->language->get('text_option_value');
+		$this->data['text_option_price'] = $this->language->get('text_option_price');
+		$this->data['text_special_price'] = $this->language->get('text_special_price');
+		$this->data['text_discount_price'] = $this->language->get('text_discount_price');
 		$this->data['text_select'] = $this->language->get('text_select');
 		$this->data['text_none'] = $this->language->get('text_none');
 		$this->data['text_percent'] = $this->language->get('text_percent');
@@ -580,6 +584,7 @@ class ControllerCatalogProduct extends Controller {
 		$this->data['entry_dimension'] = $this->language->get('entry_dimension');
 		$this->data['entry_length'] = $this->language->get('entry_length');
     	$this->data['entry_image'] = $this->language->get('entry_image');
+    	$this->data['entry_images'] = $this->language->get('entry_images');
     	$this->data['entry_download'] = $this->language->get('entry_download');
     	$this->data['entry_category'] = $this->language->get('entry_category');
 		$this->data['entry_filter'] = $this->language->get('entry_filter');
@@ -597,7 +602,6 @@ class ControllerCatalogProduct extends Controller {
 		$this->data['entry_tag'] = $this->language->get('entry_tag');
 		$this->data['entry_customer_group'] = $this->language->get('entry_customer_group');
 		$this->data['entry_reward'] = $this->language->get('entry_reward');
-		$this->data['entry_layout'] = $this->language->get('entry_layout');
 				
     	$this->data['button_save'] = $this->language->get('button_save');
     	$this->data['button_cancel'] = $this->language->get('button_cancel');
@@ -608,16 +612,17 @@ class ControllerCatalogProduct extends Controller {
 		$this->data['button_add_image'] = $this->language->get('button_add_image');
 		$this->data['button_remove'] = $this->language->get('button_remove');
 		$this->data['button_add'] = $this->language->get('button_add');
+		$this->data['button_close'] = $this->language->get('button_close');
 		
     	$this->data['tab_general'] = $this->language->get('tab_general');
     	$this->data['tab_data'] = $this->language->get('tab_data');
-		$this->data['tab_option'] = $this->language->get('tab_option');		
+		$this->data['tab_price'] = $this->language->get('tab_price');		
 		$this->data['tab_discount'] = $this->language->get('tab_discount');
 		$this->data['tab_special'] = $this->language->get('tab_special');
     	$this->data['tab_image'] = $this->language->get('tab_image');		
 		$this->data['tab_links'] = $this->language->get('tab_links');
 		$this->data['tab_reward'] = $this->language->get('tab_reward');
-		$this->data['tab_design'] = $this->language->get('tab_design');
+		$this->data['tab_seo'] = $this->language->get('tab_seo');
 		 
  		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
@@ -716,7 +721,7 @@ class ControllerCatalogProduct extends Controller {
     	}
 
 		$this->data['token'] = $this->session->data['token'];
-		
+		$this->data['option_action'] = $this->url->link('catalog/product/new_option', 'token=' . $this->session->data['token'] . $url, 'SSL');
 		$this->load->model('localisation/language');
 		
 		$this->data['languages'] = $this->model_localisation_language->getLanguages();
@@ -1149,19 +1154,7 @@ class ControllerCatalogProduct extends Controller {
 		} else {
 			$this->data['product_reward'] = array();
 		}
-		
-		if (isset($this->request->post['layout_id'])) {
-			$this->data['layout_id'] = $this->request->post['layout_id'];
-		} elseif (isset($this->request->get['product_id'])) {
-			$this->data['layout_id'] = $this->model_catalog_product->getProductLayouts($this->request->get['product_id']);
-		} else {
-			$this->data['layout_id'] = array();
-		}
-
-		$this->load->model('design/layout');
-		
-		$this->data['layouts'] = $this->model_design_layout->getLayouts();
-										
+												
 		$this->template = 'catalog/product_form.tpl';
 		$this->children = array(
 			'common/header',
@@ -1181,11 +1174,7 @@ class ControllerCatalogProduct extends Controller {
         		$this->error['name'][$language_id] = $this->language->get('error_name');
       		}
     	}
-		/*
-    	if ((utf8_strlen($this->request->post['model']) < 1) || (utf8_strlen($this->request->post['model']) > 64)) {
-      		$this->error['model'] = $this->language->get('error_model');
-    	}
-		*/
+
 		if ($this->error && !isset($this->error['warning'])) {
 			$this->error['warning'] = $this->language->get('error_warning');
 		}
@@ -1304,5 +1293,54 @@ class ControllerCatalogProduct extends Controller {
 
 		$this->response->setOutput(json_encode($json));
 	}
+
+	public function new_option() {
+		$this->language->load('catalog/option');
+
+		$this->document->setTitle($this->language->get('heading_title'));
+		
+		$this->load->model('catalog/option');
+		
+		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateOption()) {
+			$this->model_catalog_option->addOption($this->request->post);
+			
+			$json = array('status'=>1,'msg'=>$this->language->get('text_success'));
+			
+		}else{
+			$json = array('status'=>0,'msg'=>implode('<br>', $this->error));
+		}
+		$this->response->setOutput(json_encode($json));
+	}
+
+	protected function validateOption() {
+		if (!$this->user->hasPermission('modify', 'catalog/option')) {
+			$this->error['warning'] = $this->language->get('error_permission');
+		}
+		$error_name = array();
+		foreach ($this->request->post['option_description'] as $language_id => $value) {
+			if ((utf8_strlen($value['name']) < 1) || (utf8_strlen($value['name']) > 128)) {
+				$this->error['name'] = $this->language->get('error_name');
+			}
+		}
+
+		if (($this->request->post['type'] == 'select' || $this->request->post['type'] == 'radio' || $this->request->post['type'] == 'checkbox') && !isset($this->request->post['option_value'])) {
+			$this->error['warning'] = $this->language->get('error_type');
+		}
+
+		if (isset($this->request->post['option_value'])) {
+			foreach ($this->request->post['option_value'] as $option_value_id => $option_value) {
+				foreach ($option_value['option_value_description'] as $language_id => $option_value_description) {
+					if ((utf8_strlen($option_value_description['name']) < 1) || (utf8_strlen($option_value_description['name']) > 128)) {
+						$this->error['option_value'] = $this->language->get('error_option_value'); 
+					}					
+				}
+			}	
+		}
+
+		if (!$this->error) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
-?>

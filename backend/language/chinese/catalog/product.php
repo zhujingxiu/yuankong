@@ -3,10 +3,13 @@
 $_['heading_title']              = '商品管理'; 
 
 // Tab
+$_['tab_general']                = '基本资料';
+$_['tab_data']                   = '商品描述';
 $_['tab_shipping']               = '配送';
 $_['tab_links']                  = '关联设置';
 $_['tab_design']                 = '布局设计';
-$_['tab_option']                 = '售价选项';
+$_['tab_price']                  = '价格设定';
+$_['tab_seo']                    = 'SEO设定';
 // Text  
 $_['text_success']               = '成功： 您已成功更新商品信息！';
 $_['text_plus']                  = '+';
@@ -19,7 +22,11 @@ $_['text_option']                = '选项';
 $_['text_option_value']          = '选项值';
 $_['text_percent']               = '百分比';
 $_['text_amount']                = '固定数额';
-$_['button_add']                = '添加分类';
+$_['text_option_new']            = '添加售价选项';
+$_['text_option_price']          = '选项价格设置';
+$_['text_special_price']         = '优惠价格设置';
+$_['text_discount_price']        = '促销活动设置';
+$_['button_add']                 = '添加分类';
 
 // Column
 $_['column_name']                = '商品名称';
@@ -36,7 +43,7 @@ $_['entry_name']                 = '商品名称：';
 $_['entry_subtitle']             = '&nbsp;&nbsp;副标题：';
 $_['entry_meta_keyword']         = '&nbsp;&nbsp;Meta标签关键词：';
 $_['entry_meta_description']     = '&nbsp;&nbsp;Meta标签描述：';
-$_['entry_description']          = '&nbsp;&nbsp;详细介绍：';
+$_['entry_description']          = '&nbsp;&nbsp;描述详情：';
 $_['entry_store']                = '&nbsp;&nbsp;网店：';
 $_['entry_keyword']              = '&nbsp;&nbsp;SEO关键字：<br /><span class="help">请不要使用空格键，SEO关键字必须是维一的。</span>';
 $_['entry_model']                = '&nbsp;&nbsp;商品型号：';
@@ -62,6 +69,7 @@ $_['entry_weight']               = '&nbsp;&nbsp;重&nbsp;&nbsp;量：';
 $_['entry_length']               = '&nbsp;&nbsp;尺寸单位：';
 $_['entry_dimension']            = '&nbsp;&nbsp;尺寸 (长 x 宽 x 高)：';
 $_['entry_image']                = '&nbsp;&nbsp;商品图片：';
+$_['entry_images']               = '&nbsp;&nbsp;更多图片：';
 $_['entry_customer_group']       = '&nbsp;&nbsp;用户群组：';
 $_['entry_date_start']           = '&nbsp;&nbsp;开始日期：';
 $_['entry_date_end']             = '&nbsp;&nbsp;结束日期：';

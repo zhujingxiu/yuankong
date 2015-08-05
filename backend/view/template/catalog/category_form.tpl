@@ -17,7 +17,6 @@
       <div id="tabs" class="htabs">
         <a href="#tab-general"><?php echo $tab_general; ?></a>
         <a href="#tab-data"><?php echo $tab_data; ?></a>
-        <a href="#tab-design"><?php echo $tab_design; ?></a>
       </div>
       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
         <div id="tab-general">
@@ -121,45 +120,6 @@
                   <?php } ?>
                 </select></td>
             </tr>
-            <tr>
-              <td><?php echo $entry_related; ?></td>
-              <td><input type="text" name="related" value="" /></td>
-            </tr>
-            <tr>
-              <td>&nbsp;</td>
-              <td><div id="category-related" class="scrollbox">
-                  <?php $class = 'odd'; ?>
-                  <?php foreach ($category_related as $category_related) { ?>
-                  <?php $class = ($class == 'even' ? 'odd' : 'even'); ?>
-                  <div id="category-related<?php echo $category_related['category_id']; ?>" class="<?php echo $class; ?>"> <?php echo $category_related['name']; ?><img src="view/image/delete.png" alt="" />
-                    <input type="hidden" name="category_related[]" value="<?php echo $category_related['category_id']; ?>" />
-                  </div>
-                  <?php } ?>
-                </div></td>
-            </tr>
-          </table>
-        </div>
-        <div id="tab-design">
-          <table class="list">
-            <thead>
-              <tr>
-                <td class="left"><?php echo $entry_layout; ?></td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="left"><select name="layout_id">
-                    <option value=""></option>
-                    <?php foreach ($layouts as $layout) { ?>
-                    <?php if ( in_array($layout['layout_id'], $layout_id)) { ?>
-                    <option value="<?php echo $layout['layout_id']; ?>" selected="selected"><?php echo $layout['name']; ?></option>
-                    <?php } else { ?>
-                    <option value="<?php echo $layout['layout_id']; ?>"><?php echo $layout['name']; ?></option>
-                    <?php } ?>
-                    <?php } ?>
-                  </select></td>
-              </tr>
-            </tbody>
           </table>
         </div>
       </form>

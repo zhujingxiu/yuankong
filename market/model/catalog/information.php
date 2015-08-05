@@ -11,16 +11,7 @@ class ModelCatalogInformation extends Model {
 		
 		return $query->rows;
 	}
-	
-	public function getInformationLayoutId($information_id) {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "information_to_layout WHERE information_id = '" . (int)$information_id . "'");
-		 
-		if ($query->num_rows) {
-			return $query->row['layout_id'];
-		} else {
-			return $this->config->get('config_layout_information');
-		}
-	}	
+
 
 	public function getWiki($wiki_id) {
 		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "wiki w  LEFT JOIN " . DB_PREFIX . "wiki_group wg ON (w.group_id = wg.group_id) WHERE w.wiki_id = '" . (int)$wiki_id . "' AND w.status = '1'");

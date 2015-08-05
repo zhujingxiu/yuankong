@@ -12,16 +12,6 @@ class ModelCatalogCategory extends Model {
 		return $query->rows;
 	}
 	
-				
-	public function getCategoryLayoutId($category_id) {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "category_to_layout WHERE category_id = '" . (int)$category_id . "' ");
-		
-		if ($query->num_rows) {
-			return $query->row['layout_id'];
-		} else {
-			return $this->config->get('config_layout_category');
-		}
-	}
 					
 	public function getTotalCategoriesByCategoryId($parent_id = 0) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "category c  WHERE c.parent_id = '" . (int)$parent_id . "'  AND c.status = '1'");

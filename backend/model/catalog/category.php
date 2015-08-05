@@ -27,11 +27,6 @@ class ModelCatalogCategory extends Model {
 		}
 		
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "category_path` SET `category_id` = '" . (int)$category_id . "', `path_id` = '" . (int)$category_id . "', `level` = '" . (int)$level . "'");
-		
-		// Set which layout to use with this category
-		if (isset($data['layout_id'])) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "category_to_layout SET category_id = '" . (int)$category_id . "', layout_id = '" . (int)$data['layout_id'] . "'");
-		}
 						
 		if ($data['keyword']) {
 			$this->db->query("INSERT INTO " . DB_PREFIX . "url_alias SET query = 'category_id=" . (int)$category_id . "', keyword = '" . $this->db->escape($data['keyword']) . "'");
@@ -103,12 +98,6 @@ class ModelCatalogCategory extends Model {
 			
 			$this->db->query("REPLACE INTO `" . DB_PREFIX . "category_path` SET category_id = '" . (int)$category_id . "', `path_id` = '" . (int)$category_id . "', level = '" . (int)$level . "'");
 		}
-		
-		$this->db->query("DELETE FROM " . DB_PREFIX . "category_to_layout WHERE category_id = '" . (int)$category_id . "'");
-
-		if (isset($data['layout_id'])) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "category_to_layout SET category_id = '" . (int)$category_id . "', layout_id = '" . (int)$data['layout_id'] . "'");
-		}
 				
 		$this->db->query("DELETE FROM " . DB_PREFIX . "url_alias WHERE query = 'category_id=" . (int)$category_id. "'");
 		
@@ -130,8 +119,6 @@ class ModelCatalogCategory extends Model {
 		
 		$this->db->query("DELETE FROM " . DB_PREFIX . "category WHERE category_id = '" . (int)$category_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "category_description WHERE category_id = '" . (int)$category_id . "'");
-		$this->db->query("DELETE FROM " . DB_PREFIX . "category_to_layout WHERE category_id = '" . (int)$category_id . "'");
-		$this->db->query("DELETE FROM " . DB_PREFIX . "product_to_category WHERE category_id = '" . (int)$category_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "url_alias WHERE query = 'category_id=" . (int)$category_id . "'");
 		
 		$this->cache->delete('category');
@@ -221,18 +208,6 @@ class ModelCatalogCategory extends Model {
 
 		return $category_filter_data;
 	}
-
-	public function getCategoryLayouts($category_id) {
-		$category_layout_data = array();
-		
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "category_to_layout WHERE category_id = '" . (int)$category_id . "'");
-		
-		foreach ($query->rows as $result) {
-			$category_layout_data[] = $result['layout_id'];
-		}
-		
-		return $category_layout_data;
-	}
 		
 	public function getTotalCategories() {
       	$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "category");
@@ -245,12 +220,6 @@ class ModelCatalogCategory extends Model {
 		
 		return $query->row['total'];
 	}
-
-	public function getTotalCategoriesByLayoutId($layout_id) {
-		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "category_to_layout WHERE layout_id = '" . (int)$layout_id . "'");
-
-		return $query->row['total'];
-	}	
 
 	public function getSelectionCategories($parent_id = null) {
 		$sql = "SELECT c.*,cd.name FROM " . DB_PREFIX . "category c  LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) WHERE cd.language_id = '" . (int)$this->config->get('config_language_id') . "' ";

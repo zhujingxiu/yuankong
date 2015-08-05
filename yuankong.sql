@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2015 年 08 月 05 日 09:39
+-- 生成日期: 2015 年 08 月 05 日 16:24
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.4.3
 
@@ -21838,26 +21838,6 @@ INSERT INTO `yk_category_path` (`category_id`, `path_id`, `level`) VALUES
 -- --------------------------------------------------------
 
 --
--- 表的结构 `yk_category_to_layout`
---
-
-CREATE TABLE IF NOT EXISTS `yk_category_to_layout` (
-  `category_id` int(11) NOT NULL,
-  `layout_id` int(11) NOT NULL,
-  PRIMARY KEY (`category_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `yk_category_to_layout`
---
-
-INSERT INTO `yk_category_to_layout` (`category_id`, `layout_id`) VALUES
-(61, 0),
-(62, 4);
-
--- --------------------------------------------------------
-
---
 -- 表的结构 `yk_company`
 --
 
@@ -22374,26 +22354,6 @@ INSERT INTO `yk_information_description` (`information_id`, `language_id`, `titl
 -- --------------------------------------------------------
 
 --
--- 表的结构 `yk_information_to_layout`
---
-
-CREATE TABLE IF NOT EXISTS `yk_information_to_layout` (
-  `information_id` int(11) NOT NULL,
-  `layout_id` int(11) NOT NULL,
-  PRIMARY KEY (`information_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `yk_information_to_layout`
---
-
-INSERT INTO `yk_information_to_layout` (`information_id`, `layout_id`) VALUES
-(4, 0),
-(3, 0);
-
--- --------------------------------------------------------
-
---
 -- 表的结构 `yk_language`
 --
 
@@ -22595,7 +22555,7 @@ CREATE TABLE IF NOT EXISTS `yk_option` (
   `remark` varchar(128) DEFAULT NULL,
   `sort_order` int(3) NOT NULL,
   PRIMARY KEY (`option_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
 
 --
 -- 转存表中的数据 `yk_option`
@@ -22604,7 +22564,9 @@ CREATE TABLE IF NOT EXISTS `yk_option` (
 INSERT INTO `yk_option` (`option_id`, `type`, `remark`, `sort_order`) VALUES
 (13, 'image', '灭火器箱', 1),
 (14, 'image', '源控灭火器', 2),
-(15, 'image', '灭火器箱', 0);
+(15, 'image', '灭火器箱', 0),
+(16, 'radio', '', 0),
+(17, 'radio', '', 0);
 
 -- --------------------------------------------------------
 
@@ -22626,7 +22588,9 @@ CREATE TABLE IF NOT EXISTS `yk_option_description` (
 INSERT INTO `yk_option_description` (`option_id`, `language_id`, `name`) VALUES
 (13, 2, '规格型号'),
 (14, 2, '图片规格'),
-(15, 2, '规格型号');
+(15, 2, '规格型号'),
+(16, 2, '性别'),
+(17, 2, '颜色');
 
 -- --------------------------------------------------------
 
@@ -22640,7 +22604,7 @@ CREATE TABLE IF NOT EXISTS `yk_option_value` (
   `image` varchar(255) NOT NULL,
   `sort_order` int(3) NOT NULL,
   PRIMARY KEY (`option_value_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=56 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=60 ;
 
 --
 -- 转存表中的数据 `yk_option_value`
@@ -22653,7 +22617,11 @@ INSERT INTO `yk_option_value` (`option_value_id`, `option_id`, `image`, `sort_or
 (52, 13, 'data/case/logopic5.jpg', 4),
 (53, 13, 'data/case/logopic3.jpg', 0),
 (54, 14, 'data/logopic5.jpg', 1),
-(55, 15, 'data/logopic5.jpg', 0);
+(55, 15, 'data/logopic5.jpg', 0),
+(56, 16, '', 1),
+(57, 16, '', 2),
+(58, 17, '', 1),
+(59, 17, '', 2);
 
 -- --------------------------------------------------------
 
@@ -22680,7 +22648,11 @@ INSERT INTO `yk_option_value_description` (`option_value_id`, `language_id`, `op
 (52, 2, 13, 'Model-4-WEM'),
 (53, 2, 13, 'Model-5-7XT'),
 (54, 2, 14, 'asdas'),
-(55, 2, 15, 'adasda');
+(55, 2, 15, 'adasda'),
+(56, 2, 16, '男'),
+(57, 2, 16, '女'),
+(58, 2, 17, '黑'),
+(59, 2, 17, '白');
 
 -- --------------------------------------------------------
 
@@ -23279,18 +23251,6 @@ INSERT INTO `yk_product_to_category` (`product_id`, `category_id`) VALUES
 (53, 63),
 (54, 79),
 (55, 65);
-
--- --------------------------------------------------------
-
---
--- 表的结构 `yk_product_to_layout`
---
-
-CREATE TABLE IF NOT EXISTS `yk_product_to_layout` (
-  `product_id` int(11) NOT NULL,
-  `layout_id` int(11) NOT NULL,
-  PRIMARY KEY (`product_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 

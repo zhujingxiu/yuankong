@@ -522,3 +522,19 @@
 2015-08-05 17:38:35 - PHP Notice:  Trying to get property of non-object in D:\wamp\www\yuankong\backend\model\sale\company.php on line 161
 2015-08-05 17:38:35 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\controller\sale\company.php on line 367
 2015-08-05 17:38:35 - PHP Notice:  Error: Could not load template D:\wamp\www\yuankong/backend/view/template/sale/company_list.tpl! in D:\wamp\www\yuankong\system\engine\controller.php on line 70
+2015-08-05 20:57:16 - PHP Notice:  Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM yk_company a LEFT JOIN yk_company_group ag ON a.group_id = ag.group_id  ORD' at line 1<br />Error No: 1064<br />SELECT a.*,ag.name group_name, a.fullname AS name, FROM yk_company a LEFT JOIN yk_company_group ag ON a.group_id = ag.group_id  ORDER BY name ASC LIMIT 0,20 in E:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-08-05 20:57:16 - PHP Notice:  Trying to get property of non-object in E:\wamp\www\yuankong\backend\model\sale\company.php on line 161
+2015-08-05 20:57:16 - PHP Warning:  Invalid argument supplied for foreach() in E:\wamp\www\yuankong\backend\controller\sale\company.php on line 367
+2015-08-05 20:57:16 - PHP Notice:  Error: Could not load template E:\wamp\www\yuankong/backend/view/template/sale/company_list.tpl! in E:\wamp\www\yuankong\system\engine\controller.php on line 70
+2015-08-05 21:16:38 - PHP Notice:  Undefined variable: category_related in E:\wamp\www\yuankong\backend\view\template\catalog\category_form.tpl on line 131
+2015-08-05 21:16:38 - PHP Warning:  Invalid argument supplied for foreach() in E:\wamp\www\yuankong\backend\view\template\catalog\category_form.tpl on line 131
+2015-08-05 21:19:45 - PHP Notice:  Undefined variable: tab_design in E:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 29
+2015-08-05 21:19:45 - PHP Notice:  Undefined variable: entry_layout in E:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 619
+2015-08-05 21:19:45 - PHP Notice:  Undefined variable: layouts in E:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 626
+2015-08-05 21:19:45 - PHP Warning:  Invalid argument supplied for foreach() in E:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 626
+2015-08-05 21:50:53 - PHP Notice:  Undefined variable: tab_option in E:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 19
+2015-08-05 23:44:40 - PHP Notice:  Undefined variable: sort_group in E:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 39
+2015-08-05 23:44:40 - PHP Notice:  Undefined variable: sort_account in E:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 44
+2015-08-05 23:44:40 - PHP Notice:  Undefined variable: sort_telephone in E:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 49
+2015-08-05 23:54:42 - PHP Notice:  Undefined variable: button_close in E:\wamp\www\yuankong\backend\view\template\catalog\product_form.tpl on line 1054
+2015-08-06 0:07:01 - PHP Notice:  Array to string conversion in E:\wamp\www\yuankong\backend\controller\catalog\product.php on line 1310

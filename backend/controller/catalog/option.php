@@ -354,6 +354,7 @@ class ControllerCatalogOption extends Controller {
     	}
 		
 		$this->data['token'] = $this->session->data['token'];
+		$this->data['ajax'] = isset($this->request->get['ajax']);
 		
 		$this->load->model('localisation/language');
 		

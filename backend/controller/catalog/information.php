@@ -275,7 +275,6 @@ class ControllerCatalogInformation extends Controller {
 		$this->data['entry_bottom'] = $this->language->get('entry_bottom');
 		$this->data['entry_sort_order'] = $this->language->get('entry_sort_order');
 		$this->data['entry_status'] = $this->language->get('entry_status');
-		$this->data['entry_layout'] = $this->language->get('entry_layout');
 		
 		$this->data['button_save'] = $this->language->get('button_save');
 		$this->data['button_cancel'] = $this->language->get('button_cancel');
@@ -388,17 +387,6 @@ class ControllerCatalogInformation extends Controller {
 			$this->data['sort_order'] = '';
 		}
 		
-		if (isset($this->request->post['layout_id'])) {
-			$this->data['layout_id'] = $this->request->post['layout_id'];
-		} elseif (isset($this->request->get['information_id'])) {
-			$this->data['layout_id'] = $this->model_catalog_information->getInformationLayouts($this->request->get['information_id']);
-		} else {
-			$this->data['layout_id'] = array();
-		}
-
-		$this->load->model('design/layout');
-		
-		$this->data['layouts'] = $this->model_design_layout->getLayouts();
 				
 		$this->template = 'catalog/information_form.tpl';
 		$this->children = array(

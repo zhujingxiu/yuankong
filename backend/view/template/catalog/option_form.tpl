@@ -1,3 +1,4 @@
+<?php if(!$ajax){?>
 <?php echo $header; ?>
 <div id="content">
   <div class="breadcrumb">
@@ -11,10 +12,12 @@
   <div class="box">
     <div class="heading">
       <h1><img src="view/image/information.png" alt="" /> <?php echo $heading_title; ?></h1>
-      <div class="buttons"><a onclick="$('#form').submit();" class="button"><?php echo $button_save; ?></a><a href="<?php echo $cancel; ?>" class="button"><?php echo $button_cancel; ?></a></div>
+      <div class="buttons"><a onclick="$('#option-form').submit();" class="button"><?php echo $button_save; ?></a><a href="<?php echo $cancel; ?>" class="button"><?php echo $button_cancel; ?></a></div>
     </div>
     <div class="content">
-      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
+    
+      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="option-form">
+<?php }?>          
         <table class="form">
           <tr>
             <td><span class="required">*</span> <?php echo $entry_name; ?></td>
@@ -136,10 +139,8 @@
             </tr>
           </tfoot>
         </table>
-      </form>
-    </div>
-  </div>
-</div>
+      
+
 <script type="text/javascript"><!--
 $('select[name=\'type\']').bind('change', function() {
 	if (this.value == 'select' || this.value == 'radio' || this.value == 'checkbox' || this.value == 'image') {
@@ -197,4 +198,10 @@ function image_upload(field, thumb) {
 	});
 };
 //--></script> 
+<?php if(!$ajax){?>
+</form>
+    </div>
+  </div>
+</div>
 <?php echo $footer; ?>
+<?php }?>

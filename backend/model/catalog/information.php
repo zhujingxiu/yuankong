@@ -8,10 +8,6 @@ class ModelCatalogInformation extends Model {
 		foreach ($data['information_description'] as $language_id => $value) {
 			$this->db->query("INSERT INTO " . DB_PREFIX . "information_description SET information_id = '" . (int)$information_id . "', language_id = '" . (int)$language_id . "', title = '" . $this->db->escape($value['title']) . "', description = '" . $this->db->escape($value['description']) . "'");
 		}
-
-		if (isset($data['layout_id'])) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "information_to_layout SET information_id = '" . (int)$information_id . "',  layout_id = '" . (int)$data['layout_id'] . "'");
-		}
 				
 		if ($data['keyword']) {
 			$this->db->query("INSERT INTO " . DB_PREFIX . "url_alias SET query = 'information_id=" . (int)$information_id . "', keyword = '" . $this->db->escape($data['keyword']) . "'");
@@ -28,13 +24,7 @@ class ModelCatalogInformation extends Model {
 		foreach ($data['information_description'] as $language_id => $value) {
 			$this->db->query("INSERT INTO " . DB_PREFIX . "information_description SET information_id = '" . (int)$information_id . "', language_id = '" . (int)$language_id . "', title = '" . $this->db->escape($value['title']) . "', description = '" . $this->db->escape($value['description']) . "'");
 		}
-		
-		$this->db->query("DELETE FROM " . DB_PREFIX . "information_to_layout WHERE information_id = '" . (int)$information_id . "'");
-
-		if (isset($data['layout_id'])) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "information_to_layout SET information_id = '" . (int)$information_id . "',layout_id = '" . (int)$data['layout_id'] . "'");
-		}
-				
+	
 		$this->db->query("DELETE FROM " . DB_PREFIX . "url_alias WHERE query = 'information_id=" . (int)$information_id. "'");
 		
 		if ($data['keyword']) {
@@ -47,7 +37,6 @@ class ModelCatalogInformation extends Model {
 	public function deleteInformation($information_id) {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "information WHERE information_id = '" . (int)$information_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "information_description WHERE information_id = '" . (int)$information_id . "'");
-		$this->db->query("DELETE FROM " . DB_PREFIX . "information_to_layout WHERE information_id = '" . (int)$information_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "url_alias WHERE query = 'information_id=" . (int)$information_id . "'");
 
 		$this->cache->delete('information');
@@ -125,28 +114,11 @@ class ModelCatalogInformation extends Model {
 		return $information_description_data;
 	}
 	
-
-	public function getInformationLayouts($information_id) {
-		$information_layout_data = array();
-		
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "information_to_layout WHERE information_id = '" . (int)$information_id . "'");
-		
-		foreach ($query->rows as $result) {
-			$information_layout_data[] = $result['layout_id'];
-		}
-		
-		return $information_layout_data;
-	}
 		
 	public function getTotalInformations() {
       	$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "information");
 		
 		return $query->row['total'];
 	}	
-	
-	public function getTotalInformationsByLayoutId($layout_id) {
-		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "information_to_layout WHERE layout_id = '" . (int)$layout_id . "'");
 
-		return $query->row['total'];
-	}	
 }
