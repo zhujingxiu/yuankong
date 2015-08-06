@@ -332,6 +332,10 @@ class ModelCatalogProduct extends Model {
 		if (isset($data['filter_status']) && !is_null($data['filter_status'])) {
 			$sql .= " AND p.status = '" . (int)$data['filter_status'] . "'";
 		}
+
+		if (!empty($data['filter_parent_category'])) {
+			$sql .= " AND p.product_id IN (SELECT product_id FROM  " . DB_PREFIX . "product_to_category WHERE category_id = '".(int)$data['filter_parent_category']."')";			
+		}
 		
 		$sql .= " GROUP BY p.product_id";
 					
@@ -367,7 +371,6 @@ class ModelCatalogProduct extends Model {
 		
 			$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
 		}	
-		
 		$query = $this->db->query($sql);
 
 		return $query->rows;
@@ -519,7 +522,9 @@ class ModelCatalogProduct extends Model {
 		if (isset($data['filter_status']) && !is_null($data['filter_status'])) {
 			$sql .= " AND p.status = '" . (int)$data['filter_status'] . "'";
 		}
-		
+		if (!empty($data['filter_parent_category'])) {
+			$sql .= " AND p.product_id IN (SELECT product_id FROM  " . DB_PREFIX . "product_to_category WHERE category_id = '".(int)$data['filter_parent_category']."')";	
+		}
 		$query = $this->db->query($sql);
 		
 		return $query->row['total'];

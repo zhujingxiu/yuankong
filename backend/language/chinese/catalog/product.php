@@ -82,7 +82,7 @@ $_['entry_option_value']         = '&nbsp;&nbsp;选项数值：';
 $_['entry_required']             = '必选项：';
 $_['entry_status']               = '&nbsp;&nbsp;商品状态：';
 $_['entry_sort_order']           = '&nbsp;&nbsp;选项排序：';
-$_['entry_category']             = '&nbsp;&nbsp;所属分类：<br /><span class="help">可多个分类</span>';
+$_['entry_category']             = '&nbsp;&nbsp;所属分类：';
 $_['entry_filter']           	 = '&nbsp;&nbsp;筛选：<br /><span class="help">输入关键字自动匹配筛选项</span>';
 $_['entry_download']             = '&nbsp;&nbsp;下载商品：<br /><span class="help">输入关键字自动匹配商品</span>';
 $_['entry_related']              = '&nbsp;&nbsp;相关商品：<br /><span class="help">输入关键字自动匹配商品</span>';

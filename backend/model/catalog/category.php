@@ -197,17 +197,6 @@ class ModelCatalogCategory extends Model {
 		return $category_description_data;
 	}	
 	
-	public function getCategoryFilters($category_id) {
-		$category_filter_data = array();
-		
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "category_filter WHERE category_id = '" . (int)$category_id . "'");
-		
-		foreach ($query->rows as $result) {
-			$category_filter_data[] = $result['filter_id'];
-		}
-
-		return $category_filter_data;
-	}
 		
 	public function getTotalCategories() {
       	$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "category");
@@ -242,6 +231,12 @@ class ModelCatalogCategory extends Model {
 		return $query->rows;
 	} 
 
+	public function getTotalProductsByCategoryId($category_id) {
+		$query = $this->db->query("SELECT COUNT(p.product_id) total FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) LEFT JOIN " . DB_PREFIX . "product_to_category p2c ON (p.product_id = p2c.product_id) WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND p2c.category_id = '" . (int)$category_id . "' ORDER BY pd.name ASC");
+								  
+		return $query->row['total'];
+	}
+
 	public function getCategoryRelated($category_id) {
 		$category_related_data = array();
 		
@@ -255,7 +250,7 @@ class ModelCatalogCategory extends Model {
 	}
 
     private function getChildren($category_id=null){
-        $sql = "SELECT c.category_id, cd.name,c.status, c.parent_id, c.sort_order FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) WHERE cd.language_id = '" . (int)$this->config->get('config_language_id') . "' ";
+        $sql = "SELECT c.category_id, cd.name,c.status, c.parent_id, c.sort_order FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "') WHERE 1 ";
         if( $category_id != null ) {           
             $sql .= ' AND c.parent_id='.(int)$category_id;           
         }
@@ -281,6 +276,7 @@ class ModelCatalogCategory extends Model {
                     'category_id'   => $result['category_id'],
                     'parent_id'     => $result['parent_id'],
                     'name'      	=> $result['name'],
+                    'total'      	=> (int)$this->getTotalProductsByCategoryId($result['category_id']),
                     'status'    	=> $result['status'],
                     'sort_order'    => isset($result['sort_order']) ? (int)$result['sort_order'] : 0
                 );

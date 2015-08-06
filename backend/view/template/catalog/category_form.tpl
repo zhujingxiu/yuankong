@@ -1,3 +1,4 @@
+<?php if(!$ajax){?>
 <?php echo $header; ?>
 <div id="content">
   <div class="breadcrumb">
@@ -14,11 +15,14 @@
       <div class="buttons"><a onclick="$('#form').submit();" class="button"><?php echo $button_save; ?></a><a href="<?php echo $cancel; ?>" class="button"><?php echo $button_cancel; ?></a></div>
     </div>
     <div class="content">
+
+      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
+<?php }?> 
       <div id="tabs" class="htabs">
         <a href="#tab-general"><?php echo $tab_general; ?></a>
         <a href="#tab-data"><?php echo $tab_data; ?></a>
-      </div>
-      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
+        <a href="#tab-products"><?php echo $tab_products; ?></a>
+      </div>       
         <div id="tab-general">
           <table class="form">
             <tr>
@@ -122,11 +126,73 @@
             </tr>
           </table>
         </div>
-      </form>
-    </div>
-  </div>
-</div>
-<script type="text/javascript" src="view/javascript/ckeditor/ckeditor.js"></script> 
+        <div id="tab-products">
+          <?php if($products){?>
+          <table class="list">
+            <thead>
+              <tr>
+                <td width="1" style="text-align: center;"><input type="checkbox" onclick="$('input[name*=\'selected\']').attr('checked', this.checked);" /></td>
+                <td class="center"><?php echo $column_image; ?></td>
+                <td class="left"><?php if ($sort == 'pd.name') { ?>
+                  <a href="<?php echo $sort_name; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_product_name; ?></a>
+                  <?php } else { ?>
+                  <a href="<?php echo $sort_name; ?>"><?php echo $column_product_name; ?></a>
+                  <?php } ?></td>
+                <td class="left"><?php if ($sort == 'p.model') { ?>
+                  <a href="<?php echo $sort_model; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_model; ?></a>
+                  <?php } else { ?>
+                  <a href="<?php echo $sort_model; ?>"><?php echo $column_model; ?></a>
+                  <?php } ?></td>
+                <td class="left"><?php if ($sort == 'p.price') { ?>
+                  <a href="<?php echo $sort_price; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_price; ?></a>
+                  <?php } else { ?>
+                  <a href="<?php echo $sort_price; ?>"><?php echo $column_price; ?></a>
+                  <?php } ?></td>
+                <td class="left"><?php if ($sort == 'p.status') { ?>
+                  <a href="<?php echo $sort_status; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_status; ?></a>
+                  <?php } else { ?>
+                  <a href="<?php echo $sort_status; ?>"><?php echo $column_status; ?></a>
+                  <?php } ?></td>
+                <td class="right"><?php echo $column_operator; ?></td>
+              </tr>
+            </thead>
+            <tbody>
+              <?php if ($products) { ?>
+              <?php foreach ($products as $product) { ?>
+              <tr>
+                <td style="text-align: center;"><?php if ($product['selected']) { ?>
+                  <input type="checkbox" name="selected[]" value="<?php echo $product['product_id']; ?>" checked="checked" />
+                  <?php } else { ?>
+                  <input type="checkbox" name="selected[]" value="<?php echo $product['product_id']; ?>" />
+                  <?php } ?></td>
+                <td class="center"><img src="<?php echo $product['image']; ?>" alt="<?php echo $product['name']; ?>" style="padding: 1px; border: 1px solid #DDDDDD;" /></td>
+                <td class="left"><?php echo $product['name']; ?></td>
+                <td class="left"><?php echo $product['model']; ?></td>
+                <td class="left"><?php if ($product['special']) { ?>
+                  <span style="text-decoration: line-through;"><?php echo $product['price']; ?></span><br/>
+                  <span style="color: #b00;"><?php echo $product['special']; ?></span>
+                  <?php } else { ?>
+                  <?php echo $product['price']; ?>
+                  <?php } ?></td>
+                <td class="left"><?php echo $product['status']; ?></td>
+                <td class="right"><?php foreach ($product['action'] as $action) { ?>
+                  [ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
+                  <?php } ?></td>
+              </tr>
+              <?php } ?>
+
+              <?php } ?>
+            </tbody>
+          </table>
+          <div class="pagination"><?php echo $pagination; ?></div>
+          <?php }else{?>
+          <div class="center">
+            <?php echo $text_no_products; ?>
+          </div>
+          <?php }?>
+        </div>
+
+
 <script type="text/javascript"><!--
 <?php foreach ($languages as $language) { ?>
 CKEDITOR.replace('description<?php echo $language['language_id']; ?>', {
@@ -221,44 +287,11 @@ $('.selection-category select').bind('change',function(){
 });
 $('#top-category').trigger('change')
 //--></script> 
-<script type="text/javascript"><!--
-  // Related
-$('input[name=\'related\']').autocomplete({
-  delay: 500,
-  source: function(request, response) {
-    $.ajax({
-      url: 'index.php?route=catalog/category/autocomplete&token=<?php echo $token; ?>&filter_name=' +  encodeURIComponent(request.term),
-      dataType: 'json',
-      success: function(json) {   
-        response($.map(json, function(item) {
-          return {
-            label: item.name,
-            value: item.category_id
-          }
-        }));
-      }
-    });
-  }, 
-  select: function(event, ui) {
-    $('#category-related' + ui.item.value).remove();
-    
-    $('#category-related').append('<div id="category-related' + ui.item.value + '">' + ui.item.label + '<img src="view/image/delete.png" alt="" /><input type="hidden" name="category_related[]" value="' + ui.item.value + '" /></div>');
 
-    $('#category-related div:odd').attr('class', 'odd');
-    $('#category-related div:even').attr('class', 'even');
-        
-    return false;
-  },
-  focus: function(event, ui) {
-      return false;
-   }
-});
-
-$('#category-related div img').live('click', function() {
-  $(this).parent().remove();
-  
-  $('#category-related div:odd').attr('class', 'odd');
-  $('#category-related div:even').attr('class', 'even'); 
-});
-//--></script>
+<?php if(!$ajax){?>
+      </form>
+    </div>
+  </div>
+</div>
 <?php echo $footer; ?>
+<?php }?>

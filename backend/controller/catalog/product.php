@@ -530,6 +530,9 @@ class ControllerCatalogProduct extends Controller {
   	protected function getForm() {
     	$this->data['heading_title'] = $this->language->get('heading_title');
  		$this->document->addScript(TPL_JS.'form.js');
+ 		$this->document->addScript('view/javascript/jquery/jstree/jquery.tree.min.js');
+        $this->document->addScript('view/javascript/jquery/jstree/plugins/jquery.tree.checkbox.js');
+
     	$this->data['text_enabled'] = $this->language->get('text_enabled');
     	$this->data['text_disabled'] = $this->language->get('text_disabled');
     	$this->data['text_none'] = $this->language->get('text_none');
@@ -718,8 +721,9 @@ class ControllerCatalogProduct extends Controller {
 
 		if (isset($this->request->get['product_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
       		$product_info = $this->model_catalog_product->getProduct($this->request->get['product_id']);
-    	}
 
+    	}
+    	$this->data['product_id'] = isset($this->request->get['product_id']) ? (int)$this->request->get['product_id'] : 0;
 		$this->data['token'] = $this->session->data['token'];
 		$this->data['option_action'] = $this->url->link('catalog/product/new_option', 'token=' . $this->session->data['token'] . $url, 'SSL');
 		$this->load->model('localisation/language');
@@ -1343,4 +1347,41 @@ class ControllerCatalogProduct extends Controller {
 			return false;
 		}
 	}
+
+	public function categories(){
+		$this->load->model('catalog/category');
+		$this->load->model('catalog/product');
+		$product_id = isset($this->request->get['product_id']) ? (int)$this->request->get['product_id'] : 0;
+		$selected = $this->model_catalog_product->getProductCategories($product_id);
+		$nodes = $this->tree($this->model_catalog_category->getNodeTree(null),$selected,true);
+        $this->response->setOutput(json_encode($nodes));
+	}
+
+	private function tree($nodes,$selected=array(),$open=false){
+
+        if(is_array($nodes)){
+            $data = array();
+            foreach ($nodes as $key => $item) {
+                $tmp = array();
+                $tmp['data'] = $item['name']." (".$item['total'].")";
+                if($open){
+                	$tmp['state'] = 'open';
+                }
+                $tmp['attributes'] = array(
+                    'category_id'   => $item['category_id'],
+                    'name'      => $item['name'],
+                    'parent_id' => $item['parent_id'],
+                    'status'    => $item['status'],
+                    'sort_order'=> $item['sort_order'],
+                    'class'=>in_array($item['category_id'], $selected) ? 'jstree-checked' : ''                    
+                );
+                if(isset($item['children']) && is_array($item['children'])){
+                    $tmp['children'] = $this->tree($item['children'],$selected);
+                }
+                $data[] = $tmp;
+            }
+            return $data;
+        }
+        return false;
+    }
 }

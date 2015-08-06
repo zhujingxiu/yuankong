@@ -11,6 +11,7 @@ class ControllerCatalogCategory extends Controller {
 		 
 		$this->getList();
 		if(!empty($this->request->get['tree'])){
+
 			$nodes = $this->tree($this->model_catalog_category->getNodeTree(null),true);
             $this->response->setOutput(json_encode($nodes));
 		}else{
@@ -24,7 +25,7 @@ class ControllerCatalogCategory extends Controller {
             $data = array();
             foreach ($nodes as $key => $item) {
                 $tmp = array();
-                $tmp['data'] = $item['name'];
+                $tmp['data'] = $item['name']." (".$item['total'].")";
                 if($open){
                 	$tmp['state'] = 'open';
                 }
@@ -38,8 +39,6 @@ class ControllerCatalogCategory extends Controller {
                 );
                 if(isset($item['children']) && is_array($item['children'])){
                     $tmp['children'] = $this->tree($item['children']);
-                }else{
-                    $tmp['attributes']['rel'] = "file";
                 }
                 $data[] = $tmp;
             }
@@ -204,6 +203,7 @@ class ControllerCatalogCategory extends Controller {
 
 		switch ($mode) {
 			case 'tree':
+				$this->document->addScript('view/javascript/ckeditor/ckeditor.js');
 				$this->data['button_mode'] = $this->language->get('button_mode_list');
 				$this->data['mode'] = $this->url->link('catalog/category', 'token=' . $this->session->data['token'] . $url, 'SSL');
 				$this->template = 'catalog/category_tree.tpl';
@@ -262,7 +262,7 @@ class ControllerCatalogCategory extends Controller {
 
 	protected function getForm() {
 		$this->data['heading_title'] = $this->language->get('heading_title');
-
+		$this->document->addScript('view/javascript/ckeditor/ckeditor.js');
 		$this->data['text_none'] = $this->language->get('text_none');
 		$this->data['text_default'] = $this->language->get('text_default');
 		$this->data['text_image_manager'] = $this->language->get('text_image_manager');
@@ -273,6 +273,8 @@ class ControllerCatalogCategory extends Controller {
 		$this->data['text_percent'] = $this->language->get('text_percent');
 		$this->data['text_amount'] = $this->language->get('text_amount');
 		$this->data['text_exception'] = $this->language->get('text_exception');
+		$this->data['text_no_results'] = $this->language->get('text_no_results');
+		$this->data['text_no_products'] = $this->language->get('text_no_products');
 				
 		$this->data['entry_name'] = $this->language->get('entry_name');
 		$this->data['entry_meta_keyword'] = $this->language->get('entry_meta_keyword');
@@ -293,8 +295,13 @@ class ControllerCatalogCategory extends Controller {
 
     	$this->data['tab_general'] = $this->language->get('tab_general');
     	$this->data['tab_data'] = $this->language->get('tab_data');
-		$this->data['tab_design'] = $this->language->get('tab_design');
-		
+		$this->data['tab_products'] = $this->language->get('tab_products');
+
+		$this->data['text_enabled'] = $this->language->get('text_enabled');		
+		$this->data['text_disabled'] = $this->language->get('text_disabled');		
+		$this->data['text_no_results'] = $this->language->get('text_no_results');		
+		$this->data['text_image_manager'] = $this->language->get('text_image_manager');		
+			
  		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
 		} else {
@@ -346,6 +353,7 @@ class ControllerCatalogCategory extends Controller {
     	}
 		
 		$this->data['token'] = $this->session->data['token'];
+		$this->data['ajax'] = isset($this->request->get['ajax']);
 		
 		$this->load->model('localisation/language');
 		
@@ -436,8 +444,156 @@ class ControllerCatalogCategory extends Controller {
 		}
 
 		$this->data['top_categories'] = $this->model_catalog_category->getSelectionCategories(null);
+		$this->data['products'] = array();
+		if(isset($this->request->get['category_id'])){
+			$filter_category = (int)$this->request->get['category_id'];
 
+			if (isset($this->request->get['sort'])) {
+				$sort = $this->request->get['sort'];
+			} else {
+				$sort = 'p.date_added';
+			}
+			
+			if (isset($this->request->get['order'])) {
+				$order = $this->request->get['order'];
+			} else {
+				$order = 'DESC';
+			}
+			
+			if (isset($this->request->get['page'])) {
+				$page = $this->request->get['page'];
+			} else {
+				$page = 1;
+			}
+						
+			$url = '';
+								
 
+			if (isset($this->request->get['category_id'])) {
+				$url .= '&category_id=' . $this->request->get['category_id'];
+			}
+							
+			if (isset($this->request->get['sort'])) {
+				$url .= '&sort=' . $this->request->get['sort'];
+			}
+
+			if (isset($this->request->get['order'])) {
+				$url .= '&order=' . $this->request->get['order'];
+			}
+			
+			if (isset($this->request->get['page'])) {
+				$url .= '&page=' . $this->request->get['page'];
+			}
+
+			$data = array(
+				'filter_parent_category' => $filter_category,
+				'sort'            => $sort,
+				'order'           => $order,
+				'start'           => ($page - 1) * $this->config->get('config_admin_limit'),
+				'limit'           => $this->config->get('config_admin_limit')
+			);
+
+			$this->load->model('catalog/product');
+		
+			$product_total = $this->model_catalog_product->getTotalProducts($data);
+			
+			$results = $this->model_catalog_product->getProducts($data);
+				    	
+			foreach ($results as $result) {
+				$action = array();
+				
+				$action[] = array(
+					'text' => $this->language->get('text_edit'),
+					'href' => $this->url->link('catalog/product/update', 'token=' . $this->session->data['token'] . '&product_id=' . $result['product_id'] . $url, 'SSL')
+				);
+				
+				if ($result['image'] && file_exists(DIR_IMAGE . $result['image'])) {
+					$image = $this->model_tool_image->resize($result['image'], 40, 40);
+				} else {
+					$image = $this->model_tool_image->resize('no_image.jpg', 40, 40);
+				}
+		
+				$special = false;
+				
+				$product_specials = $this->model_catalog_product->getProductSpecials($result['product_id']);
+				
+				foreach ($product_specials  as $product_special) {
+					if (($product_special['date_start'] == '0000-00-00' || $product_special['date_start'] < date('Y-m-d')) && ($product_special['date_end'] == '0000-00-00' || $product_special['date_end'] > date('Y-m-d'))) {
+						$special = $product_special['price'];
+				
+						break;
+					}					
+				}
+				 
+	      		$this->data['products'][] = array(
+					'product_id' => $result['product_id'],
+					'name'       => $result['name'],
+					'model'      => $result['model'],
+					'price'      => $result['price'],
+					'special'    => $special,
+					'image'      => $image,
+					'quantity'   => $result['quantity'],
+					'status'     => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),
+					'selected'   => isset($this->request->post['selected']) && in_array($result['product_id'], $this->request->post['selected']),
+					'action'     => $action
+				);
+	    	}
+
+			$this->data['column_image'] = $this->language->get('column_image');		
+			$this->data['column_product_name'] = $this->language->get('column_product_name');		
+			$this->data['column_model'] = $this->language->get('column_model');		
+			$this->data['column_price'] = $this->language->get('column_price');			
+			$this->data['column_status'] = $this->language->get('column_status');		
+			$this->data['column_operator'] = $this->language->get('column_operator');		
+
+			$url = '';
+			
+			if (isset($this->request->get['category_id'])) {
+				$url .= '&category_id=' . $this->request->get['category_id'];
+			}
+									
+			if ($order == 'ASC') {
+				$url .= '&order=DESC';
+			} else {
+				$url .= '&order=ASC';
+			}
+
+			if (isset($this->request->get['page'])) {
+				$url .= '&page=' . $this->request->get['page'];
+			}
+						
+			$this->data['sort_name'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&sort=pd.name' . $url, 'SSL');
+			$this->data['sort_model'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&sort=p.model' . $url, 'SSL');
+			$this->data['sort_price'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&sort=p.price' . $url, 'SSL');
+			$this->data['sort_quantity'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&sort=p.quantity' . $url, 'SSL');
+			$this->data['sort_status'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&sort=p.status' . $url, 'SSL');
+			
+			$url = '';
+
+			if (isset($this->request->get['category_id'])) {
+				$url .= '&category_id=' . $this->request->get['category_id'];
+			}
+
+			if (isset($this->request->get['sort'])) {
+				$url .= '&sort=' . $this->request->get['sort'];
+			}
+													
+			if (isset($this->request->get['order'])) {
+				$url .= '&order=' . $this->request->get['order'];
+			}
+					
+			$pagination = new Pagination();
+			$pagination->total = $product_total;
+			$pagination->page = $page;
+			$pagination->limit = $this->config->get('config_admin_limit');
+			$pagination->text = $this->language->get('text_pagination');
+			$pagination->url = $this->url->link('catalog/category/update', 'token=' . $this->session->data['token'] . $url . '&page={page}', 'SSL');
+				
+			$this->data['pagination'] = $pagination->render();
+
+			$this->data['sort'] = $sort;
+			$this->data['order'] = $order;
+		}
 		$this->template = 'catalog/category_form.tpl';
 		$this->children = array(
 			'common/header',

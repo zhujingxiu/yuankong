@@ -26,7 +26,7 @@
       </div>
       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
         <div id="tab-general" class="vtabs-content">
-          <table class="form">
+          <table class="form" style="float:left;width:65%;">
             <tr class="hide-item">
               <td><?php echo $entry_category; ?></td>
               <td>
@@ -70,8 +70,6 @@
                 <span class="error"><?php echo $error_model; ?></span>
                 <?php } ?></td>
             </tr>
-          </table>
-          <table class="form">
             <tr class="hide-item">
               <td><?php echo $entry_sku; ?></td>
               <td><input type="text" name="sku" value="<?php echo $sku; ?>" /></td>
@@ -114,7 +112,7 @@
               <td><?php echo $entry_minimum; ?></td>
               <td><input type="text" name="minimum" value="<?php echo $minimum; ?>" size="2" /></td>
             </tr>
-            <tr class="hide-item">
+            <tr>
               <td><?php echo $entry_subtract; ?></td>
               <td><select name="subtract">
                   <?php if ($subtract) { ?>
@@ -126,7 +124,7 @@
                   <?php } ?>
                 </select></td>
             </tr>
-            <tr class="hide-item">
+            <tr>
               <td><?php echo $entry_stock_status; ?></td>
               <td><select name="stock_status_id">
                   <?php foreach ($stock_statuses as $stock_status) { ?>
@@ -209,6 +207,10 @@
               <td><input type="text" name="sort_order" value="<?php echo $sort_order; ?>" size="2" /></td>
             </tr>
           </table>
+          <div class="category-tree">
+            <h4><?php echo $entry_category; ?><a class="toggle">展开 / 收缩</a></h4>
+            <div class="tree" id="category-tree"></div>
+          </div>
         </div>
         <div id="tab-data" class="vtabs-content">
           <div id="languages" class="htabs">
@@ -638,22 +640,9 @@
 <link type="text/css" href="<?php echo TPL_JS ?>umeditor/themes/default/css/umeditor.min.css" rel="stylesheet" />
 <script type="text/javascript" src="<?php echo TPL_JS ?>umeditor/umeditor.config.js"></script> 
 <script type="text/javascript" src="<?php echo TPL_JS ?>umeditor/umeditor.min.js"></script> 
-<?php if(false){ ?>
-<script type="text/javascript" src="view/javascript/ckeditor/ckeditor.js"></script>
-<?php } ?>
 <script type="text/javascript"><!--
 <?php foreach ($languages as $language) { ?>
   UM.getEditor('description<?php echo $language["language_id"]; ?>');
-  <?php if(false){ ?>
-CKEDITOR.replace('description<?php echo $language["language_id"]; ?>', {
-	filebrowserBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
-	filebrowserImageBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
-	filebrowserFlashBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
-	filebrowserUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
-	filebrowserImageUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
-	filebrowserFlashUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>'
-});
-<?php } ?>
 <?php } ?>
 //--></script> 
 <script type="text/javascript"><!--
@@ -1130,9 +1119,49 @@ $('#tabs a').tabs();
 $('#languages a').tabs(); 
 $('#vtab-price a').tabs();
 //--></script> 
+<script type="text/javascript">
+    $(function () { 
+        $("#category-tree").tree({
+            types : {"file" :{icon : {image : "view/image/file.png"}}},
+            ui : {theme_name : "checkbox"},
+            data : { 
+                async : true,
+                type : "json",
+                opts : {
+                    method : 'POST',
+                    url:'index.php?route=catalog/product/categories&token=<?php echo $token ?>&product_id=<?php echo $product_id ?>'
+                }
+            },
+            callback : { 
+              onload : function(t){
+                $.each($("#category-tree .jstree-checked"), function(k, n) {
+                  $.tree.plugins.checkbox.check($(n));
+                });
+              }
+            },
+            plugins : {checkbox : { }}
+
+        });
+    });
+
+    $('.toggle').toggle(
+        function(){$.tree.reference('.tree').open_all()},
+        function(){$.tree.reference('.tree').close_all()}
+    );
+    
+</script>
 <style type="text/css">
   .hide-item{display: none;}
   fieldset{border: 1px dotted #cccccc;margin-bottom: 5px;}
   fieldset legend{padding: 3px 10px;font-weight: bold}
+  .category-tree{
+    width:33%;
+    min-height:550px;
+    float:left;
+    margin-left:10px;
+    border-left:1px dotted #ccc;
+    padding-left:10px;
+  }
+  .tree{margin:0 auto;padding: 10px;}
 </style>
 <?php echo $footer; ?>

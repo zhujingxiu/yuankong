@@ -24,11 +24,14 @@
     <div class="content">
         <table class="form">
             <tr>
-                <td style="width:80%"><div class="tree" id="category-tree"></div></td>
-                <td valign ="top">
-                    <br/><br/>
+                <td valign ="top" style="border:1px dashed #dedede;">
                     <a class="button toggle">展开 / 收缩</a>
-                    <br/><br/>
+                    <br/>
+                    <div class="tree" id="category-tree"></div></td>
+                <td valign ="top" style="width:80%;margin-left:10px;border:1px dashed #dedede;">
+                    <form id="tree-category" method="post">
+                        
+                    </form>
                 </td>
             </tr>
         </table>
@@ -49,6 +52,12 @@
                 }
             },
             callback : { 
+                onselect:function(n){
+                    var cid = $(n).attr('category_id');
+                    if(cid>0){
+                        $('#tree-category').load('index.php?route=catalog/category/update&category_id='+cid+'&token=<?php echo $token ?>&ajax=1')
+                    }
+                },
                 beforedelete : function(n,t,r){
                     if(confirm("Do you want to delete?")) {
                         $.post('index.php?route=catalog/category/delete&token=<?php echo $token; ?>',{'selected[]':$(n).attr('node_id')},function(json){
@@ -89,9 +98,9 @@
         function(){$.tree.reference('.tree').open_all()},
         function(){$.tree.reference('.tree').close_all()}
     );
-
+    $('#tree-category').load('index.php?route=catalog/category/insert&token=<?php echo $token ?>&ajax=1')
 </script>
 <style type="text/css">   
-.tree{margin:0 auto;width:90%;padding: 20px;border:1px dashed #dedede;}
+.tree{margin:0 auto;padding: 10px;}
 </style>
 <?php echo $footer; ?>

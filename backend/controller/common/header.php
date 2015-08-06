@@ -120,7 +120,7 @@ class ControllerCommonHeader extends Controller {
 			$this->data['company_group'] = $this->url->link('extension/company_group', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['backup'] = $this->url->link('tool/backup', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['banner'] = $this->url->link('design/banner', 'token=' . $this->session->data['token'], 'SSL');
-			$this->data['category'] = $this->url->link('catalog/category', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['category'] = $this->url->link('catalog/category', 'mode=tree&token=' . $this->session->data['token'], 'SSL');
 			$this->data['coupon'] = $this->url->link('sale/coupon', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['currency'] = $this->url->link('localisation/currency', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['customer'] = $this->url->link('sale/customer', 'token=' . $this->session->data['token'], 'SSL');
