@@ -1,7 +1,7 @@
 <?php require( DIR_TEMPLATE.$this->config->get('config_template')."/template/common/config.tpl" ); ?>
 <?php echo $header; ?>
 <?php require( DIR_TEMPLATE.$this->config->get('config_template')."/template/common/breadcrumb.tpl" ); ?>
-<div class="w mt10 fix">
+<div class="w fix">
     <?php if( $SPAN[0] ): ?>
     <div class="<?php echo $SPAN[0];?>">
         <?php echo $column_left; ?>
@@ -30,7 +30,6 @@
                         <em class="pl20">阅读:<?php echo $item['viewed'] ?>次</em>
                     </p>
                     <div class="news-text">
-                        <!--最多130个字 多了截取显示...-->
                         <?php echo truncate_string($item['text'],130) ?>
                     </div>
                 </li>

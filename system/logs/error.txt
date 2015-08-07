@@ -939,3 +939,43 @@
 2015-08-07 16:58:09 - PHP Notice:  Trying to get property of non-object in D:\wamp\www\yuankong\market\model\catalog\product.php on line 428
 2015-08-07 16:58:09 - PHP Notice:  Error: Table 'yuankong.yk_product_to_layout' doesn't exist<br />Error No: 1146<br />SELECT * FROM yk_product_to_layout WHERE product_id = '53'  in D:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
 2015-08-07 16:58:09 - PHP Notice:  Trying to get property of non-object in D:\wamp\www\yuankong\market\model\catalog\product.php on line 428
+2015-08-07 22:15:25 - PHP Notice:  Error: Could not load controller module/ykaffiliate! in E:\wamp\www\yuankong\system\engine\controller.php on line 47
+2015-08-07 23:02:19 - PHP Notice:  Undefined variable: sort_status in E:\wamp\www\yuankong\backend\view\template\extension\company_group_list.tpl on line 33
+2015-08-07 23:02:26 - PHP Notice:  Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM yk_company a LEFT JOIN yk_company_group ag ON a.group_id = ag.group_id  ORD' at line 1<br />Error No: 1064<br />SELECT a.*,ag.name group_name, a.fullname AS name, FROM yk_company a LEFT JOIN yk_company_group ag ON a.group_id = ag.group_id  ORDER BY name ASC LIMIT 0,20 in E:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-08-07 23:02:26 - PHP Notice:  Trying to get property of non-object in E:\wamp\www\yuankong\backend\model\sale\company.php on line 161
+2015-08-07 23:02:26 - PHP Warning:  Invalid argument supplied for foreach() in E:\wamp\www\yuankong\backend\controller\sale\company.php on line 367
+2015-08-07 23:02:26 - PHP Notice:  Error: Could not load template E:\wamp\www\yuankong/backend/view/template/sale/company_list.tpl! in E:\wamp\www\yuankong\system\engine\controller.php on line 70
+2015-08-07 23:13:27 - PHP Notice:  Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM yk_company a LEFT JOIN yk_company_group ag ON a.group_id = ag.group_id  ORD' at line 1<br />Error No: 1064<br />SELECT a.*,ag.name group_name, a.fullname AS name, FROM yk_company a LEFT JOIN yk_company_group ag ON a.group_id = ag.group_id  ORDER BY name ASC LIMIT 0,20 in E:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-08-07 23:13:27 - PHP Notice:  Trying to get property of non-object in E:\wamp\www\yuankong\backend\model\sale\company.php on line 161
+2015-08-07 23:13:27 - PHP Warning:  Invalid argument supplied for foreach() in E:\wamp\www\yuankong\backend\controller\sale\company.php on line 367
+2015-08-07 23:13:27 - PHP Notice:  Error: Could not load template E:\wamp\www\yuankong/backend/view/template/sale/company_list.tpl! in E:\wamp\www\yuankong\system\engine\controller.php on line 70
+2015-08-07 23:14:02 - PHP Notice:  Undefined index: balance in E:\wamp\www\yuankong\backend\controller\sale\company.php on line 380
+2015-08-07 23:14:02 - PHP Notice:  Error: Could not load template E:\wamp\www\yuankong/backend/view/template/sale/company_list.tpl! in E:\wamp\www\yuankong\system\engine\controller.php on line 70
+2015-08-07 23:17:18 - PHP Notice:  Undefined index: balance in E:\wamp\www\yuankong\backend\controller\sale\company.php on line 380
+2015-08-07 23:17:18 - PHP Notice:  Undefined variable: affiliates in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 105
+2015-08-07 23:18:50 - PHP Notice:  Undefined index: affiliate_id in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 111
+2015-08-07 23:18:50 - PHP Notice:  Undefined index: balance in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 116
+2015-08-07 23:19:34 - PHP Notice:  Undefined index: affiliate_id in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 110
+2015-08-07 23:19:51 - PHP Notice:  Undefined index: affiliate_id in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 109
+2015-08-07 23:23:14 - PHP Notice:  Undefined variable: affiliate_id in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 18
+2015-08-07 23:23:14 - PHP Notice:  Undefined variable: commission in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 126
+2015-08-07 23:23:14 - PHP Notice:  Undefined variable: tax in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 130
+2015-08-07 23:23:14 - PHP Notice:  Undefined variable: entry_payment in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 133
+2015-08-07 23:23:14 - PHP Notice:  Undefined variable: payment in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 134
+2015-08-07 23:23:14 - PHP Notice:  Undefined variable: text_cheque in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 139
+2015-08-07 23:23:14 - PHP Notice:  Undefined variable: payment in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 141
+2015-08-07 23:23:14 - PHP Notice:  Undefined variable: entry_cheque in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 151
+2015-08-07 23:23:14 - PHP Notice:  Undefined variable: cheque in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 152
+2015-08-07 23:23:14 - PHP Notice:  Undefined variable: entry_bank_name in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 158
+2015-08-07 23:23:14 - PHP Notice:  Undefined variable: bank_name in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 159
+2015-08-07 23:23:14 - PHP Notice:  Undefined variable: entry_bank_branch_number in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 162
+2015-08-07 23:23:14 - PHP Notice:  Undefined variable: bank_branch_number in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 163
+2015-08-07 23:23:14 - PHP Notice:  Undefined variable: entry_bank_swift_code in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 166
+2015-08-07 23:23:14 - PHP Notice:  Undefined variable: bank_swift_code in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 167
+2015-08-07 23:23:14 - PHP Notice:  Undefined variable: entry_bank_account_name in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 170
+2015-08-07 23:23:14 - PHP Notice:  Undefined variable: bank_account_name in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 171
+2015-08-07 23:23:14 - PHP Notice:  Undefined variable: entry_bank_account_number in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 174
+2015-08-07 23:23:14 - PHP Notice:  Undefined variable: bank_account_number in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 175
+2015-08-07 23:23:14 - PHP Notice:  Undefined variable: affiliate_id in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 180
+2015-08-07 23:23:14 - PHP Notice:  Undefined variable: affiliate_id in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 256
+2015-08-07 23:23:14 - PHP Notice:  Undefined variable: affiliate_id in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 260

@@ -6,14 +6,14 @@
         
         <h3 class="s-show f_m ">
           <i class="icon2 sshow"></i>
-          <?php echo $category['name']; ?>
+          <a href="<?php echo $category['href'] ?>"><?php echo $category['name']; ?></a>
         </h3>
         <?php if ($category['children']) { ?>
         <div class="shopstylebox">
           <?php foreach ($category['children'] as $child) { ?>
           <dl <?php echo ($child['category_id'] == $child_id) ? 'class="chover"' : ''  ?>>
             
-            <dt><i class="icon2 sshow"></i><?php echo $child['name'] ?></dt>
+            <dt><i class="icon2 sshow"></i><a href="<?php echo $child['href'] ?>"><?php echo $child['name'] ?></a></dt>
             <?php if(isset($child['children']) && is_array($child['children'])){?>
             <dd class="c-dd-box">
             <?php foreach ($child['children'] as $item): ?>
@@ -34,19 +34,24 @@
 
 <script type="text/javascript">
 
-    $(".shopsty-box h3").click(function(){
-        if($(this).parent().hasClass("phover")){
-            $(this).parent().removeClass("phover");
+    $(".shopsty-box h3>i.sshow").click(function(){
+        if($(this).parent().parent().hasClass("phover")){
+            $(this).parent().parent().removeClass("phover");
         }else{
-        $(this).parent().siblings().removeClass("phover");
-        $(this).parent().addClass("phover");}
+        $(this).parent().parent().siblings().removeClass("phover");
+        $(this).parent().parent().addClass("phover");}
     });
-    $(".shopstylebox dl dt").click(function(){
-        if($(this).parent().hasClass("chover")){
-            $(this).parent().removeClass("chover");
+    $(".shopstylebox dl dt > i.sshow").click(function(){
+        if($(this).parent().parent().hasClass("chover")){
+            $(this).parent().parent().removeClass("chover");
         }else{
-        $(this).parent().siblings().removeClass("chover");
-        $(this).parent().addClass("chover");}
+        $(this).parent().parent().siblings().removeClass("chover");
+        $(this).parent().parent().addClass("chover");}
     });
+    <?php if(!isset($this->request->get['path'])){?>
+    $(function(){
+      $(".shopsty-box h3 > i.sshow:first").trigger('click');
+    });
+    <?php }?>
 </script>
 </div>

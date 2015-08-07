@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2015 年 08 月 07 日 09:39
+-- 生成日期: 2015 年 08 月 07 日 15:45
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.4.3
 
@@ -21845,30 +21845,17 @@ CREATE TABLE IF NOT EXISTS `yk_company` (
   `company_id` int(11) NOT NULL AUTO_INCREMENT,
   `group_id` smallint(6) NOT NULL DEFAULT '0',
   `zone_id` int(11) NOT NULL DEFAULT '0',
-  `fullname` varchar(64) DEFAULT NULL,
+  `title` varchar(64) DEFAULT NULL,
+  `corporation` varchar(64) DEFAULT NULL,
   `mobile_phone` varchar(16) NOT NULL,
+  `identity_number` varchar(32) DEFAULT NULL,
   `email` varchar(96) NOT NULL,
   `telephone` varchar(32) NOT NULL,
   `fax` varchar(32) NOT NULL,
-  `password` varchar(40) NOT NULL,
-  `salt` varchar(9) NOT NULL,
-  `company` varchar(32) NOT NULL,
   `website` varchar(255) NOT NULL,
-  `address` varchar(128) NOT NULL,
-  `area_zone` varchar(128) NOT NULL,
-  `areas` varchar(32) NOT NULL,
-  `postcode` varchar(10) NOT NULL,
-  `province_id` int(11) NOT NULL,
   `code` varchar(64) NOT NULL,
   `commission` decimal(4,2) NOT NULL DEFAULT '0.00',
-  `tax` varchar(64) NOT NULL,
-  `payment` varchar(6) NOT NULL,
-  `cheque` varchar(100) NOT NULL,
-  `bank_name` varchar(64) NOT NULL,
-  `bank_branch_number` varchar(64) NOT NULL,
-  `bank_swift_code` varchar(64) NOT NULL,
-  `bank_account_name` varchar(64) NOT NULL,
-  `bank_account_number` varchar(64) NOT NULL,
+  `address_id` int(11) NOT NULL DEFAULT '0',
   `ip` varchar(40) NOT NULL,
   `status` tinyint(1) NOT NULL,
   `approved` tinyint(1) NOT NULL,
@@ -21880,8 +21867,25 @@ CREATE TABLE IF NOT EXISTS `yk_company` (
 -- 转存表中的数据 `yk_company`
 --
 
-INSERT INTO `yk_company` (`company_id`, `group_id`, `zone_id`, `fullname`, `mobile_phone`, `email`, `telephone`, `fax`, `password`, `salt`, `company`, `website`, `address`, `area_zone`, `areas`, `postcode`, `province_id`, `code`, `commission`, `tax`, `payment`, `cheque`, `bank_name`, `bank_branch_number`, `bank_swift_code`, `bank_account_name`, `bank_account_number`, `ip`, `status`, `approved`, `date_added`) VALUES
-(1, 1, 0, '是的撒旦', '18260051051', '18260051051@139.com', '111111', '', '754ea0bbb4f796c1794f9639a8085ac106a8e2d5', '137c6a924', '企鹅王企鹅王企鹅完全委屈额', '', '去问问企鹅王企鹅王', '江苏省 苏州市 虎丘区', '12|988|3085', '', 12, '55b88477d5f55', '5.00', '', 'cheque', '', '', '', '', '', '', '', 1, 0, '2015-07-29 15:47:53');
+INSERT INTO `yk_company` (`company_id`, `group_id`, `zone_id`, `title`, `corporation`, `mobile_phone`, `identity_number`, `email`, `telephone`, `fax`, `website`, `code`, `commission`, `address_id`, `ip`, `status`, `approved`, `date_added`) VALUES
+(1, 1, 0, '是的撒旦', NULL, '18260051051', NULL, '18260051051@139.com', '111111', '', '', '55b88477d5f55', '5.00', 0, '', 1, 0, '2015-07-29 15:47:53');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `yk_company_file`
+--
+
+CREATE TABLE IF NOT EXISTS `yk_company_file` (
+  `company_id` int(11) NOT NULL,
+  `mode` enum('identity','permit') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'identity',
+  `path` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
+  `note` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `customer_id` int(11) NOT NULL DEFAULT '0',
+  `user_id` int(11) NOT NULL DEFAULT '0',
+  `date_added` datetime NOT NULL,
+  `date_modified` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -22021,6 +22025,7 @@ CREATE TABLE IF NOT EXISTS `yk_customer` (
   `viewed` text,
   `newsletter` tinyint(1) NOT NULL DEFAULT '0',
   `address_id` int(11) NOT NULL DEFAULT '0',
+  `company_id` int(11) NOT NULL DEFAULT '0',
   `customer_group_id` int(11) NOT NULL,
   `ip` varchar(40) NOT NULL DEFAULT '0',
   `status` tinyint(1) NOT NULL,
@@ -22034,9 +22039,9 @@ CREATE TABLE IF NOT EXISTS `yk_customer` (
 -- 转存表中的数据 `yk_customer`
 --
 
-INSERT INTO `yk_customer` (`customer_id`, `mobile_phone`, `fullname`, `email`, `telephone`, `fax`, `gender`, `avatar`, `password`, `salt`, `cart`, `wishlist`, `viewed`, `newsletter`, `address_id`, `customer_group_id`, `ip`, `status`, `approved`, `token`, `date_added`) VALUES
-(1, '18850911766', 'yk18850911766', '', '', '', 0, 'asset/image/avatar/ea7d3dfbe0a7.jpg', 'fb56688220316000e4ec159a3bc5bb3a570b5f36', 'b9d2ee16f', 'a:0:{}', '', 'a:1:{i:0;s:2:"53";}', 0, 0, 1, '127.0.0.1', 1, 1, '', '2015-07-29 11:31:25'),
-(2, '18959526595', '是的撒旦', '', '', '', 0, NULL, 'ce8cc6dc288e7c92dbde66d27e828f2ef496dc78', '748e6de48', 'a:0:{}', '', NULL, 0, 0, 1, '127.0.0.1', 1, 0, '', '2015-07-29 15:26:24');
+INSERT INTO `yk_customer` (`customer_id`, `mobile_phone`, `fullname`, `email`, `telephone`, `fax`, `gender`, `avatar`, `password`, `salt`, `cart`, `wishlist`, `viewed`, `newsletter`, `address_id`, `company_id`, `customer_group_id`, `ip`, `status`, `approved`, `token`, `date_added`) VALUES
+(1, '18850911766', 'yk18850911766', '', '', '', 0, 'asset/image/avatar/ea7d3dfbe0a7.jpg', 'fb56688220316000e4ec159a3bc5bb3a570b5f36', 'b9d2ee16f', 'a:0:{}', '', 'a:1:{i:0;s:2:"53";}', 0, 0, 0, 1, '127.0.0.1', 1, 1, '', '2015-07-29 11:31:25'),
+(2, '18959526595', '是的撒旦', '', '', '', 0, NULL, 'ce8cc6dc288e7c92dbde66d27e828f2ef496dc78', '748e6de48', 'a:0:{}', '', NULL, 0, 0, 0, 1, '127.0.0.1', 1, 0, '', '2015-07-29 15:26:24');
 
 -- --------------------------------------------------------
 
@@ -23960,7 +23965,7 @@ CREATE TABLE IF NOT EXISTS `yk_wiki` (
 
 INSERT INTO `yk_wiki` (`wiki_id`, `group_id`, `user_id`, `title`, `subtitle`, `text`, `status`, `is_top`, `from`, `viewed`, `sort_order`, `date_added`) VALUES
 (2, 2, 1, '新闻测试数据标题', '新闻测试数据副本标题', '&lt;span style=&quot;font-family:Tahoma, Helvetica, Arial, 宋体, sans-serif;font-size:14px;line-height:30px;&quot;&gt;2015年5月初，美国数字地球公司拍摄的卫星照片显示越南非法建岛行为，在非法侵占我南沙岛礁上大规模填海造地。越南非法建岛激起了中方愤慨，我外交部发言人洪磊表示，中国要求有关国家立即停止一切侵犯中国主权和权益的言行。洪磊还揭露，越南非法建岛，共计侵占20多个岛礁，填海造地的同时还设立了机场、港池，甚至还有导弹阵地，中国外交部严厉指责越南非法建岛行为。&lt;/span&gt;', 1, 0, '腾讯新闻', 6, 0, '2015-05-24 21:37:30'),
-(3, 3, 1, '最新款式灭火器', '5.1日家用汽载灭火器全场5折', '<p><span style="color:#CC0000;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;">齐齐哈尔</span><span style="color:#333333;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;">警方与绑架案犯发生激烈</span><span style="color:#CC0000;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;">枪战</span><span style="color:#333333;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;">&nbsp;一民警头部中弹</span></p>', 1, 1, '消防e站', 8, 2, '2015-08-02 17:59:41'),
+(3, 3, 1, '最新款式灭火器', '5.1日家用汽载灭火器全场5折', '<p><span style="color:#CC0000;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;">齐齐哈尔</span><span style="color:#333333;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;">警方与绑架案犯发生激烈</span><span style="color:#CC0000;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;">枪战</span><span style="color:#333333;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;">&nbsp;一民警头部中弹</span></p>', 1, 1, '消防e站', 9, 2, '2015-08-02 17:59:41'),
 (4, 1, 1, '新一代宝马7系官网曝光 6月10日首发', '新一代宝马7系官网曝光', '<p>车型代号G11的新一代宝马7系的官图和部分信息在宝马奥地利官网曝光，新车将在6月10日正式发布，10月上市销售。新一代7系在奥地利市场的起价为100445欧元(约合人民币69.2万元)。<img alt="" src="http://www.yuankong.com/image/data/demo/apple_logo.jpg" />12321312</p>', 1, 0, '新浪汽车', 3, 0, '2015-06-10 05:20:56'),
 (5, 2, 1, '4S店卖旧车', '法院判决：赔偿车主三倍车款！', '<p><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">山东济宁的刘女士，在当地名为“安斯达”的菲亚特4S店，以128000元买下了菲亚特轿车，就在提车40天后，刘女士发现，这辆车竟然被补过漆！经法院裁判，4S店隐瞒了该车曾经出售的事实，应退回刘女士购车款，并按购车款的3倍赔偿，总计38.4万。（央视）</span><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">山东济宁的刘女士，在当地名为“安斯达”的菲亚特4S店，以128000元买下了菲亚特轿车，就在提车40天后，刘女士发现，这辆车竟然被补过漆！经法院裁判，4S店隐瞒了该车曾经出售的事实，应退回刘女士购车款，并按购车款的3倍赔偿，总计38.4万。（央视）</span></p>', 1, 0, 'http://d.weibo.com/', 1, 0, '2015-07-27 20:57:57'),
 (6, 2, 1, '港囧》首支正式预告片 9月25日爆笑', '港囧》首支正式预告片 9月25日爆笑', '<p><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">《港囧》发布首支正式预告片，简单粗暴地曝光了电影的正片画面：小舅子</span><a target="_blank" render="ext" extra-data="type=atname" href="http://weibo.com/n/%E5%8C%85%E8%B4%9D%E5%B0%94?from=feed&loc=at" usercard="name=包贝尔" style="color: rgb(235, 115, 80); text-decoration: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">@包贝尔</a><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">&nbsp;为保护姐姐</span><a target="_blank" render="ext" extra-data="type=atname" href="http://weibo.com/n/%E8%B5%B5%E8%96%87?from=feed&loc=at" usercard="name=赵薇" style="color: rgb(235, 115, 80); text-decoration: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">@赵薇</a><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">&nbsp;化身名侦探，对姐夫</span><a target="_blank" render="ext" extra-data="type=atname" href="http://weibo.com/n/%E5%BE%90%E5%B3%A5?from=feed&loc=at" usercard="name=徐峥" style="color: rgb(235, 115, 80); text-decoration: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">@徐峥</a><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">&nbsp;进行史上最残酷拷问！逼得徐峥仓惶逃窜，两人在街头展开一场枪战、爆炸、飞车、坠楼、街头火拼组成追击战。更有徐峥高楼勇救赵薇的感人桥段。</span></p>', 1, 0, '', 1, 0, '2015-07-27 20:58:53'),

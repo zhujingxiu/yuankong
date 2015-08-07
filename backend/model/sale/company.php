@@ -85,7 +85,7 @@ class ModelSaleCompany extends Model {
 	}
 
 	public function getCompanys($data = array()) {
-		$sql = "SELECT a.*,ag.name group_name, a.fullname AS name, FROM " . DB_PREFIX . "company a LEFT JOIN ".DB_PREFIX."company_group ag ON a.group_id = ag.group_id ";
+		$sql = "SELECT a.*,ag.name group_name, a.fullname AS name FROM " . DB_PREFIX . "company a LEFT JOIN ".DB_PREFIX."company_group ag ON a.group_id = ag.group_id ";
 
 		$implode = array();
 		

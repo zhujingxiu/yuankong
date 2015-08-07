@@ -6,7 +6,6 @@ class ControllerModuleBanner extends Controller {
 		$this->load->model('design/banner');
 		$this->load->model('tool/image');
 		
-		$this->document->addScript('market/view/javascript/jquery/jquery.cycle.js');
 				
 		$this->data['banners'] = array();
 		

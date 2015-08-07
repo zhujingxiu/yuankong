@@ -345,7 +345,7 @@ class ControllerSaleCompany extends Controller {
 		$this->data['insert'] = $this->url->link('sale/company/insert', 'token=' . $this->session->data['token'] . $url, 'SSL');
 		$this->data['delete'] = $this->url->link('sale/company/delete', 'token=' . $this->session->data['token'] . $url, 'SSL');
 
-		$this->data['companys'] = array();
+		$this->data['companies'] = array();
 
 		$data = array(
 			'filter_name'       => $filter_name, 
@@ -372,12 +372,11 @@ class ControllerSaleCompany extends Controller {
 				'href' => $this->url->link('sale/company/update', 'token=' . $this->session->data['token'] . '&company_id=' . $result['company_id'] . $url, 'SSL')
 			);
 			
-			$this->data['companys'][] = array(
+			$this->data['companies'][] = array(
 				'company_id' => $result['company_id'],
 				'name'         => $result['name'],
 				'group'        => $result['group_name'],
 				'email'        => $result['email'],
-				'balance'      => $this->currency->format($result['balance'], $this->config->get('config_currency')),
 				'status'       => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),
 				'approved'     => ($result['approved'] ? $this->language->get('text_yes') : $this->language->get('text_no')),
 				'date_added'   => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
@@ -536,8 +535,6 @@ class ControllerSaleCompany extends Controller {
 		$this->data['text_select'] = $this->language->get('text_select');
 		$this->data['text_none'] = $this->language->get('text_none');
     	$this->data['text_wait'] = $this->language->get('text_wait');
-		$this->data['text_cheque'] = $this->language->get('text_cheque');
-		$this->data['text_paypal'] = $this->language->get('text_paypal');
 		$this->data['text_bank'] = $this->language->get('text_bank');
 		$this->data['text_group'] = $this->language->get('text_group');
 				
@@ -554,13 +551,6 @@ class ControllerSaleCompany extends Controller {
 		$this->data['entry_commission'] = $this->language->get('entry_commission');
 		$this->data['entry_tax'] = $this->language->get('entry_tax');
 		$this->data['entry_code'] = $this->language->get('entry_code');
-		$this->data['entry_payment'] = $this->language->get('entry_payment');
-		$this->data['entry_cheque'] = $this->language->get('entry_cheque');
-		$this->data['entry_bank_name'] = $this->language->get('entry_bank_name');
-		$this->data['entry_bank_branch_number'] = $this->language->get('entry_bank_branch_number');
-		$this->data['entry_bank_swift_code'] = $this->language->get('entry_bank_swift_code');
-		$this->data['entry_bank_account_name'] = $this->language->get('entry_bank_account_name');
-		$this->data['entry_bank_account_number'] = $this->language->get('entry_bank_account_number');
 		$this->data['entry_password'] = $this->language->get('entry_password');
     	$this->data['entry_confirm'] = $this->language->get('entry_confirm');
 		$this->data['entry_status'] = $this->language->get('entry_status');
@@ -794,78 +784,6 @@ class ControllerSaleCompany extends Controller {
 		} else {
       		$this->data['code'] = uniqid();
     	}
-		
-		if (isset($this->request->post['commission'])) {
-      		$this->data['commission'] = $this->request->post['commission'];
-    	} elseif (!empty($company_info)) { 
-			$this->data['commission'] = $company_info['commission'];
-		} else {
-      		$this->data['commission'] = $this->config->get('config_commission');
-    	}
-		
-		if (isset($this->request->post['tax'])) {
-      		$this->data['tax'] = $this->request->post['tax'];
-    	} elseif (!empty($company_info)) { 
-			$this->data['tax'] = $company_info['tax'];
-		} else {
-      		$this->data['tax'] = '';
-    	}		
-
-		if (isset($this->request->post['payment'])) {
-      		$this->data['payment'] = $this->request->post['payment'];
-    	} elseif (!empty($company_info)) { 
-			$this->data['payment'] = $company_info['payment'];
-		} else {
-      		$this->data['payment'] = 'cheque';
-    	}	
-
-		if (isset($this->request->post['cheque'])) {
-      		$this->data['cheque'] = $this->request->post['cheque'];
-    	} elseif (!empty($company_info)) { 
-			$this->data['cheque'] = $company_info['cheque'];
-		} else {
-      		$this->data['cheque'] = '';
-    	}	
-
-		if (isset($this->request->post['bank_name'])) {
-      		$this->data['bank_name'] = $this->request->post['bank_name'];
-    	} elseif (!empty($company_info)) { 
-			$this->data['bank_name'] = $company_info['bank_name'];
-		} else {
-      		$this->data['bank_name'] = '';
-    	}	
-
-		if (isset($this->request->post['bank_branch_number'])) {
-      		$this->data['bank_branch_number'] = $this->request->post['bank_branch_number'];
-    	} elseif (!empty($company_info)) { 
-			$this->data['bank_branch_number'] = $company_info['bank_branch_number'];
-		} else {
-      		$this->data['bank_branch_number'] = '';
-    	}
-
-		if (isset($this->request->post['bank_swift_code'])) {
-      		$this->data['bank_swift_code'] = $this->request->post['bank_swift_code'];
-    	} elseif (!empty($company_info)) { 
-			$this->data['bank_swift_code'] = $company_info['bank_swift_code'];
-		} else {
-      		$this->data['bank_swift_code'] = '';
-    	}
-
-		if (isset($this->request->post['bank_account_name'])) {
-      		$this->data['bank_account_name'] = $this->request->post['bank_account_name'];
-    	} elseif (!empty($company_info)) { 
-			$this->data['bank_account_name'] = $company_info['bank_account_name'];
-		} else {
-      		$this->data['bank_account_name'] = '';
-    	}
-
-		if (isset($this->request->post['bank_account_number'])) {
-      		$this->data['bank_account_number'] = $this->request->post['bank_account_number'];
-    	} elseif (!empty($company_info)) { 
-			$this->data['bank_account_number'] = $company_info['bank_account_number'];
-		} else {
-      		$this->data['bank_account_number'] = '';
-    	}
 																												
     	if (isset($this->request->post['status'])) {
       		$this->data['status'] = $this->request->post['status'];
@@ -964,68 +882,6 @@ class ControllerSaleCompany extends Controller {
 	  		return false;
 		}  
   	} 
-		
-	public function transaction() {
-    	$this->language->load('sale/company');
-		
-		$this->load->model('sale/company');
-		
-		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->user->hasPermission('modify', 'sale/company')) { 
-			$this->model_sale_company->addTransaction($this->request->get['company_id'], $this->request->post['description'], $this->request->post['amount']);
-				
-			$this->data['success'] = $this->language->get('text_success');
-		} else {
-			$this->data['success'] = '';
-		}
-
-		if (($this->request->server['REQUEST_METHOD'] == 'POST') && !$this->user->hasPermission('modify', 'sale/company')) {
-			$this->data['error_warning'] = $this->language->get('error_permission');
-		} else {
-			$this->data['error_warning'] = '';
-		}
-
-		$this->data['text_no_results'] = $this->language->get('text_no_results');
-		$this->data['text_balance'] = $this->language->get('text_balance');
-		
-		$this->data['column_date_added'] = $this->language->get('column_date_added');
-		$this->data['column_description'] = $this->language->get('column_description');
-		$this->data['column_amount'] = $this->language->get('column_amount');
-		
-		if (isset($this->request->get['page'])) {
-			$page = $this->request->get['page'];
-		} else {
-			$page = 1;
-		}  
-		
-		$this->data['transactions'] = array();
-			
-		$results = $this->model_sale_company->getTransactions($this->request->get['company_id'], ($page - 1) * 10, 10);
-      		
-		foreach ($results as $result) {
-        	$this->data['transactions'][] = array(
-				'amount'      => $this->currency->format($result['amount'], $this->config->get('config_currency')),
-				'description' => $result['description'],
-        		'date_added'  => date($this->language->get('date_format_short'), strtotime($result['date_added']))
-        	);
-      	}			
-		
-		$this->data['balance'] = $this->currency->format($this->model_sale_company->getTransactionTotal($this->request->get['company_id']), $this->config->get('config_currency'));
-		
-		$transaction_total = $this->model_sale_company->getTotalTransactions($this->request->get['company_id']);
-			
-		$pagination = new Pagination();
-		$pagination->total = $transaction_total;
-		$pagination->page = $page;
-		$pagination->limit = $this->config->get('config_admin_limit');
-		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = $this->url->link('sale/company/transaction', 'token=' . $this->session->data['token'] . '&company_id=' . $this->request->get['company_id'] . '&page={page}', 'SSL');
-			
-		$this->data['pagination'] = $pagination->render();
-
-		$this->template = 'sale/company_transaction.tpl';		
-		
-		$this->response->setOutput($this->render());
-	}
 		
 	public function autocomplete() {
 		$company_data = array();

@@ -12,7 +12,7 @@ if( !empty($column_left) && !empty($column_right) ){
 		$layout = 'center';
 	}
 	
-	$spans = array( 'full' 			=> array('l w210','','r 290'),
+	$spans = array( 'full' 			=> array('l w210','','r w290'),
 					'center-right'  => array('',' l w900 ',' r w290 '), 
 					'center-left'   => array(' l w210',' r w980 ',''),
 					'center'		=> array('',' w ','')
