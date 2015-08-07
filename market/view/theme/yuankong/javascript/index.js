@@ -82,7 +82,7 @@ o.dlist={
         var dom2=sel.children(dom2);
         dom2.find("span").click(function(){
             var self = $(this);
-            var t = self.attr("data-val");console.info(t);
+            var t = self.attr("data-val");
             dom1.find("span").html(self.text());
             dom1.find("input[name='search_model']").val(self.attr('val'));
             sel.removeClass("hov");
@@ -310,5 +310,31 @@ o.silbings={
             $(this).siblings().removeClass(dom);
             $(this).addClass(dom);
         });
+    }
+}
+//新增判断浏览器滚动高度和浏览器高度
+o.wscroll={
+    wst:function(){
+        var ws=document.body.scrollTop||document.documentElement.scrollTop;
+        return ws;
+    },
+    wsh:function(){
+        var wh=document.body.clientHeight||document.documentElement.clientHeight;
+        var winh=window.innerHeight;
+        return parseInt(wh)>parseInt(winh) ? winh : wh;
+    }
+}
+//浏览器滚动判断隐藏和显示
+o.scr={
+    init:function(dom){
+        window.onscroll=function(){
+            var wst= o.wscroll.wst(),
+                 wsh= o.wscroll.wsh();
+            if(wst>wsh){
+                $(dom).show();
+            }else{
+                $(dom).hide();
+            }
+        }
     }
 }

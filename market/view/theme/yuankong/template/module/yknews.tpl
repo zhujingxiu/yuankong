@@ -19,13 +19,12 @@
         <h3 class="e-title">装修消防</h3>
         <div class="xf-box">
             <ul>
-                <li><a href="#" class="db"><i class="icon zxxf-des"></i><br />装修消防设计</a></li>
-                <li><a href="#" class="db"><i class="icon zxxf-sg"></i><br />装修消防设计</a></li>
-                <li><a href="#" class="db"><i class="icon zxxf-jc"></i><br />装修消防设计</a></li>
-                <li><a href="#" class="db"><i class="icon zxxf-bs"></i><br />装修消防设计</a></li>
+                <li><a href="#" class="db"><i class="icon zxxf-des"></i><br>消防助手</a></li>
+                <li><a href="#" class="db"><i class="icon zxxf-sg"></i><br>招投标</a></li>
+                <li><a href="#" class="db"><i class="icon zxxf-jc"></i><br>消防问答</a></li>
+                <li><a href="#" class="db"><i class="icon zxxf-bs"></i><br>项目报价</a></li>
             </ul>
         </div>
     </div>
-
 
 </div>

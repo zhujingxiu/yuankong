@@ -114,7 +114,7 @@ class ControllerSaleProjectGroup extends Controller {
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
-			$sort = 'name';
+			$sort = 'sort_order';
 		}
 		
 		if (isset($this->request->get['order'])) {
@@ -184,6 +184,7 @@ class ControllerSaleProjectGroup extends Controller {
 			$this->data['project_groups'][] = array(
 				'group_id' 			 => $result['group_id'],
 				'name'               => $result['name'],
+				'keyword'            => $result['keyword'],
 				'show'               => $result['show'] ? $this->language->get('text_yes') : $this->language->get('text_no'),
 				'sort_order'         => $result['sort_order'],
 				'selected'           => isset($this->request->post['selected']) && in_array($result['group_id'], $this->request->post['selected']),
@@ -196,6 +197,7 @@ class ControllerSaleProjectGroup extends Controller {
 		$this->data['text_no_results'] = $this->language->get('text_no_results');
 
 		$this->data['column_name'] = $this->language->get('column_name');
+		$this->data['column_keyword'] = $this->language->get('column_keyword');
 		$this->data['column_show'] = $this->language->get('column_show');
 		$this->data['column_sort_order'] = $this->language->get('column_sort_order');
 		$this->data['column_action'] = $this->language->get('column_action');		
@@ -230,6 +232,7 @@ class ControllerSaleProjectGroup extends Controller {
 		}
 		
 		$this->data['sort_name'] = $this->url->link('sale/project_group', 'token=' . $this->session->data['token'] . '&sort=pg.name' . $url, 'SSL');
+		$this->data['sort_keyword'] = $this->url->link('sale/project_group', 'token=' . $this->session->data['token'] . '&sort=pg.keyword' . $url, 'SSL');
 		$this->data['sort_show'] = $this->url->link('sale/project_group', 'token=' . $this->session->data['token'] . '&sort=pg.show' . $url, 'SSL');
 		$this->data['sort_sort_order'] = $this->url->link('sale/project_group', 'token=' . $this->session->data['token'] . '&sort=pg.sort_order' . $url, 'SSL');
 		
@@ -268,6 +271,7 @@ class ControllerSaleProjectGroup extends Controller {
      	$this->data['heading_title'] = $this->language->get('heading_title');
 
     	$this->data['entry_name'] = $this->language->get('entry_name');
+    	$this->data['entry_keyword'] = $this->language->get('entry_keyword');
     	$this->data['entry_show'] = $this->language->get('entry_show');
     	$this->data['entry_remark'] = $this->language->get('entry_remark');
 		$this->data['entry_sort_order'] = $this->language->get('entry_sort_order');
@@ -339,6 +343,14 @@ class ControllerSaleProjectGroup extends Controller {
 			$this->data['name'] = '';
 		}
 
+		if (isset($this->request->post['keyword'])) {
+			$this->data['keyword'] = $this->request->post['keyword'];
+		} elseif (!empty($project_group_info['keyword'])) {
+			$this->data['keyword'] = $project_group_info['keyword'];
+		} else {
+			$this->data['keyword'] = '';
+		}
+
 		if (isset($this->request->post['show'])) {
 			$this->data['show'] = $this->request->post['show'];
 		} elseif (!empty($project_group_info['show'])) {
@@ -379,6 +391,10 @@ class ControllerSaleProjectGroup extends Controller {
 	
   		if ((utf8_strlen($this->request->post['name']) < 3) || (utf8_strlen($this->request->post['name']) > 64)) {
     		$this->error['name'] = $this->language->get('error_name');
+  		}
+
+  		if ((utf8_strlen($this->request->post['keyword']) < 3) || (utf8_strlen($this->request->post['keyword']) > 64)) {
+    		$this->error['keyword'] = $this->language->get('error_keyword');
   		}
     	
 		if (!$this->error) {

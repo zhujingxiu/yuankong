@@ -421,16 +421,6 @@ class ModelCatalogProduct extends Model {
 		
 		return $category_data;
 	}
-		
-	public function getProductLayoutId($product_id) {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_to_layout WHERE product_id = '" . (int)$product_id . "' ");
-		
-		if ($query->num_rows) {
-			return $query->row['layout_id'];
-		} else {
-			return  $this->config->get('config_layout_product');
-		}
-	}
 	
 	public function getCategories($product_id) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_to_category WHERE product_id = '" . (int)$product_id . "'");

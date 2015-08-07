@@ -143,7 +143,7 @@
 
                 <?php foreach( $module['category_tabs']['data'] as $idx => $category ) { ?>
                 
-                 <table class="form category-tab" id="category-tab-wrapper<?php echo $idx+1;?>">
+                 <table class="form category-tab" id="category-tab<?php echo $module_row; ?>-wrapper<?php echo $idx+1;?>">
                     <tr>
                       <td></td>
                       <td style="width:36%;">
@@ -158,7 +158,7 @@
                       <td>
                           <input type="text" name="ykproduct_module[<?php echo $module_row;?>][category_tabs][sort][]" value="<?php echo $category['sort'];?>" size="3">
                       </td>
-                      <td size="4"><img src="view/image/delete.png" alt="" onclick="$('#category-tab-wrapper<?php echo $idx+1;?>').remove(); return false;" /></td>             
+                      <td size="4"><img src="view/image/delete.png" alt="" onclick="$('#category-tab<?php echo $module_row; ?>-wrapper<?php echo $idx+1;?>').remove(); return false;" /></td>             
                     </tr>
                   </table>  
                   
@@ -212,7 +212,7 @@
 
                 <?php foreach( $module['product_tabs']['data'] as $idx => $product ) { ?>
                 
-                 <table class="form product-tab" id="product-tab-wrapper<?php echo $idx+1;?>">
+                 <table class="form product-tab" id="product-tab<?php echo $module_row; ?>-wrapper<?php echo $idx+1;?>">
                     <tr>
                       <td></td>
                       <td style="width:36%;">
@@ -242,7 +242,7 @@
                       <td>
                           <input type="text" name="ykproduct_module[<?php echo $module_row;?>][product_tabs][sort][]" value="<?php echo $product['sort'];?>" size="3">
                       </td>
-                      <td size="4"><img src="view/image/delete.png" alt="" onclick="$('#product-tab-wrapper<?php echo $idx+1;?>').remove(); return false;" /></td>             
+                      <td size="4"><img src="view/image/delete.png" alt="" onclick="$('#product-tab<?php echo $module_row; ?>-wrapper<?php echo $idx+1;?>').remove(); return false;" /></td>             
                     </tr>
                   </table>  
                   
@@ -260,7 +260,7 @@
               <tr>
                 <td class="header-title"><h3><?php echo $text_add_banner;?></h3></td>
                 <td class="header-body"></td>
-                <td class="header-action"><a class="btn" onclick="addBannerTab('banner-tabs<?php echo $module_row; ?>',<?php echo $module_row;?>)"><?php echo $button_add ?></a></td>
+                <td class="header-action"><a class="btn" onclick="addBannerTab('banner-tabs<?php echo $module_row;?>',<?php echo $module_row;?>)"><?php echo $button_add ?></a></td>
               </tr>
             </table>
 
@@ -269,7 +269,7 @@
 
                 <?php foreach( $module['banner_tabs']['data'] as $idx => $banner ) { ?>
                 
-                 <table class="form banner-tab" id="banner-tab-wrapper<?php echo $idx+1;?>">
+                 <table class="form banner-tab" id="banner-tab<?php echo $module_row; ?>-wrapper<?php echo $idx+1;?>">
                     <tr>
                       <td><?php echo $entry_banner ?></td>
                       <td colspan="2"> 
@@ -294,7 +294,7 @@
                       <td>
                           <input type="text" name="ykproduct_module[<?php echo $module_row;?>][banner_tabs][sort][]" value="<?php echo $banner['sort'];?>" size="3">
                       </td>
-                      <td size="4"><img src="view/image/delete.png" alt="" onclick="$('#banner-tab-wrapper<?php echo $idx+1;?>').remove(); return false;" /></td>             
+                      <td size="4"><img src="view/image/delete.png" alt="" onclick="$('#banner-tab<?php echo $module_row; ?>-wrapper<?php echo $idx+1;?>').remove(); return false;" /></td>             
                     </tr>
                   </table>  
                   
@@ -326,7 +326,7 @@
     if(_category_id > 0){
 
       var html  = '';
-       html = '<table class="form category-tab '+_class+'" id="category-tab-wrapper'+index+'">';
+       html = '<table class="form category-tab '+_class+'" id="category-tab'+mid+'-wrapper'+index+'">';
        html +=     '<tr><td></td>';
        html +=       ' <td style="width:36%;">';
        html += '<b>' + _name.join(' &gt; ')+'['+ _category_id +']' + '</b><input type="hidden" name="ykproduct_module['+mid+'][category_tabs][category][]" value="' + _category_id + '" />';
@@ -335,7 +335,7 @@
        html += '<td><input type="text" name="ykproduct_module['+mid+'][category_tabs][limit][]" size="3" value="5"></td>';
        html += '<td><?php echo $entry_sort_order;?></td>';
        html += '<td><input type="text" name="ykproduct_module['+mid+'][category_tabs][sort][]" size="3" value="0"></td>';
-       html += '<td size="4"><img src="view/image/delete.png" alt="" onclick="$(\'#category-tab-wrapper'+index+'\').remove(); return false;" /></td>'; 
+       html += '<td size="4"><img src="view/image/delete.png" alt="" onclick="$(\'#category-tab'+mid+'-wrapper'+index+'\').remove(); return false;" /></td>'; 
        html +=     '</tr>'
        html +=    '</table> ';
       $('#'+wrapper).append( html );
@@ -365,7 +365,7 @@
     
     if(_product_id > 0){
       var html  = '';
-       html = '<table class="form product-tab '+_class+'" id="product-tab-wrapper'+index+'">';
+       html = '<table class="form product-tab '+_class+'" id="product-tab'+mid+'-wrapper'+index+'">';
        html +=     '<tr>';
        html +=      '<td></td>';
        html +=      '<td style="width:36%">';
@@ -378,7 +378,7 @@
         html += '<td>  <?php echo $entry_subtitle;?> <span>'+_subtitle+'</span></td>';  
        html += '<td><?php echo $entry_sort_order;?></td>';
        html += '<td><input type="text" name="ykproduct_module['+mid+'][product_tabs][sort][]" size="3" value="0"></td>';
-       html += '<td size="4"><img src="view/image/delete.png" alt="" onclick="$(\'#product-tab-wrapper'+index+'\').remove(); return false;" /></td>'; 
+       html += '<td size="4"><img src="view/image/delete.png" alt="" onclick="$(\'#product-tab'+mid+'-wrapper'+index+'\').remove(); return false;" /></td>'; 
        html +=     '</tr>'
        html +=    '</table> ';
       $('#'+wrapper).append( html );
@@ -393,7 +393,7 @@
     var _class= (index%2==0 ? "odd":"eve");
     var banner_row = 'banner-'+ mid+ '-'+index;
     var html  = '';
-     html = '<table class="form banner-tab '+_class+'" id="banner-tab-wrapper'+index+'">';
+     html = '<table class="form banner-tab '+_class+'" id="banner-tab'+mid+'-wrapper'+index+'">';
      html += '<tr>';
      html += '<td><?php echo $entry_banner;?> </td>';
      html += '<td colspan="3"> ';
@@ -404,7 +404,7 @@
      html += '<td colspan="2"><input type="text" name="ykproduct_module['+mid+'][banner_tabs][link][]"></td>';
      html += '<td><?php echo $entry_sort_order;?></td>';
      html += '<td><input type="text" name="ykproduct_module['+mid+'][banner_tabs][sort][]" size="3"></td>';
-     html += '<td size="4"><img src="view/image/delete.png" alt="" onclick="$(\'#product-tab-wrapper'+index+'\').remove(); return false;" /></td>'; 
+     html += '<td size="4"><img src="view/image/delete.png" alt="" onclick="$(\'#product-tab'+mid+'-wrapper'+index+'\').remove(); return false;" /></td>'; 
      html +=     '</tr>'
      html +=    '</table> ';
     $('#'+wrapper).append( html );

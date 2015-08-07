@@ -27,6 +27,12 @@
               </td>
           </tr>
           <tr>
+            <td><?php echo $entry_keyword; ?></td>
+            <td><input type="text" name="keyword" value="<?php echo $keyword; ?>"><?php if (isset($error_keyword)) { ?>
+              <span class="error"><?php echo $error_keyword; ?></span><br />
+              <?php } ?></td>
+          </tr>
+          <tr>
             <td><?php echo $entry_show; ?></td>
             <td>
               <select name="show">
@@ -43,7 +49,7 @@
           </tr>
           <tr>
             <td><?php echo $entry_remark; ?></td>
-            <td><textarea name="remark"><?php echo $remark; ?></textarea></td>
+            <td><textarea style="width:330px;" name="remark"><?php echo $remark; ?></textarea></td>
           </tr>
           <tr>
             <td><?php echo $entry_sort_order; ?></td>

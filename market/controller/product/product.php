@@ -369,6 +369,11 @@ class ControllerProductProduct extends Controller {
 								'price'                   => $price,
 								'price_prefix'            => $option_value['price_prefix']
 							);
+							$this->data['images'][] = array(
+								'popup' => $this->model_tool_image->resize($option_value['image'], $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height')),
+								'thumb' => $this->model_tool_image->resize($option_value['image'], $this->config->get('config_image_additional_width'), $this->config->get('config_image_additional_height')),
+								'rel'	=> $option_value['product_option_value_id']
+							);
 						}
 					}
 					

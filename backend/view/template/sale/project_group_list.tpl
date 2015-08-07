@@ -22,17 +22,22 @@
           <thead>
             <tr>
               <td width="1" style="text-align: center;"><input type="checkbox" onclick="$('input[name*=\'selected\']').attr('checked', this.checked);" /></td>
-              <td class="left"><?php if ($sort == 'ng.name') { ?>
+              <td class="left"><?php if ($sort == 'pg.name') { ?>
                 <a href="<?php echo $sort_name; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_name; ?></a>
                 <?php } else { ?>
                 <a href="<?php echo $sort_name; ?>"><?php echo $column_name; ?></a>
                 <?php } ?></td>
-              <td class="left"><?php if ($sort == 'ng.show') { ?>
+                <td class="left"><?php if ($sort == 'pg.keyword') { ?>
+                <a href="<?php echo $sort_keyword; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_keyword; ?></a>
+                <?php } else { ?>
+                <a href="<?php echo $sort_keyword; ?>"><?php echo $column_keyword; ?></a>
+                <?php } ?></td>
+              <td class="left"><?php if ($sort == 'pg.show') { ?>
                 <a href="<?php echo $sort_show; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_show; ?></a>
                 <?php } else { ?>
                 <a href="<?php echo $sort_show; ?>"><?php echo $column_show; ?></a>
                 <?php } ?></td>
-              <td class="right"><?php if ($sort == 'ng.sort_order') { ?>
+              <td class="right"><?php if ($sort == 'pg.sort_order') { ?>
                 <a href="<?php echo $sort_sort_order; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_sort_order; ?></a>
                 <?php } else { ?>
                 <a href="<?php echo $sort_sort_order; ?>"><?php echo $column_sort_order; ?></a>
@@ -53,6 +58,7 @@
                 <input type="checkbox" name="selected[]" value="<?php echo $item['group_id']; ?>" />
                 <?php } ?></td>
               <td class="left"><?php echo $item['name']; ?></td>
+              <td class="left"><?php echo $item['keyword']; ?></td>
               <td class="left"><?php echo $item['show']; ?></td>
               <td class="right"><?php echo $item['sort_order']; ?></td>
               <td class="right"><?php foreach ($item['action'] as $action) { ?>
@@ -62,7 +68,7 @@
             <?php } ?>
             <?php } else { ?>
             <tr>
-              <td class="center" colspan="5"><?php echo $text_no_results; ?></td>
+              <td class="center" colspan="6"><?php echo $text_no_results; ?></td>
             </tr>
             <?php } ?>
           </tbody>

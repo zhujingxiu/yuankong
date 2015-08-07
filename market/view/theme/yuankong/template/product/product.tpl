@@ -15,7 +15,9 @@
                     	<li class="on"><img src="<?php echo $thumb; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>"></li>
                     	<?php if ($images): ?>
                     	<?php foreach ($images as $key => $item): ?>
-                    	<li><img src="<?php echo $item['thumb']; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>"></li>		
+                    	<li >
+                            <img src="<?php echo $item['thumb']; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" <?php echo isset($item['rel']) ? 'data-rel="'.$item['rel'].'"' : ''; ?>/>
+                        </li>		
                     	<?php endforeach ?>
                     	<?php endif ?>
                     </ul>
@@ -55,20 +57,6 @@
             </div>
             <?php }?>
             <ul class="shop-other-news mt20">
-            	<?php if(false){?>
-				<?php if ($manufacturer) { ?>
-				<li class="fix">
-					<span><?php echo $text_manufacturer; ?></span> 
-					<a href="<?php echo $manufacturers; ?>"><?php echo $manufacturer; ?></a>
-				</li>
-				<?php } ?>
-				<li class="fix">
-					<span><?php echo $text_model; ?></span> <?php echo $model; ?>
-				</li>
-				<li class="fix">
-					<span><?php echo $text_stock; ?></span> <?php echo $stock; ?>
-				</li>
-				<?php }?>
                 <?php if ($options) { ?>
 				<li class="fix">					
 					<?php foreach ($options as $option) { ?>
@@ -224,12 +212,12 @@
 			<div id="tab-description" class="d-boxes">
 				<?php echo $description; ?>
 			</div>
-			<div id="tab-records" class="d-boxes"></div>
+			<div id="tab-records" class="d-boxes" style="display:none;"></div>
 			<?php if ($review_status) { ?>
-		    <div id="tab-reviews" class="d-boxes"></div>
+		    <div id="tab-reviews" class="d-boxes" style="display:none;"></div>
 		    <?php } ?>	
 		  	<?php if ($tags) { ?>
-		  	<div id="tab-tags" class="d-boxes">
+		  	<div id="tab-tags" class="d-boxes" style="display:none;">
 		  		<b><?php echo $text_tags; ?></b>
 			    <?php for ($i = 0; $i < count($tags); $i++) { ?>
 			    <?php if ($i < (count($tags) - 1)) { ?>

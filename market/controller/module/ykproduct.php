@@ -14,10 +14,11 @@ class ControllerModuleYkproduct extends Controller {
         $this->data['title_class']   = $setting['title_class'];
         $this->data['additional_class']   = $setting['additional_class'];
 
-        sort($setting['category_tabs']['sort']);
-        sort($setting['product_tabs']['sort']);
-        sort($setting['banner_tabs']['sort']);
+        asort($setting['category_tabs']['sort']);
+        asort($setting['product_tabs']['sort']);
+        asort($setting['banner_tabs']['sort']);
         $this->data['category'] = array();
+
         foreach ($setting['category_tabs']['sort'] as $i => $value) {
             
             $_category = $this->model_catalog_category->getCategory($setting['category_tabs']['category'][$i]); 

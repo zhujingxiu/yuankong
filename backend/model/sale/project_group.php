@@ -3,6 +3,7 @@ class ModelSaleProjectGroup extends Model {
 	public function addProjectGroup($data) {
 		$fields = array(
 			'name' => isset($data['name']) ? strip_tags(trim($data['name'])) : '',
+			'keyword' => isset($data['keyword']) ? strtolower(strip_tags(trim($data['keyword']))) : '',
 			'show' => isset($data['show']) ? (int)$data['show'] : 0,
 			'remark' => isset($data['remark']) ? $data['remark'] : '',
 			'sort_order' => isset($data['sort_order']) ? (int)$data['sort_order'] : 0
@@ -14,6 +15,7 @@ class ModelSaleProjectGroup extends Model {
 	public function editProjectGroup($project_group_id, $data) {
 		$fields = array(
 			'name' => isset($data['name']) ? strip_tags(trim($data['name'])) : 0,
+			'keyword' => isset($data['keyword']) ? strtolower(strip_tags(trim($data['keyword']))) : '',
 			'show' => isset($data['show']) ? (int)$data['show'] : 0,
 			'remark' => isset($data['remark']) ? $data['remark'] : '',
 			'sort_order' => isset($data['sort_order']) ? (int)$data['sort_order'] : 0
@@ -36,6 +38,7 @@ class ModelSaleProjectGroup extends Model {
 		$sql = "SELECT * FROM " . DB_PREFIX . "project_group pg  ";
 			
 		$sort_data = array(
+			'pg.keyword',
 			'pg.name',
 			'pg.show',
 			'pg.sort_order'

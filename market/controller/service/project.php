@@ -7,101 +7,103 @@ class ControllerServiceProject extends Controller {
 		
 		$this->language->load('service/project');
 		
-		$this->load->model('service/project');
- 		
-		if (isset($this->request->get['project_id'])) {
-			$project_info = $this->model_service_project->getProject($this->request->get['project_id']);
-			
-		}
-
-        $this->document->setTitle($this->language->get('heading_title'));
+        
         $this->document->addStyle('market/view/theme/yuankong/stylesheet/yk_zt.css');
-    	$this->document->addScript('market/view/theme/yuankong/javascript/validation.js');
+        $this->document->addScript('market/view/theme/yuankong/javascript/validation.js');
+        $this->load->model('service/project');
 
-      	$this->data['breadcrumbs'] = array();
+        $this->data['heading_title'] = $this->language->get('heading_title');
+        $this->data['column_telephone'] = $this->language->get('column_telephone');
+        $this->data['column_account'] = $this->language->get('column_account');
+        $this->data['column_group'] = $this->language->get('column_group');
+        $this->data['column_status'] = $this->language->get('column_status');
+        $this->data['column_date_applied'] = $this->language->get('column_date_applied');
 
-      	$this->data['breadcrumbs'][] = array(
-        	'text'      => $this->language->get('text_home'),
-			'href'      => $this->url->link('common/home'),        	
-        	'separator' => false
-      	); 
+        $this->data['action'] = $this->url->link('service/project/apply', '', 'SSL');
+        $this->data['button_view'] = $this->language->get('button_view');
+        
+        $keyword = isset($this->request->get['group']) ? strtolower(trim($this->request->get['group'])) : 'index';
+        $group_id = $this->model_service_project->getProjectIdByKeyword($keyword);
+        if (isset($this->request->get['page'])) {
+            $page = $this->request->get['page'];
+        } else {
+            $page = 1;
+        }
+        
+        $this->data['group_id'] = $group_id;
+        $this->data['projects'] = array();
+        
+        $total = $this->model_service_project->getTotalProjects($group_id);
+        
+        $results = $this->model_service_project->getProjects($group_id,($page - 1) * 10, 10);
+        
+        foreach ($results as $result) {
+            if(isset($result['status'])){
+                switch ((int)$result['status']) {
+                    case 1:
+                        $status_text = $this->language->get('text_project_pending');
+                        break;
+                    case 2:
+                        $status_text = $this->language->get('text_project_processing');
+                        break;
+                    case 3:
+                        $status_text = $this->language->get('text_project_completed');
+                        break;
+                    default:
+                        $status_text = $this->language->get('text_unknown');
+                        break;
+                }
+                $result['status_text'] = $status_text;
+            }
+            $result['group'] = $result['name'];
+            $result['date_applied'] = date('Y-m-d',strtotime($result['date_applied']));
+            $result['telephone'] = substr_replace($result['telephone'],'****',3,4);
+            $this->data['projects'][] = $result;
+        }
 
-      	$this->data['breadcrumbs'][] = array(
-        	'text'      => $this->language->get('text_account'),
-			'href'      => $this->url->link('account/account', '', 'SSL'),        	
-        	'separator' => $this->language->get('text_separator')
-      	);
-		
-		$url = '';
-		
-		if (isset($this->request->get['page'])) {
-			$url .= '&page=' . $this->request->get['page'];
-		}
-				
-      	$this->data['breadcrumbs'][] = array(
-        	'text'      => $this->language->get('heading_title'),
-			'href'      => $this->url->link('service/project', $url, 'SSL'),        	
-        	'separator' => $this->language->get('text_separator')
-      	);
+        $this->data['groups'] = $this->model_service_project->getProjectGroups();
 
-		$this->data['heading_title'] = $this->language->get('heading_title');
+        switch ($keyword) {
+            case 'design':
+                $this->document->setTitle($this->language->get('title_design'));
+                $template = 'project_design';
+                break;
+            case 'project':
+                $this->document->setTitle($this->language->get('title_project'));
+                $template = 'project_project';
+                break;
+            case 'check':
+                $this->document->setTitle($this->language->get('title_check'));
+                $template = 'project_check';
+                break;
+            case 'approve':
+                $this->document->setTitle($this->language->get('title_approve'));
+                $template = 'project_approve';
+                break;
+            case 'maintenance':
+                $this->document->setTitle($this->language->get('title_maintenance'));
+                $template = 'project_maintenance';
+                break;
+            case 'trusteeship':
+                $this->document->setTitle($this->language->get('title_trusteeship'));
+                $template = 'project_trusteeship';
+                break;
+            case 'train':
+                $this->document->setTitle($this->language->get('title_train'));
+                $template = 'project_train';
+                break;
+            case 'guarantee':
+                $this->document->setTitle($this->language->get('title_guarantee'));
+                $template = 'project_guarantee';
+                break;
+            default:
+                $this->document->setTitle($this->language->get('heading_title'));
+                $template = 'project';
+                break;
+        }
 
-		$this->data['column_telephone'] = $this->language->get('column_telephone');
-		$this->data['column_account'] = $this->language->get('column_account');
-		$this->data['column_group'] = $this->language->get('column_group');
-		$this->data['column_status'] = $this->language->get('column_status');
-		$this->data['column_date_applied'] = $this->language->get('column_date_applied');
 
-		$this->data['action'] = $this->url->link('service/project/apply', '', 'SSL');
-		$this->data['button_view'] = $this->language->get('button_view');
-		
-		if (isset($this->request->get['page'])) {
-			$page = $this->request->get['page'];
-		} else {
-			$page = 1;
-		}
-		
-		$this->data['projects'] = array();
-		
-		$total = $this->model_service_project->getTotalProjects();
-		
-		$results = $this->model_service_project->getProjects(($page - 1) * 10, 10);
-		
-		foreach ($results as $result) {
-			if(isset($result['status'])){
-				switch ((int)$result['status']) {
-					case 1:
-						$status_text = $this->language->get('text_project_pending');
-						break;
-					case 2:
-						$status_text = $this->language->get('text_project_processing');
-						break;
-					case 3:
-						$status_text = $this->language->get('text_project_completed');
-						break;
-					default:
-						$status_text = $this->language->get('text_unknown');
-						break;
-				}
-				$result['status_text'] = $status_text;
-			}
-			$result['group'] = $result['name'];
-			$result['date_applied'] = date('Y-m-d',strtotime($result['date_applied']));
-			$result['telephone'] = substr_replace($result['telephone'],'****',3,4);
-			$this->data['projects'][] = $result;
-		}
-
-		$pagination = new Pagination();
-		$pagination->total = $total;
-		$pagination->page = $page;
-		$pagination->limit = 10;
-		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = $this->url->link('service/project', 'page={page}', 'SSL');
-		
-		$this->data['pagination'] = $pagination->render();
-		$this->data['groups'] = $this->model_service_project->getProjectGroups();
-
-		$this->template = $this->config->get('config_template') . '/template/service/project.tpl';
+		$this->template = $this->config->get('config_template') . '/template/service/'.$template.'.tpl';
 		
 		$this->children = array(
 			'common/footer',
@@ -110,6 +112,8 @@ class ControllerServiceProject extends Controller {
 						
 		$this->response->setOutput($this->render());				
 	}
+
+
 	
 	public function info() { 
 		$this->language->load('service/project');

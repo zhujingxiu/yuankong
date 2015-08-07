@@ -51,7 +51,7 @@ class ControllerCommonFileManager extends Controller {
 		}
 		
 		$this->template = 'common/filemanager.tpl';
-		
+		$this->response->addHeader('Content-Type: charset=utf-8');
 		$this->response->setOutput($this->render());
 	}	
 	
@@ -421,6 +421,7 @@ class ControllerCommonFileManager extends Controller {
 		
 		if (isset($this->request->post['directory'])) {
 			if (isset($this->request->files['image']) && $this->request->files['image']['tmp_name']) {
+				
 				$filename = basename(html_entity_decode($this->request->files['image']['name'], ENT_QUOTES, 'UTF-8'));
 				
 				if ((strlen($filename) < 3) || (strlen($filename) > 255)) {
@@ -433,7 +434,7 @@ class ControllerCommonFileManager extends Controller {
 					$json['error'] = $this->language->get('error_directory');
 				}
 				
-				if ($this->request->files['image']['size'] > 2000000) {
+				if ($this->request->files['image']['size'] > 5100000) {
 					$json['error'] = $this->language->get('error_file_size');
 				}
 				
@@ -476,7 +477,13 @@ class ControllerCommonFileManager extends Controller {
       		$json['error'] = $this->language->get('error_permission');  
     	}
 		
-		if (!isset($json['error'])) {	
+		if (!isset($json['error'])) {
+			$fileInfo = pathinfo($this->request->files['image']['name']);
+			if (preg_match("/[\x7f-\xff]/", $fileInfo['filename'])) { 	
+				$filename = date('ymdHis')."_".substr(md5(uniqid()),rand(0, 15),4).'.'.$fileInfo['extension'];
+			}else{
+				$filename = $fileInfo['filename']."_".substr(md5(uniqid()),rand(0, 15),4).'.'.$fileInfo['extension'];
+			}
 			if (@move_uploaded_file($this->request->files['image']['tmp_name'], $directory . '/' . $filename)) {		
 				$json['success'] = $this->language->get('text_uploaded');
 			} else {
