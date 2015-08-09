@@ -23,6 +23,7 @@ class ControllerCommonHeader extends Controller {
 		
 		$this->data['text_company'] = $this->language->get('text_company');
 		$this->data['text_company_group'] = $this->language->get('text_company_group');
+		$this->data['text_company_zone'] = $this->language->get('text_company_zone');
 		$this->data['text_backup'] = $this->language->get('text_backup');
 		$this->data['text_banner'] = $this->language->get('text_banner');
 		$this->data['text_catalog'] = $this->language->get('text_catalog');
@@ -118,6 +119,7 @@ class ControllerCommonHeader extends Controller {
 			$this->data['home'] = $this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['company'] = $this->url->link('sale/company', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['company_group'] = $this->url->link('extension/company_group', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['company_zone'] = $this->url->link('extension/company_zone', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['backup'] = $this->url->link('tool/backup', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['banner'] = $this->url->link('design/banner', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['category'] = $this->url->link('catalog/category', 'mode=tree&token=' . $this->session->data['token'], 'SSL');

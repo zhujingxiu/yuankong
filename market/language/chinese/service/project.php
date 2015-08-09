@@ -3,11 +3,12 @@
 $_['heading_title']         = '消防前置条件_消防网上商城【消防E站官网】';
 $_['title_design']          = '消防设计_消防网上商城【消防E站官网】';
 $_['title_project']          = '消防工程_消防网上商城【消防E站官网】';
-$_['title_check']          = '消防检测_消防网上商城【消防E站官网】';
+$_['title_check']           = '消防检测_消防网上商城【消防E站官网】';
 $_['title_approve']          = '消防审核验收_消防网上商城【消防E站官网】';
 $_['title_maintenance']          = '消防维保_消防网上商城【消防E站官网】';
 $_['title_trusteeship']          = '消防托管_消防网上商城【消防E站官网】';
-$_['title_desing']          = '消防设计_消防网上商城【消防E站官网】';
+$_['title_train']           = '消防培训_消防网上商城【消防E站官网】';
+$_['title_guarantee']          = '消防保障_消防网上商城【消防E站官网】';
 
 // Text
 $_['text_account']          = '账号';

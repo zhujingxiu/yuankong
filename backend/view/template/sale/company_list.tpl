@@ -22,20 +22,26 @@
           <thead>
             <tr>
               <td width="1" style="text-align: center;"><input type="checkbox" onclick="$('input[name*=\'selected\']').attr('checked', this.checked);" /></td>
-              <td class="left"><?php if ($sort == 'name') { ?>
-                <a href="<?php echo $sort_name; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_name; ?></a>
+              <td class="left"><?php if ($sort == 'c.title') { ?>
+                <a href="<?php echo $sort_title; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_title; ?></a>
                 <?php } else { ?>
-                <a href="<?php echo $sort_name; ?>"><?php echo $column_name; ?></a>
+                <a href="<?php echo $sort_title; ?>"><?php echo $column_title; ?></a>
                 <?php } ?></td>
-              <td class="left"><?php if ($sort == 'a.group_id') { ?>
-                <a href="<?php echo $sort_group; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_group; ?></a>
+              <td class="left"><?php echo $column_group; ?></td>
+              <td class="left"><?php if ($sort == 'c.corporation') { ?>
+                <a href="<?php echo $sort_corporation; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_corporation; ?></a>
                 <?php } else { ?>
-                <a href="<?php echo $sort_group; ?>"><?php echo $column_group; ?></a>
+                <a href="<?php echo $sort_corporation; ?>"><?php echo $column_corporation; ?></a>
                 <?php } ?></td>
-              <td class="left"><?php if ($sort == 'c.email') { ?>
-                <a href="<?php echo $sort_email; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_email; ?></a>
+              <td class="left"><?php if ($sort == 'c.mobile_phone') { ?>
+                <a href="<?php echo $sort_mobile_phone; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_mobile_phone; ?></a>
                 <?php } else { ?>
-                <a href="<?php echo $sort_email; ?>"><?php echo $column_email; ?></a>
+                <a href="<?php echo $sort_mobile_phone; ?>"><?php echo $column_mobile_phone; ?></a>
+                <?php } ?></td>
+              <td class="left"><?php if ($sort == 'c.zone_id') { ?>
+                <a href="<?php echo $sort_zone; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_zone; ?></a>
+                <?php } else { ?>
+                <a href="<?php echo $sort_zone; ?>"><?php echo $column_zone; ?></a>
                 <?php } ?></td>
               <td class="left"><?php if ($sort == 'c.status') { ?>
                 <a href="<?php echo $sort_status; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_status; ?></a>
@@ -58,7 +64,7 @@
           <tbody>
             <tr class="filter">
               <td></td>
-              <td><input type="text" name="filter_name" value="<?php echo $filter_name; ?>" /></td>
+              <td><input type="text" name="filter_title" value="<?php echo $filter_title; ?>" /></td>
               <td><select name="filter_group_id">
                   <option value="*"></option>
                   <?php foreach ($groups as $item): ?>
@@ -70,7 +76,18 @@
                   <?php endforeach ?>
                   
                 </select></td>
-              <td><input type="text" name="filter_email" value="<?php echo $filter_email; ?>" /></td>
+              <td><input type="text" name="filter_corporation" value="<?php echo $filter_corporation; ?>" /></td>
+              <td><input type="text" name="filter_mobile_phone" value="<?php echo $filter_mobile_phone; ?>" /></td>
+              <td><select name="filter_zone_id">
+                  <option value="*"></option>
+                  <?php foreach ($groups as $item): ?>
+                  <?php if ($filter_group_id == $item['group_id']) { ?>
+                  <option value="<?php echo $item['group_id'] ?>" selected="selected"><?php echo $item['name']; ?></option>
+                  <?php } else { ?>
+                  <option value="<?php echo $item['group_id'] ?>"><?php echo $item['name']; ?></option>
+                  <?php } ?>
+                  <?php endforeach ?>
+                </select></td>
               <td><select name="filter_status">
                   <option value="*"></option>
                   <?php if ($filter_status) { ?>
@@ -108,9 +125,11 @@
                 <?php } else { ?>
                 <input type="checkbox" name="selected[]" value="<?php echo $item['affiliate_id']; ?>" />
                 <?php } ?></td>
-              <td class="left"><?php echo $item['name']; ?></td>
+              <td class="left"><?php echo $item['title']; ?></td>
               <td class="left"><?php echo $item['group']; ?></td>
-              <td class="left"><?php echo $item['email']; ?></td>
+              <td class="left"><?php echo $item['corporation']; ?></td>
+              <td class="left"><?php echo $item['mobile_phone']; ?></td>
+              <td class="left"><?php echo $item['zone']; ?></td>
               <td class="left"><?php echo $item['status']; ?></td>
               <td class="left"><?php echo $item['approved']; ?></td>
               <td class="left"><?php echo $item['date_added']; ?></td>
@@ -121,7 +140,7 @@
             <?php } ?>
             <?php } else { ?>
             <tr>
-              <td class="center" colspan="8"><?php echo $text_no_results; ?></td>
+              <td class="center" colspan="10"><?php echo $text_no_results; ?></td>
             </tr>
             <?php } ?>
           </tbody>
@@ -133,44 +152,16 @@
 </div>
 <script type="text/javascript"><!--
 function filter() {
-	url = 'index.php?route=sale/affiliate&token=<?php echo $token; ?>';
-	
-	var filter_name = $('input[name=\'filter_name\']').attr('value');
-	
-	if (filter_name) {
-		url += '&filter_name=' + encodeURIComponent(filter_name);
-	}
-	
-	var filter_email = $('input[name=\'filter_email\']').attr('value');
-	
-	if (filter_email) {
-		url += '&filter_email=' + encodeURIComponent(filter_email);
-	}
-	
-	var filter_group_id = $('select[name=\'filter_group_id\']').attr('value');
-	
-	if (filter_group_id != '*') {
-		url += '&filter_group_id=' + encodeURIComponent(filter_group_id);
-	}	
-	
-	var filter_status = $('select[name=\'filter_status\']').attr('value');
-	
-	if (filter_status != '*') {
-		url += '&filter_status=' + encodeURIComponent(filter_status); 
-	}	
-	
-	var filter_approved = $('select[name=\'filter_approved\']').attr('value');
-	
-	if (filter_approved != '*') {
-		url += '&filter_approved=' + encodeURIComponent(filter_approved);
-	}	
-	
-	var filter_date_added = $('input[name=\'filter_date_added\']').attr('value');
-	
-	if (filter_date_added) {
-		url += '&filter_date_added=' + encodeURIComponent(filter_date_added);
-	}
-	
+	url = 'index.php?route=sale/company&token=<?php echo $token; ?>';
+	var paramArr=[];
+  $("tr.filter input[name],tr.filter select[name]").each(function(){
+    if($(this).val()&&$(this).val()!='*'){
+      paramArr.push($(this).attr("name")+"="+encodeURIComponent($(this).val()))
+    }
+  });
+  if(paramArr.length>0){
+    url+="&"+paramArr.join("&");
+  }
 	location = url;
 }
 //--></script> 

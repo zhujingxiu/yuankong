@@ -7,46 +7,55 @@
             return  new Alertbox(opts).init();
         }
         this.opts=opts||{};
-        this.type=this.opts.type||"mini";
-        this.title = this.opts.title || "";
-        this.msg = this.opts.msg || "";
+        this.type=this.opts.type;
+        this.msg=this.opts.msg || "";
+        this.delay=this.opts.delay;
     }
     Alertbox.prototype={
         constructor:Alertbox,
         init: function(){
             var me=this;
             me.setStyle();
-            console.log("123");
+            me.getbox();
+            me.minEvent();
         },
         setStyle: function(){
             var self = this,
                 style = d.createElement("style"),
-                cssStr = ".alert-box{position:absolute;left:0;top:0;border-radius:0.2rem;background:#FFF;-webkit-box-sizing:border-box;z-index:100;font-size:0.6rem;}" +
-                    ".alert-msg{padding:0.4rem 0.6rem 0.6rem;text-align:center;line-height:1.8;word-break:break-all;}" +
-                    ".alert-title{padding:0.6rem 0.6rem 0;text-align:center;}" +
-                    ".alert-btn{display:-webkit-flex !important;display:-webkit-box;border-top:1px solid #DCDCDC;}" +
-                    ".alert-btn a{display:block;-webkit-flex:1 !important;-webkit-box-flex:1;height:1.68rem;line-height:1.68rem;text-align:center;}" +
-                    ".alert-btn a.alert-confirm{border-left:1px solid #DCDCDC;color:#EDA200;}" +
-                    ".alert-btn a.alert-confirm.single{border-left:none;}" +
-                    ".alert-mini-box{border-radius:0.2rem;background:rgba(0,0,0,.7);color:#fff;}";
+                cssStr = ".alertbox { background: #f8f8f8; border:1px solid #eee; border-radius: 5px; -webkit-border-radius: 5px;  position: fixed; *position: absolute; top: 25%; left: 50%; width: 360px; margin-left: -210px; padding:30px; z-index: 111; }"+
+                         ".alertbox h3 { line-height: 40px; font-size: 16px; color: #333;text-align: center;}"+
+                         ".truebtn { background: url('imgs/icon/icon2.png') no-repeat -71px -170px; height: 48px; width: 48px; display: inline-block;}"+
+                         ".falsebtn { background: url('imgs/icon/icon2.png') no-repeat -71px -380px; height: 48px; width: 48px; display: inline-block;}"+
+                         ".alertp { padding-bottom: 20px; text-align: center;}";
             style.type= "text/css";
             style.innerText = cssStr;
             d.head.appendChild(style);
         },
+        getbox:function(){
+            var me=this;
+            var alertbox="";
+            var alertid= d.createElement("div");
+            alertid.id="alertbox";
+            if(me.type){
+                alertbox+='<div class="alertbox">'+
+                '<p class="alertp">'+'<i class="truebtn"></i>'+'</p>'+
+                '<h3>'+ me.msg+'</h3>'+
+                '</div>';
+            }else{
+                alertbox+='<div class="alertbox" id="alertbox">'+
+                    '<p class="alertp">'+'<i class="falsebtn"></i>'+'</p>'+
+                    '<h3>'+ me.msg+'</h3>'+
+                    '</div>';
+            };
+            alertid.innerHTML=alertbox;
+            d.body.appendChild(alertid);
+
+        },
         minEvent: function(){
             var self = this;
+            var id= d.getElementById("alertbox");
             setTimeout(function(){
-                if (navigator.userAgent.match(/iPhone/i)) {
-                    $(self.alertBox).fadeOut(500, function(){
-                        self.getEl(d, "body").removeChild(self.alertBox);
-                        self.callback && typeof self.callback == "function" && self.callback();
-                    });
-                } else{
-                    self.remove(self.alertBox);
-                    self.callback && typeof self.callback == "function" && self.callback();
-                }
-                self.remove(self.getEl(d, "#alertMask_"+self.uuid));
-
+                d.body.removeChild(id);
             },self.delay);
         }
     }

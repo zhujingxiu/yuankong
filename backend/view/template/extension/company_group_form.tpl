@@ -27,6 +27,10 @@
               </td>
           </tr>
           <tr>
+            <td><?php echo $entry_tag; ?></td>
+            <td><input type="text" name="tag" value="<?php echo $tag ?>" /> </td>
+          </tr>
+          <tr>
             <td><?php echo $entry_status; ?></td>
             <td>
               <select name="status">

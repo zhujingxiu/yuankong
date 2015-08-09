@@ -15,8 +15,8 @@ img { vertical-align: top;}
 .c-xm-dd span.on { background: #dedede;}
 .hov .c-xm-dd {display:block;}
 .zt-secbox{ background: #f3f2f0;padding: 40px 0 30px; }
-.boxtable { width:100%; border: 1px solid #e4e4e4; }
-.boxtable td { border-bottom: 1px solid #e4e4e4; border-right:1px solid #e4e4e4; background: #fff; padding: 20px 10px; line-height: 40px; text-align: center;}
+.boxtable { width:100%; border: 1px solid #ccc; }
+.boxtable td { border-bottom: 1px solid #ccc; border-right:1px solid #ccc; background: #fff; padding: 20px 10px; line-height: 40px; text-align: center;}
 .boxtable td.f-b-c { font-size: 24px;color: #C30D23; font-weight: bold;}
 .boxtable td.b-c { background: #C30D23; color: #fff;}
 .w200 { width: 195px; padding-left: 5px;}
@@ -34,11 +34,15 @@ img { vertical-align: top;}
 .ptb {padding: 40px 0 30px;}
 .hs-zt-r-bg { background: url("../yk_img/icon/zt-r-pic1.png") repeat; }
 .zt-title h3 { font-size: 28px; color: #333; font-weight: bold; text-align: center; line-height: 40px;}
-.zt-fix {display: none; background: #C30D23; position: fixed; bottom: 0; left: 0; width: 100%; padding: 15px 0; *position: absolute;_position: absolute; overflow: hidden;}
+.zt-fix {background: #C30D23; width: 100%; padding: 15px 0; margin-top: 15px; overflow: hidden;}
 .zt-fix .gc-tab-sub { width: 100px; background: #fff; color: #333;}
+.fixedes { position: fixed; bottom: 0; left: 0;*position: absolute;_position: absolute; }
 .qz-bannerbox { background: #95969b;}
 .fix-gc .c_r { color: #fff !important;}
 .gc-bannerbox { background: #32d3c3; padding: 35px 0 20px;}
 .jc-bannerbox { background: #fe7da6; padding: 40px 0 30px;}
 .ys-bannerbox { background: #01af63; padding: 40px 0 30px;}
 .wb-bannerbox { background: #ff7022; padding: 40px 0 30px;}
+.tg-bannerbox { background: #7b8cf6; padding: 40px 0 30px;}
+.px-bannerbox { background: #026bd4; padding: 40px 0 30px;}
+.bz-bannerbox { background: #07a7bd; padding: 40px 0 30px;}

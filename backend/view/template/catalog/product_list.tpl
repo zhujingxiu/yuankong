@@ -123,35 +123,15 @@
 function filter() {
 	url = 'index.php?route=catalog/product&token=<?php echo $token; ?>';
 	
-	var filter_name = $('input[name=\'filter_name\']').attr('value');
-	
-	if (filter_name) {
-		url += '&filter_name=' + encodeURIComponent(filter_name);
-	}
-	
-	var filter_model = $('input[name=\'filter_model\']').attr('value');
-	
-	if (filter_model) {
-		url += '&filter_model=' + encodeURIComponent(filter_model);
-	}
-	
-	var filter_price = $('input[name=\'filter_price\']').attr('value');
-	
-	if (filter_price) {
-		url += '&filter_price=' + encodeURIComponent(filter_price);
-	}
-	
-	var filter_quantity = $('input[name=\'filter_quantity\']').attr('value');
-	
-	if (filter_quantity) {
-		url += '&filter_quantity=' + encodeURIComponent(filter_quantity);
-	}
-	
-	var filter_status = $('select[name=\'filter_status\']').attr('value');
-	
-	if (filter_status != '*') {
-		url += '&filter_status=' + encodeURIComponent(filter_status);
-	}	
+  var paramArr=[];
+  $("tr.filter input[name],tr.filter select[name]").each(function(){
+    if($(this).val()&&$(this).val()!='*'){
+      paramArr.push($(this).attr("name")+"="+encodeURIComponent($(this).val()))
+    }
+  });
+  if(paramArr.length>0){
+    url+="&"+paramArr.join("&");
+  }
 
 	location = url;
 }

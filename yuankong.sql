@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2015 年 08 月 07 日 15:45
+-- 生成日期: 2015 年 08 月 09 日 15:37
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.4.3
 
@@ -21843,9 +21843,9 @@ INSERT INTO `yk_category_path` (`category_id`, `path_id`, `level`) VALUES
 
 CREATE TABLE IF NOT EXISTS `yk_company` (
   `company_id` int(11) NOT NULL AUTO_INCREMENT,
-  `group_id` smallint(6) NOT NULL DEFAULT '0',
   `zone_id` int(11) NOT NULL DEFAULT '0',
   `title` varchar(64) DEFAULT NULL,
+  `logo` varchar(256) DEFAULT NULL,
   `corporation` varchar(64) DEFAULT NULL,
   `mobile_phone` varchar(16) NOT NULL,
   `identity_number` varchar(32) DEFAULT NULL,
@@ -21854,8 +21854,14 @@ CREATE TABLE IF NOT EXISTS `yk_company` (
   `fax` varchar(32) NOT NULL,
   `website` varchar(255) NOT NULL,
   `code` varchar(64) NOT NULL,
+  `permit` tinyint(4) NOT NULL DEFAULT '0',
+  `recommend` tinyint(4) NOT NULL DEFAULT '0',
+  `deposit` int(11) NOT NULL DEFAULT '0',
   `commission` decimal(4,2) NOT NULL DEFAULT '0.00',
-  `address_id` int(11) NOT NULL DEFAULT '0',
+  `address` varchar(256) DEFAULT NULL,
+  `area_zone` varchar(128) DEFAULT NULL,
+  `areas` varchar(128) DEFAULT NULL,
+  `postcode` varchar(8) DEFAULT NULL,
   `ip` varchar(40) NOT NULL,
   `status` tinyint(1) NOT NULL,
   `approved` tinyint(1) NOT NULL,
@@ -21867,8 +21873,56 @@ CREATE TABLE IF NOT EXISTS `yk_company` (
 -- 转存表中的数据 `yk_company`
 --
 
-INSERT INTO `yk_company` (`company_id`, `group_id`, `zone_id`, `title`, `corporation`, `mobile_phone`, `identity_number`, `email`, `telephone`, `fax`, `website`, `code`, `commission`, `address_id`, `ip`, `status`, `approved`, `date_added`) VALUES
-(1, 1, 0, '是的撒旦', NULL, '18260051051', NULL, '18260051051@139.com', '111111', '', '', '55b88477d5f55', '5.00', 0, '', 1, 0, '2015-07-29 15:47:53');
+INSERT INTO `yk_company` (`company_id`, `zone_id`, `title`, `logo`, `corporation`, `mobile_phone`, `identity_number`, `email`, `telephone`, `fax`, `website`, `code`, `permit`, `recommend`, `deposit`, `commission`, `address`, `area_zone`, `areas`, `postcode`, `ip`, `status`, `approved`, `date_added`) VALUES
+(1, 3, '天朝消防', 'data/logo.png', '萧十一郎', '18260051051', '321321199909091119', '18260051051@139.com', '111111', '', '', '55b88477d5f55', 0, 1, 10000, '5.00', '北京西路产业孵化器', '江苏省 苏州市 太仓市', '12|988|4346', '', '', 1, 0, '2015-07-29 15:47:53');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `yk_company_case`
+--
+
+CREATE TABLE IF NOT EXISTS `yk_company_case` (
+  `case_id` int(11) NOT NULL AUTO_INCREMENT,
+  `company_id` int(11) NOT NULL DEFAULT '0',
+  `name` varchar(64) NOT NULL,
+  `note` text,
+  `image` varchar(255) DEFAULT NULL,
+  `sort` smallint(6) NOT NULL DEFAULT '0',
+  `date_added` datetime DEFAULT NULL,
+  PRIMARY KEY (`case_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+--
+-- 转存表中的数据 `yk_company_case`
+--
+
+INSERT INTO `yk_company_case` (`case_id`, `company_id`, `name`, `note`, `image`, `sort`, `date_added`) VALUES
+(1, 0, '大润发', '', 'data/case/logopic6.jpg', 0, NULL),
+(2, 0, 'SubWay', '', 'data/case/logopic2.jpg', 0, NULL),
+(3, 0, '肯德基', '', 'data/case/logopic1.jpg', 0, NULL),
+(4, 0, '沃尔玛', '', 'data/case/logopic5.jpg', 0, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `yk_company_description`
+--
+
+CREATE TABLE IF NOT EXISTS `yk_company_description` (
+  `company_id` int(11) NOT NULL,
+  `title` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `text` text COLLATE utf8_unicode_ci,
+  `image` text COLLATE utf8_unicode_ci,
+  `date_modified` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- 转存表中的数据 `yk_company_description`
+--
+
+INSERT INTO `yk_company_description` (`company_id`, `title`, `text`, `image`, `date_modified`) VALUES
+(1, '公司采风', '公司采风公司采公司采风公司采风风公司采风公司采风公司采风公公司采风司采公司采风风公司采风公司采风公司采风', NULL, '2015-08-09 21:44:28');
 
 -- --------------------------------------------------------
 
@@ -21877,15 +21931,24 @@ INSERT INTO `yk_company` (`company_id`, `group_id`, `zone_id`, `title`, `corpora
 --
 
 CREATE TABLE IF NOT EXISTS `yk_company_file` (
+  `file_id` int(11) NOT NULL AUTO_INCREMENT,
   `company_id` int(11) NOT NULL,
   `mode` enum('identity','permit') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'identity',
   `path` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
+  `sort` smallint(6) NOT NULL DEFAULT '0',
   `note` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `customer_id` int(11) NOT NULL DEFAULT '0',
-  `user_id` int(11) NOT NULL DEFAULT '0',
+  `status` tinyint(4) NOT NULL DEFAULT '0',
   `date_added` datetime NOT NULL,
-  `date_modified` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  PRIMARY KEY (`file_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
+--
+-- 转存表中的数据 `yk_company_file`
+--
+
+INSERT INTO `yk_company_file` (`file_id`, `company_id`, `mode`, `path`, `sort`, `note`, `status`, `date_added`) VALUES
+(1, 1, 'identity', '', 1, '', 0, '2015-08-09 22:45:28'),
+(2, 1, 'identity', 'data/logopic5.jpg', 1, 'safdasfasfdasdasdasdas', 0, '2015-08-09 22:46:20');
 
 -- --------------------------------------------------------
 
@@ -21896,6 +21959,7 @@ CREATE TABLE IF NOT EXISTS `yk_company_file` (
 CREATE TABLE IF NOT EXISTS `yk_company_group` (
   `group_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) DEFAULT NULL,
+  `tag` varchar(32) DEFAULT NULL,
   `status` tinyint(4) NOT NULL DEFAULT '1',
   `show` tinyint(4) NOT NULL DEFAULT '0',
   `sort_order` int(3) NOT NULL,
@@ -21906,11 +21970,82 @@ CREATE TABLE IF NOT EXISTS `yk_company_group` (
 -- 转存表中的数据 `yk_company_group`
 --
 
-INSERT INTO `yk_company_group` (`group_id`, `name`, `status`, `show`, `sort_order`) VALUES
-(1, '设计公司', 1, 0, 1),
-(2, '检测公司', 1, 0, 1),
-(3, '维保公司', 1, 0, 1),
-(4, '工程公司', 1, 0, 1);
+INSERT INTO `yk_company_group` (`group_id`, `name`, `tag`, `status`, `show`, `sort_order`) VALUES
+(1, '设计公司', '设计', 1, 1, 1),
+(2, '检测公司', '检测', 1, 1, 1),
+(3, '维保公司', '维保', 1, 1, 1),
+(4, '工程公司', '工程', 1, 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `yk_company_member`
+--
+
+CREATE TABLE IF NOT EXISTS `yk_company_member` (
+  `member_id` int(11) NOT NULL AUTO_INCREMENT,
+  `company_id` int(11) NOT NULL,
+  `name` varchar(128) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `position` varchar(128) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `avatar` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `note` varchar(512) COLLATE utf8_unicode_ci NOT NULL,
+  `sort` smallint(6) NOT NULL DEFAULT '0',
+  `date_added` datetime DEFAULT NULL,
+  PRIMARY KEY (`member_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- 转存表中的数据 `yk_company_member`
+--
+
+INSERT INTO `yk_company_member` (`member_id`, `company_id`, `name`, `position`, `avatar`, `note`, `sort`, `date_added`) VALUES
+(1, 1, '沃尔玛', '总经理', 'data/logopic5.jpg', '阿萨德撒大声的撒', 4, '2015-08-09 23:02:29');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `yk_company_to_group`
+--
+
+CREATE TABLE IF NOT EXISTS `yk_company_to_group` (
+  `company_id` int(11) NOT NULL DEFAULT '0',
+  `group_id` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- 转存表中的数据 `yk_company_to_group`
+--
+
+INSERT INTO `yk_company_to_group` (`company_id`, `group_id`) VALUES
+(1, 1),
+(1, 3);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `yk_company_zone`
+--
+
+CREATE TABLE IF NOT EXISTS `yk_company_zone` (
+  `zone_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(128) DEFAULT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT '1',
+  `show` tinyint(4) NOT NULL DEFAULT '0',
+  `sort_order` int(3) NOT NULL,
+  PRIMARY KEY (`zone_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+
+--
+-- 转存表中的数据 `yk_company_zone`
+--
+
+INSERT INTO `yk_company_zone` (`zone_id`, `name`, `status`, `show`, `sort_order`) VALUES
+(1, '苏州市区', 1, 1, 1),
+(2, '太仓', 1, 1, 1),
+(3, '张家港', 1, 1, 1),
+(4, '昆山', 1, 1, 1),
+(5, '上海', 1, 1, 5),
+(6, '常熟', 1, 0, 2);
 
 -- --------------------------------------------------------
 
@@ -22055,21 +22190,6 @@ CREATE TABLE IF NOT EXISTS `yk_customer_ban_ip` (
   PRIMARY KEY (`customer_ban_ip_id`),
   KEY `ip` (`ip`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- 表的结构 `yk_customer_company_zone`
---
-
-CREATE TABLE IF NOT EXISTS `yk_customer_company_zone` (
-  `zone_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(128) DEFAULT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT '1',
-  `show` tinyint(4) NOT NULL DEFAULT '0',
-  `sort_order` int(3) NOT NULL,
-  PRIMARY KEY (`zone_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 -- --------------------------------------------------------
 
@@ -23472,7 +23592,7 @@ CREATE TABLE IF NOT EXISTS `yk_setting` (
   `value` text NOT NULL,
   `serialized` tinyint(1) NOT NULL,
   PRIMARY KEY (`setting_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2088 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2089 ;
 
 --
 -- 转存表中的数据 `yk_setting`
@@ -23609,7 +23729,7 @@ INSERT INTO `yk_setting` (`setting_id`, `group`, `key`, `value`, `serialized`) V
 (1978, 'config', 'config_province_id', '12', 0),
 (1977, 'config', 'config_layout_id', '4', 0),
 (1622, 'wiki', 'wiki_module', 'a:1:{i:0;a:6:{s:9:"layout_id";s:2:"12";s:8:"position";s:11:"column_left";s:6:"status";s:1:"1";s:5:"title";s:12:"消防百科";s:16:"additional_class";s:0:"";s:10:"sort_order";s:1:"1";}}', 1),
-(1733, 'oauth', 'oauth', 'a:4:{s:2:"qq";a:5:{s:9:"client_id";s:9:"101197861";s:13:"client_secret";s:32:"cad73abb978d36a30e965cd70adf0118";s:3:"img";s:18:"data/case/qq-l.png";s:4:"sort";s:1:"1";s:6:"status";s:1:"1";}s:5:"weibo";a:5:{s:9:"client_id";s:10:"3965874500";s:13:"client_secret";s:32:"b0c3c2b042e31bca4e6a86287cb6c842";s:3:"img";s:18:"data/case/wb-l.png";s:4:"sort";s:1:"2";s:6:"status";s:1:"1";}s:6:"alipay";a:5:{s:9:"client_id";s:0:"";s:13:"client_secret";s:0:"";s:3:"img";s:0:"";s:4:"sort";s:1:"0";s:6:"status";s:1:"0";}s:5:"baidu";a:5:{s:9:"client_id";s:0:"";s:13:"client_secret";s:0:"";s:3:"img";s:0:"";s:4:"sort";s:1:"0";s:6:"status";s:1:"0";}}', 1),
+(2088, 'oauth', 'oauth', 'a:4:{s:2:"qq";a:5:{s:9:"client_id";s:9:"101197861";s:13:"client_secret";s:32:"cad73abb978d36a30e965cd70adf0118";s:3:"img";s:18:"data/qq-l_de85.png";s:4:"sort";s:1:"1";s:6:"status";s:1:"1";}s:5:"weibo";a:5:{s:9:"client_id";s:10:"3965874500";s:13:"client_secret";s:32:"b0c3c2b042e31bca4e6a86287cb6c842";s:3:"img";s:18:"data/wb-l_08bf.png";s:4:"sort";s:1:"2";s:6:"status";s:1:"1";}s:6:"alipay";a:5:{s:9:"client_id";s:0:"";s:13:"client_secret";s:0:"";s:3:"img";s:0:"";s:4:"sort";s:1:"0";s:6:"status";s:1:"0";}s:5:"baidu";a:5:{s:9:"client_id";s:0:"";s:13:"client_secret";s:0:"";s:3:"img";s:0:"";s:4:"sort";s:1:"0";s:6:"status";s:1:"0";}}', 1),
 (1976, 'config', 'config_template', 'yuankong', 0),
 (1975, 'config', 'config_meta_description', '苏州源控', 0),
 (1732, 'ykliked', 'ykliked_module', 'a:1:{i:0;a:8:{s:5:"limit";s:1:"6";s:11:"image_width";s:3:"160";s:12:"image_height";s:2:"92";s:9:"layout_id";s:1:"7";s:8:"position";s:14:"content_bottom";s:6:"status";s:1:"1";s:16:"additional_class";s:4:"mt10";s:10:"sort_order";s:1:"1";}}', 1),

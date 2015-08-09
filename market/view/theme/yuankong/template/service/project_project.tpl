@@ -88,8 +88,6 @@
         <p><img src="asset/image/project/ztpic14.jpg" /></p>
     </div>
 </div>
-
-<?php echo $footer; ?>
 <!--底部浮动申请框-->
 <div class="zt-fix">
     <form id="find-form" method="post" action="<?php echo $action ?>">
@@ -97,6 +95,7 @@
         <p class="dib"></p>
         <input type="text" class="gc-tab-text gcname" name="account" placeholder="您的姓名" />
         <input type="text" class="gc-tab-text gctel" name="telephone" placeholder="您的手机号" />
+        <input type="hidden" name="group_id" value="<?php echo $group_id ?>"/>
         <input type="submit" class="gc-tab-sub " value="立即申请" />
     </div>
     </form>
@@ -119,5 +118,5 @@
             window.open('<?php echo $this->url->link("service/project") ?>'+'&group='+$(this).attr('data-val'));
         })
     });
-
 </script>
+<?php echo $footer; ?>

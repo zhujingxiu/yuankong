@@ -53,6 +53,7 @@ class ControllerModuleMiniLogin extends Controller {
                     $oauth_lists[$val['sort']] = array(
                         'tag'      => $key,
                         'status'   => $val['status'],
+                        'icon'      => $val['img'],
                         'href'     => $this->url->link('account/oauth/bind', 'tag='.$key, 'SSL')
                     );
                 }
@@ -68,7 +69,7 @@ class ControllerModuleMiniLogin extends Controller {
             $oauth_html .= '<p class="mt5">';
             foreach ($oauth_lists as $item) {
                 $oauth_html .= '<a class="pr15" href="' . $item['href'] . '" >' ;
-                $oauth_html .=  $item['tag'] ;
+                $oauth_html .= '<img src="'.TPL_IMG.$item['icon'].'" title="' . $item['tag'] . '">' ;
                 $oauth_html .= '</a>';
             }
             $oauth_html .= '</p>';

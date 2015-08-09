@@ -3,6 +3,7 @@ class ModelExtensionCompanyGroup extends Model {
     public function addCompanyGroup($data) {
         $fields = array(
             'name' => isset($data['name']) ? strip_tags(trim($data['name'])) : '',
+            'tag' => isset($data['tag']) ? strip_tags(trim($data['tag'])) : '',
             'show' => isset($data['show']) ? (int)$data['show'] : 0,
             'status' => isset($data['status']) ? (int)$data['status'] : 0,
             'sort_order' => isset($data['sort_order']) ? (int)$data['sort_order'] : 0
@@ -14,6 +15,7 @@ class ModelExtensionCompanyGroup extends Model {
     public function editCompanyGroup($group_id, $data) {
         $fields = array(
             'name' => isset($data['name']) ? strip_tags(trim($data['name'])) : 0,
+            'tag' => isset($data['tag']) ? strip_tags(trim($data['tag'])) : 0,
             'show' => isset($data['show']) ? (int)$data['show'] : 0,
             'status' => isset($data['status']) ? (int)$data['status'] : 0,
             'sort_order' => isset($data['sort_order']) ? (int)$data['sort_order'] : 0
@@ -37,6 +39,7 @@ class ModelExtensionCompanyGroup extends Model {
             
         $sort_data = array(
             'name',
+            'tag',
             'show',
             'status',
             'sort_order'

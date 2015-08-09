@@ -4,32 +4,62 @@ class ModelSaleCompany extends Model {
 		$area_zone = array();
 		if(isset($data['area']) && is_array($data['area'])){
 			foreach ($data['area'] as $area_id) {
-				$_area_info = $this->db->fetch('area',array('one'=>true,'condition'=> array('area_id'=>$area_id)));
-				if(!empty($_area_info['name'])){
-					$area_zone[] = $_area_info['name'];
+				if($area_id){
+					$_area_info = $this->db->fetch('area',array('one'=>true,'condition'=> array('area_id'=>$area_id)));
+					if(!empty($_area_info['name'])){
+						$area_zone[] = $_area_info['name'];
+					}
 				}				
 			}
 		}
-		reset($data['area']);
 		$salt = substr(md5(uniqid(rand(), true)), 0, 9);
+		$password = sha1($salt . sha1($salt . sha1($data['password'])));
 		$fileds = array(
-			'group_id' 		=> $data['group_id'],
-			'fullname' 		=> $data['fullname'],
+			'title' 		=> $data['title'],
+			'corporation' 	=> $data['corporation'],
 			'mobile_phone' 	=> $data['mobile_phone'],
 			'email' 		=> $data['email'],
 			'telephone' 	=> $data['telephone'],
 			'fax' 			=> $data['fax'],
 			'salt' 			=> $salt,
-			'password' 		=> sha1($salt . sha1($salt . sha1($data['password']))),
-			'company' 		=> $data['company'],
+			'password' 		=> $password,
 			'area_zone' 	=> implode(" ", $area_zone),
 			'areas' 		=> implode("|",$data['area']),
 			'postcode' 		=> isset($data['postcode']) ? $data['postcode'] : '',
-			'province_id' 	=> current($data['area']),
-			'code' 			=> isset($data['code']) ? $data['code'] : '',
-			
+			'address' 		=> isset($data['address']) ? $data['address'] : '',
+			'status' 		=> isset($data['status']) ? (int)$data['status'] : 0,
+			'logo' 			=> isset($data['logo']) ? htmlspecialchars_decode($data['logo']) : '',
+			'zone_id' 		=> $data['zone_id'],
+			'recommend' 	=> $data['recommend'],
+			'deposit' 		=> $data['deposit'],
+			'code' 			=> isset($data['code']) ? $data['code'] : '',			
 		);
-      	$this->db->insert("company",$fileds);       	
+      	$company_id = $this->db->insert("company",$fileds);    
+
+      	if(isset($data['group_id']) && is_array($data['group_id'])) {
+      		$this->db->delete('company_to_group',array('company_id'=>$company_id));
+      		foreach ($data['group_id'] as $group) {
+      			$this->db->insert('company_to_group',array('company_id'=>$company_id,'group_id'=>$group));
+      		}
+      	}
+
+      	$this->db->delete('customer',array('company_id'=>$company_id));
+      	$fileds =array(
+      		'fullname' 	    => $data['corporation'],
+			'mobile_phone' 	=> $data['mobile_phone'],
+			'email' 		=> $data['email'],
+			'telephone' 	=> $data['telephone'],
+			'fax' 			=> $data['fax'],
+			'salt' 			=> $salt,
+			'password' 		=> $password,
+			'company_id'	=> $company_id,
+			'avatar' 		=> isset($data['logo']) ? htmlspecialchars_decode($data['logo']) : '',
+			'customer_group_id'=> $this->config->get('config_customer_group_id'),
+			'status' 		=> isset($data['status']) ? (int)$data['status'] : 0,
+			'approved'		=> 0,
+			'date_added'	=> date('Y-m-d H:i:s')
+      	);
+      	$this->db->insert('customer',$fileds);
 	}
 	
 	public function editCompany($company_id, $data) {
@@ -42,29 +72,58 @@ class ModelSaleCompany extends Model {
 				}				
 			}
 		}
-		reset($data['area']);
-		$salt = substr(md5(uniqid(rand(), true)), 0, 9);
 		$fileds = array(
-			'group_id' 		=> $data['group_id'],
-			'fullname' 		=> $data['fullname'],
+			'title' 		=> $data['title'],
+			'corporation' 	=> $data['corporation'],
 			'mobile_phone' 	=> $data['mobile_phone'],
 			'email' 		=> $data['email'],
 			'telephone' 	=> $data['telephone'],
 			'fax' 			=> $data['fax'],
-			'salt' 			=> $salt,
-			'password' 		=> sha1($salt . sha1($salt . sha1($data['password']))),
-			'company' 		=> $data['company'],
-			'area_zone' 	=> implode(" ", $area_zone),
-			'areas' 		=> implode("|",$data['area']),
+			'address' 		=> isset($data['address']) ? $data['address'] : '',
 			'postcode' 		=> isset($data['postcode']) ? $data['postcode'] : '',
-			'province_id' 	=> current($data['area']),
+			'status' 		=> isset($data['status']) ? (int)$data['status'] : 0,
+			'logo' 			=> isset($data['logo']) ? htmlspecialchars_decode($data['logo']) : '',
+			'zone_id' 		=> $data['zone_id'],
+			'recommend' 	=> $data['recommend'],
+			'deposit' 		=> $data['deposit'],
 			'code' 			=> isset($data['code']) ? $data['code'] : '',
 			
 		);
+		if($area_zone){
+			$fileds['area_zone'] = implode(" ", $area_zone);
+			$fileds['areas'] = implode("|",$data['area']);
+		}
 		$this->db->update("company", array('company_id' => (int)$company_id),$fileds);
-	
+		if(isset($data['group_id']) && is_array($data['group_id'])) {
+      		$this->db->delete('company_to_group',array('company_id'=>$company_id));
+      		foreach ($data['group_id'] as $group) {
+      			$this->db->insert('company_to_group',array('company_id'=>$company_id,'group_id'=>$group));
+      		}
+      	}
+
+      	$customer =array(
+      		'fullname' 	    => $data['corporation'],
+			'mobile_phone' 	=> $data['mobile_phone'],
+			'email' 		=> $data['email'],
+			'telephone' 	=> $data['telephone'],
+			'fax' 			=> $data['fax'],
+			'status' 		=> isset($data['status']) ? (int)$data['status'] : 0,
+			'avatar' 		=> isset($data['logo']) ? htmlspecialchars_decode($data['logo']) : '',
+      	);
+      	$this->db->update('customer',$customer,array('company_id'=>$company_id));
       	if ($data['password']) {
         	$this->db->query("UPDATE " . DB_PREFIX . "company SET salt = '" . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . "' WHERE company_id = '" . (int)$company_id . "'");
+        	$this->db->query("UPDATE " . DB_PREFIX . "customer SET salt = '" . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . "' WHERE company_id = '" . (int)$company_id . "'");
+      	}
+      	if (isset($data['dtitle']) && trim($data['dtitle'])) {
+      		$this->db->delete('company_description',array('company_id'=>$company_id));
+      		$fileds = array(
+      			'company_id' => $company_id,
+      			'title' => trim($data['dtitle']),
+      			'text'	=> strip_tags(trim($data['text'])),
+      			'date_modified' => date('Y-m-d H:i:s')
+      		);
+        	$this->db->insert("company_description" , $fileds);
       	}
 	}
 	
@@ -73,7 +132,7 @@ class ModelSaleCompany extends Model {
 	}
 	
 	public function getCompany($company_id) {
-		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "company WHERE company_id = '" . (int)$company_id . "'");
+		$query = $this->db->query("SELECT c.*,cz.name zone FROM " . DB_PREFIX . "company c LEFT JOIN ".DB_PREFIX."company_zone cz ON c.zone_id = cz.zone_id WHERE c.company_id = '" . (int)$company_id . "'");
 	
 		return $query->row;
 	}
@@ -84,37 +143,64 @@ class ModelSaleCompany extends Model {
 		return $query->row;
 	}
 
-	public function getCompanys($data = array()) {
-		$sql = "SELECT a.*,ag.name group_name, a.fullname AS name FROM " . DB_PREFIX . "company a LEFT JOIN ".DB_PREFIX."company_group ag ON a.group_id = ag.group_id ";
+	public function getCompanyByMobilePhone($mobile_phone) {
+		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "company WHERE mobile_phone = '" . $this->db->escape($mobile_phone) . "'");
+	
+		return $query->row;
+	}
+
+	public function getCompanies($data = array()) {
+		$sql = "SELECT c.*,cz.name zone FROM " . DB_PREFIX . "company c LEFT JOIN ".DB_PREFIX."company_zone cz ON c.zone_id = cz.zone_id ";
 
 		$implode = array();
 		
 		if (!empty($data['filter_mobile_phone'])) {
-			$implode[] = "a.mobile_phone LIKE '" . $this->db->escape($data['filter_mobile_phone']) . "%'";
+			$implode[] = "c.mobile_phone LIKE '" . $this->db->escape($data['filter_mobile_phone']) . "%'";
 		}
 
-		if (!empty($data['filter_name'])) {
-			$implode[] = "a.fullname LIKE '" . $this->db->escape($data['filter_name']) . "%'";
+		if (!empty($data['filter_title'])) {
+			$implode[] = "c.title LIKE '" . $this->db->escape($data['filter_title']) . "%'";
+		}
+
+		if (!empty($data['filter_corporation'])) {
+			$implode[] = "c.corporation LIKE '" . $this->db->escape($data['filter_corporation']) . "%'";
 		}
 
 		if (!empty($data['filter_email'])) {
-			$implode[] = "LCASE(a.email) = '" . $this->db->escape(utf8_strtolower($data['filter_email'])) . "'";
+			$implode[] = "LCASE(c.email) = '" . $this->db->escape(utf8_strtolower($data['filter_email'])) . "'";
 		}
 		
 		if (!empty($data['filter_code'])) {
-			$implode[] = "a.code = '" . $this->db->escape($data['filter_code']) . "'";
+			$implode[] = "c.code = '" . $this->db->escape($data['filter_code']) . "'";
+		}
+
+		if (isset($data['filter_zone_id']) && !is_null($data['filter_zone_id'])) {
+			$implode[] = "c.zone_id = '" . (int)$data['filter_zone_id'] . "'";
+		}
+
+		if (isset($data['filter_group_id']) && !is_null($data['filter_group_id'])) {
+			$cid= array();
+			$query = $this->db->query("SELECT company_id FROM ".DB_PREFIX."company_to_group WHERE group_id = '".(int)$data['filter_group_id']."'");
+			if($query->num_rows){
+				foreach ($query->rows as $row) {
+					$cid[]= (int)$row['company_id'];
+				}
+
+			}
+			if($cid)
+			$implode[] = "c.zone_id IN (" . implode(",", $cid) . ")";
 		}
 					
 		if (isset($data['filter_status']) && !is_null($data['filter_status'])) {
-			$implode[] = "a.status = '" . (int)$data['filter_status'] . "'";
+			$implode[] = "c.status = '" . (int)$data['filter_status'] . "'";
 		}	
 		
 		if (isset($data['filter_approved']) && !is_null($data['filter_approved'])) {
-			$implode[] = "a.approved = '" . (int)$data['filter_approved'] . "'";
+			$implode[] = "c.approved = '" . (int)$data['filter_approved'] . "'";
 		}		
 		
 		if (!empty($data['filter_date_added'])) {
-			$implode[] = "DATE(a.date_added) = DATE('" . $this->db->escape($data['filter_date_added']) . "')";
+			$implode[] = "DATE(c.date_added) = DATE('" . $this->db->escape($data['filter_date_added']) . "')";
 		}
 		
 		if ($implode) {
@@ -122,20 +208,20 @@ class ModelSaleCompany extends Model {
 		}
 		
 		$sort_data = array(
-			'name',
-			'a.email',
-			'a.mobile_phone',
-			'a.group_id',
-			'a.code',
-			'a.status',
-			'a.approved',
-			'a.date_added'
+			'c.title',
+			'c.corporation',
+			'c.mobile_phone',
+			'c.zone_id',
+			'c.code',
+			'c.status',
+			'c.approved',
+			'c.date_added'
 		);	
 			
 		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
 			$sql .= " ORDER BY " . $data['sort'];	
 		} else {
-			$sql .= " ORDER BY name";	
+			$sql .= " ORDER BY c.date_added";	
 		}
 			
 		if (isset($data['order']) && ($data['order'] == 'DESC')) {
@@ -161,69 +247,78 @@ class ModelSaleCompany extends Model {
 		return $query->rows;	
 	}
 	
-	public function approve($company_id) {
-		$company_info = $this->getCompany($company_id);
-			
-		if ($company_info) {
-			$this->db->query("UPDATE " . DB_PREFIX . "company SET approved = '1' WHERE company_id = '" . (int)$company_id . "'");
-			
-			$this->language->load('mail/company');
+
 	
-			$message  = sprintf($this->language->get('text_approve_welcome'), $this->config->get('config_name')) . "\n\n";
-			$message .= $this->language->get('text_approve_login') . "\n";
-			$message .= HTTP_CATALOG . 'index.php?route=company/login' . "\n\n";
-			$message .= $this->language->get('text_approve_services') . "\n\n";
-			$message .= $this->language->get('text_approve_thanks') . "\n";
-			$message .= $this->config->get('config_name');
+	public function getCompanyGroups($company_id,$farmat=false) {
+		$data = array();
+		$query = $this->db->query("SELECT c2g.group_id,cg.name,cg.tag FROM " . DB_PREFIX . "company_to_group c2g LEFT JOIN ".DB_PREFIX."company_group cg ON cg.group_id = c2g.group_id WHERE company_id = '".(int)$company_id."'");
 	
-			$mail = new Mail();
-			$mail->protocol = $this->config->get('config_mail_protocol');
-			$mail->hostname = $this->config->get('config_smtp_host');
-			$mail->username = $this->config->get('config_smtp_username');
-			$mail->password = $this->config->get('config_smtp_password');
-			$mail->port = $this->config->get('config_smtp_port');
-			$mail->timeout = $this->config->get('config_smtp_timeout');							
-			$mail->setTo($company_info['email']);
-			$mail->setFrom($this->config->get('config_email'));
-			$mail->setSender($this->config->get('config_name'));
-			$mail->setSubject(html_entity_decode(sprintf($this->language->get('text_approve_subject'), $this->config->get('config_name')), ENT_QUOTES, 'UTF-8'));
-			$mail->setText(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));
-			$mail->send();
-		}
-	}
-	
-	public function getCompanysByNewsletter() {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "company WHERE newsletter = '1' ORDER BY fullname, lastname, email");
-	
-		return $query->rows;
+		if($query->num_rows){
+			foreach ($query->rows as $row) {
+				if($farmat){
+					$data[] = $row['group_id'];
+				}else{
+					$data[$row['group_id']] = $row;
+				}
+			}	
+		} 
+
+		return $data;
 	}
 		
-	public function getTotalCompanys($data = array()) {
-      	$sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "company";
+	public function getTotalCompanies($data = array()) {
+      	$sql = "SELECT COUNT(c.company_id) AS total FROM " . DB_PREFIX . "company c";
 		
+
 		$implode = array();
+		
 		if (!empty($data['filter_mobile_phone'])) {
-			$implode[] = "mobile_phone LIKE '" . $this->db->escape($data['filter_mobile_phone']) . "%'";
+			$implode[] = "c.mobile_phone LIKE '" . $this->db->escape($data['filter_mobile_phone']) . "%'";
 		}
 
-		if (!empty($data['filter_name'])) {
-			$implode[] = "fullname LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
+		if (!empty($data['filter_title'])) {
+			$implode[] = "c.title LIKE '" . $this->db->escape($data['filter_title']) . "%'";
+		}
+
+		if (!empty($data['filter_corporation'])) {
+			$implode[] = "c.corporation LIKE '" . $this->db->escape($data['filter_corporation']) . "%'";
+		}
+
+		if (!empty($data['filter_email'])) {
+			$implode[] = "LCASE(c.email) = '" . $this->db->escape(utf8_strtolower($data['filter_email'])) . "'";
 		}
 		
-		if (!empty($data['filter_email'])) {
-			$implode[] = "LCASE(email) = '" . $this->db->escape(utf8_strtolower($data['filter_email'])) . "'";
-		}	
-				
+		if (!empty($data['filter_code'])) {
+			$implode[] = "c.code = '" . $this->db->escape($data['filter_code']) . "'";
+		}
+
+		if (isset($data['filter_zone_id']) && !is_null($data['filter_zone_id'])) {
+			$implode[] = "c.zone_id = '" . (int)$data['filter_zone_id'] . "'";
+		}
+
+		if (isset($data['filter_group_id']) && !is_null($data['filter_group_id'])) {
+			$cid= array();
+			$query = $this->db->query("SELECT company_id FROM ".DB_PREFIX."company_to_group WHERE group_id = '".(int)$data['filter_group_id']."'");
+			if($query->num_rows){
+				foreach ($query->rows as $row) {
+					$cid[]= (int)$row['company_id'];
+				}
+
+			}
+			if($cid)
+			$implode[] = "c.zone_id IN (" . implode(",", $cid) . ")";
+		}
+					
 		if (isset($data['filter_status']) && !is_null($data['filter_status'])) {
-			$implode[] = "status = '" . (int)$data['filter_status'] . "'";
-		}			
+			$implode[] = "c.status = '" . (int)$data['filter_status'] . "'";
+		}	
 		
 		if (isset($data['filter_approved']) && !is_null($data['filter_approved'])) {
-			$implode[] = "approved = '" . (int)$data['filter_approved'] . "'";
+			$implode[] = "c.approved = '" . (int)$data['filter_approved'] . "'";
 		}		
-				
+		
 		if (!empty($data['filter_date_added'])) {
-			$implode[] = "DATE(date_added) = DATE('" . $this->db->escape($data['filter_date_added']) . "')";
+			$implode[] = "DATE(c.date_added) = DATE('" . $this->db->escape($data['filter_date_added']) . "')";
 		}
 		
 		if ($implode) {
@@ -234,6 +329,74 @@ class ModelSaleCompany extends Model {
 				
 		return $query->row['total'];
 	}
+
+	public function getCompanyFile($company_id){
+		$query = $this->db->query("SELECT * FROM ".DB_PREFIX."company_file WHERE company_id = '".(int)$company_id."' ORDER BY mode ASC" );
+		return $query->rows;
+	}
+
+	public function getCompanyDescription($company_id){
+		$query = $this->db->query("SELECT * FROM ".DB_PREFIX."company_description WHERE company_id = '".(int)$company_id."' " );
+		return $query->row;
+	}
+
+	public function addFile($company_id,$data){
+		$fileds = array(
+			'company_id'	=> $company_id,
+			'mode'	=> $data['mode'],
+			'path'	=> htmlspecialchars_decode($data['path']),
+			'note'	=> isset($data['note']) ? strip_tags($data['note']) : '',
+			'sort'	=> $data['sort'],
+			'status'	=> isset($data['status']) ? (int)$data['status'] : 1,
+			'date_added'=> date('Y-m-d H:i:s')
+		);
+		$this->db->insert("company_file" ,$fileds);
+	}
+
+	public function deleteFile($file_id) {
+		$this->db->query("DELETE FROM " . DB_PREFIX . "company_file WHERE file_id = '" . (int)$file_id . "'");
+	}
+	
+	public function getFiles($company_id, $start = 0, $limit = 10) {
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "company_file WHERE company_id = '" . (int)$company_id . "' ORDER BY date_added DESC LIMIT " . (int)$start . "," . (int)$limit);
+	
+		return $query->rows;
+	}
+	
+	public function getTotalFiles($company_id) {
+		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "company_file WHERE company_id = '" . (int)$company_id . "'");
+	
+		return $query->row['total'];
+	}
+
+	public function addMember($company_id,$data){
+		$fileds = array(
+			'company_id'=> $company_id,
+			'name'		=> $data['name'],
+			'position'	=> $data['position'],
+			'avatar'	=> isset($data['avatar']) ? htmlspecialchars_decode($data['avatar']) : '',
+			'note'		=> isset($data['note']) ?  strip_tags($data['note']) : '',
+			'sort'		=> $data['sort'],
+			'date_added'=> date('Y-m-d H:i:s')
+		);
+		$this->db->insert("company_member" ,$fileds);
+	}
+
+	public function deleteMember($file_id) {
+		$this->db->query("DELETE FROM " . DB_PREFIX . "company_member WHERE file_id = '" . (int)$file_id . "'");
+	}
+	
+	public function getMembers($company_id, $start = 0, $limit = 10) {
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "company_member WHERE company_id = '" . (int)$company_id . "' ORDER BY date_added DESC LIMIT " . (int)$start . "," . (int)$limit);
+	
+		return $query->rows;
+	}
+	
+	public function getTotalMembers($company_id) {
+		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "company_member WHERE company_id = '" . (int)$company_id . "'");
+	
+		return $query->row['total'];
+	}
 		
 	public function getTotalCompanysAwaitingApproval() {
       	$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "company WHERE status = '0' OR approved = '0'");
@@ -241,10 +404,40 @@ class ModelSaleCompany extends Model {
 		return $query->row['total'];
 	}	
 	
-	public function getTotalCompanysByProvinceId($province_id) {
-		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "company WHERE province_id = '" . (int)$province_id . "'");
+	public function getTotalCompanysByZoneId($zone_id) {
+		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "company WHERE zone_id = '" . (int)$zone_id . "'");
 		
 		return $query->row['total'];
 	}
-				
+	public function approve($company_id,$notify=false) {
+		$company_info = $this->getCompany($company_id);
+			
+		if ($company_info) {
+			$this->db->query("UPDATE " . DB_PREFIX . "company SET approved = '1' WHERE company_id = '" . (int)$company_id . "'");
+			if($notify){
+				$this->language->load('mail/company');
+		
+				$message  = sprintf($this->language->get('text_approve_welcome'), $this->config->get('config_name')) . "\n\n";
+				$message .= $this->language->get('text_approve_login') . "\n";
+				$message .= HTTP_CATALOG . 'index.php?route=company/login' . "\n\n";
+				$message .= $this->language->get('text_approve_services') . "\n\n";
+				$message .= $this->language->get('text_approve_thanks') . "\n";
+				$message .= $this->config->get('config_name');
+		
+				$mail = new Mail();
+				$mail->protocol = $this->config->get('config_mail_protocol');
+				$mail->hostname = $this->config->get('config_smtp_host');
+				$mail->username = $this->config->get('config_smtp_username');
+				$mail->password = $this->config->get('config_smtp_password');
+				$mail->port = $this->config->get('config_smtp_port');
+				$mail->timeout = $this->config->get('config_smtp_timeout');							
+				$mail->setTo($company_info['email']);
+				$mail->setFrom($this->config->get('config_email'));
+				$mail->setSender($this->config->get('config_name'));
+				$mail->setSubject(html_entity_decode(sprintf($this->language->get('text_approve_subject'), $this->config->get('config_name')), ENT_QUOTES, 'UTF-8'));
+				$mail->setText(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));
+				$mail->send();
+			}
+		}
+	}		
 }

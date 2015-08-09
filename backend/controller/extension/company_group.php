@@ -114,7 +114,7 @@ class ControllerExtensionCompanyGroup extends Controller {
         if (isset($this->request->get['sort'])) {
             $sort = $this->request->get['sort'];
         } else {
-            $sort = 'name';
+            $sort = 'sort_order';
         }
         
         if (isset($this->request->get['order'])) {
@@ -184,6 +184,7 @@ class ControllerExtensionCompanyGroup extends Controller {
             $this->data['company_groups'][] = array(
                 'group_id'           => $result['group_id'],
                 'name'               => $result['name'],
+                'tag'               => $result['tag'],
                 'show'               => $result['show'] ? $this->language->get('text_yes') : $this->language->get('text_no'),
                 'status_text'        => $result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
                 'sort_order'         => $result['sort_order'],
@@ -197,6 +198,7 @@ class ControllerExtensionCompanyGroup extends Controller {
         $this->data['text_no_results'] = $this->language->get('text_no_results');
 
         $this->data['column_name'] = $this->language->get('column_name');
+        $this->data['column_tag'] = $this->language->get('column_tag');
         $this->data['column_show'] = $this->language->get('column_show');
         $this->data['column_status'] = $this->language->get('column_status');
         $this->data['column_sort_order'] = $this->language->get('column_sort_order');
@@ -270,6 +272,7 @@ class ControllerExtensionCompanyGroup extends Controller {
         $this->data['heading_title'] = $this->language->get('heading_title');
 
         $this->data['entry_name'] = $this->language->get('entry_name');
+        $this->data['entry_tag'] = $this->language->get('entry_tag');
         $this->data['entry_show'] = $this->language->get('entry_show');
         $this->data['entry_status'] = $this->language->get('entry_status');
         $this->data['entry_sort_order'] = $this->language->get('entry_sort_order');
@@ -337,10 +340,18 @@ class ControllerExtensionCompanyGroup extends Controller {
     
         if (isset($this->request->post['name'])) {
             $this->data['name'] = $this->request->post['name'];
-        } elseif (!empty($company_group_info)) {
+        } elseif (!empty($company_group_info['name'])) {
             $this->data['name'] = $company_group_info['name'];
         } else {
             $this->data['name'] = '';
+        }
+
+        if (isset($this->request->post['tag'])) {
+            $this->data['tag'] = $this->request->post['tag'];
+        } elseif (!empty($company_group_info['tag'])) {
+            $this->data['tag'] = $company_group_info['tag'];
+        } else {
+            $this->data['tag'] = '';
         }
 
         if (isset($this->request->post['status'])) {
@@ -382,7 +393,7 @@ class ControllerExtensionCompanyGroup extends Controller {
         }
     
         
-        if ((utf8_strlen($this->request->post['name']) < 3) || (utf8_strlen($this->request->post['name']) > 64)) {
+        if ((utf8_strlen($this->request->post['name']) < 1) || (utf8_strlen($this->request->post['name']) > 64)) {
             $this->error['name'] = $this->language->get('error_name');
         }
         

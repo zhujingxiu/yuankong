@@ -574,7 +574,7 @@ class ControllerSettingSetting extends Controller {
 		} elseif ($this->config->get('config_invoice_prefix')) {
 			$this->data['config_invoice_prefix'] = $this->config->get('config_invoice_prefix');			
 		} else {
-			$this->data['config_invoice_prefix'] = 'INV-' . date('Y') . '-00';
+			$this->data['config_invoice_prefix'] = 'Yk119-' . date('Y') . '-00';
 		}
 		
 		if (isset($this->request->post['config_order_status_id'])) {

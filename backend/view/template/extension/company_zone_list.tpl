@@ -27,6 +27,11 @@
                 <?php } else { ?>
                 <a href="<?php echo $sort_name; ?>"><?php echo $column_name; ?></a>
                 <?php } ?></td>
+              <td class="left"><?php if ($sort == 'status') { ?>
+                <a href="<?php echo $sort_status; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_status; ?></a>
+                <?php } else { ?>
+                <a href="<?php echo $sort_status; ?>"><?php echo $column_status; ?></a>
+                <?php } ?></td>
               <td class="left"><?php if ($sort == 'show') { ?>
                 <a href="<?php echo $sort_show; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_show; ?></a>
                 <?php } else { ?>
@@ -41,18 +46,19 @@
             </tr>
           </thead>
           <tbody>
-            <?php if ($help_groups) { ?>
-            <?php foreach ($help_groups as $item) { ?>
+            <?php if ($company_zones) { ?>
+            <?php foreach ($company_zones as $item) { ?>
             <tr>
               <td style="text-align: center;">
-                <?php echo $item['group_id']; ?>
+                <?php echo $item['zone_id']; ?>
                 <br>
                 <?php if ($item['selected']) { ?>
-                <input type="checkbox" name="selected[]" value="<?php echo $item['group_id']; ?>" checked="checked" />
+                <input type="checkbox" name="selected[]" value="<?php echo $item['zone_id']; ?>" checked="checked" />
                 <?php } else { ?>
-                <input type="checkbox" name="selected[]" value="<?php echo $item['group_id']; ?>" />
+                <input type="checkbox" name="selected[]" value="<?php echo $item['zone_id']; ?>" />
                 <?php } ?></td>
               <td class="left"><?php echo $item['name']; ?></td>
+              <td class="left"><?php echo $item['status_text']; ?></td>
               <td class="left"><?php echo $item['show']; ?></td>
               <td class="right"><?php echo $item['sort_order']; ?></td>
               <td class="right"><?php foreach ($item['action'] as $action) { ?>
@@ -62,7 +68,7 @@
             <?php } ?>
             <?php } else { ?>
             <tr>
-              <td class="center" colspan="5"><?php echo $text_no_results; ?></td>
+              <td class="center" colspan="6"><?php echo $text_no_results; ?></td>
             </tr>
             <?php } ?>
           </tbody>

@@ -979,3 +979,200 @@
 2015-08-07 23:23:14 - PHP Notice:  Undefined variable: affiliate_id in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 180
 2015-08-07 23:23:14 - PHP Notice:  Undefined variable: affiliate_id in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 256
 2015-08-07 23:23:14 - PHP Notice:  Undefined variable: affiliate_id in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 260
+2015-08-09 16:07:34 - PHP Notice:  Error: Unknown column 'a.fullname' in 'field list'<br />Error No: 1054<br />SELECT a.*,ag.name group_name, a.fullname AS name FROM yk_company a LEFT JOIN yk_company_group ag ON a.group_id = ag.group_id  ORDER BY name ASC LIMIT 0,20 in E:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-08-09 16:07:34 - PHP Notice:  Trying to get property of non-object in E:\wamp\www\yuankong\backend\model\sale\company.php on line 161
+2015-08-09 16:07:34 - PHP Warning:  Invalid argument supplied for foreach() in E:\wamp\www\yuankong\backend\controller\sale\company.php on line 367
+2015-08-09 16:37:02 - PHP Notice:  Undefined variable: filter_zone_id in E:\wamp\www\yuankong\backend\controller\sale\company.php on line 397
+2015-08-09 16:37:02 - PHP Notice:  Error: Unknown column 'a.fullname' in 'field list'<br />Error No: 1054<br />SELECT a.*,ag.name group_name, a.fullname AS name FROM yk_company a LEFT JOIN yk_company_group ag ON a.group_id = ag.group_id  ORDER BY name ASC LIMIT 0,20 in E:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-08-09 16:37:02 - PHP Notice:  Trying to get property of non-object in E:\wamp\www\yuankong\backend\model\sale\company.php on line 161
+2015-08-09 16:37:02 - PHP Warning:  Invalid argument supplied for foreach() in E:\wamp\www\yuankong\backend\controller\sale\company.php on line 410
+2015-08-09 16:37:02 - PHP Notice:  Undefined variable: filter_zone_id in E:\wamp\www\yuankong\backend\controller\sale\company.php on line 567
+2015-08-09 16:37:02 - PHP Notice:  Undefined variable: sort_corporation in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 34
+2015-08-09 16:37:26 - PHP Notice:  Error: Unknown column 'a.fullname' in 'field list'<br />Error No: 1054<br />SELECT a.*,ag.name group_name, a.fullname AS name FROM yk_company a LEFT JOIN yk_company_group ag ON a.group_id = ag.group_id  ORDER BY name ASC LIMIT 0,20 in E:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-08-09 16:37:26 - PHP Notice:  Trying to get property of non-object in E:\wamp\www\yuankong\backend\model\sale\company.php on line 161
+2015-08-09 16:37:26 - PHP Warning:  Invalid argument supplied for foreach() in E:\wamp\www\yuankong\backend\controller\sale\company.php on line 416
+2015-08-09 16:37:26 - PHP Notice:  Undefined variable: sort_corporation in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 34
+2015-08-09 16:51:01 - PHP Notice:  Undefined variable: sort_status in E:\wamp\www\yuankong\backend\view\template\extension\company_group_list.tpl on line 34
+2015-08-09 16:51:52 - PHP Notice:  Undefined variable: sort_status in E:\wamp\www\yuankong\backend\view\template\extension\company_group_list.tpl on line 34
+2015-08-09 16:52:02 - PHP Notice:  Undefined variable: sort_status in E:\wamp\www\yuankong\backend\view\template\extension\company_group_list.tpl on line 34
+2015-08-09 16:52:10 - PHP Notice:  Undefined variable: sort_status in E:\wamp\www\yuankong\backend\view\template\extension\company_group_list.tpl on line 34
+2015-08-09 16:52:19 - PHP Notice:  Undefined variable: sort_status in E:\wamp\www\yuankong\backend\view\template\extension\company_group_list.tpl on line 34
+2015-08-09 16:52:24 - PHP Notice:  Undefined variable: sort_status in E:\wamp\www\yuankong\backend\view\template\extension\company_group_list.tpl on line 34
+2015-08-09 16:52:29 - PHP Notice:  Undefined variable: sort_status in E:\wamp\www\yuankong\backend\view\template\extension\company_group_list.tpl on line 34
+2015-08-09 16:52:36 - PHP Notice:  Undefined variable: sort_status in E:\wamp\www\yuankong\backend\view\template\extension\company_group_list.tpl on line 34
+2015-08-09 16:52:43 - PHP Notice:  Undefined variable: sort_status in E:\wamp\www\yuankong\backend\view\template\extension\company_group_list.tpl on line 34
+2015-08-09 16:52:46 - PHP Notice:  Error: Unknown table 'c'<br />Error No: 1051<br />SELECT c.*,ag.name group_name, c.fullname AS name FROM yk_company a LEFT JOIN yk_company_group ag ON c.group_id = ag.group_id  ORDER BY c.date_added DESC LIMIT 0,20 in E:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-08-09 16:52:46 - PHP Notice:  Trying to get property of non-object in E:\wamp\www\yuankong\backend\model\sale\company.php on line 161
+2015-08-09 16:52:46 - PHP Warning:  Invalid argument supplied for foreach() in E:\wamp\www\yuankong\backend\controller\sale\company.php on line 416
+2015-08-09 16:52:46 - PHP Notice:  Undefined variable: sort_corporation in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 34
+2015-08-09 17:03:02 - PHP Notice:  Error: Not unique table/alias: 'a'<br />Error No: 1066<br />SELECT c.*,a.name zone FROM yk_company a LEFT JOIN yk_area a ON c.zone_id = a.area_id  ORDER BY c.date_added DESC LIMIT 0,20 in E:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-08-09 17:03:02 - PHP Notice:  Trying to get property of non-object in E:\wamp\www\yuankong\backend\model\sale\company.php on line 182
+2015-08-09 17:03:02 - PHP Warning:  Invalid argument supplied for foreach() in E:\wamp\www\yuankong\backend\controller\sale\company.php on line 416
+2015-08-09 17:03:02 - PHP Notice:  Undefined variable: sort_corporation in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 34
+2015-08-09 17:03:37 - PHP Notice:  Undefined index: group_name in E:\wamp\www\yuankong\backend\controller\sale\company.php on line 428
+2015-08-09 17:03:37 - PHP Notice:  Undefined index: zone_name in E:\wamp\www\yuankong\backend\controller\sale\company.php on line 429
+2015-08-09 17:03:37 - PHP Notice:  Undefined variable: sort_corporation in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 34
+2015-08-09 17:03:37 - PHP Notice:  Undefined index: affiliate_id in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-09 17:08:42 - PHP Notice:  Undefined index: zone_name in E:\wamp\www\yuankong\backend\controller\sale\company.php on line 435
+2015-08-09 17:08:42 - PHP Notice:  Undefined variable: sort_corporation in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 34
+2015-08-09 17:08:42 - PHP Notice:  Undefined index: affiliate_id in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-09 17:10:42 - PHP Notice:  Undefined index: zone_name in E:\wamp\www\yuankong\backend\controller\sale\company.php on line 435
+2015-08-09 17:10:42 - PHP Notice:  Undefined variable: sort_corporation in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 34
+2015-08-09 17:10:42 - PHP Notice:  Undefined index: affiliate_id in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-09 17:11:14 - PHP Notice:  Undefined index: zone_name in E:\wamp\www\yuankong\backend\controller\sale\company.php on line 435
+2015-08-09 17:11:14 - PHP Notice:  Undefined variable: sort_corporation in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 34
+2015-08-09 17:11:14 - PHP Notice:  Undefined index: affiliate_id in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-09 17:11:37 - PHP Notice:  Undefined index: zone_name in E:\wamp\www\yuankong\backend\controller\sale\company.php on line 438
+2015-08-09 17:11:37 - PHP Notice:  Undefined variable: sort_corporation in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 34
+2015-08-09 17:11:37 - PHP Notice:  Undefined index: affiliate_id in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-09 17:12:31 - PHP Notice:  Undefined index: zone_name in E:\wamp\www\yuankong\backend\controller\sale\company.php on line 438
+2015-08-09 17:12:31 - PHP Notice:  Undefined variable: sort_corporation in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 34
+2015-08-09 17:12:31 - PHP Notice:  Undefined index: affiliate_id in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-09 17:13:31 - PHP Notice:  Undefined variable: sort_corporation in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 34
+2015-08-09 17:13:31 - PHP Notice:  Undefined index: affiliate_id in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-09 17:13:43 - PHP Notice:  Undefined variable: sort_corporation in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 34
+2015-08-09 17:13:43 - PHP Notice:  Undefined index: affiliate_id in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-09 17:14:08 - PHP Notice:  Undefined index: company in E:\wamp\www\yuankong\backend\controller\sale\company.php on line 814
+2015-08-09 17:14:08 - PHP Notice:  Undefined index: province_id in E:\wamp\www\yuankong\backend\controller\sale\company.php on line 846
+2015-08-09 17:15:32 - PHP Notice:  Undefined variable: sort_corporation in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 34
+2015-08-09 17:15:32 - PHP Notice:  Undefined index: affiliate_id in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-09 17:15:52 - PHP Notice:  Undefined index: company in E:\wamp\www\yuankong\backend\controller\sale\company.php on line 814
+2015-08-09 17:15:52 - PHP Notice:  Undefined index: province_id in E:\wamp\www\yuankong\backend\controller\sale\company.php on line 846
+2015-08-09 17:27:01 - PHP Notice:  Undefined variable: company_group in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 29
+2015-08-09 17:27:01 - PHP Warning:  array_key_exists() expects parameter 2 to be array, null given in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 29
+2015-08-09 17:27:01 - PHP Notice:  Undefined variable: company_group in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 29
+2015-08-09 17:27:01 - PHP Warning:  array_key_exists() expects parameter 2 to be array, null given in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 29
+2015-08-09 17:27:01 - PHP Notice:  Undefined variable: company_group in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 29
+2015-08-09 17:27:01 - PHP Warning:  array_key_exists() expects parameter 2 to be array, null given in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 29
+2015-08-09 17:27:01 - PHP Notice:  Undefined variable: company_group in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 29
+2015-08-09 17:27:01 - PHP Warning:  array_key_exists() expects parameter 2 to be array, null given in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 29
+2015-08-09 17:27:01 - PHP Notice:  Undefined variable: entry_province in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 68
+2015-08-09 17:27:01 - PHP Notice:  Undefined variable: area_zone in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 69
+2015-08-09 17:27:53 - PHP Notice:  Undefined variable: entry_province in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 56
+2015-08-09 17:27:53 - PHP Notice:  Undefined variable: area_zone in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 57
+2015-08-09 17:28:10 - PHP Notice:  Undefined variable: entry_province in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 56
+2015-08-09 17:28:10 - PHP Notice:  Undefined variable: area_zone in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 57
+2015-08-09 17:28:30 - PHP Notice:  Undefined variable: entry_province in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 56
+2015-08-09 17:34:09 - PHP Notice:  Undefined variable: sort_corporation in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 34
+2015-08-09 17:34:09 - PHP Notice:  Undefined index: affiliate_id in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-09 17:34:22 - PHP Notice:  Undefined variable: sort_corporation in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 34
+2015-08-09 17:34:22 - PHP Notice:  Undefined index: affiliate_id in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-09 17:43:58 - PHP Notice:  Undefined variable: sort_corporation in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 34
+2015-08-09 17:43:58 - PHP Notice:  Undefined index: affiliate_id in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-09 17:44:00 - PHP Notice:  Undefined variable: sort_corporation in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 34
+2015-08-09 17:44:00 - PHP Notice:  Undefined index: affiliate_id in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-09 18:13:44 - PHP Notice:  Error: Could not load language extension/company_zone! in E:\wamp\www\yuankong\system\library\language.php on line 39
+2015-08-09 18:13:44 - PHP Notice:  Undefined index: zone_id in E:\wamp\www\yuankong\backend\controller\extension\company_zone.php on line 181
+2015-08-09 18:13:44 - PHP Notice:  Undefined index: zone_id in E:\wamp\www\yuankong\backend\controller\extension\company_zone.php on line 185
+2015-08-09 18:13:44 - PHP Notice:  Undefined index: zone_id in E:\wamp\www\yuankong\backend\controller\extension\company_zone.php on line 181
+2015-08-09 18:13:44 - PHP Notice:  Undefined index: zone_id in E:\wamp\www\yuankong\backend\controller\extension\company_zone.php on line 185
+2015-08-09 18:13:44 - PHP Notice:  Undefined index: zone_id in E:\wamp\www\yuankong\backend\controller\extension\company_zone.php on line 181
+2015-08-09 18:13:44 - PHP Notice:  Undefined index: zone_id in E:\wamp\www\yuankong\backend\controller\extension\company_zone.php on line 185
+2015-08-09 18:13:44 - PHP Notice:  Undefined index: zone_id in E:\wamp\www\yuankong\backend\controller\extension\company_zone.php on line 181
+2015-08-09 18:13:44 - PHP Notice:  Undefined index: zone_id in E:\wamp\www\yuankong\backend\controller\extension\company_zone.php on line 185
+2015-08-09 18:13:44 - PHP Notice:  Undefined index: zone_id in E:\wamp\www\yuankong\backend\controller\extension\company_zone.php on line 181
+2015-08-09 18:13:44 - PHP Notice:  Undefined index: zone_id in E:\wamp\www\yuankong\backend\controller\extension\company_zone.php on line 185
+2015-08-09 18:13:44 - PHP Notice:  Undefined variable: column_tag in E:\wamp\www\yuankong\backend\view\template\extension\company_zone_list.tpl on line 30
+2015-08-09 18:13:44 - PHP Notice:  Undefined variable: sort_status in E:\wamp\www\yuankong\backend\view\template\extension\company_zone_list.tpl on line 34
+2015-08-09 18:13:44 - PHP Notice:  Undefined variable: company_groups in E:\wamp\www\yuankong\backend\view\template\extension\company_zone_list.tpl on line 50
+2015-08-09 18:14:19 - PHP Notice:  Undefined index: zone_id in E:\wamp\www\yuankong\backend\controller\extension\company_zone.php on line 181
+2015-08-09 18:14:19 - PHP Notice:  Undefined index: zone_id in E:\wamp\www\yuankong\backend\controller\extension\company_zone.php on line 185
+2015-08-09 18:14:19 - PHP Notice:  Undefined index: zone_id in E:\wamp\www\yuankong\backend\controller\extension\company_zone.php on line 181
+2015-08-09 18:14:19 - PHP Notice:  Undefined index: zone_id in E:\wamp\www\yuankong\backend\controller\extension\company_zone.php on line 185
+2015-08-09 18:14:19 - PHP Notice:  Undefined index: zone_id in E:\wamp\www\yuankong\backend\controller\extension\company_zone.php on line 181
+2015-08-09 18:14:19 - PHP Notice:  Undefined index: zone_id in E:\wamp\www\yuankong\backend\controller\extension\company_zone.php on line 185
+2015-08-09 18:14:19 - PHP Notice:  Undefined index: zone_id in E:\wamp\www\yuankong\backend\controller\extension\company_zone.php on line 181
+2015-08-09 18:14:19 - PHP Notice:  Undefined index: zone_id in E:\wamp\www\yuankong\backend\controller\extension\company_zone.php on line 185
+2015-08-09 18:14:19 - PHP Notice:  Undefined index: zone_id in E:\wamp\www\yuankong\backend\controller\extension\company_zone.php on line 181
+2015-08-09 18:14:19 - PHP Notice:  Undefined index: zone_id in E:\wamp\www\yuankong\backend\controller\extension\company_zone.php on line 185
+2015-08-09 18:14:19 - PHP Notice:  Undefined variable: column_tag in E:\wamp\www\yuankong\backend\view\template\extension\company_zone_list.tpl on line 30
+2015-08-09 18:14:19 - PHP Notice:  Undefined variable: sort_status in E:\wamp\www\yuankong\backend\view\template\extension\company_zone_list.tpl on line 34
+2015-08-09 18:14:19 - PHP Notice:  Undefined variable: company_groups in E:\wamp\www\yuankong\backend\view\template\extension\company_zone_list.tpl on line 50
+2015-08-09 18:14:57 - PHP Notice:  Undefined index: zone_id in E:\wamp\www\yuankong\backend\controller\extension\company_zone.php on line 181
+2015-08-09 18:14:57 - PHP Notice:  Undefined index: zone_id in E:\wamp\www\yuankong\backend\controller\extension\company_zone.php on line 185
+2015-08-09 18:14:57 - PHP Notice:  Undefined index: zone_id in E:\wamp\www\yuankong\backend\controller\extension\company_zone.php on line 181
+2015-08-09 18:14:57 - PHP Notice:  Undefined index: zone_id in E:\wamp\www\yuankong\backend\controller\extension\company_zone.php on line 185
+2015-08-09 18:14:57 - PHP Notice:  Undefined index: zone_id in E:\wamp\www\yuankong\backend\controller\extension\company_zone.php on line 181
+2015-08-09 18:14:57 - PHP Notice:  Undefined index: zone_id in E:\wamp\www\yuankong\backend\controller\extension\company_zone.php on line 185
+2015-08-09 18:14:57 - PHP Notice:  Undefined index: zone_id in E:\wamp\www\yuankong\backend\controller\extension\company_zone.php on line 181
+2015-08-09 18:14:57 - PHP Notice:  Undefined index: zone_id in E:\wamp\www\yuankong\backend\controller\extension\company_zone.php on line 185
+2015-08-09 18:14:57 - PHP Notice:  Undefined index: zone_id in E:\wamp\www\yuankong\backend\controller\extension\company_zone.php on line 181
+2015-08-09 18:14:57 - PHP Notice:  Undefined index: zone_id in E:\wamp\www\yuankong\backend\controller\extension\company_zone.php on line 185
+2015-08-09 18:14:57 - PHP Notice:  Undefined variable: column_tag in E:\wamp\www\yuankong\backend\view\template\extension\company_zone_list.tpl on line 30
+2015-08-09 18:14:57 - PHP Notice:  Undefined variable: sort_status in E:\wamp\www\yuankong\backend\view\template\extension\company_zone_list.tpl on line 34
+2015-08-09 18:15:50 - PHP Notice:  Undefined variable: column_tag in E:\wamp\www\yuankong\backend\view\template\extension\company_zone_list.tpl on line 30
+2015-08-09 18:15:50 - PHP Notice:  Undefined variable: sort_status in E:\wamp\www\yuankong\backend\view\template\extension\company_zone_list.tpl on line 34
+2015-08-09 18:16:09 - PHP Notice:  Undefined variable: sort_status in E:\wamp\www\yuankong\backend\view\template\extension\company_zone_list.tpl on line 33
+2015-08-09 18:17:44 - PHP Notice:  Undefined variable: sort_status in E:\wamp\www\yuankong\backend\view\template\extension\company_zone_list.tpl on line 33
+2015-08-09 18:18:33 - PHP Notice:  Undefined variable: sort_status in E:\wamp\www\yuankong\backend\view\template\extension\company_zone_list.tpl on line 33
+2015-08-09 18:18:45 - PHP Notice:  Undefined variable: sort_status in E:\wamp\www\yuankong\backend\view\template\extension\company_zone_list.tpl on line 33
+2015-08-09 18:19:08 - PHP Notice:  Undefined variable: sort_corporation in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 34
+2015-08-09 18:19:08 - PHP Notice:  Undefined index: affiliate_id in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-09 18:21:34 - PHP Notice:  Undefined variable: sort_corporation in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 34
+2015-08-09 18:21:34 - PHP Notice:  Undefined index: affiliate_id in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-09 19:08:13 - PHP Notice:  Error: Unknown column 'a.name' in 'field list'<br />Error No: 1054<br />SELECT c.*,a.name zone FROM yk_company c LEFT JOIN yk_company_zone cz ON c.zone_id = cz.zone_id WHERE c.company_id = '1' in E:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-08-09 19:08:13 - PHP Notice:  Trying to get property of non-object in E:\wamp\www\yuankong\backend\model\sale\company.php on line 80
+2015-08-09 19:45:36 - PHP Notice:  Undefined variable: entry_description in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 123
+2015-08-09 19:45:36 - PHP Notice:  Undefined variable: entry_amount in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 127
+2015-08-09 19:45:36 - PHP Notice:  Undefined variable: button_add_transaction in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 131
+2015-08-09 19:47:19 - PHP Notice:  Undefined variable: entry_description in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 123
+2015-08-09 19:47:19 - PHP Notice:  Undefined variable: entry_amount in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 127
+2015-08-09 19:47:19 - PHP Notice:  Undefined variable: button_add_transaction in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 131
+2015-08-09 19:54:49 - PHP Notice:  Undefined variable: entry_postion in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 127
+2015-08-09 20:14:32 - PHP Notice:  Undefined variable: entry_mode in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 123
+2015-08-09 20:14:32 - PHP Notice:  Undefined variable: entry_remark in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 177
+2015-08-09 20:14:48 - PHP Notice:  Undefined variable: entry_remark in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 177
+2015-08-09 20:16:52 - PHP Notice:  Undefined variable: entry_remark in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 177
+2015-08-09 20:17:03 - PHP Notice:  Undefined variable: entry_remark in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 177
+2015-08-09 20:17:53 - PHP Notice:  Undefined variable: entry_remark in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 177
+2015-08-09 20:18:16 - PHP Notice:  Undefined variable: entry_remark in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 177
+2015-08-09 20:23:32 - PHP Notice:  Undefined variable: sort_status in E:\wamp\www\yuankong\backend\view\template\extension\company_zone_list.tpl on line 33
+2015-08-09 20:23:45 - PHP Notice:  Undefined variable: sort_corporation in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 34
+2015-08-09 20:23:45 - PHP Notice:  Undefined index: affiliate_id in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-09 20:25:58 - PHP Notice:  Undefined variable: text_yes in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 108
+2015-08-09 20:25:58 - PHP Notice:  Undefined variable: text_no in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 109
+2015-08-09 20:35:38 - PHP Notice:  Undefined variable: sort_corporation in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 34
+2015-08-09 20:35:38 - PHP Notice:  Undefined index: affiliate_id in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-09 20:42:36 - PHP Warning:  array_key_exists() expects parameter 2 to be array, string given in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 36
+2015-08-09 20:42:36 - PHP Warning:  array_key_exists() expects parameter 2 to be array, string given in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 36
+2015-08-09 20:42:36 - PHP Warning:  array_key_exists() expects parameter 2 to be array, string given in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 36
+2015-08-09 20:42:36 - PHP Warning:  array_key_exists() expects parameter 2 to be array, string given in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 36
+2015-08-09 20:46:19 - PHP Warning:  in_array() expects parameter 2 to be array, string given in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 36
+2015-08-09 20:46:19 - PHP Warning:  in_array() expects parameter 2 to be array, string given in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 36
+2015-08-09 20:46:19 - PHP Warning:  in_array() expects parameter 2 to be array, string given in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 36
+2015-08-09 20:46:19 - PHP Warning:  in_array() expects parameter 2 to be array, string given in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 36
+2015-08-09 20:46:36 - PHP Warning:  in_array() expects parameter 2 to be array, string given in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 36
+2015-08-09 20:46:36 - PHP Warning:  in_array() expects parameter 2 to be array, string given in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 36
+2015-08-09 20:46:36 - PHP Warning:  in_array() expects parameter 2 to be array, string given in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 36
+2015-08-09 20:46:36 - PHP Warning:  in_array() expects parameter 2 to be array, string given in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 36
+2015-08-09 20:51:11 - PHP Notice:  Error: Unknown column 'salt' in 'field list'<br />Error No: 1054<br />UPDATE yk_company SET  `title` = '天朝消防', `corporation` = '萧十一郎', `mobile_phone` = '18260051051', `email` = '18260051051@139.com', `telephone` = '111111', `fax` = '', `salt` = 'ee1dfed40', `password` = '7924dca86054ad33055e7abccc0af13a6612f04e', `area_zone` = '江苏省 苏州市 太仓市', `areas` = '12|988|4346', `postcode` = '', `zone_id` = '3', `recommend` = '0', `deposit` = '0', `code` = '55b88477d5f55' WHERE  `company_id` = '1' in E:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-08-09 20:51:11 - PHP Notice:  Undefined variable: sort_corporation in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 34
+2015-08-09 20:51:11 - PHP Notice:  Undefined index: affiliate_id in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-09 20:55:57 - PHP Notice:  Undefined variable: sort_corporation in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 34
+2015-08-09 20:55:57 - PHP Notice:  Undefined index: affiliate_id in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-09 20:58:40 - PHP Notice:  Undefined variable: postcode in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 82
+2015-08-09 21:03:07 - PHP Notice:  Undefined variable: sort_corporation in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 34
+2015-08-09 21:03:07 - PHP Notice:  Undefined index: affiliate_id in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-09 21:03:11 - PHP Notice:  Undefined variable: error_area in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 73
+2015-08-09 21:07:25 - PHP Notice:  Error: Unknown column 'mode' in 'order clause'<br />Error No: 1054<br />SELECT * FROM yk_company_description WHERE company_id = '1' ORDER BY mode ASC in E:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-08-09 21:07:25 - PHP Notice:  Trying to get property of non-object in E:\wamp\www\yuankong\backend\model\sale\company.php on line 305
+2015-08-09 21:41:11 - PHP Notice:  Undefined variable: no_image in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 43
+2015-08-09 21:43:04 - PHP Notice:  Undefined variable: sort_corporation in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 34
+2015-08-09 21:43:04 - PHP Notice:  Undefined index: affiliate_id in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-09 21:44:28 - PHP Notice:  Undefined variable: sort_corporation in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 34
+2015-08-09 21:44:28 - PHP Notice:  Undefined index: affiliate_id in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-09 22:14:41 - PHP Notice:  Undefined variable: customer_id in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 249
+2015-08-09 22:14:41 - PHP Notice:  Undefined variable: customer_id in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 253
+2015-08-09 22:14:41 - PHP Notice:  Undefined variable: customer_id in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 273
+2015-08-09 22:14:41 - PHP Notice:  Undefined variable: customer_id in E:\wamp\www\yuankong\backend\view\template\sale\company_form.tpl on line 277
+2015-08-09 22:31:46 - PHP Notice:  Error: Could not load template E:\wamp\www\yuankong/backend/view/template/sale/company_file.tpl! in E:\wamp\www\yuankong\system\engine\controller.php on line 70
+2015-08-09 22:33:51 - PHP Notice:  Undefined variable: transactions in E:\wamp\www\yuankong\backend\view\template\sale\company_file.tpl on line 16
+2015-08-09 22:42:34 - PHP Notice:  Undefined variable: column_action in E:\wamp\www\yuankong\backend\view\template\sale\company_file.tpl on line 15
+2015-08-09 22:44:03 - PHP Notice:  Undefined index: file in E:\wamp\www\yuankong\backend\model\sale\company.php on line 347
+2015-08-09 22:44:03 - PHP Notice:  Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'company_file' at line 1<br />Error No: 1064<br />company_file in E:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-08-09 22:45:28 - PHP Notice:  Undefined index: file in E:\wamp\www\yuankong\backend\model\sale\company.php on line 347
+2015-08-09 23:00:07 - PHP Notice:  Undefined variable: files in E:\wamp\www\yuankong\backend\view\template\sale\company_member.tpl on line 20
+2015-08-09 23:02:04 - PHP Notice:  Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'company_member' at line 1<br />Error No: 1064<br />company_member in E:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-08-09 23:02:29 - PHP Notice:  Undefined index: mode in E:\wamp\www\yuankong\backend\controller\sale\company.php on line 1062
+2015-08-09 23:04:08 - PHP Notice:  Undefined index: mode in E:\wamp\www\yuankong\backend\controller\sale\company.php on line 1062
+2015-08-09 23:10:34 - PHP Notice:  Undefined variable: column_status in E:\wamp\www\yuankong\backend\view\template\sale\company_file.tpl on line 14

@@ -82,11 +82,9 @@ o.dlist={
         var dom2=sel.children(dom2);
         dom2.find("span").click(function(){
             var self = $(this);
-            var t = self.attr("data-val");
             dom1.find("span").html(self.text());
             dom1.find("input[name='search_model']").val(self.attr('val'));
             sel.removeClass("hov");
-            sel.find('input[name="group_id"]').val(t);
         }).hover(function(){
             $(this).addClass("on");
         }, function(){
@@ -322,6 +320,10 @@ o.wscroll={
         var wh=document.body.clientHeight||document.documentElement.clientHeight;
         var winh=window.innerHeight;
         return parseInt(wh)>parseInt(winh) ? winh : wh;
+    },
+    bodyh:function(){
+        var bh=document.body.offsetHeight||document.documentElement.offsetHeight;
+        return bh;
     }
 }
 //浏览器滚动判断隐藏和显示
@@ -329,12 +331,203 @@ o.scr={
     init:function(dom){
         window.onscroll=function(){
             var wst= o.wscroll.wst(),
-                 wsh= o.wscroll.wsh();
-            if(wst>wsh){
-                $(dom).show();
+                 wsh= o.wscroll.wsh(),
+                 bh= o.wscroll.bodyh();
+            if(wst>wsh&&wst<bh-wsh){
+                $(dom).addClass("fixedes");
             }else{
-                $(dom).hide();
+                $(dom).removeClass("fixedes");
             }
         }
     }
 }
+pCommon.slider = {
+    //对外提供重置全局参数
+    opts: {},
+    init: function(selector, options){
+        var slider = function(sel, opt){
+            var me = this;
+
+            //参数
+            var opts = $.extend({}, me.defaults, opt);
+            var jcon = $(sel),
+            //图片索引状态按钮
+                jbtns = jcon.find(opts.btnBox).find(opts.btnItem),
+            //图片显示框
+                jconBox = jcon.find(opts.conBox),
+            //图片滚动框
+                jconInner = jcon.find(opts.conInner),
+            //图片列表
+                jcons = jcon.find(opts.conBox).find(opts.conItem),
+            //上一页
+                jpreBtn = jcon.find(opts.btnPre),
+            //下一页
+                jnextBtn = jcon.find(opts.btnNext),
+            //len:图片个数
+            //nlen:克隆首尾图片后个数，用于循环展示
+            //curI当前索引值
+            //unitW、unitH显示框宽高
+                len = jcons.length, nlen = len + 2, curI = 0, unitW = jconBox.width(), unitH = jconBox.height();
+            var go2con = null, timer = null, delayTimer = null;
+
+            //初始化dom操作
+            if (opts.type == "h" || opts.type == "v") {
+                jconInner.append(jcons.eq(0).clone());
+                jconInner.prepend(jcons.eq(len-1).clone());
+                jcons = jcon.find(opts.conBox).find(opts.conItem);
+                jcon.find(".fn_ttbox .img_index").html(1+'/'+len);
+            }
+            jcons.css({width: unitW + "px", height: unitH + "px", overflow: "hidden"});
+
+
+            //向后循环返回初始位置
+            function reStart(){
+                if (opts.type == "h") {
+                    jconInner.css({left: 0});
+                }else if (opts.type == "v") {
+                    jconInner.css({top: 0});
+                }
+            }
+            //向前循环返回末尾位置
+            function reEnd(){
+                if (opts.type == "h") {
+                    jconInner.css({left: -(len+1)*unitW});
+                }else if (opts.type == "v") {
+                    jconInner.css({top: -(len+1)*unitH});
+                }
+            };
+            if (opts.type == "h") {
+                jconInner.css({left:-unitW + "px", width: nlen * unitW + "px", height: unitH + "px"});
+                go2con = function(index){
+                    var l = - (index * unitW) - unitW;
+                    jbtns.removeClass(opts.tabOnClass).eq(index).addClass(opts.tabOnClass);
+                    jconInner.stop().animate({left: l + "px"}, 500, 'easeOutQuad');
+                    jcon.find(".fn_ttbox .fn_item").hide().eq(index).show();
+                    jcon.find(".fn_ttbox .img_index").html((index+1)+'/'+len);
+                    curI = index;
+                    if (opts.callback) {
+                        opts.callback(curI);
+                    }
+                };
+            }else if (opts.type == "v") {
+                jconInner.css({top:-unitH + "px"});
+                go2con = function(index){
+                    var l = - (index * unitH) - unitH;
+                    jbtns.removeClass(opts.tabOnClass).eq(index).addClass(opts.tabOnClass);
+                    jconInner.stop().animate({top: l + "px"}, 500, 'easeOutQuad');
+                    curI = index;
+                    if (opts.callback) {
+                        opts.callback(curI);
+                    }
+                };
+            }else if(opts.type == "a"){
+                jcons.css({position: "absolute"}).hide().eq(curI).show();
+                go2con = function(index){
+                    if (curI == index) {
+                        return;
+                    }
+                    jbtns.removeClass(opts.tabOnClass).eq(index).addClass(opts.tabOnClass);
+                    jcons.stop().hide().eq(index).fadeIn(300);
+                    jcons.eq(curI).show().fadeOut(300);
+                    curI = index;
+                    if (opts.callback) {
+                        opts.callback(curI);
+                    }
+                };
+            }else if(opts.type == "n"){
+                go2con = function(index){
+                    var l = - (index * unitH);
+                    jbtns.removeClass(opts.tabOnClass).eq(index).addClass(opts.tabOnClass);
+                    jconInner.css({top: l + "px"});
+                    curI = index;
+                    if (opts.callback) {
+                        opts.callback(curI);
+                    }
+                };
+            }
+            if (opts.ev == 'mouseover') {
+                jbtns.hover(function(){
+                    var Jme = $(this);
+                    clearTimeout(delayTimer);
+                    delayTimer = null;
+                    delayTimer = setTimeout(function() {
+                        var i = Jme.index();
+                        go2con(i);
+                    },opts.hoverDelay);
+                },function() {
+                    clearTimeout(delayTimer);
+                    delayTimer = null;
+                });
+            }else{
+                jbtns.bind(opts.ev, function(){
+                    var Jme = $(this), i = Jme.index();
+                    go2con(i);
+                });
+            }
+            jpreBtn.click(function(){
+                var i = curI - 1;
+                if (i < 0) {
+                    i = len - 1;
+                    reEnd();
+                }
+                go2con(i);
+            });
+            jnextBtn.click(function(){
+                var i = curI + 1;
+                if (i >= len) {
+                    i = 0;
+                    reStart();
+                }
+                go2con(i);
+            });
+
+            if (opts.auto) {
+                jcon.bind("mouseover", function(){
+                    clearInterval(timer);
+                    timer = null;
+                }).bind("mouseout", function(){
+                    clearInterval(timer);
+                    timer = null;
+                    timer = setInterval(function(){
+                        var i = curI + 1;
+                        if (i >= len) {
+                            i = 0;
+                        }
+                        go2con(i);
+                    }, opts.time);
+                }).trigger("mouseout");
+            }
+        };
+
+        slider.prototype.defaults = {
+            //按钮包裹元素
+            btnBox: ".fn_btnbox",
+            //按钮元素
+            btnItem: ".fn_btn_item",
+            //上一页
+            btnPre: ".fn_pre",
+            //下一页
+            btnNext: ".fn_next",
+            //内容包裹元素
+            conBox: ".fn_con",
+            //内容包裹滚动元素
+            conInner: ".fn_con_inner",
+            //内容元素
+            conItem: ".fn_con_item",
+            //tab选中样式名
+            tabOnClass: "on",
+            //切换类型v(纵向)\h(横向)\a(透明度)\n(无效果)
+            type: "h",
+            //触发事件
+            ev: "mouseover",
+            //hover是触发延迟
+            hoverDelay: 0,
+            auto: true,
+            time: 4000,
+            callback: null
+        };
+        //复写全局设定
+        slider.prototype.defaults = $.extend({}, slider.prototype.defaults, pCommon.slider.opts);
+        return new slider(selector, options);
+    }
+};

@@ -27,6 +27,21 @@
               </td>
           </tr>
           <tr>
+            <td><?php echo $entry_status; ?></td>
+            <td>
+              <select name="status">
+                <?php if($status){ ?>
+                <option value="1" selected><?php echo $text_enabled ?></option>
+                <option value="0"><?php echo $text_disabled ?></option>
+                <?php }else{ ?>
+                <option value="0" selected><?php echo $text_disabled ?></option>
+                <option value="1"><?php echo $text_enabled ?></option>
+                <?php }?>
+                <option>
+              </select>  
+            </td>
+          </tr>
+          <tr>
             <td><?php echo $entry_show; ?></td>
             <td>
               <select name="show">

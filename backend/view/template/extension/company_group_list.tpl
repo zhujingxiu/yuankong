@@ -27,6 +27,7 @@
                 <?php } else { ?>
                 <a href="<?php echo $sort_name; ?>"><?php echo $column_name; ?></a>
                 <?php } ?></td>
+              <td class="left"><?php echo $column_tag; ?></td>
               <td class="left"><?php if ($sort == 'status') { ?>
                 <a href="<?php echo $sort_status; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_status; ?></a>
                 <?php } else { ?>
@@ -58,6 +59,7 @@
                 <input type="checkbox" name="selected[]" value="<?php echo $item['group_id']; ?>" />
                 <?php } ?></td>
               <td class="left"><?php echo $item['name']; ?></td>
+              <td class="left"><?php echo $item['tag']; ?></td>
               <td class="left"><?php echo $item['status_text']; ?></td>
               <td class="left"><?php echo $item['show']; ?></td>
               <td class="right"><?php echo $item['sort_order']; ?></td>
@@ -68,7 +70,7 @@
             <?php } ?>
             <?php } else { ?>
             <tr>
-              <td class="center" colspan="6"><?php echo $text_no_results; ?></td>
+              <td class="center" colspan="7"><?php echo $text_no_results; ?></td>
             </tr>
             <?php } ?>
           </tbody>
