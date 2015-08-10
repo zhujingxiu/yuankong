@@ -4,7 +4,7 @@
     <div class="ovh fix b_f">
         <div class="l-gs-list btb3">
             <div class="w900 fix">
-                <?php foreach ($affiliates as $item): ?>
+                <?php foreach ($companies as $item): ?>
                 <dl class="gslist-dl">
                     <dt class="gs-list-dt">
                         <i class="<?php echo $item['icon_class'] ?>"></i>
@@ -14,8 +14,8 @@
                     <?php  foreach ($item['data'] as $info): ?>
                     <dd class="gs-l-dd">
                         <a href="<?php echo $info['link'] ?>">
-                            <?php if(!empty($info['company'])){
-                                echo truncate_string($info['company'],30);
+                            <?php if(!empty($info['title'])){
+                                echo truncate_string($info['title'],30);
                             }?>
                         </a>
                     </dd>
@@ -44,7 +44,7 @@
                         <?php foreach ($lateast as $key => $item): ?>
                         <li class="new-gs txt_clip">
                             <i class="r-bg-b"><?php echo $key+1 ?></i>
-                            <a href="<?php echo $item['link'] ?>"><?php echo truncate_string($item['company'],30) ?></a></li>    
+                            <a href="<?php echo $item['link'] ?>"><?php echo truncate_string($item['title'],30) ?></a></li>    
                         <?php endforeach ?>
                     </ul>
                     <?php if(count($lateast) > 5){ ?>

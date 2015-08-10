@@ -18,6 +18,7 @@ $_['text_unapprove']             = '未审核';
 $_['text_wait']                 = '请耐心等待！';
 $_['text_balance']              = '余额：';
 $_['text_group']                 = '公司类别';
+$_['confirm_delete']                 = '确认删除吗?';
 
 // Column
 $_['column_title']              = '公司名称';
@@ -72,7 +73,7 @@ $_['entry_text']         		= '内容：';
 $_['entry_image']         		= '图片：';
 $_['entry_identity']         	= '法人身份证件';
 $_['entry_permit']         		= '营业执照';
-
+$_['entry_file_status']         = '审核状态:';
 // Error
 $_['error_permission']          = '警告： 您没有权限更改加盟公司！';
 $_['error_exists']              = '警告： 此手机号码已注册！';

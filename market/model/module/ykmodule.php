@@ -56,13 +56,13 @@ class ModelModuleYkmodule extends Model {
 		return $query->rows;
 	}
 
-	public function getAffiliates($data=array()){
+	public function getCompanies($data=array()){
 		
-		$sql = "SELECT * FROM ".DB_PREFIX."affiliate ";
+		$sql = "SELECT * FROM ".DB_PREFIX."company c";
 		if(isset($data['group_id'])){
-			$sql .=" WHERE group_id = '".(int)$data['group_id']."'";
+			$sql .=" WHERE company_id IN (SELECT company_id FROM ".DB_PREFIX."company_to_group WHERE group_id = '".(int)$data['group_id']."' )";
 		}
-		$sql .= " ORDER BY date_added DESC ";
+		$sql .= " ORDER BY c.date_added DESC ";
 		if(!empty($data['limit'])){
 			$sql .=" LIMIT ".$data['limit'];
 		}else{

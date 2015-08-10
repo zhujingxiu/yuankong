@@ -21,8 +21,6 @@ class ModelSaleCompany extends Model {
 			'email' 		=> $data['email'],
 			'telephone' 	=> $data['telephone'],
 			'fax' 			=> $data['fax'],
-			'salt' 			=> $salt,
-			'password' 		=> $password,
 			'area_zone' 	=> implode(" ", $area_zone),
 			'areas' 		=> implode("|",$data['area']),
 			'postcode' 		=> isset($data['postcode']) ? $data['postcode'] : '',
@@ -32,8 +30,10 @@ class ModelSaleCompany extends Model {
 			'zone_id' 		=> $data['zone_id'],
 			'recommend' 	=> $data['recommend'],
 			'deposit' 		=> $data['deposit'],
-			'code' 			=> isset($data['code']) ? $data['code'] : '',			
+			'code' 			=> isset($data['code']) ? $data['code'] : '',	
+			'date_added'	=> date('Y-m-d H:i:s')		
 		);
+
       	$company_id = $this->db->insert("company",$fileds);    
 
       	if(isset($data['group_id']) && is_array($data['group_id'])) {
@@ -121,6 +121,7 @@ class ModelSaleCompany extends Model {
       			'company_id' => $company_id,
       			'title' => trim($data['dtitle']),
       			'text'	=> strip_tags(trim($data['text'])),
+      			'image'	=> htmlspecialchars_decode($data['image']),
       			'date_modified' => date('Y-m-d H:i:s')
       		);
         	$this->db->insert("company_description" , $fileds);
@@ -342,14 +343,27 @@ class ModelSaleCompany extends Model {
 			'path'	=> htmlspecialchars_decode($data['path']),
 			'note'	=> isset($data['note']) ? strip_tags($data['note']) : '',
 			'sort'	=> $data['sort'],
-			'status'	=> isset($data['status']) ? (int)$data['status'] : 1,
+			'status'	=> 0,
 			'date_added'=> date('Y-m-d H:i:s')
 		);
 		$this->db->insert("company_file" ,$fileds);
 	}
 
+	public function saveFile($file_id,$status=0,$sort=0,$note=''){
+		$fileds = array(
+			'status' => $status,
+			'sort'   => $sort,
+			'note'	 => strip_tags($note),
+			'date_added'=>date('Y-m-d H:i:s')
+		);
+
+		$this->db->update('company_file',array('file_id'=>$file_id),$fileds);
+		return true;
+	}
+
 	public function deleteFile($file_id) {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "company_file WHERE file_id = '" . (int)$file_id . "'");
+		return true;
 	}
 	public function getCompanyFile($file_id) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "company_file WHERE file_id = '" . (int)$file_id . "' ");
@@ -380,12 +394,24 @@ class ModelSaleCompany extends Model {
 		);
 		$this->db->insert("company_member" ,$fileds);
 	}
+	public function saveMember($member_id,$data){
+		$fileds = array(
+			'name' 		=> $data['name'],
+			'position' 	=> $data['position'],
+			'sort'   	=> isset($data['sort']) ? (int)$data['sort'] : 1,
+			'note'	 	=> isset($data['note']) ? strip_tags(htmlspecialchars_decode($data['note'])) : '',
+			'date_added'=>date('Y-m-d H:i:s')
+		);
 
-	public function deleteMember($file_id) {
-		$this->db->query("DELETE FROM " . DB_PREFIX . "company_member WHERE file_id = '" . (int)$file_id . "'");
+		$this->db->update('company_member',array('member_id'=>$member_id),$fileds);
+		return true;
+	}
+	public function deleteMember($member_id) {
+		$this->db->query("DELETE FROM " . DB_PREFIX . "company_member WHERE member_id = '" . (int)$member_id . "'");
+		return true;
 	}
 	public function getCompanyMember($member_id) {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "company_member WHERE member_id = '" . (int)$member_id . "' ORDER BY date_added DESC LIMIT " . (int)$start . "," . (int)$limit);
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "company_member WHERE member_id = '" . (int)$member_id . "' ");
 	
 		return $query->row;
 	}

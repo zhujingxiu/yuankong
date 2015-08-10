@@ -208,8 +208,8 @@
               <td><?php echo $entry_image; ?></td>
               <td>
                 <div class="image">
-                  <img src="<?php echo $no_image; ?>"id="thumb-image" />
-                  <input type="hidden" name="image" value="" id="image" />
+                  <img src="<?php echo $image; ?>"id="thumb-image" />
+                  <input type="hidden" name="image" value="<?php echo $image ?>" id="image" />
                   <br />
                   <a onclick="image_upload('image', 'thumb-image');">
                     <?php echo $text_browse; ?>
@@ -275,7 +275,7 @@ $('#button-files').bind('click', function() {
     url: 'index.php?route=sale/company/file&token=<?php echo $token; ?>&company_id=<?php echo $company_id; ?>',
     type: 'post',
     dataType: 'html',
-    data: 'path=' + encodeURIComponent($('#tab-file input[name=\'file\']').val()) + '&mode=' + encodeURIComponent($('#tab-file input[name=\'mode\']').val())+ '&note=' + encodeURIComponent($('#tab-file textarea[name=\'note\']').val())+ '&sort=' + encodeURIComponent($('#tab-file input[name=\'sort\']').val()),
+    data: 'path=' + encodeURIComponent($('#tab-file input[name=\'file\']').val()) + '&mode=' + encodeURIComponent($('#tab-file input[name=\'mode\']:checked').val())+ '&note=' + encodeURIComponent($('#tab-file textarea[name=\'note\']').val())+ '&sort=' + encodeURIComponent($('#tab-file input[name=\'sort\']').val()),
     beforeSend: function() {
       $('.success, .warning').remove();
       $('#button-files').attr('disabled', true);
@@ -289,7 +289,6 @@ $('#button-files').bind('click', function() {
       $('#files').html(html);     
       $('#tab-files input').val('');
       $('#tab-files textarea').html('');
-      $('#tab-files img').attr('src','');
     }
   });
 });
@@ -314,7 +313,6 @@ $('#button-members').bind('click', function() {
       $('#members').html(html);     
       $('#tab-member input').val('');
       $('#tab-member textarea').html('');
-      $('#tab-member img').attr('src','');
     }
   });
 });

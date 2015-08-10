@@ -8,10 +8,10 @@ class ControllerModuleYkcompany extends Controller {
         $this->data['setting'] = $setting;  
 
         $this->data['title'] = $setting['title'][$this->config->get('config_language_id')];
-        $this->data['companys'] = array();
+        $this->data['companies'] = array();
         if(isset($setting['category_tabs'])){
             if(isset($setting['sort'])){
-                sort($setting['sort']);
+                asort($setting['sort']);
                 $groups = array();
                 foreach ($setting['sort'] as $key => $value) {
                     $groups[] = $setting['category_tabs'][$key];
@@ -30,7 +30,7 @@ class ControllerModuleYkcompany extends Controller {
                     'group_id' => $gid,
                     'limit'     => isset($setting['limit'][$key]) ? $setting['limit'][$key] : 5,
                 );
-                $_company = $this->model_module_ykmodule->getAffiliates($config);
+                $_company = $this->model_module_ykmodule->getCompanies($config);
 
                 foreach ($_company as $i => $item) {                    
                     $_company[$i]['link'] = $this->url->link('account/company/info','company_id='.$item['company_id'],'SSL');
@@ -41,12 +41,12 @@ class ControllerModuleYkcompany extends Controller {
                     'icon_class' => isset($setting['icon_class'][$key]) ? $setting['icon_class'][$key] : '',
                     'title' => $title,
                 );
-                $this->data['companys'][] = $data;
+                $this->data['companies'][] = $data;
             }
         }
 
         $this->data['module'] = $module++;
-        $lateast = $this->model_module_ykmodule->getAffiliates(array('limit'=>$setting['lateast']));
+        $lateast = $this->model_module_ykmodule->getCompanies(array('limit'=>$setting['lateast']));
         foreach ($lateast as $key => $item) {
             $lateast[$key]['link'] = $this->url->link('company/account/info','company_id='.$item['company_id'],'SSL');
         }

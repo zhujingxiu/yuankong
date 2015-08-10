@@ -17,9 +17,9 @@
         				<?php foreach ($item['data'] as $info): ?>
         				<a href="<?php echo $info['link'] ?>">
         					<?php if(!empty($info['title'])){
-        						echo truncate_string($info['title']);
+        						echo truncate_string($info['title'],18);
         					}else if(!empty($info['text'])){
-								echo truncate_string($info['text']);
+								echo truncate_string($info['text'],18);
         					}?>
         				</a>
         				<?php endforeach ?>
@@ -38,9 +38,9 @@
         				<?php foreach ($item['data'] as $info): ?>
         				<a href="<?php echo $info['link'] ?>">
         					<?php if(!empty($info['title'])){
-        						echo truncate_string($info['title']);
+        						echo truncate_string($info['title'],18);
         					}else if(!empty($info['text'])){
-								echo truncate_string($info['text']);
+								echo truncate_string($info['text'],18);
         					}?>
         				</a>
         				<?php endforeach ?>

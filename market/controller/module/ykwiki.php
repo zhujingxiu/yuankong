@@ -25,7 +25,7 @@ class ControllerModuleYkwiki extends Controller {
                     $link = $this->url->link('information/wiki','wiki_group='.$gid,'SSL');
                 }else{
                     $title = $this->language->get('text_wiki_help');
-                    $link = $this->url->link('information/help','','SSL');
+                    $link = $this->url->link('information/wiki','wiki_group=help','SSL');
                 }
                 $config =  array(
                     'group_id' => $gid,

@@ -931,9 +931,9 @@ class ControllerSaleCompany extends Controller {
     	if (isset($this->request->post['image'])) {
       		$this->data['image'] = $this->request->post['image'];
     	} elseif (!empty($company_description['image'])) { 
-			$this->data['image'] = $company_description['image'];
+			$this->data['image'] = $this->model_tool_image->resize($company_description['image'],100,100);
 		} else {
-      		$this->data['image'] = '';
+      		$this->data['image'] = $this->model_tool_image->resize('no_image.jpg',100,100);
     	}
         $this->load->model('extension/company_group');
         $this->data['groups'] = $this->model_extension_company_group->getCompanyGroups();
@@ -977,6 +977,22 @@ class ControllerSaleCompany extends Controller {
 		$this->data['column_sort'] = $this->language->get('column_sort');
 		$this->data['column_status'] = $this->language->get('column_status');
 		$this->data['column_action'] = $this->language->get('column_action');
+		$this->data['title'] = '文件详情';
+
+		$this->data['button_close'] = $this->language->get('button_close');
+		$this->data['button_save'] = $this->language->get('button_save');
+		$this->data['entry_mode'] = $this->language->get('entry_mode'); 		
+		$this->data['entry_identity'] = $this->language->get('entry_identity'); 		
+		$this->data['entry_permit'] = $this->language->get('entry_permit'); 		
+		$this->data['entry_file'] = $this->language->get('entry_file'); 		
+		$this->data['entry_note'] = $this->language->get('entry_note'); 		
+ 		$this->data['entry_sort'] = $this->language->get('entry_sort');
+ 		$this->data['text_wait'] = $this->language->get('text_wait');
+ 		$this->data['confirm_delete'] = $this->language->get('confirm_delete');
+ 		$this->data['entry_file_status'] = $this->language->get('entry_file_status');
+
+ 		$this->data['text_approved'] = $this->language->get('text_approved');
+ 		$this->data['text_unapprove'] = $this->language->get('text_unapprove');
 		
 		if (isset($this->request->get['page'])) {
 			$page = $this->request->get['page'];
@@ -993,11 +1009,11 @@ class ControllerSaleCompany extends Controller {
 		
 			$action[] = array(
 				'text' 		=> $this->language->get('text_edit'),
-				'onclick' 	=> 'file_detail(' . $result['file_id'].')'
+				'onclick' 	=> 'file_detail(' . $result['file_id'].','.$this->request->get['company_id'].')'
 			);
 			$action[] = array(
 				'text' 		=> $this->language->get('text_delete'),
-				'onclick' 	=> 'file_delete(' . $result['file_id'].')'
+				'onclick' 	=> 'file_delete(' . $result['file_id'].','.$this->request->get['company_id'].')'
 			);
         	$this->data['files'][] = array(
 				'file'      => $this->model_tool_image->resize($result['path'], 100,100),
@@ -1054,7 +1070,17 @@ class ControllerSaleCompany extends Controller {
 		$this->data['column_note'] = $this->language->get('column_note');
 		$this->data['column_sort'] = $this->language->get('column_sort');
 		$this->data['column_action'] = $this->language->get('column_action');
+		$this->data['title'] = '成员详情';
 
+		$this->data['button_close'] = $this->language->get('button_close');
+		$this->data['button_save'] = $this->language->get('button_save');
+		$this->data['entry_member'] = $this->language->get('entry_member'); 		
+		$this->data['entry_position'] = $this->language->get('entry_position'); 		
+		$this->data['entry_avatar'] = $this->language->get('entry_avatar'); 		
+		$this->data['entry_note'] = $this->language->get('entry_note'); 		
+ 		$this->data['entry_sort'] = $this->language->get('entry_sort');
+ 		$this->data['text_wait'] = $this->language->get('text_wait');
+ 		$this->data['confirm_delete'] = $this->language->get('confirm_delete');
 		if (isset($this->request->get['page'])) {
 			$page = $this->request->get['page'];
 		} else {
@@ -1066,13 +1092,24 @@ class ControllerSaleCompany extends Controller {
 		$results = $this->model_sale_company->getMembers($this->request->get['company_id'], ($page - 1) * 10, 10);
       		
 		foreach ($results as $result) {
+			$action = array();
+		
+			$action[] = array(
+				'text' 		=> $this->language->get('text_edit'),
+				'onclick' 	=> 'member_detail(' . $result['member_id'].','.$this->request->get['company_id'].')'
+			);
+			$action[] = array(
+				'text' 		=> $this->language->get('text_delete'),
+				'onclick' 	=> 'member_delete(' . $result['member_id'].','.$this->request->get['company_id'].')'
+			);
         	$this->data['members'][] = array(
         		'name' 		=> $result['name'],
         		'position' 	=> $result['position'],
 				'avatar'    => $this->model_tool_image->resize($result['avatar'], 100,100),
 				'note' 		=> $result['note'],
 				'sort' 		=> $result['sort'],
-        		'date_added'=> date($this->language->get('date_format_short'), strtotime($result['date_added']))
+        		'date_added'=> date($this->language->get('date_format_short'), strtotime($result['date_added'])),
+        		'action'	=> $action
         	);
       	}			
 		
@@ -1095,6 +1132,7 @@ class ControllerSaleCompany extends Controller {
 
 	public function ajax_data(){
 		$this->load->model('sale/company');
+		$this->load->model('tool/image');
 		$this->load->language('sale/company');
 		if(isset($this->request->get['action'])){
 			$action = strtolower(trim($this->request->get['action']));
@@ -1108,9 +1146,61 @@ class ControllerSaleCompany extends Controller {
 			case 'get_file':
 				$file_id = isset($this->request->get['file_id']) ? (int)$this->request->get['file_id'] : false;
 				$file = $this->model_sale_company->getCompanyFile($file_id);
-				$json['status'] = 1;
-				$json['data']	= $file;
+				if(!empty($file['path'])){
+					$file['src'] = $this->model_tool_image->resize($file['path'], 100, 100);
+				}else{
+					$file['src'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
+				}
+				$json = array('status' => 1,'data'	=> $file);
 			break;
+			case 'save_file':
+				$file_id = isset($this->request->post['file_id']) ? (int)$this->request->post['file_id'] : 0;
+				$status = isset($this->request->post['status']) ? (int)$this->request->post['status'] : 0;
+				$sort = isset($this->request->post['sort']) ? (int)$this->request->post['sort'] : 1;
+				$note = isset($this->request->post['note']) ? strip_tags(htmlspecialchars_decode($this->request->post['note'])) : '';
+				if($this->model_sale_company->saveFile($file_id,$status,$sort,$note)){
+					$json = array('status' => 1);	
+				}else{
+					$json = array('status' => 0 ,'msg' => $this->language->get('text_exception'));
+				}
+			break;
+			case 'delete_file':
+				$file_id = isset($this->request->get['file_id']) ? (int)$this->request->get['file_id'] : 0;
+				
+				if($this->model_sale_company->deleteFile($file_id)){
+					$json = array('status' => 1);	
+				}else{
+					$json = array('status' => 0 ,'msg' => $this->language->get('text_exception'));
+				}	
+			break;
+			case 'get_member':
+				$member_id = isset($this->request->get['member_id']) ? (int)$this->request->get['member_id'] : false;
+				$member = $this->model_sale_company->getCompanyMember($member_id);
+				if(!empty($member['avatar'])){
+					$member['src'] = $this->model_tool_image->resize($member['avatar'], 100, 100);
+				}else{
+					$member['src'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
+				}
+				$json = array('status' => 1,'data'	=> $member);
+			break;
+			case 'save_member':
+				$member_id = isset($this->request->post['member_id']) ? (int)$this->request->post['member_id'] : 0;
+				
+				if($this->model_sale_company->saveMember($member_id,$this->request->post)){
+					$json = array('status' => 1);	
+				}else{
+					$json = array('status' => 0 ,'msg' => $this->language->get('text_exception'));
+				}
+			break;
+			case 'delete_member':
+				$member_id = isset($this->request->get['member_id']) ? (int)$this->request->get['member_id'] : 0;
+				
+				if($this->model_sale_company->deleteMember($member_id)){
+					$json = array('status' => 1);	
+				}else{
+					$json = array('status' => 0 ,'msg' => $this->language->get('text_exception'));
+				}	
+			break;			
 		}
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
