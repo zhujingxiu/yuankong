@@ -1176,3 +1176,11 @@
 2015-08-09 23:02:29 - PHP Notice:  Undefined index: mode in E:\wamp\www\yuankong\backend\controller\sale\company.php on line 1062
 2015-08-09 23:04:08 - PHP Notice:  Undefined index: mode in E:\wamp\www\yuankong\backend\controller\sale\company.php on line 1062
 2015-08-09 23:10:34 - PHP Notice:  Undefined variable: column_status in E:\wamp\www\yuankong\backend\view\template\sale\company_file.tpl on line 14
+2015-08-10 13:16:35 - PHP Notice:  Undefined variable: sort_corporation in D:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 34
+2015-08-10 13:16:36 - PHP Notice:  Undefined index: affiliate_id in D:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-10 13:16:36 - PHP Notice:  Undefined variable: sort_corporation in D:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 34
+2015-08-10 13:16:36 - PHP Notice:  Undefined index: affiliate_id in D:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-10 13:42:15 - PHP Notice:  Undefined variable: start in D:\wamp\www\yuankong\backend\model\sale\company.php on line 355
+2015-08-10 13:42:15 - PHP Notice:  Undefined variable: limit in D:\wamp\www\yuankong\backend\model\sale\company.php on line 355
+2015-08-10 13:42:26 - PHP Notice:  Undefined variable: start in D:\wamp\www\yuankong\backend\model\sale\company.php on line 355
+2015-08-10 13:42:26 - PHP Notice:  Undefined variable: limit in D:\wamp\www\yuankong\backend\model\sale\company.php on line 355

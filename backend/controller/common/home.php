@@ -155,8 +155,8 @@ class ControllerCommonHome extends Controller {
 		
 		$this->load->model('sale/company');
 		
-		$this->data['total_company'] = $this->model_sale_company->getTotalCompanys();
-		$this->data['total_company_approval'] = $this->model_sale_company->getTotalCompanysAwaitingApproval();
+		$this->data['total_company'] = $this->model_sale_company->getTotalCompanies();
+		$this->data['total_company_approval'] = $this->model_sale_company->getTotalCompaniesAwaitingApproval();
 				
 		$this->data['orders'] = array(); 
 		

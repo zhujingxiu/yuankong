@@ -26,7 +26,11 @@
       <td class="left"><?php echo $item['sort']; ?></td>
       <td class="left"><?php echo $item['status']; ?></td>
       <td class="left"><?php echo $item['note']; ?></td>
-      <td class="right"></td>
+      <td class="right">
+        <?php foreach ($item['action'] as $action): ?>
+          <a onclick="<?php echo $action['onclick'] ?>"><?php echo $action['text'] ?></a>
+        <?php endforeach ?>
+      </td>
     </tr>
     <?php } ?>
 
@@ -38,3 +42,14 @@
   </tbody>
 </table>
 <div class="pagination"><?php echo $pagination; ?></div>
+<script type="text/javascript">
+  function file_detail(file_id){
+    $.get('index.php?route=sale/company/ajax_data&token=<?php echo $token ?>',
+      {action:'get_file',file_id:file_id},
+      function(json){
+
+      },
+    'json');
+  }
+
+</script>

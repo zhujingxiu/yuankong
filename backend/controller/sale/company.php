@@ -969,7 +969,7 @@ class ControllerSaleCompany extends Controller {
 		}		
 		
 		$this->data['text_no_results'] = $this->language->get('text_no_results');
-		
+		$this->data['token'] = $this->session->data['token'];
 		$this->data['column_date_added'] = $this->language->get('column_date_added');
 		$this->data['column_file'] = $this->language->get('column_file');
 		$this->data['column_mode'] = $this->language->get('column_mode');
@@ -989,13 +989,24 @@ class ControllerSaleCompany extends Controller {
 		$results = $this->model_sale_company->getFiles($this->request->get['company_id'], ($page - 1) * 10, 10);
       		
 		foreach ($results as $result) {
+			$action = array();
+		
+			$action[] = array(
+				'text' 		=> $this->language->get('text_edit'),
+				'onclick' 	=> 'file_detail(' . $result['file_id'].')'
+			);
+			$action[] = array(
+				'text' 		=> $this->language->get('text_delete'),
+				'onclick' 	=> 'file_delete(' . $result['file_id'].')'
+			);
         	$this->data['files'][] = array(
 				'file'      => $this->model_tool_image->resize($result['path'], 100,100),
-				'note' => $result['note'],
-				'sort' => $result['sort'],
-				'mode' => strtolower($result['mode'])=='identity' ? $this->language->get('entry_identity') : $this->language->get('entry_permit'),
-				'status' => $result['status'] ? $this->language->get('text_approved') : $this->language->get('text_unapprove'),
-        		'date_added'  => date($this->language->get('date_format_short'), strtotime($result['date_added']))
+				'note' 		=> $result['note'],
+				'sort' 		=> $result['sort'],
+				'mode' 		=> strtolower($result['mode'])=='identity' ? $this->language->get('entry_identity') : $this->language->get('entry_permit'),
+				'status' 	=> $result['status'] ? $this->language->get('text_approved') : $this->language->get('text_unapprove'),
+        		'date_added'=> date($this->language->get('date_format_short'), strtotime($result['date_added'])),
+        		'action'	=> $action
         	);
       	}			
 
@@ -1033,7 +1044,7 @@ class ControllerSaleCompany extends Controller {
 		} else {
 			$this->data['error_warning'] = '';
 		}	
-				
+		$this->data['token'] = $this->session->data['token'];		
 		$this->data['text_no_results'] = $this->language->get('text_no_results');
 		
 		$this->data['column_date_added'] = $this->language->get('column_date_added');
@@ -1080,6 +1091,29 @@ class ControllerSaleCompany extends Controller {
 		$this->template = 'sale/company_member.tpl';		
 		
 		$this->response->setOutput($this->render());
+	}
+
+	public function ajax_data(){
+		$this->load->model('sale/company');
+		$this->load->language('sale/company');
+		if(isset($this->request->get['action'])){
+			$action = strtolower(trim($this->request->get['action']));
+		}else if(isset($this->request->post['action'])){
+			$action = strtolower(trim($this->request->post['action']));
+		}else{
+			$action = 'get';
+		}
+		$json = array();
+		switch ($action) {
+			case 'get_file':
+				$file_id = isset($this->request->get['file_id']) ? (int)$this->request->get['file_id'] : false;
+				$file = $this->model_sale_company->getCompanyFile($file_id);
+				$json['status'] = 1;
+				$json['data']	= $file;
+			break;
+		}
+		$this->response->addHeader('Content-Type: application/json');
+		$this->response->setOutput(json_encode($json));
 	}
 	
   	protected function validateForm() {

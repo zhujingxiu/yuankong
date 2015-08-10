@@ -279,7 +279,11 @@ class ControllerServiceProject extends Controller {
       		if(isset($this->request->post['redirect'])){
       			$this->redirect(htmlspecialchars_decode($this->request->post['redirect']));	
       		}
-	  		$this->redirect($this->url->link('service/project', '', 'SSL'));
+	  		//$this->redirect($this->url->link('service/project', '', 'SSL'));
+            $this->response->addHeader('Content-Type: application/json');
+            $this->response->addHeader('Content-Type: text/html; charset=utf-8');
+        
+            die("<script type='text/javascript'>alert('Success!');history.go(-1);</script>");
     	} 
 
   	}

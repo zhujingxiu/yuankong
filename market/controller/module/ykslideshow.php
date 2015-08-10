@@ -14,8 +14,7 @@ class ControllerModuleYkslideshow extends Controller {
         if( isset($setting['banner_image'])){
             foreach( $setting['banner_image'] as $banner ){
                 $banner['thumb'] = $this->model_tool_image->resize($banner['image'], $setting['width'], $setting['height']);
-            
-                
+
                 $title = isset( $banner['title'][$this->config->get('config_language_id')] ) ? $banner['title'][$this->config->get('config_language_id')]:"";
                 $description = isset( $banner['description'][$this->config->get('config_language_id')] ) ? $banner['description'][$this->config->get('config_language_id')]:"";
                 $banner['title'] =  html_entity_decode( $title, ENT_QUOTES, 'UTF-8');
@@ -30,6 +29,10 @@ class ControllerModuleYkslideshow extends Controller {
             }
         }
         $this->data['module'] = $module++;
+
+        $this->data['jszd'] = HTTP_SERVER.'market/view/theme/yuankong/yk_img/adimg/ztpic1.jpg';
+        $this->data['xfpx'] = HTTP_SERVER.'market/view/theme/yuankong/yk_img/adimg/ztpic2.jpg';
+        $this->data['shys'] = HTTP_SERVER.'market/view/theme/yuankong/yk_img/adimg/ztpic3.jpg';
                         
         $this->template = $this->config->get('config_template') . '/template/module/ykslideshow.tpl';
         

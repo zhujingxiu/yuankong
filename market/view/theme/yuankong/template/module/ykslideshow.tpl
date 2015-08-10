@@ -28,14 +28,14 @@
         <a class="next icon2" href="javascript:void(0)"></a>
     </div>
     <div class="ovh mt10 fix">
-        <a class="l db" href="">
-            <img src="market/view/theme/<?php echo $this->config->get('config_template') ?>/yk_img/adimg/ztpic1.jpg">
+        <a class="l db" >
+            <img src="<?php echo $jszd ?>">
         </a>
-        <a class="l db ml15" href="">
-            <img src="market/view/theme/<?php echo $this->config->get('config_template') ?>/yk_img/adimg/ztpic2.jpg">
+        <a class="l db ml15" >
+            <img src="<?php echo $xfpx ?>">
         </a>
-        <a class="r db" href="">
-            <img src="market/view/theme/<?php echo $this->config->get('config_template') ?>/yk_img/adimg/ztpic3.jpg">
+        <a class="r db" >
+            <img src="<?php echo $shys ?>">
         </a>
     </div>
 

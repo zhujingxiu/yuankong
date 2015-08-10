@@ -330,11 +330,6 @@ class ModelSaleCompany extends Model {
 		return $query->row['total'];
 	}
 
-	public function getCompanyFile($company_id){
-		$query = $this->db->query("SELECT * FROM ".DB_PREFIX."company_file WHERE company_id = '".(int)$company_id."' ORDER BY mode ASC" );
-		return $query->rows;
-	}
-
 	public function getCompanyDescription($company_id){
 		$query = $this->db->query("SELECT * FROM ".DB_PREFIX."company_description WHERE company_id = '".(int)$company_id."' " );
 		return $query->row;
@@ -356,7 +351,11 @@ class ModelSaleCompany extends Model {
 	public function deleteFile($file_id) {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "company_file WHERE file_id = '" . (int)$file_id . "'");
 	}
+	public function getCompanyFile($file_id) {
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "company_file WHERE file_id = '" . (int)$file_id . "' ");
 	
+		return $query->row;
+	}
 	public function getFiles($company_id, $start = 0, $limit = 10) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "company_file WHERE company_id = '" . (int)$company_id . "' ORDER BY date_added DESC LIMIT " . (int)$start . "," . (int)$limit);
 	
@@ -385,7 +384,11 @@ class ModelSaleCompany extends Model {
 	public function deleteMember($file_id) {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "company_member WHERE file_id = '" . (int)$file_id . "'");
 	}
+	public function getCompanyMember($member_id) {
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "company_member WHERE member_id = '" . (int)$member_id . "' ORDER BY date_added DESC LIMIT " . (int)$start . "," . (int)$limit);
 	
+		return $query->row;
+	}
 	public function getMembers($company_id, $start = 0, $limit = 10) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "company_member WHERE company_id = '" . (int)$company_id . "' ORDER BY date_added DESC LIMIT " . (int)$start . "," . (int)$limit);
 	
@@ -398,7 +401,7 @@ class ModelSaleCompany extends Model {
 		return $query->row['total'];
 	}
 		
-	public function getTotalCompanysAwaitingApproval() {
+	public function getTotalCompaniesAwaitingApproval() {
       	$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "company WHERE status = '0' OR approved = '0'");
 
 		return $query->row['total'];
