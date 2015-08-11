@@ -26,6 +26,7 @@
 <script type="text/javascript" src="view/javascript/jquery/tabs.js"></script>
 <script type="text/javascript" src="view/javascript/jquery/superfish/js/superfish.js"></script>
 <script type="text/javascript" src="view/javascript/common.js"></script>
+<script type="text/javascript" src="view/javascript/scrolltop.js"></script>
 <?php foreach ($scripts as $script) { ?>
 <script type="text/javascript" src="<?php echo $script; ?>"></script>
 <?php } ?>
@@ -90,6 +91,12 @@ $(document).ready(function(){
           <li><a href="<?php echo $category; ?>"><?php echo $text_category; ?></a></li>
           <li><a href="<?php echo $product; ?>"><?php echo $text_product; ?></a></li>
           <li><a href="<?php echo $option; ?>"><?php echo $text_option; ?></a></li>
+          <li><a class="parent"><?php echo $text_attribute; ?></a>
+            <ul>
+              <li><a href="<?php echo $attribute; ?>"><?php echo $text_attribute; ?></a></li>
+              <li><a href="<?php echo $attribute_group; ?>"><?php echo $text_attribute_group; ?></a></li>
+            </ul>
+          </li>
           <li><a href="<?php echo $manufacturer; ?>"><?php echo $text_manufacturer; ?></a></li>
         </ul>
       </li>

@@ -202,7 +202,6 @@ class ControllerSaleCompany extends Controller {
 			$this->error['warning'] = $this->language->get('error_permission');
 		} elseif (isset($this->request->post['selected'])) {
 			$approved = 0;
-			
 			foreach ($this->request->post['selected'] as $company_id) {
 				$company_info = $this->model_sale_company->getCompany($company_id);
 				
@@ -213,7 +212,7 @@ class ControllerSaleCompany extends Controller {
 				}
 			}
 			
-			$this->session->data['success'] = sprintf($this->language->get('text_approved'), $approved);
+			$this->session->data['success'] = sprintf($this->language->get('text_success_approved'), $approved);
 			
 			$url = '';
 		
@@ -975,7 +974,7 @@ class ControllerSaleCompany extends Controller {
 		$this->data['column_mode'] = $this->language->get('column_mode');
 		$this->data['column_note'] = $this->language->get('column_note');
 		$this->data['column_sort'] = $this->language->get('column_sort');
-		$this->data['column_status'] = $this->language->get('column_status');
+		$this->data['column_status'] = $this->language->get('column_file_status');
 		$this->data['column_action'] = $this->language->get('column_action');
 		$this->data['title'] = '文件详情';
 

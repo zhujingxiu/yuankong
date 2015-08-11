@@ -210,6 +210,15 @@
 
   		<div class="ovh detailbox">
 			<div id="tab-description" class="d-boxes">
+                <?php if ($attribute_groups) { ?>
+                <?php foreach ($attribute_groups as $group) { ?>
+                <ul class="shop-cs-news fix">
+                    <?php foreach ($group['attribute'] as $item) { ?>
+                    <li><em class="c3"><?php echo $item['name']; ?></em><?php echo $item['text']; ?> </li>
+                    <?php }?>
+                </ul>
+                <?php }?>
+                <?php }?>
 				<?php echo $description; ?>
 			</div>
 			<div id="tab-records" class="d-boxes" style="display:none;"></div>

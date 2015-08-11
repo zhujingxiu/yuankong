@@ -588,7 +588,7 @@ class ControllerCatalogProduct extends Controller {
 		$this->data['entry_length'] = $this->language->get('entry_length');
     	$this->data['entry_image'] = $this->language->get('entry_image');
     	$this->data['entry_images'] = $this->language->get('entry_images');
-    	$this->data['entry_download'] = $this->language->get('entry_download');
+    	$this->data['entry_attribute'] = $this->language->get('entry_attribute');
     	$this->data['entry_category'] = $this->language->get('entry_category');
 		$this->data['entry_filter'] = $this->language->get('entry_filter');
 		$this->data['entry_related'] = $this->language->get('entry_related');
@@ -608,6 +608,7 @@ class ControllerCatalogProduct extends Controller {
 				
     	$this->data['button_save'] = $this->language->get('button_save');
     	$this->data['button_cancel'] = $this->language->get('button_cancel');
+    	$this->data['button_add_attribute'] = $this->language->get('button_add_attribute');
 		$this->data['button_add_option'] = $this->language->get('button_add_option');
 		$this->data['button_add_option_value'] = $this->language->get('button_add_option_value');
 		$this->data['button_add_discount'] = $this->language->get('button_add_discount');
@@ -1012,7 +1013,30 @@ class ControllerCatalogProduct extends Controller {
 			}
 		}
 		$this->data['top_categories'] = $this->model_catalog_category->getSelectionCategories(null);		
+		// Attributes
+		$this->load->model('catalog/attribute');
 		
+		if (isset($this->request->post['product_attribute'])) {
+			$product_attributes = $this->request->post['product_attribute'];
+		} elseif (isset($this->request->get['product_id'])) {
+			$product_attributes = $this->model_catalog_product->getProductAttributes($this->request->get['product_id']);
+		} else {
+			$product_attributes = array();
+		}
+		
+		$this->data['product_attributes'] = array();
+		
+		foreach ($product_attributes as $product_attribute) {
+			$attribute_info = $this->model_catalog_attribute->getAttribute($product_attribute['attribute_id']);
+			
+			if ($attribute_info) {
+				$this->data['product_attributes'][] = array(
+					'attribute_id'                  => $product_attribute['attribute_id'],
+					'name'                          => $attribute_info['name'],
+					'product_attribute_description' => $product_attribute['product_attribute_description']
+				);
+			}
+		}
 		// Options
 		$this->load->model('catalog/option');
 		
@@ -1353,20 +1377,17 @@ class ControllerCatalogProduct extends Controller {
 		$this->load->model('catalog/product');
 		$product_id = isset($this->request->get['product_id']) ? (int)$this->request->get['product_id'] : 0;
 		$selected = $this->model_catalog_product->getProductCategories($product_id);
-		$nodes = $this->tree($this->model_catalog_category->getNodeTree(null),$selected,true);
+		$nodes = $this->tree($this->model_catalog_category->getNodeTree(null),$selected);
         $this->response->setOutput(json_encode($nodes));
 	}
 
-	private function tree($nodes,$selected=array(),$open=false){
+	private function tree($nodes,$selected=array()){
 
         if(is_array($nodes)){
             $data = array();
             foreach ($nodes as $key => $item) {
                 $tmp = array();
-                $tmp['data'] = $item['name']." (".$item['total'].")";
-                if($open){
-                	$tmp['state'] = 'open';
-                }
+                $tmp['data'] = $item['name']." (".$item['total'].")";                
                 $tmp['attributes'] = array(
                     'category_id'   => $item['category_id'],
                     'name'      => $item['name'],
@@ -1377,6 +1398,7 @@ class ControllerCatalogProduct extends Controller {
                 );
                 if(isset($item['children']) && is_array($item['children'])){
                     $tmp['children'] = $this->tree($item['children'],$selected);
+                    $tmp['state'] = 'open';
                 }
                 $data[] = $tmp;
             }

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2015 年 08 月 10 日 16:42
+-- 生成日期: 2015 年 08 月 11 日 09:43
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.4.3
 
@@ -21278,6 +21278,95 @@ INSERT INTO `yk_area_to_area_geo` (`area_to_area_geo_id`, `area_id`, `area_geo_i
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `yk_attribute`
+--
+
+CREATE TABLE IF NOT EXISTS `yk_attribute` (
+  `attribute_id` int(11) NOT NULL AUTO_INCREMENT,
+  `attribute_group_id` int(11) NOT NULL,
+  `sort_order` int(3) NOT NULL,
+  PRIMARY KEY (`attribute_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+
+--
+-- 转存表中的数据 `yk_attribute`
+--
+
+INSERT INTO `yk_attribute` (`attribute_id`, `attribute_group_id`, `sort_order`) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(3, 1, 3),
+(4, 1, 4),
+(5, 1, 5),
+(6, 1, 6);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `yk_attribute_description`
+--
+
+CREATE TABLE IF NOT EXISTS `yk_attribute_description` (
+  `attribute_id` int(11) NOT NULL,
+  `language_id` int(11) NOT NULL,
+  `name` varchar(64) NOT NULL,
+  PRIMARY KEY (`attribute_id`,`language_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `yk_attribute_description`
+--
+
+INSERT INTO `yk_attribute_description` (`attribute_id`, `language_id`, `name`) VALUES
+(1, 2, '商品品牌：'),
+(2, 2, '商品编号：'),
+(3, 2, '商品产地：'),
+(4, 2, '商品型号：'),
+(5, 2, '商品类型：'),
+(6, 2, '是否现货：');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `yk_attribute_group`
+--
+
+CREATE TABLE IF NOT EXISTS `yk_attribute_group` (
+  `attribute_group_id` int(11) NOT NULL AUTO_INCREMENT,
+  `sort_order` int(3) NOT NULL,
+  PRIMARY KEY (`attribute_group_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- 转存表中的数据 `yk_attribute_group`
+--
+
+INSERT INTO `yk_attribute_group` (`attribute_group_id`, `sort_order`) VALUES
+(1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `yk_attribute_group_description`
+--
+
+CREATE TABLE IF NOT EXISTS `yk_attribute_group_description` (
+  `attribute_group_id` int(11) NOT NULL,
+  `language_id` int(11) NOT NULL,
+  `name` varchar(64) NOT NULL,
+  PRIMARY KEY (`attribute_group_id`,`language_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `yk_attribute_group_description`
+--
+
+INSERT INTO `yk_attribute_group_description` (`attribute_group_id`, `language_id`, `name`) VALUES
+(1, 2, '商品附属信息');
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `yk_banner`
 --
 
@@ -21874,9 +21963,9 @@ CREATE TABLE IF NOT EXISTS `yk_company` (
 --
 
 INSERT INTO `yk_company` (`company_id`, `zone_id`, `title`, `logo`, `corporation`, `mobile_phone`, `identity_number`, `email`, `telephone`, `fax`, `website`, `code`, `permit`, `recommend`, `deposit`, `commission`, `address`, `area_zone`, `areas`, `postcode`, `ip`, `status`, `approved`, `date_added`) VALUES
-(1, 3, '天朝消防', 'data/logo.png', '萧十一郎', '18260051051', '321321199909091119', '18260051051@139.com', '111111', '', '', '55b88477d5f55', 0, 1, 10000, '5.00', '北京西路产业孵化器', '江苏省 苏州市 太仓市', '12|988|4346', '', '', 1, 0, '2015-07-29 15:47:53'),
-(2, 1, '骊威消防', 'data/case/logopic3.jpg', '彭骊威', '18850921766', NULL, '', '', '', '', '55c8cb7680254', 0, 0, 0, '0.00', '南京西路街道号码', '江苏省 苏州市 昆山市', '12|988|47821', '', '', 1, 0, '0000-00-00 00:00:00'),
-(3, 2, '金松龄消防公司', 'data/case/logopic6.jpg', '金松龄', '18959523214', NULL, '', '', '', '', '55c8cccbd1674', 0, 0, 0, '0.00', '北京西路产业孵化器', '江苏省 苏州市 太仓市', '12|988|4346', '', '', 1, 0, '2015-08-11 00:11:09');
+(1, 3, '天朝消防', 'data/logo.png', '萧十一郎', '18260051051', '321321199909091119', '18260051051@139.com', '111111', '', '', '55b88477d5f55', 0, 1, 10000, '5.00', '北京西路产业孵化器', '江苏省 苏州市 太仓市', '12|988|4346', '', '', 1, 1, '2015-07-29 15:47:53'),
+(2, 1, '骊威消防', 'data/case/logopic3.jpg', '彭骊威', '18850921766', NULL, '', '', '', '', '55c8cb7680254', 0, 0, 0, '0.00', '南京西路街道号码', '江苏省 苏州市 昆山市', '12|988|47821', '', '', 1, 1, '0000-00-00 00:00:00'),
+(3, 2, '金松龄消防公司', 'data/case/logopic6.jpg', '金松龄', '18959523214', NULL, '', '', '', '', '55c8cccbd1674', 0, 0, 0, '0.00', '北京西路产业孵化器', '江苏省 苏州市 太仓市', '12|988|4346', '', '', 1, 1, '2015-08-11 00:11:09');
 
 -- --------------------------------------------------------
 
@@ -22688,7 +22777,7 @@ CREATE TABLE IF NOT EXISTS `yk_option` (
   `remark` varchar(128) DEFAULT NULL,
   `sort_order` int(3) NOT NULL,
   PRIMARY KEY (`option_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
 
 --
 -- 转存表中的数据 `yk_option`
@@ -22700,7 +22789,8 @@ INSERT INTO `yk_option` (`option_id`, `type`, `remark`, `sort_order`) VALUES
 (15, 'image', '灭火器箱', 0),
 (16, 'radio', '', 0),
 (17, 'radio', '', 0),
-(18, 'select', '', 2);
+(18, 'select', '', 2),
+(19, 'select', '', 5);
 
 -- --------------------------------------------------------
 
@@ -22725,7 +22815,8 @@ INSERT INTO `yk_option_description` (`option_id`, `language_id`, `name`) VALUES
 (15, 2, '规格型号'),
 (16, 2, '性别'),
 (17, 2, '颜色'),
-(18, 2, '售后服务');
+(18, 2, '售后服务'),
+(19, 2, '测试');
 
 -- --------------------------------------------------------
 
@@ -22739,7 +22830,7 @@ CREATE TABLE IF NOT EXISTS `yk_option_value` (
   `image` varchar(255) NOT NULL,
   `sort_order` int(3) NOT NULL,
   PRIMARY KEY (`option_value_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=62 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=64 ;
 
 --
 -- 转存表中的数据 `yk_option_value`
@@ -22758,7 +22849,9 @@ INSERT INTO `yk_option_value` (`option_value_id`, `option_id`, `image`, `sort_or
 (58, 17, '', 1),
 (59, 17, '', 2),
 (60, 18, '', 1),
-(61, 18, '', 2);
+(61, 18, '', 2),
+(62, 19, '', 1),
+(63, 19, '', 2);
 
 -- --------------------------------------------------------
 
@@ -22791,7 +22884,9 @@ INSERT INTO `yk_option_value_description` (`option_value_id`, `language_id`, `op
 (58, 2, 17, '黑'),
 (59, 2, 17, '白'),
 (60, 2, 18, '一年延保'),
-(61, 2, 18, '两年延保');
+(61, 2, 18, '两年延保'),
+(62, 2, 19, '测试1'),
+(63, 2, 19, '测试2');
 
 -- --------------------------------------------------------
 
@@ -23177,10 +23272,33 @@ CREATE TABLE IF NOT EXISTS `yk_product` (
 INSERT INTO `yk_product` (`product_id`, `model`, `sku`, `upc`, `isbn`, `mpn`, `location`, `quantity`, `stock_status_id`, `image`, `manufacturer_id`, `shipping`, `price`, `market`, `points`, `tax_class_id`, `date_available`, `weight`, `weight_class_id`, `length`, `width`, `height`, `length_class_id`, `subtract`, `minimum`, `sort_order`, `status`, `date_added`, `date_modified`, `viewed`, `sales`) VALUES
 (50, '132143', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic1.jpg', 0, 1, '126.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-26 13:00:31', '2015-06-16 16:23:34', 91, 0),
 (51, 'ae123213', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic2.jpg', 0, 1, '123.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-23 07:23:47', '0000-00-00 00:00:00', 43, 0),
-(52, '123123', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic4.jpg', 0, 1, '123.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-07-29 16:18:27', '0000-00-00 00:00:00', 30, 0),
+(52, '123123', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic4.jpg', 0, 1, '123.0000', '125.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-08-11 17:00:17', '0000-00-00 00:00:00', 38, 0),
 (53, '231414', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic3.jpg', 0, 1, '125.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-26 13:13:01', '0000-00-00 00:00:00', 173, 0),
 (54, '2144232', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic5.jpg', 0, 1, '128.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-16 09:03:38', '0000-00-00 00:00:00', 8, 0),
 (55, 'xf1325324', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic6.jpg', 0, 1, '158.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-16 09:05:42', '0000-00-00 00:00:00', 4, 0);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `yk_product_attribute`
+--
+
+CREATE TABLE IF NOT EXISTS `yk_product_attribute` (
+  `product_id` int(11) NOT NULL,
+  `attribute_id` int(11) NOT NULL,
+  `language_id` int(11) NOT NULL,
+  `text` text NOT NULL,
+  PRIMARY KEY (`product_id`,`attribute_id`,`language_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `yk_product_attribute`
+--
+
+INSERT INTO `yk_product_attribute` (`product_id`, `attribute_id`, `language_id`, `text`) VALUES
+(52, 3, 2, '爱的撒旦是'),
+(52, 1, 2, '撒大师的撒'),
+(52, 2, 2, '阿萨德撒的撒');
 
 -- --------------------------------------------------------
 
@@ -23272,14 +23390,15 @@ CREATE TABLE IF NOT EXISTS `yk_product_option` (
   `option_value` text NOT NULL,
   `required` tinyint(1) NOT NULL,
   PRIMARY KEY (`product_option_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=228 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=229 ;
 
 --
 -- 转存表中的数据 `yk_product_option`
 --
 
 INSERT INTO `yk_product_option` (`product_option_id`, `product_id`, `option_id`, `option_value`, `required`) VALUES
-(227, 53, 13, '', 1);
+(227, 53, 13, '', 1),
+(228, 52, 16, '', 1);
 
 -- --------------------------------------------------------
 
@@ -23302,7 +23421,7 @@ CREATE TABLE IF NOT EXISTS `yk_product_option_value` (
   `weight` decimal(12,3) NOT NULL,
   `weight_prefix` varchar(1) NOT NULL,
   PRIMARY KEY (`product_option_value_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
 
 --
 -- 转存表中的数据 `yk_product_option_value`
@@ -23313,7 +23432,9 @@ INSERT INTO `yk_product_option_value` (`product_option_value_id`, `product_optio
 (19, 227, 53, 13, 51, 100, 0, '5.0000', '+', 0, '+', '0.000', '+'),
 (18, 227, 53, 13, 50, 100, 0, '15.0000', '+', 0, '+', '0.000', '+'),
 (17, 227, 53, 13, 49, 100, 0, '10.0000', '+', 0, '+', '0.000', '+'),
-(21, 227, 53, 13, 53, 100, 1, '10.0000', '-', 0, '+', '0.000', '+');
+(21, 227, 53, 13, 53, 100, 1, '10.0000', '-', 0, '+', '0.000', '+'),
+(22, 228, 52, 16, 56, 100, 0, '10.0000', '+', 0, '+', '0.000', '+'),
+(23, 228, 52, 16, 57, 100, 0, '12.0000', '+', 0, '+', '0.000', '+');
 
 -- --------------------------------------------------------
 

@@ -58,9 +58,9 @@ class ModelModuleYkmodule extends Model {
 
 	public function getCompanies($data=array()){
 		
-		$sql = "SELECT * FROM ".DB_PREFIX."company c";
+		$sql = "SELECT * FROM ".DB_PREFIX."company c WHERE approved = 1 AND status = 1 ";
 		if(isset($data['group_id'])){
-			$sql .=" WHERE company_id IN (SELECT company_id FROM ".DB_PREFIX."company_to_group WHERE group_id = '".(int)$data['group_id']."' )";
+			$sql .=" AND company_id IN (SELECT company_id FROM ".DB_PREFIX."company_to_group WHERE group_id = '".(int)$data['group_id']."' )";
 		}
 		$sql .= " ORDER BY c.date_added DESC ";
 		if(!empty($data['limit'])){

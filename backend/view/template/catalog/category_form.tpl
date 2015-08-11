@@ -15,9 +15,10 @@
       <div class="buttons"><a onclick="$('#form').submit();" class="button"><?php echo $button_save; ?></a><a href="<?php echo $cancel; ?>" class="button"><?php echo $button_cancel; ?></a></div>
     </div>
     <div class="content">
-
+<?php }else{?> 
+<a onclick="$('#').submit();" class="button" style="display: block; position: fixed; bottom: 150px; right:40px; z-index: 99999;"><?php echo $button_save; ?></a>
+<?php }?>
       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
-<?php }?> 
       <div id="tabs" class="htabs">
         <a href="#tab-general"><?php echo $tab_general; ?></a>
         <a href="#tab-data"><?php echo $tab_data; ?></a>
@@ -191,7 +192,7 @@
           </div>
           <?php }?>
         </div>
-
+      </form>
 
 <script type="text/javascript"><!--
 <?php foreach ($languages as $language) { ?>
@@ -289,7 +290,7 @@ $('#top-category').trigger('change')
 //--></script> 
 
 <?php if(!$ajax){?>
-      </form>
+
     </div>
   </div>
 </div>

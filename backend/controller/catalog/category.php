@@ -12,23 +12,20 @@ class ControllerCatalogCategory extends Controller {
 		$this->getList();
 		if(!empty($this->request->get['tree'])){
 
-			$nodes = $this->tree($this->model_catalog_category->getNodeTree(null),true);
+			$nodes = $this->tree($this->model_catalog_category->getNodeTree(null));
             $this->response->setOutput(json_encode($nodes));
 		}else{
 			$this->getList();
 		}
 	}
 
-    private function tree($nodes,$open=false){
+    private function tree($nodes){
 
         if(is_array($nodes)){
             $data = array();
             foreach ($nodes as $key => $item) {
                 $tmp = array();
                 $tmp['data'] = $item['name']." (".$item['total'].")";
-                if($open){
-                	$tmp['state'] = 'open';
-                }
                 $tmp['attributes'] = array(
                     'category_id'   => $item['category_id'],
                     'name'      => $item['name'],
@@ -39,6 +36,7 @@ class ControllerCatalogCategory extends Controller {
                 );
                 if(isset($item['children']) && is_array($item['children'])){
                     $tmp['children'] = $this->tree($item['children']);
+                    $tmp['state'] = 'open';
                 }
                 $data[] = $tmp;
             }

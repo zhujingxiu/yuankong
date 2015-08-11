@@ -49,7 +49,19 @@ class ModelCatalogProduct extends Model {
 			);
 			$this->db->insert("product_description",$description);
 		}
-	
+		
+		if (isset($data['product_attribute'])) {
+			foreach ($data['product_attribute'] as $product_attribute) {
+				if ($product_attribute['attribute_id']) {
+					$this->db->query("DELETE FROM " . DB_PREFIX . "product_attribute WHERE product_id = '" . (int)$product_id . "' AND attribute_id = '" . (int)$product_attribute['attribute_id'] . "'");
+					
+					foreach ($product_attribute['product_attribute_description'] as $language_id => $product_attribute_description) {				
+						$this->db->query("INSERT INTO " . DB_PREFIX . "product_attribute SET product_id = '" . (int)$product_id . "', attribute_id = '" . (int)$product_attribute['attribute_id'] . "', language_id = '" . (int)$language_id . "', text = '" .  $this->db->escape($product_attribute_description['text']) . "'");
+					}
+				}
+			}
+		}
+
 		if (isset($data['product_option'])) {
 			foreach ($data['product_option'] as $product_option) {
 				if ($product_option['type'] == 'select' || $product_option['type'] == 'radio' || $product_option['type'] == 'checkbox' || $product_option['type'] == 'image') {
@@ -167,6 +179,19 @@ class ModelCatalogProduct extends Model {
 			);
 			$this->db->insert("product_description",$description);
 		}
+		$this->db->query("DELETE FROM " . DB_PREFIX . "product_attribute WHERE product_id = '" . (int)$product_id . "'");
+
+		if (!empty($data['product_attribute'])) {
+			foreach ($data['product_attribute'] as $product_attribute) {
+				if ($product_attribute['attribute_id']) {
+					$this->db->query("DELETE FROM " . DB_PREFIX . "product_attribute WHERE product_id = '" . (int)$product_id . "' AND attribute_id = '" . (int)$product_attribute['attribute_id'] . "'");
+					
+					foreach ($product_attribute['product_attribute_description'] as $language_id => $product_attribute_description) {				
+						$this->db->query("INSERT INTO " . DB_PREFIX . "product_attribute SET product_id = '" . (int)$product_id . "', attribute_id = '" . (int)$product_attribute['attribute_id'] . "', language_id = '" . (int)$language_id . "', text = '" .  $this->db->escape($product_attribute_description['text']) . "'");
+					}
+				}
+			}
+		}
 
 		$this->db->query("DELETE FROM " . DB_PREFIX . "product_option WHERE product_id = '" . (int)$product_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "product_option_value WHERE product_id = '" . (int)$product_id . "'");
@@ -266,7 +291,8 @@ class ModelCatalogProduct extends Model {
 			$data['viewed'] = '0';
 			$data['keyword'] = '';
 			$data['status'] = '0';
-						
+
+			$data = array_merge($data, array('product_attribute' => $this->getProductAttributes($product_id)));
 			$data = array_merge($data, array('product_description' => $this->getProductDescriptions($product_id)));			
 			$data = array_merge($data, array('product_discount' => $this->getProductDiscounts($product_id)));
 			$data = array_merge($data, array('product_image' => $this->getProductImages($product_id)));		
@@ -282,6 +308,7 @@ class ModelCatalogProduct extends Model {
 	
 	public function deleteProduct($product_id) {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "product WHERE product_id = '" . (int)$product_id . "'");
+		$this->db->query("DELETE FROM " . DB_PREFIX . "product_attribute WHERE product_id = '" . (int)$product_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "product_description WHERE product_id = '" . (int)$product_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "product_discount WHERE product_id = '" . (int)$product_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "product_image WHERE product_id = '" . (int)$product_id . "'");
@@ -381,7 +408,29 @@ class ModelCatalogProduct extends Model {
 								  
 		return $query->rows;
 	} 
-	
+
+	public function getProductAttributes($product_id) {
+		$product_attribute_data = array();
+		
+		$product_attribute_query = $this->db->query("SELECT attribute_id FROM " . DB_PREFIX . "product_attribute WHERE product_id = '" . (int)$product_id . "' GROUP BY attribute_id");
+		
+		foreach ($product_attribute_query->rows as $product_attribute) {
+			$product_attribute_description_data = array();
+			
+			$product_attribute_description_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_attribute WHERE product_id = '" . (int)$product_id . "' AND attribute_id = '" . (int)$product_attribute['attribute_id'] . "'");
+			
+			foreach ($product_attribute_description_query->rows as $product_attribute_description) {
+				$product_attribute_description_data[$product_attribute_description['language_id']] = array('text' => $product_attribute_description['text']);
+			}
+			
+			$product_attribute_data[] = array(
+				'attribute_id'                  => $product_attribute['attribute_id'],
+				'product_attribute_description' => $product_attribute_description_data
+			);
+		}
+		
+		return $product_attribute_data;
+	}
 	public function getProductDescriptions($product_id) {
 		$product_description_data = array();
 		
@@ -559,7 +608,11 @@ class ModelCatalogProduct extends Model {
 
 		return $query->row['total'];
 	}	
-	
+	public function getTotalProductsByAttributeId($attribute_id) {
+		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "product_attribute WHERE attribute_id = '" . (int)$attribute_id . "'");
+
+		return $query->row['total'];
+	}
 	public function getTotalProductsByOptionId($option_id) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "product_option WHERE option_id = '" . (int)$option_id . "'");
 

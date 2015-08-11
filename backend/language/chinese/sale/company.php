@@ -13,12 +13,13 @@ $_['button_add_file']           = '添加文件';
 $_['button_add']                = '添加';
 // Text
 $_['text_success']              = '成功： 您已成功更新加盟公司！';
+$_['text_success_approved']     = '成功： 您已审核了%s个加盟公司！';
 $_['text_approved']             = '已过审';
 $_['text_unapprove']             = '未审核';
 $_['text_wait']                 = '请耐心等待！';
 $_['text_balance']              = '余额：';
 $_['text_group']                 = '公司类别';
-$_['confirm_delete']                 = '确认删除吗?';
+$_['confirm_delete']            = '确认删除吗?';
 
 // Column
 $_['column_title']              = '公司名称';
@@ -28,12 +29,12 @@ $_['column_recommend']          = '推荐';
 $_['column_corporation']        = '法人';
 $_['column_status']             = '状态';
 $_['column_zone']               = '区域';
-$_['column_approved']           = '审核';
+$_['column_approved']           = '过审';
 $_['column_date_added']         = '添加日期';
 $_['column_description']        = '描述';
 $_['column_mode']               = '文件类型';
 $_['column_file']               = '文件';
-$_['column_status']               = '审核状态';
+$_['column_file_status']        = '审核状态';
 $_['column_note']               = '说明';
 $_['column_sort']               = '排序';
 $_['column_avatar']             = '头像';

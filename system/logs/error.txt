@@ -1261,3 +1261,54 @@
 2015-08-11 0:11:09 - PHP Notice:  Undefined index: affiliate_id in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
 2015-08-11 0:11:09 - PHP Notice:  Undefined index: affiliate_id in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
 2015-08-11 0:11:09 - PHP Notice:  Undefined index: affiliate_id in E:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-11 9:40:20 - PHP Notice:  Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '_id = '0' ORDER BY customer ASC LIMIT 0,20' at line 1<br />Error No: 1064<br />SELECT *, c.fullname AS customer, cgd.name AS customer_group FROM yk_customer c LEFT JOIN yk_customer_group_description cgd ON (c.customer_group_id = cgd.customer_group_id) WHERE cgd.language_id = '2' AND company _id = '0' ORDER BY customer ASC LIMIT 0,20 in D:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-08-11 9:40:20 - PHP Notice:  Trying to get property of non-object in D:\wamp\www\yuankong\backend\model\sale\customer.php on line 161
+2015-08-11 9:40:20 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\controller\sale\customer.php on line 418
+2015-08-11 9:40:20 - PHP Notice:  Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '_id = '0' ORDER BY customer ASC LIMIT 0,20' at line 1<br />Error No: 1064<br />SELECT *, c.fullname AS customer, cgd.name AS customer_group FROM yk_customer c LEFT JOIN yk_customer_group_description cgd ON (c.customer_group_id = cgd.customer_group_id) WHERE cgd.language_id = '2' AND company _id = '0' ORDER BY customer ASC LIMIT 0,20 in D:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-08-11 9:40:20 - PHP Notice:  Trying to get property of non-object in D:\wamp\www\yuankong\backend\model\sale\customer.php on line 161
+2015-08-11 9:40:20 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\controller\sale\customer.php on line 418
+2015-08-11 9:42:58 - PHP Notice:  Undefined variable: sort_corporation in D:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 34
+2015-08-11 9:42:58 - PHP Notice:  Undefined index: affiliate_id in D:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-11 9:42:58 - PHP Notice:  Undefined index: affiliate_id in D:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-11 9:42:58 - PHP Notice:  Undefined index: affiliate_id in D:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-11 9:42:58 - PHP Notice:  Undefined variable: sort_corporation in D:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 34
+2015-08-11 9:42:58 - PHP Notice:  Undefined index: affiliate_id in D:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-11 9:42:58 - PHP Notice:  Undefined index: affiliate_id in D:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-11 9:42:58 - PHP Notice:  Undefined index: affiliate_id in D:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-11 9:58:35 - PHP Notice:  Undefined variable: sort_corporation in D:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 34
+2015-08-11 9:58:35 - PHP Notice:  Undefined index: affiliate_id in D:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-11 9:58:36 - PHP Notice:  Undefined index: affiliate_id in D:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-11 9:58:36 - PHP Notice:  Undefined index: affiliate_id in D:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-11 9:58:43 - PHP Notice:  Undefined variable: sort_corporation in D:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 34
+2015-08-11 9:58:43 - PHP Notice:  Undefined index: affiliate_id in D:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-11 9:58:43 - PHP Notice:  Undefined index: affiliate_id in D:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-11 9:58:43 - PHP Notice:  Undefined index: affiliate_id in D:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-11 10:18:19 - PHP Notice:  Undefined variable: sort_corporation in D:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 34
+2015-08-11 10:18:19 - PHP Notice:  Undefined index: affiliate_id in D:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-11 10:18:19 - PHP Notice:  Undefined index: affiliate_id in D:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-11 10:18:19 - PHP Notice:  Undefined index: affiliate_id in D:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-11 10:18:19 - PHP Notice:  Undefined variable: sort_corporation in D:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 34
+2015-08-11 10:18:19 - PHP Notice:  Undefined index: affiliate_id in D:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-11 10:18:19 - PHP Notice:  Undefined index: affiliate_id in D:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-11 10:18:19 - PHP Notice:  Undefined index: affiliate_id in D:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-11 10:18:25 - PHP Notice:  Undefined variable: sort_corporation in D:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 34
+2015-08-11 10:18:25 - PHP Notice:  Undefined index: affiliate_id in D:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-11 10:18:25 - PHP Notice:  Undefined index: affiliate_id in D:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-11 10:18:25 - PHP Notice:  Undefined index: affiliate_id in D:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 126
+2015-08-11 10:24:35 - PHP Notice:  Undefined variable: sort_corporation in D:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 38
+2015-08-11 10:24:35 - PHP Notice:  Undefined index: affiliate_id in D:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 130
+2015-08-11 10:24:35 - PHP Notice:  Undefined index: affiliate_id in D:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 130
+2015-08-11 10:24:35 - PHP Notice:  Undefined index: affiliate_id in D:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 130
+2015-08-11 10:27:02 - PHP Notice:  Undefined variable: sort_corporation in D:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 38
+2015-08-11 10:27:07 - PHP Notice:  Undefined variable: sort_corporation in D:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 38
+2015-08-11 10:28:22 - PHP Notice:  Undefined variable: sort_corporation in D:\wamp\www\yuankong\backend\view\template\sale\company_list.tpl on line 38
+2015-08-11 13:45:42 - PHP Notice:  Error: Duplicate entry '52-64' for key 'PRIMARY'<br />Error No: 1062<br />INSERT INTO yk_product_to_category SET product_id = '52', category_id = '64' in D:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-08-11 13:45:42 - PHP Notice:  Error: Duplicate entry '52-107' for key 'PRIMARY'<br />Error No: 1062<br />INSERT INTO yk_product_to_category SET product_id = '52', category_id = '107' in D:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-08-11 14:56:51 - PHP Notice:  Error: Duplicate entry '52-64' for key 'PRIMARY'<br />Error No: 1062<br />INSERT INTO yk_product_to_category SET product_id = '52', category_id = '64' in D:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-08-11 14:57:13 - PHP Notice:  Error: Duplicate entry '52-64' for key 'PRIMARY'<br />Error No: 1062<br />INSERT INTO yk_product_to_category SET product_id = '52', category_id = '64' in D:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-08-11 17:14:29 - PHP Notice:  Undefined variable: attribute_group in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product.tpl on line 215
+2015-08-11 17:14:29 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product.tpl on line 215
+2015-08-11 17:14:30 - PHP Notice:  Undefined variable: attribute_group in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product.tpl on line 215
+2015-08-11 17:14:30 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product.tpl on line 215
+2015-08-11 17:15:38 - PHP Notice:  Undefined variable: attribute_group in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product.tpl on line 215
+2015-08-11 17:15:38 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\market\view\theme\yuankong\template\product\product.tpl on line 215

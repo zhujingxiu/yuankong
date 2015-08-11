@@ -14,7 +14,11 @@
   <div class="box">
     <div class="heading">
       <h1><img src="view/image/customer.png" alt="" /> <?php echo $heading_title; ?></h1>
-      <div class="buttons"><a onclick="$('form').attr('action', '<?php echo $approve; ?>'); $('form').submit();" class="button"><?php echo $button_approve; ?></a><a href="<?php echo $insert; ?>" class="button"><?php echo $button_insert; ?></a><a onclick="$('form').attr('action', '<?php echo $delete; ?>'); $('form').submit();" class="button"><?php echo $button_delete; ?></a></div>
+      <div class="buttons">
+        <a onclick="$('form').attr('action', '<?php echo $approve; ?>'); $('form').submit();" class="button"><?php echo $button_approve; ?></a>
+        <a href="<?php echo $insert; ?>" class="button"><?php echo $button_insert; ?></a>
+        <a onclick="$('form').attr('action', '<?php echo $delete; ?>'); $('form').submit();" class="button"><?php echo $button_delete; ?></a>
+      </div>
     </div>
     <div class="content">
       <form action="" method="post" enctype="multipart/form-data" id="form">
@@ -121,9 +125,9 @@
             <?php foreach ($companies as $item) { ?>
             <tr>
               <td style="text-align: center;"><?php if ($item['selected']) { ?>
-                <input type="checkbox" name="selected[]" value="<?php echo $item['affiliate_id']; ?>" checked="checked" />
+                <input type="checkbox" name="selected[]" value="<?php echo $item['company_id']; ?>" checked="checked" />
                 <?php } else { ?>
-                <input type="checkbox" name="selected[]" value="<?php echo $item['affiliate_id']; ?>" />
+                <input type="checkbox" name="selected[]" value="<?php echo $item['company_id']; ?>" />
                 <?php } ?></td>
               <td class="left"><?php echo $item['title']; ?></td>
               <td class="left"><?php echo $item['group']; ?></td>
@@ -175,13 +179,13 @@ $('input[name=\'filter_name\']').autocomplete({
 	delay: 500,
 	source: function(request, response) {
 		$.ajax({
-			url: 'index.php?route=sale/affiliate/autocomplete&token=<?php echo $token; ?>&filter_name=' +  encodeURIComponent(request.term),
+			url: 'index.php?route=sale/company/autocomplete&token=<?php echo $token; ?>&filter_name=' +  encodeURIComponent(request.term),
 			dataType: 'json',
 			success: function(json) {		
 				response($.map(json, function(item) {
 					return {
 						label: item.name,
-						value: item.affiliate_id
+						value: item.company_id
 					}
 				}));
 			}

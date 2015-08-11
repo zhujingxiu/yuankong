@@ -11,7 +11,10 @@
   <div class="box">
     <div class="heading">
       <h1><img src="view/image/product.png" alt="" /> <?php echo $heading_title; ?></h1>
-      <div class="buttons"><a onclick="$('#form').submit();" class="button"><?php echo $button_save; ?></a><a href="<?php echo $cancel; ?>" class="button"><?php echo $button_cancel; ?></a></div>
+      <div class="buttons" >
+        <a onclick="$('#form').submit();" class="button" style="display: block; position: fixed; bottom: 150px; right:40px; z-index: 99999;"><?php echo $button_save; ?></a>
+        <a href="<?php echo $cancel; ?>" class="button"><?php echo $button_cancel; ?></a>
+      </div>
     </div>
     <div class="content">
       <div id="tabs" class="vtabs">
@@ -27,42 +30,6 @@
       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
         <div id="tab-general" class="vtabs-content">
           <table class="form" style="float:left;width:65%;">
-            <tr class="hide-item">
-              <td><?php echo $entry_category; ?></td>
-              <td>
-                <div class="selection-category">
-                  <select id="top-category" for-entry="second-category">
-                    <option value="0"><?php echo $text_none ?></option>
-                    <?php foreach ($top_categories as $item): ?>
-                    <option value="<?php echo $item['category_id'] ?>"><?php echo $item['name'] ?></option>
-                    <?php endforeach ?>
-                  </select>
-                </div>
-                <div class="selection-category">
-                  <select id="second-category" for-entry="third-category"></select>
-                </div>
-                <div class="selection-category">
-                  <select id="third-category" for-entry="fourth-category"></select>
-                </div>
-                <div class="selection-category">
-                  <select id="fourth-category"></select>
-                </div>
-                <a class="btn" id="add-category"><?php echo $button_add ?></a>
-              </td>
-            </tr>
-            <tr class="hide-item">
-              <td>&nbsp;</td>
-              <td><div id="product-category" class="scrollbox" style="width:500px;height:80px;">
-                  <?php $class = 'odd'; ?>
-                  <?php foreach ($product_categories as $product_category) { ?>
-                  <?php $class = ($class == 'even' ? 'odd' : 'even'); ?>
-                  <div id="product-category<?php echo $product_category['category_id']; ?>" class="<?php echo $class; ?>"><?php echo $product_category['name']; ?><img src="view/image/delete.png" alt="" />
-                    <input type="hidden" name="product_category[]" value="<?php echo $product_category['category_id']; ?>" />
-                  </div>
-                  <?php } ?>
-                </div></td>
-            </tr> 
-
             <tr>
               <td> <?php echo $entry_model; ?></td>
               <td><input type="text" name="model" value="<?php echo $model; ?>" />
@@ -86,31 +53,22 @@
               <td><?php echo $entry_mpn; ?></td>
               <td><input type="text" name="mpn" value="<?php echo $mpn; ?>" /></td>
             </tr>
-            <tr class="hide-item">
+            <tr>
               <td><?php echo $entry_location; ?></td>
               <td><input type="text" name="location" value="<?php echo $location; ?>" /></td>
             </tr>
-
-            <tr class="hide-item">
-              <td><?php echo $entry_tax_class; ?></td>
-              <td><select name="tax_class_id">
-                  <option value="0"><?php echo $text_none; ?></option>
-                  <?php foreach ($tax_classes as $tax_class) { ?>
-                  <?php if ($tax_class['tax_class_id'] == $tax_class_id) { ?>
-                  <option value="<?php echo $tax_class['tax_class_id']; ?>" selected="selected"><?php echo $tax_class['title']; ?></option>
+            
+            <tr>
+              <td><?php echo $entry_stock_status; ?></td>
+              <td><select name="stock_status_id">
+                  <?php foreach ($stock_statuses as $stock_status) { ?>
+                  <?php if ($stock_status['stock_status_id'] == $stock_status_id) { ?>
+                  <option value="<?php echo $stock_status['stock_status_id']; ?>" selected="selected"><?php echo $stock_status['name']; ?></option>
                   <?php } else { ?>
-                  <option value="<?php echo $tax_class['tax_class_id']; ?>"><?php echo $tax_class['title']; ?></option>
+                  <option value="<?php echo $stock_status['stock_status_id']; ?>"><?php echo $stock_status['name']; ?></option>
                   <?php } ?>
                   <?php } ?>
                 </select></td>
-            </tr>
-            <tr class="hide-item">
-              <td><?php echo $entry_quantity; ?></td>
-              <td><input type="text" name="quantity" value="<?php echo $quantity; ?>" size="2" /></td>
-            </tr>
-            <tr class="hide-item">
-              <td><?php echo $entry_minimum; ?></td>
-              <td><input type="text" name="minimum" value="<?php echo $minimum; ?>" size="2" /></td>
             </tr>
             <tr>
               <td><?php echo $entry_subtract; ?></td>
@@ -124,17 +82,26 @@
                   <?php } ?>
                 </select></td>
             </tr>
-            <tr>
-              <td><?php echo $entry_stock_status; ?></td>
-              <td><select name="stock_status_id">
-                  <?php foreach ($stock_statuses as $stock_status) { ?>
-                  <?php if ($stock_status['stock_status_id'] == $stock_status_id) { ?>
-                  <option value="<?php echo $stock_status['stock_status_id']; ?>" selected="selected"><?php echo $stock_status['name']; ?></option>
+            <tr class="hide-item">
+              <td><?php echo $entry_tax_class; ?></td>
+              <td><select name="tax_class_id">
+                  <option value="0"><?php echo $text_none; ?></option>
+                  <?php foreach ($tax_classes as $tax_class) { ?>
+                  <?php if ($tax_class['tax_class_id'] == $tax_class_id) { ?>
+                  <option value="<?php echo $tax_class['tax_class_id']; ?>" selected="selected"><?php echo $tax_class['title']; ?></option>
                   <?php } else { ?>
-                  <option value="<?php echo $stock_status['stock_status_id']; ?>"><?php echo $stock_status['name']; ?></option>
+                  <option value="<?php echo $tax_class['tax_class_id']; ?>"><?php echo $tax_class['title']; ?></option>
                   <?php } ?>
                   <?php } ?>
                 </select></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_quantity; ?></td>
+              <td><input type="text" name="quantity" value="<?php echo $quantity; ?>" size="5" /></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_minimum; ?></td>
+              <td><input type="text" name="minimum" value="<?php echo $minimum; ?>" size="2" /></td>
             </tr>
             <tr>
               <td><?php echo $entry_shipping; ?></td>
@@ -605,6 +572,36 @@
         </div>
         <?php }?> 
         <div id="tab-links" class="vtabs-content">
+          <table id="attribute" class="list">
+            <thead>
+              <tr>
+                <td class="left"><?php echo $entry_attribute; ?></td>
+                <td class="left"><?php echo $entry_text; ?></td>
+                <td></td>
+              </tr>
+            </thead>
+            <?php $attribute_row = 0; ?>
+            <?php foreach ($product_attributes as $product_attribute) { ?>
+            <tbody id="attribute-row<?php echo $attribute_row; ?>">
+              <tr>
+                <td class="left"><input type="text" name="product_attribute[<?php echo $attribute_row; ?>][name]" value="<?php echo $product_attribute['name']; ?>" />
+                  <input type="hidden" name="product_attribute[<?php echo $attribute_row; ?>][attribute_id]" value="<?php echo $product_attribute['attribute_id']; ?>" /></td>
+                <td class="left"><?php foreach ($languages as $language) { ?>
+                  <textarea name="product_attribute[<?php echo $attribute_row; ?>][product_attribute_description][<?php echo $language['language_id']; ?>][text]" cols="50" rows="2"><?php echo isset($product_attribute['product_attribute_description'][$language['language_id']]) ? $product_attribute['product_attribute_description'][$language['language_id']]['text'] : ''; ?></textarea>
+                  <img src="<?php echo TPL_IMG ?>flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" align="top" /><br />
+                  <?php } ?></td>
+                <td class="left"><a onclick="$('#attribute-row<?php echo $attribute_row; ?>').remove();" class="button"><?php echo $button_remove; ?></a></td>
+              </tr>
+            </tbody>
+            <?php $attribute_row++; ?>
+            <?php } ?>
+            <tfoot>
+              <tr>
+                <td colspan="2"></td>
+                <td class="left"><a onclick="addAttribute();" class="button"><?php echo $button_add_attribute; ?></a></td>
+              </tr>
+            </tfoot>
+          </table>
           <table class="form">
             <tr>
               <td><?php echo $entry_manufacturer; ?></td>
@@ -690,78 +687,6 @@ $('input[name=\'manufacturer\']').autocomplete({
    }
 });
 
-// Category
-$('input[name=\'category\']').autocomplete({
-	delay: 500,
-	source: function(request, response) {
-		$.ajax({
-			url: 'index.php?route=catalog/category/autocomplete&token=<?php echo $token; ?>&filter_name=' +  encodeURIComponent(request.term),
-			dataType: 'json',
-			success: function(json) {		
-				response($.map(json, function(item) {
-					return {
-						label: item.name,
-						value: item.category_id
-					}
-				}));
-			}
-		});
-	}, 
-	select: function(event, ui) {
-		$('#product-category' + ui.item.value).remove();
-		
-		$('#product-category').append('<div id="product-category' + ui.item.value + '">' + ui.item.label + '<img src="view/image/delete.png" alt="" /><input type="hidden" name="product_category[]" value="' + ui.item.value + '" /></div>');
-
-		$('#product-category div:odd').attr('class', 'odd');
-		$('#product-category div:even').attr('class', 'even');
-				
-		return false;
-	},
-	focus: function(event, ui) {
-      return false;
-   }
-});
-$('.selection-category select').bind('change',function(){
-  var $cid = $(this).val(),
-  $obj = $('.selection-category #'+$(this).attr('for-entry'));
-  $(this).parent().nextAll('.selection-category').hide().children('select').empty();
-  if($cid > 0 ){
-    $.get('index.php?route=catalog/category/selection_category&token=<?php echo $token ?>&cid='+$cid ,{},function(json){
-      if(json.status==1){
-        $obj.append($("<option value='*'><?php echo $text_none ?></option>"));
-        for(var i in json.data){
-          $obj.append($("<option value='" + json.data[i].category_id + "'>" + json.data[i].name + "</option>"));
-        }
-        $obj.parent().show();
-      }
-    },'json');
-  }
-});
-$('#top-category').trigger('change');
-$('#add-category').bind('click',function(){
-    var category_id = 0,name = [];
-    $.each($('.selection-category select'),function(){
-      if($.isNumeric($(this).val()) && $(this).val() > 0){
-        category_id = $(this).val();
-        name.push($(this).find("option:selected").text()); 
-      }
-    })
-    if(category_id > 0){
-      var html = '<div id="product-category' + category_id + '">' + name.join(' &gt; ') + '<img src="view/image/delete.png" alt="" /><input type="hidden" name="product_category[]" value="' + category_id + '" /></div>';
-      $('#product-category').append(html);
-      $('#product-category div:odd').attr('class', 'odd');
-      $('#product-category div:even').attr('class', 'even');
-    }
-})
-
-
-$('#product-category div img').live('click', function() {
-	$(this).parent().remove();
-	
-	$('#product-category div:odd').attr('class', 'odd');
-	$('#product-category div:even').attr('class', 'even');	
-});
-
 // Related
 $('input[name=\'related\']').autocomplete({
 	delay: 500,
@@ -801,7 +726,63 @@ $('#product-related div img').live('click', function() {
 	$('#product-related div:even').attr('class', 'even');	
 });
 //--></script> 
+<script type="text/javascript"><!--
+var attribute_row = <?php echo $attribute_row; ?>;
 
+function addAttribute() {
+  html  = '<tbody id="attribute-row' + attribute_row + '">';
+    html += '  <tr>';
+  html += '    <td class="left"><input type="text" name="product_attribute[' + attribute_row + '][name]" value="" /><input type="hidden" name="product_attribute[' + attribute_row + '][attribute_id]" value="" /></td>';
+  html += '    <td class="left">';
+  <?php foreach ($languages as $language) { ?>
+  html += '<textarea name="product_attribute[' + attribute_row + '][product_attribute_description][<?php echo $language['language_id']; ?>][text]" cols="50" rows="2"></textarea><img src="<?php echo TPL_IMG ?>flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" align="top" /><br />';
+    <?php } ?>
+  html += '    </td>';
+  html += '    <td class="left"><a onclick="$(\'#attribute-row' + attribute_row + '\').remove();" class="button"><?php echo $button_remove; ?></a></td>';
+    html += '  </tr>';  
+    html += '</tbody>';
+  
+  $('#attribute tfoot').before(html);
+  
+  attributeautocomplete(attribute_row);
+  
+  attribute_row++;
+}
+
+function attributeautocomplete(attribute_row) {
+  $('input[name=\'product_attribute[' + attribute_row + '][name]\']').catcomplete({
+    delay: 500,
+    source: function(request, response) {
+      $.ajax({
+        url: 'index.php?route=catalog/attribute/autocomplete&token=<?php echo $token; ?>&filter_name=' +  encodeURIComponent(request.term),
+        dataType: 'json',
+        success: function(json) { 
+          response($.map(json, function(item) {
+            return {
+              category: item.attribute_group,
+              label: item.name,
+              value: item.attribute_id
+            }
+          }));
+        }
+      });
+    }, 
+    select: function(event, ui) {
+      $('input[name=\'product_attribute[' + attribute_row + '][name]\']').attr('value', ui.item.label);
+      $('input[name=\'product_attribute[' + attribute_row + '][attribute_id]\']').attr('value', ui.item.value);
+      
+      return false;
+    },
+    focus: function(event, ui) {
+          return false;
+      }
+  });
+}
+
+$('#attribute tbody').each(function(index, element) {
+  attributeautocomplete(index);
+});
+//--></script> 
 <script type="text/javascript"><!--	
 var option_row = <?php echo $option_row; ?>;
 
@@ -969,7 +950,6 @@ function addOptionValue(option_row) {
 	html += '    <td class="left"><a onclick="$(\'#option-value-row' + option_value_row + '\').remove();" class="button"><?php echo $button_remove; ?></a></td>';
 	html += '  </tr>';
 	html += '</tbody>';
-	
 	$('#option-value' + option_row + ' tfoot').before(html);
 
 	option_value_row++;
@@ -1136,19 +1116,27 @@ $('#vtab-price a').tabs();
               onload : function(t){
                 $.each($("#category-tree .jstree-checked"), function(k, n) {
                   $.tree.plugins.checkbox.check($(n));
+                  $('.category-tree').append('<input type="hidden" name="product_category[]" value="'+$(n).attr('category_id')+'" />');
+                });
+              },
+              onselect : function(nd,t){  
+                $(nd).toggleClass('jstree-checked');         
+                $('.category-tree').find('input[name^="product_category"]').remove();
+                $.each($("#category-tree .jstree-checked"), function(k, n) {
+                  $('.category-tree').append('<input type="hidden" name="product_category[]" value="'+$(n).attr('category_id')+'" />');
                 });
               }
             },
-            plugins : {checkbox : { }}
+            plugins : {checkbox : { three_state:false}}
 
         });
+
     });
 
     $('.toggle').toggle(
         function(){$.tree.reference('.tree').open_all()},
         function(){$.tree.reference('.tree').close_all()}
     );
-    
 </script>
 <style type="text/css">
   .hide-item{display: none;}

@@ -51,14 +51,14 @@ $_['entry_sku']                  = '&nbsp;&nbsp;库存单位：<br/><span class=
 $_['entry_upc']                  = '&nbsp;&nbsp;UPC：<br/><span class="help">通用产品代码</span>';
 $_['entry_isbn']                 = '&nbsp;&nbsp;ISBN：<br/><span class="help">国际标准书号</span>';
 $_['entry_mpn']                  = '&nbsp;&nbsp;MPN：<br/><span class="help">制造商零件编号</span>';
-$_['entry_location']             = '&nbsp;&nbsp;商品位置：';
+$_['entry_location']             = '&nbsp;&nbsp;商品产地：';
 $_['entry_manufacturer']         = '&nbsp;&nbsp;商品品牌：<br /><span class="help">输入关键字自动匹配品牌</span>';
 $_['entry_shipping']             = '&nbsp;&nbsp;要求配送：'; 
 $_['entry_date_available']       = '&nbsp;&nbsp;供货日期：';
 $_['entry_quantity']             = '&nbsp;&nbsp;商品数量：';
 $_['entry_minimum']              = '&nbsp;&nbsp;最小起订量：<br/><span class="help">最小订单数据</span>';
 $_['entry_stock_status']         = '&nbsp;&nbsp;库存状况：<br/><span class="help">显示当一个产品没有存货时的状态</span>';
-$_['entry_price']                = '&nbsp;销售价格：<br/><span class="help">更详细的价格设置，需到 售价选项 面板中设置</span>';
+$_['entry_price']                = '&nbsp;销售价格：';
 $_['entry_market']               = '&nbsp;&nbsp;市场价格：';
 $_['entry_tax_class']            = '&nbsp;&nbsp;商品税类：';
 $_['entry_points']               = '积分：<br/><span class="help">购买此商品所需积分。如果您不想让客户使用积分来购买此产品，请将值设为0。</span>';

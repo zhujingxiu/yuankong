@@ -18,7 +18,6 @@
         <a href="<?php echo $mode; ?>" class="button"><?php echo $button_mode; ?></a>
         <a href="<?php echo $repair; ?>" class="button"><?php echo $button_repair; ?></a>
         <a href="<?php echo $insert; ?>" class="button"><?php echo $button_insert; ?></a>
-        <a onclick="$('#form').submit();" class="button"><?php echo $button_delete; ?></a>
       </div>
     </div>
     <div class="content">
@@ -29,9 +28,9 @@
                     <br/>
                     <div class="tree" id="category-tree"></div></td>
                 <td valign ="top" style="width:80%;margin-left:10px;border:1px dashed #dedede;">
-                    <form id="tree-category" method="post">
+                    <div id="tree-category" >
                         
-                    </form>
+                    </div>
                 </td>
             </tr>
         </table>
@@ -59,7 +58,7 @@
                     }
                 },
                 beforedelete : function(n,t,r){
-                    if(confirm("Do you want to delete?")) {
+                    if(confirm("确定删除吗?")) {
                         $.post('index.php?route=catalog/category/delete&token=<?php echo $token; ?>',{'selected[]':$(n).attr('node_id')},function(json){
                             data = JSON.parse(json);
                             if(data.status==1){
@@ -79,7 +78,7 @@
                     items : {
                         create : false,
                         rename : {
-                            label: "Edit",
+                            label: "编辑",
                             icon : "rename",
                             visible : function(n,t){
                                 return 1;
@@ -87,7 +86,8 @@
                             action  : function(n,t){
                               window.open(n.attr('link'))
                             }
-                        }
+                        },
+                        remove :{label:'删除'}
                     }
                 }
             }

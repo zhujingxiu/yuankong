@@ -62,7 +62,7 @@ class ModelSaleCustomer extends Model {
 	}
 	
 	public function getCustomer($customer_id) {
-		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "customer WHERE customer_id = '" . (int)$customer_id . "'");
+		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "customer WHERE customer_id = '" . (int)$customer_id . "' AND company _id = '0' ");
 	
 		return $query->row;
 	}
@@ -80,7 +80,7 @@ class ModelSaleCustomer extends Model {
 	}
 			
 	public function getCustomers($data = array()) {
-		$sql = "SELECT *, c.fullname AS customer, cgd.name AS customer_group FROM " . DB_PREFIX . "customer c LEFT JOIN " . DB_PREFIX . "customer_group_description cgd ON (c.customer_group_id = cgd.customer_group_id) WHERE cgd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
+		$sql = "SELECT *, c.fullname AS customer, cgd.name AS customer_group FROM " . DB_PREFIX . "customer c LEFT JOIN " . DB_PREFIX . "customer_group_description cgd ON (c.customer_group_id = cgd.customer_group_id) WHERE cgd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND company_id = '0'";
 
 		$implode = array();
 		if (!empty($data['filter_mobile_phone'])) {
@@ -270,8 +270,9 @@ class ModelSaleCustomer extends Model {
 		if (!empty($data['filter_date_added'])) {
 			$implode[] = "DATE(date_added) = DATE('" . $this->db->escape($data['filter_date_added']) . "')";
 		}
-		
+		$implode[] = " company_id = '0' ";
 		if ($implode) {
+
 			$sql .= " WHERE " . implode(" AND ", $implode);
 		}
 				
@@ -281,7 +282,7 @@ class ModelSaleCustomer extends Model {
 	}
 		
 	public function getTotalCustomersAwaitingApproval() {
-      	$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "customer WHERE status = '0' OR approved = '0'");
+      	$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "customer WHERE company_id = '0' AND status = '0' OR approved = '0'");
 
 		return $query->row['total'];
 	}
@@ -299,7 +300,7 @@ class ModelSaleCustomer extends Model {
 	}
 	
 	public function getTotalCustomersByCustomerGroupId($customer_group_id) {
-		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "customer WHERE customer_group_id = '" . (int)$customer_group_id . "'");
+		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "customer WHERE company_id = '0' AND customer_group_id = '" . (int)$customer_group_id . "'");
 		
 		return $query->row['total'];
 	}
