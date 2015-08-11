@@ -1,26 +1,26 @@
 <?php 
-class ControllerExtensionCompanyZone extends Controller { 
+class ControllerSaleCompanyGroup extends Controller { 
     private $error = array();
    
     public function index() {
-        $this->language->load('extension/company_zone');
+        $this->language->load('sale/company_group');
     
         $this->document->setTitle($this->language->get('heading_title'));
         
-        $this->load->model('extension/company_zone');
+        $this->load->model('sale/company_group');
         
         $this->getList();
     }
               
     public function insert() {
-        $this->language->load('extension/company_zone');
+        $this->language->load('sale/company_group');
     
         $this->document->setTitle($this->language->get('heading_title'));
         
-        $this->load->model('extension/company_zone');
+        $this->load->model('sale/company_group');
             
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-            $this->model_extension_company_zone->addCompanyZone($this->request->post);
+            $this->model_sale_company_group->addCompanyGroup($this->request->post);
             
             $this->session->data['success'] = $this->language->get('text_success');
 
@@ -38,21 +38,21 @@ class ControllerExtensionCompanyZone extends Controller {
                 $url .= '&page=' . $this->request->get['page'];
             }
                         
-            $this->redirect($this->url->link('extension/company_zone', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+            $this->redirect($this->url->link('sale/company_group', 'token=' . $this->session->data['token'] . $url, 'SSL'));
         }
     
         $this->getForm();
     }
 
     public function update() {
-        $this->language->load('extension/company_zone');
+        $this->language->load('sale/company_group');
     
         $this->document->setTitle($this->language->get('heading_title'));
         
-        $this->load->model('extension/company_zone');
+        $this->load->model('sale/company_group');
         
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-            $this->model_extension_company_zone->editCompanyZone($this->request->get['zone_id'], $this->request->post);
+            $this->model_sale_company_group->editCompanyGroup($this->request->get['group_id'], $this->request->post);
             
             $this->session->data['success'] = $this->language->get('text_success');
 
@@ -70,22 +70,22 @@ class ControllerExtensionCompanyZone extends Controller {
                 $url .= '&page=' . $this->request->get['page'];
             }
             
-            $this->redirect($this->url->link('extension/company_zone', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+            $this->redirect($this->url->link('sale/company_group', 'token=' . $this->session->data['token'] . $url, 'SSL'));
         }
     
         $this->getForm();
     }
 
     public function delete() {
-        $this->language->load('extension/company_zone');
+        $this->language->load('sale/company_group');
     
         $this->document->setTitle($this->language->get('heading_title'));
         
-        $this->load->model('extension/company_zone');
+        $this->load->model('sale/company_group');
         
         if (isset($this->request->post['selected']) && $this->validateDelete()) {
-            foreach ($this->request->post['selected'] as $zone_id) {
-                $this->model_extension_company_zone->deleteCompanyZone($zone_id);
+            foreach ($this->request->post['selected'] as $group_id) {
+                $this->model_sale_company_group->deleteCompanyGroup($group_id);
             }
                         
             $this->session->data['success'] = $this->language->get('text_success');
@@ -104,7 +104,7 @@ class ControllerExtensionCompanyZone extends Controller {
                 $url .= '&page=' . $this->request->get['page'];
             }
             
-            $this->redirect($this->url->link('extension/company_zone', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+            $this->redirect($this->url->link('sale/company_group', 'token=' . $this->session->data['token'] . $url, 'SSL'));
         }
     
         $this->getList();
@@ -153,14 +153,14 @@ class ControllerExtensionCompanyZone extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text'      => $this->language->get('heading_title'),
-            'href'      => $this->url->link('extension/company_zone', 'token=' . $this->session->data['token'] . $url, 'SSL'),
+            'href'      => $this->url->link('sale/company_group', 'token=' . $this->session->data['token'] . $url, 'SSL'),
             'separator' => ' :: '
         );
                             
-        $this->data['insert'] = $this->url->link('extension/company_zone/insert', 'token=' . $this->session->data['token'] . $url, 'SSL');
-        $this->data['delete'] = $this->url->link('extension/company_zone/delete', 'token=' . $this->session->data['token'] . $url, 'SSL');    
+        $this->data['insert'] = $this->url->link('sale/company_group/insert', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        $this->data['delete'] = $this->url->link('sale/company_group/delete', 'token=' . $this->session->data['token'] . $url, 'SSL');    
 
-        $this->data['company_zones'] = array();
+        $this->data['company_groups'] = array();
 
         $data = array(
             'sort'  => $sort,
@@ -169,25 +169,26 @@ class ControllerExtensionCompanyZone extends Controller {
             'limit' => $this->config->get('config_admin_limit')
         );
         
-        $company_zone_total = $this->model_extension_company_zone->getTotalCompanyZones();
+        $company_group_total = $this->model_sale_company_group->getTotalCompanyGroups();
     
-        $results = $this->model_extension_company_zone->getCompanyZones($data);
+        $results = $this->model_sale_company_group->getCompanyGroups($data);
  
         foreach ($results as $result) {
             $action = array();
             
             $action[] = array(
                 'text' => $this->language->get('text_edit'),
-                'href' => $this->url->link('extension/company_zone/update', 'token=' . $this->session->data['token'] . '&zone_id=' . $result['zone_id'] . $url, 'SSL')
+                'href' => $this->url->link('sale/company_group/update', 'token=' . $this->session->data['token'] . '&group_id=' . $result['group_id'] . $url, 'SSL')
             );
                         
-            $this->data['company_zones'][] = array(
-                'zone_id'           => $result['zone_id'],
+            $this->data['company_groups'][] = array(
+                'group_id'           => $result['group_id'],
                 'name'               => $result['name'],
+                'tag'               => $result['tag'],
                 'show'               => $result['show'] ? $this->language->get('text_yes') : $this->language->get('text_no'),
                 'status_text'        => $result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
                 'sort_order'         => $result['sort_order'],
-                'selected'           => isset($this->request->post['selected']) && in_array($result['zone_id'], $this->request->post['selected']),
+                'selected'           => isset($this->request->post['selected']) && in_array($result['group_id'], $this->request->post['selected']),
                 'action'             => $action
             );
         }   
@@ -197,6 +198,7 @@ class ControllerExtensionCompanyZone extends Controller {
         $this->data['text_no_results'] = $this->language->get('text_no_results');
 
         $this->data['column_name'] = $this->language->get('column_name');
+        $this->data['column_tag'] = $this->language->get('column_tag');
         $this->data['column_show'] = $this->language->get('column_show');
         $this->data['column_status'] = $this->language->get('column_status');
         $this->data['column_sort_order'] = $this->language->get('column_sort_order');
@@ -231,9 +233,9 @@ class ControllerExtensionCompanyZone extends Controller {
             $url .= '&page=' . $this->request->get['page'];
         }
         
-        $this->data['sort_name'] = $this->url->link('extension/company_zone', 'token=' . $this->session->data['token'] . '&sort=name' . $url, 'SSL');
-        $this->data['sort_show'] = $this->url->link('extension/company_zone', 'token=' . $this->session->data['token'] . '&sort=show' . $url, 'SSL');
-        $this->data['sort_sort_order'] = $this->url->link('extension/company_zone', 'token=' . $this->session->data['token'] . '&sort=sort_order' . $url, 'SSL');
+        $this->data['sort_name'] = $this->url->link('sale/company_group', 'token=' . $this->session->data['token'] . '&sort=name' . $url, 'SSL');
+        $this->data['sort_show'] = $this->url->link('sale/company_group', 'token=' . $this->session->data['token'] . '&sort=show' . $url, 'SSL');
+        $this->data['sort_sort_order'] = $this->url->link('sale/company_group', 'token=' . $this->session->data['token'] . '&sort=sort_order' . $url, 'SSL');
         
         $url = '';
 
@@ -246,18 +248,18 @@ class ControllerExtensionCompanyZone extends Controller {
         }
 
         $pagination = new Pagination();
-        $pagination->total = $company_zone_total;
+        $pagination->total = $company_group_total;
         $pagination->page = $page;
         $pagination->limit = $this->config->get('config_admin_limit');
         $pagination->text = $this->language->get('text_pagination');
-        $pagination->url = $this->url->link('extension/company_zone', 'token=' . $this->session->data['token'] . $url . '&page={page}', 'SSL');
+        $pagination->url = $this->url->link('sale/company_group', 'token=' . $this->session->data['token'] . $url . '&page={page}', 'SSL');
             
         $this->data['pagination'] = $pagination->render();
 
         $this->data['sort'] = $sort;
         $this->data['order'] = $order;
 
-        $this->template = 'extension/company_zone_list.tpl';
+        $this->template = 'sale/company_group_list.tpl';
         $this->children = array(
             'common/header',
             'common/footer'
@@ -270,6 +272,7 @@ class ControllerExtensionCompanyZone extends Controller {
         $this->data['heading_title'] = $this->language->get('heading_title');
 
         $this->data['entry_name'] = $this->language->get('entry_name');
+        $this->data['entry_tag'] = $this->language->get('entry_tag');
         $this->data['entry_show'] = $this->language->get('entry_show');
         $this->data['entry_status'] = $this->language->get('entry_status');
         $this->data['entry_sort_order'] = $this->language->get('entry_sort_order');
@@ -318,56 +321,64 @@ class ControllerExtensionCompanyZone extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text'      => $this->language->get('heading_title'),
-            'href'      => $this->url->link('extension/company_zone', 'token=' . $this->session->data['token'] . $url, 'SSL'),
+            'href'      => $this->url->link('sale/company_group', 'token=' . $this->session->data['token'] . $url, 'SSL'),
             'separator' => ' :: '
         );
         
-        if (!isset($this->request->get['zone_id'])) {
-            $this->data['action'] = $this->url->link('extension/company_zone/insert', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        if (!isset($this->request->get['group_id'])) {
+            $this->data['action'] = $this->url->link('sale/company_group/insert', 'token=' . $this->session->data['token'] . $url, 'SSL');
         } else {
-            $this->data['action'] = $this->url->link('extension/company_zone/update', 'token=' . $this->session->data['token'] . '&zone_id=' . $this->request->get['zone_id'] . $url, 'SSL');
+            $this->data['action'] = $this->url->link('sale/company_group/update', 'token=' . $this->session->data['token'] . '&group_id=' . $this->request->get['group_id'] . $url, 'SSL');
         }
             
-        $this->data['cancel'] = $this->url->link('extension/company_zone', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        $this->data['cancel'] = $this->url->link('sale/company_group', 'token=' . $this->session->data['token'] . $url, 'SSL');
 
-        if (isset($this->request->get['zone_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
-            $company_zone_info = $this->model_extension_company_zone->getCompanyZone($this->request->get['zone_id']);
+        if (isset($this->request->get['group_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
+            $company_group_info = $this->model_sale_company_group->getCompanyGroup($this->request->get['group_id']);
         }
                 
     
         if (isset($this->request->post['name'])) {
             $this->data['name'] = $this->request->post['name'];
-        } elseif (!empty($company_zone_info['name'])) {
-            $this->data['name'] = $company_zone_info['name'];
+        } elseif (!empty($company_group_info['name'])) {
+            $this->data['name'] = $company_group_info['name'];
         } else {
             $this->data['name'] = '';
         }
 
+        if (isset($this->request->post['tag'])) {
+            $this->data['tag'] = $this->request->post['tag'];
+        } elseif (!empty($company_group_info['tag'])) {
+            $this->data['tag'] = $company_group_info['tag'];
+        } else {
+            $this->data['tag'] = '';
+        }
+
         if (isset($this->request->post['status'])) {
             $this->data['status'] = $this->request->post['status'];
-        } elseif (!empty($company_zone_info['status'])) {
-            $this->data['status'] = $company_zone_info['status'];
+        } elseif (!empty($company_group_info['status'])) {
+            $this->data['status'] = $company_group_info['status'];
         } else {
             $this->data['status'] = 1;
         }
 
         if (isset($this->request->post['show'])) {
             $this->data['show'] = $this->request->post['show'];
-        } elseif (!empty($company_zone_info['show'])) {
-            $this->data['show'] = $company_zone_info['show'];
+        } elseif (!empty($company_group_info['show'])) {
+            $this->data['show'] = $company_group_info['show'];
         } else {
             $this->data['show'] = '';
         }
 
         if (isset($this->request->post['sort_order'])) {
             $this->data['sort_order'] = $this->request->post['sort_order'];
-        } elseif (!empty($company_zone_info['sort_order'])) {
-            $this->data['sort_order'] = $company_zone_info['sort_order'];
+        } elseif (!empty($company_group_info['sort_order'])) {
+            $this->data['sort_order'] = $company_group_info['sort_order'];
         } else {
             $this->data['sort_order'] = '';
         }
    
-        $this->template = 'extension/company_zone_form.tpl';
+        $this->template = 'sale/company_group_form.tpl';
         $this->children = array(
             'common/header',
             'common/footer'
@@ -377,7 +388,7 @@ class ControllerExtensionCompanyZone extends Controller {
     }
     
     protected function validateForm() {
-        if (!$this->user->hasPermission('modify', 'extension/company_zone')) {
+        if (!$this->user->hasPermission('modify', 'sale/company_group')) {
             $this->error['warning'] = $this->language->get('error_permission');
         }
     
@@ -395,7 +406,7 @@ class ControllerExtensionCompanyZone extends Controller {
     }
 
     protected function validateDelete() {
-        if (!$this->user->hasPermission('modify', 'extension/company_zone')) {
+        if (!$this->user->hasPermission('modify', 'sale/company_group')) {
             $this->error['warning'] = $this->language->get('error_permission');
         }
         

@@ -122,6 +122,7 @@ $(document).ready(function(){
           <li><a href="<?php echo $company; ?>"><?php echo $text_company; ?></a></li>
           <li><a href="<?php echo $company_group; ?>"><?php echo $text_company_group; ?></a></li>
           <li><a href="<?php echo $company_zone; ?>"><?php echo $text_company_zone; ?></a></li>
+          <li><a href="<?php echo $company_request; ?>"><?php echo $text_company_request; ?></a></li>
           <li><a href="<?php echo $case; ?>"><?php echo $text_case; ?></a></li>
         </ul>
       </li>

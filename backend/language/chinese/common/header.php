@@ -6,6 +6,7 @@ $_['heading_title']                    = '功能菜单';
 $_['text_company']                     = '商户公司';
 $_['text_company_group']               = '公司类别';
 $_['text_company_zone']                = '公司区域设置';
+$_['text_company_request']             = '公司申请';
 $_['text_attribute']                   = '属性';
 $_['text_attribute_group']             = '属性组';
 $_['text_api']             			   = '平台账户';

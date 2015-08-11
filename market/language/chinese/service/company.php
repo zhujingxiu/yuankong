@@ -4,24 +4,14 @@ $_['heading_title']         = '消防公司';
 
 // Text
 $_['text_account']          = '账号';
-$_['text_project']          = '工程信息';
-$_['text_project_detail']   = '工程详细';
 $_['text_status']           = '状态：';
 $_['text_date_added']       = '工程日期：';
 $_['text_customer']         = '会员：';
 
-$_['text_products']         = '商品：';
+$_['text_totals']         	= '共有<i class="c_red"> %s </i>家消防服务公司';
 $_['text_total']            = '合计：';
-$_['text_comment']          = '工程备注';
-$_['text_history']          = '工程记录';
 
-$_['text_empty']            = '您还没有订购过本店商品！';
-$_['text_error']            = '找不到相关工程！';
-$_['text_action']           = '选择操作：';
-$_['text_selected']         = '请选择您想要操作的选项';
-$_['text_project_pending']  = '未处理';
-$_['text_project_processing']= '处理中';
-$_['text_project_completed']= '已完成';
+$_['entry_type']         	= '公司类型';
 $_['text_success']          = '您已经添加商品 #%s 到您的购物车！';
 $_['text_apply_success']    = '您的申请已提交，我们将尽快处理！';
 // Column

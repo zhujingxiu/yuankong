@@ -343,10 +343,6 @@ class ControllerSaleCompany extends Controller {
 		if (isset($this->request->get['filter_status'])) {
 			$url .= '&filter_status=' . $this->request->get['filter_status'];
 		}
-
-		if (isset($this->request->get['filter_group_id'])) {
-			$url .= '&filter_group_id=' . $this->request->get['filter_group_id'];
-		}
 		if (isset($this->request->get['filter_group_id'])) {
 			$url .= '&filter_group_id=' . $this->request->get['filter_group_id'];
 		}
@@ -582,8 +578,8 @@ class ControllerSaleCompany extends Controller {
 		$this->data['filter_approved'] = $filter_approved;
 		$this->data['filter_date_added'] = $filter_date_added;
 
-		$this->load->model('extension/company_group');
-		$this->data['groups'] = $this->model_extension_company_group->getCompanyGroups();
+		$this->load->model('sale/company_group');
+		$this->data['groups'] = $this->model_sale_company_group->getCompanyGroups();
 		
 		$this->data['sort'] = $sort;
 		$this->data['order'] = $order;
@@ -630,6 +626,8 @@ class ControllerSaleCompany extends Controller {
 		$this->data['entry_status'] = $this->language->get('entry_status');
 		$this->data['entry_recommend'] = $this->language->get('entry_recommend');
  		$this->data['entry_deposit'] = $this->language->get('entry_deposit');
+ 		$this->data['entry_viewed'] = $this->language->get('entry_viewed');
+ 		$this->data['entry_credit'] = $this->language->get('entry_credit');
  		$this->data['entry_member'] = $this->language->get('entry_member');
  		$this->data['entry_position'] = $this->language->get('entry_position');
  		$this->data['entry_avatar'] = $this->language->get('entry_avatar');
@@ -899,6 +897,30 @@ class ControllerSaleCompany extends Controller {
       		$this->data['deposit'] = 0;
     	}
 
+    	if (isset($this->request->post['viewed'])) {
+      		$this->data['viewed'] = $this->request->post['viewed'];
+    	} elseif (!empty($company_info['viewed'])) { 
+			$this->data['viewed'] = $company_info['viewed'];
+		} else {
+      		$this->data['viewed'] = 0;
+    	}
+
+    	if (isset($this->request->post['credit'])) {
+      		$this->data['credit'] = $this->request->post['credit'];
+    	} elseif (!empty($company_info['credit'])) { 
+			$this->data['credit'] = $company_info['credit'];
+		} else {
+      		$this->data['credit'] = 0;
+    	}
+
+		if (isset($this->request->post['sort_order'])) {
+      		$this->data['sort_order'] = $this->request->post['sort_order'];
+    	} elseif (!empty($company_info['sort_order'])) { 
+			$this->data['sort_order'] = $company_info['sort_order'];
+		} else {
+      		$this->data['sort_order'] = 0;
+    	}
+
     	if (isset($this->request->post['password'])) { 
 			$this->data['password'] = $this->request->post['password'];
 		} else {
@@ -934,10 +956,10 @@ class ControllerSaleCompany extends Controller {
 		} else {
       		$this->data['image'] = $this->model_tool_image->resize('no_image.jpg',100,100);
     	}
-        $this->load->model('extension/company_group');
-        $this->data['groups'] = $this->model_extension_company_group->getCompanyGroups();
-		$this->load->model('extension/company_zone');
-        $this->data['zones'] = $this->model_extension_company_zone->getCompanyZones();
+        $this->load->model('sale/company_group');
+        $this->data['groups'] = $this->model_sale_company_group->getCompanyGroups();
+		$this->load->model('sale/company_zone');
+        $this->data['zones'] = $this->model_sale_company_zone->getCompanyZones();
      	$this->data['no_image'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
 		$this->template = 'sale/company_form.tpl';
 		$this->children = array(

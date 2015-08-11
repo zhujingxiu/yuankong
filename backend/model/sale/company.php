@@ -30,6 +30,9 @@ class ModelSaleCompany extends Model {
 			'zone_id' 		=> $data['zone_id'],
 			'recommend' 	=> $data['recommend'],
 			'deposit' 		=> $data['deposit'],
+			'viewed' 		=> $data['viewed'],
+			'sort_order' 	=> $data['sort_order'],
+			'credit' 		=> (float)$data['credit'],
 			'code' 			=> isset($data['code']) ? $data['code'] : '',	
 			'date_added'	=> date('Y-m-d H:i:s')		
 		);
@@ -86,6 +89,9 @@ class ModelSaleCompany extends Model {
 			'zone_id' 		=> $data['zone_id'],
 			'recommend' 	=> $data['recommend'],
 			'deposit' 		=> $data['deposit'],
+			'viewed' 		=> $data['viewed'],
+			'sort_order' 	=> $data['sort_order'],
+			'credit' 		=> (float)$data['credit'],
 			'code' 			=> isset($data['code']) ? $data['code'] : '',
 			
 		);
@@ -189,7 +195,7 @@ class ModelSaleCompany extends Model {
 
 			}
 			if($cid)
-			$implode[] = "c.zone_id IN (" . implode(",", $cid) . ")";
+			$implode[] = "c.company_id IN (" . implode(",", $cid) . ")";
 		}
 					
 		if (isset($data['filter_status']) && !is_null($data['filter_status'])) {
@@ -216,7 +222,8 @@ class ModelSaleCompany extends Model {
 			'c.code',
 			'c.status',
 			'c.approved',
-			'c.date_added'
+			'c.date_added',
+			'c.sort_order'
 		);	
 			
 		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
@@ -307,7 +314,7 @@ class ModelSaleCompany extends Model {
 
 			}
 			if($cid)
-			$implode[] = "c.zone_id IN (" . implode(",", $cid) . ")";
+			$implode[] = "c.company_id IN (" . implode(",", $cid) . ")";
 		}
 					
 		if (isset($data['filter_status']) && !is_null($data['filter_status'])) {
@@ -438,11 +445,17 @@ class ModelSaleCompany extends Model {
 		
 		return $query->row['total'];
 	}
+
+	public function getApprovedCompanies(){
+		$query = $this->db->query("SELECT * FROM ".DB_PREFIX."company WHERE status = '1' AND approved = '1'");
+		return $query->rows;
+	}
 	public function approve($company_id,$notify=false) {
 		$company_info = $this->getCompany($company_id);
 			
 		if ($company_info) {
 			$this->db->query("UPDATE " . DB_PREFIX . "company SET approved = '1' WHERE company_id = '" . (int)$company_id . "'");
+			$this->db->query("UPDATE " . DB_PREFIX . "customer SET approved = '1' WHERE company_id = '" . (int)$company_id . "'");
 			if($notify){
 				$this->language->load('mail/company');
 		

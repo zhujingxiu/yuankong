@@ -115,7 +115,7 @@ class ControllerExtensionCase extends Controller {
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
-			$sort = 'name';
+			$sort = 'sort_order';
 		}
 		
 		if (isset($this->request->get['order'])) {
@@ -191,7 +191,6 @@ class ControllerExtensionCase extends Controller {
 				'case_id' 	=> $result['case_id'],
 				'name'      => $result['name'],
 				'cover' 	=> $this->model_tool_image->resize($image, 100, 100),
-				'images' 	=> $this->model_extension_case->getTotalCaseImages($result['case_id']),
 				'sort_order' => $result['sort_order'],
 				'selected'        => isset($this->request->post['selected']) && in_array($result['case_id'], $this->request->post['selected']),
 				'action'          => $action
@@ -204,7 +203,6 @@ class ControllerExtensionCase extends Controller {
 
 		$this->data['column_name'] = $this->language->get('column_name');
 		$this->data['column_cover'] = $this->language->get('column_cover');
-		$this->data['column_images'] = $this->language->get('column_images');
 		$this->data['column_sort_order'] = $this->language->get('column_sort_order');
 		$this->data['column_action'] = $this->language->get('column_action');		
 		
@@ -273,14 +271,11 @@ class ControllerExtensionCase extends Controller {
   
   	protected function getForm() {
     	$this->data['heading_title'] = $this->language->get('heading_title');
-    	$this->document->addScript('view/javascript/jquery/ajaxupload.js');
-    	$this->document->addScript('view/javascript/ckeditor/ckeditor.js');
-    	$this->document->addScript(TPL_JS.'jquery.json.min.js');
     	$this->document->addStyle(TPL_JS.'fancybox/jquery.fancybox.css?v=2.1.5');
         $this->document->addScript(TPL_JS.'fancybox/jquery.fancybox.pack.js?v=2.1.5');
         $this->document->addStyle(TPL_JS.'fancybox/helpers/jquery.fancybox-buttons.css?v=2.1.5');
         $this->document->addScript(TPL_JS.'fancybox/helpers/jquery.fancybox-buttons.js?v=2.1.5');
-        $this->document->addStyle(TPL_JS.'fancybox/helpers/jquery.fancybox-thumbs?v=2.1.5');
+        $this->document->addStyle(TPL_JS.'fancybox/helpers/jquery.fancybox-thumbs.css?v=2.1.5');
         $this->document->addScript(TPL_JS.'fancybox/helpers/jquery.fancybox-thumbs.js?v=2.1.5');
     	$this->data['text_enabled'] = $this->language->get('text_enabled');
     	$this->data['text_disabled'] = $this->language->get('text_disabled');
@@ -350,19 +345,9 @@ class ControllerExtensionCase extends Controller {
 		}
 		$this->load->model('tool/image');
 		$this->data['cancel'] = $this->url->link('extension/case', 'token=' . $this->session->data['token'] . $url, 'SSL');
-		$file = array();
+
     	if (isset($this->request->get['case_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
       		$case_info = $this->model_extension_case->getCase($this->request->get['case_id']);
-      		$case_images = $this->model_extension_case->getCaseImages($this->request->get['case_id']);
-      		foreach ($case_images as $attch) {
-      			if ($attch['path'] && file_exists($attch['path'])) {
-	                $file[] = array(
-	                	'realpath' => HTTP_CATALOG.substr($attch['path'],strpos($attch['path'],'/')+1),
-	                	'name' => $attch['name'],
-	                	'image' => $this->model_tool_image->resize($attch['path'], 100, 100,true),
-	                );
-	            }
-      		}
     	}
 
 		$this->data['token'] = $this->session->data['token'];
@@ -375,22 +360,6 @@ class ControllerExtensionCase extends Controller {
       		$this->data['name'] = '';
     	}
 		
-		if (isset($this->request->post['desc'])) {
-      		$this->data['desc'] = $this->request->post['desc'];
-    	} elseif (!empty($case_info)) {
-			$this->data['desc'] = $case_info['desc'];
-		} else {	
-      		$this->data['desc'] = '';
-    	}
-		
-		if (isset($this->request->post['keyword'])) {
-			$this->data['keyword'] = $this->request->post['keyword'];
-		} elseif (!empty($case_info)) {
-			$this->data['keyword'] = $case_info['keyword'];
-		} else {
-			$this->data['keyword'] = '';
-		}
-
 		if (isset($this->request->post['cover'])) {
 			$this->data['cover'] = $this->request->post['cover'];
 		} elseif (!empty($case_info)) {
@@ -398,8 +367,6 @@ class ControllerExtensionCase extends Controller {
 		} else {
 			$this->data['cover'] = '';
 		}
-		
-		
 
 		if (isset($this->request->post['cover']) && file_exists(DIR_IMAGE . $this->request->post['cover'])) {
 			$this->data['thumb'] = $this->model_tool_image->resize($this->request->post['cover'], 100, 100);
@@ -418,8 +385,6 @@ class ControllerExtensionCase extends Controller {
 		} else {
       		$this->data['sort_order'] = '';
     	}
-
-    	$this->data['case_images'] = $file;
 		
 		$this->template = 'extension/case_form.tpl';
 		$this->children = array(
@@ -458,37 +423,5 @@ class ControllerExtensionCase extends Controller {
 	  		return false;
 		}  
   	}
-	
-	public function autocomplete() {
-		$json = array();
 		
-		if (isset($this->request->get['filter_name'])) {
-			$this->load->model('extension/case');
-			
-			$data = array(
-				'filter_name' => $this->request->get['filter_name'],
-				'start'       => 0,
-				'limit'       => 20
-			);
-			
-			$results = $this->model_extension_case->getCases($data);
-				
-			foreach ($results as $result) {
-				$json[] = array(
-					'case_id' => $result['case_id'], 
-					'name'            => strip_tags(html_entity_decode($result['name'], ENT_QUOTES, 'UTF-8'))
-				);
-			}		
-		}
-
-		$sort_order = array();
-	  
-		foreach ($json as $key => $value) {
-			$sort_order[$key] = $value['name'];
-		}
-
-		array_multisort($sort_order, SORT_ASC, $json);
-
-		$this->response->setOutput(json_encode($json));
-	}	
 }

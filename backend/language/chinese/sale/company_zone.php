@@ -8,7 +8,7 @@ $_['text_success']      = '成功：你已经修改商户区域！';
 // Column
 $_['column_name']       = '区域名';
 $_['column_show']       = '前台显示';
-$_['column_status']       = '状态';
+$_['column_status']     = '状态';
 $_['column_sort_order'] = '排序';
 $_['column_action']     = '管理';
 

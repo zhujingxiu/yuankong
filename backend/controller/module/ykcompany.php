@@ -117,8 +117,8 @@ class ControllerModuleYkcompany extends Controller {
         } elseif ($this->config->get('ykcompany_module')) { 
             $this->data['modules'] = $this->config->get('ykcompany_module');
         }   
-        $this->load->model('extension/company_group');
-        $company_group = $this->model_extension_company_group->getCompanyGroups();
+        $this->load->model('sale/company_group');
+        $company_group = $this->model_sale_company_group->getCompanyGroups();
         foreach ($company_group as $key => $value) {
             $company_group[$key]['name'] = $this->language->get('text_company').' -> '.$value['name'];
         }

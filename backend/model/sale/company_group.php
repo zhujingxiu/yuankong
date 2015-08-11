@@ -1,41 +1,47 @@
 <?php 
-class ModelExtensionHelpGroup extends Model {
-    public function addHelpGroup($data) {
+class ModelSaleCompanyGroup extends Model {
+    public function addCompanyGroup($data) {
         $fields = array(
             'name' => isset($data['name']) ? strip_tags(trim($data['name'])) : '',
+            'tag' => isset($data['tag']) ? strip_tags(trim($data['tag'])) : '',
             'show' => isset($data['show']) ? (int)$data['show'] : 0,
+            'status' => isset($data['status']) ? (int)$data['status'] : 0,
             'sort_order' => isset($data['sort_order']) ? (int)$data['sort_order'] : 0
         );
 
-        return $this->db->insert("help_group",$fields);
+        return $this->db->insert("company_group",$fields);
     }
 
-    public function editHelpGroup($group_id, $data) {
+    public function editCompanyGroup($group_id, $data) {
         $fields = array(
             'name' => isset($data['name']) ? strip_tags(trim($data['name'])) : 0,
+            'tag' => isset($data['tag']) ? strip_tags(trim($data['tag'])) : 0,
             'show' => isset($data['show']) ? (int)$data['show'] : 0,
+            'status' => isset($data['status']) ? (int)$data['status'] : 0,
             'sort_order' => isset($data['sort_order']) ? (int)$data['sort_order'] : 0
         );
 
-        return $this->db->update("help_group",array('group_id'=>$group_id),$fields);
+        return $this->db->update("company_group",array('group_id'=>$group_id),$fields);
     }
     
-    public function deleteHelpGroup($group_id) {
-        $this->db->delete("help_group",array('group_id' => (int)$group_id));
+    public function deleteCompanyGroup($group_id) {
+        $this->db->delete("company_group",array('group_id' => (int)$group_id));
     }
         
-    public function getHelpGroup($group_id) {
-        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "help_group WHERE group_id = '" . (int)$group_id . "'");
+    public function getCompanyGroup($group_id) {
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "company_group WHERE group_id = '" . (int)$group_id . "'");
         
         return $query->row;
     }
         
-    public function getHelpGroups($data = array()) {
-        $sql = "SELECT * FROM " . DB_PREFIX . "help_group ";
+    public function getCompanyGroups($data = array()) {
+        $sql = "SELECT * FROM " . DB_PREFIX . "company_group ";
             
         $sort_data = array(
             'name',
+            'tag',
             'show',
+            'status',
             'sort_order'
         );  
         
@@ -69,8 +75,8 @@ class ModelExtensionHelpGroup extends Model {
     }
     
     
-    public function getTotalHelpGroups() {
-        $query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "help_group");
+    public function getTotalCompanyGroups() {
+        $query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "company_group");
         
         return $query->row['total'];
     }   

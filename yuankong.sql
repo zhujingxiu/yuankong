@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2015 年 08 月 11 日 09:43
+-- 生成日期: 2015 年 08 月 11 日 16:54
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.4.3
 
@@ -21435,7 +21435,6 @@ INSERT INTO `yk_banner_image_description` (`banner_image_id`, `language_id`, `ba
 CREATE TABLE IF NOT EXISTS `yk_case` (
   `case_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
-  `desc` text,
   `cover` varchar(255) DEFAULT NULL,
   `sort_order` int(3) NOT NULL,
   PRIMARY KEY (`case_id`)
@@ -21445,31 +21444,11 @@ CREATE TABLE IF NOT EXISTS `yk_case` (
 -- 转存表中的数据 `yk_case`
 --
 
-INSERT INTO `yk_case` (`case_id`, `name`, `desc`, `cover`, `sort_order`) VALUES
-(1, '大润发', '', 'data/case/logopic6.jpg', 0),
-(2, 'SubWay', '', 'data/case/logopic2.jpg', 0),
-(3, '肯德基', '', 'data/case/logopic1.jpg', 0),
-(4, '沃尔玛', '', 'data/case/logopic5.jpg', 0);
-
--- --------------------------------------------------------
-
---
--- 表的结构 `yk_case_image`
---
-
-CREATE TABLE IF NOT EXISTS `yk_case_image` (
-  `case_id` int(11) NOT NULL,
-  `name` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
-  `path` varchar(512) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- 转存表中的数据 `yk_case_image`
---
-
-INSERT INTO `yk_case_image` (`case_id`, `name`, `path`) VALUES
-(4, 'shoppic4.jpg', '../asset/upload/20150615/20150615045851_af337968.jpg'),
-(4, 'shoppic5.jpg', '../asset/upload/20150615/20150615045855_86408726.jpg');
+INSERT INTO `yk_case` (`case_id`, `name`, `cover`, `sort_order`) VALUES
+(1, '大润发', 'data/case/logopic6.jpg', 1),
+(2, 'SubWay', 'data/case/logopic2.jpg', 4),
+(3, '肯德基', 'data/case/logopic1.jpg', 2),
+(4, '沃尔玛', 'data/case/logopic5.jpg', 3);
 
 -- --------------------------------------------------------
 
@@ -21946,6 +21925,8 @@ CREATE TABLE IF NOT EXISTS `yk_company` (
   `permit` tinyint(4) NOT NULL DEFAULT '0',
   `recommend` tinyint(4) NOT NULL DEFAULT '0',
   `deposit` int(11) NOT NULL DEFAULT '0',
+  `viewed` int(11) NOT NULL DEFAULT '0',
+  `credit` decimal(5,2) NOT NULL DEFAULT '0.00',
   `commission` decimal(4,2) NOT NULL DEFAULT '0.00',
   `address` varchar(256) DEFAULT NULL,
   `area_zone` varchar(128) DEFAULT NULL,
@@ -21954,18 +21935,21 @@ CREATE TABLE IF NOT EXISTS `yk_company` (
   `ip` varchar(40) NOT NULL,
   `status` tinyint(1) NOT NULL,
   `approved` tinyint(1) NOT NULL,
+  `sort_order` smallint(6) NOT NULL DEFAULT '0',
   `date_added` datetime NOT NULL,
   PRIMARY KEY (`company_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- 转存表中的数据 `yk_company`
 --
 
-INSERT INTO `yk_company` (`company_id`, `zone_id`, `title`, `logo`, `corporation`, `mobile_phone`, `identity_number`, `email`, `telephone`, `fax`, `website`, `code`, `permit`, `recommend`, `deposit`, `commission`, `address`, `area_zone`, `areas`, `postcode`, `ip`, `status`, `approved`, `date_added`) VALUES
-(1, 3, '天朝消防', 'data/logo.png', '萧十一郎', '18260051051', '321321199909091119', '18260051051@139.com', '111111', '', '', '55b88477d5f55', 0, 1, 10000, '5.00', '北京西路产业孵化器', '江苏省 苏州市 太仓市', '12|988|4346', '', '', 1, 1, '2015-07-29 15:47:53'),
-(2, 1, '骊威消防', 'data/case/logopic3.jpg', '彭骊威', '18850921766', NULL, '', '', '', '', '55c8cb7680254', 0, 0, 0, '0.00', '南京西路街道号码', '江苏省 苏州市 昆山市', '12|988|47821', '', '', 1, 1, '0000-00-00 00:00:00'),
-(3, 2, '金松龄消防公司', 'data/case/logopic6.jpg', '金松龄', '18959523214', NULL, '', '', '', '', '55c8cccbd1674', 0, 0, 0, '0.00', '北京西路产业孵化器', '江苏省 苏州市 太仓市', '12|988|4346', '', '', 1, 1, '2015-08-11 00:11:09');
+INSERT INTO `yk_company` (`company_id`, `zone_id`, `title`, `logo`, `corporation`, `mobile_phone`, `identity_number`, `email`, `telephone`, `fax`, `website`, `code`, `permit`, `recommend`, `deposit`, `viewed`, `credit`, `commission`, `address`, `area_zone`, `areas`, `postcode`, `ip`, `status`, `approved`, `sort_order`, `date_added`) VALUES
+(1, 3, '天朝消防', 'data/logo.png', '萧十一郎', '18260051051', '321321199909091119', '18260051051@139.com', '111111', '', '', '55b88477d5f55', 0, 1, 10000, 0, '0.00', '5.00', '北京西路产业孵化器', '江苏省 苏州市 太仓市', '12|988|4346', '', '', 1, 1, 0, '2015-07-29 15:47:53'),
+(2, 1, '骊威消防', 'data/case/logopic3.jpg', '彭骊威', '18850921766', NULL, '', '', '', '', '55c8cb7680254', 0, 0, 0, 0, '0.00', '0.00', '南京西路街道号码', '江苏省 苏州市 昆山市', '12|988|47821', '', '', 1, 1, 0, '0000-00-00 00:00:00'),
+(3, 2, '金松龄消防公司', 'data/case/logopic6.jpg', '金松龄', '18959523214', NULL, '', '', '', '', '55c8cccbd1674', 0, 0, 0, 0, '0.00', '0.00', '北京西路产业孵化器', '江苏省 苏州市 太仓市', '12|988|4346', '', '', 1, 1, 0, '2015-08-11 00:11:09'),
+(4, 2, '松涛消防器材器械', 'data/case/logopic2.jpg', '郭松涛', '15956952355', NULL, '', '', '', '', '55c9f868d7449', 0, 0, 0, 0, '0.00', '0.00', '北京东路街道', '江苏省 苏州市 太仓市', '12|988|4346', '', '', 1, 1, 0, '2015-08-11 21:29:43'),
+(5, 1, '胡林翼消防', 'http://www.yk119.com//asset/image/cache/data/logopic5-100x100.jpg', '胡林翼', '15975345625', NULL, '', '', '', '', '55c9f939537f1', 0, 0, 0, 0, '0.00', '0.00', '南京东路', '江苏省 苏州市 平江区', '12|988|3087', '', '', 1, 1, 0, '2015-08-11 21:33:11');
 
 -- --------------------------------------------------------
 
@@ -22013,7 +21997,8 @@ CREATE TABLE IF NOT EXISTS `yk_company_description` (
 --
 
 INSERT INTO `yk_company_description` (`company_id`, `title`, `text`, `image`, `date_modified`) VALUES
-(1, '公司采风', '公司采风公司采公司采风公司采风风公司采风公司采风公司采风公公司采风司采公司采风风公司采风公司采风公司采风', 'data/sdetail2.jpg', '2015-08-10 23:32:58');
+(1, '公司采风', '公司采风公司采公司采风公司采风风公司采风公司采风公司采风公公司采风司采公司采风风公司采风公司采风公司采风', 'data/sdetail2.jpg', '2015-08-10 23:32:58'),
+(5, 'dasdsadsa', 'sadasdsadsadassa', 'data/banner1.jpg', '2015-08-11 21:48:28');
 
 -- --------------------------------------------------------
 
@@ -22031,7 +22016,7 @@ CREATE TABLE IF NOT EXISTS `yk_company_file` (
   `status` tinyint(4) NOT NULL DEFAULT '0',
   `date_added` datetime NOT NULL,
   PRIMARY KEY (`file_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=11 ;
 
 --
 -- 转存表中的数据 `yk_company_file`
@@ -22040,7 +22025,10 @@ CREATE TABLE IF NOT EXISTS `yk_company_file` (
 INSERT INTO `yk_company_file` (`file_id`, `company_id`, `mode`, `path`, `sort`, `note`, `status`, `date_added`) VALUES
 (5, 1, 'identity', 'data/logopic5.jpg', 1, '', 1, '2015-08-10 22:42:20'),
 (6, 1, 'identity', 'data/banner2.jpg', 0, 'sadsad', 0, '2015-08-10 22:42:57'),
-(7, 1, 'permit', 'data/banner3.jpg', 0, 'sadsadsa', 0, '2015-08-10 22:44:10');
+(7, 1, 'permit', 'data/banner3.jpg', 0, 'sadsadsa', 0, '2015-08-10 22:44:10'),
+(8, 4, 'identity', 'data/logopic5.jpg', 1, '', 0, '2015-08-11 21:30:29'),
+(9, 4, 'permit', 'data/banner3.jpg', 2, '', 0, '2015-08-11 21:30:39'),
+(10, 5, 'identity', 'data/logo.png', 0, 'sadsad', 0, '2015-08-11 21:33:31');
 
 -- --------------------------------------------------------
 
@@ -22084,15 +22072,44 @@ CREATE TABLE IF NOT EXISTS `yk_company_member` (
   `sort` smallint(6) NOT NULL DEFAULT '0',
   `date_added` datetime DEFAULT NULL,
   PRIMARY KEY (`member_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
 --
 -- 转存表中的数据 `yk_company_member`
 --
 
 INSERT INTO `yk_company_member` (`member_id`, `company_id`, `name`, `position`, `avatar`, `note`, `sort`, `date_added`) VALUES
-(2, 0, '', '', '', '', 0, '2015-08-10 23:12:26'),
-(3, 1, '沃尔玛', '总经理', 'data/logopic5.jpg', 'wewq', 0, '2015-08-10 23:28:07');
+(2, 1, 'asdsa', '', '', '', 1, '2015-08-10 23:12:26'),
+(3, 1, '沃尔玛', '总经理', 'data/logopic5.jpg', 'wewq', 0, '2015-08-10 23:28:07'),
+(4, 4, '是的撒旦', '撒的撒', 'data/qq-l_de85.png', '', 1, '2015-08-11 21:31:15'),
+(5, 5, '萨达撒', '撒的撒的撒', 'data/yuankong/shoppic2.jpg', '', 0, '2015-08-11 21:34:13');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `yk_company_request`
+--
+
+CREATE TABLE IF NOT EXISTS `yk_company_request` (
+  `request_id` int(11) NOT NULL AUTO_INCREMENT,
+  `account` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `mobile_phone` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `company_id` int(11) NOT NULL DEFAULT '0',
+  `status` tinyint(4) NOT NULL DEFAULT '0',
+  `note` varchar(512) COLLATE utf8_unicode_ci NOT NULL,
+  `user_id` int(11) NOT NULL DEFAULT '0',
+  `date_added` datetime DEFAULT NULL,
+  `date_modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`request_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
+
+--
+-- 转存表中的数据 `yk_company_request`
+--
+
+INSERT INTO `yk_company_request` (`request_id`, `account`, `mobile_phone`, `company_id`, `status`, `note`, `user_id`, `date_added`, `date_modified`) VALUES
+(4, 'ABC', '13562015061', 1, 1, '', 0, '2015-08-11 23:21:08', NULL),
+(5, 'XXX', '18952015061', 0, 0, '', 0, '2015-08-11 07:40:27', NULL);
 
 -- --------------------------------------------------------
 
@@ -22116,7 +22133,10 @@ INSERT INTO `yk_company_to_group` (`company_id`, `group_id`) VALUES
 (0, 3),
 (2, 2),
 (2, 3),
-(3, 4);
+(3, 4),
+(4, 1),
+(4, 3),
+(5, 3);
 
 -- --------------------------------------------------------
 
@@ -22266,7 +22286,7 @@ CREATE TABLE IF NOT EXISTS `yk_customer` (
   `token` varchar(255) NOT NULL,
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`customer_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- 转存表中的数据 `yk_customer`
@@ -22274,7 +22294,9 @@ CREATE TABLE IF NOT EXISTS `yk_customer` (
 
 INSERT INTO `yk_customer` (`customer_id`, `mobile_phone`, `fullname`, `email`, `telephone`, `fax`, `gender`, `avatar`, `password`, `salt`, `cart`, `wishlist`, `viewed`, `newsletter`, `address_id`, `company_id`, `customer_group_id`, `ip`, `status`, `approved`, `token`, `date_added`) VALUES
 (5, '18959523214', '金松龄', '', '', '', 0, 'data/case/logopic6.jpg', '0c918e7d4d5e44853fb46d9fa479b7ae666e2f45', '9087ff7ed', NULL, NULL, NULL, 0, 0, 3, 1, '0', 1, 0, '', '2015-08-11 00:11:09'),
-(4, '18850921766', '彭骊威', '', '', '', 0, 'data/case/logopic3.jpg', '6054f0b3cc0fe57f84fbb76a3f9d5bb5d741ff3e', 'a021a00ce', NULL, NULL, NULL, 0, 0, 2, 1, '0', 1, 0, '', '2015-08-11 00:06:12');
+(4, '18850921766', '彭骊威', '', '', '', 0, 'data/case/logopic3.jpg', '6054f0b3cc0fe57f84fbb76a3f9d5bb5d741ff3e', 'a021a00ce', NULL, NULL, NULL, 0, 0, 2, 1, '0', 1, 0, '', '2015-08-11 00:06:12'),
+(6, '15956952355', '郭松涛', '', '', '', 0, 'data/case/logopic2.jpg', 'cf1021536f784367538b15895bba28a9383783d7', 'deb170148', NULL, NULL, NULL, 0, 0, 4, 1, '0', 1, 0, '', '2015-08-11 21:29:43'),
+(7, '15975345625', '胡林翼', '', '', '', 0, 'data/logopic5.jpg', '1c779f9d6cbc76d6e9506665bda725caad6cdef7', '26583db36', NULL, NULL, NULL, 0, 0, 5, 1, '0', 1, 0, '', '2015-08-11 21:33:11');
 
 -- --------------------------------------------------------
 

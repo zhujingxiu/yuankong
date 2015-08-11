@@ -136,6 +136,14 @@
               <td><input type="text" name="deposit" value="<?php echo $deposit; ?>"/></td>
             </tr>
             <tr>
+              <td><?php echo $entry_viewed; ?></td>
+              <td><input type="text" name="viewed" value="<?php echo $viewed; ?>"/></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_credit; ?></td>
+              <td><input type="text" name="credit" value="<?php echo $credit; ?>"/></td>
+            </tr>
+            <tr>
               <td><?php echo $entry_email; ?></td>
               <td><input type="text" name="email" value="<?php echo $email; ?>" size="50"/></td>
             </tr> 
@@ -151,7 +159,10 @@
               <td><?php echo $entry_code; ?></td>
               <td><input type="code" name="code" value="<?php echo $code; ?>"  /></td>
             </tr>
-
+            <tr>
+              <td><?php echo $entry_sort; ?></td>
+              <td><input type="text" name="sort_order" value="<?php echo $sort_order; ?>"  /></td>
+            </tr>
           </table>
         </div>
         <?php if ($company_id) { ?>

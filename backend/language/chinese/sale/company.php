@@ -60,6 +60,8 @@ $_['entry_area_zone']           = '省份/市：';
 $_['entry_zone']                = '所属区域：';
 $_['entry_recommend']           = '&nbsp;&nbsp;&nbsp;推荐商家：';
 $_['entry_deposit']             = '&nbsp;&nbsp;&nbsp;保证金：';
+$_['entry_viewed']              = '&nbsp;&nbsp;&nbsp;人气：<span class="help">浏览次数</span>';
+$_['entry_credit']              = '&nbsp;&nbsp;&nbsp;信誉：';
 $_['entry_code']                = '&nbsp;&nbsp;&nbsp;跟踪码：<span class="help">跟踪码可以在跟踪时使用。</span>';
 $_['entry_commission']          = '&nbsp;&nbsp;&nbsp;佣金 (%)：<span class="help">每个订单可收取的佣金百分比。</span>';
 $_['entry_position']            = '职位：';

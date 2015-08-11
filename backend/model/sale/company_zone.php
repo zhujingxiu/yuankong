@@ -1,5 +1,5 @@
 <?php 
-class ModelExtensionCompanyZone extends Model {
+class ModelSaleCompanyZone extends Model {
     public function addCompanyZone($data) {
         $fields = array(
             'name' => isset($data['name']) ? strip_tags(trim($data['name'])) : '',

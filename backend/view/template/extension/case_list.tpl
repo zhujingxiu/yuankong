@@ -28,7 +28,6 @@
                 <a href="<?php echo $sort_name; ?>"><?php echo $column_name; ?></a>
                 <?php } ?></td>
               <td class="center"><?php echo $column_cover; ?></td>
-              <td class="center"><?php echo $column_images; ?></td>
               <td class="right"><?php if ($sort == 'sort_order') { ?>
                 <a href="<?php echo $sort_sort_order; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_sort_order; ?></a>
                 <?php } else { ?>
@@ -48,7 +47,6 @@
                 <?php } ?></td>
               <td class="left"><?php echo $item['name']; ?></td>
               <td class="center"><img src="<?php echo $item['cover']; ?>"></td>
-              <td class="center"><?php echo $item['images']; ?></td>
               <td class="right"><?php echo $item['sort_order']; ?></td>
               <td class="right"><?php foreach ($item['action'] as $action) { ?>
                 [ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
@@ -57,7 +55,7 @@
             <?php } ?>
             <?php } else { ?>
             <tr>
-              <td class="center" colspan="6"><?php echo $text_no_results; ?></td>
+              <td class="center" colspan="5"><?php echo $text_no_results; ?></td>
             </tr>
             <?php } ?>
           </tbody>
