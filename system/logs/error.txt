@@ -1670,3 +1670,5 @@
 2015-08-12 0:32:38 - PHP Warning:  Invalid argument supplied for foreach() in E:\wamp\www\yuankong\market\controller\service\company.php on line 109
 2015-08-12 0:45:30 - PHP Notice:  Error: Unknown column 'c.zone_id' in 'where clause'<br />Error No: 1054<br />SELECT COUNT(*) AS total FROM `yk_company` WHERE 1  AND c.zone_id = '0' in E:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
 2015-08-12 0:45:30 - PHP Notice:  Trying to get property of non-object in E:\wamp\www\yuankong\market\model\service\company.php on line 102
+2015-08-12 7:42:35 - PHP Notice:  Undefined variable: text_company in E:\wamp\www\yuankong\backend\view\template\setting\setting.tpl on line 557
+2015-08-12 7:46:03 - PHP Notice:  Undefined index: config_ftp_status in E:\wamp\www\yuankong\backend\controller\setting\setting.php on line 1050

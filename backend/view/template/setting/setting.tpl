@@ -407,6 +407,19 @@
                   <?php } ?>
                 </select></td>
             </tr>
+            <tr>
+              <td><?php echo $entry_company; ?></td>
+              <td><select name="config_company_id">
+                  <option value="0"><?php echo $text_none; ?></option>
+                  <?php foreach ($informations as $information) { ?>
+                  <?php if ($information['information_id'] == $config_company_id) { ?>
+                  <option value="<?php echo $information['information_id']; ?>" selected="selected"><?php echo $information['title']; ?></option>
+                  <?php } else { ?>
+                  <option value="<?php echo $information['information_id']; ?>"><?php echo $information['title']; ?></option>
+                  <?php } ?>
+                  <?php } ?>
+                </select></td>
+            </tr>
           </table>
           <h2><?php echo $text_checkout; ?></h2>
           <table class="form">
@@ -444,19 +457,6 @@
                   <option value="0"><?php echo $text_none; ?></option>
                   <?php foreach ($informations as $information) { ?>
                   <?php if ($information['information_id'] == $config_checkout_id) { ?>
-                  <option value="<?php echo $information['information_id']; ?>" selected="selected"><?php echo $information['title']; ?></option>
-                  <?php } else { ?>
-                  <option value="<?php echo $information['information_id']; ?>"><?php echo $information['title']; ?></option>
-                  <?php } ?>
-                  <?php } ?>
-                </select></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_company; ?></td>
-              <td><select name="config_company_id">
-                  <option value="0"><?php echo $text_none; ?></option>
-                  <?php foreach ($informations as $information) { ?>
-                  <?php if ($information['information_id'] == $config_company_id) { ?>
                   <option value="<?php echo $information['information_id']; ?>" selected="selected"><?php echo $information['title']; ?></option>
                   <?php } else { ?>
                   <option value="<?php echo $information['information_id']; ?>"><?php echo $information['title']; ?></option>
@@ -554,23 +554,7 @@
                 </select></td>
             </tr>
           </table>
-          <h2><?php echo $text_company; ?></h2>
-          <table class="form">
-            <tr>
-              <td><?php echo $entry_company; ?></td>
-              <td><select name="config_company_id">
-                  <option value="0"><?php echo $text_none; ?></option>
-                  <?php foreach ($informations as $information) { ?>
-                  <?php if ($information['information_id'] == $config_company_id) { ?>
-                  <option value="<?php echo $information['information_id']; ?>" selected="selected"><?php echo $information['title']; ?></option>
-                  <?php } else { ?>
-                  <option value="<?php echo $information['information_id']; ?>"><?php echo $information['title']; ?></option>
-                  <?php } ?>
-                  <?php } ?>
-                </select></td>
-            </tr>
 
-          </table>
           <h2><?php echo $text_return; ?></h2>
           <table class="form">
             <tr>
