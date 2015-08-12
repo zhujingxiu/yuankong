@@ -7,6 +7,7 @@ $_['text_more']             = ' 更多 &gt;&gt; ';
 $_['button_apply']          = ' 立刻申请 ';
 $_['text_find']             = '帮我找公司';
 $_['text_lateast']          = '最新签约公司';
+$_['text_remark']          = '申请后我们会及时与您联系';
 
 // entry
 $_['entry_name']        = '您的姓名';

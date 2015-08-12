@@ -28,10 +28,12 @@ class ModelCatalogInformation extends Model {
 	public function getWikis($data=array()){
 
 		$sql= "SELECT * FROM ".DB_PREFIX."wiki WHERE 1";
-		if(isset($data['filter_group']) AND $data['filter_group']){
+		if(isset($data['filter_group']) && $data['filter_group']){
 			$sql .= " AND group_id = '".(int)$data['filter_group']."'";
 		}
-
+		if(isset($data['filter_search']) && trim($data['filter_search'])){
+			$sql .= " AND (title LIKE '%".$this->db->escape(trim($data['filter_search']))."%' OR `text` LIKE '%".$this->db->escape(trim($data['filter_search']))."%')";
+		}
 		$sort_data = array(
 			'viewed',
 			'sort_order',
@@ -69,7 +71,9 @@ class ModelCatalogInformation extends Model {
 		if(isset($data['filter_group']) AND $data['filter_group']){
 			$sql .= " AND group_id = '".(int)$data['filter_group']."'";
 		}
-
+		if(isset($data['filter_search']) && trim($data['filter_search'])){
+			$sql .= " AND (`title` LIKE '%".$this->db->escape(trim($data['filter_search']))."%' OR `text` LIKE '%".$this->db->escape(trim($data['filter_search']))."%')";
+		}
 		$query = $this->db->query($sql);
 
 		return $query->row['total'];
@@ -93,7 +97,9 @@ class ModelCatalogInformation extends Model {
 	public function getTotalHelp($data=array()){
 		$sql= "SELECT COUNT(help_id) total FROM ".DB_PREFIX."help WHERE 1";
 		
-
+		if(isset($data['filter_search']) && trim($data['filter_search'])){
+			$sql .= " AND (`text` LIKE '%".$this->db->escape(trim($data['filter_search']))."%' OR `reply` LIKE '%".$this->db->escape(trim($data['filter_search']))."%')";
+		}
 		$query = $this->db->query($sql);
 
 		return $query->row['total'];
@@ -102,6 +108,9 @@ class ModelCatalogInformation extends Model {
 	public function getHelps($data=array()){
 		$sql= "SELECT * FROM ".DB_PREFIX."help WHERE 1";
 
+		if(isset($data['filter_search']) && trim($data['filter_search'])){
+			$sql .= " AND (`text` LIKE '%".$this->db->escape(trim($data['filter_search']))."%' OR `reply` LIKE '%".$this->db->escape(trim($data['filter_search']))."%')";
+		}
 		$sort_data = array(
 			'viewed',
 			'sort_order',

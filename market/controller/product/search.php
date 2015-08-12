@@ -11,6 +11,7 @@ class ControllerProductSearch extends Controller {
 		
 		if (isset($this->request->get['search'])) {
 			$search = $this->request->get['search'];
+			$this->document->addScript(TPL_JS."jquery.textfilter.js");
 		} else {
 			$search = '';
 		} 
@@ -40,6 +41,18 @@ class ControllerProductSearch extends Controller {
 		} else {
 			$sub_category = '';
 		} 
+
+		if (isset($this->request->get['min_price'])) {
+			$min_price = $this->request->get['min_price'];
+		} else {
+			$min_price = '';
+		}
+
+		if (isset($this->request->get['max_price'])) {
+			$max_price = $this->request->get['max_price'];
+		} else {
+			$max_price = '';
+		}
 								
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
@@ -70,9 +83,6 @@ class ControllerProductSearch extends Controller {
 		} else {
 			$this->document->setTitle($this->language->get('heading_title'));
 		}
-		
-		$this->document->addScript('market/view/javascript/jquery/jquery.total-storage.min.js');
-
 		$this->data['breadcrumbs'] = array();
 
    		$this->data['breadcrumbs'][] = array( 
@@ -149,6 +159,11 @@ class ControllerProductSearch extends Controller {
 		$this->data['text_grid'] = $this->language->get('text_grid');		
 		$this->data['text_sort'] = $this->language->get('text_sort');
 		$this->data['text_limit'] = $this->language->get('text_limit');
+		$this->data['text_sales'] = $this->language->get('text_sales');
+
+		$this->data['text_sort_sales'] = $this->language->get('text_sort_sales');
+		$this->data['text_sort_price'] = $this->language->get('text_sort_price');
+		$this->data['text_sort_default'] = $this->language->get('text_sort_default');
 		
 		$this->data['entry_search'] = $this->language->get('entry_search');
     	$this->data['entry_description'] = $this->language->get('entry_description');
@@ -157,6 +172,7 @@ class ControllerProductSearch extends Controller {
 		$this->data['button_cart'] = $this->language->get('button_cart');
 		$this->data['button_wishlist'] = $this->language->get('button_wishlist');
 		$this->data['button_compare'] = $this->language->get('button_compare');
+		$this->data['button_submit'] = $this->language->get('button_submit');
 
 		$this->data['compare'] = $this->url->link('product/compare');
 		
@@ -219,7 +235,7 @@ class ControllerProductSearch extends Controller {
 					
 			foreach ($results as $result) {
 				if ($result['image']) {
-					$image = $this->model_tool_image->resize($result['image'], $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
+					$image = $this->model_tool_image->resize($result['image'], 117,117);
 				} else {
 					$image = false;
 				}
@@ -247,7 +263,11 @@ class ControllerProductSearch extends Controller {
 				} else {
 					$rating = false;
 				}
-			
+				$parent_id = $this->model_catalog_product->getProductCategories($result['product_id']);
+				
+				$path = $this->model_catalog_product->getCategoryPath($parent_id);
+				
+				$path_param = empty($path) ? '' : '&path='.$path;
 				$this->data['products'][] = array(
 					'product_id'  => $result['product_id'],
 					'thumb'       => $image,
@@ -257,94 +277,40 @@ class ControllerProductSearch extends Controller {
 					'special'     => $special,
 					'tax'         => $tax,
 					'rating'      => $result['rating'],
+					'sales'       => $result['sales'],
 					'reviews'     => sprintf($this->language->get('text_reviews'), (int)$result['reviews']),
-					'href'        => $this->url->link('product/product', 'product_id=' . $result['product_id'] . $url)
+					'href'        => $this->url->link('product/product', $path_param.'&product_id=' . $result['product_id'] )
 				);
 			}
 					
 			$url = '';
-			
 			if (isset($this->request->get['search'])) {
-				$url .= '&search=' . urlencode(html_entity_decode($this->request->get['search'], ENT_QUOTES, 'UTF-8'));
+				$url .= '&search=' . $this->request->get['search'];
 			}
-			
-			if (isset($this->request->get['tag'])) {
-				$url .= '&tag=' . urlencode(html_entity_decode($this->request->get['tag'], ENT_QUOTES, 'UTF-8'));
+			if (isset($this->request->get['filter'])) {
+				$url .= '&filter=' . $this->request->get['filter'];
 			}
-					
-			if (isset($this->request->get['description'])) {
-				$url .= '&description=' . $this->request->get['description'];
-			}
-			
-			if (isset($this->request->get['category_id'])) {
-				$url .= '&category_id=' . $this->request->get['category_id'];
-			}
-			
-			if (isset($this->request->get['sub_category'])) {
-				$url .= '&sub_category=' . $this->request->get['sub_category'];
-			}
-					
+				
 			if (isset($this->request->get['limit'])) {
 				$url .= '&limit=' . $this->request->get['limit'];
 			}
-						
-			$this->data['sorts'] = array();
-			
-			$this->data['sorts'][] = array(
-				'text'  => $this->language->get('text_default'),
-				'value' => 'p.sort_order-ASC',
-				'href'  => $this->url->link('product/search', 'sort=p.sort_order&order=ASC' . $url)
-			);
-			
-			$this->data['sorts'][] = array(
-				'text'  => $this->language->get('text_name_asc'),
-				'value' => 'pd.name-ASC',
-				'href'  => $this->url->link('product/search', 'sort=pd.name&order=ASC' . $url)
-			); 
-	
-			$this->data['sorts'][] = array(
-				'text'  => $this->language->get('text_name_desc'),
-				'value' => 'pd.name-DESC',
-				'href'  => $this->url->link('product/search', 'sort=pd.name&order=DESC' . $url)
-			);
-	
-			$this->data['sorts'][] = array(
-				'text'  => $this->language->get('text_price_asc'),
-				'value' => 'p.price-ASC',
-				'href'  => $this->url->link('product/search', 'sort=p.price&order=ASC' . $url)
-			); 
-	
-			$this->data['sorts'][] = array(
-				'text'  => $this->language->get('text_price_desc'),
-				'value' => 'p.price-DESC',
-				'href'  => $this->url->link('product/search', 'sort=p.price&order=DESC' . $url)
-			); 
-			
-			if ($this->config->get('config_review_status')) {
-				$this->data['sorts'][] = array(
-					'text'  => $this->language->get('text_rating_desc'),
-					'value' => 'rating-DESC',
-					'href'  => $this->url->link('product/search', 'sort=rating&order=DESC' . $url)
-				); 
-				
-				$this->data['sorts'][] = array(
-					'text'  => $this->language->get('text_rating_asc'),
-					'value' => 'rating-ASC',
-					'href'  => $this->url->link('product/search', 'sort=rating&order=ASC' . $url)
-				);
+
+			if(isset($this->request->get['order']) && strtolower($this->request->get['order']) == 'desc'){
+				$this->data['sort_order'] = $this->url->link('product/search',  '&sort=p.sort_order&order=ASC' . $url);
+				$this->data['sort_price'] = $this->url->link('product/search',  '&sort=p.price&order=ASC' . $url);
+				$this->data['sort_sales'] = $this->url->link('product/search',  '&sort=p.sales&order=ASC' . $url);
+			}else{
+				$this->data['sort_order'] = $this->url->link('product/search',  '&sort=p.sort_order&order=DESC' . $url);
+				$this->data['sort_price'] = $this->url->link('product/search',  '&sort=p.price&order=DESC' . $url);
+				$this->data['sort_sales'] = $this->url->link('product/search',  '&sort=p.sales&order=DESC' . $url);
 			}
-			
-			$this->data['sorts'][] = array(
-				'text'  => $this->language->get('text_model_asc'),
-				'value' => 'p.model-ASC',
-				'href'  => $this->url->link('product/search', 'sort=p.model&order=ASC' . $url)
-			); 
-	
-			$this->data['sorts'][] = array(
-				'text'  => $this->language->get('text_model_desc'),
-				'value' => 'p.model-DESC',
-				'href'  => $this->url->link('product/search', 'sort=p.model&order=DESC' . $url)
-			);
+			if(isset($this->request->get['sort'])&& strtolower($this->request->get['sort']) == 'p.price'){
+				$this->data['sort_on'] = 'price';
+			}else if(isset($this->request->get['sort'])&& strtolower($this->request->get['sort']) == 'p.sales'){
+				$this->data['sort_on'] = 'sales';
+			}else{
+				$this->data['sort_on'] = 'sort_order';
+			}
 	
 			$url = '';
 			
@@ -430,8 +396,15 @@ class ControllerProductSearch extends Controller {
 			$pagination->limit = $limit;
 			$pagination->text = $this->language->get('text_pagination');
 			$pagination->url = $this->url->link('product/search', $url . '&page={page}');
-			
-			$this->data['pagination'] = $pagination->render();
+			$this->data['pagination'] = $pagination->render_page();
+			$this->data['prev_link'] = $pagination->prev_link ? $pagination->prev_link : 'javascript:void(0)';
+			$this->data['next_link'] = $pagination->next_link ? $pagination->next_link : 'javascript:void(0)';
+			$this->data['page'] = $pagination->page;
+			$this->data['total_page'] = ceil($pagination->total / $pagination->limit);
+			$this->data['text_totals'] = sprintf($this->language->get('text_totals'),$product_total);
+			$this->data['filter_action'] = $this->url->link('product/category',$url,'SSL');
+			$this->data['min_price'] = $min_price;
+			$this->data['max_price'] = $max_price;
 		}	
 		
 		$this->data['search'] = $search;

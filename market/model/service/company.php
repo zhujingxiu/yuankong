@@ -1,9 +1,9 @@
 <?php
 class ModelServiceCompany extends Model {
-    public function addRequest($data) {
+    public function addCompanyRequest($data) {
         $fields =  array(
             'company_id'    => isset($data['company_id']) ? (int)$data['company_id'] : 0,
-            'telephone'     => $data['telephone'],
+            'mobile_phone'     => $data['mobile_phone'],
             'account'       => $data['account'],
             'status'        => 1,
             'date_added'    => date('Y-m-d H:i:s'),
@@ -51,7 +51,7 @@ class ModelServiceCompany extends Model {
         if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
             $sql .= " ORDER BY " . $data['sort'];
         } else {
-            $sql .= " ORDER BY p.sort_order";   
+            $sql .= " ORDER BY c.sort_order";   
         }
         if (isset($data['start']) || isset($data['limit'])) {
             if ($data['start'] < 0) {

@@ -6,10 +6,10 @@ class ControllerCommonSearch extends Controller {
         $route = '';
         switch($mode){
             case 'wiki':
-                $route = 'information/wiki/search';
+                $route = 'information/wiki';
                 break;
             case 'company':
-                $route = 'service/company/search';
+                $route = 'service/company';
                 break;
             default:
                 $route = 'product/search';

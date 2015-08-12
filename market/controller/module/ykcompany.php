@@ -33,7 +33,7 @@ class ControllerModuleYkcompany extends Controller {
                 $_company = $this->model_module_ykmodule->getCompanies($config);
 
                 foreach ($_company as $i => $item) {                    
-                    $_company[$i]['link'] = $this->url->link('account/company/info','company_id='.$item['company_id'],'SSL');
+                    $_company[$i]['link'] = $this->url->link('service/company/info','company_id='.$item['company_id'],'SSL');
                 }
                 $offset = isset($setting['sort'][$key]) ? (int)$setting['sort'][$key] : 0;
                 $data = array(
@@ -48,19 +48,19 @@ class ControllerModuleYkcompany extends Controller {
         $this->data['module'] = $module++;
         $lateast = $this->model_module_ykmodule->getCompanies(array('limit'=>$setting['lateast']));
         foreach ($lateast as $key => $item) {
-            $lateast[$key]['link'] = $this->url->link('company/account/info','company_id='.$item['company_id'],'SSL');
+            $lateast[$key]['link'] = $this->url->link('service/company/info','company_id='.$item['company_id'],'SSL');
         }
         $this->data['lateast'] = $lateast;
         $this->data['text_more'] = $this->language->get('text_more');
         $this->data['entry_name'] = $this->language->get('entry_name');
         $this->data['entry_telephone'] = $this->language->get('entry_telephone');
-        $this->data['error_name'] = $this->language->get('error_name');
+        $this->data['text_remark'] = $this->language->get('text_remark');
         $this->data['error_telephone'] = $this->language->get('error_telephone');
         $this->data['text_find'] = $this->language->get('text_find');
         $this->data['text_lateast'] = $this->language->get('text_lateast');
         $this->data['button_apply'] = $this->language->get('button_apply');
-        $this->data['more'] = $this->url->link('company/account/list','','SSL');
-        $this->data['action'] = $this->url->link('service/project/apply','','SSL');
+        $this->data['more'] = $this->url->link('service/company','','SSL');
+        $this->data['action'] = $this->url->link('service/company/apply','','SSL');
         $this->template = $this->config->get('config_template') . '/template/module/ykcompany.tpl';
         
         $this->render();

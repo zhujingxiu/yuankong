@@ -431,7 +431,7 @@
 .gs-dz-c .h-down { top: 12px; right: 10px;}
 .label-s { background: #fafafa; height: 45px; line-height: 45px; border-right: 1px solid #e4e4e4; width: 100px; text-align: center;}
 .xfgs-chose-box .gs-s { display: inline-block; padding: 5px 0; line-height: 35px; text-align: center; width: 100px;}
-.xfgs-chose-box .son,.gs-px-list li.son { font-weight: bold; color: #C30D23;}
+.xfgs-chose-box .son,.gs-px-list li.son a{ font-weight: bold; color: #C30D23;}
 .xfgs-px-box { background: #fafafa; border-bottom: 1px solid #e4e4e4; height: 35px; line-height: 35px;}
 .gs-px-list li { float: left; width: 110px; text-align: center; border-right: 1px solid #e4e4e4; font-size: 14px; color: #333;}
 .gs-search { background: #fff; border: 1px solid #eee; width: 200px; height: 25px; line-height: 25px; margin-top: 4px;}

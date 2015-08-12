@@ -14,6 +14,11 @@ $_['text_total']            = '合计：';
 $_['entry_type']         	= '公司类型';
 $_['text_success']          = '您已经添加商品 #%s 到您的购物车！';
 $_['text_apply_success']    = '您的申请已提交，我们将尽快处理！';
+
+$_['text_sort_default'] = '默认排序';
+$_['text_sort_viewed']   = '人气';
+$_['text_sort_recommend']   = '推荐';
+$_['text_sort_credit']   = '信誉';
 // Column
 
 $_['column_name']           = '品名';

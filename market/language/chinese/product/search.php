@@ -4,6 +4,7 @@ $_['heading_title']     = '搜索';
  
 // Text
 $_['text_search']       = '符合搜索条件的商品';
+$_['text_totals']       = '&nbsp; 共有<b>%s</b>件';
 $_['text_keyword']      = '关键字';
 $_['text_category']     = '所有类别';
 $_['text_sub_category'] = '搜索子目录';
@@ -31,9 +32,11 @@ $_['text_rating_desc']  = '最高评级';
 $_['text_model_asc']    = '型号 A - Z';
 $_['text_model_desc']   = '型号 Z - A';
 $_['text_limit']        = '显示：';
-
+$_['text_sales']        = '已售:';
+$_['text_sort_default'] = '默认';
+$_['text_sort_price']   = '价格';
+$_['text_sort_sales']   = '销量';
 // Entry
 $_['entry_search']      = '搜索：';
 $_['entry_description'] = '搜索商品详细介绍';
 $_['entry_model']       = '搜索商品型号';
-?>

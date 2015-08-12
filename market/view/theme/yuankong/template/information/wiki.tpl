@@ -50,4 +50,9 @@
     </div>
     <?php endif; ?>
 </div>
+<script type="text/javascript">
+<?php if($search){ ?>
+    $('.newslist-li h4,.newslist-li .news-text').textSearch('<?php echo $search ?>',{markColor: "#C30D23"});
+<?php }?>
+</script>
 <?php echo $footer; ?>
