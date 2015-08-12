@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2015 年 08 月 11 日 16:54
+-- 生成日期: 2015 年 08 月 12 日 09:30
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.4.3
 
@@ -21435,6 +21435,7 @@ INSERT INTO `yk_banner_image_description` (`banner_image_id`, `language_id`, `ba
 CREATE TABLE IF NOT EXISTS `yk_case` (
   `case_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
+  `desc` text,
   `cover` varchar(255) DEFAULT NULL,
   `sort_order` int(3) NOT NULL,
   PRIMARY KEY (`case_id`)
@@ -21444,11 +21445,31 @@ CREATE TABLE IF NOT EXISTS `yk_case` (
 -- 转存表中的数据 `yk_case`
 --
 
-INSERT INTO `yk_case` (`case_id`, `name`, `cover`, `sort_order`) VALUES
-(1, '大润发', 'data/case/logopic6.jpg', 1),
-(2, 'SubWay', 'data/case/logopic2.jpg', 4),
-(3, '肯德基', 'data/case/logopic1.jpg', 2),
-(4, '沃尔玛', 'data/case/logopic5.jpg', 3);
+INSERT INTO `yk_case` (`case_id`, `name`, `desc`, `cover`, `sort_order`) VALUES
+(1, '大润发', '', 'data/case/logopic6.jpg', 0),
+(2, 'SubWay', '', 'data/case/logopic2.jpg', 0),
+(3, '肯德基', '', 'data/case/logopic1.jpg', 0),
+(4, '沃尔玛', '', 'data/case/logopic5.jpg', 0);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `yk_case_image`
+--
+
+CREATE TABLE IF NOT EXISTS `yk_case_image` (
+  `case_id` int(11) NOT NULL,
+  `name` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `path` varchar(512) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- 转存表中的数据 `yk_case_image`
+--
+
+INSERT INTO `yk_case_image` (`case_id`, `name`, `path`) VALUES
+(4, 'shoppic4.jpg', '../asset/upload/20150615/20150615045851_af337968.jpg'),
+(4, 'shoppic5.jpg', '../asset/upload/20150615/20150615045855_86408726.jpg');
 
 -- --------------------------------------------------------
 
@@ -21925,8 +21946,6 @@ CREATE TABLE IF NOT EXISTS `yk_company` (
   `permit` tinyint(4) NOT NULL DEFAULT '0',
   `recommend` tinyint(4) NOT NULL DEFAULT '0',
   `deposit` int(11) NOT NULL DEFAULT '0',
-  `viewed` int(11) NOT NULL DEFAULT '0',
-  `credit` decimal(5,2) NOT NULL DEFAULT '0.00',
   `commission` decimal(4,2) NOT NULL DEFAULT '0.00',
   `address` varchar(256) DEFAULT NULL,
   `area_zone` varchar(128) DEFAULT NULL,
@@ -21935,21 +21954,18 @@ CREATE TABLE IF NOT EXISTS `yk_company` (
   `ip` varchar(40) NOT NULL,
   `status` tinyint(1) NOT NULL,
   `approved` tinyint(1) NOT NULL,
-  `sort_order` smallint(6) NOT NULL DEFAULT '0',
   `date_added` datetime NOT NULL,
   PRIMARY KEY (`company_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- 转存表中的数据 `yk_company`
 --
 
-INSERT INTO `yk_company` (`company_id`, `zone_id`, `title`, `logo`, `corporation`, `mobile_phone`, `identity_number`, `email`, `telephone`, `fax`, `website`, `code`, `permit`, `recommend`, `deposit`, `viewed`, `credit`, `commission`, `address`, `area_zone`, `areas`, `postcode`, `ip`, `status`, `approved`, `sort_order`, `date_added`) VALUES
-(1, 3, '天朝消防', 'data/logo.png', '萧十一郎', '18260051051', '321321199909091119', '18260051051@139.com', '111111', '', '', '55b88477d5f55', 0, 1, 10000, 0, '0.00', '5.00', '北京西路产业孵化器', '江苏省 苏州市 太仓市', '12|988|4346', '', '', 1, 1, 0, '2015-07-29 15:47:53'),
-(2, 1, '骊威消防', 'data/case/logopic3.jpg', '彭骊威', '18850921766', NULL, '', '', '', '', '55c8cb7680254', 0, 0, 0, 0, '0.00', '0.00', '南京西路街道号码', '江苏省 苏州市 昆山市', '12|988|47821', '', '', 1, 1, 0, '0000-00-00 00:00:00'),
-(3, 2, '金松龄消防公司', 'data/case/logopic6.jpg', '金松龄', '18959523214', NULL, '', '', '', '', '55c8cccbd1674', 0, 0, 0, 0, '0.00', '0.00', '北京西路产业孵化器', '江苏省 苏州市 太仓市', '12|988|4346', '', '', 1, 1, 0, '2015-08-11 00:11:09'),
-(4, 2, '松涛消防器材器械', 'data/case/logopic2.jpg', '郭松涛', '15956952355', NULL, '', '', '', '', '55c9f868d7449', 0, 0, 0, 0, '0.00', '0.00', '北京东路街道', '江苏省 苏州市 太仓市', '12|988|4346', '', '', 1, 1, 0, '2015-08-11 21:29:43'),
-(5, 1, '胡林翼消防', 'http://www.yk119.com//asset/image/cache/data/logopic5-100x100.jpg', '胡林翼', '15975345625', NULL, '', '', '', '', '55c9f939537f1', 0, 0, 0, 0, '0.00', '0.00', '南京东路', '江苏省 苏州市 平江区', '12|988|3087', '', '', 1, 1, 0, '2015-08-11 21:33:11');
+INSERT INTO `yk_company` (`company_id`, `zone_id`, `title`, `logo`, `corporation`, `mobile_phone`, `identity_number`, `email`, `telephone`, `fax`, `website`, `code`, `permit`, `recommend`, `deposit`, `commission`, `address`, `area_zone`, `areas`, `postcode`, `ip`, `status`, `approved`, `date_added`) VALUES
+(1, 3, '天朝消防', 'data/logo.png', '萧十一郎', '18260051051', '321321199909091119', '18260051051@139.com', '111111', '', '', '55b88477d5f55', 0, 1, 10000, '5.00', '北京西路产业孵化器', '江苏省 苏州市 太仓市', '12|988|4346', '', '', 1, 1, '2015-07-29 15:47:53'),
+(2, 1, '骊威消防', 'data/case/logopic3.jpg', '彭骊威', '18850921766', NULL, '', '', '', '', '55c8cb7680254', 0, 0, 0, '0.00', '南京西路街道号码', '江苏省 苏州市 昆山市', '12|988|47821', '', '', 1, 1, '0000-00-00 00:00:00'),
+(3, 2, '金松龄消防公司', 'data/case/logopic6.jpg', '金松龄', '18959523214', NULL, '', '', '', '', '55c8cccbd1674', 0, 0, 0, '0.00', '北京西路产业孵化器', '江苏省 苏州市 太仓市', '12|988|4346', '', '', 1, 1, '2015-08-11 00:11:09');
 
 -- --------------------------------------------------------
 
@@ -21997,8 +22013,7 @@ CREATE TABLE IF NOT EXISTS `yk_company_description` (
 --
 
 INSERT INTO `yk_company_description` (`company_id`, `title`, `text`, `image`, `date_modified`) VALUES
-(1, '公司采风', '公司采风公司采公司采风公司采风风公司采风公司采风公司采风公公司采风司采公司采风风公司采风公司采风公司采风', 'data/sdetail2.jpg', '2015-08-10 23:32:58'),
-(5, 'dasdsadsa', 'sadasdsadsadassa', 'data/banner1.jpg', '2015-08-11 21:48:28');
+(1, '公司采风', '公司采风公司采公司采风公司采风风公司采风公司采风公司采风公公司采风司采公司采风风公司采风公司采风公司采风', 'data/sdetail2.jpg', '2015-08-10 23:32:58');
 
 -- --------------------------------------------------------
 
@@ -22016,7 +22031,7 @@ CREATE TABLE IF NOT EXISTS `yk_company_file` (
   `status` tinyint(4) NOT NULL DEFAULT '0',
   `date_added` datetime NOT NULL,
   PRIMARY KEY (`file_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
 
 --
 -- 转存表中的数据 `yk_company_file`
@@ -22025,10 +22040,7 @@ CREATE TABLE IF NOT EXISTS `yk_company_file` (
 INSERT INTO `yk_company_file` (`file_id`, `company_id`, `mode`, `path`, `sort`, `note`, `status`, `date_added`) VALUES
 (5, 1, 'identity', 'data/logopic5.jpg', 1, '', 1, '2015-08-10 22:42:20'),
 (6, 1, 'identity', 'data/banner2.jpg', 0, 'sadsad', 0, '2015-08-10 22:42:57'),
-(7, 1, 'permit', 'data/banner3.jpg', 0, 'sadsadsa', 0, '2015-08-10 22:44:10'),
-(8, 4, 'identity', 'data/logopic5.jpg', 1, '', 0, '2015-08-11 21:30:29'),
-(9, 4, 'permit', 'data/banner3.jpg', 2, '', 0, '2015-08-11 21:30:39'),
-(10, 5, 'identity', 'data/logo.png', 0, 'sadsad', 0, '2015-08-11 21:33:31');
+(7, 1, 'permit', 'data/banner3.jpg', 0, 'sadsadsa', 0, '2015-08-10 22:44:10');
 
 -- --------------------------------------------------------
 
@@ -22072,44 +22084,15 @@ CREATE TABLE IF NOT EXISTS `yk_company_member` (
   `sort` smallint(6) NOT NULL DEFAULT '0',
   `date_added` datetime DEFAULT NULL,
   PRIMARY KEY (`member_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 --
 -- 转存表中的数据 `yk_company_member`
 --
 
 INSERT INTO `yk_company_member` (`member_id`, `company_id`, `name`, `position`, `avatar`, `note`, `sort`, `date_added`) VALUES
-(2, 1, 'asdsa', '', '', '', 1, '2015-08-10 23:12:26'),
-(3, 1, '沃尔玛', '总经理', 'data/logopic5.jpg', 'wewq', 0, '2015-08-10 23:28:07'),
-(4, 4, '是的撒旦', '撒的撒', 'data/qq-l_de85.png', '', 1, '2015-08-11 21:31:15'),
-(5, 5, '萨达撒', '撒的撒的撒', 'data/yuankong/shoppic2.jpg', '', 0, '2015-08-11 21:34:13');
-
--- --------------------------------------------------------
-
---
--- 表的结构 `yk_company_request`
---
-
-CREATE TABLE IF NOT EXISTS `yk_company_request` (
-  `request_id` int(11) NOT NULL AUTO_INCREMENT,
-  `account` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `mobile_phone` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  `company_id` int(11) NOT NULL DEFAULT '0',
-  `status` tinyint(4) NOT NULL DEFAULT '0',
-  `note` varchar(512) COLLATE utf8_unicode_ci NOT NULL,
-  `user_id` int(11) NOT NULL DEFAULT '0',
-  `date_added` datetime DEFAULT NULL,
-  `date_modified` datetime DEFAULT NULL,
-  PRIMARY KEY (`request_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
-
---
--- 转存表中的数据 `yk_company_request`
---
-
-INSERT INTO `yk_company_request` (`request_id`, `account`, `mobile_phone`, `company_id`, `status`, `note`, `user_id`, `date_added`, `date_modified`) VALUES
-(4, 'ABC', '13562015061', 1, 1, '', 0, '2015-08-11 23:21:08', NULL),
-(5, 'XXX', '18952015061', 0, 0, '', 0, '2015-08-11 07:40:27', NULL);
+(2, 0, '', '', '', '', 0, '2015-08-10 23:12:26'),
+(3, 1, '沃尔玛', '总经理', 'data/logopic5.jpg', 'wewq', 0, '2015-08-10 23:28:07');
 
 -- --------------------------------------------------------
 
@@ -22133,10 +22116,7 @@ INSERT INTO `yk_company_to_group` (`company_id`, `group_id`) VALUES
 (0, 3),
 (2, 2),
 (2, 3),
-(3, 4),
-(4, 1),
-(4, 3),
-(5, 3);
+(3, 4);
 
 -- --------------------------------------------------------
 
@@ -22286,7 +22266,7 @@ CREATE TABLE IF NOT EXISTS `yk_customer` (
   `token` varchar(255) NOT NULL,
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`customer_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- 转存表中的数据 `yk_customer`
@@ -22294,9 +22274,7 @@ CREATE TABLE IF NOT EXISTS `yk_customer` (
 
 INSERT INTO `yk_customer` (`customer_id`, `mobile_phone`, `fullname`, `email`, `telephone`, `fax`, `gender`, `avatar`, `password`, `salt`, `cart`, `wishlist`, `viewed`, `newsletter`, `address_id`, `company_id`, `customer_group_id`, `ip`, `status`, `approved`, `token`, `date_added`) VALUES
 (5, '18959523214', '金松龄', '', '', '', 0, 'data/case/logopic6.jpg', '0c918e7d4d5e44853fb46d9fa479b7ae666e2f45', '9087ff7ed', NULL, NULL, NULL, 0, 0, 3, 1, '0', 1, 0, '', '2015-08-11 00:11:09'),
-(4, '18850921766', '彭骊威', '', '', '', 0, 'data/case/logopic3.jpg', '6054f0b3cc0fe57f84fbb76a3f9d5bb5d741ff3e', 'a021a00ce', NULL, NULL, NULL, 0, 0, 2, 1, '0', 1, 0, '', '2015-08-11 00:06:12'),
-(6, '15956952355', '郭松涛', '', '', '', 0, 'data/case/logopic2.jpg', 'cf1021536f784367538b15895bba28a9383783d7', 'deb170148', NULL, NULL, NULL, 0, 0, 4, 1, '0', 1, 0, '', '2015-08-11 21:29:43'),
-(7, '15975345625', '胡林翼', '', '', '', 0, 'data/logopic5.jpg', '1c779f9d6cbc76d6e9506665bda725caad6cdef7', '26583db36', NULL, NULL, NULL, 0, 0, 5, 1, '0', 1, 0, '', '2015-08-11 21:33:11');
+(4, '18850921766', '彭骊威', '', '', '', 0, 'data/case/logopic3.jpg', '6054f0b3cc0fe57f84fbb76a3f9d5bb5d741ff3e', 'a021a00ce', NULL, NULL, NULL, 0, 0, 2, 1, '0', 1, 0, '', '2015-08-11 00:06:12');
 
 -- --------------------------------------------------------
 
@@ -22545,9 +22523,9 @@ CREATE TABLE IF NOT EXISTS `yk_help` (
 --
 
 INSERT INTO `yk_help` (`help_id`, `customer_id`, `account`, `telephone`, `text`, `is_top`, `sort_order`, `reply`, `user_id`, `status`, `date_replied`, `date_added`, `viewed`) VALUES
-(1, 0, '宝马740i', '12312312', 'asdsadasdasdas', 0, 0, 'asdsadasdsa', 1, 1, '2015-06-10 06:14:38', '2015-06-10 06:14:38', 0),
+(1, 0, '宝马740i', '12312312', 'asdsadasdasdas', 0, 0, 'asdsadasdsa', 1, 1, '2015-06-10 06:14:38', '2015-06-10 06:14:38', 18),
 (2, 0, 'asdsafafasdasd', '12321321312', 'adasdasdsadassa', 0, 0, NULL, 0, 1, NULL, '2015-05-25 07:37:26', 0),
-(3, 0, '汉武帝', '1312434243', '汉代建立起中原王朝的一个初步形态，尤以汉武帝对\r\n\r\n疆域的拓展最具开创意义。[详细]', 1, 2, '在李莎与李立三的后代看来，李莎"为了爱情的远行"\r\n\r\n，虽然为此付出了巨大的代价，但终生无悔。[详', 1, 1, NULL, '2015-06-10 08:25:06', 0);
+(3, 0, '汉武帝', '1312434243', '汉代建立起中原王朝的一个初步形态，尤以汉武帝对\r\n\r\n疆域的拓展最具开创意义。[详细]', 1, 2, '在李莎与李立三的后代看来，李莎"为了爱情的远行"\r\n\r\n，虽然为此付出了巨大的代价，但终生无悔。[详', 1, 1, NULL, '2015-06-10 08:25:06', 8);
 
 -- --------------------------------------------------------
 
@@ -23292,11 +23270,11 @@ CREATE TABLE IF NOT EXISTS `yk_product` (
 --
 
 INSERT INTO `yk_product` (`product_id`, `model`, `sku`, `upc`, `isbn`, `mpn`, `location`, `quantity`, `stock_status_id`, `image`, `manufacturer_id`, `shipping`, `price`, `market`, `points`, `tax_class_id`, `date_available`, `weight`, `weight_class_id`, `length`, `width`, `height`, `length_class_id`, `subtract`, `minimum`, `sort_order`, `status`, `date_added`, `date_modified`, `viewed`, `sales`) VALUES
-(50, '132143', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic1.jpg', 0, 1, '126.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-26 13:00:31', '2015-06-16 16:23:34', 91, 0),
+(50, '132143', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic1.jpg', 0, 1, '126.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-26 13:00:31', '2015-06-16 16:23:34', 92, 0),
 (51, 'ae123213', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic2.jpg', 0, 1, '123.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-23 07:23:47', '0000-00-00 00:00:00', 43, 0),
-(52, '123123', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic4.jpg', 0, 1, '123.0000', '125.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-08-11 17:00:17', '0000-00-00 00:00:00', 38, 0),
-(53, '231414', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic3.jpg', 0, 1, '125.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-26 13:13:01', '0000-00-00 00:00:00', 173, 0),
-(54, '2144232', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic5.jpg', 0, 1, '128.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-16 09:03:38', '0000-00-00 00:00:00', 8, 0),
+(52, '123123', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic4.jpg', 0, 1, '123.0000', '125.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-08-12 10:27:21', '0000-00-00 00:00:00', 38, 0),
+(53, '231414', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic3.jpg', 0, 1, '125.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-26 13:13:01', '0000-00-00 00:00:00', 175, 0),
+(54, '2144232', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic5.jpg', 0, 1, '128.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-16 09:03:38', '0000-00-00 00:00:00', 9, 0),
 (55, 'xf1325324', '', '', '', '', '', 1000, 7, 'data/yuankong/shoppic6.jpg', 0, 1, '158.0000', '0.0000', 0, 0, '2015-06-15', '0.000', 1, '0.000', '0.000', '0.000', 1, 0, 1, 1, 1, '2015-06-16 09:05:42', '0000-00-00 00:00:00', 4, 0);
 
 -- --------------------------------------------------------
@@ -23318,9 +23296,9 @@ CREATE TABLE IF NOT EXISTS `yk_product_attribute` (
 --
 
 INSERT INTO `yk_product_attribute` (`product_id`, `attribute_id`, `language_id`, `text`) VALUES
-(52, 3, 2, '爱的撒旦是'),
 (52, 1, 2, '撒大师的撒'),
-(52, 2, 2, '阿萨德撒的撒');
+(52, 2, 2, '阿萨德撒的撒'),
+(52, 3, 2, '爱的撒旦是');
 
 -- --------------------------------------------------------
 
@@ -23455,8 +23433,8 @@ INSERT INTO `yk_product_option_value` (`product_option_value_id`, `product_optio
 (18, 227, 53, 13, 50, 100, 0, '15.0000', '+', 0, '+', '0.000', '+'),
 (17, 227, 53, 13, 49, 100, 0, '10.0000', '+', 0, '+', '0.000', '+'),
 (21, 227, 53, 13, 53, 100, 1, '10.0000', '-', 0, '+', '0.000', '+'),
-(22, 228, 52, 16, 56, 100, 0, '10.0000', '+', 0, '+', '0.000', '+'),
-(23, 228, 52, 16, 57, 100, 0, '12.0000', '+', 0, '+', '0.000', '+');
+(23, 228, 52, 16, 57, 100, 0, '12.0000', '+', 0, '+', '0.000', '+'),
+(22, 228, 52, 16, 56, 100, 0, '10.0000', '+', 0, '+', '0.000', '+');
 
 -- --------------------------------------------------------
 
@@ -23745,7 +23723,7 @@ CREATE TABLE IF NOT EXISTS `yk_setting` (
   `value` text NOT NULL,
   `serialized` tinyint(1) NOT NULL,
   PRIMARY KEY (`setting_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2091 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2121 ;
 
 --
 -- 转存表中的数据 `yk_setting`
@@ -23770,7 +23748,7 @@ INSERT INTO `yk_setting` (`setting_id`, `group`, `key`, `value`, `serialized`) V
 (1864, 'flat', 'flat_status', '1', 0),
 (1863, 'flat', 'flat_area_geo_id', '0', 0),
 (1862, 'flat', 'flat_tax_class_id', '0', 0),
-(1280, 'carousel', 'carousel_module', 'a:1:{i:0;a:8:{s:5:"limit";s:1:"5";s:6:"scroll";s:1:"3";s:5:"width";s:2:"80";s:6:"height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:14:"content_bottom";s:6:"status";s:1:"0";s:10:"sort_order";i:1;}}', 1),
+(2112, 'carousel', 'carousel_module', 'a:1:{i:0;a:8:{s:5:"limit";s:1:"5";s:6:"scroll";s:1:"3";s:5:"width";s:2:"80";s:6:"height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:14:"content_bottom";s:6:"status";s:1:"0";s:10:"sort_order";i:1;}}', 1),
 (1861, 'flat', 'flat_cost', '50.00', 0),
 (42, 'credit', 'credit_sort_order', '7', 0),
 (43, 'credit', 'credit_status', '1', 0),
@@ -23847,18 +23825,18 @@ INSERT INTO `yk_setting` (`setting_id`, `group`, `key`, `value`, `serialized`) V
 (1996, 'config', 'config_customer_online', '0', 0),
 (1995, 'config', 'config_tax_customer', 'shipping', 0),
 (1994, 'config', 'config_tax_default', 'shipping', 0),
-(2084, 'yknews', 'yknews_module', 'a:1:{i:0;a:8:{s:9:"layout_id";s:1:"1";s:8:"position";s:9:"slideshow";s:8:"group_id";s:1:"3";s:5:"title";s:10:"e站快报";s:5:"limit";s:1:"5";s:11:"first_class";s:3:"cff";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"3";}}', 1),
-(1396, 'ykproject', 'ykproject_module', 'a:1:{i:0;a:4:{s:9:"layout_id";s:1:"1";s:8:"position";s:9:"slideshow";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"1";}}', 1),
+(2109, 'yknews', 'yknews_module', 'a:1:{i:0;a:8:{s:9:"layout_id";s:1:"1";s:8:"position";s:9:"slideshow";s:8:"group_id";s:1:"3";s:5:"title";s:10:"e站快报";s:5:"limit";s:1:"5";s:11:"first_class";s:3:"cff";s:6:"status";s:1:"1";s:10:"sort_order";i:3;}}', 1),
+(2107, 'ykproject', 'ykproject_module', 'a:1:{i:0;a:4:{s:9:"layout_id";s:1:"1";s:8:"position";s:9:"slideshow";s:6:"status";s:1:"1";s:10:"sort_order";i:1;}}', 1),
 (1397, 'ykcarousel', 'ykcarousel_module', 'a:1:{i:0;a:5:{s:9:"layout_id";s:5:"99999";s:8:"position";s:9:"slideshow";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"1";s:12:"banner_image";a:3:{i:1;a:4:{s:5:"image";s:16:"data/banner2.jpg";s:4:"link";s:17:" www.yk119.com.cn";s:5:"title";a:1:{i:2;s:0:"";}s:11:"description";a:1:{i:2;s:31:"&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n";}}i:2;a:4:{s:5:"image";s:16:"data/banner1.jpg";s:4:"link";s:17:" www.yk119.com.cn";s:5:"title";a:1:{i:2;s:0:"";}s:11:"description";a:1:{i:2;s:31:"&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n";}}i:3;a:4:{s:5:"image";s:16:"data/banner3.jpg";s:4:"link";s:17:" www.yk119.com.cn";s:5:"title";a:1:{i:2;s:0:"";}s:11:"description";a:1:{i:2;s:31:"&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n";}}}}}', 1),
 (1993, 'config', 'config_vat', '0', 0),
 (1992, 'config', 'config_tax', '0', 0),
 (1991, 'config', 'config_voucher_max', '1000', 0),
 (1990, 'config', 'config_voucher_min', '1', 0),
-(1279, 'ykcase', 'ykcase_module', 'a:1:{i:0;a:6:{s:9:"layout_id";s:1:"1";s:8:"position";s:8:"showcase";s:5:"title";s:12:"案例精选";s:5:"limit";s:2:"16";s:6:"status";s:1:"1";s:10:"sort_order";i:1;}}', 1),
-(1625, 'ykwiki', 'ykwiki_module', 'a:1:{i:1;a:9:{s:5:"title";a:1:{i:2;s:12:"消防百科";}s:9:"layout_id";s:1:"1";s:8:"position";s:11:"mass_bottom";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"4";s:13:"category_tabs";a:6:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";i:3;s:1:"0";i:4;s:1:"4";i:5;s:1:"5";}s:5:"limit";a:6:{i:0;s:1:"5";i:1;s:1:"5";i:2;s:1:"5";i:3;s:1:"5";i:4;s:1:"5";i:5;s:1:"5";}s:5:"image";a:6:{i:0;s:24:"data/yuankong/bkpic1.jpg";i:1;s:24:"data/yuankong/bkpic2.jpg";i:2;s:24:"data/yuankong/bkpic3.jpg";i:3;s:24:"data/yuankong/bkpic4.jpg";i:4;s:24:"data/yuankong/bkpic5.jpg";i:5;s:24:"data/yuankong/bkpic6.jpg";}s:4:"sort";a:6:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";i:3;s:1:"4";i:4;s:1:"5";i:5;s:1:"6";}}}', 1),
+(2111, 'ykcase', 'ykcase_module', 'a:1:{i:0;a:6:{s:9:"layout_id";s:1:"1";s:8:"position";s:8:"showcase";s:5:"title";s:12:"案例精选";s:5:"limit";s:2:"16";s:6:"status";s:1:"1";s:10:"sort_order";i:1;}}', 1),
+(2116, 'ykwiki', 'ykwiki_module', 'a:1:{i:1;a:9:{s:5:"title";a:1:{i:2;s:12:"消防百科";}s:9:"layout_id";s:1:"1";s:8:"position";s:11:"mass_bottom";s:6:"status";s:1:"1";s:10:"sort_order";i:4;s:13:"category_tabs";a:6:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";i:3;s:1:"0";i:4;s:1:"4";i:5;s:1:"5";}s:5:"limit";a:6:{i:0;s:1:"5";i:1;s:1:"5";i:2;s:1:"5";i:3;s:1:"5";i:4;s:1:"5";i:5;s:1:"5";}s:5:"image";a:6:{i:0;s:24:"data/yuankong/bkpic1.jpg";i:1;s:24:"data/yuankong/bkpic2.jpg";i:2;s:24:"data/yuankong/bkpic3.jpg";i:3;s:24:"data/yuankong/bkpic4.jpg";i:4;s:24:"data/yuankong/bkpic5.jpg";i:5;s:24:"data/yuankong/bkpic6.jpg";}s:4:"sort";a:6:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";i:3;s:1:"4";i:4;s:1:"5";i:5;s:1:"6";}}}', 1),
 (1284, 'ykaffiliate', 'ykaffiliate_module', 'a:1:{i:1;a:10:{s:5:"title";a:1:{i:2;s:12:"消防公司";}s:9:"layout_id";s:1:"1";s:8:"position";s:11:"mass_bottom";s:6:"status";s:1:"1";s:7:"lateast";s:1:"5";s:10:"sort_order";i:3;s:13:"category_tabs";a:4:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";i:3;s:1:"4";}s:5:"limit";a:4:{i:0;s:1:"5";i:1;s:1:"5";i:2;s:1:"5";i:3;s:1:"5";}s:10:"icon_class";a:4:{i:0;s:14:"icon design-gs";i:1;s:10:"icon jc-gs";i:2;s:10:"icon wb-gs";i:3;s:10:"icon gc-gs";}s:4:"sort";a:4:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";i:3;s:1:"4";}}}', 1),
-(2087, 'ykproduct', 'ykproduct_module', 'a:2:{i:1;a:10:{s:5:"title";a:1:{i:2;s:12:"消防器材";}s:9:"layout_id";s:1:"1";s:8:"position";s:11:"mass_bottom";s:6:"status";s:1:"1";s:11:"title_class";s:14:"index-t l-blue";s:16:"additional_class";s:0:"";s:10:"sort_order";s:1:"1";s:13:"category_tabs";a:3:{s:8:"category";a:6:{i:0;s:2:"61";i:1;s:2:"69";i:2;s:2:"75";i:3;s:2:"84";i:4;s:2:"89";i:5;s:2:"94";}s:5:"limit";a:6:{i:0;s:1:"3";i:1;s:1:"2";i:2;s:1:"2";i:3;s:1:"3";i:4;s:1:"2";i:5;s:1:"3";}s:4:"sort";a:6:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";i:3;s:1:"4";i:4;s:1:"5";i:5;s:1:"6";}}s:12:"product_tabs";a:3:{s:7:"product";a:4:{i:0;s:2:"53";i:1;s:2:"52";i:2;s:2:"55";i:3;s:2:"54";}s:5:"image";a:4:{i:0;s:26:"data/yuankong/shoppic3.jpg";i:1;s:26:"data/yuankong/shoppic4.jpg";i:2;s:26:"data/yuankong/shoppic6.jpg";i:3;s:26:"data/yuankong/shoppic5.jpg";}s:4:"sort";a:4:{i:0;s:1:"3";i:1;s:1:"2";i:2;s:1:"3";i:3;s:1:"4";}}s:11:"banner_tabs";a:3:{s:5:"image";a:3:{i:0;s:25:"data/yuankong/banner4.jpg";i:1;s:25:"data/yuankong/banner5.jpg";i:2;s:25:"data/yuankong/banner6.jpg";}s:4:"link";a:3:{i:0;s:18:"www.yk119.com.cn/1";i:1;s:18:"www.yk119.com.cn/2";i:2;s:18:"www.yk119.com.cn/3";}s:4:"sort";a:3:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";}}}i:2;a:10:{s:5:"title";a:1:{i:2;s:12:"消防装备";}s:9:"layout_id";s:1:"1";s:8:"position";s:11:"mass_bottom";s:6:"status";s:1:"1";s:11:"title_class";s:15:"index-t l-zongs";s:16:"additional_class";s:6:"shebei";s:10:"sort_order";s:1:"2";s:13:"category_tabs";a:3:{s:8:"category";a:4:{i:0;s:2:"97";i:1;s:3:"109";i:2;s:3:"115";i:3;s:3:"128";}s:5:"limit";a:4:{i:0;s:1:"6";i:1;s:1:"5";i:2;s:1:"6";i:3;s:1:"5";}s:4:"sort";a:4:{i:0;s:1:"2";i:1;s:1:"3";i:2;s:1:"1";i:3;s:1:"1";}}s:12:"product_tabs";a:3:{s:7:"product";a:5:{i:0;s:2:"50";i:1;s:2:"51";i:2;s:2:"54";i:3;s:2:"53";i:4;s:2:"55";}s:5:"image";a:5:{i:0;s:26:"data/yuankong/shoppic1.jpg";i:1;s:26:"data/yuankong/shoppic2.jpg";i:2;s:26:"data/yuankong/shoppic5.jpg";i:3;s:26:"data/yuankong/shoppic3.jpg";i:4;s:26:"data/yuankong/shoppic6.jpg";}s:4:"sort";a:5:{i:0;s:1:"5";i:1;s:1:"2";i:2;s:1:"3";i:3;s:1:"4";i:4;s:1:"5";}}s:11:"banner_tabs";a:3:{s:5:"image";a:3:{i:0;s:25:"data/yuankong/banner6.jpg";i:1;s:25:"data/yuankong/banner5.jpg";i:2;s:25:"data/yuankong/banner4.jpg";}s:4:"link";a:3:{i:0;s:24:"http://www.yuankong.com/";i:1;s:24:"http://www.yuankong.com/";i:2;s:24:"http://www.yuankong.com/";}s:4:"sort";a:3:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";}}}}', 1),
-(2068, 'yknavigation', 'yknavigation_module', 'a:1:{i:0;a:5:{s:9:"layout_id";s:5:"99999";s:8:"position";s:8:"mainmenu";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"0";s:9:"navigator";a:6:{i:0;a:8:{s:5:"title";s:6:"首页";s:5:"route";s:11:"common/home";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:0:"";s:6:"status";s:1:"1";s:8:"selected";s:1:"1";s:4:"sort";s:1:"1";}i:1;a:8:{s:5:"title";s:12:"消防商城";s:5:"route";s:16:"product/category";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:0:"";s:6:"status";s:1:"1";s:8:"selected";s:1:"0";s:4:"sort";s:1:"2";}i:2;a:8:{s:5:"title";s:13:"报价-设计";s:5:"route";s:15:"service/project";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:10:"icon freem";s:6:"status";s:1:"1";s:8:"selected";s:1:"0";s:4:"sort";s:1:"3";}i:3;a:8:{s:5:"title";s:12:"精选案例";s:5:"route";s:12:"service/case";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:0:"";s:6:"status";s:1:"1";s:8:"selected";s:1:"0";s:4:"sort";s:1:"4";}i:4;a:8:{s:5:"title";s:12:"消防公司";s:5:"route";s:15:"service/company";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:0:"";s:6:"status";s:1:"1";s:8:"selected";s:1:"0";s:4:"sort";s:1:"5";}i:5;a:8:{s:5:"title";s:12:"消防百科";s:5:"route";s:16:"information/wiki";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:0:"";s:6:"status";s:1:"1";s:8:"selected";s:1:"0";s:4:"sort";s:1:"6";}}}}', 1),
+(2114, 'ykproduct', 'ykproduct_module', 'a:2:{i:1;a:10:{s:5:"title";a:1:{i:2;s:12:"消防器材";}s:9:"layout_id";s:1:"1";s:8:"position";s:11:"mass_bottom";s:6:"status";s:1:"1";s:11:"title_class";s:14:"index-t l-blue";s:16:"additional_class";s:0:"";s:10:"sort_order";s:1:"1";s:13:"category_tabs";a:3:{s:8:"category";a:6:{i:0;s:2:"61";i:1;s:2:"69";i:2;s:2:"75";i:3;s:2:"84";i:4;s:2:"89";i:5;s:2:"94";}s:5:"limit";a:6:{i:0;s:1:"3";i:1;s:1:"2";i:2;s:1:"2";i:3;s:1:"3";i:4;s:1:"2";i:5;s:1:"3";}s:4:"sort";a:6:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";i:3;s:1:"4";i:4;s:1:"5";i:5;s:1:"6";}}s:12:"product_tabs";a:3:{s:7:"product";a:4:{i:0;s:2:"53";i:1;s:2:"52";i:2;s:2:"55";i:3;s:2:"54";}s:5:"image";a:4:{i:0;s:26:"data/yuankong/shoppic3.jpg";i:1;s:26:"data/yuankong/shoppic4.jpg";i:2;s:26:"data/yuankong/shoppic6.jpg";i:3;s:26:"data/yuankong/shoppic5.jpg";}s:4:"sort";a:4:{i:0;s:1:"3";i:1;s:1:"2";i:2;s:1:"3";i:3;s:1:"4";}}s:11:"banner_tabs";a:3:{s:5:"image";a:3:{i:0;s:25:"data/yuankong/banner4.jpg";i:1;s:25:"data/yuankong/banner5.jpg";i:2;s:25:"data/yuankong/banner6.jpg";}s:4:"link";a:3:{i:0;s:18:"www.yk119.com.cn/1";i:1;s:18:"www.yk119.com.cn/2";i:2;s:18:"www.yk119.com.cn/3";}s:4:"sort";a:3:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";}}}i:2;a:10:{s:5:"title";a:1:{i:2;s:12:"消防装备";}s:9:"layout_id";s:1:"1";s:8:"position";s:11:"mass_bottom";s:6:"status";s:1:"1";s:11:"title_class";s:15:"index-t l-zongs";s:16:"additional_class";s:6:"shebei";s:10:"sort_order";i:2;s:13:"category_tabs";a:3:{s:8:"category";a:4:{i:0;s:2:"97";i:1;s:3:"109";i:2;s:3:"115";i:3;s:3:"128";}s:5:"limit";a:4:{i:0;s:1:"6";i:1;s:1:"5";i:2;s:1:"6";i:3;s:1:"5";}s:4:"sort";a:4:{i:0;s:1:"2";i:1;s:1:"3";i:2;s:1:"1";i:3;s:1:"1";}}s:12:"product_tabs";a:3:{s:7:"product";a:5:{i:0;s:2:"50";i:1;s:2:"51";i:2;s:2:"54";i:3;s:2:"53";i:4;s:2:"55";}s:5:"image";a:5:{i:0;s:26:"data/yuankong/shoppic1.jpg";i:1;s:26:"data/yuankong/shoppic2.jpg";i:2;s:26:"data/yuankong/shoppic5.jpg";i:3;s:26:"data/yuankong/shoppic3.jpg";i:4;s:26:"data/yuankong/shoppic6.jpg";}s:4:"sort";a:5:{i:0;s:1:"5";i:1;s:1:"2";i:2;s:1:"3";i:3;s:1:"4";i:4;s:1:"5";}}s:11:"banner_tabs";a:3:{s:5:"image";a:3:{i:0;s:25:"data/yuankong/banner6.jpg";i:1;s:25:"data/yuankong/banner5.jpg";i:2;s:25:"data/yuankong/banner4.jpg";}s:4:"link";a:3:{i:0;s:24:"http://www.yuankong.com/";i:1;s:24:"http://www.yuankong.com/";i:2;s:24:"http://www.yuankong.com/";}s:4:"sort";a:3:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";}}}}', 1),
+(2106, 'yknavigation', 'yknavigation_module', 'a:1:{i:0;a:5:{s:9:"layout_id";s:5:"99999";s:8:"position";s:8:"mainmenu";s:6:"status";s:1:"1";s:10:"sort_order";i:1;s:9:"navigator";a:6:{i:0;a:8:{s:5:"title";s:6:"首页";s:5:"route";s:11:"common/home";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:0:"";s:6:"status";s:1:"1";s:8:"selected";s:1:"1";s:4:"sort";s:1:"1";}i:1;a:8:{s:5:"title";s:12:"消防商城";s:5:"route";s:16:"product/category";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:0:"";s:6:"status";s:1:"1";s:8:"selected";s:1:"0";s:4:"sort";s:1:"2";}i:2;a:8:{s:5:"title";s:13:"报价-设计";s:5:"route";s:15:"service/project";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:10:"icon freem";s:6:"status";s:1:"1";s:8:"selected";s:1:"0";s:4:"sort";s:1:"3";}i:3;a:8:{s:5:"title";s:12:"精选案例";s:5:"route";s:12:"service/case";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:0:"";s:6:"status";s:1:"1";s:8:"selected";s:1:"0";s:4:"sort";s:1:"4";}i:4;a:8:{s:5:"title";s:12:"消防公司";s:5:"route";s:15:"service/company";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:0:"";s:6:"status";s:1:"1";s:8:"selected";s:1:"0";s:4:"sort";s:1:"5";}i:5;a:8:{s:5:"title";s:12:"消防百科";s:5:"route";s:16:"information/wiki";s:5:"param";s:0:"";s:16:"additional_class";s:0:"";s:4:"icon";s:0:"";s:6:"status";s:1:"1";s:8:"selected";s:1:"0";s:4:"sort";s:1:"6";}}}}', 1),
 (1989, 'config', 'config_download', '1', 0),
 (1988, 'config', 'config_review_status', '1', 0),
 (1987, 'config', 'config_product_count', '1', 0),
@@ -23866,16 +23844,16 @@ INSERT INTO `yk_setting` (`setting_id`, `group`, `key`, `value`, `serialized`) V
 (1408, 'featured', 'product', '', 0),
 (1409, 'featured', 'featured_product', '54,53,55,51', 0),
 (1410, 'featured', 'featured_module', 'a:2:{i:0;a:7:{s:5:"limit";s:1:"6";s:11:"image_width";s:3:"185";s:12:"image_height";s:3:"106";s:9:"layout_id";s:1:"3";s:8:"position";s:11:"column_left";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"2";}i:1;a:7:{s:5:"limit";s:1:"6";s:11:"image_width";s:3:"185";s:12:"image_height";s:3:"106";s:9:"layout_id";s:1:"2";s:8:"position";s:11:"column_left";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"2";}}', 1),
-(1289, 'themecontrol', 'themecontrol', 'a:23:{s:13:"default_theme";s:8:"yuankong";s:9:"layout_id";s:1:"1";s:8:"position";s:1:"1";s:21:"cateogry_display_mode";s:4:"grid";s:20:"cateogry_product_row";s:1:"0";s:14:"category_pzoom";s:1:"1";s:18:"product_enablezoom";s:1:"1";s:19:"product_zoomgallery";s:6:"slider";s:16:"product_zoommode";s:5:"basic";s:20:"product_zoomlenssize";s:3:"150";s:18:"product_zoomeasing";s:1:"1";s:21:"product_zoomlensshape";s:5:"basic";s:22:"product_related_column";s:1:"0";s:6:"search";a:3:{s:6:"option";a:2:{i:0;s:7:"product";i:1;s:4:"news";}s:11:"placeholder";s:9:"消防栓";s:7:"keyword";a:4:{i:0;a:4:{s:5:"title";s:15:"干粉灭火器";s:4:"link";s:23:"http://www.yuankong.com";s:16:"additional_class";s:0:"";s:4:"sort";s:1:"1";}i:1;a:4:{s:5:"title";s:15:"应急指示灯";s:4:"link";s:23:"http://www.yuankong.com";s:16:"additional_class";s:0:"";s:4:"sort";s:1:"2";}i:2;a:4:{s:5:"title";s:12:"防毒面罩";s:4:"link";s:23:"http://www.yuankong.com";s:16:"additional_class";s:0:"";s:4:"sort";s:1:"3";}i:3;a:4:{s:5:"title";s:9:"消防栓";s:4:"link";s:23:"http://www.yuankong.com";s:16:"additional_class";s:0:"";s:4:"sort";s:1:"4";}}}s:23:"enable_custom_copyright";s:1:"1";s:20:"copyright_customhtml";a:1:{i:2;s:307:"&lt;p class=&quot;pt5 c8&quot;&gt;\r\n  消防e站 版权所有Copyright ? 2015-2025 www.yk119.com.cn www.yk119.cn All rights reserved\r\n  &lt;br&gt;苏ICP备15012632号 组织机构代码证：320585000221760\r\n  &lt;br&gt;中国互联网协会信用评价中心网信认证 网信编码:1664391091\r\n&lt;/p&gt;";}s:18:"topleft_customhtml";a:1:{i:2;s:430:"&lt;div class=&quot;h-weix l rel&quot;&gt;&lt;i class=&quot;icon2 wxtub&quot;&gt;&lt;/i&gt;&lt;em class=&quot;icon2 h-down&quot;&gt;&lt;/em&gt;\r\n&lt;div class=&quot;wxbox&quot;&gt;&lt;img src=&quot;http://www.yuankong.com/asset/image/data/yuankong/ewm2.jpg&quot; /&gt;\r\n&lt;p class=&quot;c8&quot;&gt;打开微信，点击“发现”，使用“扫一扫”即可关注爱游戏官方微信&lt;/p&gt;\r\n&lt;/div&gt;\r\n&lt;/div&gt;\r\n";}s:18:"contact_customhtml";a:1:{i:2;s:31:"&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n";}s:15:"block_promotion";s:0:"";s:14:"block_showcase";s:0:"";s:16:"block_footer_top";s:0:"";s:19:"block_footer_center";s:0:"";s:19:"block_footer_bottom";s:0:"";}', 1),
-(1402, 'ykprocedure', 'ykprocedure_module', 'a:1:{i:0;a:4:{s:9:"layout_id";s:1:"1";s:8:"position";s:9:"promotion";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"4";}}', 1),
+(2120, 'themecontrol', 'themecontrol', 'a:11:{s:13:"default_theme";s:8:"yuankong";s:9:"layout_id";s:1:"1";s:8:"position";s:1:"1";s:6:"search";a:3:{s:6:"option";a:3:{i:0;s:7:"product";i:1;s:4:"wiki";i:2;s:7:"company";}s:11:"placeholder";s:9:"消防栓";s:7:"keyword";a:4:{i:0;a:4:{s:5:"title";s:15:"干粉灭火器";s:4:"link";s:23:"http://www.yuankong.com";s:16:"additional_class";s:0:"";s:4:"sort";s:1:"1";}i:1;a:4:{s:5:"title";s:15:"应急指示灯";s:4:"link";s:23:"http://www.yuankong.com";s:16:"additional_class";s:0:"";s:4:"sort";s:1:"2";}i:2;a:4:{s:5:"title";s:12:"防毒面罩";s:4:"link";s:23:"http://www.yuankong.com";s:16:"additional_class";s:0:"";s:4:"sort";s:1:"3";}i:3;a:4:{s:5:"title";s:9:"消防栓";s:4:"link";s:23:"http://www.yuankong.com";s:16:"additional_class";s:0:"";s:4:"sort";s:1:"4";}}}s:18:"topleft_customhtml";a:1:{i:2;s:430:"&lt;div class=&quot;h-weix l rel&quot;&gt;&lt;i class=&quot;icon2 wxtub&quot;&gt;&lt;/i&gt;&lt;em class=&quot;icon2 h-down&quot;&gt;&lt;/em&gt;\r\n&lt;div class=&quot;wxbox&quot;&gt;&lt;img src=&quot;http://www.yuankong.com/asset/image/data/yuankong/ewm2.jpg&quot; /&gt;\r\n&lt;p class=&quot;c8&quot;&gt;打开微信，点击“发现”，使用“扫一扫”即可关注爱游戏官方微信&lt;/p&gt;\r\n&lt;/div&gt;\r\n&lt;/div&gt;\r\n";}s:18:"contact_customhtml";a:1:{i:2;s:31:"&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n";}s:15:"block_promotion";s:0:"";s:14:"block_showcase";s:0:"";s:16:"block_footer_top";s:0:"";s:19:"block_footer_center";s:0:"";s:19:"block_footer_bottom";s:0:"";}', 1),
+(2110, 'ykprocedure', 'ykprocedure_module', 'a:1:{i:0;a:4:{s:9:"layout_id";s:1:"1";s:8:"position";s:9:"promotion";s:6:"status";s:1:"1";s:10:"sort_order";i:1;}}', 1),
 (1985, 'config', 'config_catalog_limit', '15', 0),
 (1984, 'config', 'config_weight_class_id', '1', 0),
 (1983, 'config', 'config_length_class_id', '1', 0),
 (1982, 'config', 'config_currency_auto', '0', 0),
 (1981, 'config', 'config_currency', 'CNY', 0),
-(1287, 'yklink', 'yklink_module', 'a:1:{i:0;a:5:{s:9:"layout_id";s:5:"99999";s:8:"position";s:10:"footer_top";s:6:"status";s:1:"1";s:5:"limit";s:2:"15";s:10:"sort_order";i:1;}}', 1),
-(1401, 'ykslideshow', 'ykslideshow_module', 'a:1:{i:0;a:7:{s:9:"layout_id";s:1:"1";s:8:"position";s:9:"slideshow";s:6:"status";s:1:"1";s:5:"width";s:3:"940";s:6:"height";s:3:"350";s:10:"sort_order";s:1:"2";s:12:"banner_image";a:3:{i:1;a:4:{s:5:"image";s:16:"data/banner3.jpg";s:4:"link";s:16:"www.yk119.com.cn";s:5:"title";a:1:{i:2;s:0:"";}s:11:"description";a:1:{i:2;s:31:"&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n";}}i:2;a:4:{s:5:"image";s:16:"data/banner1.jpg";s:4:"link";s:16:"www.yk119.com.cn";s:5:"title";a:1:{i:2;s:0:"";}s:11:"description";a:1:{i:2;s:31:"&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n";}}i:3;a:4:{s:5:"image";s:16:"data/banner2.jpg";s:4:"link";s:16:"www.yk119.com.cn";s:5:"title";a:1:{i:2;s:0:"";}s:11:"description";a:1:{i:2;s:31:"&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n";}}}}}', 1),
-(1407, 'ykcustom', 'ykcustom_module', 'a:2:{i:1;a:7:{s:12:"module_title";a:1:{i:2;s:12:"页底导航";}s:11:"description";a:1:{i:2;s:816:"&lt;div class=&quot;foot tc&quot;&gt;\r\n&lt;p class=&quot;lh30&quot;&gt;&lt;a href=&quot;#&quot;&gt;关于我们&lt;/a&gt; &lt;b&gt;|&lt;/b&gt; &lt;a href=&quot;#&quot;&gt;项目工程&lt;/a&gt; &lt;b&gt;|&lt;/b&gt; &lt;a href=&quot;#&quot;&gt;入驻消防e站&lt;/a&gt; &lt;b&gt;|&lt;/b&gt; &lt;a href=&quot;#&quot;&gt;诚聘英才&lt;/a&gt; &lt;b&gt;|&lt;/b&gt; &lt;a href=&quot;#&quot;&gt;联系我们&lt;/a&gt; &lt;b&gt;|&lt;/b&gt; &lt;a href=&quot;#&quot;&gt;网站地图&lt;/a&gt;&lt;/p&gt;\r\n\r\n&lt;p class=&quot;pt5 c8&quot;&gt;消防e站 版权所有Copyright ? 2015-2025 www.yk119.com.cn www.yk119.cn All rights reserved&lt;br /&gt;\r\n苏ICP备15012632号 组织机构代码证：320585000221760&lt;br /&gt;\r\n中国互联网协会信用评价中心网信认证 网信编码:1664391091&lt;/p&gt;\r\n&lt;/div&gt;\r\n";}s:9:"layout_id";s:5:"99999";s:8:"position";s:13:"footer_bottom";s:6:"status";s:1:"1";s:12:"module_class";s:0:"";s:10:"sort_order";s:1:"1";}i:2;a:7:{s:12:"module_title";a:1:{i:2;s:13:"e站直通车";}s:11:"description";a:1:{i:2;s:2388:"&lt;div class=&quot;rel pb10&quot;&gt;\r\n&lt;h3 class=&quot;index-t l-fens&quot;&gt;e站直通车&lt;/h3&gt;\r\n&lt;/div&gt;\r\n\r\n&lt;div class=&quot;ovh fix b_f btb3 bd2 p10&quot;&gt;&lt;span class=&quot;ztc-pic&quot;&gt;&lt;img src=&quot;http://www.yuankong.com/asset/image/data/yuankong/bkpic7.jpg&quot; /&gt;&lt;/span&gt;\r\n\r\n&lt;ul class=&quot;l ztc-ul fix&quot;&gt;\r\n	&lt;li class=&quot;ztc-li&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;建设工程&lt;br /&gt;\r\n	消防备案&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor3&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;消防技术&lt;br /&gt;\r\n	服务&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor1&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;消防产品装修&lt;br /&gt;\r\n	材料检验&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor2&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;生产企业消防&lt;br /&gt;\r\n	产品抽封样&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor4&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;消防产品市场&lt;br /&gt;\r\n	准入查询&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor5&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;建筑施工资质&lt;br /&gt;\r\n	证书查询&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor6&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;社会单位消防安全&lt;br /&gt;\r\n	户籍化管理系统&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;灭火器维修技术&lt;br /&gt;\r\n	服务管理&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor1&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;建设工程消防&lt;br /&gt;\r\n	检查信息管理&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor3&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;灭火器维修技术&lt;br /&gt;\r\n	服务机构查询&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor5&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;建筑消防设施维修保养&lt;br /&gt;\r\n	技术服务机构查询&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor4&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;建筑消防设施检测&lt;br /&gt;\r\n	技术服务机构查询&lt;/a&gt;&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;/div&gt;\r\n";}s:9:"layout_id";s:1:"1";s:8:"position";s:11:"mass_bottom";s:6:"status";s:1:"1";s:12:"module_class";s:0:"";s:10:"sort_order";s:1:"5";}}', 1),
+(2118, 'yklink', 'yklink_module', 'a:1:{i:0;a:5:{s:9:"layout_id";s:5:"99999";s:8:"position";s:10:"footer_top";s:6:"status";s:1:"1";s:5:"limit";s:2:"15";s:10:"sort_order";i:1;}}', 1),
+(2108, 'ykslideshow', 'ykslideshow_module', 'a:1:{i:0;a:7:{s:9:"layout_id";s:1:"1";s:8:"position";s:9:"slideshow";s:6:"status";s:1:"1";s:5:"width";s:3:"940";s:6:"height";s:3:"350";s:10:"sort_order";i:2;s:12:"banner_image";a:3:{i:1;a:4:{s:5:"image";s:16:"data/banner3.jpg";s:4:"link";s:16:"www.yk119.com.cn";s:5:"title";a:1:{i:2;s:0:"";}s:11:"description";a:1:{i:2;s:31:"&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n";}}i:2;a:4:{s:5:"image";s:16:"data/banner1.jpg";s:4:"link";s:16:"www.yk119.com.cn";s:5:"title";a:1:{i:2;s:0:"";}s:11:"description";a:1:{i:2;s:31:"&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n";}}i:3;a:4:{s:5:"image";s:16:"data/banner2.jpg";s:4:"link";s:16:"www.yk119.com.cn";s:5:"title";a:1:{i:2;s:0:"";}s:11:"description";a:1:{i:2;s:31:"&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n";}}}}}', 1),
+(2119, 'ykcustom', 'ykcustom_module', 'a:2:{i:1;a:7:{s:12:"module_title";a:1:{i:2;s:12:"页底导航";}s:11:"description";a:1:{i:2;s:816:"&lt;div class=&quot;foot tc&quot;&gt;\r\n&lt;p class=&quot;lh30&quot;&gt;&lt;a href=&quot;#&quot;&gt;关于我们&lt;/a&gt; &lt;b&gt;|&lt;/b&gt; &lt;a href=&quot;#&quot;&gt;项目工程&lt;/a&gt; &lt;b&gt;|&lt;/b&gt; &lt;a href=&quot;#&quot;&gt;入驻消防e站&lt;/a&gt; &lt;b&gt;|&lt;/b&gt; &lt;a href=&quot;#&quot;&gt;诚聘英才&lt;/a&gt; &lt;b&gt;|&lt;/b&gt; &lt;a href=&quot;#&quot;&gt;联系我们&lt;/a&gt; &lt;b&gt;|&lt;/b&gt; &lt;a href=&quot;#&quot;&gt;网站地图&lt;/a&gt;&lt;/p&gt;\r\n\r\n&lt;p class=&quot;pt5 c8&quot;&gt;消防e站 版权所有Copyright ? 2015-2025 www.yk119.com.cn www.yk119.cn All rights reserved&lt;br /&gt;\r\n苏ICP备15012632号 组织机构代码证：320585000221760&lt;br /&gt;\r\n中国互联网协会信用评价中心网信认证 网信编码:1664391091&lt;/p&gt;\r\n&lt;/div&gt;\r\n";}s:9:"layout_id";s:5:"99999";s:8:"position";s:13:"footer_bottom";s:6:"status";s:1:"1";s:12:"module_class";s:0:"";s:10:"sort_order";i:1;}i:2;a:7:{s:12:"module_title";a:1:{i:2;s:13:"e站直通车";}s:11:"description";a:1:{i:2;s:2388:"&lt;div class=&quot;rel pb10&quot;&gt;\r\n&lt;h3 class=&quot;index-t l-fens&quot;&gt;e站直通车&lt;/h3&gt;\r\n&lt;/div&gt;\r\n\r\n&lt;div class=&quot;ovh fix b_f btb3 bd2 p10&quot;&gt;&lt;span class=&quot;ztc-pic&quot;&gt;&lt;img src=&quot;http://www.yuankong.com/asset/image/data/yuankong/bkpic7.jpg&quot; /&gt;&lt;/span&gt;\r\n\r\n&lt;ul class=&quot;l ztc-ul fix&quot;&gt;\r\n	&lt;li class=&quot;ztc-li&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;建设工程&lt;br /&gt;\r\n	消防备案&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor3&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;消防技术&lt;br /&gt;\r\n	服务&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor1&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;消防产品装修&lt;br /&gt;\r\n	材料检验&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor2&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;生产企业消防&lt;br /&gt;\r\n	产品抽封样&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor4&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;消防产品市场&lt;br /&gt;\r\n	准入查询&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor5&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;建筑施工资质&lt;br /&gt;\r\n	证书查询&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor6&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;社会单位消防安全&lt;br /&gt;\r\n	户籍化管理系统&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;灭火器维修技术&lt;br /&gt;\r\n	服务管理&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor1&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;建设工程消防&lt;br /&gt;\r\n	检查信息管理&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor3&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;灭火器维修技术&lt;br /&gt;\r\n	服务机构查询&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor5&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;建筑消防设施维修保养&lt;br /&gt;\r\n	技术服务机构查询&lt;/a&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;ztc-li bor4&quot;&gt;&lt;a href=&quot;#&quot; rel=&quot;nofollow&quot;&gt;建筑消防设施检测&lt;br /&gt;\r\n	技术服务机构查询&lt;/a&gt;&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;/div&gt;\r\n";}s:9:"layout_id";s:1:"1";s:8:"position";s:11:"mass_bottom";s:6:"status";s:1:"1";s:12:"module_class";s:0:"";s:10:"sort_order";s:1:"5";}}', 1),
 (1412, 'ykviewed', 'ykviewed_module', 'a:2:{i:0;a:8:{s:5:"limit";s:1:"6";s:11:"image_width";s:3:"160";s:12:"image_height";s:2:"92";s:9:"layout_id";s:1:"3";s:8:"position";s:11:"mass_bottom";s:6:"status";s:1:"1";s:16:"additional_class";s:0:"";s:10:"sort_order";s:1:"1";}i:1;a:8:{s:5:"limit";s:1:"6";s:11:"image_width";s:3:"160";s:12:"image_height";s:2:"92";s:9:"layout_id";s:1:"2";s:8:"position";s:11:"mass_bottom";s:6:"status";s:1:"1";s:16:"additional_class";s:0:"";s:10:"sort_order";s:1:"1";}}', 1),
 (1980, 'config', 'config_admin_language', 'cn', 0),
 (1979, 'config', 'config_language', 'cn', 0),
@@ -23910,7 +23888,7 @@ INSERT INTO `yk_setting` (`setting_id`, `group`, `key`, `value`, `serialized`) V
 (2082, 'alipay_direct', 'alipay_direct_sort_order', '1', 0),
 (2083, 'ykbookproject', 'ykbookproject_module', 'a:1:{i:0;a:4:{s:9:"layout_id";s:2:"14";s:8:"position";s:12:"column_right";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"1";}}', 1),
 (2085, 'banner', 'banner_module', 'a:1:{i:0;a:7:{s:9:"banner_id";s:1:"9";s:5:"width";s:3:"980";s:6:"height";s:3:"100";s:9:"layout_id";s:1:"3";s:8:"position";s:11:"content_top";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"1";}}', 1),
-(2090, 'ykcompany', 'ykcompany_module', 'a:1:{i:1;a:10:{s:5:"title";a:1:{i:2;s:12:"消防公司";}s:9:"layout_id";s:1:"1";s:8:"position";s:11:"mass_bottom";s:6:"status";s:1:"1";s:7:"lateast";s:1:"5";s:10:"sort_order";s:1:"3";s:13:"category_tabs";a:4:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";i:3;s:1:"4";}s:5:"limit";a:4:{i:0;s:1:"5";i:1;s:1:"5";i:2;s:1:"5";i:3;s:1:"5";}s:10:"icon_class";a:4:{i:0;s:14:"icon design-gs";i:1;s:10:"icon jc-gs";i:2;s:10:"icon wb-gs";i:3;s:10:"icon gc-gs";}s:4:"sort";a:4:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";i:3;s:1:"4";}}}', 1);
+(2115, 'ykcompany', 'ykcompany_module', 'a:1:{i:1;a:10:{s:5:"title";a:1:{i:2;s:12:"消防公司";}s:9:"layout_id";s:1:"1";s:8:"position";s:11:"mass_bottom";s:6:"status";s:1:"1";s:7:"lateast";s:1:"5";s:10:"sort_order";i:3;s:13:"category_tabs";a:4:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";i:3;s:1:"4";}s:5:"limit";a:4:{i:0;s:1:"5";i:1;s:1:"5";i:2;s:1:"5";i:3;s:1:"5";}s:10:"icon_class";a:4:{i:0;s:14:"icon design-gs";i:1;s:10:"icon jc-gs";i:2;s:10:"icon wb-gs";i:3;s:10:"icon gc-gs";}s:4:"sort";a:4:{i:0;s:1:"1";i:1;s:1:"2";i:2;s:1:"3";i:3;s:1:"4";}}}', 1);
 
 -- --------------------------------------------------------
 
@@ -24239,11 +24217,11 @@ CREATE TABLE IF NOT EXISTS `yk_wiki` (
 
 INSERT INTO `yk_wiki` (`wiki_id`, `group_id`, `user_id`, `title`, `subtitle`, `text`, `status`, `is_top`, `from`, `viewed`, `sort_order`, `date_added`) VALUES
 (2, 2, 1, '新闻测试数据标题', '新闻测试数据副本标题', '&lt;span style=&quot;font-family:Tahoma, Helvetica, Arial, 宋体, sans-serif;font-size:14px;line-height:30px;&quot;&gt;2015年5月初，美国数字地球公司拍摄的卫星照片显示越南非法建岛行为，在非法侵占我南沙岛礁上大规模填海造地。越南非法建岛激起了中方愤慨，我外交部发言人洪磊表示，中国要求有关国家立即停止一切侵犯中国主权和权益的言行。洪磊还揭露，越南非法建岛，共计侵占20多个岛礁，填海造地的同时还设立了机场、港池，甚至还有导弹阵地，中国外交部严厉指责越南非法建岛行为。&lt;/span&gt;', 1, 0, '腾讯新闻', 6, 0, '2015-05-24 21:37:30'),
-(3, 3, 1, '最新款式灭火器', '5.1日家用汽载灭火器全场5折', '<p><span style="color:#CC0000;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;">齐齐哈尔</span><span style="color:#333333;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;">警方与绑架案犯发生激烈</span><span style="color:#CC0000;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;">枪战</span><span style="color:#333333;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;">&nbsp;一民警头部中弹</span></p>', 1, 1, '消防e站', 9, 2, '2015-08-02 17:59:41'),
+(3, 3, 1, '最新款式灭火器', '5.1日家用汽载灭火器全场5折', '<p><span style="color:#CC0000;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;">齐齐哈尔</span><span style="color:#333333;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;">警方与绑架案犯发生激烈</span><span style="color:#CC0000;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;">枪战</span><span style="color:#333333;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;">&nbsp;一民警头部中弹</span></p>', 1, 1, '消防e站', 10, 2, '2015-08-02 17:59:41'),
 (4, 1, 1, '新一代宝马7系官网曝光 6月10日首发', '新一代宝马7系官网曝光', '<p>车型代号G11的新一代宝马7系的官图和部分信息在宝马奥地利官网曝光，新车将在6月10日正式发布，10月上市销售。新一代7系在奥地利市场的起价为100445欧元(约合人民币69.2万元)。<img alt="" src="http://www.yuankong.com/image/data/demo/apple_logo.jpg" />12321312</p>', 1, 0, '新浪汽车', 3, 0, '2015-06-10 05:20:56'),
 (5, 2, 1, '4S店卖旧车', '法院判决：赔偿车主三倍车款！', '<p><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">山东济宁的刘女士，在当地名为“安斯达”的菲亚特4S店，以128000元买下了菲亚特轿车，就在提车40天后，刘女士发现，这辆车竟然被补过漆！经法院裁判，4S店隐瞒了该车曾经出售的事实，应退回刘女士购车款，并按购车款的3倍赔偿，总计38.4万。（央视）</span><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">山东济宁的刘女士，在当地名为“安斯达”的菲亚特4S店，以128000元买下了菲亚特轿车，就在提车40天后，刘女士发现，这辆车竟然被补过漆！经法院裁判，4S店隐瞒了该车曾经出售的事实，应退回刘女士购车款，并按购车款的3倍赔偿，总计38.4万。（央视）</span></p>', 1, 0, 'http://d.weibo.com/', 1, 0, '2015-07-27 20:57:57'),
 (6, 2, 1, '港囧》首支正式预告片 9月25日爆笑哈哈哈哈哈', '港囧》首支正式预告片 9月25日爆笑', '<p><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">《港囧》发布首支正式预告片，简单粗暴地曝光了电影的正片画面：小舅子</span><a target="_blank" render="ext" extra-data="type=atname" href="http://weibo.com/n/%E5%8C%85%E8%B4%9D%E5%B0%94?from=feed&loc=at" usercard="name=包贝尔" style="color: rgb(235, 115, 80); text-decoration: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">@包贝尔</a><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">&nbsp;为保护姐姐</span><a target="_blank" render="ext" extra-data="type=atname" href="http://weibo.com/n/%E8%B5%B5%E8%96%87?from=feed&loc=at" usercard="name=赵薇" style="color: rgb(235, 115, 80); text-decoration: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">@赵薇</a><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">&nbsp;化身名侦探，对姐夫</span><a target="_blank" render="ext" extra-data="type=atname" href="http://weibo.com/n/%E5%BE%90%E5%B3%A5?from=feed&loc=at" usercard="name=徐峥" style="color: rgb(235, 115, 80); text-decoration: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">@徐峥</a><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">&nbsp;进行史上最残酷拷问！逼得徐峥仓惶逃窜，两人在街头展开一场枪战、爆炸、飞车、坠楼、街头火拼组成追击战。更有徐峥高楼勇救赵薇的感人桥段。</span></p>', 1, 0, '', 1, 0, '2015-08-11 00:15:10'),
-(7, 4, 1, '想知道真相', '想知道真相', '<p><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">今天，中国游泳队抵达俄罗斯喀山，孙杨、宁泽涛等队员露面时都显得比较轻松，心情不错的孙杨还比出剪刀手。本届世锦赛游泳比赛将于8月2日开始，孙杨将参加200、400、800、1500米自由泳四个单项比赛，外媒预测他能包揽四金。转发，为中国游泳健儿们加油！</span><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">今天，中国游泳队抵达俄罗斯喀山，孙杨、宁泽涛等队员露面时都显得比较轻松，心情不错的孙杨还比出剪刀手。本届世锦赛游泳比赛将于8月2日开始，孙杨将参加200、400、800、1500米自由泳四个单项比赛，外媒预测他能包揽四金。转发，为中国游泳健儿们加油！</span><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">今天，中国游泳队抵达俄罗斯喀山，孙杨、宁泽涛等队员露面时都显得比较轻松，心情不错的孙杨还比出剪刀手。本届世锦赛游泳比赛将于8月2日开始，孙杨将参加200、400、800、1500米自由泳四个单项比赛，外媒预测他能包揽四金。转发，为中国游泳健儿们加油！</span></p>', 1, 0, '', 7, 1, '2015-07-27 21:14:19'),
+(7, 4, 1, '想知道真相', '想知道真相', '<p><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">今天，中国游泳队抵达俄罗斯喀山，孙杨、宁泽涛等队员露面时都显得比较轻松，心情不错的孙杨还比出剪刀手。本届世锦赛游泳比赛将于8月2日开始，孙杨将参加200、400、800、1500米自由泳四个单项比赛，外媒预测他能包揽四金。转发，为中国游泳健儿们加油！</span><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">今天，中国游泳队抵达俄罗斯喀山，孙杨、宁泽涛等队员露面时都显得比较轻松，心情不错的孙杨还比出剪刀手。本届世锦赛游泳比赛将于8月2日开始，孙杨将参加200、400、800、1500米自由泳四个单项比赛，外媒预测他能包揽四金。转发，为中国游泳健儿们加油！</span><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">今天，中国游泳队抵达俄罗斯喀山，孙杨、宁泽涛等队员露面时都显得比较轻松，心情不错的孙杨还比出剪刀手。本届世锦赛游泳比赛将于8月2日开始，孙杨将参加200、400、800、1500米自由泳四个单项比赛，外媒预测他能包揽四金。转发，为中国游泳健儿们加油！</span></p>', 1, 0, '', 9, 1, '2015-07-27 21:14:19'),
 (8, 3, 1, '撒旦撒旦撒旦撒', '完任务', '<p>撒旦撒旦撒旦撒多撒阿萨股份的规定收费都是</p>', 1, 0, '', 0, 1, '2015-08-02 17:59:06');
 
 -- --------------------------------------------------------

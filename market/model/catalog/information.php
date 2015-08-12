@@ -80,6 +80,11 @@ class ModelCatalogInformation extends Model {
 			$this->db->query("UPDATE ".DB_PREFIX."wiki SET viewed = viewed + 1 WHERE wiki_id = '".(int)$wiki_id."'");
 		}
 	}
+	public function addHelpViewed($help_id){
+		if((int)$help_id){
+			$this->db->query("UPDATE ".DB_PREFIX."help SET viewed = viewed + 1 WHERE help_id = '".(int)$help_id."'");
+		}
+	}
 	public function getHelp($wiki_id) {
 		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "help WHERE help_id = '" . (int)$wiki_id . "' AND status = '1'");
 	

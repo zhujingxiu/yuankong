@@ -109,8 +109,10 @@ class ControllerCatalogProduct extends Controller {
 			if (isset($this->request->get['page'])) {
 				$url .= '&page=' . $this->request->get['page'];
 			}
+			if(empty($this->request->post['keep'])){
+				$this->redirect($this->url->link('catalog/product', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+			}
 			
-			$this->redirect($this->url->link('catalog/product', 'token=' . $this->session->data['token'] . $url, 'SSL'));
 		}
 
     	$this->getForm();
@@ -607,6 +609,7 @@ class ControllerCatalogProduct extends Controller {
 		$this->data['entry_reward'] = $this->language->get('entry_reward');
 				
     	$this->data['button_save'] = $this->language->get('button_save');
+    	$this->data['button_keep'] = $this->language->get('button_keep');
     	$this->data['button_cancel'] = $this->language->get('button_cancel');
     	$this->data['button_add_attribute'] = $this->language->get('button_add_attribute');
 		$this->data['button_add_option'] = $this->language->get('button_add_option');
@@ -632,6 +635,14 @@ class ControllerCatalogProduct extends Controller {
 			$this->data['error_warning'] = $this->error['warning'];
 		} else {
 			$this->data['error_warning'] = '';
+		}
+
+		if (isset($this->session->data['success'])) {
+			$this->data['success'] = $this->session->data['success'];
+		
+			unset($this->session->data['success']);
+		} else {
+			$this->data['success'] = '';
 		}
 
  		if (isset($this->error['name'])) {

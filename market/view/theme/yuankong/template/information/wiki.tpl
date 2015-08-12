@@ -10,6 +10,9 @@
     <div class="<?php echo $SPAN[1];?> newslist l">
         <?php echo $content_top; ?>
         <div class="newslist-title">
+            <div class="r gs-search">
+                <input type="text" class="gs-s-text" value=""><i class="icon2 s-sbtn"></i>
+            </div>
             <span class="c_red pr10"><?php echo $wiki_name ?></span>
             <span class="pr10">共有<em class="plr c_red"><?php echo $totals ?></em>条结果</span>
             <span class="pl20 f_m">排序:
@@ -24,7 +27,7 @@
 
                 <?php foreach ($wikis as $key => $item): ?>
                   <li class="newslist-li">
-                    <h4><a <?php echo isset($item['link']) ? 'href="'.$item['link'].'"' : '' ?>"><?php echo truncate_string($item['title']) ?></a></h4>
+                    <h4><a <?php echo isset($item['link']) ? 'href="'.$item['link'].'"' : '' ?>><?php echo truncate_string($item['title']) ?></a></h4>
                     <p class="lh30 f_s c9">
                         更新日期:<?php echo $item['date_added'] ?>
                         <em class="pl20">阅读:<?php echo $item['viewed'] ?>次</em>
@@ -35,7 +38,6 @@
                 </li>
                 <?php endforeach ?>
             </ul>
-            <!-- 翻页 -->
             <div class="pagebox mt10">
                 <?php echo $pagination; ?>
             </div>

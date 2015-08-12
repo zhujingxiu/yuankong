@@ -27,6 +27,8 @@ $_['text_option_price']          = '选项价格设置';
 $_['text_special_price']         = '优惠价格设置';
 $_['text_discount_price']        = '促销活动设置';
 $_['button_add']                 = '添加分类';
+$_['button_save']                 = '保存后返回';
+$_['button_keep']                 = '保存并继续';
 
 // Column
 $_['column_name']                = '商品名称';

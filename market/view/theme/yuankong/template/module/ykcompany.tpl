@@ -1,5 +1,5 @@
     <div class="rel pb10">
-        <h3 class="index-t l-zongs"><?php echo $title ?></h3>
+        <h3 class="index-t l-products"><?php echo $title ?></h3>
     </div>
     <div class="ovh fix b_f">
         <div class="l-gs-list btb3">

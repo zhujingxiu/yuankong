@@ -195,10 +195,10 @@ class ControllerModuleThemeControl extends Controller {
 		
 	 	$this->data['search_option'] = array(
 	 		'product' 	=> $this->language->get('text_search_product'),
-	 		'news' 		=> $this->language->get('text_search_news'),
+	 		'wiki' 		=> $this->language->get('text_search_wiki'),
 	 		'category' 	=> $this->language->get('text_search_category'),
 	 		'company'   => $this->language->get('text_search_company'),
-	 		'wiki' 		=> $this->language->get('text_search_wiki'),
+	 		
 	 	);
 
 		if(!isset($module['search'])){

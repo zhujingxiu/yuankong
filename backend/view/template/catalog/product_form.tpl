@@ -8,11 +8,15 @@
   <?php if ($error_warning) { ?>
   <div class="warning"><?php echo $error_warning; ?></div>
   <?php } ?>
+  <?php if ($success) { ?>
+  <div class="success"><?php echo $success; ?></div>
+  <?php } ?>
   <div class="box">
     <div class="heading">
       <h1><img src="view/image/product.png" alt="" /> <?php echo $heading_title; ?></h1>
       <div class="buttons" >
         <a onclick="$('#form').submit();" class="button" style="display: block; position: fixed; bottom: 150px; right:40px; z-index: 99999;"><?php echo $button_save; ?></a>
+        <a onclick="$('#form').append('<input name=keep value=1 type=hidden >');$('#form').submit();" class="button" style="display: block; position: fixed; bottom: 200px; right:40px; z-index: 99999;"><?php echo $button_keep; ?></a>
         <a href="<?php echo $cancel; ?>" class="button"><?php echo $button_cancel; ?></a>
       </div>
     </div>

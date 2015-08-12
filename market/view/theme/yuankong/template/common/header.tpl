@@ -73,8 +73,7 @@ $(function(){ $('input, textarea').placeholder(); });
 				<img src="<?php echo $logo; ?>" title="<?php echo $name; ?>" alt="<?php echo $name; ?>" />
 			</a>
 		<?php } ?>
-		<div class="logo-search">
-
+		<div class="logo-search" id="top-filter">
 			<div class="rel l-s-box b_f">
 				<dl class="s-select">
 					<?php if (isset($themeConfig['search']['option'][0])): ?>
@@ -96,7 +95,7 @@ $(function(){ $('input, textarea').placeholder(); });
                     
                 </dl>
 				<input type="text" name="search" placeholder="<?php echo isset($themeConfig['search']['placeholder']) ? trim($themeConfig['search']['placeholder']) : $text_search; ?>" value="<?php echo $search ?>" class="l s-text"/>
-				<input type="submit" class="l s-sub" value="<?php echo $text_search; ?>" />
+				<input type="button" class="l s-sub button-search" value="<?php echo $text_search; ?>" />
 			</div>
 			<?php if (isset($themeConfig['search']['keyword']) && is_array($themeConfig['search']['keyword'])): ?>
 			<p class="pt5 f_s">

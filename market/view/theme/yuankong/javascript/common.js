@@ -1,4 +1,33 @@
 $(function(){
+    /* Search */
+    $('.button-search').bind('click', function() {
+
+        url = $('base').attr('href') + 'index.php?route=common/search';
+                 
+        var search = $('#top-filter input[name=\'search\']').val();
+        var mode = $('#top-filter input[name=\'search_model\']').val();
+        if (search!='') {
+            url += '&search=' + encodeURIComponent(search) + '&mode=' + encodeURIComponent(mode);
+        }
+        
+        location = url;
+    });
+    
+    $('#top-filter input[name=\'search\']').bind('keydown', function(e) {
+        if (e.keyCode == 13) {
+            url = $('base').attr('href') + 'index.php?route=common/search';
+             
+            var search = $('input[name=\'search\']').val();
+            
+            var mode = $('#top-filter input[name=\'search_model\']').val();
+            if (search!='') {
+                url += '&search=' + encodeURIComponent(search) + '&mode=' + encodeURIComponent(mode);
+            }
+            
+            location = url;
+        }
+    });
+
     $('#product :input[name^="option"]').bind('click',function(){
         $(this).parentsUntil('.xh-style').parent().find('.hov').removeClass('hov').find('[name^="option"]').removeAttr('checked');
         $(this).attr('checked','checked').parent().addClass('hov');
