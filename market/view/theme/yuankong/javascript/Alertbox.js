@@ -24,8 +24,8 @@
                 style = d.createElement("style"),
                 cssStr = ".alertbox { background: #f8f8f8; border:1px solid #eee; border-radius: 5px; -webkit-border-radius: 5px;  position: fixed; *position: absolute; top: 25%; left: 50%; width: 360px; margin-left: -210px; padding:30px; z-index: 111; }"+
                          ".alertbox h3 { line-height: 40px; font-size: 16px; color: #333;text-align: center;}"+
-                         ".truebtn { background: url('imgs/icon/icon2.png') no-repeat -71px -170px; height: 48px; width: 48px; display: inline-block;}"+
-                         ".falsebtn { background: url('imgs/icon/icon2.png') no-repeat -71px -380px; height: 48px; width: 48px; display: inline-block;}"+
+                         ".truebtn { background: url('market/view/theme/yuankong/yk_img/icon/icon2.png') no-repeat -71px -170px; height: 48px; width: 48px; display: inline-block;}"+
+                         ".falsebtn { background: url('market/view/theme/yuankong/yk_img/icon/icon2.png') no-repeat -71px -380px; height: 48px; width: 48px; display: inline-block;}"+
                          ".alertp { padding-bottom: 20px; text-align: center;}";
             style.type= "text/css";
             style.innerText = cssStr;

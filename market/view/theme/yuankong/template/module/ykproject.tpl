@@ -9,14 +9,14 @@
     
     <div class="ovh">
         <?php $n=0;foreach ($groups as $item): ?>
-        <form action="<?php echo $action ?>" method="post" id="project-apply-<?php echo $item['group_id'] ?>">
+        <form method="post" id="project-apply-<?php echo $item['group_id'] ?>">
             <div class="gc-b-detail" style="display:<?php echo !$n ? 'block' : 'none' ?>">
                 <p class="f_m c8"><?php echo $item['remark'] ?></p>
                 <p class="f_m c8 validate"></p>
                 <input type="text" class="gc-tab-text mt15 gcname" name="account" placeholder="您的姓名" />
                 <input type="text" class="gc-tab-text mt15 gctel" name="telephone" placeholder="您的手机号" />
                 <input type="hidden" name="group_id" value="<?php echo $item['group_id'] ?>" />
-                <input type="submit" class="gc-tab-sub mt15" value="立即申请" />
+                <input type="submit" class="gc-tab-sub mt15 apply-project" value="立即申请" />
             </div>
         </form>
         <?php $n++; endforeach ?>
@@ -38,11 +38,23 @@
         $(function(){
             $.validator.setDefaults({      
                 submitHandler: function(form) {   
-                    form.submit();   
+                    //form.submit();   
+                    $.ajax({
+                        url:'<?php echo $action ?>',
+                        method:'post',
+                        data:$(form).serialize(), 
+                        dataType:'json',
+                        success:function(json){
+                            if(json.status==1){
+                                Alertbox({type:true,msg:json.msg,delay:5000});
+                            }else{
+                                Alertbox({type:false,msg:json.error,delay:5000});
+                            }
+                        }
+                    })
                 },
                 errorElement: "em",
-                focusInvalid: true,
-                
+                focusInvalid: true                
             }),
             <?php foreach ($groups as $item){ ?>
             $("#project-apply-<?php echo $item['group_id'] ?>").validate({
@@ -59,10 +71,11 @@
                 },
                 messages:{
                     account:{
-                        required:'请输入名字'
+                        required:'请输入名字',
+                        byteRangeLength:'姓名长度须在2到20个字符之间'
                     },
                     telephone:{
-                        required:'请输入联系电话'
+                        required:'请输入手机号码'
                     }
                 },
                 errorPlacement: function (error, element) {

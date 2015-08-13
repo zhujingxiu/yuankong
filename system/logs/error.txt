@@ -1950,3 +1950,6 @@
 2015-08-12 23:12:25 - PHP Notice:  Error: Unknown column 'p.sort_order' in 'order clause'<br />Error No: 1054<br />SELECT DISTINCT c.*,cz.name FROM `yk_company` c LEFT JOIN yk_company_zone cz ON cz.zone_id = c.zone_id WHERE 1  ORDER BY p.sort_order LIMIT 0,10 in E:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
 2015-08-12 23:12:25 - PHP Notice:  Trying to get property of non-object in E:\wamp\www\yuankong\market\model\service\company.php on line 70
 2015-08-12 23:12:25 - PHP Warning:  Invalid argument supplied for foreach() in E:\wamp\www\yuankong\market\controller\service\company.php on line 123
+2015-08-13 21:42:49 - PHP Notice:  Undefined index: account in E:\wamp\www\yuankong\market\controller\service\project.php on line 298
+2015-08-13 21:42:52 - PHP Notice:  Undefined index: account in E:\wamp\www\yuankong\market\controller\service\project.php on line 298
+2015-08-13 21:48:17 - PHP Notice:  Undefined index: account in E:\wamp\www\yuankong\market\controller\service\project.php on line 300

@@ -90,7 +90,35 @@ function getURLVar(key) {
         }
     }
 }
-
+function applyProject(el){
+    var obj = $(el).parent('.project-form');
+    var account = obj.find('input[name="account"]').val();
+    var telephone = obj.find('input[name="telephone"]').val();
+    var name_patt = /^[\u4e00-\u9fa5]{2,6}$/;
+    var phone_patt = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
+    if(!name_patt.test(account)){
+        obj.find('input[name="account"]').focus();
+        return false;
+    }
+    if(!phone_patt.test(telephone)){
+        obj.find('input[name="telephone"]').focus();
+        return false;
+    }
+    $.ajax({
+        url:'index.php?route=service/project/apply',
+        type:'post',
+        data:obj.find('input'),
+        dataType:'json',
+        success:function(json){
+            if(json.status==1){
+                Alertbox({type:true,msg:json.msg,delay:5000});
+                setTimeout("location.reload();",5000);                
+            }else{
+                Alertbox({type:false,msg:json.error,delay:5000});
+            }
+        }
+    })
+}
 function selectedCheckout(selected){
     $.ajax({
         url:'index.php?route=checkout/checkout/selected',
@@ -109,7 +137,6 @@ function selectedCheckout(selected){
                 location = json['redirect'];
             }
         }
-
     })
 }
 
@@ -249,7 +276,7 @@ function getImgUrl(fileName){
     if(ext=='jpg'||ext=='jpeg'||ext=='gif'||ext=='png'){
         url=fileName;
     }else{
-        url="/asset/image/img/icons/"+ext+".png";
+        url="/asset/image/icons/"+ext+".png";
     }
     return url;
 }

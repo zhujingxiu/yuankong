@@ -49,6 +49,8 @@ if( count($modules) ){ ?>
 		echo $powered;
 	} ?>
 </div>
+<script type="text/javascript" src="market/view/theme/<?php echo $themeName;?>/javascript/Alertbox.js"></script>
+
 <script type="text/javascript">
 	o.mous.init(".h-weix","hov");
     o.mous.init(".my-ezhan","hov");
