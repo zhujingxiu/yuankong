@@ -79,6 +79,22 @@
                         required:'请输入联系电话'
                     }
                 },
+                submitHandler: function(form) {   
+                    //form.submit();   
+                    $.ajax({
+                        url:form.action,
+                        method:'post',
+                        data:$(form).serialize(), 
+                        dataType:'json',
+                        success:function(json){
+                            if(json.status==1){
+                                Alertbox({type:true,msg:json.msg,delay:5000});
+                            }else{
+                                Alertbox({type:false,msg:json.error,delay:5000});
+                            }
+                        }
+                    })
+                },
                 errorPlacement: function (error, element) {
                     $('#company-index-form p.f_m').hide()
                     $('#company-index-form p.validate').html(error).show(); 
@@ -86,6 +102,7 @@
                 success:function(e){
                     $('#company-index-form p.validate').html('<?php echo $text_remark ?>');
                 }
+
             });
         })
     </script>

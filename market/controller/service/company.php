@@ -244,12 +244,11 @@ class ControllerServiceCompany extends Controller {
       		if(isset($this->request->post['redirect'])){
       			$this->redirect(htmlspecialchars_decode($this->request->post['redirect']));	
       		}
-	  		//$this->redirect($this->url->link('service/company', '', 'SSL'));
-            $this->response->addHeader('Content-Type: application/json');
-            $this->response->addHeader('Content-Type: text/html; charset=utf-8');
-        
-            die("<script type='text/javascript'>alert('Success!');history.go(-1);</script>");
-    	} 
+	  		$json = array('status'=>1,'msg'=>$this->language->get('text_apply_success'));
+    	}else{
+    		$json = array('status'=>0,'error'=>implode("<br>", $this->error));
+    	}
+    	$this->response->setOutput(json_encode($json));
 
   	}
 
