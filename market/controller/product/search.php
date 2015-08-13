@@ -272,7 +272,7 @@ class ControllerProductSearch extends Controller {
 					'product_id'  => $result['product_id'],
 					'thumb'       => $image,
 					'name'        => $result['name'],
-					'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, 100) . '..',
+					'description' => truncate_string(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 120) ,
 					'price'       => $price,
 					'special'     => $special,
 					'tax'         => $tax,

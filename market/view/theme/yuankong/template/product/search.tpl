@@ -46,13 +46,15 @@
                                 <?php endif ?>
                             </p>
                             <p class="pt5">
-                              <em class="l">
+                                <b class="f_xl c_red"><?php echo $item['price']; ?></b>
+                                &nbsp; &nbsp;
+                                <em class="">
                                 <?php echo $text_sales ?>
                                 <i class="c_red"><?php echo $item['sales'] ?></i>
-                              </em>
-                              <b class="f_xl c_red"><?php echo $item['price']; ?></b>
+                                </em>
+                              
                             </p>
-                            <p class="gsjj-t ptext"><?php echo $item['description'] ?></p>
+                            <p class="gsjj-t ptext" style="text-indent:0px;"><?php echo $item['description'] ?></p>
                         </div>
                         <p class="sqyuyue">
                             <a onclick="addToCart('<?php echo $item['product_id']; ?>');" class="yybtn">加入购物车</a>
