@@ -3,21 +3,23 @@
         <h2>免费登记预约项目</h2>
         <div class="gcsq-style">
             <label>选择项目</label>
+            <?php if ($groups): ?>                   
             <dl class="chose-xm">
                 <dt class="c-xm-dt"><span>消防设计</span></dt>
                 <dd class="c-xm-dd">
-                    <span>消防设计</span>
-                    <span>消防检测</span>
-                    <span>消防工程</span>
-                    <span>消防维保</span>
+                    <?php foreach ($groups as $item): ?>
+                    <span class="group-option" data-val="<?php echo $item['keyword'] ?>"><?php echo $item['name'] ?></span>   
+                    <?php endforeach ?>
                 </dd>
+                
             </dl>
+            <?php endif ?>
         </div>
-        <div class="gc-b-detail">
+        <div class="gc-b-detail project-form">
             <p class="f_s"></p>
-            <input type="text" class="gc-tab-text gcname" value="" placeholder="您的姓名">
-            <input type="text" class="gc-tab-text mt15 gctel" value="" placeholder="您的手机号">
-            <input type="submit" class="gc-tab-sub mt15" value="立即申请">
+            <input type="text" class="gc-tab-text gcname" name="account" placeholder="您的姓名" />
+            <input type="text" class="gc-tab-text mt15 gctel" name="telephone" placeholder="您的手机号" />
+            <input type="button" class="gc-tab-sub mt15" value="立即申请" onclick="applyProject(this);">
         </div>
         <div class="tel-phone mt15">
             <i class="icon telphone"></i>服务热线:400-883-4119
@@ -28,14 +30,16 @@
     <img src="market/view/theme/yuankong/yk_img/adimg/adpic3.jpg">
 </div>
 <div class="xg-style mt10">
-    <h3 class="title f_l">苏州消防公司排行</h3>
+    <h3 class="title f_l"><?php echo $zone_name ?>消防公司排行</h3>
     <div class="p10">
         <ul class="ovh">
-            <li class="new-gs txt_clip"><i class="r-bg-b">1</i><a href="#">苏州水电费卡拉胶</a></li>
-            <li class="new-gs txt_clip"><i class="r-bg-b">2</i><a href="#">苏州水电费卡拉胶</a></li>
-            <li class="new-gs txt_clip"><i class="r-bg-b">3</i><a href="#">苏州水电费卡拉胶</a></li>
-            <li class="new-gs txt_clip"><i class="b-bg-b">4</i><a href="#">苏州水电费卡拉胶</a></li>
-            <li class="new-gs txt_clip"><i class="b-bg-b">5</i><a href="#">苏州水电费卡拉胶</a></li>
+            
+            <?php $n = 1 ;foreach ($companies as $item) { ?>
+                <li class="new-gs txt_clip">
+                    <i class="r-bg-b"><?php echo $n ?></i>
+                    <a href="<?php echo $item['link'] ?>"><?php echo $item['title'] ?></a>
+                </li>
+            <?php $n++; } ?>
         </ul>
     </div>
 </div>

@@ -12,7 +12,7 @@ class ModelServiceCompany extends Model {
     }
      
     public function getCompanies($data=array()) {
-        $sql = "SELECT DISTINCT c.*,cz.name FROM `" . DB_PREFIX . "company` c LEFT JOIN ".DB_PREFIX."company_zone cz ON cz.zone_id = c.zone_id WHERE 1 ";
+        $sql = "SELECT DISTINCT c.*,cz.name FROM `" . DB_PREFIX . "company` c LEFT JOIN ".DB_PREFIX."company_zone cz ON cz.zone_id = c.zone_id WHERE c.status = '1' AND c.approved = '1' ";
         $implode = array();
 
         if (!empty($data['filter_company'])) {
@@ -71,7 +71,7 @@ class ModelServiceCompany extends Model {
     }
 
     public function getTotalCompanies($data=array()) {
-        $sql = "SELECT COUNT(c.company_id) AS total FROM `" . DB_PREFIX . "company` c WHERE 1 ";
+        $sql = "SELECT COUNT(c.company_id) AS total FROM `" . DB_PREFIX . "company` c WHERE c.status = '1' AND c.approved = '1' ";
         $implode = array();
 
         if (!empty($data['filter_company'])) {
@@ -100,11 +100,26 @@ class ModelServiceCompany extends Model {
         $query = $this->db->query($sql);
         return $query->row['total'];
     }
-
+    public function getCompanyRank($zone_id = null,$limit = 5 ){
+        $implode =  array();
+        $implode[] = "status = '1'";
+        $implode[] = "approved = '1'";
+        if ($zone_id) {
+            $implode[] = "zone_id = '" . (int)$zone_id . "'";
+        }
+        $query = $this->db->query("SELECT company_id,title FROM `" . DB_PREFIX . "company` WHERE ".implode(" AND ", $implode)." ORDER BY deposit DESC , recommend DESC , credit DESC ,viewed DESC LIMIT ".$limit);
+        return $query->rows;
+    }
     public function getCompanyZones(){
         $query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "company_zone` WHERE `status` = '1' AND `show` = '1' ORDER BY sort_order ASC ");   
     
         return $query->rows;
+    }
+
+    public function getCompanyZone($zone_id){
+        $query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "company_zone` WHERE `status` = '1' AND `show` = '1' AND zone_id = '".$zone_id."' ");   
+    
+        return $query->row;
     }
 
     public function getCompanyGroups(){

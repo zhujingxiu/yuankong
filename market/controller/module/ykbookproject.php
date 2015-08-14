@@ -2,37 +2,24 @@
 class ControllerModuleYkbookproject extends Controller {
     protected function index() {
         $this->language->load('module/ykbookproject');
+        $this->load->model('service/project');
         
-        $this->data['heading_title'] = $this->language->get('heading_title');
-        $this->data['text_register'] = $this->language->get('text_register');
-        $this->data['text_login'] = $this->language->get('text_login');
-        $this->data['text_logout'] = $this->language->get('text_logout');
-        $this->data['text_forgotten'] = $this->language->get('text_forgotten');
-        $this->data['text_account'] = $this->language->get('text_account');
-        $this->data['text_edit'] = $this->language->get('text_edit');
-        $this->data['text_password'] = $this->language->get('text_password');
-        $this->data['text_address'] = $this->language->get('text_address');
-        $this->data['text_wishlist'] = $this->language->get('text_wishlist');
-        $this->data['text_order'] = $this->language->get('text_order');
-        $this->data['text_return'] = $this->language->get('text_return');
-        $this->data['text_transaction'] = $this->language->get('text_transaction');
-        $this->data['text_newsletter'] = $this->language->get('text_newsletter');
-        
-        $this->data['logged'] = $this->customer->isLogged();
-        $this->data['register'] = $this->url->link('account/register', '', 'SSL');
-        $this->data['login'] = $this->url->link('account/login', '', 'SSL');
-        $this->data['logout'] = $this->url->link('account/logout', '', 'SSL');
-        $this->data['forgotten'] = $this->url->link('account/forgotten', '', 'SSL');
-        $this->data['account'] = $this->url->link('account/account', '', 'SSL');
-        $this->data['edit'] = $this->url->link('account/edit', '', 'SSL');
-        $this->data['password'] = $this->url->link('account/password', '', 'SSL');
-        $this->data['address'] = $this->url->link('account/address', '', 'SSL');
-        $this->data['wishlist'] = $this->url->link('account/wishlist');
-        $this->data['order'] = $this->url->link('account/order', '', 'SSL');
-        $this->data['download'] = $this->url->link('account/download', '', 'SSL');
-        $this->data['return'] = $this->url->link('account/return', '', 'SSL');
-        $this->data['transaction'] = $this->url->link('account/transaction', '', 'SSL');
-        $this->data['newsletter'] = $this->url->link('account/newsletter', '', 'SSL');
+        $this->data['groups'] = $this->model_service_project->getProjectGroups();
+
+        $this->load->model('service/company');
+        if (isset($this->request->get['zone'])) {
+            $zone_id = $this->request->get['zone'];
+        } else {
+            $zone_id = 1;
+        }
+
+        $this->data['companies'] = $this->model_service_company->getCompanyRank($zone_id);
+        $zone = $this->model_service_company->getCompanyZone($zone_id);
+
+        $this->data['zone_name'] = !empty($zone['name']) ? $zone['name'] : '';
+        foreach ($this->data['companies'] as $key => $value) {
+            $this->data['companies'][$key]['link'] = $this->url->link('service/company/info','company_id='.$value['company_id']);
+        }
 
         if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/ykbookproject.tpl')) {
             $this->template = $this->config->get('config_template') . '/template/module/ykbookproject.tpl';
