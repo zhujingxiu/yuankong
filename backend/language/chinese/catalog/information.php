@@ -16,6 +16,7 @@ $_['entry_title']       = '文章标题：';
 $_['entry_description'] = '文章内容：';
 $_['entry_store']       = '&nbsp;&nbsp;网店：';
 $_['entry_keyword']     = '&nbsp;&nbsp;SEO关键词：<br /><span class="help">请确保关键词的维一性。请不要使用空格，使用‘-’来替换空格</span>';
+$_['entry_center']      = '帮助中心：<br/><span class="help">在帮助中心列表中显示。</span>';
 $_['entry_bottom']      = '页面底部：<br/><span class="help">在页面底部显示。</span>';
 $_['entry_status']      = '&nbsp;&nbsp;文章状态：';
 $_['entry_sort_order']  = '&nbsp;&nbsp;页面排序：';

@@ -58,7 +58,7 @@ $(function(){ $('input, textarea').placeholder(); });
 	<div class="fix">
         <ul class="l regis-tab">
             <li class="regis-li tabon"><?php echo $text_regs_customer ?></li>
-            <li class="regis-li"><?php echo $text_regs_affiliate ?></li>
+            <li class="regis-li"><?php echo $text_regs_company ?></li>
         </ul>
         <span class="r"></span>
     </div>
@@ -68,7 +68,7 @@ $(function(){ $('input, textarea').placeholder(); });
             <p class="f_m c46"><?php echo $text_qr_code ?></p>
             <p><img src="asset/image/data/yuankong/ewm2.jpg" alt=""/></p>
         </div>
-	  	<form id="customer-signup" action="<?php echo $customer_action; ?>" method="post" >
+	  	<form id="customer-signup" action="<?php echo $action; ?>" method="post" >
 			<div class="regis">
 			  	<table class="registable" id="customer-form">
 					<tr>
@@ -153,16 +153,16 @@ $(function(){ $('input, textarea').placeholder(); });
 			  	</table>
 			</div>
 		</form>
-		<form id="affiliate-signup" action="<?php echo $affiliate_action; ?>" method="post" >
+		<form id="company-signup" action="<?php echo $action; ?>" method="post" >
 			<div class="regis" style="display: none;">
-	            <table class="registable" id="affiliate-form">
+	            <table class="registable" id="company-form">
 	            	<tr>
 	                    <td class="tr" width="96">
 	                    	<em class="c_r">*</em> <?php echo $entry_email ?>
 	                    </td>
 	                    <td>
 	                    	<div class="form-group">
-		                    	<input type="text" class="regis-text" name="email" placeholder="<?php echo $text_affiliate_email ?>" />
+		                    	<input type="text" class="regis-text" name="email" placeholder="<?php echo $text_company_email ?>" />
 		                    </div>
 	                    </td>
 	                </tr>
@@ -172,7 +172,7 @@ $(function(){ $('input, textarea').placeholder(); });
 	                    </td>
 	                    <td>
 							<div class="form-group">
-		                    	<input type="password" class="regis-text" name="password" id="affiliate-password" />
+		                    	<input type="password" class="regis-text" name="password" id="company-password" />
 		                    </div>
 	                    </td>
 	                </tr>
@@ -188,17 +188,17 @@ $(function(){ $('input, textarea').placeholder(); });
 	                </tr>
 	                <tr>
 	                    <td class="tr">
-	                    	<em class="c_r">*</em> <?php echo $entry_affiliate_name ?>
+	                    	<em class="c_r">*</em> <?php echo $entry_company_name ?>
 	                    </td>
 	                    <td>
 	                    	<div class="form-group">
-	                    		<input type="text" class="regis-text" name="company" placeholder="<?php echo $text_affiliate_name ?>" />
+	                    		<input type="text" class="regis-text" name="company" placeholder="<?php echo $text_company_name ?>" />
 	                    	</div>
 	                    </td>
 	                </tr>
 	                <tr>
 	                    <td class="tr">
-	                    	<em class="c_r">*</em> <?php echo $entry_affiliate_group ?>
+	                    	<em class="c_r">*</em> <?php echo $entry_company_group ?>
 	                    </td>
 	                    <td>
 							<div class="form-group">
@@ -213,7 +213,7 @@ $(function(){ $('input, textarea').placeholder(); });
 	                </tr>
 	                <tr>
 	                    <td class="tr">
-	                    	<em class="c_r">*</em> <?php echo $entry_affiliate_address ?>
+	                    	<em class="c_r">*</em> <?php echo $entry_company_address ?>
 	                    </td>
 	                    <td>
 	                    	<div class="form-group">
@@ -223,7 +223,7 @@ $(function(){ $('input, textarea').placeholder(); });
 	                </tr>
 	                <tr>
 	                    <td class="tr">
-	                    	<em class="c_r">*</em> <?php echo $entry_affiliate_customer ?>
+	                    	<em class="c_r">*</em> <?php echo $entry_company_customer ?>
 	                    </td>
 	                    <td>
 	                    	<div class="form-group">
@@ -233,11 +233,11 @@ $(function(){ $('input, textarea').placeholder(); });
 	                </tr>
 	                <tr>
 	                    <td class="tr">
-	                    	<em class="c_r">*</em> <?php echo $entry_affiliate_telephone ?>
+	                    	<em class="c_r">*</em> <?php echo $entry_company_telephone ?>
 	                    </td>
 	                    <td>
 	                    	<div class="form-group">
-		                    	<input type="text" class="regis-text" name="mobile_phone" id="affiliate-mobilephone" />
+		                    	<input type="text" class="regis-text" name="mobile_phone" id="company-mobilephone" />
 		                    </div>
 	                    </td>
 	                </tr>
@@ -248,7 +248,7 @@ $(function(){ $('input, textarea').placeholder(); });
 	                    </td>
 	                    <td>
 	                    	<div class="form-group">
-		                    	<input type="text" name="captcha" class="regis-text w100" value="" id="affiliate-captcha" />
+		                    	<input type="text" name="captcha" class="regis-text w100" value="" id="company-captcha" />
 		                    	<span class="pl10 captcha">
 		                    		<img src="<?php echo $captcha_link ?>" />
 		                    		<a href="javascript:void(0);" class="pl10 c_g chg-img"><?php echo $text_captcha_change ?></a>
@@ -271,7 +271,7 @@ $(function(){ $('input, textarea').placeholder(); });
 		                <td>&nbsp;</td>
 		                <td>
 		                	<div class="form-group">
-		                		<input type="checkbox" name="agree" checked="checked" value="1" id="affiliate-agree"/>
+		                		<input type="checkbox" name="agree" checked="checked" value="1" id="company-agree"/>
 		                		<?php echo $text_agree; ?> 
 							</div>
 		                </td>
@@ -354,7 +354,7 @@ $(function(){ $('input, textarea').placeholder(); });
 	        	e.prev('.form-group').addClass("valid").next('.error').remove();
 	        }
 	    });
-	    $('#affiliate-signup').validate({
+	    $('#company-signup').validate({
 	    	rules:{
 	    		email:{
 					required: true,
@@ -378,7 +378,7 @@ $(function(){ $('input, textarea').placeholder(); });
 	            },
 	            confirm: {
 	                required: true,
-	                equalTo: "#affiliate-password"
+	                equalTo: "#company-password"
 	            },	            
 	            mobile_phone: {
 	            	required: true,

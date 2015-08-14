@@ -1960,3 +1960,77 @@
 2015-08-14 14:29:18 - PHP Notice:  Error: Column 'status' in where clause is ambiguous<br />Error No: 1052<br />SELECT DISTINCT c.*,cz.name FROM `yk_company` c LEFT JOIN yk_company_zone cz ON cz.zone_id = c.zone_id WHERE status = '1' AND approved = '1'  ORDER BY c.sort_order LIMIT 0,10 in D:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
 2015-08-14 14:29:18 - PHP Notice:  Trying to get property of non-object in D:\wamp\www\yuankong\market\model\service\company.php on line 70
 2015-08-14 14:29:18 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\market\controller\service\company.php on line 151
+2015-08-14 20:46:17 - PHP Notice:  Undefined variable: sort_on in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\wiki.tpl on line 20
+2015-08-14 20:46:17 - PHP Notice:  Undefined variable: sort_on in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\wiki.tpl on line 21
+2015-08-14 20:46:35 - PHP Notice:  Undefined variable: sort_on in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\wiki.tpl on line 20
+2015-08-14 20:46:35 - PHP Notice:  Undefined variable: sort_on in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\wiki.tpl on line 21
+2015-08-14 20:46:41 - PHP Notice:  Undefined variable: sort_on in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\wiki.tpl on line 20
+2015-08-14 20:46:41 - PHP Notice:  Undefined variable: sort_on in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\wiki.tpl on line 21
+2015-08-14 20:46:43 - PHP Notice:  Undefined variable: sort_on in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\wiki.tpl on line 20
+2015-08-14 20:46:43 - PHP Notice:  Undefined variable: sort_on in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\wiki.tpl on line 21
+2015-08-14 20:46:44 - PHP Notice:  Undefined variable: sort_on in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\wiki.tpl on line 20
+2015-08-14 20:46:44 - PHP Notice:  Undefined variable: sort_on in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\wiki.tpl on line 21
+2015-08-14 20:46:45 - PHP Notice:  Undefined variable: sort_on in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\wiki.tpl on line 20
+2015-08-14 20:46:45 - PHP Notice:  Undefined variable: sort_on in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\wiki.tpl on line 21
+2015-08-14 20:50:17 - PHP Notice:  Use of undefined constant url - assumed 'url' in E:\wamp\www\yuankong\market\controller\information\wiki.php on line 141
+2015-08-14 21:54:48 - PHP Notice:  Undefined variable: text_regs_affiliate in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\register.tpl on line 61
+2015-08-14 21:54:48 - PHP Notice:  Undefined variable: affiliate_action in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\register.tpl on line 156
+2015-08-14 21:54:48 - PHP Notice:  Undefined variable: text_affiliate_email in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\register.tpl on line 165
+2015-08-14 21:54:48 - PHP Notice:  Undefined variable: entry_affiliate_name in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\register.tpl on line 191
+2015-08-14 21:54:48 - PHP Notice:  Undefined variable: text_affiliate_name in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\register.tpl on line 195
+2015-08-14 21:54:48 - PHP Notice:  Undefined variable: entry_affiliate_group in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\register.tpl on line 201
+2015-08-14 21:54:48 - PHP Notice:  Undefined variable: entry_affiliate_address in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\register.tpl on line 216
+2015-08-14 21:54:48 - PHP Notice:  Undefined variable: entry_affiliate_customer in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\register.tpl on line 226
+2015-08-14 21:54:48 - PHP Notice:  Undefined variable: entry_affiliate_telephone in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\register.tpl on line 236
+2015-08-14 21:56:07 - PHP Notice:  Undefined variable: company_action in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\register.tpl on line 156
+2015-08-14 21:58:45 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 88
+2015-08-14 21:58:45 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 90
+2015-08-14 21:58:45 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 88
+2015-08-14 21:58:45 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 90
+2015-08-14 21:58:45 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 88
+2015-08-14 21:58:45 - PHP Notice:  Undefined index: link in E:\wamp\www\yuankong\market\view\theme\yuankong\template\account\account.tpl on line 90
+2015-08-14 22:36:43 - PHP Notice:  Undefined variable: title in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 12
+2015-08-14 22:36:43 - PHP Notice:  Undefined variable: base in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 13
+2015-08-14 22:36:43 - PHP Notice:  Undefined variable: keywords in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 17
+2015-08-14 22:36:43 - PHP Notice:  Undefined variable: icon in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 20
+2015-08-14 22:36:43 - PHP Notice:  Undefined variable: top in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 43
+2015-08-14 22:36:43 - PHP Notice:  Undefined variable: home in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 46
+2015-08-14 22:36:43 - PHP Notice:  Undefined variable: logo in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 47
+2015-08-14 22:36:43 - PHP Notice:  Undefined variable: name in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 47
+2015-08-14 22:36:43 - PHP Notice:  Undefined variable: name in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 47
+2015-08-14 22:38:26 - PHP Notice:  Undefined variable: top in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 43
+2015-08-14 22:38:26 - PHP Notice:  Undefined variable: home in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 46
+2015-08-14 22:39:14 - PHP Notice:  Undefined variable: home in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 46
+2015-08-14 22:42:55 - PHP Notice:  Undefined variable: home in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 46
+2015-08-14 22:43:20 - PHP Notice:  Undefined variable: entry_layout in E:\wamp\www\yuankong\backend\view\template\catalog\information_form.tpl on line 82
+2015-08-14 22:43:20 - PHP Notice:  Undefined variable: layouts in E:\wamp\www\yuankong\backend\view\template\catalog\information_form.tpl on line 89
+2015-08-14 22:43:20 - PHP Warning:  Invalid argument supplied for foreach() in E:\wamp\www\yuankong\backend\view\template\catalog\information_form.tpl on line 89
+2015-08-14 22:57:02 - PHP Notice:  Error: Unknown column 'i.date_added' in 'order clause'<br />Error No: 1054<br />SELECT * FROM yk_information i LEFT JOIN yk_information_description id ON (i.information_id = id.information_id) WHERE i.center = 1 AND id.language_id = '2' AND i.status = '1' ORDER BY i.sort_order, i.date_added DESC in E:\wamp\www\yuankong\system\library\db\mysqli.php on line 42
+2015-08-14 22:57:02 - PHP Notice:  Trying to get property of non-object in E:\wamp\www\yuankong\market\model\catalog\information.php on line 18
+2015-08-14 22:57:02 - PHP Warning:  Invalid argument supplied for foreach() in E:\wamp\www\yuankong\market\controller\information\information.php on line 51
+2015-08-14 22:57:33 - PHP Notice:  Undefined variable: home in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 46
+2015-08-14 22:58:42 - PHP Notice:  Undefined variable: home in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 46
+2015-08-14 22:58:45 - PHP Notice:  Undefined variable: home in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 46
+2015-08-14 22:58:46 - PHP Notice:  Undefined variable: home in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 46
+2015-08-14 22:58:47 - PHP Notice:  Undefined variable: home in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 46
+2015-08-14 23:00:05 - PHP Notice:  Undefined variable: home in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 46
+2015-08-14 23:00:16 - PHP Notice:  Undefined variable: home in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 46
+2015-08-14 23:00:20 - PHP Notice:  Undefined variable: home in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 46
+2015-08-14 23:00:22 - PHP Notice:  Undefined variable: home in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 46
+2015-08-14 23:01:11 - PHP Notice:  Undefined variable: home in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 46
+2015-08-14 23:01:46 - PHP Notice:  Undefined variable: home in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 46
+2015-08-14 23:01:49 - PHP Notice:  Undefined variable: home in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 46
+2015-08-14 23:01:51 - PHP Notice:  Undefined variable: home in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 46
+2015-08-14 23:01:52 - PHP Notice:  Undefined variable: home in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 46
+2015-08-14 23:01:52 - PHP Notice:  Undefined variable: home in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 46
+2015-08-14 23:03:05 - PHP Notice:  Undefined variable: home in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 46
+2015-08-14 23:03:12 - PHP Notice:  Undefined variable: home in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 46
+2015-08-14 23:03:14 - PHP Notice:  Undefined variable: home in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 46
+2015-08-14 23:04:15 - PHP Notice:  Undefined variable: home in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 46
+2015-08-14 23:04:15 - PHP Notice:  Undefined variable: information_id in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 56
+2015-08-14 23:04:15 - PHP Notice:  Undefined variable: information_id in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 56
+2015-08-14 23:04:15 - PHP Notice:  Undefined variable: information_id in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 56
+2015-08-14 23:04:39 - PHP Notice:  Undefined variable: home in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 46
+2015-08-14 23:04:42 - PHP Notice:  Undefined variable: home in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 46
+2015-08-14 23:04:44 - PHP Notice:  Undefined variable: home in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 46
+2015-08-14 23:05:08 - PHP Notice:  Undefined variable: home in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 46

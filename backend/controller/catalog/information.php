@@ -272,6 +272,7 @@ class ControllerCatalogInformation extends Controller {
 		$this->data['entry_description'] = $this->language->get('entry_description');
 		$this->data['entry_store'] = $this->language->get('entry_store');
 		$this->data['entry_keyword'] = $this->language->get('entry_keyword');
+		$this->data['entry_center'] = $this->language->get('entry_center');
 		$this->data['entry_bottom'] = $this->language->get('entry_bottom');
 		$this->data['entry_sort_order'] = $this->language->get('entry_sort_order');
 		$this->data['entry_status'] = $this->language->get('entry_status');
@@ -357,7 +358,7 @@ class ControllerCatalogInformation extends Controller {
 		
 		if (isset($this->request->post['keyword'])) {
 			$this->data['keyword'] = $this->request->post['keyword'];
-		} elseif (!empty($information_info)) {
+		} elseif (!empty($information_info['keyword'])) {
 			$this->data['keyword'] = $information_info['keyword'];
 		} else {
 			$this->data['keyword'] = '';
@@ -365,15 +366,23 @@ class ControllerCatalogInformation extends Controller {
 		
 		if (isset($this->request->post['bottom'])) {
 			$this->data['bottom'] = $this->request->post['bottom'];
-		} elseif (!empty($information_info)) {
+		} elseif (isset($information_info['bottom'])) {
 			$this->data['bottom'] = $information_info['bottom'];
 		} else {
 			$this->data['bottom'] = 0;
 		}
+
+		if (isset($this->request->post['center'])) {
+			$this->data['center'] = $this->request->post['center'];
+		} elseif (isset($information_info['center'])) {
+			$this->data['center'] = $information_info['center'];
+		} else {
+			$this->data['center'] = 1;
+		}
 		
 		if (isset($this->request->post['status'])) {
 			$this->data['status'] = $this->request->post['status'];
-		} elseif (!empty($information_info)) {
+		} elseif (isset($information_info['status'])) {
 			$this->data['status'] = $information_info['status'];
 		} else {
 			$this->data['status'] = 1;
@@ -381,7 +390,7 @@ class ControllerCatalogInformation extends Controller {
 				
 		if (isset($this->request->post['sort_order'])) {
 			$this->data['sort_order'] = $this->request->post['sort_order'];
-		} elseif (!empty($information_info)) {
+		} elseif (!empty($information_info['sort_order'])) {
 			$this->data['sort_order'] = $information_info['sort_order'];
 		} else {
 			$this->data['sort_order'] = '';

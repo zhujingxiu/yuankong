@@ -3,8 +3,8 @@
     </div>
     <div class="ovh fix b_f btb3">
     	<div class="l">
-            <div class="newsbox1"><a href="#" class="newsb-bg1"></a></div>
-            <div class="newsbox2"><a href="#" class="newsb-bg2"></a></div>
+            <div class="newsbox1"><a href="<?php echo $this->url->link('information/wiki') ?>" class="newsb-bg1"></a></div>
+            <div class="newsbox2"><a href="<?php echo $this->url->link('information/wiki') ?>" class="newsb-bg2"></a></div>
         </div>
         <div class="index-news b_f btb3">
         	<ul class="index-news-ul">

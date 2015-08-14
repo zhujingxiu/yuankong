@@ -1,5 +1,6 @@
 <?php 
 class ControllerInformationWiki extends Controller {
+    private $error = array();
     public function index(){
         $this->language->load('information/wiki');
         $this->document->setTitle($this->language->get('heading_title'));
@@ -15,11 +16,6 @@ class ControllerInformationWiki extends Controller {
             $sort = $this->request->get['sort'];
         } else {
             $sort = 'sort_order';
-        }
-        if (isset($this->request->get['order'])) {
-            $order = $this->request->get['order'];
-        } else {
-            $order = 'ASC';
         }
         
         if (isset($this->request->get['page'])) {
@@ -49,6 +45,17 @@ class ControllerInformationWiki extends Controller {
         }
         $this->data['wikis'] = array();
         if($wiki_group===false){
+            $wiki_name = $this->language->get('text_wiki_help');
+            $this->data['breadcrumbs'][] = array(
+                'text'      => $this->language->get('text_tag_school'),
+                'href'      => 'javascript:;',
+                'separator' => $this->language->get('text_separator')
+            );
+            $this->data['breadcrumbs'][] = array(
+                'text'      => $wiki_name,
+                'href'      => $this->url->link('information/wiki','wiki_group=help','SSL'),
+                'separator' => $this->language->get('text_separator')
+            );
             if($search){
                 $this->data['breadcrumbs'][] = array(
                     'text'      => $search,
@@ -56,25 +63,12 @@ class ControllerInformationWiki extends Controller {
                     'separator' => $this->language->get('text_separator')
                 );
                 $wiki_name = $search;
-            }else{
-                $wiki_name = $this->language->get('text_wiki_help');
-                $this->data['breadcrumbs'][] = array(
-                    'text'      => $this->language->get('text_tag_school'),
-                    'href'      => 'javascript:;',
-                    'separator' => $this->language->get('text_separator')
-                );
-                $this->data['breadcrumbs'][] = array(
-                    'text'      => $wiki_name,
-                    'href'      => $this->url->link('information/wiki','wiki_group=help','SSL'),
-                    'separator' => $this->language->get('text_separator')
-                );
             }
             $filter = array(      
                 'filter_search' => $search,          
                 'start'         => 0,
                 'limit'         => 10,
-                'sort'          => $sort,
-                'order'         => $order,
+                'sort'          => $sort
             );
             $total = $this->model_catalog_information->getTotalHelp($filter);
             
@@ -84,39 +78,39 @@ class ControllerInformationWiki extends Controller {
                 $result['title'] = $result['text'];
                 $result['text'] = $result['reply'];
                 $result['date_added'] = date('Y-m-d',strtotime($result['date_added']));
+                $result['link'] = $this->url->link('information/wiki/help','wiki_group=help&help_id='.$result['help_id'],'SSL');
                 $this->data['wikis'][] = $result;
             }
         }else{
+            $wiki_name = $this->language->get('heading_title');
+            $group_info = $this->model_catalog_information->getWikiGroup($wiki_group);
+                
+            if($group_info){
+                if(isset($group_info['tag']) && $group_info['tag']==2){
+                    $text_tag = $this->language->get('text_tag_school');
+                }else{
+                    $text_tag = $this->language->get('text_tag_information');
+                }
+                $this->data['breadcrumbs'][] = array(
+                    'text'      => $text_tag,
+                    'href'      => 'javascript:;',
+                    'separator' => $this->language->get('text_separator')
+                );
+                $this->data['breadcrumbs'][] = array(
+                    'text'      => $group_info['name'],
+                    'href'      => $this->url->link('information/wiki','wiki_group='.$group_info['group_id']),
+                    'separator' => $this->language->get('text_separator')
+                );
+                $wiki_name = $group_info['name'];
+            }
             if($search){
                 $this->data['breadcrumbs'][] = array(
                     'text'      => $search,
-                    'href'      => $this->url->link('information/wiki','wiki_group=help','SSL'),
+                    'href'      => $this->url->link('information/wiki','','SSL'),
                     'separator' => $this->language->get('text_separator')
                 );
                 $wiki_name = $search;
 
-            }else{
-                $wiki_name = $this->language->get('heading_title');
-                $group_info = $this->model_catalog_information->getWikiGroup($wiki_group);
-                    
-                if($group_info){
-                    if(isset($group_info['tag']) && $group_info['tag']==2){
-                        $text_tag = $this->language->get('text_tag_school');
-                    }else{
-                        $text_tag = $this->language->get('text_tag_information');
-                    }
-                    $this->data['breadcrumbs'][] = array(
-                        'text'      => $text_tag,
-                        'href'      => 'javascript:;',
-                        'separator' => $this->language->get('text_separator')
-                    );
-                    $this->data['breadcrumbs'][] = array(
-                        'text'      => $group_info['name'],
-                        'href'      => $this->url->link('information/wiki','wiki_group='.$group_info['group_id']),
-                        'separator' => $this->language->get('text_separator')
-                    );
-                    $wiki_name = $group_info['name'];
-                }
             }
             $filter = array(
                 'filter_group'  => $wiki_group,
@@ -124,7 +118,6 @@ class ControllerInformationWiki extends Controller {
                 'start'         => 0,
                 'limit'         => 10,
                 'sort'          => $sort,
-                'order'         => $order,
             );        
             $total = $this->model_catalog_information->getTotalWiki($filter);
             
@@ -136,8 +129,22 @@ class ControllerInformationWiki extends Controller {
                 $this->data['wikis'][] = $result;
             }
         }
+        $url = '';
+        if (isset($this->request->get['search'])) {
+            $url .= '&search=' . $this->request->get['search'];
+        }
+        if (isset($this->request->get['wiki_group'])) {
+            $url .= '&wiki_group=' . $this->request->get['wiki_group'];
+        }
+        $this->data['sort_order'] = $this->url->link('information/wiki',  'sort=sort_order'.$url );
+        $this->data['sort_viewed'] = $this->url->link('information/wiki',  'sort=viewed'.$url );
+        if(isset($this->request->get['sort'])&& strtolower($this->request->get['sort']) == 'viewed'){
+            $this->data['sort_on'] = 'viewed';
+        }else{
+            $this->data['sort_on'] = 'sort_order';
+        }
         $this->data['wiki_name'] = $wiki_name;
-
+        
         $pagination = new Pagination();
         $pagination->total = $total;
         $pagination->page = $page;
@@ -145,7 +152,7 @@ class ControllerInformationWiki extends Controller {
         $pagination->text = $this->language->get('text_pagination');
         $pagination->url = $this->url->link('service/project', 'page={page}', 'SSL');
         
-        $this->data['pagination'] = $pagination->render_list();
+        $this->data['pagination'] = $pagination->render_page();
         $this->data['totals'] = $total;
         $this->data['search'] = $search;
 
@@ -157,7 +164,8 @@ class ControllerInformationWiki extends Controller {
             'common/content_top',
             'common/content_bottom',
             'common/footer',
-            'common/header'
+            'common/header',
+            'module/mini_login'
         );
                     
         $this->response->setOutput($this->render());
@@ -419,5 +427,45 @@ class ControllerInformationWiki extends Controller {
             $this->response->setOutput($this->render());
         }
     }
-	
+	public function ask(){
+        $url = '';
+        if (isset($this->request->get['search'])) {
+            $url .= '&search=' . $this->request->get['search'];
+        }
+        if (isset($this->request->get['wiki_group'])) {
+            $url .= '&wiki_group=' . $this->request->get['wiki_group'];
+        }
+        if (isset($this->request->get['sort'])) {
+            $url .= '&sort=' . $this->request->get['sort'];
+        }
+        if(!$this->customer->isLogged()){
+            
+            $this->session->data['redirect'] = $this->url->link('information/wiki',$url);
+            $this->redirect($this->url->link('account/login'));  
+        }
+        $this->language->load('information/wiki');
+
+        $this->load->model('catalog/information');
+            
+        if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateAsk()) {
+            $this->model_catalog_information->addHelp($this->request->post);
+            $json = array('status'=>1,'msg'=>$this->language->get('text_ask_success'));
+        }else{
+            $json = array('status'=>0,'error'=>implode("<br>", $this->error));
+        }
+        $this->response->setOutput(json_encode($json));
+    }
+
+    private function validateAsk(){
+
+        if ((utf8_strlen($this->request->post['text']) < 2) || (utf8_strlen($this->request->post['text']) > 128)) {
+            $this->error['text'] = $this->language->get('error_text');
+        }
+
+        if (!$this->error) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

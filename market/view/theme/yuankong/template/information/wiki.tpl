@@ -11,14 +11,14 @@
         <?php echo $content_top; ?>
         <div class="newslist-title">
             <div class="r gs-search">
-                <input type="text" class="gs-s-text" value=""><i class="icon2 s-sbtn"></i>
+                <input type="text" class="gs-s-text" value="<?php echo $search ?>"><i class="icon2 s-sbtn"></i>
             </div>
             <span class="c_red pr10"><?php echo $wiki_name ?></span>
             <span class="pr10">共有<em class="plr c_red"><?php echo $totals ?></em>条结果</span>
             <span class="pl20 f_m">排序:
-              <select class="news-px-select">
-                <option>默认</option>
-                <option>按阅读量</option>
+              <select class="news-px-select" onchange="location.href=this.value">
+                <option value="<?php echo $sort_order ?>" <?php echo $sort_on == 'sort_order' ? 'selected' : ''?>>默认</option>
+                <option value="<?php echo $sort_viewed ?>" <?php echo $sort_on == 'viewed' ? 'selected' : ''?>>按阅读量</option>
               </select>
             </span>
         </div>
@@ -54,5 +54,18 @@
 <?php if($search){ ?>
     $('.newslist-li h4,.newslist-li .news-text').textSearch('<?php echo $search ?>',{markColor: "#C30D23"});
 <?php }?>
+$('.s-sbtn').bind('click',function(){
+    if($(this).parent('.gs-search').find('input').val()!=''){
+        var route = 'route='+(getQueryString('route') ? getQueryString('route') : 'information/wiki');
+        var group = getQueryString('wiki_group') ? '&wiki_group='+getQueryString('wiki_group') : '';
+        var sort = getQueryString('sort') ? '&sort='+getQueryString('sort') : '';
+        var search = '&search='+$(this).parent('.gs-search').find('input').val();
+        location.href= $('base').attr('href') + 'index.php?'+route+group+sort+search;
+    }
+})
 </script>
+<div class="tm-mask" id="tm-mask" style="display:none;"></div>
+<div class="iframe-login" style="display:none;">
+  <?php echo $mini_login ?>
+</div>
 <?php echo $footer; ?>

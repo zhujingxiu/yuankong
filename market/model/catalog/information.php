@@ -12,7 +12,11 @@ class ModelCatalogInformation extends Model {
 		return $query->rows;
 	}
 
-
+	public function getHelpCenterInformations(){
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "information i LEFT JOIN " . DB_PREFIX . "information_description id ON (i.information_id = id.information_id) WHERE i.center = 1 AND id.language_id = '" . (int)$this->config->get('config_language_id') . "' AND i.status = '1' ORDER BY i.sort_order, i.information_id DESC");
+		
+		return $query->rows;
+	}
 	public function getWiki($wiki_id) {
 		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "wiki w  LEFT JOIN " . DB_PREFIX . "wiki_group wg ON (w.group_id = wg.group_id) WHERE w.wiki_id = '" . (int)$wiki_id . "' AND w.status = '1'");
 	
@@ -34,21 +38,13 @@ class ModelCatalogInformation extends Model {
 		if(isset($data['filter_search']) && trim($data['filter_search'])){
 			$sql .= " AND (title LIKE '%".$this->db->escape(trim($data['filter_search']))."%' OR `text` LIKE '%".$this->db->escape(trim($data['filter_search']))."%')";
 		}
-		$sort_data = array(
-			'viewed',
-			'sort_order',
-			'date_added'
-		);
-		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
-			$sql .= " ORDER BY " . $data['sort'];
-		} else {
-			$sql .= " ORDER BY date_added";	
-		}
-
-		if (isset($data['order']) && ($data['order'] == 'ASC')) {
-			$sql .= " ASC";
-		} else {
-			$sql .= " DESC";
+		switch (strtolower($data['sort'])) {
+			case 'viewed':
+				$sql .= " ORDER BY viewed DESC,date_added DESC";
+				break;
+			default:
+				$sql .= " ORDER BY sort_order ASC,date_added DESC";
+				break;
 		}
 		if (isset($data['start']) || isset($data['limit'])) {
 			if ($data['start'] < 0) {
@@ -84,6 +80,17 @@ class ModelCatalogInformation extends Model {
 			$this->db->query("UPDATE ".DB_PREFIX."wiki SET viewed = viewed + 1 WHERE wiki_id = '".(int)$wiki_id."'");
 		}
 	}
+	public function AddHelp($data) {
+		$fields = array(
+			'customer_id' 	=> $this->customer->getId(),
+			'account' 		=> $this->customer->getFullName(),
+			'telephone' 	=> $this->customer->getMobilePhone(),
+			'text'			=> strip_tags($data['text']),
+			'status'		=> 1,
+			'date_added'	=> date('Y-m-d H:i:s')
+		);
+		return $this->db->insert("help",$fields);
+	}	
 	public function addHelpViewed($help_id){
 		if((int)$help_id){
 			$this->db->query("UPDATE ".DB_PREFIX."help SET viewed = viewed + 1 WHERE help_id = '".(int)$help_id."'");
@@ -111,21 +118,13 @@ class ModelCatalogInformation extends Model {
 		if(isset($data['filter_search']) && trim($data['filter_search'])){
 			$sql .= " AND (`text` LIKE '%".$this->db->escape(trim($data['filter_search']))."%' OR `reply` LIKE '%".$this->db->escape(trim($data['filter_search']))."%')";
 		}
-		$sort_data = array(
-			'viewed',
-			'sort_order',
-			'date_added'
-		);
-		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
-			$sql .= " ORDER BY " . $data['sort'];
-		} else {
-			$sql .= " ORDER BY sort_order";	
-		}
-
-		if (isset($data['order']) && ($data['order'] == 'DESC')) {
-			$sql .= " DESC";
-		} else {
-			$sql .= " ASC";
+		switch (strtolower(trim($data['sort']))) {
+			case 'viewed':
+				$sql .= " ORDER BY viewed DESC,date_added DESC";
+				break;
+			default:
+				$sql .= " ORDER BY sort_order ASC,date_added DESC";
+				break;
 		}
 		if (isset($data['start']) || isset($data['limit'])) {
 			if ($data['start'] < 0) {
@@ -141,4 +140,12 @@ class ModelCatalogInformation extends Model {
 		$query = $this->db->query($sql);
 		return $query->rows;
 	}
+
+	public function getTopHelps($limit=5){
+		$sql= "SELECT * FROM ".DB_PREFIX."help WHERE LENGTH(reply) >5 AND user_id > 0 ORDER BY is_top DESC ,date_replied DESC LIMIT ".$limit;
+		$query = $this->db->query($sql);
+		return $query->rows;
+	}
+
+
 }

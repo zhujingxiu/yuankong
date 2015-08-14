@@ -8,10 +8,9 @@
                 <dt class="c-xm-dt"><span>消防设计</span></dt>
                 <dd class="c-xm-dd">
                     <?php foreach ($groups as $item): ?>
-                    <span class="group-option" data-val="<?php echo $item['keyword'] ?>"><?php echo $item['name'] ?></span>   
+                    <span class="group-option" data-val="<?php echo $item['group_id'] ?>"><?php echo $item['name'] ?></span>   
                     <?php endforeach ?>
-                </dd>
-                
+                </dd>                
             </dl>
             <?php endif ?>
         </div>
@@ -19,6 +18,7 @@
             <p class="f_s"></p>
             <input type="text" class="gc-tab-text gcname" name="account" placeholder="您的姓名" />
             <input type="text" class="gc-tab-text mt15 gctel" name="telephone" placeholder="您的手机号" />
+            <input type="hidden" name="group_id" value="1"/>
             <input type="button" class="gc-tab-sub mt15" value="立即申请" onclick="applyProject(this);">
         </div>
         <div class="tel-phone mt15">
@@ -48,5 +48,7 @@
     o.silbings.init(".gs-px-list li","son");
     o.dlist.init(".chose-xm",".c-xm-dt",".c-xm-dd");
     valid.gcdj.gcvdation(".gc-b-detail");
-
+    $('.group-option').bind('click',function(){
+        $('.project-form input[name="group_id"]').val($(this).attr('data-val'));
+    })
 </script>

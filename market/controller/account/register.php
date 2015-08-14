@@ -144,7 +144,7 @@ class ControllerAccountRegister extends Controller {
 			$this->data['error_confirm'] = '';
 		}
 	
-    	$this->data['customer_action'] = $this->url->link('account/register', '', 'SSL');
+    	$this->data['action'] = $this->url->link('account/register', '', 'SSL');
 		
 		if (isset($this->request->post['mobile_phone'])) {
     		$this->data['mobile_phone'] = $this->request->post['mobile_phone'];
