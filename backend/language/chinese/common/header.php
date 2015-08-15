@@ -93,3 +93,4 @@ $_['text_messages']                    = '通知消息 （%s）';
 $_['text_new_orders']                  = '最新订单（%s）';
 $_['text_new_projects']                = '最新申请（%s）';
 $_['text_new_helps']                   = '最新提问（%s）';
+

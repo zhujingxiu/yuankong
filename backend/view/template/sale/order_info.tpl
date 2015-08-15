@@ -13,10 +13,10 @@
     <div class="content">
       <div class="vtabs">
         <a href="#tab-order"><?php echo $tab_order; ?></a>
+        <a href="#tab-product"><?php echo $tab_product; ?></a>
         <?php if ($shipping_method) { ?>
         <a href="#tab-shipping"><?php echo $tab_shipping; ?></a>
-        <?php } ?>
-        <a href="#tab-product"><?php echo $tab_product; ?></a>
+        <?php } ?>        
         <a href="#tab-history"><?php echo $tab_history; ?></a>
       </div>
       <div id="tab-order" class="vtabs-content">
@@ -145,48 +145,6 @@
           </tr>
         </table>
       </div>
-      <?php if ($shipping_method) { ?>
-      <div id="tab-shipping" class="vtabs-content">
-        <table class="form">
-          <tr>
-            <td><?php echo $text_fullname; ?></td>
-            <td><?php echo $shipping_fullname; ?></td>
-          </tr>
-          <tr>
-            <td><?php echo $text_telephone; ?></td>
-            <td><?php echo $shipping_telephone; ?></td>
-          </tr>
-          <?php if ($shipping_company) { ?>
-          <tr>
-            <td><?php echo $text_company; ?></td>
-            <td><?php echo $shipping_company; ?></td>
-          </tr>
-          <?php } ?>
-          <tr>
-            <td><?php echo $text_address; ?></td>
-            <td><?php echo $shipping_address; ?></td>
-          </tr>
-
-          <?php if ($shipping_postcode) { ?>
-          <tr>
-            <td><?php echo $text_postcode; ?></td>
-            <td><?php echo $shipping_postcode; ?></td>
-          </tr>
-          <?php } ?>
-          <tr>
-            <td><?php echo $text_province; ?></td>
-            <td><?php echo $shipping_province; ?></td>
-          </tr>
-
-          <?php if ($shipping_method) { ?>
-          <tr>
-            <td><?php echo $text_shipping_method; ?></td>
-            <td><?php echo $shipping_method; ?></td>
-          </tr>
-          <?php } ?>
-        </table>
-      </div>
-      <?php } ?>
       <div id="tab-product" class="vtabs-content">
         <table class="list">
           <thead>
@@ -236,17 +194,85 @@
           <?php } ?>
         </table>
       </div>
+      <?php if ($shipping_method) { ?>
+      <div id="tab-shipping" class="vtabs-content">
+        <table class="form">
+          <tr>
+            <td><?php echo $text_fullname; ?></td>
+            <td><?php echo $shipping_fullname; ?></td>
+          </tr>
+          <tr>
+            <td><?php echo $text_telephone; ?></td>
+            <td><?php echo $shipping_telephone; ?></td>
+          </tr>
+          <?php if ($shipping_company) { ?>
+          <tr>
+            <td><?php echo $text_company; ?></td>
+            <td><?php echo $shipping_company; ?></td>
+          </tr>
+          <?php } ?>
+          <tr>
+            <td><?php echo $text_address; ?></td>
+            <td><?php echo $shipping_address; ?></td>
+          </tr>
+
+          <?php if ($shipping_postcode) { ?>
+          <tr>
+            <td><?php echo $text_postcode; ?></td>
+            <td><?php echo $shipping_postcode; ?></td>
+          </tr>
+          <?php } ?>
+          <tr>
+            <td><?php echo $text_province; ?></td>
+            <td><?php echo $shipping_province; ?></td>
+          </tr>
+
+          <?php if ($shipping_method) { ?>
+          <tr>
+            <td><?php echo $text_shipping_method; ?></td>
+            <td><?php echo $shipping_method; ?></td>
+          </tr>
+          <?php } ?>
+        </table>
+        <br/>
+        <div id="shipment"></div>
+        <table class="form">
+          <tr>
+            <td><?php echo $entry_order_status; ?></td>
+            <td><select name="order_status_id">
+                <?php foreach ($order_statuses as $item) { ?>
+                <?php if ($item['order_status_id'] == $order_status_id) { ?>
+                <option value="<?php echo $item['order_status_id']; ?>" selected="selected"><?php echo $item['name']; ?></option>
+                <?php } else { ?>
+                <option value="<?php echo $item['order_status_id']; ?>"><?php echo $item['name']; ?></option>
+                <?php } ?>
+                <?php } ?>
+              </select></td>
+          </tr>
+          <tr>
+            <td><?php echo $entry_notify; ?></td>
+            <td><input type="checkbox" name="notify" value="1" checked/></td>
+          </tr>
+          <tr>
+            <td><?php echo $entry_comment; ?></td>
+            <td><textarea name="comment" cols="40" rows="3" style="width: 99%"></textarea>
+              <div style="margin-top: 10px; text-align: right;"><a id="button-shipment" class="button"><?php echo $button_add_shipment; ?></a></div></td>
+          </tr>
+        </table>
+      </div>
+      <?php } ?>
+
       <div id="tab-history" class="vtabs-content">
         <div id="history"></div>
         <table class="form">
           <tr>
             <td><?php echo $entry_order_status; ?></td>
             <td><select name="order_status_id">
-                <?php foreach ($order_statuses as $order_statuses) { ?>
-                <?php if ($order_statuses['order_status_id'] == $order_status_id) { ?>
-                <option value="<?php echo $order_statuses['order_status_id']; ?>" selected="selected"><?php echo $order_statuses['name']; ?></option>
+                <?php foreach ($order_statuses as $item) { ?>
+                <?php if ($item['order_status_id'] == $order_status_id) { ?>
+                <option value="<?php echo $item['order_status_id']; ?>" selected="selected"><?php echo $item['name']; ?></option>
                 <?php } else { ?>
-                <option value="<?php echo $order_statuses['order_status_id']; ?>"><?php echo $order_statuses['name']; ?></option>
+                <option value="<?php echo $item['order_status_id']; ?>"><?php echo $item['name']; ?></option>
                 <?php } ?>
                 <?php } ?>
               </select></td>
@@ -257,7 +283,7 @@
           </tr>
           <tr>
             <td><?php echo $entry_comment; ?></td>
-            <td><textarea name="comment" cols="40" rows="8" style="width: 99%"></textarea>
+            <td><textarea name="comment" cols="40" rows="3" style="width: 99%"></textarea>
               <div style="margin-top: 10px; text-align: right;"><a id="button-history" class="button"><?php echo $button_add_history; ?></a></div></td>
           </tr>
         </table>
@@ -481,7 +507,8 @@ $('#commission-remove').live('click', function() {
 		}
 	});
 });
-
+//--></script> 
+<script type="text/javascript"><!--
 $('#history .pagination a').live('click', function() {
 	$('#history').load(this.href);
 	
@@ -513,6 +540,40 @@ $('#button-history').live('click', function() {
 			$('#order-status').html($('select[name=\'order_status_id\'] option:selected').text());
 		}
 	});
+});
+//--></script> 
+<script type="text/javascript"><!--
+$('#shipment .pagination a').live('click', function() {
+  $('#shipment').load(this.href);
+  
+  return false;
+});     
+
+$('#shipment').load('index.php?route=sale/order/shipment&token=<?php echo $token; ?>&order_id=<?php echo $order_id; ?>');
+
+$('#button-shipment').live('click', function() {
+  $.ajax({
+    url: 'index.php?route=sale/order/shipment&token=<?php echo $token; ?>&order_id=<?php echo $order_id; ?>',
+    type: 'post',
+    dataType: 'html',
+    data: 'order_status_id=' + encodeURIComponent($('select[name=\'order_status_id\']').val()) + '&notify=' + encodeURIComponent($('input[name=\'notify\']').attr('checked') ? 1 : 0) + '&append=' + encodeURIComponent($('input[name=\'append\']').attr('checked') ? 1 : 0) + '&comment=' + encodeURIComponent($('textarea[name=\'comment\']').val()),
+    beforeSend: function() {
+      $('.success, .warning').remove();
+      $('#button-shipment').attr('disabled', true);
+      $('#shipment').prepend('<div class="attention"><img src="view/image/loading.gif" alt="" /> <?php echo $text_wait; ?></div>');
+    },
+    complete: function() {
+      $('#button-shipment').attr('disabled', false);
+      $('.attention').remove();
+    },
+    success: function(html) {
+      $('#shipment').html(html);
+      
+      $('textarea[name=\'comment\']').val('');
+      
+      $('#order-status').html($('select[name=\'order_status_id\'] option:selected').text());
+    }
+  });
 });
 //--></script> 
 <script type="text/javascript"><!--

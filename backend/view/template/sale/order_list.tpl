@@ -21,6 +21,13 @@
       </div>
     </div>
     <div class="content">
+      <div id="htabs" class="htabs">
+        <a style="display:inline;" href="<?php echo $all ?>" class="<?php echo (!$tab || $tab=='all') ? 'selected' : '' ?>"><?php echo $tab_all; ?></a>
+        <?php foreach ($order_statuses as $item): ?>
+        <a style="display:inline;" href="<?php echo $item['link'] ?>" <?php echo $tab==$item['order_status_id'] ? 'class="selected"' : '' ?>><?php echo $item['name']; ?></a>
+        <?php endforeach ?>
+        
+      </div>
       <form action="" method="post" enctype="multipart/form-data" id="form">
         <table class="list">
           <thead>
@@ -31,6 +38,7 @@
                 <?php } else { ?>
                 <a href="<?php echo $sort_order; ?>"><?php echo $column_order_id; ?></a>
                 <?php } ?></td>
+              <td class="left"><?php echo '商品'; ?></td>
               <td class="left"><?php if ($sort == 'customer') { ?>
                 <a href="<?php echo $sort_customer; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_customer; ?></a>
                 <?php } else { ?>
@@ -63,6 +71,7 @@
             <tr class="filter">
               <td></td>
               <td align="right"><input type="text" name="filter_order_id" value="<?php echo $filter_order_id; ?>" size="4" style="text-align: right;" /></td>
+              <td></td>
               <td><input type="text" name="filter_customer" value="<?php echo $filter_customer; ?>" /></td>
               <td><select name="filter_order_status_id">
                   <option value="*"></option>
@@ -93,6 +102,23 @@
                 <input type="checkbox" name="selected[]" value="<?php echo $order['order_id']; ?>" />
                 <?php } ?></td>
               <td class="right"><?php echo $order['order_id']; ?></td>
+              <td class="left">
+                <?php if(!empty($order['order_products'])){ 
+                  foreach ($order['order_products'] as $_product){?>
+                  <div><?php echo $_product['name']; ?>
+                  <?php if($_option_number = count($_product['option'])){ ?>
+                    <br> &nbsp;<small> - 
+                    <?php $n =1; foreach ($_product['option'] as $_option){                   
+                     echo $_option['value'].($n == $_option_number  ? '' : ' & ' );
+                     $n++;
+                    } ?> 
+                    </small>
+                  <?php }?>
+                  <small> <i>(Qty:<?php echo $_product['quantity'] ?>) </i> </small>
+                  </div>
+                <?php }
+                }?>
+              </td>
               <td class="left"><?php echo $order['customer']; ?></td>
               <td class="left"><?php echo $order['status']; ?></td>
               <td class="right"><?php echo $order['total']; ?></td>

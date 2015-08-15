@@ -188,14 +188,14 @@ class ModelSaleOrder extends Model {
 	}
 	
 	public function getOrders($data = array()) {
-		$sql = "SELECT o.order_id, o.fullname AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS status, o.total, o.currency_code, o.currency_value, o.date_added, o.date_modified FROM `" . DB_PREFIX . "order` o";
+		$sql = "SELECT o.order_id, o.fullname AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS status, o.total, o.currency_code, o.currency_value, o.date_added, o.date_modified FROM `" . DB_PREFIX . "order` o WHERE 1 ";
 
 		if (isset($data['filter_order_status_id']) && !is_null($data['filter_order_status_id'])) {
-			$sql .= " WHERE o.order_status_id = '" . (int)$data['filter_order_status_id'] . "'";
+			$sql .= " AND o.order_status_id = '" . (int)$data['filter_order_status_id'] . "'";
 		} else {
-			$sql .= " WHERE o.order_status_id > '0'";
+			$sql .= " AND o.order_status_id > '0'";
 		}
-
+		
 		if (!empty($data['filter_order_id'])) {
 			$sql .= " AND o.order_id = '" . (int)$data['filter_order_id'] . "'";
 		}
@@ -216,8 +216,12 @@ class ModelSaleOrder extends Model {
 			$sql .= " AND o.total = '" . (float)$data['filter_total'] . "'";
 		}
 
+		if (isset($data['tab'])) {
+			$sql .= " AND o.order_status_id = '" . (int)$data['tab'] . "'";
+		}
 		$sort_data = array(
 			'o.order_id',
+			'o.order_status_id',
 			'customer',
 			'status',
 			'o.date_added',
@@ -291,12 +295,12 @@ class ModelSaleOrder extends Model {
 	}
 
 	public function getTotalOrders($data = array()) {
-      	$sql = "SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "order`";
+      	$sql = "SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "order` WHERE 1 ";
 
 		if (isset($data['filter_order_status_id']) && !is_null($data['filter_order_status_id'])) {
-			$sql .= " WHERE order_status_id = '" . (int)$data['filter_order_status_id'] . "'";
+			$sql .= " AND order_status_id = '" . (int)$data['filter_order_status_id'] . "'";
 		} else {
-			$sql .= " WHERE order_status_id > '0'";
+			$sql .= " AND order_status_id > '0'";
 		}
 
 		if (!empty($data['filter_order_id'])) {
@@ -318,7 +322,9 @@ class ModelSaleOrder extends Model {
 		if (!empty($data['filter_total'])) {
 			$sql .= " AND total = '" . (float)$data['filter_total'] . "'";
 		}
-
+		if (isset($data['tab'])) {
+			$sql .= " AND order_status_id = '" . (int)$data['tab'] . "'";
+		}
 		$query = $this->db->query($sql);
 
 		return $query->row['total'];

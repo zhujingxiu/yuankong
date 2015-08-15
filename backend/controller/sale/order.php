@@ -189,16 +189,16 @@ class ControllerSaleOrder extends Controller {
 			$filter_order_id = null;
 		}
 
-		if (isset($this->request->get['filter_customer'])) {
-			$filter_customer = $this->request->get['filter_customer'];
-		} else {
-			$filter_customer = null;
-		}
-
 		if (isset($this->request->get['filter_order_status_id'])) {
 			$filter_order_status_id = $this->request->get['filter_order_status_id'];
 		} else {
 			$filter_order_status_id = null;
+		}
+
+		if (isset($this->request->get['filter_customer'])) {
+			$filter_customer = $this->request->get['filter_customer'];
+		} else {
+			$filter_customer = null;
 		}
 		
 		if (isset($this->request->get['filter_total'])) {
@@ -217,6 +217,12 @@ class ControllerSaleOrder extends Controller {
 			$filter_date_modified = $this->request->get['filter_date_modified'];
 		} else {
 			$filter_date_modified = null;
+		}
+
+		if (isset($this->request->get['tab'])) {
+			$tab = $this->request->get['tab'];
+		} else {
+			$tab = null;
 		}
 
 		if (isset($this->request->get['sort'])) {
@@ -263,6 +269,10 @@ class ControllerSaleOrder extends Controller {
 			$url .= '&filter_date_modified=' . $this->request->get['filter_date_modified'];
 		}
 
+		if (isset($this->request->get['tab'])) {
+			$url .= '&tab=' . $this->request->get['tab'];
+		}
+
 		if (isset($this->request->get['sort'])) {
 			$url .= '&sort=' . $this->request->get['sort'];
 		}
@@ -292,16 +302,58 @@ class ControllerSaleOrder extends Controller {
 		$this->data['invoice'] = $this->url->link('sale/order/invoice', 'token=' . $this->session->data['token'], 'SSL');
 		$this->data['insert'] = $this->url->link('sale/order/insert', 'token=' . $this->session->data['token'], 'SSL');
 		$this->data['delete'] = $this->url->link('sale/order/delete', 'token=' . $this->session->data['token'] . $url, 'SSL');
+		$this->load->model('localisation/order_status');
+		$url = '';
+
+		if (isset($this->request->get['filter_order_id'])) {
+			$url .= '&filter_order_id=' . $this->request->get['filter_order_id'];
+		}
+		
+		if (isset($this->request->get['filter_customer'])) {
+			$url .= '&filter_customer=' . urlencode(html_entity_decode($this->request->get['filter_customer'], ENT_QUOTES, 'UTF-8'));
+		}
+											
+		if (isset($this->request->get['filter_order_status_id'])) {
+			$url .= '&filter_order_status_id=' . $this->request->get['filter_order_status_id'];
+		}
+		
+		if (isset($this->request->get['filter_total'])) {
+			$url .= '&filter_total=' . $this->request->get['filter_total'];
+		}
+					
+		if (isset($this->request->get['filter_date_added'])) {
+			$url .= '&filter_date_added=' . $this->request->get['filter_date_added'];
+		}
+		
+		if (isset($this->request->get['filter_date_modified'])) {
+			$url .= '&filter_date_modified=' . $this->request->get['filter_date_modified'];
+		}
+
+		if (isset($this->request->get['sort'])) {
+			$url .= '&sort=' . $this->request->get['sort'];
+		}
+
+		if (isset($this->request->get['order'])) {
+			$url .= '&order=' . $this->request->get['order'];
+		}
+
+		$this->data['all'] = $this->url->link('sale/order', 'token=' . $this->session->data['token'] . $url, 'SSL');
+
+    	$this->data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
+    	foreach ($this->data['order_statuses'] as $key => $item) {
+    		$this->data['order_statuses'][$key]['link'] = $this->url->link('sale/order', 'tab='.$item['order_status_id'].'&token=' . $this->session->data['token'] . $url, 'SSL');
+    	}
 
 		$this->data['orders'] = array();
 
 		$data = array(
 			'filter_order_id'        => $filter_order_id,
 			'filter_customer'	     => $filter_customer,
-			'filter_order_status_id' => $filter_order_status_id,
 			'filter_total'           => $filter_total,
 			'filter_date_added'      => $filter_date_added,
 			'filter_date_modified'   => $filter_date_modified,
+			'filter_order_status_id' => $filter_order_status_id,
+			'tab'                 	 => $tab,
 			'sort'                   => $sort,
 			'order'                  => $order,
 			'start'                  => ($page - 1) * $this->config->get('config_admin_limit'),
@@ -327,9 +379,25 @@ class ControllerSaleOrder extends Controller {
 				);
 			}
 			*/
+			$order_products = $this->model_sale_order->getOrderProducts((int)$result['order_id']);
+			if($order_products){
+				foreach($order_products as $opkey => $order_product){
+					$order_option = $this->model_sale_order->getOrderOptions((int)$result['order_id'], $order_product['order_product_id']);
+					$order_products[$opkey] = array(
+						'order_product_id' => $order_product['order_product_id'],
+						'product_id'       => $order_product['product_id'],
+						'name'             => $order_product['name'],
+						'option'           => $order_option,
+						'quantity'         => $order_product['quantity'],
+						'price'            => $order_product['price'],
+						'total'            => $order_product['total'],
+					);
+				}
+			}
 			$this->data['orders'][] = array(
 				'order_id'      => $result['order_id'],
 				'customer'      => $result['customer'],
+				'products'		=> $order_products,
 				'status'        => $result['status'],
 				'total'         => $this->currency->format($result['total'], $result['currency_code'], $result['currency_value']),
 				'date_added'    => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
@@ -357,6 +425,10 @@ class ControllerSaleOrder extends Controller {
 		$this->data['button_delete'] = $this->language->get('button_delete');
 		$this->data['button_filter'] = $this->language->get('button_filter');
 
+		$this->data['tab_all'] = $this->language->get('tab_all');
+		$this->data['tab_pending'] = $this->language->get('tab_pending');
+		$this->data['tab_processing'] = $this->language->get('tab_processing');
+		$this->data['tab_processed'] = $this->language->get('tab_processed');
 		$this->data['token'] = $this->session->data['token'];
 		
 		if (isset($this->error['warning'])) {
@@ -397,6 +469,10 @@ class ControllerSaleOrder extends Controller {
 		
 		if (isset($this->request->get['filter_date_modified'])) {
 			$url .= '&filter_date_modified=' . $this->request->get['filter_date_modified'];
+		}
+
+		if (isset($this->request->get['tab'])) {
+			$url .= '&tab=' . $this->request->get['tab'];
 		}
 
 		if ($order == 'ASC') {
@@ -442,6 +518,9 @@ class ControllerSaleOrder extends Controller {
 			$url .= '&filter_date_modified=' . $this->request->get['filter_date_modified'];
 		}
 
+		if (isset($this->request->get['tab'])) {
+			$url .= '&tab=' . $this->request->get['tab'];
+		}
 		if (isset($this->request->get['sort'])) {
 			$url .= '&sort=' . $this->request->get['sort'];
 		}
@@ -449,7 +528,7 @@ class ControllerSaleOrder extends Controller {
 		if (isset($this->request->get['order'])) {
 			$url .= '&order=' . $this->request->get['order'];
 		}
-
+		
 		$pagination = new Pagination();
 		$pagination->total = $order_total;
 		$pagination->page = $page;
@@ -466,10 +545,7 @@ class ControllerSaleOrder extends Controller {
 		$this->data['filter_date_added'] = $filter_date_added;
 		$this->data['filter_date_modified'] = $filter_date_modified;
 
-		$this->load->model('localisation/order_status');
-
-    	$this->data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
-
+		$this->data['tab'] = $tab;
 		$this->data['sort'] = $sort;
 		$this->data['order'] = $order;
 
@@ -1127,6 +1203,7 @@ class ControllerSaleOrder extends Controller {
 			$this->data['button_invoice'] = $this->language->get('button_invoice');
 			$this->data['button_cancel'] = $this->language->get('button_cancel');
 			$this->data['button_add_history'] = $this->language->get('button_add_history');
+			$this->data['button_add_shipment'] = $this->language->get('button_add_shipment');
 		
 			$this->data['tab_order'] = $this->language->get('tab_order');
 			$this->data['tab_payment'] = $this->language->get('tab_payment');
@@ -1561,7 +1638,69 @@ class ControllerSaleOrder extends Controller {
 		
 		$this->response->setOutput($this->render());
   	}
+
+	public function shipment() {
+    	$this->language->load('sale/order');
+		
+		$this->data['error'] = '';
+		$this->data['success'] = '';
+		
+		$this->load->model('sale/order');
 	
+		if ($this->request->server['REQUEST_METHOD'] == 'POST') {
+			if (!$this->user->hasPermission('modify', 'sale/order')) { 
+				$this->data['error'] = $this->language->get('error_permission');
+			}
+			
+			if (!$this->data['error']) { 
+				$this->model_sale_order->addOrderHistory($this->request->get['order_id'], $this->request->post);
+				
+				$this->data['success'] = $this->language->get('text_success');
+			}
+		}
+				
+		$this->data['text_no_results'] = $this->language->get('text_no_results');
+		
+		$this->data['column_date_added'] = $this->language->get('column_date_added');
+		$this->data['column_status'] = $this->language->get('column_status');
+		$this->data['column_notify'] = $this->language->get('column_notify');
+		$this->data['column_comment'] = $this->language->get('column_comment');
+
+		if (isset($this->request->get['page'])) {
+			$page = $this->request->get['page'];
+		} else {
+			$page = 1;
+		}  
+		
+		$this->data['histories'] = array();
+			
+		$results = $this->model_sale_order->getOrderHistories($this->request->get['order_id'], ($page - 1) * 10, 10);
+      		
+		foreach ($results as $result) {
+        	$this->data['histories'][] = array(
+				'notify'     => $result['notify'] ? $this->language->get('text_yes') : $this->language->get('text_no'),
+				'status'     => $result['status'],
+				'comment'    => nl2br($result['comment']),
+        		'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added']))
+        	);
+      	}			
+		
+		$history_total = $this->model_sale_order->getTotalOrderHistories($this->request->get['order_id']);
+			
+		$pagination = new Pagination();
+		$pagination->total = $history_total;
+		$pagination->page = $page;
+		$pagination->limit = 10; 
+		$pagination->text = $this->language->get('text_pagination');
+		$pagination->url = $this->url->link('sale/order/history', 'token=' . $this->session->data['token'] . '&order_id=' . $this->request->get['order_id'] . '&page={page}', 'SSL');
+			
+		$this->data['pagination'] = $pagination->render();
+		
+		$this->template = 'sale/order_shipment.tpl';		
+		
+		$this->response->setOutput($this->render());
+  	}
+
 	public function download() {
 		$this->load->model('sale/order');
 		

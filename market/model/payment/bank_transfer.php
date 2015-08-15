@@ -3,7 +3,7 @@ class ModelPaymentBankTransfer extends Model {
   	public function getMethod($total) {
 		$this->language->load('payment/bank_transfer');
 		
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "area_to_area_geo WHERE area_geo_id = '" . (int)$this->config->get('bank_transfer_area_geo_id') . "' AND country_id = '" . (int)$address['country_id'] . "' AND (area_id = '" . (int)$address['area_id'] . "' OR area_id = '0')");
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "area_to_area_geo WHERE area_geo_id = '" . (int)$this->config->get('bank_transfer_area_geo_id') . "' AND (area_id = '" . (int)$address['area_id'] . "' OR area_id = '0')");
 		
 		if ($this->config->get('bank_transfer_total') > 0 && $this->config->get('bank_transfer_total') > $total) {
 			$status = false;

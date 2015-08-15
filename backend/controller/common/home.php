@@ -192,7 +192,41 @@ class ControllerCommonHome extends Controller {
 		
 			$this->model_localisation_currency->updateCurrencies();
 		}
-		
+
+		$url = '';
+		$this->data['text_emenu_add_product'] = $this->language->get('text_emenu_add_product');
+		$this->data['emenu_add_product'] = $this->url->link('catalog/product/insert', 'token=' . $this->session->data['token'] . $url, 'SSL');
+		$this->data['text_emenu_products'] = $this->language->get('text_emenu_products');
+		$this->data['emenu_products'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['text_emenu_add_category'] = $this->language->get('text_emenu_add_category');
+		$this->data['emenu_add_category'] = $this->url->link('catalog/category/insert', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['text_emenu_projects'] = $this->language->get('text_emenu_projects');
+		$this->data['emenu_projects'] = $this->url->link('sale/project', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['text_emenu_options'] = $this->language->get('text_emenu_options');
+		$this->data['emenu_options'] = $this->url->link('catalog/option', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['text_emenu_manufacturer'] = $this->language->get('text_emenu_manufacturer');
+		$this->data['emenu_manufacturer'] = $this->url->link('catalog/manufacturer', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['text_emenu_information'] = $this->language->get('text_emenu_information');
+		$this->data['emenu_information'] = $this->url->link('catalog/information', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['text_emenu_reviews'] = $this->language->get('text_emenu_reviews');
+		$this->data['emenu_reviews'] = $this->url->link('catalog/review', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['text_emenu_orders'] = $this->language->get('text_emenu_orders');
+		$this->data['emenu_orders'] = $this->url->link('sale/order', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['text_emenu_returns'] = $this->language->get('text_emenu_returns');
+		$this->data['emenu_returns'] = $this->url->link('sale/return', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['text_emenu_customers'] = $this->language->get('text_emenu_customers');
+		$this->data['emenu_customers'] = $this->url->link('sale/customer', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['text_emenu_coupons'] = $this->language->get('text_emenu_coupons');
+		$this->data['emenu_coupons'] = $this->url->link('sale/coupon', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['text_emenu_mail'] = $this->language->get('text_emenu_mail');
+		$this->data['emenu_mail'] = $this->url->link('sale/contact', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['text_emenu_settings'] = $this->language->get('text_emenu_settings');
+		$this->data['emenu_settings'] = $this->url->link('setting/store', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['text_emenu_purchased'] = $this->language->get('text_emenu_purchased');
+		$this->data['emenu_purchased'] = $this->url->link('report/product_purchased', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['text_emenu_backup_restore'] = $this->language->get('text_emenu_backup_restore');
+		$this->data['emenu_backup_restore'] = $this->url->link('tool/backup', 'token=' . $this->session->data['token'], 'SSL');
+	
 		$this->template = 'common/home.tpl';
 		$this->children = array(
 			'common/header',

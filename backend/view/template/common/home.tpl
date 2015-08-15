@@ -28,6 +28,47 @@
       <h1><img src="view/image/home.png" alt="" /> <?php echo $heading_title; ?></h1>
     </div>
     <div class="content">
+      <div class="shortcuts">
+        <ul>
+          <li> <a href="<?php echo $emenu_add_product; ?>"> <img src="view/image/shortcut/add-product.png">
+            <h6><?php echo $text_emenu_add_product; ?></h6>
+            </a> </li>
+          <li> <a href="<?php echo $emenu_products; ?>"> <img src="view/image/shortcut/products.png">
+            <h6><?php echo $text_emenu_products; ?></h6>
+            </a> </li>
+          <li> <a href="<?php echo $emenu_add_category; ?>"> <img src="view/image/shortcut/add-category.png">
+            <h6><?php echo $text_emenu_add_category; ?></h6>
+            </a> </li>
+          <li> <a href="<?php echo $emenu_projects; ?>"> <img src="view/image/shortcut/projects.png">
+            <h6><?php echo $text_emenu_projects; ?></h6>
+            </a> </li>
+          <li> <a href="<?php echo $emenu_options; ?>"> <img src="view/image/shortcut/options.png">
+            <h6><?php echo $text_emenu_options; ?></h6>
+            </a> </li>
+          <li> <a href="<?php echo $emenu_information; ?>"> <img src="view/image/shortcut/information.png">
+            <h6><?php echo $text_emenu_information; ?></h6>
+            </a> </li>
+          <li> <a href="<?php echo $emenu_reviews; ?>"> <img src="view/image/shortcut/reviews.png">
+            <h6><?php echo $text_emenu_reviews; ?></h6>
+            </a> </li>
+          <li> <a href="<?php echo $emenu_orders; ?>"> <img src="view/image/shortcut/orders.png">
+            <h6><?php echo $text_emenu_orders; ?></h6>
+            </a> </li>
+          <li> <a href="<?php echo $emenu_returns; ?>"> <img src="view/image/shortcut/returns.png">
+            <h6><?php echo $text_emenu_returns; ?></h6>
+            </a> </li>
+          <li> <a href="<?php echo $emenu_customers; ?>"> <img src="view/image/shortcut/customers.png">
+            <h6><?php echo $text_emenu_customers; ?></h6>
+            </a> </li>
+          <li> <a href="<?php echo $emenu_settings; ?>"> <img src="view/image/shortcut/settings.png">
+            <h6><?php echo $text_emenu_settings; ?></h6>
+            </a> </li>
+          <li> <a href="<?php echo $emenu_backup_restore; ?>"> <img src="view/image/shortcut/backup_restore.png">
+            <h6><?php echo $text_emenu_backup_restore; ?></h6>
+            </a> </li>
+        </ul>
+      </div>
+      <div style="clear:both;"></div>
       <div class="overview">
         <div class="dashboard-heading"><?php echo $text_overview; ?></div>
         <div class="dashboard-content">

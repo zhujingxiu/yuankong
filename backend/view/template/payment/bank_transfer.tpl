@@ -43,14 +43,14 @@
               </select></td>
           </tr>
           <tr>
-            <td><?php echo $entry_geo_zone; ?></td>
-            <td><select name="bank_transfer_geo_zone_id">
+            <td><?php echo $entry_area_geo; ?></td>
+            <td><select name="bank_transfer_area_geo_id">
                 <option value="0"><?php echo $text_all_zones; ?></option>
-                <?php foreach ($geo_zones as $geo_zone) { ?>
-                <?php if ($geo_zone['geo_zone_id'] == $bank_transfer_geo_zone_id) { ?>
-                <option value="<?php echo $geo_zone['geo_zone_id']; ?>" selected="selected"><?php echo $geo_zone['name']; ?></option>
+                <?php foreach ($area_geos as $area_geo) { ?>
+                <?php if ($area_geo['area_geo_id'] == $bank_transfer_area_geo_id) { ?>
+                <option value="<?php echo $area_geo['area_geo_id']; ?>" selected="selected"><?php echo $area_geo['name']; ?></option>
                 <?php } else { ?>
-                <option value="<?php echo $geo_zone['geo_zone_id']; ?>"><?php echo $geo_zone['name']; ?></option>
+                <option value="<?php echo $area_geo['area_geo_id']; ?>"><?php echo $area_geo['name']; ?></option>
                 <?php } ?>
                 <?php } ?>
               </select></td>

@@ -41,4 +41,20 @@ $_['error_image_cache']             = '警告： 图片缓存目录%s 不可写�
 $_['error_cache']                   = '警告： 缓存目录%s 不可写！';
 $_['error_download']                = '警告： 下载目录%s 不可写！';
 $_['error_logs']                    = '警告： 日志目录%s 不可写！';
-?>
+
+$_['text_emenu_add_product']    = '添加商品';
+$_['text_emenu_products']       = '商品管理';
+$_['text_emenu_add_category']   = '添加分类';
+$_['text_emenu_projects']       = '工程管理';
+$_['text_emenu_options']        = '售价选项';
+$_['text_emenu_manufacturer']   = '品牌厂商';
+$_['text_emenu_information']    = '文章管理';
+$_['text_emenu_reviews']        = '商品点评';
+$_['text_emenu_orders']         = '订单管理';
+$_['text_emenu_returns']        = '退货退款';
+$_['text_emenu_customers']      = '客户管理';
+$_['text_emenu_coupons']        = '优惠券';
+$_['text_emenu_mail']           = '邮件通知';
+$_['text_emenu_settings']       = '系统设置';
+$_['text_emenu_purchased']      = 'Purchased';
+$_['text_emenu_backup_restore'] = '系统备份';

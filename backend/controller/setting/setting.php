@@ -83,8 +83,16 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_company'] = $this->language->get('entry_company');		
 		$this->data['entry_order_edit'] = $this->language->get('entry_order_edit');
 		$this->data['entry_invoice_prefix'] = $this->language->get('entry_invoice_prefix');
+
 		$this->data['entry_order_status'] = $this->language->get('entry_order_status');
+		$this->data['entry_paid_status'] = $this->language->get('entry_paid_status');
 		$this->data['entry_complete_status'] = $this->language->get('entry_complete_status');	
+		$this->data['entry_unshipped_status'] = $this->language->get('entry_unshipped_status');	
+		$this->data['entry_shipped_status'] = $this->language->get('entry_shipped_status');	
+		$this->data['entry_received_status'] = $this->language->get('entry_received_status');	
+		$this->data['entry_refunded_status'] = $this->language->get('entry_refunded_status');	
+		$this->data['entry_closed_status'] = $this->language->get('entry_closed_status');	
+
 		$this->data['entry_stock_display'] = $this->language->get('entry_stock_display');
 		$this->data['entry_stock_warning'] = $this->language->get('entry_stock_warning');
 		$this->data['entry_stock_checkout'] = $this->language->get('entry_stock_checkout');
@@ -582,13 +590,43 @@ class ControllerSettingSetting extends Controller {
 		} else {
 			$this->data['config_order_status_id'] = $this->config->get('config_order_status_id');		
 		}
-		
+		if (isset($this->request->post['config_paid_status_id'])) {
+			$this->data['config_paid_status_id'] = $this->request->post['config_paid_status_id'];
+		} else {
+			$this->data['config_paid_status_id'] = $this->config->get('config_paid_status_id');		
+		}
+
+		if (isset($this->request->post['config_shipped_status_id'])) {
+			$this->data['config_shipped_status_id'] = $this->request->post['config_shipped_status_id'];
+		} else {
+			$this->data['config_shipped_status_id'] = $this->config->get('config_shipped_status_id');		
+		}
+
+		if (isset($this->request->post['config_unshipped_status_id'])) {
+			$this->data['config_unshipped_status_id'] = $this->request->post['config_unshipped_status_id'];
+		} else {
+			$this->data['config_unshipped_status_id'] = $this->config->get('config_unshipped_status_id');		
+		}
+		if (isset($this->request->post['config_received_status_id'])) {
+			$this->data['config_received_status_id'] = $this->request->post['config_received_status_id'];
+		} else {
+			$this->data['config_received_status_id'] = $this->config->get('config_received_status_id');		
+		}
 		if (isset($this->request->post['config_complete_status_id'])) {
 			$this->data['config_complete_status_id'] = $this->request->post['config_complete_status_id'];
 		} else {
 			$this->data['config_complete_status_id'] = $this->config->get('config_complete_status_id');
 		}	
-		
+		if (isset($this->request->post['config_refunded_status_id'])) {
+			$this->data['config_refunded_status_id'] = $this->request->post['config_refunded_status_id'];
+		} else {
+			$this->data['config_refunded_status_id'] = $this->config->get('config_refunded_status_id');		
+		}
+		if (isset($this->request->post['config_closed_status_id'])) {
+			$this->data['config_closed_status_id'] = $this->request->post['config_closed_status_id'];
+		} else {
+			$this->data['config_closed_status_id'] = $this->config->get('config_closed_status_id');		
+		}
 		$this->load->model('localisation/order_status');
 		
 		$this->data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();	

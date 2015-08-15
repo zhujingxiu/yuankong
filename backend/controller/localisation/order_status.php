@@ -114,7 +114,7 @@ class ControllerLocalisationOrderStatus extends Controller {
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
-			$sort = 'name';
+			$sort = 'order_status_id';
 		}
 		
 		if (isset($this->request->get['order'])) {

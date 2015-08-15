@@ -1,7 +1,9 @@
 <?php
 // Heading
 $_['heading_title']           = '订单管理';
-
+$_['tab_all']                 = '全部订单';
+$_['tab_shipping']            = '货运信息';
+$_['button_add_shipment']     = '添加货运信息';
 // Text
 $_['text_success']            = '成功： 您已成功更新订单！';
 $_['text_order_id']           = '订单号：';
@@ -64,8 +66,8 @@ $_['text_credit_added']       = '账户信用已添加！';
 $_['text_credit_remove']      = '删除信用';
 $_['text_credit_removed']     = '账户信用已添加！';
 $_['text_upload']             = '文件已经成功上传！';
-$_['text_error']                              = '错误：<br /><span class="help">Returns an error string with a warning message or a reason why the request failed.</span>';
-$_['text_success_address']                    = '成功： 您已成功更新订单地址！';
+$_['text_error']              = '错误：<br /><span class="help">Returns an error string with a warning message or a reason why the request failed.</span>';
+$_['text_success_address']    = '成功： 您已成功更新订单地址！';
 
 // Column
 $_['column_order_id']         = '订单号';

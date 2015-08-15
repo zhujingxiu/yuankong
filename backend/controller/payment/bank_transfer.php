@@ -26,7 +26,7 @@ class ControllerPaymentBankTransfer extends Controller {
 		$this->data['entry_bank'] = $this->language->get('entry_bank');
 		$this->data['entry_total'] = $this->language->get('entry_total');	
 		$this->data['entry_order_status'] = $this->language->get('entry_order_status');		
-		$this->data['entry_geo_zone'] = $this->language->get('entry_geo_zone');
+		$this->data['entry_area_geo'] = $this->language->get('entry_area_geo');
 		$this->data['entry_status'] = $this->language->get('entry_status');
 		$this->data['entry_sort_order'] = $this->language->get('entry_sort_order');
 		
@@ -103,15 +103,15 @@ class ControllerPaymentBankTransfer extends Controller {
 		
 		$this->data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
 		
-		if (isset($this->request->post['bank_transfer_geo_zone_id'])) {
-			$this->data['bank_transfer_geo_zone_id'] = $this->request->post['bank_transfer_geo_zone_id'];
+		if (isset($this->request->post['bank_transfer_area_geo_id'])) {
+			$this->data['bank_transfer_area_geo_id'] = $this->request->post['bank_transfer_area_geo_id'];
 		} else {
-			$this->data['bank_transfer_geo_zone_id'] = $this->config->get('bank_transfer_geo_zone_id'); 
+			$this->data['bank_transfer_area_geo_id'] = $this->config->get('bank_transfer_area_geo_id'); 
 		} 
 		
-		$this->load->model('localisation/geo_zone');
+		$this->load->model('localisation/area_geo');
 										
-		$this->data['geo_zones'] = $this->model_localisation_geo_zone->getGeoZones();
+		$this->data['area_geos'] = $this->model_localisation_area_geo->getAreaGeos();
 		
 		if (isset($this->request->post['bank_transfer_status'])) {
 			$this->data['bank_transfer_status'] = $this->request->post['bank_transfer_status'];
@@ -157,4 +157,3 @@ class ControllerPaymentBankTransfer extends Controller {
 		}	
 	}
 }
-?>

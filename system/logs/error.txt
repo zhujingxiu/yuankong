@@ -2034,3 +2034,142 @@
 2015-08-14 23:04:42 - PHP Notice:  Undefined variable: home in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 46
 2015-08-14 23:04:44 - PHP Notice:  Undefined variable: home in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 46
 2015-08-14 23:05:08 - PHP Notice:  Undefined variable: home in E:\wamp\www\yuankong\market\view\theme\yuankong\template\information\information.tpl on line 46
+2015-08-15 9:07:50 - PHP Notice:  Error: Could not load model localisation/geo_zone! in D:\wamp\www\yuankong\system\engine\loader.php on line 48
+2015-08-15 9:07:50 - PHP Notice:  Error: Could not load model localisation/geo_zone! in D:\wamp\www\yuankong\system\engine\loader.php on line 48
+2015-08-15 9:17:07 - PHP Notice:  Error: Could not load model localisation/geo_zone! in D:\wamp\www\yuankong\system\engine\loader.php on line 48
+2015-08-15 9:17:07 - PHP Notice:  Error: Could not load model localisation/geo_zone! in D:\wamp\www\yuankong\system\engine\loader.php on line 48
+2015-08-15 9:18:05 - PHP Notice:  Undefined variable: entry_geo_zone in D:\wamp\www\yuankong\backend\view\template\payment\cod.tpl on line 36
+2015-08-15 9:18:05 - PHP Notice:  Undefined variable: geo_zones in D:\wamp\www\yuankong\backend\view\template\payment\cod.tpl on line 39
+2015-08-15 9:18:05 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\payment\cod.tpl on line 39
+2015-08-15 10:52:00 - PHP Notice:  Error: Could not load language payment/chinapay! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-08-15 10:52:01 - PHP Notice:  Error: Could not load language payment/chinapay! in D:\wamp\www\yuankong\system\library\language.php on line 39
+2015-08-15 11:02:23 - PHP Notice:  Undefined variable: column_left in D:\wamp\www\yuankong\backend\view\template\payment\chinapay.tpl on line 1
+2015-08-15 11:02:23 - PHP Notice:  Undefined variable: entry_geo_zone in D:\wamp\www\yuankong\backend\view\template\payment\chinapay.tpl on line 56
+2015-08-15 11:02:23 - PHP Notice:  Undefined variable: geo_zones in D:\wamp\www\yuankong\backend\view\template\payment\chinapay.tpl on line 59
+2015-08-15 11:02:23 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\payment\chinapay.tpl on line 59
+2015-08-15 11:02:23 - PHP Notice:  Undefined variable: column_left in D:\wamp\www\yuankong\backend\view\template\payment\chinapay.tpl on line 1
+2015-08-15 11:02:23 - PHP Notice:  Undefined variable: entry_geo_zone in D:\wamp\www\yuankong\backend\view\template\payment\chinapay.tpl on line 56
+2015-08-15 11:02:23 - PHP Notice:  Undefined variable: geo_zones in D:\wamp\www\yuankong\backend\view\template\payment\chinapay.tpl on line 59
+2015-08-15 11:02:23 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\payment\chinapay.tpl on line 59
+2015-08-15 11:03:30 - PHP Notice:  Undefined variable: column_left in D:\wamp\www\yuankong\backend\view\template\payment\chinapay.tpl on line 1
+2015-08-15 11:03:30 - PHP Notice:  Undefined variable: entry_geo_zone in D:\wamp\www\yuankong\backend\view\template\payment\chinapay.tpl on line 56
+2015-08-15 11:03:30 - PHP Notice:  Undefined variable: geo_zones in D:\wamp\www\yuankong\backend\view\template\payment\chinapay.tpl on line 59
+2015-08-15 11:03:30 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\payment\chinapay.tpl on line 59
+2015-08-15 11:04:41 - PHP Notice:  Undefined variable: entry_geo_zone in D:\wamp\www\yuankong\backend\view\template\payment\chinapay.tpl on line 45
+2015-08-15 11:04:41 - PHP Notice:  Undefined variable: geo_zones in D:\wamp\www\yuankong\backend\view\template\payment\chinapay.tpl on line 48
+2015-08-15 11:04:41 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\payment\chinapay.tpl on line 48
+2015-08-15 12:00:17 - PHP Notice:  Undefined variable: sort_group in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 39
+2015-08-15 12:00:17 - PHP Notice:  Undefined variable: sort_account in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 44
+2015-08-15 12:00:17 - PHP Notice:  Undefined variable: sort_telephone in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 49
+2015-08-15 12:00:17 - PHP Notice:  Undefined variable: sort_group in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 39
+2015-08-15 12:00:17 - PHP Notice:  Undefined variable: sort_account in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 44
+2015-08-15 12:00:17 - PHP Notice:  Undefined variable: sort_telephone in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 49
+2015-08-15 15:36:12 - PHP Notice:  Undefined variable: status in D:\wamp\www\yuankong\backend\controller\sale\order.php on line 422
+2015-08-15 15:36:12 - PHP Notice:  Undefined variable: status in D:\wamp\www\yuankong\backend\controller\sale\order.php on line 479
+2015-08-15 15:36:13 - PHP Notice:  Undefined variable: status in D:\wamp\www\yuankong\backend\controller\sale\order.php on line 422
+2015-08-15 15:36:13 - PHP Notice:  Undefined variable: status in D:\wamp\www\yuankong\backend\controller\sale\order.php on line 479
+2015-08-15 15:38:17 - PHP Notice:  Undefined variable: sort_group in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 39
+2015-08-15 15:38:17 - PHP Notice:  Undefined variable: sort_account in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 44
+2015-08-15 15:38:17 - PHP Notice:  Undefined variable: sort_telephone in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 49
+2015-08-15 15:38:17 - PHP Notice:  Undefined variable: sort_group in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 39
+2015-08-15 15:38:17 - PHP Notice:  Undefined variable: sort_account in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 44
+2015-08-15 15:38:17 - PHP Notice:  Undefined variable: sort_telephone in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 49
+2015-08-15 16:08:19 - PHP Notice:  Undefined variable: entry_recevied_status in D:\wamp\www\yuankong\backend\view\template\setting\setting.tpl on line 524
+2015-08-15 16:09:42 - PHP Notice:  Undefined variable: config_received_status_id in D:\wamp\www\yuankong\backend\view\template\setting\setting.tpl on line 527
+2015-08-15 16:09:42 - PHP Notice:  Undefined variable: config_received_status_id in D:\wamp\www\yuankong\backend\view\template\setting\setting.tpl on line 527
+2015-08-15 16:09:42 - PHP Notice:  Undefined variable: config_received_status_id in D:\wamp\www\yuankong\backend\view\template\setting\setting.tpl on line 527
+2015-08-15 16:09:42 - PHP Notice:  Undefined variable: config_received_status_id in D:\wamp\www\yuankong\backend\view\template\setting\setting.tpl on line 527
+2015-08-15 16:09:42 - PHP Notice:  Undefined variable: config_received_status_id in D:\wamp\www\yuankong\backend\view\template\setting\setting.tpl on line 527
+2015-08-15 16:09:42 - PHP Notice:  Undefined variable: config_received_status_id in D:\wamp\www\yuankong\backend\view\template\setting\setting.tpl on line 527
+2015-08-15 16:09:42 - PHP Notice:  Undefined variable: config_received_status_id in D:\wamp\www\yuankong\backend\view\template\setting\setting.tpl on line 527
+2015-08-15 16:10:24 - PHP Notice:  Undefined variable: config_received_status_id in D:\wamp\www\yuankong\backend\view\template\setting\setting.tpl on line 527
+2015-08-15 16:10:24 - PHP Notice:  Undefined variable: config_received_status_id in D:\wamp\www\yuankong\backend\view\template\setting\setting.tpl on line 527
+2015-08-15 16:10:24 - PHP Notice:  Undefined variable: config_received_status_id in D:\wamp\www\yuankong\backend\view\template\setting\setting.tpl on line 527
+2015-08-15 16:10:24 - PHP Notice:  Undefined variable: config_received_status_id in D:\wamp\www\yuankong\backend\view\template\setting\setting.tpl on line 527
+2015-08-15 16:10:24 - PHP Notice:  Undefined variable: config_received_status_id in D:\wamp\www\yuankong\backend\view\template\setting\setting.tpl on line 527
+2015-08-15 16:10:24 - PHP Notice:  Undefined variable: config_received_status_id in D:\wamp\www\yuankong\backend\view\template\setting\setting.tpl on line 527
+2015-08-15 16:10:24 - PHP Notice:  Undefined variable: config_received_status_id in D:\wamp\www\yuankong\backend\view\template\setting\setting.tpl on line 527
+2015-08-15 16:11:46 - PHP Notice:  Undefined index: config_ftp_status in D:\wamp\www\yuankong\backend\controller\setting\setting.php on line 1088
+2015-08-15 16:11:46 - PHP Notice:  Undefined variable: config_received_status_id in D:\wamp\www\yuankong\backend\view\template\setting\setting.tpl on line 527
+2015-08-15 16:11:46 - PHP Notice:  Undefined variable: config_received_status_id in D:\wamp\www\yuankong\backend\view\template\setting\setting.tpl on line 527
+2015-08-15 16:11:46 - PHP Notice:  Undefined variable: config_received_status_id in D:\wamp\www\yuankong\backend\view\template\setting\setting.tpl on line 527
+2015-08-15 16:11:46 - PHP Notice:  Undefined variable: config_received_status_id in D:\wamp\www\yuankong\backend\view\template\setting\setting.tpl on line 527
+2015-08-15 16:11:46 - PHP Notice:  Undefined variable: config_received_status_id in D:\wamp\www\yuankong\backend\view\template\setting\setting.tpl on line 527
+2015-08-15 16:11:46 - PHP Notice:  Undefined variable: config_received_status_id in D:\wamp\www\yuankong\backend\view\template\setting\setting.tpl on line 527
+2015-08-15 16:11:46 - PHP Notice:  Undefined variable: config_received_status_id in D:\wamp\www\yuankong\backend\view\template\setting\setting.tpl on line 527
+2015-08-15 16:12:16 - PHP Notice:  Undefined index: config_ftp_status in D:\wamp\www\yuankong\backend\controller\setting\setting.php on line 1088
+2015-08-15 16:12:17 - PHP Notice:  Undefined variable: config_received_status_id in D:\wamp\www\yuankong\backend\view\template\setting\setting.tpl on line 527
+2015-08-15 16:12:17 - PHP Notice:  Undefined variable: config_received_status_id in D:\wamp\www\yuankong\backend\view\template\setting\setting.tpl on line 527
+2015-08-15 16:12:17 - PHP Notice:  Undefined variable: config_received_status_id in D:\wamp\www\yuankong\backend\view\template\setting\setting.tpl on line 527
+2015-08-15 16:12:17 - PHP Notice:  Undefined variable: config_received_status_id in D:\wamp\www\yuankong\backend\view\template\setting\setting.tpl on line 527
+2015-08-15 16:12:17 - PHP Notice:  Undefined variable: config_received_status_id in D:\wamp\www\yuankong\backend\view\template\setting\setting.tpl on line 527
+2015-08-15 16:12:17 - PHP Notice:  Undefined variable: config_received_status_id in D:\wamp\www\yuankong\backend\view\template\setting\setting.tpl on line 527
+2015-08-15 16:12:17 - PHP Notice:  Undefined variable: config_received_status_id in D:\wamp\www\yuankong\backend\view\template\setting\setting.tpl on line 527
+2015-08-15 16:22:45 - PHP Notice:  Undefined variable: all in D:\wamp\www\yuankong\backend\view\template\sale\order_list.tpl on line 25
+2015-08-15 16:22:45 - PHP Notice:  Undefined variable: all in D:\wamp\www\yuankong\backend\view\template\sale\order_list.tpl on line 25
+2015-08-15 16:22:53 - PHP Notice:  Undefined variable: all in D:\wamp\www\yuankong\backend\view\template\sale\order_list.tpl on line 25
+2015-08-15 16:22:54 - PHP Notice:  Undefined variable: all in D:\wamp\www\yuankong\backend\view\template\sale\order_list.tpl on line 25
+2015-08-15 16:23:01 - PHP Notice:  Undefined variable: all in D:\wamp\www\yuankong\backend\view\template\sale\order_list.tpl on line 25
+2015-08-15 16:23:01 - PHP Notice:  Undefined variable: all in D:\wamp\www\yuankong\backend\view\template\sale\order_list.tpl on line 25
+2015-08-15 16:23:06 - PHP Notice:  Undefined variable: all in D:\wamp\www\yuankong\backend\view\template\sale\order_list.tpl on line 25
+2015-08-15 16:23:06 - PHP Notice:  Undefined variable: all in D:\wamp\www\yuankong\backend\view\template\sale\order_list.tpl on line 25
+2015-08-15 16:23:14 - PHP Notice:  Undefined variable: all in D:\wamp\www\yuankong\backend\view\template\sale\order_list.tpl on line 25
+2015-08-15 16:23:14 - PHP Notice:  Undefined variable: all in D:\wamp\www\yuankong\backend\view\template\sale\order_list.tpl on line 25
+2015-08-15 16:24:42 - PHP Notice:  Undefined variable: all in D:\wamp\www\yuankong\backend\view\template\sale\order_list.tpl on line 25
+2015-08-15 16:25:22 - PHP Notice:  Undefined variable: all in D:\wamp\www\yuankong\backend\view\template\sale\order_list.tpl on line 25
+2015-08-15 16:26:32 - PHP Notice:  Undefined variable: all in D:\wamp\www\yuankong\backend\view\template\sale\order_list.tpl on line 25
+2015-08-15 16:26:38 - PHP Notice:  Undefined variable: all in D:\wamp\www\yuankong\backend\view\template\sale\order_list.tpl on line 25
+2015-08-15 16:26:38 - PHP Notice:  Undefined variable: all in D:\wamp\www\yuankong\backend\view\template\sale\order_list.tpl on line 25
+2015-08-15 16:26:41 - PHP Notice:  Undefined variable: all in D:\wamp\www\yuankong\backend\view\template\sale\order_list.tpl on line 25
+2015-08-15 16:26:41 - PHP Notice:  Undefined variable: all in D:\wamp\www\yuankong\backend\view\template\sale\order_list.tpl on line 25
+2015-08-15 16:27:03 - PHP Notice:  Undefined variable: all in D:\wamp\www\yuankong\backend\view\template\sale\order_list.tpl on line 25
+2015-08-15 16:27:12 - PHP Notice:  Undefined variable: all in D:\wamp\www\yuankong\backend\view\template\sale\order_list.tpl on line 25
+2015-08-15 16:27:12 - PHP Notice:  Undefined variable: all in D:\wamp\www\yuankong\backend\view\template\sale\order_list.tpl on line 25
+2015-08-15 16:29:38 - PHP Notice:  Undefined variable: all in D:\wamp\www\yuankong\backend\view\template\sale\order_list.tpl on line 25
+2015-08-15 16:29:39 - PHP Notice:  Undefined variable: all in D:\wamp\www\yuankong\backend\view\template\sale\order_list.tpl on line 25
+2015-08-15 16:29:44 - PHP Notice:  Undefined variable: all in D:\wamp\www\yuankong\backend\view\template\sale\order_list.tpl on line 25
+2015-08-15 16:29:44 - PHP Notice:  Undefined variable: all in D:\wamp\www\yuankong\backend\view\template\sale\order_list.tpl on line 25
+2015-08-15 16:31:09 - PHP Notice:  Undefined variable: item in D:\wamp\www\yuankong\backend\controller\sale\order.php on line 340
+2015-08-15 16:48:05 - PHP Warning:  Illegal string offset 'order_status_id' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 271
+2015-08-15 16:48:05 - PHP Warning:  Illegal string offset 'order_status_id' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 274
+2015-08-15 16:48:05 - PHP Warning:  Illegal string offset 'name' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 274
+2015-08-15 16:48:05 - PHP Warning:  Illegal string offset 'order_status_id' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 271
+2015-08-15 16:48:05 - PHP Warning:  Illegal string offset 'order_status_id' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 274
+2015-08-15 16:48:05 - PHP Warning:  Illegal string offset 'name' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 274
+2015-08-15 16:49:35 - PHP Warning:  Illegal string offset 'order_status_id' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 271
+2015-08-15 16:49:35 - PHP Warning:  Illegal string offset 'order_status_id' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 274
+2015-08-15 16:49:35 - PHP Warning:  Illegal string offset 'name' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 274
+2015-08-15 16:49:35 - PHP Warning:  Illegal string offset 'order_status_id' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 271
+2015-08-15 16:49:35 - PHP Warning:  Illegal string offset 'order_status_id' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 274
+2015-08-15 16:49:35 - PHP Warning:  Illegal string offset 'name' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 274
+2015-08-15 16:53:05 - PHP Warning:  Illegal string offset 'order_status_id' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 271
+2015-08-15 16:53:05 - PHP Warning:  Illegal string offset 'order_status_id' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 274
+2015-08-15 16:53:05 - PHP Warning:  Illegal string offset 'name' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 274
+2015-08-15 16:53:05 - PHP Warning:  Illegal string offset 'order_status_id' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 271
+2015-08-15 16:53:05 - PHP Warning:  Illegal string offset 'order_status_id' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 274
+2015-08-15 16:53:05 - PHP Warning:  Illegal string offset 'name' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 274
+2015-08-15 16:53:48 - PHP Warning:  Illegal string offset 'order_status_id' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 271
+2015-08-15 16:53:48 - PHP Warning:  Illegal string offset 'order_status_id' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 274
+2015-08-15 16:53:48 - PHP Warning:  Illegal string offset 'name' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 274
+2015-08-15 16:53:48 - PHP Warning:  Illegal string offset 'order_status_id' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 271
+2015-08-15 16:53:48 - PHP Warning:  Illegal string offset 'order_status_id' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 274
+2015-08-15 16:53:48 - PHP Warning:  Illegal string offset 'name' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 274
+2015-08-15 16:54:38 - PHP Warning:  Illegal string offset 'order_status_id' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 271
+2015-08-15 16:54:38 - PHP Warning:  Illegal string offset 'order_status_id' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 274
+2015-08-15 16:54:38 - PHP Warning:  Illegal string offset 'name' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 274
+2015-08-15 16:54:38 - PHP Warning:  Illegal string offset 'order_status_id' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 271
+2015-08-15 16:54:38 - PHP Warning:  Illegal string offset 'order_status_id' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 274
+2015-08-15 16:54:38 - PHP Warning:  Illegal string offset 'name' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 274
+2015-08-15 16:55:46 - PHP Warning:  Illegal string offset 'order_status_id' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 271
+2015-08-15 16:55:46 - PHP Warning:  Illegal string offset 'order_status_id' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 274
+2015-08-15 16:55:46 - PHP Warning:  Illegal string offset 'name' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 274
+2015-08-15 16:55:46 - PHP Warning:  Illegal string offset 'order_status_id' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 271
+2015-08-15 16:55:46 - PHP Warning:  Illegal string offset 'order_status_id' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 274
+2015-08-15 16:55:46 - PHP Warning:  Illegal string offset 'name' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 274
+2015-08-15 16:58:40 - PHP Warning:  Illegal string offset 'order_status_id' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 271
+2015-08-15 16:58:40 - PHP Warning:  Illegal string offset 'order_status_id' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 274
+2015-08-15 16:58:40 - PHP Warning:  Illegal string offset 'name' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 274
+2015-08-15 16:58:40 - PHP Warning:  Illegal string offset 'order_status_id' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 271
+2015-08-15 16:58:40 - PHP Warning:  Illegal string offset 'order_status_id' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 274
+2015-08-15 16:58:40 - PHP Warning:  Illegal string offset 'name' in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 274
+2015-08-15 17:06:00 - PHP Notice:  Undefined variable: button_add_shipment in D:\wamp\www\yuankong\backend\view\template\sale\order_info.tpl on line 259

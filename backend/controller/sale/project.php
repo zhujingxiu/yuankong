@@ -275,7 +275,7 @@ class ControllerSaleProject extends Controller {
 		$pagination->page = $page;
 		$pagination->limit = $this->config->get('config_admin_limit');
 		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = HTTPS_SERVER . 'index.php?route=sale/coupon&token=' . $this->session->data['token'] . $url . '&page={page}';
+		$pagination->url = HTTPS_SERVER . 'index.php?route=sale/project&token=' . $this->session->data['token'] . $url . '&page={page}';
 
 		$this->data['pagination'] = $pagination->render();
 

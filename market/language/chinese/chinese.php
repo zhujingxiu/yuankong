@@ -13,7 +13,6 @@ $_['thousand_point']        = ',';
 
 // Text
 $_['text_home']             = '首页';
-
 $_['text_yes']              = '是';
 $_['text_no']               = '否';
 $_['text_none']             = ' --- 无 --- ';
@@ -24,7 +23,6 @@ $_['text_separator']        = ' <em class="plr fa_s">&gt;</em> ';
 $_['text_more']        		= ' 更多  ';
 $_['text_unknown']        	= ' 未知 ';
 $_['text_wiki_help']        = ' 消防问答 ';
-
 $_['text_search_product']   = '消防产品';
 $_['text_search_wiki']      = '消防资讯';
 $_['text_search_category']  = '商品分类';
