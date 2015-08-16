@@ -135,7 +135,7 @@ class ModelSaleOrder extends Model {
 				$language_filename = '';
 				$language_directory = '';
 			}
-			
+
 			return array(
 				'order_id'                => $order_query->row['order_id'],
 				'order_sn'                => $order_query->row['order_sn'],
@@ -163,6 +163,8 @@ class ModelSaleOrder extends Model {
 				'shipping_area_zone' 	  => $order_query->row['shipping_area_zone'],
 				'shipping_method'         => $order_query->row['shipping_method'],
 				'shipping_code'           => $order_query->row['shipping_code'],
+				'shipping_tracking_no'    => $order_query->row['shipping_tracking_no'],
+				'shipping_express_id'     => $order_query->row['shipping_express_id'],
 				'comment'                 => $order_query->row['comment'],
 				'total'                   => $order_query->row['total'],
 				'reward'                  => $reward,

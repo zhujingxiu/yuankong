@@ -103,8 +103,8 @@
                 <?php } ?></td>
               <td class="right"><?php echo $order['order_id']; ?></td>
               <td class="left">
-                <?php if(!empty($order['order_products'])){ 
-                  foreach ($order['order_products'] as $_product){?>
+                <?php if(!empty($order['products'])){ 
+                  foreach ($order['products'] as $_product){?>
                   <div><?php echo $_product['name']; ?>
                   <?php if($_option_number = count($_product['option'])){ ?>
                     <br> &nbsp;<small> - 
@@ -114,7 +114,7 @@
                     } ?> 
                     </small>
                   <?php }?>
-                  <small> <i>(Qty:<?php echo $_product['quantity'] ?>) </i> </small>
+                  <small> <i>(数量:<?php echo $_product['quantity'] ?>) </i> </small>
                   </div>
                 <?php }
                 }?>

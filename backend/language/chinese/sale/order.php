@@ -2,7 +2,7 @@
 // Heading
 $_['heading_title']           = '订单管理';
 $_['tab_all']                 = '全部订单';
-$_['tab_shipping']            = '货运信息';
+$_['tab_shipping']            = '物流信息';
 $_['button_add_shipment']     = '添加货运信息';
 // Text
 $_['text_success']            = '成功： 您已成功更新订单！';

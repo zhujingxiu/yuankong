@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2015 年 08 月 13 日 09:16
+-- 生成日期: 2015 年 08 月 16 日 14:35
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.4.3
 
@@ -22297,7 +22297,7 @@ CREATE TABLE IF NOT EXISTS `yk_customer` (
 
 INSERT INTO `yk_customer` (`customer_id`, `mobile_phone`, `fullname`, `email`, `telephone`, `fax`, `gender`, `avatar`, `password`, `salt`, `cart`, `wishlist`, `viewed`, `newsletter`, `address_id`, `company_id`, `customer_group_id`, `ip`, `status`, `approved`, `token`, `date_added`) VALUES
 (5, '18959523214', '金松龄', '', '', '', 0, 'data/case/logopic6.jpg', '0c918e7d4d5e44853fb46d9fa479b7ae666e2f45', '9087ff7ed', NULL, NULL, NULL, 0, 0, 3, 1, '0', 1, 0, '', '2015-08-11 00:11:09'),
-(4, '18850921766', '彭骊威', '', '', '', 0, 'data/case/logopic3.jpg', '6054f0b3cc0fe57f84fbb76a3f9d5bb5d741ff3e', 'a021a00ce', NULL, NULL, NULL, 0, 0, 2, 1, '0', 1, 0, '', '2015-08-11 00:06:12'),
+(4, '18850921766', '彭骊威', '', '', '', 0, 'data/case/logopic3.jpg', '6054f0b3cc0fe57f84fbb76a3f9d5bb5d741ff3e', 'a021a00ce', 'a:0:{}', '', NULL, 0, 0, 2, 1, '127.0.0.1', 1, 0, '', '2015-08-11 00:06:12'),
 (6, '15956952355', '郭松涛', '', '', '', 0, 'data/case/logopic2.jpg', 'cf1021536f784367538b15895bba28a9383783d7', 'deb170148', NULL, NULL, NULL, 0, 0, 4, 1, '0', 1, 0, '', '2015-08-11 21:29:43'),
 (7, '15975345625', '胡林翼', '', '', '', 0, 'data/logopic5.jpg', '1c779f9d6cbc76d6e9506665bda725caad6cdef7', '26583db36', NULL, NULL, NULL, 0, 0, 5, 1, '0', 1, 0, '', '2015-08-11 21:33:11');
 
@@ -22387,7 +22387,7 @@ CREATE TABLE IF NOT EXISTS `yk_customer_ip` (
   `date_added` datetime NOT NULL,
   PRIMARY KEY (`customer_ip_id`),
   KEY `ip` (`ip`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- 转存表中的数据 `yk_customer_ip`
@@ -22395,7 +22395,8 @@ CREATE TABLE IF NOT EXISTS `yk_customer_ip` (
 
 INSERT INTO `yk_customer_ip` (`customer_ip_id`, `customer_id`, `ip`, `area_zone`, `date_added`) VALUES
 (1, 1, '127.0.0.1', NULL, '2015-06-12 17:35:00'),
-(2, 2, '127.0.0.1', NULL, '2015-07-16 13:38:42');
+(2, 2, '127.0.0.1', NULL, '2015-07-16 13:38:42'),
+(3, 4, '127.0.0.1', NULL, '2015-08-14 21:58:44');
 
 -- --------------------------------------------------------
 
@@ -22463,6 +22464,30 @@ CREATE TABLE IF NOT EXISTS `yk_customer_transaction` (
   `date_added` datetime NOT NULL,
   PRIMARY KEY (`customer_transaction_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `yk_express`
+--
+
+CREATE TABLE IF NOT EXISTS `yk_express` (
+  `express_id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `logo` varchar(128) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `telephone` varchar(16) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `sort_order` smallint(6) NOT NULL DEFAULT '0',
+  `note` text COLLATE utf8_unicode_ci,
+  `date_added` datetime DEFAULT NULL,
+  PRIMARY KEY (`express_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- 转存表中的数据 `yk_express`
+--
+
+INSERT INTO `yk_express` (`express_id`, `title`, `logo`, `telephone`, `sort_order`, `note`, `date_added`) VALUES
+(1, '消防e站送货', 'data/logo.png', '18850911766', 1, '阿萨德撒的撒的撒撒的撒的撒', '2015-08-16 22:23:16');
 
 -- --------------------------------------------------------
 
@@ -22541,16 +22566,17 @@ CREATE TABLE IF NOT EXISTS `yk_help` (
   `date_added` datetime DEFAULT NULL,
   `viewed` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`help_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- 转存表中的数据 `yk_help`
 --
 
 INSERT INTO `yk_help` (`help_id`, `customer_id`, `account`, `telephone`, `text`, `is_top`, `sort_order`, `reply`, `user_id`, `status`, `date_replied`, `date_added`, `viewed`) VALUES
-(1, 0, '宝马740i', '12312312', 'asdsadasdasdas', 0, 0, 'asdsadasdsa', 1, 1, '2015-06-10 06:14:38', '2015-06-10 06:14:38', 0),
-(2, 0, 'asdsafafasdasd', '12321321312', 'adasdasdsadassa', 0, 0, NULL, 0, 1, NULL, '2015-05-25 07:37:26', 0),
-(3, 0, '汉武帝', '1312434243', '汉代建立起中原王朝的一个初步形态，尤以汉武帝对\r\n\r\n疆域的拓展最具开创意义。[详细]', 1, 2, '在李莎与李立三的后代看来，李莎"为了爱情的远行"\r\n\r\n，虽然为此付出了巨大的代价，但终生无悔。[详', 1, 1, NULL, '2015-06-10 08:25:06', 0);
+(1, 0, '宝马740i', '12312312', '啊施工方和脚后跟的师范生的方式的公司的还是第三方', 0, 0, 'asdsadasdsa', 1, 1, '2015-06-10 06:14:38', '2015-06-10 06:14:38', 1),
+(2, 0, '各个房间公分', '12321321312', '一天换个房间就会根据规划成vbcvbkhjkjh需持续创新', 0, 0, '现场V型从环境和国家规划刚发的鬼地方豆腐干豆腐 ', 1, 1, NULL, '2015-05-25 07:37:26', 0),
+(3, 0, '汉武帝', '1312434243', '汉代建立起中原王朝的一个初步形态，尤以汉武帝对\r\n\r\n疆域的拓展最具开创意义。[详细]', 1, 2, '在李莎与李立三的后代看来，李莎"为了爱情的远行"\r\n\r\n，虽然为此付出了巨大的代价，但终生无悔。[详', 1, 1, NULL, '2015-06-10 08:25:06', 0),
+(4, 4, '彭骊威', '18850921766', '了规划和金融业的说法是东莞施工方的广泛的的发挥的双方各得施工方的规划烦得很', 0, 0, '阿萨法同一天范德萨史蒂芬史密斯', 1, 1, NULL, '2015-08-14 22:00:53', 0);
 
 -- --------------------------------------------------------
 
@@ -22561,6 +22587,7 @@ INSERT INTO `yk_help` (`help_id`, `customer_id`, `account`, `telephone`, `text`,
 CREATE TABLE IF NOT EXISTS `yk_information` (
   `information_id` int(11) NOT NULL AUTO_INCREMENT,
   `bottom` int(1) NOT NULL DEFAULT '0',
+  `center` tinyint(4) NOT NULL DEFAULT '1',
   `sort_order` int(3) NOT NULL DEFAULT '0',
   `status` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`information_id`)
@@ -22570,10 +22597,10 @@ CREATE TABLE IF NOT EXISTS `yk_information` (
 -- 转存表中的数据 `yk_information`
 --
 
-INSERT INTO `yk_information` (`information_id`, `bottom`, `sort_order`, `status`) VALUES
-(3, 1, 3, 1),
-(4, 1, 1, 1),
-(5, 1, 4, 1);
+INSERT INTO `yk_information` (`information_id`, `bottom`, `center`, `sort_order`, `status`) VALUES
+(3, 1, 1, 3, 1),
+(4, 1, 1, 1, 1),
+(5, 1, 1, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -22595,8 +22622,8 @@ CREATE TABLE IF NOT EXISTS `yk_information_description` (
 
 INSERT INTO `yk_information_description` (`information_id`, `language_id`, `title`, `description`) VALUES
 (4, 2, '关于我们', '&lt;p&gt;\r\n	关于我们&lt;/p&gt;'),
-(5, 2, '政策&amp; 条款', '&lt;p&gt;&lt;a alt=&quot;政策&amp;amp; 条款&quot; class=&quot;colorbox cboxElement&quot; href=&quot;http://www.opencart.cn/app/information/information/info/%E6%94%BF%E7%AD%96and-%E6%9D%A1%E6%AC%BE.html&quot; style=&quot;font-size: 12px; color: rgb(56, 176, 227); text-decoration: underline; cursor: pointer; font-family: Arial, Helvetica, sans-serif; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: right; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);&quot;&gt;&lt;b style=&quot;color: rgb(56, 176, 227); text-decoration: underline; cursor: pointer;&quot;&gt;政策&amp;amp; 条款&lt;/b&gt;&lt;/a&gt;&lt;/p&gt;\r\n'),
-(3, 2, '隐私策略', '&lt;p&gt;\r\n	隐私策略&lt;/p&gt;');
+(3, 2, '隐私策略', '&lt;p&gt;\r\n	隐私策略&lt;/p&gt;'),
+(5, 2, '政策&amp; 条款', '&lt;p&gt;政策&amp;amp; 条款&lt;/p&gt;');
 
 -- --------------------------------------------------------
 
@@ -22945,6 +22972,8 @@ CREATE TABLE IF NOT EXISTS `yk_order` (
   `shipping_area_zone` varchar(64) DEFAULT NULL,
   `shipping_method` varchar(128) NOT NULL,
   `shipping_code` varchar(128) NOT NULL,
+  `shipping_tracking_no` varchar(16) DEFAULT NULL,
+  `shipping_express_id` int(11) NOT NULL DEFAULT '0',
   `comment` text NOT NULL,
   `total` decimal(15,4) NOT NULL DEFAULT '0.0000',
   `order_status_id` int(11) NOT NULL DEFAULT '0',
@@ -22967,31 +22996,31 @@ CREATE TABLE IF NOT EXISTS `yk_order` (
 -- 转存表中的数据 `yk_order`
 --
 
-INSERT INTO `yk_order` (`order_id`, `order_sn`, `invoice_no`, `invoice_prefix`, `customer_id`, `customer_group_id`, `fullname`, `mobile_phone`, `telephone`, `email`, `fax`, `payment_method`, `payment_code`, `payment_trade_no`, `payment_trade_status`, `shipping_fullname`, `shipping_telephone`, `shipping_company`, `shipping_address`, `shipping_postcode`, `shipping_province`, `shipping_province_id`, `shipping_area_zone`, `shipping_method`, `shipping_code`, `comment`, `total`, `order_status_id`, `affiliate_id`, `commission`, `language_id`, `currency_id`, `currency_code`, `currency_value`, `ip`, `forwarded_ip`, `user_agent`, `accept_language`, `date_added`, `date_modified`) VALUES
-(1, NULL, 0, 'INV-2015-00', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '323.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-23 23:56:13', '2015-07-23 23:56:13'),
-(2, '', 0, 'INV-2015-00', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '323.0000', 2, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-24 00:09:31', '2015-07-24 00:09:31'),
-(3, '', 0, 'INV-2015-00', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '323.0000', 3, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-24 00:10:40', '2015-07-24 00:10:40'),
-(4, '', 0, 'INV-2015-00', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '323.0000', 4, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-24 00:14:33', '2015-07-24 00:14:33'),
-(5, '', 0, 'INV-2015-00', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '323.0000', 5, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-24 00:15:13', '2015-07-24 00:15:13'),
-(6, '', 0, 'INV-2015-00', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '323.0000', 6, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-24 00:17:34', '2015-07-24 00:17:34'),
-(7, '', 0, 'INV-2015-00', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '323.0000', 7, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-24 00:20:05', '2015-07-24 00:20:05'),
-(8, '', 0, 'INV-2015-00', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '323.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-24 00:21:59', '2015-07-24 00:21:59'),
-(9, '', 0, 'INV-2015-00', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '323.0000', 2, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-24 00:28:39', '2015-07-24 00:28:39'),
-(10, '', 1, 'INV-2015-00', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '323.0000', 3, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-24 00:31:04', '2015-07-24 00:31:04'),
-(11, '', 0, 'YK119-2015-00', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '425.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-27 23:20:51', '2015-07-27 23:20:51'),
-(12, '', 0, 'YK119-2015-00', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '425.0000', 2, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-27 23:21:04', '2015-07-27 23:21:04'),
-(13, '', 0, 'YK119-2015-00', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '425.0000', 3, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-27 23:27:39', '2015-07-27 23:27:39'),
-(14, '', 0, 'YK119-2015-00', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '425.0000', 4, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-27 23:28:21', '2015-07-27 23:28:21'),
-(15, '', 0, 'YK119-2015-00', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '425.0000', 2, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-27 23:31:04', '2015-07-27 23:31:04'),
-(16, '', 0, 'YK119-2015-00', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', '', '178.0000', 0, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; rv:39.0) Gecko/20100101 Firefox/39.0', 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3', '2015-07-28 16:23:22', '2015-07-28 16:23:22'),
-(17, '', 0, 'YK119-2015-00', 1, 1, 'yk18850911766', '18850911766', '', '', '', '', '', NULL, NULL, '', '', '', '', '', '', 0, NULL, '', '', '', '123.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; rv:39.0) Gecko/20100101 Firefox/39.0', 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3', '2015-07-29 11:46:19', '2015-07-29 11:46:19'),
-(18, '', 0, 'YK119-2015-00', 1, 1, 'yk18850911766', '18850911766', '', '', '', '', '', NULL, NULL, '', '', '', '', '', '', 0, NULL, '', '', '', '123.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; rv:39.0) Gecko/20100101 Firefox/39.0', 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3', '2015-07-29 11:47:22', '2015-07-29 11:47:22'),
-(19, '', 0, 'YK119-2015-00', 1, 1, 'yk18850911766', '18850911766', '', '', '', '', '', NULL, NULL, '', '', '', '', '', '', 0, NULL, '', '', '', '123.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; rv:39.0) Gecko/20100101 Firefox/39.0', 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3', '2015-07-29 12:00:33', '2015-07-29 12:00:33'),
-(20, '', 0, 'YK119-2015-00', 1, 1, 'yk18850911766', '18850911766', '', '', '', '', '', NULL, NULL, '', '18850911766', '', '', '', '', 0, NULL, '', '', '', '123.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; rv:39.0) Gecko/20100101 Firefox/39.0', 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3', '2015-07-29 12:02:56', '2015-07-29 12:02:56'),
-(21, '', 0, 'YK119-2015-00', 1, 1, 'yk18850911766', '18850911766', '', '', '', '', '', NULL, NULL, '', '18850911766', '', '', '', '', 0, NULL, '', '', '', '123.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; rv:39.0) Gecko/20100101 Firefox/39.0', 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3', '2015-07-29 12:07:33', '2015-07-29 12:07:33'),
-(22, '', 0, 'YK119-2015-00', 1, 1, 'yk18850911766', '18850911766', '', '', '', '', '', NULL, NULL, '', '18850911766', '', '', '', '', 0, NULL, '固定运费率', 'flat.flat', '', '173.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; rv:39.0) Gecko/20100101 Firefox/39.0', 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3', '2015-07-29 13:18:06', '2015-07-29 13:18:06'),
-(23, '', 0, 'YK119-2015-00', 1, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '', '18850911766', '', '', '', '', 0, NULL, '固定运费率', 'flat.flat', '', '173.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; rv:39.0) Gecko/20100101 Firefox/39.0', 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3', '2015-07-29 13:22:40', '2015-07-29 13:22:40'),
-(24, '', 0, 'YK119-2015-00', 1, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '太容易', '18850911766', '', '规划快结婚', '', '江苏省', 12, NULL, '固定运费率', 'flat.flat', '', '323.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; rv:39.0) Gecko/20100101 Firefox/39.0', 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3', '2015-07-29 15:15:11', '2015-07-29 15:15:11');
+INSERT INTO `yk_order` (`order_id`, `order_sn`, `invoice_no`, `invoice_prefix`, `customer_id`, `customer_group_id`, `fullname`, `mobile_phone`, `telephone`, `email`, `fax`, `payment_method`, `payment_code`, `payment_trade_no`, `payment_trade_status`, `shipping_fullname`, `shipping_telephone`, `shipping_company`, `shipping_address`, `shipping_postcode`, `shipping_province`, `shipping_province_id`, `shipping_area_zone`, `shipping_method`, `shipping_code`, `shipping_tracking_no`, `shipping_express_id`, `comment`, `total`, `order_status_id`, `affiliate_id`, `commission`, `language_id`, `currency_id`, `currency_code`, `currency_value`, `ip`, `forwarded_ip`, `user_agent`, `accept_language`, `date_added`, `date_modified`) VALUES
+(1, NULL, 0, 'INV-2015-00', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', NULL, 0, '', '323.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-23 23:56:13', '2015-07-23 23:56:13'),
+(2, '', 0, 'INV-2015-00', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', NULL, 0, '', '323.0000', 2, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-24 00:09:31', '2015-07-24 00:09:31'),
+(3, '', 0, 'INV-2015-00', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', NULL, 0, '', '323.0000', 3, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-24 00:10:40', '2015-07-24 00:10:40'),
+(4, '', 0, 'INV-2015-00', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', NULL, 0, '', '323.0000', 4, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-24 00:14:33', '2015-07-24 00:14:33'),
+(5, '', 0, 'INV-2015-00', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', NULL, 0, '', '323.0000', 5, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-24 00:15:13', '2015-07-24 00:15:13'),
+(6, '', 0, 'INV-2015-00', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', NULL, 0, '', '323.0000', 6, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-24 00:17:34', '2015-07-24 00:17:34'),
+(7, '', 0, 'INV-2015-00', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', NULL, 0, '', '323.0000', 7, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-24 00:20:05', '2015-07-24 00:20:05'),
+(8, '', 0, 'INV-2015-00', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', NULL, 0, '', '323.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-24 00:21:59', '2015-07-24 00:21:59'),
+(9, '', 0, 'INV-2015-00', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', NULL, 0, '', '323.0000', 2, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-24 00:28:39', '2015-07-24 00:28:39'),
+(10, '', 1, 'INV-2015-00', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', NULL, 0, '', '323.0000', 3, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-24 00:31:04', '2015-07-24 00:31:04'),
+(11, '', 0, 'YK119-2015-00', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', NULL, 0, '', '425.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-27 23:20:51', '2015-07-27 23:20:51'),
+(12, '', 0, 'YK119-2015-00', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', NULL, 0, '', '425.0000', 2, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-27 23:21:04', '2015-07-27 23:21:04'),
+(13, '', 0, 'YK119-2015-00', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', NULL, 0, '', '425.0000', 3, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-27 23:27:39', '2015-07-27 23:27:39'),
+(14, '', 0, 'YK119-2015-00', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', NULL, 0, '', '425.0000', 4, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-27 23:28:21', '2015-07-27 23:28:21'),
+(15, '', 0, 'YK119-2015-00', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', NULL, 0, '', '425.0000', 2, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36', 'zh-CN,zh;q=0.8', '2015-07-27 23:31:04', '2015-07-27 23:31:04'),
+(16, '', 0, 'YK119-2015-00', 2, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '朱景修', '18850911766', '', '黄石镇丁庄村', '', '福建省', 16, NULL, '固定运费率', 'flat.flat', NULL, 0, '', '178.0000', 0, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; rv:39.0) Gecko/20100101 Firefox/39.0', 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3', '2015-07-28 16:23:22', '2015-07-28 16:23:22'),
+(17, '', 0, 'YK119-2015-00', 1, 1, 'yk18850911766', '18850911766', '', '', '', '', '', NULL, NULL, '', '', '', '', '', '', 0, NULL, '', '', NULL, 0, '', '123.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; rv:39.0) Gecko/20100101 Firefox/39.0', 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3', '2015-07-29 11:46:19', '2015-07-29 11:46:19'),
+(18, '', 0, 'YK119-2015-00', 1, 1, 'yk18850911766', '18850911766', '', '', '', '', '', NULL, NULL, '', '', '', '', '', '', 0, NULL, '', '', NULL, 0, '', '123.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; rv:39.0) Gecko/20100101 Firefox/39.0', 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3', '2015-07-29 11:47:22', '2015-07-29 11:47:22'),
+(19, '', 0, 'YK119-2015-00', 1, 1, 'yk18850911766', '18850911766', '', '', '', '', '', NULL, NULL, '', '', '', '', '', '', 0, NULL, '', '', NULL, 0, '', '123.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; rv:39.0) Gecko/20100101 Firefox/39.0', 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3', '2015-07-29 12:00:33', '2015-07-29 12:00:33'),
+(20, '', 0, 'YK119-2015-00', 1, 1, 'yk18850911766', '18850911766', '', '', '', '', '', NULL, NULL, '', '18850911766', '', '', '', '', 0, NULL, '', '', NULL, 0, '', '123.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; rv:39.0) Gecko/20100101 Firefox/39.0', 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3', '2015-07-29 12:02:56', '2015-07-29 12:02:56'),
+(21, '', 0, 'YK119-2015-00', 1, 1, 'yk18850911766', '18850911766', '', '', '', '', '', NULL, NULL, '', '18850911766', '', '', '', '', 0, NULL, '', '', NULL, 0, '', '123.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; rv:39.0) Gecko/20100101 Firefox/39.0', 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3', '2015-07-29 12:07:33', '2015-07-29 12:07:33'),
+(22, '', 0, 'YK119-2015-00', 1, 1, 'yk18850911766', '18850911766', '', '', '', '', '', NULL, NULL, '', '18850911766', '', '', '', '', 0, NULL, '固定运费率', 'flat.flat', NULL, 0, '', '173.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; rv:39.0) Gecko/20100101 Firefox/39.0', 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3', '2015-07-29 13:18:06', '2015-07-29 13:18:06'),
+(23, '', 0, 'YK119-2015-00', 1, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '', '18850911766', '', '', '', '', 0, NULL, '固定运费率', 'flat.flat', NULL, 0, '', '173.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; rv:39.0) Gecko/20100101 Firefox/39.0', 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3', '2015-07-29 13:22:40', '2015-07-29 13:22:40'),
+(24, '', 0, 'YK119-2015-00', 1, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '太容易', '18850911766', '', '规划快结婚', '', '江苏省', 12, NULL, '固定运费率', 'flat.flat', NULL, 0, '', '323.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; rv:39.0) Gecko/20100101 Firefox/39.0', 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3', '2015-07-29 15:15:11', '2015-07-29 15:15:11');
 
 -- --------------------------------------------------------
 
@@ -23109,6 +23138,21 @@ INSERT INTO `yk_order_product` (`order_product_id`, `order_id`, `product_id`, `n
 (86, 23, 51, '消防应急照明灯具', 'ae123213', 1, '123.0000', '123.0000', '0.0000', 0),
 (87, 24, 55, '源控消防泵', 'xf1325324', 1, '158.0000', '158.0000', '0.0000', 0),
 (88, 24, 53, '源控消防水带', '231414', 1, '115.0000', '115.0000', '0.0000', 0);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `yk_order_shipment`
+--
+
+CREATE TABLE IF NOT EXISTS `yk_order_shipment` (
+  `order_shipment_id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_id` int(11) NOT NULL,
+  `notify` tinyint(1) NOT NULL DEFAULT '0',
+  `note` text NOT NULL,
+  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`order_shipment_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -23554,7 +23598,7 @@ CREATE TABLE IF NOT EXISTS `yk_project` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `date_modified` datetime DEFAULT NULL,
   PRIMARY KEY (`project_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=11 ;
 
 --
 -- 转存表中的数据 `yk_project`
@@ -23569,7 +23613,8 @@ INSERT INTO `yk_project` (`project_id`, `project_sn`, `group_id`, `account`, `te
 (6, 'xf2015061301', 4, '45dasdasdasdas', '18951117250', 3, '2015-05-27 19:48:30', 3, '2015-05-27 19:49:30'),
 (7, 'xf2015151901', 2, '879dasdasdasdas', '15991117250', 3, '2015-05-27 19:28:30', 2, '2015-05-27 19:38:30'),
 (8, 'xf20150703063615', 1, '213213', '18850911766', 1, '2015-07-03 06:36:15', 0, '2015-07-03 06:36:15'),
-(9, 'xf20150802091247', 1, '撒旦撒撒旦', '13312345678', 1, '2015-08-02 09:12:47', 0, '2015-08-02 09:12:47');
+(9, 'xf20150802091247', 1, '撒旦撒撒旦', '13312345678', 1, '2015-08-02 09:12:47', 0, '2015-08-02 09:12:47'),
+(10, 'xf20150814221955', 5, '朱景修', '13111111111', 1, '2015-08-14 22:19:55', 0, '2015-08-14 22:19:55');
 
 -- --------------------------------------------------------
 
@@ -24246,7 +24291,7 @@ INSERT INTO `yk_wiki` (`wiki_id`, `group_id`, `user_id`, `title`, `subtitle`, `t
 (4, 1, 1, '新一代宝马7系官网曝光 6月10日首发', '新一代宝马7系官网曝光', '<p>车型代号G11的新一代宝马7系的官图和部分信息在宝马奥地利官网曝光，新车将在6月10日正式发布，10月上市销售。新一代7系在奥地利市场的起价为100445欧元(约合人民币69.2万元)。<img alt="" src="http://www.yuankong.com/image/data/demo/apple_logo.jpg" />12321312</p>', 1, 0, '新浪汽车', 3, 0, '2015-06-10 05:20:56'),
 (5, 2, 1, '4S店卖旧车', '法院判决：赔偿车主三倍车款！', '<p><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">山东济宁的刘女士，在当地名为“安斯达”的菲亚特4S店，以128000元买下了菲亚特轿车，就在提车40天后，刘女士发现，这辆车竟然被补过漆！经法院裁判，4S店隐瞒了该车曾经出售的事实，应退回刘女士购车款，并按购车款的3倍赔偿，总计38.4万。（央视）</span><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">山东济宁的刘女士，在当地名为“安斯达”的菲亚特4S店，以128000元买下了菲亚特轿车，就在提车40天后，刘女士发现，这辆车竟然被补过漆！经法院裁判，4S店隐瞒了该车曾经出售的事实，应退回刘女士购车款，并按购车款的3倍赔偿，总计38.4万。（央视）</span></p>', 1, 0, 'http://d.weibo.com/', 1, 0, '2015-07-27 20:57:57'),
 (6, 2, 1, '港囧》首支正式预告片 9月25日爆笑哈哈哈哈哈', '港囧》首支正式预告片 9月25日爆笑', '<p><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">《港囧》发布首支正式预告片，简单粗暴地曝光了电影的正片画面：小舅子</span><a target="_blank" render="ext" extra-data="type=atname" href="http://weibo.com/n/%E5%8C%85%E8%B4%9D%E5%B0%94?from=feed&loc=at" usercard="name=包贝尔" style="color: rgb(235, 115, 80); text-decoration: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">@包贝尔</a><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">&nbsp;为保护姐姐</span><a target="_blank" render="ext" extra-data="type=atname" href="http://weibo.com/n/%E8%B5%B5%E8%96%87?from=feed&loc=at" usercard="name=赵薇" style="color: rgb(235, 115, 80); text-decoration: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">@赵薇</a><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">&nbsp;化身名侦探，对姐夫</span><a target="_blank" render="ext" extra-data="type=atname" href="http://weibo.com/n/%E5%BE%90%E5%B3%A5?from=feed&loc=at" usercard="name=徐峥" style="color: rgb(235, 115, 80); text-decoration: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">@徐峥</a><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">&nbsp;进行史上最残酷拷问！逼得徐峥仓惶逃窜，两人在街头展开一场枪战、爆炸、飞车、坠楼、街头火拼组成追击战。更有徐峥高楼勇救赵薇的感人桥段。</span></p>', 1, 0, '', 1, 0, '2015-08-11 00:15:10'),
-(7, 4, 1, '想知道真相', '想知道真相', '<p><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">今天，中国游泳队抵达俄罗斯喀山，孙杨、宁泽涛等队员露面时都显得比较轻松，心情不错的孙杨还比出剪刀手。本届世锦赛游泳比赛将于8月2日开始，孙杨将参加200、400、800、1500米自由泳四个单项比赛，外媒预测他能包揽四金。转发，为中国游泳健儿们加油！</span><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">今天，中国游泳队抵达俄罗斯喀山，孙杨、宁泽涛等队员露面时都显得比较轻松，心情不错的孙杨还比出剪刀手。本届世锦赛游泳比赛将于8月2日开始，孙杨将参加200、400、800、1500米自由泳四个单项比赛，外媒预测他能包揽四金。转发，为中国游泳健儿们加油！</span><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">今天，中国游泳队抵达俄罗斯喀山，孙杨、宁泽涛等队员露面时都显得比较轻松，心情不错的孙杨还比出剪刀手。本届世锦赛游泳比赛将于8月2日开始，孙杨将参加200、400、800、1500米自由泳四个单项比赛，外媒预测他能包揽四金。转发，为中国游泳健儿们加油！</span></p>', 1, 0, '', 7, 1, '2015-07-27 21:14:19'),
+(7, 4, 1, '想知道真相', '想知道真相', '<p><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">今天，中国游泳队抵达俄罗斯喀山，孙杨、宁泽涛等队员露面时都显得比较轻松，心情不错的孙杨还比出剪刀手。本届世锦赛游泳比赛将于8月2日开始，孙杨将参加200、400、800、1500米自由泳四个单项比赛，外媒预测他能包揽四金。转发，为中国游泳健儿们加油！</span><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">今天，中国游泳队抵达俄罗斯喀山，孙杨、宁泽涛等队员露面时都显得比较轻松，心情不错的孙杨还比出剪刀手。本届世锦赛游泳比赛将于8月2日开始，孙杨将参加200、400、800、1500米自由泳四个单项比赛，外媒预测他能包揽四金。转发，为中国游泳健儿们加油！</span><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">今天，中国游泳队抵达俄罗斯喀山，孙杨、宁泽涛等队员露面时都显得比较轻松，心情不错的孙杨还比出剪刀手。本届世锦赛游泳比赛将于8月2日开始，孙杨将参加200、400、800、1500米自由泳四个单项比赛，外媒预测他能包揽四金。转发，为中国游泳健儿们加油！</span></p>', 1, 0, '', 9, 1, '2015-07-27 21:14:19'),
 (8, 3, 1, '撒旦撒旦撒旦撒', '完任务', '<p>撒旦撒旦撒旦撒多撒阿萨股份的规定收费都是</p>', 1, 0, '', 0, 1, '2015-08-02 17:59:06');
 
 -- --------------------------------------------------------
