@@ -60,7 +60,7 @@
 				<label><a href="<?php echo $search; ?>"><?php echo $text_search; ?></a></label>
 
 				<?php foreach ($informations as $information) { ?>
-				<label><a href="<?php echo $information['href']; ?>"><?php echo $information['title']; ?></a></label>
+				<label><a href="<?php echo $information['href']; ?>" title="<?php echo $information['title']; ?>"><?php echo truncate_string($information['title'],6); ?></a></label>
 				<?php } ?>
 				<label><a href="<?php echo $contact; ?>"><?php echo $text_contact; ?></a></label>
 			</td>	
