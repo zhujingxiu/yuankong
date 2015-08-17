@@ -67,16 +67,16 @@ class Customer {
 				}			
 			}
 
-			if ($customer_query->row['wishlist'] && is_string($customer_query->row['wishlist'])) {
-				if (!isset($this->session->data['wishlist'])) {
-					$this->session->data['wishlist'] = array();
+			if ($customer_query->row['viewed'] && is_string($customer_query->row['viewed'])) {
+				if (!isset($this->session->data['viewed'])) {
+					$this->session->data['viewed'] = array();
 				}
 								
-				$wishlist = mb_unserialize($customer_query->row['wishlist']);
+				$viewed = mb_unserialize($customer_query->row['viewed']);
 			
-				foreach ($wishlist as $product_id) {
-					if (!in_array($product_id, $this->session->data['wishlist'])) {
-						$this->session->data['wishlist'][] = $product_id;
+				foreach ($viewed as $product_id) {
+					if (!in_array($product_id, $this->session->data['viewed'])) {
+						$this->session->data['viewed'][] = $product_id;
 					}
 				}			
 			}
