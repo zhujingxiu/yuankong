@@ -2227,3 +2227,31 @@
 2015-08-17 13:00:44 - PHP Notice:  Undefined variable: sort_group in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 39
 2015-08-17 13:00:44 - PHP Notice:  Undefined variable: sort_account in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 44
 2015-08-17 13:00:44 - PHP Notice:  Undefined variable: sort_telephone in D:\wamp\www\yuankong\backend\view\template\sale\project_list.tpl on line 49
+2015-08-17 21:12:58 - PHP Notice:  Error: Could not load language service/assistant! in E:\wamp\www\yuankong\system\library\language.php on line 39
+2015-08-17 21:12:58 - PHP Notice:  Error: Could not load model service/assistant! in E:\wamp\www\yuankong\system\engine\loader.php on line 48
+2015-08-17 21:14:04 - PHP Notice:  Error: Could not load model service/assistant! in E:\wamp\www\yuankong\system\engine\loader.php on line 48
+2015-08-17 21:14:40 - PHP Notice:  Error: Could not load model service/assistant! in E:\wamp\www\yuankong\system\engine\loader.php on line 48
+2015-08-17 22:03:56 - PHP Notice:  Undefined variable: sort_on in E:\wamp\www\yuankong\market\view\theme\yuankong\template\product\search.tpl on line 25
+2015-08-17 22:03:56 - PHP Notice:  Undefined variable: sort_order in E:\wamp\www\yuankong\market\view\theme\yuankong\template\product\search.tpl on line 26
+2015-08-17 22:03:56 - PHP Notice:  Undefined variable: sort_on in E:\wamp\www\yuankong\market\view\theme\yuankong\template\product\search.tpl on line 28
+2015-08-17 22:03:56 - PHP Notice:  Undefined variable: sort_price in E:\wamp\www\yuankong\market\view\theme\yuankong\template\product\search.tpl on line 29
+2015-08-17 22:03:56 - PHP Notice:  Undefined variable: sort_on in E:\wamp\www\yuankong\market\view\theme\yuankong\template\product\search.tpl on line 31
+2015-08-17 22:03:56 - PHP Notice:  Undefined variable: sort_sales in E:\wamp\www\yuankong\market\view\theme\yuankong\template\product\search.tpl on line 32
+2015-08-17 22:03:56 - PHP Notice:  Undefined variable: pagination in E:\wamp\www\yuankong\market\view\theme\yuankong\template\product\search.tpl on line 66
+2015-08-17 22:42:08 - PHP Notice:  Undefined index: order_status_id in E:\wamp\www\yuankong\backend\view\template\extension\wiki_list.tpl on line 23
+2015-08-17 22:42:08 - PHP Notice:  Undefined variable: tab in E:\wamp\www\yuankong\backend\view\template\extension\wiki_list.tpl on line 23
+2015-08-17 22:42:08 - PHP Notice:  Undefined index: order_status_id in E:\wamp\www\yuankong\backend\view\template\extension\wiki_list.tpl on line 23
+2015-08-17 22:42:08 - PHP Notice:  Undefined variable: tab in E:\wamp\www\yuankong\backend\view\template\extension\wiki_list.tpl on line 23
+2015-08-17 22:42:08 - PHP Notice:  Undefined index: order_status_id in E:\wamp\www\yuankong\backend\view\template\extension\wiki_list.tpl on line 23
+2015-08-17 22:42:08 - PHP Notice:  Undefined variable: tab in E:\wamp\www\yuankong\backend\view\template\extension\wiki_list.tpl on line 23
+2015-08-17 22:42:08 - PHP Notice:  Undefined index: order_status_id in E:\wamp\www\yuankong\backend\view\template\extension\wiki_list.tpl on line 23
+2015-08-17 22:42:08 - PHP Notice:  Undefined variable: tab in E:\wamp\www\yuankong\backend\view\template\extension\wiki_list.tpl on line 23
+2015-08-17 22:42:08 - PHP Notice:  Undefined index: order_status_id in E:\wamp\www\yuankong\backend\view\template\extension\wiki_list.tpl on line 23
+2015-08-17 22:42:08 - PHP Notice:  Undefined variable: tab in E:\wamp\www\yuankong\backend\view\template\extension\wiki_list.tpl on line 23
+2015-08-17 22:42:26 - PHP Notice:  Undefined variable: tab in E:\wamp\www\yuankong\backend\view\template\extension\wiki_list.tpl on line 23
+2015-08-17 22:42:26 - PHP Notice:  Undefined variable: tab in E:\wamp\www\yuankong\backend\view\template\extension\wiki_list.tpl on line 23
+2015-08-17 22:42:26 - PHP Notice:  Undefined variable: tab in E:\wamp\www\yuankong\backend\view\template\extension\wiki_list.tpl on line 23
+2015-08-17 22:42:26 - PHP Notice:  Undefined variable: tab in E:\wamp\www\yuankong\backend\view\template\extension\wiki_list.tpl on line 23
+2015-08-17 22:42:26 - PHP Notice:  Undefined variable: tab in E:\wamp\www\yuankong\backend\view\template\extension\wiki_list.tpl on line 23
+2015-08-17 22:52:30 - PHP Notice:  Undefined variable: sort_sort_order in E:\wamp\www\yuankong\backend\view\template\extension\wiki_list.tpl on line 43
+2015-08-17 22:52:55 - PHP Notice:  Undefined variable: sort_sort_order in E:\wamp\www\yuankong\backend\view\template\extension\wiki_list.tpl on line 43

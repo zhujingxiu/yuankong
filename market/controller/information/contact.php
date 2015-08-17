@@ -88,7 +88,7 @@ class ControllerInformationContact extends Controller {
 		if (isset($this->request->post['name'])) {
 			$this->data['name'] = $this->request->post['name'];
 		} else {
-			$this->data['name'] = $this->customer->getFirstName();
+			$this->data['name'] = $this->customer->getFullName();
 		}
 
 		if (isset($this->request->post['email'])) {

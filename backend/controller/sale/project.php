@@ -254,6 +254,9 @@ class ControllerSaleProject extends Controller {
 		}
 
 		$this->data['sort_sn'] = $this->url->link('sale/project', 'token=' . $this->session->data['token'] . '&sort=p.project_sn' . $url, 'SSL');
+		$this->data['sort_group'] = $this->url->link('sale/project', 'token=' . $this->session->data['token'] . '&sort=p.group_id' . $url, 'SSL');
+		$this->data['sort_account'] = $this->url->link('sale/project', 'token=' . $this->session->data['token'] . '&sort=p.account' . $url, 'SSL');
+		$this->data['sort_telephone'] = $this->url->link('sale/project', 'token=' . $this->session->data['token'] . '&sort=p.telephone' . $url, 'SSL');
 		$this->data['sort_date_applied'] = $this->url->link('sale/project', 'token=' . $this->session->data['token'] . '&sort=p.date_applied' . $url, 'SSL');
 
 		$url = '';

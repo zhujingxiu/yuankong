@@ -4,9 +4,9 @@ class ControllerServiceAssistant extends Controller {
         
     public function index() {
         $this->language->load('service/assistant');
-        $this->load->model('service/assistant');
 
         $this->document->setTitle($this->language->get('heading_title'));
+        $this->document->addStyle('market/view/theme/yuankong/stylesheet/yk_zt.css');
         $this->data['breadcrumbs'] = array();
 
         $this->data['breadcrumbs'][] = array(
@@ -35,9 +35,9 @@ class ControllerServiceAssistant extends Controller {
     }
     public function bidding() {
         $this->language->load('service/assistant');
-        $this->load->model('service/assistant');
 
         $this->document->setTitle($this->language->get('heading_title'));
+        $this->document->addStyle('market/view/theme/yuankong/stylesheet/yk_zt.css');
         $this->data['breadcrumbs'] = array();
 
         $this->data['breadcrumbs'][] = array(
@@ -67,9 +67,9 @@ class ControllerServiceAssistant extends Controller {
 
     public function expert() {
         $this->language->load('service/assistant');
-        $this->load->model('service/assistant');
 
         $this->document->setTitle($this->language->get('heading_title'));
+        $this->document->addStyle('market/view/theme/yuankong/stylesheet/yk_zt.css');
         $this->data['breadcrumbs'] = array();
 
         $this->data['breadcrumbs'][] = array(
@@ -99,9 +99,9 @@ class ControllerServiceAssistant extends Controller {
 
     public function quoted_price() {
         $this->language->load('service/assistant');
-        $this->load->model('service/assistant');
 
         $this->document->setTitle($this->language->get('heading_title'));
+        $this->document->addStyle('market/view/theme/yuankong/stylesheet/yk_zt.css');
         $this->data['breadcrumbs'] = array();
 
         $this->data['breadcrumbs'][] = array(

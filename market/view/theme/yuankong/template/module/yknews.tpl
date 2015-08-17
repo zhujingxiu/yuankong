@@ -19,10 +19,10 @@
         <h3 class="e-title">装修消防</h3>
         <div class="xf-box">
             <ul>
-                <li><a href="#" class="db"><i class="icon zxxf-des"></i><br>消防助手</a></li>
-                <li><a href="#" class="db"><i class="icon zxxf-sg"></i><br>招投标</a></li>
-                <li><a href="#" class="db"><i class="icon zxxf-jc"></i><br>消防问答</a></li>
-                <li><a href="#" class="db"><i class="icon zxxf-bs"></i><br>项目报价</a></li>
+                <li><a href="<?php echo $assistant ?>" class="db"><i class="icon zxxf-des"></i><br>消防助手</a></li>
+                <li><a href="<?php echo $bidding ?>" class="db"><i class="icon zxxf-sg"></i><br>招投标</a></li>
+                <li><a href="<?php echo $expert ?>" class="db"><i class="icon zxxf-jc"></i><br>消防专家</a></li>
+                <li><a href="<?php echo $quoted_price ?>" class="db"><i class="icon zxxf-bs"></i><br>项目报价</a></li>
             </ul>
         </div>
     </div>

@@ -4,7 +4,7 @@ class ControllerInformationSitemap extends Controller {
     	$this->language->load('information/sitemap');
  
 		$this->document->setTitle($this->language->get('heading_title')); 
-
+		$this->document->addStyle('market/view/theme/yuankong/stylesheet/yk_zt.css');
       	$this->data['breadcrumbs'] = array();
 
       	$this->data['breadcrumbs'][] = array(

@@ -221,7 +221,7 @@ class ControllerCommonHome extends Controller {
 		$this->data['text_emenu_mail'] = $this->language->get('text_emenu_mail');
 		$this->data['emenu_mail'] = $this->url->link('sale/contact', 'token=' . $this->session->data['token'], 'SSL');
 		$this->data['text_emenu_settings'] = $this->language->get('text_emenu_settings');
-		$this->data['emenu_settings'] = $this->url->link('setting/store', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['emenu_settings'] = $this->url->link('setting/setting', 'token=' . $this->session->data['token'], 'SSL');
 		$this->data['text_emenu_purchased'] = $this->language->get('text_emenu_purchased');
 		$this->data['emenu_purchased'] = $this->url->link('report/product_purchased', 'token=' . $this->session->data['token'], 'SSL');
 		$this->data['text_emenu_backup_restore'] = $this->language->get('text_emenu_backup_restore');

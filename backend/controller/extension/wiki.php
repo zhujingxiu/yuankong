@@ -21,6 +21,8 @@ class ControllerExtensionWiki extends Controller {
 			'href'      => $this->url->link('extension/wiki', 'token=' . $this->session->data['token'], 'SSL'),
       		'separator' => ' :: '
    		);
+
+
 		
 		if (isset($this->session->data['success'])) {
 			$this->data['success'] = $this->session->data['success'];
@@ -37,23 +39,55 @@ class ControllerExtensionWiki extends Controller {
 		} else {
 			$this->data['error'] = '';
 		}
-		
+		if (isset($this->request->get['sort'])) {
+			$sort = $this->request->get['sort'];
+		} else {
+			$sort = 'w.date_added';
+		}
+
+		if (isset($this->request->get['order'])) {
+			$order = $this->request->get['order'];
+		} else {
+			$order = 'DESC';
+		}
 		$url = '';
-		
+		$tab = false;
+		if (isset($this->request->get['tab'])) {
+			$tab = $this->request->get['tab'];
+			$url .= '&tab=' . $this->request->get['tab'];
+		}
+		if (isset($this->request->get['sort'])) {
+			$url .= '&sort=' . $this->request->get['sort'];
+		}
+
+		if (isset($this->request->get['order'])) {
+			$url .= '&order=' . $this->request->get['order'];
+		}
 		if (isset($this->request->get['page'])) {
 			$page = $this->request->get['page'];
 			$url .= '&page=' . $this->request->get['page'];
 		} else { 
 			$page = 1;
 		}
+		$this->load->model('extension/wiki_group');
+		$this->data['groups'] = $this->model_extension_wiki_group->getWikiGroups();
+		foreach ($this->data['groups'] as $key => $item) {
+			if($item['group_id']){
+				$this->data['groups'][$key]['link'] = $this->url->link('extension/wiki','tab='.$item['group_id'].'&token='.$this->session->data['token'],'SSL');
+			}
+			if($tab===false){
+				$tab =  $item['group_id'] ;
+			}
+		}		
 		
 		$data = array(
+			'tab' => $tab,
 			'page' => $page,
 			'limit' => $this->config->get('config_admin_limit'),
 			'start' => $this->config->get('config_admin_limit') * ($page - 1),
 		);
 		
-		$total = $this->model_extension_wiki->countWiki();
+		$total = $this->model_extension_wiki->countWiki($data);
 		
 		$pagination = new Pagination();
 		$pagination->total = $total;
@@ -71,6 +105,7 @@ class ControllerExtensionWiki extends Controller {
 		$this->data['text_subtitle'] = $this->language->get('text_subtitle');
 		$this->data['text_from'] = $this->language->get('text_from');
 		$this->data['text_date'] = $this->language->get('text_date');
+		$this->data['text_sort'] = $this->language->get('text_sort_order');
 		$this->data['text_action'] = $this->language->get('text_action');
 		$this->data['text_edit'] = $this->language->get('text_edit');
 		
@@ -91,11 +126,35 @@ class ControllerExtensionWiki extends Controller {
 				'group' => $item['name'],
 				'subtitle' => $item['subtitle'],
 				'from' => $item['from'],
+				'sort_order' => $item['sort_order'],
 				'date_added' => date('Y-m-d H:i:s', strtotime($item['date_added'])),
 				'edit' => $this->url->link('extension/wiki/edit', '&wiki_id=' . $item['wiki_id'] . '&token=' . $this->session->data['token'], 'SSL')
 			);
 		}
 		
+
+		$url = '';
+		if (isset($this->request->get['tab'])) {
+			$url .= '&tab=' . $this->request->get['tab'];
+		}else{
+			$url .= '&tab='.$tab;
+		}
+		if ($order == 'ASC') {
+			$url .= '&order=DESC';
+		} else {
+			$url .= '&order=ASC';
+		}
+
+		if (isset($this->request->get['page'])) {
+			$url .= '&page=' . $this->request->get['page'];
+		}
+
+		$this->data['sort_order'] = $this->url->link('extension/wiki', 'token=' . $this->session->data['token'] . '&sort=w.sort_order' . $url, 'SSL');
+		$this->data['sort_title'] = $this->url->link('extension/wiki', 'token=' . $this->session->data['token'] . '&sort=w.title' . $url, 'SSL');
+		$this->data['sort_date_added'] = $this->url->link('extension/wiki', 'token=' . $this->session->data['token'] . '&sort=w.date_added' . $url, 'SSL');
+		$this->data['tab'] = $tab;
+		$this->data['sort'] = $sort;
+		$this->data['order'] = $order;
 		$this->template = 'extension/wiki_list.tpl';
 		$this->children = array(
 			'common/header',

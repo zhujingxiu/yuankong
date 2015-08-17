@@ -9,7 +9,7 @@
 <?php endif; ?> 
 <div class="<?php echo $SPAN[1];?>">
 
-<div id="content" class="page"><?php echo $content_top; ?>
+<div id="content" class="bkbox"><?php echo $content_top; ?>
 
   <h1><?php echo $heading_title; ?></h1>
   <div class="content"><?php echo $text_error; ?></div>
@@ -18,7 +18,7 @@
   <?php echo $content_bottom; ?></div>
 </div> 
 <?php if( $SPAN[2] ): ?>
-<div class="span<?php echo $SPAN[2];?>">	
+<div class="<?php echo $SPAN[2];?>">	
 	<?php echo $column_right; ?>
 </div>
 <?php endif; ?>

@@ -17,6 +17,10 @@ class ControllerModuleYknews extends Controller {
         $this->data['module'] = $module++;
         $this->data['text_more'] = $this->language->get('text_more');
         $this->data['news'] = $this->url->link('information/wiki','','SSL');
+        $this->data['assistant'] = $this->url->link('service/assistant','','SSL');
+        $this->data['expert'] = $this->url->link('service/assistant/expert','','SSL');
+        $this->data['quoted_price'] = $this->url->link('service/assistant/quoted_price','','SSL');
+        $this->data['bidding'] = $this->url->link('service/assistant/bidding','','SSL');
         $this->template = $this->config->get('config_template') . '/template/module/yknews.tpl';
         
         $this->render();

@@ -46,8 +46,27 @@ class ModelExtensionWiki extends Model {
 	}
    
 	public function getAllWiki($data) {
-		$sql = "SELECT * FROM " . DB_PREFIX . "wiki n LEFT JOIN " . DB_PREFIX . "wiki_group ng ON n.group_id = ng.group_id WHERE 1 ORDER BY date_added DESC";
+		$sql = "SELECT * FROM " . DB_PREFIX . "wiki w LEFT JOIN " . DB_PREFIX . "wiki_group wg ON w.group_id = wg.group_id WHERE 1 ";
+		if (!empty($data['tab'])) {
+			$sql .= " AND w.group_id = '" . (int)$data['tab'] . "'";
+		}		
+		$sort_data = array(
+			'w.title',
+			'w.date_added',
+			'w.sort_order'
+		);	
 		
+		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
+			$sql .= " ORDER BY " . $data['sort'];	
+		} else {
+			$sql .= " ORDER BY w.date_added ";	
+		}
+		
+		if (isset($data['order']) && ($data['order'] == 'ASC')) {
+			$sql .= " ASC";
+		} else {
+			$sql .= " DESC";
+		}
 		if (isset($data['start']) || isset($data['limit'])) {
 			if ($data['start'] < 0) {
 				$data['start'] = 0;
@@ -68,9 +87,13 @@ class ModelExtensionWiki extends Model {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "wiki WHERE wiki_id = '" . (int)$id . "'");
 	}
    
-	public function countWiki() {
-		$query = $this->db->query("SELECT COUNT(wiki_id) total FROM " . DB_PREFIX . "wiki");
-	
+	public function countWiki($data=array()) {
+		$sql = "SELECT COUNT(wiki_id) total FROM " . DB_PREFIX . "wiki";
+		
+		if (!empty($data['tab'])) {
+			$sql .= " WHERE group_id = '" . (int)$data['tab'] . "'";
+		}
+		$query = $this->db->query($sql);
 		return $query->row['total'];
 	}
 }
