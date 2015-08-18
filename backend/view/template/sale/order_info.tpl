@@ -196,7 +196,7 @@
       </div>
       <?php if ($shipping_method) { ?>
       <div id="tab-shipping" class="vtabs-content">
-        <table class="form">
+        <table class="form" style="float:left;width:48%;margin-right:5px">
           <tr>
             <td><?php echo $text_fullname; ?></td>
             <td><?php echo $shipping_fullname; ?></td>
@@ -234,31 +234,39 @@
           </tr>
           <?php } ?>
         </table>
+        
+        <table class="form" style="float:left;width:48%;margin-left:5px;border-left:1px dashed #ccc;padding-left:5px;">
+          <?php if ($expresses) { ?>
+          <tr>
+            <td><?php echo $text_shipping_express; ?></td>
+            <td>
+              <select name="shipping_express_id">
+                <option value="0"><?php echo $text_none ?></option>
+              <?php foreach ($expresses as $item): ?>
+                <option value="<?php echo $item['shipping_express_id'] ?>" <?php echo ($shipping_express_id == $item['express_id']) ? 'selected' : '' ?>>
+                  <?php echo $item['title'] ?>
+                </option>
+              <?php endforeach ?>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td><?php echo $text_shipping_tracking_no; ?></td>
+            <td><input type="text" name="shipping_tracking_no" value="<?php echo $shipping_tracking_no; ?>" size="30"/></td>
+          </tr>
+          <tr>
+              <td><?php echo $entry_notify; ?></td>
+              <td><input type="checkbox" name="notify" value="1" checked/></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_comment; ?></td>
+              <td><textarea name="comment" rows="3" style="width: 99%"></textarea>
+                <div style="margin-top: 10px; text-align: right;"><a id="button-shipment" class="button"><?php echo $button_add_shipment; ?></a></div></td>
+            </tr>
+          <?php } ?>
+        </table>
         <br/>
         <div id="shipment"></div>
-        <table class="form">
-          <tr>
-            <td><?php echo $entry_order_status; ?></td>
-            <td><select name="order_status_id">
-                <?php foreach ($order_statuses as $item) { ?>
-                <?php if ($item['order_status_id'] == $order_status_id) { ?>
-                <option value="<?php echo $item['order_status_id']; ?>" selected="selected"><?php echo $item['name']; ?></option>
-                <?php } else { ?>
-                <option value="<?php echo $item['order_status_id']; ?>"><?php echo $item['name']; ?></option>
-                <?php } ?>
-                <?php } ?>
-              </select></td>
-          </tr>
-          <tr>
-            <td><?php echo $entry_notify; ?></td>
-            <td><input type="checkbox" name="notify" value="1" checked/></td>
-          </tr>
-          <tr>
-            <td><?php echo $entry_comment; ?></td>
-            <td><textarea name="comment" cols="40" rows="3" style="width: 99%"></textarea>
-              <div style="margin-top: 10px; text-align: right;"><a id="button-shipment" class="button"><?php echo $button_add_shipment; ?></a></div></td>
-          </tr>
-        </table>
       </div>
       <?php } ?>
 

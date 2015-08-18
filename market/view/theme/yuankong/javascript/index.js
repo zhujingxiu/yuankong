@@ -64,7 +64,7 @@ o.mous={
 o.moushov={
     init:function(sel,dom){
         var sel=$(sel);
-        sel.hover(function(){
+        sel.click(function(){
             var index=$(this).index();
             sel.removeClass("tabon");
             $(this).addClass("tabon");

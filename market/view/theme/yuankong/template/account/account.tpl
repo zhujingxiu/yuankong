@@ -45,6 +45,7 @@
 			<b class="box2bottom"></b>
 	  	</div>
 	  	<div class="left">
+            <?php if($recently){ ?>
 			<div class="jqdingdan">
             	<b class="jqtittle"><?php echo $text_recently ?></b>
             	<table class="jqxldd">
@@ -58,7 +59,7 @@
                     </thead>
 
                     <tbody>
-                        <?php if($recently){ ?>
+                        
                         <?php foreach ($recently as $item): ?>
                     	<tr>
                         	<td align="center"><?php echo $item['date_added'] ?></td>
@@ -73,10 +74,11 @@
                             <td align="center"><a href="<?php echo $item['link'] ?>">查看</a></td>
                         </tr>
                         <?php endforeach ?>
-                        <?php }?>
+                        
                     </tbody>
                 </table>
             </div>
+            <?php }?>
             <div class="jqdingdan martop20">
                 <?php if ($recomments): ?>
             	<p class="tuijian1">为您推荐的热门商品</p>

@@ -9,7 +9,6 @@
     <tr>
       <td class="left"><b><?php echo $column_date_added; ?></b></td>
       <td class="left"><b><?php echo $column_comment; ?></b></td>
-      <td class="left"><b><?php echo $column_status; ?></b></td>
       <td class="left"><b><?php echo $column_notify; ?></b></td>
     </tr>
   </thead>
@@ -19,7 +18,6 @@
     <tr>
       <td class="left"><?php echo $history['date_added']; ?></td>
       <td class="left"><?php echo $history['comment']; ?></td>
-      <td class="left"><?php echo $history['status']; ?></td>
       <td class="left"><?php echo $history['notify']; ?></td>
     </tr>
     <?php } ?>

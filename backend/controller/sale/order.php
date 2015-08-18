@@ -622,7 +622,7 @@ class ControllerSaleOrder extends Controller {
 			$this->data['text_province'] = $this->language->get('text_province');
 			$this->data['text_shipping_method'] = $this->language->get('text_shipping_method');
 			$this->data['text_payment_method'] = $this->language->get('text_payment_method');	
-			$this->data['text_download'] = $this->language->get('text_download');
+			$this->data['text_none'] = $this->language->get('text_none');
 			$this->data['text_wait'] = $this->language->get('text_wait');
 			$this->data['text_generate'] = $this->language->get('text_generate');
 			$this->data['text_reward_add'] = $this->language->get('text_reward_add');
@@ -790,7 +790,7 @@ class ControllerSaleOrder extends Controller {
 			$this->data['shipping_postcode'] = $order_info['shipping_postcode'];
 			$this->data['shipping_province'] = $order_info['shipping_province'];
 			$this->data['shipping_tracking_no'] = $order_info['shipping_tracking_no'];
-			$this->data['shipping_express'] = $order_info['shipping_express'];
+			$this->data['shipping_express_id'] = $order_info['shipping_express_id'];
 
 			$this->data['products'] = array();
 
@@ -848,7 +848,8 @@ class ControllerSaleOrder extends Controller {
 			$this->data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
 
 			$this->data['order_status_id'] = $order_info['order_status_id'];
-			
+			$this->load->model('extension/express');
+			$this->data['expresses'] = $this->model_extension_express->getExpresss();
 			$this->template = 'sale/order_info.tpl';
 			$this->children = array(
 				'common/header',

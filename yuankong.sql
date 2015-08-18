@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2015 年 08 月 16 日 14:35
+-- 生成日期: 2015 年 08 月 18 日 14:58
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.4.3
 
@@ -23020,7 +23020,7 @@ INSERT INTO `yk_order` (`order_id`, `order_sn`, `invoice_no`, `invoice_prefix`, 
 (21, '', 0, 'YK119-2015-00', 1, 1, 'yk18850911766', '18850911766', '', '', '', '', '', NULL, NULL, '', '18850911766', '', '', '', '', 0, NULL, '', '', NULL, 0, '', '123.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; rv:39.0) Gecko/20100101 Firefox/39.0', 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3', '2015-07-29 12:07:33', '2015-07-29 12:07:33'),
 (22, '', 0, 'YK119-2015-00', 1, 1, 'yk18850911766', '18850911766', '', '', '', '', '', NULL, NULL, '', '18850911766', '', '', '', '', 0, NULL, '固定运费率', 'flat.flat', NULL, 0, '', '173.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; rv:39.0) Gecko/20100101 Firefox/39.0', 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3', '2015-07-29 13:18:06', '2015-07-29 13:18:06'),
 (23, '', 0, 'YK119-2015-00', 1, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '', '18850911766', '', '', '', '', 0, NULL, '固定运费率', 'flat.flat', NULL, 0, '', '173.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; rv:39.0) Gecko/20100101 Firefox/39.0', 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3', '2015-07-29 13:22:40', '2015-07-29 13:22:40'),
-(24, '', 0, 'YK119-2015-00', 1, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '太容易', '18850911766', '', '规划快结婚', '', '江苏省', 12, NULL, '固定运费率', 'flat.flat', NULL, 0, '', '323.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; rv:39.0) Gecko/20100101 Firefox/39.0', 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3', '2015-07-29 15:15:11', '2015-07-29 15:15:11');
+(24, '', 0, 'YK119-2015-00', 1, 1, 'yk18850911766', '18850911766', '', '', '', '支付宝(即时到帐)', 'alipay_direct', NULL, NULL, '太容易', '18850911766', '', '规划快结婚', '', '江苏省', 12, NULL, '固定运费率', 'flat.flat', NULL, 0, '', '323.0000', 1, 0, '0.0000', 2, 2, 'CNY', '1.0000', '127.0.0.1', '', 'Mozilla/5.0 (Windows NT 6.1; rv:39.0) Gecko/20100101 Firefox/39.0', 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3', '2015-07-29 15:15:11', '2015-08-18 22:57:31');
 
 -- --------------------------------------------------------
 
@@ -23036,7 +23036,14 @@ CREATE TABLE IF NOT EXISTS `yk_order_history` (
   `comment` text NOT NULL,
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`order_history_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- 转存表中的数据 `yk_order_history`
+--
+
+INSERT INTO `yk_order_history` (`order_history_id`, `order_id`, `order_status_id`, `notify`, `comment`, `date_added`) VALUES
+(1, 24, 1, 1, '', '2015-08-18 22:57:31');
 
 -- --------------------------------------------------------
 
@@ -23148,11 +23155,28 @@ INSERT INTO `yk_order_product` (`order_product_id`, `order_id`, `product_id`, `n
 CREATE TABLE IF NOT EXISTS `yk_order_shipment` (
   `order_shipment_id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
+  `express_id` int(11) NOT NULL DEFAULT '0',
+  `tracking_no` varchar(16) DEFAULT NULL,
   `notify` tinyint(1) NOT NULL DEFAULT '0',
   `note` text NOT NULL,
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`order_shipment_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `yk_order_shipment_tracking`
+--
+
+CREATE TABLE IF NOT EXISTS `yk_order_shipment_tracking` (
+  `tracking_id` int(11) NOT NULL AUTO_INCREMENT,
+  `shipment_id` int(11) NOT NULL,
+  `notify` tinyint(4) NOT NULL DEFAULT '1',
+  `note` text COLLATE utf8_unicode_ci,
+  `date_added` datetime DEFAULT NULL,
+  PRIMARY KEY (`tracking_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -24290,7 +24314,7 @@ INSERT INTO `yk_wiki` (`wiki_id`, `group_id`, `user_id`, `title`, `subtitle`, `t
 (3, 3, 1, '最新款式灭火器', '5.1日家用汽载灭火器全场5折', '<p><span style="color:#CC0000;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;">齐齐哈尔</span><span style="color:#333333;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;">警方与绑架案犯发生激烈</span><span style="color:#CC0000;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;">枪战</span><span style="color:#333333;font-family:arial;font-size:13px;line-height:20.0200004577637px;background-color:#FFFFFF;">&nbsp;一民警头部中弹</span></p>', 1, 1, '消防e站', 9, 2, '2015-08-02 17:59:41'),
 (4, 1, 1, '新一代宝马7系官网曝光 6月10日首发', '新一代宝马7系官网曝光', '<p>车型代号G11的新一代宝马7系的官图和部分信息在宝马奥地利官网曝光，新车将在6月10日正式发布，10月上市销售。新一代7系在奥地利市场的起价为100445欧元(约合人民币69.2万元)。<img alt="" src="http://www.yuankong.com/image/data/demo/apple_logo.jpg" />12321312</p>', 1, 0, '新浪汽车', 3, 0, '2015-06-10 05:20:56'),
 (5, 2, 1, '4S店卖旧车', '法院判决：赔偿车主三倍车款！', '<p><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">山东济宁的刘女士，在当地名为“安斯达”的菲亚特4S店，以128000元买下了菲亚特轿车，就在提车40天后，刘女士发现，这辆车竟然被补过漆！经法院裁判，4S店隐瞒了该车曾经出售的事实，应退回刘女士购车款，并按购车款的3倍赔偿，总计38.4万。（央视）</span><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">山东济宁的刘女士，在当地名为“安斯达”的菲亚特4S店，以128000元买下了菲亚特轿车，就在提车40天后，刘女士发现，这辆车竟然被补过漆！经法院裁判，4S店隐瞒了该车曾经出售的事实，应退回刘女士购车款，并按购车款的3倍赔偿，总计38.4万。（央视）</span></p>', 1, 0, 'http://d.weibo.com/', 1, 0, '2015-07-27 20:57:57'),
-(6, 2, 1, '港囧》首支正式预告片 9月25日爆笑哈哈哈哈哈', '港囧》首支正式预告片 9月25日爆笑', '<p><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">《港囧》发布首支正式预告片，简单粗暴地曝光了电影的正片画面：小舅子</span><a target="_blank" render="ext" extra-data="type=atname" href="http://weibo.com/n/%E5%8C%85%E8%B4%9D%E5%B0%94?from=feed&loc=at" usercard="name=包贝尔" style="color: rgb(235, 115, 80); text-decoration: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">@包贝尔</a><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">&nbsp;为保护姐姐</span><a target="_blank" render="ext" extra-data="type=atname" href="http://weibo.com/n/%E8%B5%B5%E8%96%87?from=feed&loc=at" usercard="name=赵薇" style="color: rgb(235, 115, 80); text-decoration: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">@赵薇</a><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">&nbsp;化身名侦探，对姐夫</span><a target="_blank" render="ext" extra-data="type=atname" href="http://weibo.com/n/%E5%BE%90%E5%B3%A5?from=feed&loc=at" usercard="name=徐峥" style="color: rgb(235, 115, 80); text-decoration: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">@徐峥</a><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">&nbsp;进行史上最残酷拷问！逼得徐峥仓惶逃窜，两人在街头展开一场枪战、爆炸、飞车、坠楼、街头火拼组成追击战。更有徐峥高楼勇救赵薇的感人桥段。</span></p>', 1, 0, '', 1, 0, '2015-08-11 00:15:10'),
+(6, 2, 1, '港囧》首支正式预告片 9月25日爆笑哈哈哈哈哈', '港囧》首支正式预告片 9月25日爆笑', '<p><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">《港囧》发布首支正式预告片，简单粗暴地曝光了电影的正片画面：小舅子</span><a target="_blank" render="ext" extra-data="type=atname" href="http://weibo.com/n/%E5%8C%85%E8%B4%9D%E5%B0%94?from=feed&loc=at" usercard="name=包贝尔" style="color: rgb(235, 115, 80); text-decoration: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">@包贝尔</a><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">&nbsp;为保护姐姐</span><a target="_blank" render="ext" extra-data="type=atname" href="http://weibo.com/n/%E8%B5%B5%E8%96%87?from=feed&loc=at" usercard="name=赵薇" style="color: rgb(235, 115, 80); text-decoration: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">@赵薇</a><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">&nbsp;化身名侦探，对姐夫</span><a target="_blank" render="ext" extra-data="type=atname" href="http://weibo.com/n/%E5%BE%90%E5%B3%A5?from=feed&loc=at" usercard="name=徐峥" style="color: rgb(235, 115, 80); text-decoration: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">@徐峥</a><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">&nbsp;进行史上最残酷拷问！逼得徐峥仓惶逃窜，两人在街头展开一场枪战、爆炸、飞车、坠楼、街头火拼组成追击战。更有徐峥高楼勇救赵薇的感人桥段。</span></p>', 1, 0, '', 2, 0, '2015-08-11 00:15:10'),
 (7, 4, 1, '想知道真相', '想知道真相', '<p><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">今天，中国游泳队抵达俄罗斯喀山，孙杨、宁泽涛等队员露面时都显得比较轻松，心情不错的孙杨还比出剪刀手。本届世锦赛游泳比赛将于8月2日开始，孙杨将参加200、400、800、1500米自由泳四个单项比赛，外媒预测他能包揽四金。转发，为中国游泳健儿们加油！</span><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">今天，中国游泳队抵达俄罗斯喀山，孙杨、宁泽涛等队员露面时都显得比较轻松，心情不错的孙杨还比出剪刀手。本届世锦赛游泳比赛将于8月2日开始，孙杨将参加200、400、800、1500米自由泳四个单项比赛，外媒预测他能包揽四金。转发，为中国游泳健儿们加油！</span><span style="color: rgb(51, 51, 51); font-family: Arial, &#39;Microsoft YaHei&#39;; font-size: 14px; line-height: 23px; white-space: normal;">今天，中国游泳队抵达俄罗斯喀山，孙杨、宁泽涛等队员露面时都显得比较轻松，心情不错的孙杨还比出剪刀手。本届世锦赛游泳比赛将于8月2日开始，孙杨将参加200、400、800、1500米自由泳四个单项比赛，外媒预测他能包揽四金。转发，为中国游泳健儿们加油！</span></p>', 1, 0, '', 9, 1, '2015-07-27 21:14:19'),
 (8, 3, 1, '撒旦撒旦撒旦撒', '完任务', '<p>撒旦撒旦撒旦撒多撒阿萨股份的规定收费都是</p>', 1, 0, '', 0, 1, '2015-08-02 17:59:06');
 

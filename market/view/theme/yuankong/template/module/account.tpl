@@ -24,12 +24,13 @@
         <dd><a <?php echo $keyword == 'account/message' ? 'class="redbg"' : '' ?> href="<?php echo $messages; ?>">站内信息</a></dd>
     </dl>
     
+
+</div>
     <!-- 我的应用 -->
-    <div class="userbox1 mt10">
-        <h3><b>企业发布</b></h3>
-        <ul class="useryy">
-          <li class="usergl"><a href="#">信息发布</a></li>
-          <li class="userwt"><a href="#">在线提问</a></li>
-        </ul>
-    </div>
+<div class="userbox1 mt10">
+    <h3><b>企业发布</b></h3>
+    <ul class="useryy">
+      <li class="usergl"><a href="#">信息发布</a></li>
+      <li class="userwt"><a href="#">在线提问</a></li>
+    </ul>
 </div>

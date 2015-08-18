@@ -91,8 +91,10 @@ class ModelAccountAddress extends Model {
 		$address_data = array();
 		
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "address WHERE customer_id = '" . (int)$this->customer->getId() . "'");
-	
-		return $query->rows;
+		foreach ($query->rows as $result) {
+			$address_data[$result['address_id']] = $result;
+		}
+		return $address_data;
 	}	
 	
 	public function getTotalAddresses() {

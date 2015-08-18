@@ -29,7 +29,7 @@
 .logobox { padding: 25px 0 20px; height: 70px;}
 .logo-search { float: left; padding-left:260px; width: 540px;}
 .l-s-box { height: 34px; border: 2px solid #c30c22; width: 536px;}
-.s-select { float: left; position: relative; font-size: 14px;}
+.s-select { float: left; position: relative; font-size: 14px;z-index:1}
 .search-dt {padding: 0 30px 0 10px; width:70px;  line-height: 34px; position: relative; z-index: 3;}
 .search-dt .h-down { top: 14px; right: 19px;}
 .search-dd { position: absolute; background: #fff; top: 30px; left: 0; padding: 5px 0 0; line-height: 30px; color: #888; display: none;}
@@ -199,7 +199,7 @@
 .newsb-bg2 { background: url("../yk_img/icon/newspic.jpg") no-repeat 0 -180px; width: 181px; height: 181px;display: block; transition:all 0.3s;-webkit-transition:all 0.3s;-moz-transition:all 0.3s;}
 .newsb-bg2:hover { transform:translate(3px);-webkit-transform:translate(3px);-moz-transform:translate(3px);}
 .news-a { float: left; padding-left: 10px; width: 200px; overflow: hidden;}
-.news-a a { display: block;  white-space: nowrap; overflow: hidden; font-size: 12px; line-height: 22px;}
+.news-a a { display: block;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;font-size: 12px; line-height: 22px;}
 .ztc-pic { float: left; border: 1px solid #dedede; padding: 1px; overflow: hidden; margin-right: 10px; display: inline;}
 .ztc-ul {width: 910px; display: inline;}
 .ztc-li { float: left; margin: 0 0 10px 15px; display: inline; width: 136px; font-size: 12px;}

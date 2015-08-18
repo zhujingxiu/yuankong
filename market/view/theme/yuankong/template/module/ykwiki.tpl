@@ -7,6 +7,7 @@
             <div class="newsbox2"><a href="<?php echo $this->url->link('information/wiki') ?>" class="newsb-bg2"></a></div>
         </div>
         <div class="index-news b_f btb3">
+            <div class="ovh">
         	<ul class="index-news-ul">
         		<?php foreach ($wiki['top'] as $item): ?>
         		<li class="index-n-li fix">
@@ -49,5 +50,6 @@
         		</li>
         		<?php endforeach ?>
         	</ul>
+        </div>
         </div>
     </div>
