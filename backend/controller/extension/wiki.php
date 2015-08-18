@@ -85,6 +85,8 @@ class ControllerExtensionWiki extends Controller {
 			'page' => $page,
 			'limit' => $this->config->get('config_admin_limit'),
 			'start' => $this->config->get('config_admin_limit') * ($page - 1),
+			'sort'	=> $sort,
+			'order' => $order
 		);
 		
 		$total = $this->model_extension_wiki->countWiki($data);
