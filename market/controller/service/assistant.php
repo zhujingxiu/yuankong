@@ -102,6 +102,7 @@ class ControllerServiceAssistant extends Controller {
 
         $this->document->setTitle($this->language->get('heading_title'));
         $this->document->addStyle('market/view/theme/yuankong/stylesheet/yk_zt.css');
+        $this->document->addScript($this->area_js());
         $this->data['breadcrumbs'] = array();
 
         $this->data['breadcrumbs'][] = array(
@@ -171,5 +172,53 @@ class ControllerServiceAssistant extends Controller {
         } else {
             return false;
         }
+    }
+
+    private function area_js(){
+        $file = TPL_JS.'area.js';
+        if(!file_exists($file)){
+            $this->load->model('localisation/area');
+            $areas = $this->model_localisation_area->getAreas();
+            $area_rows_group_by_pid = $this->array_group($areas, 'pid');
+
+            $address = array();
+            foreach ($area_rows_group_by_pid as $pid => $item) {
+                if ($pid == 0) {
+                    
+                    $item = array_filter($item, function($item){
+                        return $item['pid'] == 0;
+                    });
+                }
+                $address['name'.$pid] = array_keys($this->array_group($item, 'name'));
+                $address['code'.$pid] = array_keys($this->array_group($item, 'area_id'));
+            }
+            file_put_contents($file, 'var area = ' . json_encode_ex($address) . ';');
+            
+        }
+        return $file;
+    } 
+
+    private function array_group($array, $key, $limit = false){
+        if (empty ($array) || !is_array($array)){
+            return $array;
+        }
+
+        $_result = array ();
+        foreach ($array as $item) {
+            if ((isset($item[$key]))) {
+                $_result[(string)$item[$key]][] = $item;
+            } else {
+                $_result[count($_result)][] = $item;
+            }
+        }
+        if (!$limit) {
+            return $_result;
+        }
+
+        $result = array ();
+        foreach ($_result as $k => $item) {
+            $result[$k] = $item[0];
+        }
+        return $result;
     }
 }

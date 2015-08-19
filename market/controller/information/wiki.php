@@ -23,6 +23,12 @@ class ControllerInformationWiki extends Controller {
         } else { 
             $page = 1;
         }
+
+        if (isset($this->request->get['limit'])) {
+            $limit = $this->request->get['limit'];
+        } else { 
+            $limit = 10;
+        }
         $this->data['breadcrumbs'] = array();
         
         $this->data['breadcrumbs'][] = array(
@@ -66,8 +72,8 @@ class ControllerInformationWiki extends Controller {
             }
             $filter = array(      
                 'filter_search' => $search,          
-                'start'         => 0,
-                'limit'         => 10,
+                'start'         => ($page - 1) * $limit,
+                'limit'         => $limit,
                 'sort'          => $sort
             );
             $total = $this->model_catalog_information->getTotalHelp($filter);
@@ -115,8 +121,8 @@ class ControllerInformationWiki extends Controller {
             $filter = array(
                 'filter_group'  => $wiki_group,
                 'filter_search' => $search,
-                'start'         => 0,
-                'limit'         => 10,
+                'start'         => ($page - 1) * $limit,
+                'limit'         => $limit,
                 'sort'          => $sort,
             );        
             $total = $this->model_catalog_information->getTotalWiki($filter);
@@ -148,9 +154,9 @@ class ControllerInformationWiki extends Controller {
         $pagination = new Pagination();
         $pagination->total = $total;
         $pagination->page = $page;
-        $pagination->limit = 10;
+        $pagination->limit = $limit;
         $pagination->text = $this->language->get('text_pagination');
-        $pagination->url = $this->url->link('service/project', 'page={page}', 'SSL');
+        $pagination->url = $this->url->link('information/wiki', 'page={page}'.$url, 'SSL');
         
         $this->data['pagination'] = $pagination->render_page();
         $this->data['totals'] = $total;

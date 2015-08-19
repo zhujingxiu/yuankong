@@ -43,6 +43,7 @@
                 $(this).parent().parent().parent('.shopstylebox').parent('.shopsty-box').addClass('phover');
             }
         })
+        $(".shopsty-box h3:first").trigger('click');
     })
 </script>
 </div>

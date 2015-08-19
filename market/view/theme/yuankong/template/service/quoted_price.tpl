@@ -23,8 +23,8 @@
             <td><div class="pl15"><input type="text" class="regis-text w100" value=""/><em class="pl10">平方米</em></div> </td>
         </tr>
         <tr>
-            <td class="label-td">所在地</td>
-            <td><div class="pl15"><select class="cadress"><option>江苏省</option></select>  <select class="cadress"><option>苏州市</option></select> </div></td>
+            <td class="label-td">所在地区</td>
+            <td><div class="pl15" id="area"></div></td>
         </tr>
         <tr>
             <td colspan="2" style="text-align: center;"><input type="submit" class="gc-tab-sub w200" value="帮我估价" /></td>
@@ -32,4 +32,46 @@
         </tr>
     </table>
 </div>
+<script type="text/javascript">
+    $(function(){
+        add_select(0);
+
+        $('body').on('change', '#area select', function() {
+            var $me = $(this);
+            var $next = $me.next();
+
+            if ($me.val() == $next.data('pid')) {
+                return;
+            }
+            $me.nextAll().remove();
+            add_select($me.val());
+        });
+
+        function add_select(pid) {
+            var area_names = area['name'+pid];
+            if (!area_names) {
+                return false;
+            }
+            var area_codes = area['code'+pid];
+            var $select = $('<select >');
+            $select.attr('name', 'area[]');
+            $select.attr('class', 'cadress');
+            $select.data('pid', pid);
+            if (area_codes[0] != -1) {
+                area_names.unshift('请选择');
+                area_codes.unshift(0);
+            }
+            for (var idx in area_codes) {
+                var $option = $('<option>');
+                $option.attr('value', area_codes[idx]);
+                $option.text(area_names[idx]);
+                $select.append($option);
+            }
+            $('#area').append($select);
+        };
+        add_select(<?php echo $this->config->get('config_province_id') ?>);
+        $('select.cadress:first').val(<?php echo $this->config->get('config_province_id') ?>);
+
+    });
+</script>
 <?php echo $footer; ?>

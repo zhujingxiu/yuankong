@@ -62,7 +62,7 @@ $(function(){ $('input, textarea').placeholder(); });
     <div class="b_f w980 r">
       <div class="helpbox">
         <h3><?php echo $heading_title ?></h3>
-        <div class="helptext"><?php echo $description; ?></div>
+        <div class="helptext"><?php echo $information_text; ?></div>
       </div>
     </div>
   </div>
