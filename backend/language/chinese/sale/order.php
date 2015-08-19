@@ -4,6 +4,7 @@ $_['heading_title']           = '订单管理';
 $_['tab_all']                 = '全部订单';
 $_['tab_shipping']            = '物流信息';
 $_['button_add_shipment']     = '添加货运信息';
+$_['button_add_tracking']     = '添加物流信息';
 // Text
 $_['text_success']            = '成功： 您已成功更新订单！';
 $_['text_order_id']           = '订单号：';
@@ -57,10 +58,12 @@ $_['text_reward_add']         = '添加奖励积分';
 $_['text_reward_added']       = '奖励积分已添加！';
 $_['text_reward_remove']      = '删除奖励积分';
 $_['text_reward_removed']     = '奖励积分已删除！';
-$_['text_commission_add']     = '添加佣金';
-$_['text_commission_added']   = '佣金已添加！';
-$_['text_commission_remove']  = '删除佣金';
-$_['text_commission_removed'] = '佣金已删除！';
+$_['text_shipment_removed']     = '货运信息已删除！';
+$_['text_shipment_added']     = '货运信息已添加！';
+$_['text_tracking_removed']     = '物流信息已删除！';
+$_['text_tracking_added']       = '物流信息已添加！';
+$_['text_confirm_shipment']       = '确认删除信息？';
+
 $_['text_credit_add']         = '添加信用';
 $_['text_credit_added']       = '账户信用已添加！';
 $_['text_credit_remove']      = '删除信用';
@@ -86,7 +89,10 @@ $_['column_remaining']        = '剩余次数';
 $_['column_comment']          = '订单附言';
 $_['column_notify']           = '通知客户';
 $_['column_action']           = '管理';
-
+$_['column_express']     	  = '快递公司';
+$_['column_added']   		  = '添加时间';
+$_['column_tracking_no']  	  = '快递单号';
+$_['column_note'] = '说明';
 // Entry 
 $_['entry_store']             = '&nbsp;&nbsp;商店：';
 $_['entry_customer']          = '&nbsp;&nbsp;客户：';
@@ -100,7 +106,7 @@ $_['entry_address']           = '&nbsp;&nbsp;选择地址：';
 $_['entry_company']           = '&nbsp;&nbsp;公司名称：';
 $_['entry_company_id']        = '公司注册号：';
 $_['entry_tax_id']            = '公司税号：';
-$_['entry_address']         = '地址 1：';
+$_['entry_address']         = '地址：';
 $_['entry_address_2']         = '&nbsp;&nbsp;地址 2：';
 $_['entry_city']              = '城市：';
 $_['entry_postcode']          = '&nbsp;&nbsp;邮编：';
@@ -128,7 +134,9 @@ $_['entry_payment']           = '支付方式：';
 $_['entry_coupon']            = '折扣券：';
 $_['entry_voucher']           = '礼品券：';
 $_['entry_reward']            = '积分：';
-
+$_['entry_note']           	  = '说明：';
+$_['entry_tracking']           = '物流';
+$_['entry_time']           = '时间';
 // Error
 $_['error_warning']           = '警告： 请认真查看错误信息！';
 $_['error_permission']        = '警告： 您没有权限更改订单！';

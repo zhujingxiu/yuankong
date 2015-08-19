@@ -196,7 +196,7 @@
       </div>
       <?php if ($shipping_method) { ?>
       <div id="tab-shipping" class="vtabs-content">
-        <table class="form" style="float:left;width:48%;margin-right:5px">
+        <table class="form">
           <tr>
             <td><?php echo $text_fullname; ?></td>
             <td><?php echo $shipping_fullname; ?></td>
@@ -234,39 +234,8 @@
           </tr>
           <?php } ?>
         </table>
-        
-        <table class="form" style="float:left;width:48%;margin-left:5px;border-left:1px dashed #ccc;padding-left:5px;">
-          <?php if ($expresses) { ?>
-          <tr>
-            <td><?php echo $text_shipping_express; ?></td>
-            <td>
-              <select name="shipping_express_id">
-                <option value="0"><?php echo $text_none ?></option>
-              <?php foreach ($expresses as $item): ?>
-                <option value="<?php echo $item['shipping_express_id'] ?>" <?php echo ($shipping_express_id == $item['express_id']) ? 'selected' : '' ?>>
-                  <?php echo $item['title'] ?>
-                </option>
-              <?php endforeach ?>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td><?php echo $text_shipping_tracking_no; ?></td>
-            <td><input type="text" name="shipping_tracking_no" value="<?php echo $shipping_tracking_no; ?>" size="30"/></td>
-          </tr>
-          <tr>
-              <td><?php echo $entry_notify; ?></td>
-              <td><input type="checkbox" name="notify" value="1" checked/></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_comment; ?></td>
-              <td><textarea name="comment" rows="3" style="width: 99%"></textarea>
-                <div style="margin-top: 10px; text-align: right;"><a id="button-shipment" class="button"><?php echo $button_add_shipment; ?></a></div></td>
-            </tr>
-          <?php } ?>
-        </table>
         <br/>
-        <div id="shipment"></div>
+        <div id="shipment" style="clear:both;"></div>
       </div>
       <?php } ?>
 
@@ -299,6 +268,8 @@
     </div>
   </div>
 </div>
+<script type="text/javascript" src="view/javascript/jquery/ui/jquery-ui-timepicker-addon.js"></script>
+<script type="text/javascript" src="view/javascript/jquery/ui/jquery-ui-timepicker-zh-CN.js" ></script>
 <script type="text/javascript"><!--
 $('#invoice-generate').live('click', function() {
 	$.ajax({
@@ -551,38 +522,8 @@ $('#button-history').live('click', function() {
 });
 //--></script> 
 <script type="text/javascript"><!--
-$('#shipment .pagination a').live('click', function() {
-  $('#shipment').load(this.href);
-  
-  return false;
-});     
 
 $('#shipment').load('index.php?route=sale/order/shipment&token=<?php echo $token; ?>&order_id=<?php echo $order_id; ?>');
-
-$('#button-shipment').live('click', function() {
-  $.ajax({
-    url: 'index.php?route=sale/order/shipment&token=<?php echo $token; ?>&order_id=<?php echo $order_id; ?>',
-    type: 'post',
-    dataType: 'html',
-    data: 'order_status_id=' + encodeURIComponent($('select[name=\'order_status_id\']').val()) + '&notify=' + encodeURIComponent($('input[name=\'notify\']').attr('checked') ? 1 : 0) + '&append=' + encodeURIComponent($('input[name=\'append\']').attr('checked') ? 1 : 0) + '&comment=' + encodeURIComponent($('textarea[name=\'comment\']').val()),
-    beforeSend: function() {
-      $('.success, .warning').remove();
-      $('#button-shipment').attr('disabled', true);
-      $('#shipment').prepend('<div class="attention"><img src="view/image/loading.gif" alt="" /> <?php echo $text_wait; ?></div>');
-    },
-    complete: function() {
-      $('#button-shipment').attr('disabled', false);
-      $('.attention').remove();
-    },
-    success: function(html) {
-      $('#shipment').html(html);
-      
-      $('textarea[name=\'comment\']').val('');
-      
-      $('#order-status').html($('select[name=\'order_status_id\'] option:selected').text());
-    }
-  });
-});
 //--></script> 
 <script type="text/javascript"><!--
 $('.vtabs a').tabs();

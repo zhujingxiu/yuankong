@@ -12,175 +12,6 @@ class ControllerSaleOrder extends Controller {
     	$this->getList();
   	}
 	
-  	public function insert() {
-		$this->language->load('sale/order');
-
-		$this->document->setTitle($this->language->get('heading_title'));
-
-		$this->load->model('sale/order');
-
-		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-      	  	$this->model_sale_order->addOrder($this->request->post);
-			
-			$this->session->data['success'] = $this->language->get('text_success');
-		  
-			$url = '';
-			
-			if (isset($this->request->get['filter_order_id'])) {
-				$url .= '&filter_order_id=' . $this->request->get['filter_order_id'];
-			}
-			
-			if (isset($this->request->get['filter_customer'])) {
-				$url .= '&filter_customer=' . urlencode(html_entity_decode($this->request->get['filter_customer'], ENT_QUOTES, 'UTF-8'));
-			}
-												
-			if (isset($this->request->get['filter_order_status_id'])) {
-				$url .= '&filter_order_status_id=' . $this->request->get['filter_order_status_id'];
-			}
-			
-			if (isset($this->request->get['filter_total'])) {
-				$url .= '&filter_total=' . $this->request->get['filter_total'];
-			}
-						
-			if (isset($this->request->get['filter_date_added'])) {
-				$url .= '&filter_date_added=' . $this->request->get['filter_date_added'];
-			}
-			
-			if (isset($this->request->get['filter_date_modified'])) {
-				$url .= '&filter_date_modified=' . $this->request->get['filter_date_modified'];
-			}
-													
-			if (isset($this->request->get['sort'])) {
-				$url .= '&sort=' . $this->request->get['sort'];
-			}
-
-			if (isset($this->request->get['order'])) {
-				$url .= '&order=' . $this->request->get['order'];
-			}
-
-			if (isset($this->request->get['page'])) {
-				$url .= '&page=' . $this->request->get['page'];
-			}
-			
-			$this->redirect($this->url->link('sale/order', 'token=' . $this->session->data['token'] . $url, 'SSL'));
-		}
-		
-    	$this->getForm();
-  	}
-	
-  	public function update() {
-		$this->language->load('sale/order');
-
-		$this->document->setTitle($this->language->get('heading_title'));
-
-		$this->load->model('sale/order');
-    	
-		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_sale_order->editOrder($this->request->get['order_id'], $this->request->post);
-	  		
-			$this->session->data['success'] = $this->language->get('text_success');
-	  
-			$url = '';
-
-			if (isset($this->request->get['filter_order_id'])) {
-				$url .= '&filter_order_id=' . $this->request->get['filter_order_id'];
-			}
-			
-			if (isset($this->request->get['filter_customer'])) {
-				$url .= '&filter_customer=' . urlencode(html_entity_decode($this->request->get['filter_customer'], ENT_QUOTES, 'UTF-8'));
-			}
-												
-			if (isset($this->request->get['filter_order_status_id'])) {
-				$url .= '&filter_order_status_id=' . $this->request->get['filter_order_status_id'];
-			}
-			
-			if (isset($this->request->get['filter_total'])) {
-				$url .= '&filter_total=' . $this->request->get['filter_total'];
-			}
-						
-			if (isset($this->request->get['filter_date_added'])) {
-				$url .= '&filter_date_added=' . $this->request->get['filter_date_added'];
-			}
-			
-			if (isset($this->request->get['filter_date_modified'])) {
-				$url .= '&filter_date_modified=' . $this->request->get['filter_date_modified'];
-			}
-													
-			if (isset($this->request->get['sort'])) {
-				$url .= '&sort=' . $this->request->get['sort'];
-			}
-
-			if (isset($this->request->get['order'])) {
-				$url .= '&order=' . $this->request->get['order'];
-			}
-
-			if (isset($this->request->get['page'])) {
-				$url .= '&page=' . $this->request->get['page'];
-			}
-			
-			$this->redirect($this->url->link('sale/order', 'token=' . $this->session->data['token'] . $url, 'SSL'));
-		}
-		
-    	$this->getForm();
-  	}
-	
-  	public function delete() {
-		$this->language->load('sale/order');
-
-		$this->document->setTitle($this->language->get('heading_title'));
-
-		$this->load->model('sale/order');
-
-    	if (isset($this->request->post['selected']) && ($this->validateDelete())) {
-			foreach ($this->request->post['selected'] as $order_id) {
-				$this->model_sale_order->deleteOrder($order_id);
-			}
-
-			$this->session->data['success'] = $this->language->get('text_success');
-
-			$url = '';
-
-			if (isset($this->request->get['filter_order_id'])) {
-				$url .= '&filter_order_id=' . $this->request->get['filter_order_id'];
-			}
-			
-			if (isset($this->request->get['filter_customer'])) {
-				$url .= '&filter_customer=' . urlencode(html_entity_decode($this->request->get['filter_customer'], ENT_QUOTES, 'UTF-8'));
-			}
-												
-			if (isset($this->request->get['filter_order_status_id'])) {
-				$url .= '&filter_order_status_id=' . $this->request->get['filter_order_status_id'];
-			}
-			
-			if (isset($this->request->get['filter_total'])) {
-				$url .= '&filter_total=' . $this->request->get['filter_total'];
-			}
-						
-			if (isset($this->request->get['filter_date_added'])) {
-				$url .= '&filter_date_added=' . $this->request->get['filter_date_added'];
-			}
-			
-			if (isset($this->request->get['filter_date_modified'])) {
-				$url .= '&filter_date_modified=' . $this->request->get['filter_date_modified'];
-			}
-													
-			if (isset($this->request->get['sort'])) {
-				$url .= '&sort=' . $this->request->get['sort'];
-			}
-
-			if (isset($this->request->get['order'])) {
-				$url .= '&order=' . $this->request->get['order'];
-			}
-
-			if (isset($this->request->get['page'])) {
-				$url .= '&page=' . $this->request->get['page'];
-			}
-
-			$this->redirect($this->url->link('sale/order', 'token=' . $this->session->data['token'] . $url, 'SSL'));
-    	}
-
-    	$this->getList();
-  	}
 
   	protected function getList() {
 		if (isset($this->request->get['filter_order_id'])) {
@@ -300,8 +131,6 @@ class ControllerSaleOrder extends Controller {
    		);
 
 		$this->data['invoice'] = $this->url->link('sale/order/invoice', 'token=' . $this->session->data['token'], 'SSL');
-		$this->data['insert'] = $this->url->link('sale/order/insert', 'token=' . $this->session->data['token'], 'SSL');
-		$this->data['delete'] = $this->url->link('sale/order/delete', 'token=' . $this->session->data['token'] . $url, 'SSL');
 		$this->load->model('localisation/order_status');
 		$url = '';
 
@@ -422,8 +251,6 @@ class ControllerSaleOrder extends Controller {
 		$this->data['column_action'] = $this->language->get('column_action');
 
 		$this->data['button_invoice'] = $this->language->get('button_invoice');
-		$this->data['button_insert'] = $this->language->get('button_insert');
-		$this->data['button_delete'] = $this->language->get('button_delete');
 		$this->data['button_filter'] = $this->language->get('button_filter');
 
 		$this->data['tab_all'] = $this->language->get('tab_all');
@@ -558,19 +385,6 @@ class ControllerSaleOrder extends Controller {
 		
 		$this->response->setOutput($this->render());
   	} 
-	
-   	protected function validateDelete() {
-    	if (!$this->user->hasPermission('modify', 'sale/order')) {
-			$this->error['warning'] = $this->language->get('error_permission');
-    	}
-
-		if (!$this->error) {
-	  		return true;
-		} else {
-	  		return false;
-		}
-  	}
-	
 		
 	public function info() {
 		$this->load->model('sale/order');
@@ -645,6 +459,7 @@ class ControllerSaleOrder extends Controller {
 			$this->data['entry_order_status'] = $this->language->get('entry_order_status');
 			$this->data['entry_notify'] = $this->language->get('entry_notify');
 			$this->data['entry_comment'] = $this->language->get('entry_comment');
+			$this->data['entry_note'] = $this->language->get('entry_note');
 			
 			$this->data['button_invoice'] = $this->language->get('button_invoice');
 			$this->data['button_cancel'] = $this->language->get('button_cancel');
@@ -848,8 +663,7 @@ class ControllerSaleOrder extends Controller {
 			$this->data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
 
 			$this->data['order_status_id'] = $order_info['order_status_id'];
-			$this->load->model('extension/express');
-			$this->data['expresses'] = $this->model_extension_express->getExpresss();
+			
 			$this->template = 'sale/order_info.tpl';
 			$this->children = array(
 				'common/header',
@@ -1095,128 +909,126 @@ class ControllerSaleOrder extends Controller {
 		$this->data['success'] = '';
 		
 		$this->load->model('sale/order');
-	
+		$this->data['order_id'] = $this->request->get['order_id'];
 		if ($this->request->server['REQUEST_METHOD'] == 'POST') {
 			if (!$this->user->hasPermission('modify', 'sale/order')) { 
 				$this->data['error'] = $this->language->get('error_permission');
 			}
 			
 			if (!$this->data['error']) { 
-				$this->model_sale_order->addOrderHistory($this->request->get['order_id'], $this->request->post);
+				$this->model_sale_order->addOrderShipment($this->request->get['order_id'], $this->request->post);
 				
-				$this->data['success'] = $this->language->get('text_success');
+				$this->data['success'] = $this->language->get('text_shipment_added');
 			}
 		}
 				
 		$this->data['text_no_results'] = $this->language->get('text_no_results');
+		$this->data['text_none'] = $this->language->get('text_none');
+		$this->data['text_confirm_shipment'] = $this->language->get('text_confirm_shipment');
 		
-		$this->data['column_date_added'] = $this->language->get('column_date_added');
-		$this->data['column_status'] = $this->language->get('column_status');
+		$this->data['column_date_added'] = $this->language->get('column_added');
+		$this->data['column_express'] = $this->language->get('column_express');
+		$this->data['column_tracking_no'] = $this->language->get('column_tracking_no');
 		$this->data['column_notify'] = $this->language->get('column_notify');
-		$this->data['column_comment'] = $this->language->get('column_comment');
+		$this->data['column_note'] = $this->language->get('column_note');		
+		$this->data['column_action'] = $this->language->get('column_action');
+		$this->data['text_shipping_tracking_no'] = $this->language->get('text_shipping_tracking_no');
+		$this->data['text_shipping_express'] = $this->language->get('text_shipping_express');
+		$this->data['entry_notify'] = $this->language->get('entry_notify');
+		$this->data['entry_note'] = $this->language->get('entry_note');
+		$this->data['entry_tracking'] = $this->language->get('entry_tracking');
+		$this->data['entry_time'] = $this->language->get('entry_time');
+			
+		$this->data['button_add_shipment'] = $this->language->get('button_add_shipment');
+		$this->data['button_add_tracking'] = $this->language->get('button_add_tracking');
 
-		if (isset($this->request->get['page'])) {
-			$page = $this->request->get['page'];
-		} else {
-			$page = 1;
-		}  
 		
 		$this->data['histories'] = array();
 			
-		$results = $this->model_sale_order->getOrderHistories($this->request->get['order_id'], ($page - 1) * 10, 10);
+		$results = $this->model_sale_order->getOrderShipments($this->request->get['order_id']);
       		
 		foreach ($results as $result) {
+			$tracking = $this->model_sale_order->getOrderShipmentTrackings($result['order_shipment_id']);
+
         	$this->data['histories'][] = array(
 				'notify'     => $result['notify'] ? $this->language->get('text_yes') : $this->language->get('text_no'),
-				'status'     => $result['status'],
-				'comment'    => nl2br($result['comment']),
-        		'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added']))
+				'order_shipment_id'    => $result['order_shipment_id'],
+				'express'    => $result['express'],
+				'tracking_no'    => $result['tracking_no'],
+				'telephone'  => $result['telephone'],
+				'note'    	 => nl2br($result['note']),
+				'tracking'	 => $tracking,
+        		'date_added' => date('Y-m-d H:i:s', strtotime($result['date_added']))
         	);
       	}			
 		
-		$history_total = $this->model_sale_order->getTotalOrderHistories($this->request->get['order_id']);
-			
-		$pagination = new Pagination();
-		$pagination->total = $history_total;
-		$pagination->page = $page;
-		$pagination->limit = 10; 
-		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = $this->url->link('sale/order/history', 'token=' . $this->session->data['token'] . '&order_id=' . $this->request->get['order_id'] . '&page={page}', 'SSL');
-			
-		$this->data['pagination'] = $pagination->render();
+		$this->load->model('extension/express');
+		$this->data['expresses'] = $this->model_extension_express->getExpresss();
+		$this->data['token'] = $this->session->data['token'];
 		
 		$this->template = 'sale/order_shipment.tpl';		
 		
 		$this->response->setOutput($this->render());
   	}
-
-	public function download() {
-		$this->load->model('sale/order');
+	public function removeShipment() {
+		$this->language->load('sale/order');
 		
-		if (isset($this->request->get['order_option_id'])) {
-			$order_option_id = $this->request->get['order_option_id'];
-		} else {
-			$order_option_id = 0;
+		$json = array();
+    	
+     	if (!$this->user->hasPermission('modify', 'sale/order')) {
+      		$json['error'] = $this->language->get('error_permission'); 
+    	} elseif (isset($this->request->get['order_shipment_id'])) {
+			$this->load->model('sale/order');
+			
+			if ($this->model_sale_order->deleteOrderShipment($this->request->get['order_shipment_id'])) {
+
+				$json['success'] = $this->language->get('text_shipment_removed');
+			} else {
+				$json['error'] = $this->language->get('error_action');
+			}
+		}
+		$this->response->setOutput(json_encode($json));
+  	}
+  	public function addTracking() {
+		$this->language->load('sale/order');
+		
+		$json = array();
+
+     	if (!$this->user->hasPermission('modify', 'sale/order')) {
+      		$json['error'] = $this->language->get('error_permission'); 
+    	} elseif (isset($this->request->get['order_id'])) {
+			$this->load->model('sale/order');
+						
+			if ($this->model_sale_order->addOrderShipmentTracking($this->request->get['order_id'],$this->request->post)) {
+
+				$json['success'] = $this->language->get('text_tracking_added');
+
+			} else {
+				$json['error'] = $this->language->get('error_action');
+			}
 		}
 		
-		$option_info = $this->model_sale_order->getOrderOption($this->request->get['order_id'], $order_option_id);
+		$this->response->setOutput(json_encode($json));
+  	}
+	public function removeTracking() {
+		$this->language->load('sale/order');
 		
-		if ($option_info && $option_info['type'] == 'file') {
-			$file = DIR_DOWNLOAD . $option_info['value'];
-			$mask = basename(utf8_substr($option_info['value'], 0, utf8_strrpos($option_info['value'], '.')));
+		$json = array();
+    	
+     	if (!$this->user->hasPermission('modify', 'sale/order')) {
+      		$json['error'] = $this->language->get('error_permission'); 
+    	} elseif (isset($this->request->get['tracking_id'])) {
+			$this->load->model('sale/order');
+			
+			if ($this->model_sale_order->deleteOrderShipmentTracking($this->request->get['tracking_id'])) {
 
-			if (!headers_sent()) {
-				if (file_exists($file)) {
-					header('Content-Type: application/octet-stream');
-					header('Content-Description: File Transfer');
-					header('Content-Disposition: attachment; filename="' . ($mask ? $mask : basename($file)) . '"');
-					header('Content-Transfer-Encoding: binary');
-					header('Expires: 0');
-					header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-					header('Pragma: public');
-					header('Content-Length: ' . filesize($file));
-					
-					readfile($file, 'rb');
-					exit;
-				} else {
-					exit('Error: Could not find file ' . $file . '!');
-				}
+				$json['success'] = $this->language->get('text_tracking_removed');
 			} else {
-				exit('Error: Headers already sent out!');
+				$json['error'] = $this->language->get('error_action');
 			}
-		} else {
-			$this->language->load('error/not_found');
-
-			$this->document->setTitle($this->language->get('heading_title'));
-
-			$this->data['heading_title'] = $this->language->get('heading_title');
-
-			$this->data['text_not_found'] = $this->language->get('text_not_found');
-
-			$this->data['breadcrumbs'] = array();
-
-			$this->data['breadcrumbs'][] = array(
-				'text'      => $this->language->get('text_home'),
-				'href'      => $this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL'),
-				'separator' => false
-			);
-
-			$this->data['breadcrumbs'][] = array(
-				'text'      => $this->language->get('heading_title'),
-				'href'      => $this->url->link('error/not_found', 'token=' . $this->session->data['token'], 'SSL'),
-				'separator' => ' :: '
-			);
-		
-			$this->template = 'error/not_found.tpl';
-			$this->children = array(
-				'common/header',
-				'common/footer'
-			);
-		
-			$this->response->setOutput($this->render());
-		}	
-	}
-
+		}
+		$this->response->setOutput(json_encode($json));
+  	}
 	public function upload() {
 		$this->language->load('sale/order');
 		

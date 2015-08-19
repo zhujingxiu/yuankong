@@ -397,7 +397,7 @@ class ModelSaleOrder extends Model {
 				$this->model_sale_voucher->sendVoucher($result['voucher_id']);
 			}
 		}
-
+		/*
       	if ($data['notify']) {
 			$language = new Language($order_info['language_directory']);
 			$language->load($order_info['language_filename']);
@@ -442,6 +442,7 @@ class ModelSaleOrder extends Model {
 			$mail->setText(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));
 			$mail->send();
 		}
+		*/
 	}
 		
 	public function getOrderHistories($order_id, $start = 0, $limit = 10) {
@@ -493,4 +494,52 @@ class ModelSaleOrder extends Model {
 		
 		return $query->row['total'];
 	}	
+
+	public function addOrderShipment($order_id,$data=array()){
+		$fields = array(
+			'order_id' => $order_id,
+			'express_id' => $data['express_id'],
+			'tracking_no' => $data['tracking_no'],
+			'note' => isset($data['note']) ? strip_tags($data['note']) : '',
+			'notify' => isset($data['notify']) ? (int)$data['notify'] : 0,
+			'date_added' => date('Y-m-d H:i:s')
+		);
+		return $this->db->insert('order_shipment',$fields);
+	}
+	public function deleteOrderShipment($order_shipment_id){
+		$this->db->delete('order_shipment',array('order_shipment_id'=>$order_shipment_id));
+		$this->db->delete('order_shipment_tracking',array('order_shipment_id'=>$order_shipment_id));
+		return true;
+	}
+	public function getOrderShipments($order_id) {
+				
+		$query = $this->db->query("SELECT os.*,e.title express,e.telephone  FROM " . DB_PREFIX . "order_shipment os LEFT JOIN " . DB_PREFIX . "express e ON e.express_id = os.express_id WHERE os.order_id = '" . (int)$order_id . "' ORDER BY os.date_added ASC ");
+
+		return $query->rows;
+	}
+	
+	public function getTotalOrderShipments($order_id) {
+	  	$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "order_shipment WHERE order_id = '" . (int)$order_id . "'");
+
+		return $query->row['total'];
+	}
+	public function addOrderShipmentTracking($order_id,$data=array()){
+		$fields = array(
+			'order_id' => $order_id,
+			'order_shipment_id' => $data['order_shipment_id'],
+			'note' => isset($data['note']) ? strip_tags($data['note']) : '',
+			'date_added' => isset($data['time']) ? date('Y-m-d H:i:s',strtotime($data['time'])) : date('Y-m-d H:i:s')
+		);
+		return $this->db->insert('order_shipment_tracking',$fields);
+	}
+	public function getOrderShipmentTrackings($order_shipment_id){
+		$query = $this->db->query("SELECT *  FROM " . DB_PREFIX . "order_shipment_tracking WHERE order_shipment_id = '" . (int)$order_shipment_id . "' ORDER BY date_added DESC ");
+
+		return $query->rows;
+	}
+	public function deleteOrderShipmentTracking($tracking_id){
+
+		$this->db->delete('order_shipment_tracking',array('tracking_id'=>$tracking_id));
+		return true;
+	}
 }
