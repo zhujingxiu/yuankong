@@ -35,6 +35,7 @@ class ControllerCommonTop extends Controller {
         $this->data['profile'] = $this->url->link('account/edit', '', 'SSL');
         $this->data['message'] = $this->url->link('account/message', '', 'SSL');
         $this->data['help'] = $this->url->link('information/information', '', 'SSL');
+        $this->data['news'] = $this->url->link('information/wiki', 'wiki_group=2', 'SSL');
         $this->data['company'] = $this->url->link('account/company', '', 'SSL');
         $this->data['upload'] = $this->url->link('account/account', '', 'SSL');
         $this->data['perfact'] = $this->url->link('account/edit', '', 'SSL');

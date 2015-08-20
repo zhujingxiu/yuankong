@@ -42,7 +42,7 @@
                     </div>
                 </li>
                 <li>|</li>
-                <li class="plr"><a href="<?php echo $help ?>"><?php echo $text_help ?></a></li>
+                <li class="plr"><a href="<?php echo $news ?>"><?php echo '新闻中心' ?></a></li>
                 <li>|</li>
                 <li class="pl10 cff"><?php echo $text_hotline ?></li>
                 <?php if(false){?>
@@ -50,7 +50,7 @@
                 <a href="<?php echo $wishlist; ?>" id="wishlist-total"><?php echo $text_wishlist; ?></a>
                 
                 <a href="<?php echo $shopping_cart; ?>"><?php echo $text_shopping_cart; ?></a>
-                <!--a href="<?php //echo $checkout; ?>"><?php //echo $text_checkout; ?></a-->
+                
                 <?php //echo $currency; ?>
                 <?php //echo $language; ?>                  
                 <?php } ?>                  

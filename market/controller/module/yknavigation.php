@@ -20,7 +20,7 @@ class ControllerModuleYknavigation extends Controller {
         $this->data['navgatiors'] = $navigator;
         $this->data['module'] = $module++;
         
-        $this->data['nav_img'] = TPL_IMG."navad.jpg";
+        $this->data['nav_img'] = TPL_IMG."navad.png";
         if (isset($this->request->get['route'])) {
             $route = (string)$this->request->get['route'];
         } else {

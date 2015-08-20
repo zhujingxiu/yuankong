@@ -74,6 +74,7 @@ class ControllerCommonFileManager extends Controller {
 			
 				foreach ($directories as $directory) {
 					$json[$i]['data'] = basename($directory);
+					$json[$i]['state'] = 'open';
 					$json[$i]['attributes']['directory'] = utf8_substr($directory, strlen(DIR_IMAGE . 'data/'));
 					
 					$children = glob(rtrim($directory, '/') . '/*', GLOB_ONLYDIR);
