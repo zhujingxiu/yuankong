@@ -16,12 +16,11 @@
           <tr>
             <td><?php echo $entry_to; ?></td>
             <td><select name="to">
-                <option value="newsletter"><?php echo $text_newsletter; ?></option>
                 <option value="customer_all"><?php echo $text_customer_all; ?></option>
                 <option value="customer_group"><?php echo $text_customer_group; ?></option>
                 <option value="customer"><?php echo $text_customer; ?></option>
-                <option value="affiliate_all"><?php echo $text_affiliate_all; ?></option>
-                <option value="affiliate"><?php echo $text_affiliate; ?></option>
+                <option value="company_all"><?php echo $text_company_all; ?></option>
+                <option value="company"><?php echo $text_company; ?></option>
                 <option value="product"><?php echo $text_product; ?></option>
               </select></td>
           </tr>
@@ -45,14 +44,14 @@
               <td><div id="customer" class="scrollbox"></div></td>
             </tr>
           </tbody>
-          <tbody id="to-affiliate" class="to">
+          <tbody id="to-company" class="to">
             <tr>
-              <td><?php echo $entry_affiliate; ?></td>
-              <td><input type="text" name="affiliates" value="" /></td>
+              <td><?php echo $entry_company; ?></td>
+              <td><input type="text" name="companies" value="" /></td>
             </tr>
             <tr>
               <td>&nbsp;</td>
-              <td><div id="affiliate" class="scrollbox"></div></td>
+              <td><div id="company" class="scrollbox"></div></td>
             </tr>
           </tbody>
           <tbody id="to-product" class="to">
@@ -155,17 +154,17 @@ $('#customer div img').live('click', function() {
 });
 //--></script> 
 <script type="text/javascript"><!--	
-$('input[name=\'affiliates\']').autocomplete({
+$('input[name=\'companies\']').autocomplete({
 	delay: 500,
 	source: function(request, response) {
 		$.ajax({
-			url: 'index.php?route=sale/affiliate/autocomplete&token=<?php echo $token; ?>&filter_name=' +  encodeURIComponent(request.term),
+			url: 'index.php?route=sale/company/autocomplete&token=<?php echo $token; ?>&filter_name=' +  encodeURIComponent(request.term),
 			dataType: 'json',
 			success: function(json) {		
 				response($.map(json, function(item) {
 					return {
 						label: item.name,
-						value: item.affiliate_id
+						value: item.company_id
 					}
 				}));
 			}
@@ -173,12 +172,12 @@ $('input[name=\'affiliates\']').autocomplete({
 		
 	}, 
 	select: function(event, ui) {
-		$('#affiliate' + ui.item.value).remove();
+		$('#company' + ui.item.value).remove();
 		
-		$('#affiliate').append('<div id="affiliate' + ui.item.value + '">' + ui.item.label + '<img src="view/image/delete.png" alt="" /><input type="hidden" name="affiliate[]" value="' + ui.item.value + '" /></div>');
+		$('#company').append('<div id="company' + ui.item.value + '">' + ui.item.label + '<img src="view/image/delete.png" alt="" /><input type="hidden" name="company[]" value="' + ui.item.value + '" /></div>');
 
-		$('#affiliate div:odd').attr('class', 'odd');
-		$('#affiliate div:even').attr('class', 'even');
+		$('#company div:odd').attr('class', 'odd');
+		$('#company div:even').attr('class', 'even');
 				
 		return false;
 	},
@@ -187,11 +186,11 @@ $('input[name=\'affiliates\']').autocomplete({
    	}
 });
 
-$('#affiliate div img').live('click', function() {
+$('#company div img').live('click', function() {
 	$(this).parent().remove();
 	
-	$('#affiliate div:odd').attr('class', 'odd');
-	$('#affiliate div:even').attr('class', 'even');	
+	$('#company div:odd').attr('class', 'odd');
+	$('#company div:even').attr('class', 'even');	
 });
 
 $('input[name=\'products\']').autocomplete({

@@ -83,6 +83,7 @@ $(document).ready(function(){
         <ul>
           <li><a href="<?php echo $order; ?>"><?php echo $text_all_orders; ?></a></li>
           <li><a href="<?php echo $return; ?>"><?php echo $text_return; ?></a></li>
+          
         </ul>
       </li>
       <li id="module"><a href="<?php echo $module; ?>" class="top"><?php echo $text_module; ?></a></li>
@@ -112,6 +113,7 @@ $(document).ready(function(){
         <ul>
           <li><a href="<?php echo $customer; ?>"><?php echo $text_customer; ?></a></li>
           <li><a href="<?php echo $customer_group; ?>"><?php echo $text_customer_group; ?></a></li>
+          <li><a href="<?php echo $contact; ?>"><?php echo $text_contact; ?></a></li>
           <li><a href="<?php echo $customer_ban_ip; ?>"><?php echo $text_customer_ban_ip; ?></a></li>
         </ul>
       </li>

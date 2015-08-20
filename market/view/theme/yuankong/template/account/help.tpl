@@ -13,32 +13,27 @@
         <div class="userboxtop">
           <?php require( DIR_TEMPLATE.$this->config->get('config_template')."/template/common/breadcrumb.tpl" ); ?>
         </div>
-        <div class="userboxcen">
-            <ul class="xiaoxi martop20"  id="list0">
-                <li class="yes" onmouseover="list(this,0)">待回复</li>
-                <li class="not" onmouseover="list(this,1)">已回复</li>
-            </ul>
-            <!--资料管理-->
-            <div class="xinei clearfix"  id="list0_c_0" style="display:block;">
-                <ul class="dianping martop">
-                    <li><input type="submit" value="立即点评" class="lijidp"/><a href="#">【牛丸优惠】价比三家图优惠，不如看准品质更优惠！</a>（2012-03-13）</li>
-                    <li><input type="submit" value="立即点评" class="lijidp"/><a href="#">【牛丸优惠】价比三家图优惠，不如看准品质更优惠！</a>（2012-03-13）</li>
-                    <li><input type="submit" value="立即点评" class="lijidp"/><a href="#">【牛丸优惠】价比三家图优惠，不如看准品质更优惠！</a>（2012-03-13）</li>
-                </ul>
-            </div>
-            <!--形象标识-->
-            <div class="xinei" id="list0_c_1" style="display:none;">
-                <ul class="dianping martop">
-                    <li><span>已点评<a href="#">删除</a></span><a href="#">【牛丸优惠】价比三家图优惠，不如看准品质更优惠！</a>（2012-03-13）</li>
-                    <li><span>已点评<a href="#">删除</a></span><a href="#">【牛丸优惠】价比三家图优惠，不如看准品质更优惠！</a>（2012-03-13）</li>
-                    <li><span>已点评<a href="#">删除</a></span><a href="#">【牛丸优惠】价比三家图优惠，不如看准品质更优惠！</a>（2012-03-13）</li>
-                    <li><span>已点评<a href="#">删除</a></span><a href="#">【牛丸优惠】价比三家图优惠，不如看准品质更优惠！</a>（2012-03-13）</li>
-                    <li><span>已点评<a href="#">删除</a></span><a href="#">【牛丸优惠】价比三家图优惠，不如看准品质更优惠！</a>（2012-03-13）</li>
-                </ul>
-            </div>
+        
+        <h3 class="pl20 pt10"><b>我发布的问题</b></h3>
+        <ul class="fabuwenti fix">
+            <?php foreach ($helps as $key => $item): ?>
+            <li>
+                <a href="<?php echo $item['link'] ?>"><?php echo truncate_string($item['text'],38) ?></a>
+                <?php if ($item['replied']){ ?>
+                <p>已回答<em class="plr c9">|</em><?php echo $item['date_replied'] ?> </p>
+                <?php }else{ ?>
+                <p>未回答<em class="plr c9">|</em><?php echo $item['date_added'] ?></p>
+                <?php }?>
+            </li>
+            <?php endforeach ?>
+            
+        </ul>
+        <!------ 翻页 ------>
+        <div class="pagebox mt10">
+            <?php echo $pagination ?>
         </div>
-        <?php echo $content_bottom; ?>
     </div>
+    <?php echo $content_bottom; ?>
 </div> 
 <?php if( $SPAN[2] ): ?>
 <div class="<?php echo $SPAN[2];?>">	
