@@ -2494,3 +2494,7 @@
 2015-08-20 0:27:20 - PHP Notice:  Undefined variable: text_wait in E:\wamp\www\yuankong\backend\view\template\sale\order_shipment.tpl on line 147
 2015-08-20 0:28:02 - PHP Notice:  Undefined variable: text_wait in E:\wamp\www\yuankong\backend\view\template\sale\order_shipment.tpl on line 147
 2015-08-20 0:28:08 - PHP Notice:  Undefined variable: text_wait in E:\wamp\www\yuankong\backend\view\template\sale\order_shipment.tpl on line 147
+2015-08-21 11:00:50 - PHP Notice:  Undefined variable: languages in D:\wamp\www\yuankong\backend\view\template\extension\help_form.tpl on line 78
+2015-08-21 11:00:50 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\extension\help_form.tpl on line 78
+2015-08-21 11:03:11 - PHP Notice:  Undefined variable: languages in D:\wamp\www\yuankong\backend\view\template\extension\help_form.tpl on line 78
+2015-08-21 11:03:11 - PHP Warning:  Invalid argument supplied for foreach() in D:\wamp\www\yuankong\backend\view\template\extension\help_form.tpl on line 78

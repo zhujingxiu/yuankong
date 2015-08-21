@@ -43,7 +43,7 @@ class ModelModuleYkmodule extends Model {
 		if(!empty($data['group_id'])){
 			$sql = "SELECT * FROM ".DB_PREFIX."wiki WHERE group_id = '".(int)$data['group_id']."'";
 		}else{
-			$sql = "SELECT * FROM ".DB_PREFIX."help ";
+			$sql = "SELECT * FROM ".DB_PREFIX."help WHERE is_top = '1' ";
 		}
 		$sql .= " ORDER BY date_added DESC ";
 		if(!empty($data['limit'])){

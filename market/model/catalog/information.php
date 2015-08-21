@@ -102,7 +102,7 @@ class ModelCatalogInformation extends Model {
 		return $query->row;
 	}
 	public function getTotalHelp($data=array()){
-		$sql= "SELECT COUNT(help_id) total FROM ".DB_PREFIX."help WHERE 1";
+		$sql= "SELECT COUNT(help_id) total FROM ".DB_PREFIX."help WHERE LENGTH(reply) > 0 ";
 		
 		if(isset($data['filter_search']) && trim($data['filter_search'])){
 			$sql .= " AND (`text` LIKE '%".$this->db->escape(trim($data['filter_search']))."%' OR `reply` LIKE '%".$this->db->escape(trim($data['filter_search']))."%')";
@@ -113,7 +113,7 @@ class ModelCatalogInformation extends Model {
 	}
 
 	public function getHelps($data=array()){
-		$sql= "SELECT * FROM ".DB_PREFIX."help WHERE 1";
+		$sql= "SELECT * FROM ".DB_PREFIX."help WHERE LENGTH(reply) > 0 ";
 
 		if(isset($data['filter_search']) && trim($data['filter_search'])){
 			$sql .= " AND (`text` LIKE '%".$this->db->escape(trim($data['filter_search']))."%' OR `reply` LIKE '%".$this->db->escape(trim($data['filter_search']))."%')";
