@@ -10,6 +10,8 @@ class Customer {
 	private $avatar;
 	private $customer_group_id;
 	private $address_id;
+	private $company_id;
+	private $company = '';
 	
   	public function __construct($registry) {
 		$this->config = $registry->get('config');
@@ -31,6 +33,11 @@ class Customer {
 				$this->avatar = $customer_query->row['avatar'];
 				$this->customer_group_id = $customer_query->row['customer_group_id'];
 				$this->address_id = $customer_query->row['address_id'];
+				$this->company_id = $customer_query->row['company_id'];
+				if($this->company_id){
+					$c = $this->db->query("SELECT * FROM " . DB_PREFIX . "company WHERE company_id = '" . (int)$this->company_id . "' AND status = '1' AND approved = '1'");
+					$this->company = empty($c->row['title']) ? '' : trim($c->row['title']);
+				}
 							
       			$this->db->query("UPDATE " . DB_PREFIX . "customer SET cart = '" . $this->db->escape(isset($this->session->data['cart']) ? serialize($this->session->data['cart']) : '') . "', wishlist = '" . $this->db->escape(isset($this->session->data['wishlist']) ? serialize($this->session->data['wishlist']) : '') . "', ip = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "' WHERE customer_id = '" . (int)$this->customer_id . "'");
 			
@@ -91,6 +98,11 @@ class Customer {
 			$this->customer_group_id = $customer_query->row['customer_group_id'];
 			$this->address_id = $customer_query->row['address_id'];
           	$this->avatar = $customer_query->row['avatar'];
+          	$this->company_id = $customer_query->row['company_id'];
+          	if($this->company_id){
+				$c = $this->db->query("SELECT * FROM " . DB_PREFIX . "company WHERE company_id = '" . (int)$this->company_id . "' AND status = '1' AND approved = '1'");
+				$this->company = empty($c->row['title']) ? '' : trim($c->row['title']);
+			}
 			$this->db->query("UPDATE " . DB_PREFIX . "customer SET ip = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "' WHERE customer_id = '" . (int)$this->customer_id . "'");
 
 			if($remember){
@@ -150,6 +162,11 @@ class Customer {
 			$this->customer_group_id = $customer_query->row['customer_group_id'];
 			$this->address_id = $customer_query->row['address_id'];
           	$this->avatar = $customer_query->row['avatar'];
+          	$this->company_id = $customer_query->row['company_id'];
+          	if($this->company_id){
+				$c = $this->db->query("SELECT * FROM " . DB_PREFIX . "company WHERE company_id = '" . (int)$this->company_id . "' AND status = '1' AND approved = '1'");
+				$this->company = empty($c->row['title']) ? '' : trim($c->row['title']);
+			}
 			$this->db->query("UPDATE " . DB_PREFIX . "customer SET ip = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "' WHERE customer_id = '" . (int)$this->customer_id . "'");
 			
 	  		return true;
@@ -178,12 +195,16 @@ class Customer {
 		$this->newsletter = '';
 		$this->customer_group_id = '';
 		$this->address_id = '';
+		$this->company_id = '';
+		$this->company = '';
   	}
   
   	public function isLogged() {
     	return $this->customer_id;
   	}
-
+	public function isCompany() {
+    	return $this->company_id;
+  	}
   	public function getId() {
     	return $this->customer_id;
   	}
@@ -195,7 +216,9 @@ class Customer {
   	public function getFullName() {
 		return $this->fullname;
   	}
-  
+  	public function getCompany() {
+		return $this->company;
+  	}
   	public function getEmail() {
 		return $this->email;
   	}
