@@ -37,7 +37,7 @@ $_['text_layout']                      = '布局设计';
 $_['text_localisation']                = '参数设置';
 $_['text_logged']                      = ' <span><a href="%s">%s</a></span>，欢迎回来！';
 $_['text_logout']                      = '退出系统';
-$_['text_contact']                     = '邮件通知';
+$_['text_contact']                     = '站内通知';
 $_['text_manufacturer']                = '品牌厂商';
 $_['text_module']                      = '模块配置';
 $_['text_option']                      = '售价选项设置';

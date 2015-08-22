@@ -65,9 +65,12 @@ class ControllerAccountHelp extends Controller {
  		
     	foreach ($results as $result) {
 			$this->data['helps'][] = array(
-				'amount'      => $this->currency->format($result['amount'], $this->config->get('config_currency')),
-				'description' => $result['description'],
-				'date_added'  => date($this->language->get('date_format_short'), strtotime($result['date_added']))
+				'link'      => $this->url->link('information/wiki/help','wiki_group=help&help_id='.$result['help_id']),
+				'text'      => $result['text'],
+				'reply' 	=> $result['reply'],
+				'replied' 	=> strtotime($result['date_replied']),
+				'date_added'  => date('Y-m-d', strtotime($result['date_added'])),
+				'date_replied'  => date('Y-m-d', strtotime($result['date_replied'])),
 			);
 		}	
 
@@ -78,12 +81,8 @@ class ControllerAccountHelp extends Controller {
 		$pagination->text = $this->language->get('text_pagination');
 		$pagination->url = $this->url->link('account/help', 'page={page}', 'SSL');
 			
-		$this->data['pagination'] = $pagination->render();
-		
-		$this->data['total'] = $this->currency->format($this->customer->getBalance());
-		
-		$this->data['continue'] = $this->url->link('account/account', '', 'SSL');
-		
+		$this->data['pagination'] = $pagination->render_list();
+				
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/help.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/account/help.tpl';
 		} else {

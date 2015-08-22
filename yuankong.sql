@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2015 年 08 月 18 日 14:58
+-- 生成日期: 2015 年 08 月 20 日 15:35
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.4.3
 
@@ -22480,14 +22480,18 @@ CREATE TABLE IF NOT EXISTS `yk_express` (
   `note` text COLLATE utf8_unicode_ci,
   `date_added` datetime DEFAULT NULL,
   PRIMARY KEY (`express_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
 --
 -- 转存表中的数据 `yk_express`
 --
 
 INSERT INTO `yk_express` (`express_id`, `title`, `logo`, `telephone`, `sort_order`, `note`, `date_added`) VALUES
-(1, '消防e站送货', 'data/logo.png', '18850911766', 1, '阿萨德撒的撒的撒撒的撒的撒', '2015-08-16 22:23:16');
+(1, '消防e站送货', 'data/logo.png', '18850911766', 1, '阿萨德撒的撒的撒撒的撒的撒', '2015-08-16 22:23:16'),
+(2, '顺丰快递', 'data/other/sf.jpg', '95338', 1, '', '2015-08-19 21:42:23'),
+(3, '申通快递', 'data/other/st.jpg', '95543', 1, '', '2015-08-19 21:42:08'),
+(4, '圆通快递', 'data/other/yt.jpg', '95554', 1, '', '2015-08-19 21:41:49'),
+(5, '韵达快递', 'data/other/yd.jpg', '95546', 1, '', '2015-08-19 21:41:16');
 
 -- --------------------------------------------------------
 
@@ -22566,7 +22570,7 @@ CREATE TABLE IF NOT EXISTS `yk_help` (
   `date_added` datetime DEFAULT NULL,
   `viewed` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`help_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- 转存表中的数据 `yk_help`
@@ -22576,7 +22580,8 @@ INSERT INTO `yk_help` (`help_id`, `customer_id`, `account`, `telephone`, `text`,
 (1, 0, '宝马740i', '12312312', '啊施工方和脚后跟的师范生的方式的公司的还是第三方', 0, 0, 'asdsadasdsa', 1, 1, '2015-06-10 06:14:38', '2015-06-10 06:14:38', 1),
 (2, 0, '各个房间公分', '12321321312', '一天换个房间就会根据规划成vbcvbkhjkjh需持续创新', 0, 0, '现场V型从环境和国家规划刚发的鬼地方豆腐干豆腐 ', 1, 1, NULL, '2015-05-25 07:37:26', 0),
 (3, 0, '汉武帝', '1312434243', '汉代建立起中原王朝的一个初步形态，尤以汉武帝对\r\n\r\n疆域的拓展最具开创意义。[详细]', 1, 2, '在李莎与李立三的后代看来，李莎"为了爱情的远行"\r\n\r\n，虽然为此付出了巨大的代价，但终生无悔。[详', 1, 1, NULL, '2015-06-10 08:25:06', 0),
-(4, 4, '彭骊威', '18850921766', '了规划和金融业的说法是东莞施工方的广泛的的发挥的双方各得施工方的规划烦得很', 0, 0, '阿萨法同一天范德萨史蒂芬史密斯', 1, 1, NULL, '2015-08-14 22:00:53', 0);
+(4, 4, '彭骊威', '18850921766', '了规划和金融业的说法是东莞施工方的广泛的的发挥的双方各得施工方的规划烦得很', 0, 0, '阿萨法同一天范德萨史蒂芬史密斯', 1, 1, '2015-08-20 08:15:09', '2015-08-14 22:00:53', 1),
+(5, 4, '彭骊威', '18850921766', 'dsadsadsadasdsa', 0, 0, NULL, 0, 1, NULL, '2015-08-20 23:23:51', 1);
 
 -- --------------------------------------------------------
 
@@ -22806,13 +22811,10 @@ CREATE TABLE IF NOT EXISTS `yk_manufacturer` (
 CREATE TABLE IF NOT EXISTS `yk_message` (
   `message_id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) NOT NULL DEFAULT '0',
-  `text` varchar(512) DEFAULT NULL,
-  `is_top` tinyint(4) NOT NULL DEFAULT '0',
-  `sort_order` smallint(6) NOT NULL DEFAULT '0',
-  `reply` text,
+  `subject` varchar(128) DEFAULT NULL,
+  `text` text,
   `user_id` int(11) NOT NULL DEFAULT '0',
   `status` tinyint(4) NOT NULL DEFAULT '1',
-  `date_replied` datetime DEFAULT NULL,
   `date_added` datetime DEFAULT NULL,
   PRIMARY KEY (`message_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
@@ -23161,7 +23163,18 @@ CREATE TABLE IF NOT EXISTS `yk_order_shipment` (
   `note` text NOT NULL,
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`order_shipment_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+
+--
+-- 转存表中的数据 `yk_order_shipment`
+--
+
+INSERT INTO `yk_order_shipment` (`order_shipment_id`, `order_id`, `express_id`, `tracking_no`, `notify`, `note`, `date_added`) VALUES
+(3, 24, 2, '9879813134564644', 1, 'sdsad', '2015-08-19 22:13:45'),
+(4, 24, 4, '31243243242', 1, '43243253223432', '2015-08-19 22:19:10'),
+(5, 22, 2, '4324324', 1, '', '2015-08-19 22:54:49'),
+(6, 22, 4, '2312321321321321', 1, '', '2015-08-19 22:56:37'),
+(9, 23, 2, '879sadawqe433254', 1, '', '2015-08-19 23:57:17');
 
 -- --------------------------------------------------------
 
@@ -23171,12 +23184,20 @@ CREATE TABLE IF NOT EXISTS `yk_order_shipment` (
 
 CREATE TABLE IF NOT EXISTS `yk_order_shipment_tracking` (
   `tracking_id` int(11) NOT NULL AUTO_INCREMENT,
-  `shipment_id` int(11) NOT NULL,
-  `notify` tinyint(4) NOT NULL DEFAULT '1',
+  `order_id` int(11) NOT NULL DEFAULT '0',
+  `order_shipment_id` int(11) NOT NULL,
   `note` text COLLATE utf8_unicode_ci,
   `date_added` datetime DEFAULT NULL,
   PRIMARY KEY (`tracking_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
+
+--
+-- 转存表中的数据 `yk_order_shipment_tracking`
+--
+
+INSERT INTO `yk_order_shipment_tracking` (`tracking_id`, `order_id`, `order_shipment_id`, `note`, `date_added`) VALUES
+(1, 23, 9, 'rwqerwqewqeqweqw', '2015-08-19 05:21:21'),
+(5, 23, 9, 'asdsadsadsa', '2015-08-20 00:21:26');
 
 -- --------------------------------------------------------
 
