@@ -1,2 +1,3 @@
-cache/*.*
-logs/*.*
+/system/cache
+/system/logs
+/asset/image/cache

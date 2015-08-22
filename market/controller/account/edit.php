@@ -74,6 +74,7 @@ class ControllerAccountEdit extends Controller {
         $this->data['address_action'] = $this->url->link('account/edit/address', '', 'SSL');
 		$this->data['avatar_action'] = $this->url->link('account/edit/avatar', '', 'SSL');
         $this->data['info_action'] = $this->url->link('account/edit/info', '', 'SSL');
+        $this->data['company_action'] = $this->url->link('account/edit/company', '', 'SSL');
 
 		if ($this->request->server['REQUEST_METHOD'] != 'POST') {
             $customer_info = $this->model_account_customer->getCustomer($this->customer->getId());
@@ -126,7 +127,8 @@ class ControllerAccountEdit extends Controller {
         }
         $this->data['addresses'] = $this->model_account_address->getAddresses();
 
-		$this->data['back'] = $this->url->link('account/account', '', 'SSL');
+        $this->data['back'] = $this->url->link('account/account', '', 'SSL');
+		$this->data['isCompany'] = $this->customer->isCompany();
 
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/edit.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/account/edit.tpl';

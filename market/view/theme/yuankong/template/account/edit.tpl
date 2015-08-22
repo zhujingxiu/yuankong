@@ -51,7 +51,7 @@
                     </ul>
                 </form>
             </div>
-            <div class="xinei martop20" id="list0_c_1" style="display::<?php echo $quick == 'avatar' ? 'block' : 'none' ?>;">
+            <div class="xinei martop20" id="list0_c_1" style="display:<?php echo $quick == 'avatar' ? 'block' : 'none' ?>;">
                 <form action="<?php echo $avatar_action; ?>" method="post" id="avatar-form">
                     <div class="biaozhi">
                         <input type="button" onclick="changec('bdpic');" value="从本地上传" class="dnsc" />
