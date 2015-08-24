@@ -28,10 +28,12 @@ class ControllerModuleYknavigation extends Controller {
         }
 
         $part = explode("/", $route);
+        
         $this->data['container_class'] = "w";
         if(isset($part[0]) && $part[0] =='account'){
             $this->data['container_class'] = "register-w";
         }
+        $this->data['commonweal'] = $this->url->link('service/commonweal','','SSL');
         $this->template = $this->config->get('config_template') . '/template/module/yknavigation.tpl';
         
         $this->render();

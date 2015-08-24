@@ -12,7 +12,7 @@
             </ul>
         </div>
         <?php if($container_class=="w"){?>
-        <div class="nav-adbox"><img src="<?php echo $nav_img ?>" /></div>
+        <div class="nav-adbox"><a href="<?php echo $commonweal ?>"><img src="<?php echo $nav_img ?>" /></a></div>
         <?php }?>
     </div>
 <script type="text/javascript">

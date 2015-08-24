@@ -271,4 +271,8 @@ class ControllerServiceCompany extends Controller {
       		return false;
     	}
   	}
+
+  	public function info(){
+  		
+  	}
 }
