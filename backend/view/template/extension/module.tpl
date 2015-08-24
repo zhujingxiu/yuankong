@@ -16,31 +16,54 @@
       <h1><img src="view/image/module.png" alt="" /> <?php echo $heading_title; ?></h1>
     </div>
     <div class="content">
-      <table class="list">
-        <thead>
-          <tr>
-            <td class="left"><?php echo $column_name; ?></td>
-            <td class="right"><?php echo $column_action; ?></td>
-          </tr>
-        </thead>
-        <tbody>
-          <?php if ($extensions) { ?>
-          <?php foreach ($extensions as $extension) { ?>
-          <tr>
-            <td class="left"><?php echo $extension['name']; ?></td>
-            <td class="right"><?php foreach ($extension['action'] as $action) { ?>
-              [ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
-              <?php } ?></td>
-          </tr>
-          <?php } ?>
-          <?php } else { ?>
-          <tr>
-            <td class="center" colspan="8"><?php echo $text_no_results; ?></td>
-          </tr>
-          <?php } ?>
-        </tbody>
-      </table>
+        <table class="list">
+          <thead>
+            <tr>
+              <td class="left" colspan="3">通用布局模块</td>
+            </tr>
+          </thead>
+          <tbody>
+            <?php if ($extensions) { ?>
+            <?php foreach ($extensions as $row) { ?>
+            <tr>
+              <?php foreach ($row as $item): ?>
+              <td class="left"><?php echo $item['name']; ?>
+                <div style="float:right;">
+                <?php foreach ($item['action'] as $action) { ?>
+                [ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
+                <?php } ?>
+                </div>
+              </td>
+              <?php endforeach ?>
+            </tr>
+            <?php } ?>
+            <?php } ?>
+          </tbody>
+        </table>
+        <table class="list">
+          <thead>
+            <tr>
+              <td class="left" colspan="3"><?php echo '指定单页模块'; ?></td>
+            </tr>
+          </thead>
+          <tbody>
+            <?php if ($pages) { ?>
+            <?php foreach ($pages as $row) { ?>
+            <tr>
+              <?php foreach ($row as $item): ?>
+              <td class="left"><?php echo $item['name']; ?>
+                <div style="float:right;">
+                [ <a href="<?php echo $item['href']; ?>"><?php echo $item['action']; ?></a> ]
+                </div>
+              </td>
+              <?php endforeach ?>
+            </tr>
+            <?php } ?>
+            <?php } ?>
+          </tbody>
+        </table>
     </div>
   </div>
 </div>
+
 <?php echo $footer; ?>

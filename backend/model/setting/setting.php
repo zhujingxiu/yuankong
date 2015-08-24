@@ -27,6 +27,32 @@ class ModelSettingSetting extends Model {
 			}
 		}
 	}
+
+	public function editPage($data){
+		$this->db->query("TRUNCATE TABLE `" . DB_PREFIX . "page` ");
+		foreach ($data as $row) {
+			$fields = array(
+				'title' => $row['title'],
+				'route' => trim($row['route']),
+				'text'	=> htmlentities($row['text']),
+				'status'=> $row['status'],
+				'sort'	=> $row['sort'],
+				'date_added'=>date('Y-m-d H:i:s')
+			);
+			$this->db->insert('page',$fields);
+		}
+		
+	}
+
+	public function getPages() {
+		$data = array();
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "page ");
+		foreach ($query->rows as $row) {
+			$row['text'] = html_entity_decode($row['text']);
+			$data[] = $row;
+		}
+		return $data;
+	}
 	
 	public function deleteSetting($group) {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "setting WHERE `group` = '" . $this->db->escape($group) . "'");
