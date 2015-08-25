@@ -27,9 +27,10 @@
                          ".truebtn { background: url('market/view/theme/yuankong/yk_img/icon/icon2.png') no-repeat -71px -170px; height: 48px; width: 48px; display: inline-block;}"+
                          ".falsebtn { background: url('market/view/theme/yuankong/yk_img/icon/icon2.png') no-repeat -71px -380px; height: 48px; width: 48px; display: inline-block;}"+
                          ".alertp { padding-bottom: 20px; text-align: center;}";
+            var head = d.head || d.getElementsByTagName('head')[0];
             style.type= "text/css";
-            style.innerText = cssStr;
-            d.head.appendChild(style);
+            style.textContent = cssStr;
+            head.appendChild(style);
         },
         getbox:function(){
             var me=this;

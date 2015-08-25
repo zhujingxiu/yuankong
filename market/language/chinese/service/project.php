@@ -10,6 +10,8 @@ $_['title_trusteeship']          = '消防托管_消防网上商城【消防E站
 $_['title_train']           = '消防培训_消防网上商城【消防E站官网】';
 $_['title_guarantee']          = '消防保障_消防网上商城【消防E站官网】';
 
+$_['title_prefix']          = '消防前置条件';
+
 // Text
 $_['text_account']          = '账号';
 $_['text_project']          = '工程信息';

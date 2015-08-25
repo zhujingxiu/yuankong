@@ -490,3 +490,19 @@
 .helpbox { padding: 20px 35px; background: #fff; overflow: hidden; color: #333; font-size: 14px;}
 .helpbox h3 { font-size: 16px; font-weight: bold; color: #222; line-height: 35px; padding-bottom: 10px;}
 .helptext p { line-height: 28px; text-indent: 30px; padding-bottom: 10px;}
+/*消防公司详细*/
+.gs-detail-box { border: 1px solid #ddd; background: #fff; border-bottom-width: 3px; padding: 30px;}
+.gs-ad-pic { width: 480px; height: 300px; overflow: hidden;}
+.gs-detail { width:625px; }
+.gs-detail .gsjj { position: relative; padding-left: 115px;}
+.gs-detail .gsjj h3 { font-size: 24px; line-height: 30px; padding-bottom: 10px;}
+.qy-logo {position: absolute; top: 0; left: 0; width: 97px; height: 97px; border: 1px solid #ddd; overflow: hidden; }
+.gs-jianj { background: #f2f2f2; border: 1px solid #ccc; padding: 10px 15px; line-height: 25px; font-size: 12px; color: #666; height:125px; overflow: hidden;}
+.gs-jianj h5 { font-size: 14px; color: #333;}
+.gs-detail .gc-tab-sub { width: 260px; text-align: center; font-size: 12px;}
+.box-b-2 { background: #fff; border:1px solid #ddd; border-bottom-width: 3px;}
+.gs-d-box-t { font-size: 24px; color: #333;}
+.ebbox span { padding: 0 15px 0 16px;}
+.askul li { border-bottom: 1px dotted #ccc; padding: 10px  5px; line-height: 28px; font-size: 14px; color: #444;}
+.askul li:nth-last-child(1) { border-bottom: none;}
+.askul li h6 { color: #c30d23; font-size: 14px;}

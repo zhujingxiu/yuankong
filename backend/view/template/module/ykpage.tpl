@@ -40,7 +40,7 @@
             </tr>            
             <tr>
               <td><?php echo $entry_text; ?></td>
-              <td><textarea name="ykpage[<?php echo $module_row; ?>][text]" id="text-<?php echo $module_row; ?>" style="width:990px;height:330px;"><?php echo isset($module['text']) ? $module['text'] : ''; ?></textarea></td>
+              <td><textarea name="ykpage[<?php echo $module_row; ?>][text]" id="text-<?php echo $module_row; ?>" ><?php echo isset($module['text']) ? $module['text'] : ''; ?></textarea></td>
             </tr>
             <tr>
               <td><?php echo $entry_status; ?></td>
@@ -66,16 +66,23 @@
     </div>
   </div>
 </div>
-<link type="text/css" href="<?php echo TPL_JS ?>umeditor/themes/default/css/umeditor.min.css" rel="stylesheet" />
-<script type="text/javascript" src="<?php echo TPL_JS ?>umeditor/umeditor.config.js"></script> 
-<script type="text/javascript" src="<?php echo TPL_JS ?>umeditor/umeditor.min.js"></script> 
+<script type="text/javascript" src="view/javascript/ckeditor/ckeditor.js"></script> 
 <script type="text/javascript"><!--
-
 <?php $module_row = 1; ?>
 <?php foreach ($modules as $module) { ?>
-UM.getEditor('text-<?php echo $module_row; ?>');
+
+CKEDITOR.replace('text-<?php echo $module_row; ?>', {height:530,
+  filebrowserBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+  filebrowserImageBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+  filebrowserFlashBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+  filebrowserUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+  filebrowserImageUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+  filebrowserFlashUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>'
+});
+
 <?php $module_row++; ?>
 <?php } ?>
+
 
 var module_row = <?php echo $module_row; ?>;
 
@@ -92,7 +99,7 @@ function addModule() {
   html += '    </tr>';
 	html += '    <tr>';
 	html += '      <td><?php echo $entry_text; ?></td>';
-	html += '      <td><textarea name="ykpage[' + module_row + '][text]" id="text-' + module_row + '" style="width:990px;height:330px"></textarea></td>';
+	html += '      <td><textarea name="ykpage[' + module_row + '][text]" id="text-' + module_row + '" ></textarea></td>';
 	html += '    </tr>';
 	html += '    <tr>';
 	html += '      <td><?php echo $entry_status; ?></td>';
@@ -109,7 +116,15 @@ function addModule() {
 	html += '</div>';
 	
 	$('#form').append(html);
-	UM.getEditor('text-'+ module_row); 
+	
+  CKEDITOR.replace('text-'+ module_row, {height:530,
+    filebrowserBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+    filebrowserImageBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+    filebrowserFlashBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+    filebrowserUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+    filebrowserImageUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+    filebrowserFlashUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>'
+  });
 	
 	$('#module-add').before('<a href="#tab-module-' + module_row + '" id="module-' + module_row + '"><?php echo $tab_module; ?> ' + module_row + '&nbsp;<img src="view/image/delete.png" alt="" onclick="$(\'.vtabs a:first\').trigger(\'click\'); $(\'#module-' + module_row + '\').remove(); $(\'#tab-module-' + module_row + '\').remove(); return false;" /></a>');
 	

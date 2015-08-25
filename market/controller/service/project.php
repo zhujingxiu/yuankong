@@ -60,48 +60,31 @@ class ControllerServiceProject extends Controller {
             $result['telephone'] = substr_replace($result['telephone'],'****',3,4);
             $this->data['projects'][] = $result;
         }
-
-        $this->data['groups'] = $this->model_service_project->getProjectGroups();
-
-        switch ($keyword) {
-            case 'design':
-                $this->document->setTitle($this->language->get('title_design'));
-                $template = 'project_design';
-                break;
-            case 'project':
-                $this->document->setTitle($this->language->get('title_project'));
-                $template = 'project_project';
-                break;
-            case 'check':
-                $this->document->setTitle($this->language->get('title_check'));
-                $template = 'project_check';
-                break;
-            case 'approve':
-                $this->document->setTitle($this->language->get('title_approve'));
-                $template = 'project_approve';
-                break;
-            case 'maintenance':
-                $this->document->setTitle($this->language->get('title_maintenance'));
-                $template = 'project_maintenance';
-                break;
-            case 'trusteeship':
-                $this->document->setTitle($this->language->get('title_trusteeship'));
-                $template = 'project_trusteeship';
-                break;
-            case 'train':
-                $this->document->setTitle($this->language->get('title_train'));
-                $template = 'project_train';
-                break;
-            case 'guarantee':
-                $this->document->setTitle($this->language->get('title_guarantee'));
-                $template = 'project_guarantee';
-                break;
-            default:
-                $this->document->setTitle($this->language->get('heading_title'));
-                $template = 'project';
-                break;
+        $this->data['groups'] = array();
+        $groups = $this->model_service_project->getProjectGroups();
+        $this->load->model('tool/image');
+        foreach ($groups as $item) {
+        	$group = strtolower($item['keyword']);
+        	$item['heading_title'] = $this->language->get('title_'.$group);
+        	$item['template'] = 'project_'.$group;
+        	$item['link'] = $this->url->link('service/project','group='.$group,'SSL');
+        	$item['icon'] = $this->model_tool_image->resize($item['icon'],35,35);
+        	$this->data['groups'][strtolower($item['keyword'])] = $item;
         }
 
+        if(isset($this->data['groups'][$keyword])){
+        	$this->document->setTitle($this->data['groups'][$keyword]['heading_title']);
+            $template = $this->data['groups'][$keyword]['template'];
+        }else{
+        	$this->document->setTitle($this->language->get('heading_title'));
+            $template = 'project';
+        }
+
+        $this->data['prefix'] = array(
+        	'link'	=> $this->url->link('service/project','','SSL'),
+        	'name'	=> $this->language->get('title_prefix'),
+        	'icon'	=> $this->model_tool_image->resize('project_prefix.jpg',35,35)
+        );
 
 		$this->template = $this->config->get('config_template') . '/template/service/'.$template.'.tpl';
 		
@@ -112,156 +95,6 @@ class ControllerServiceProject extends Controller {
 						
 		$this->response->setOutput($this->render());				
 	}
-
-
-	
-	public function info() { 
-		$this->language->load('service/project');
-		
-		if (isset($this->request->get['project_id'])) {
-			$project_id = $this->request->get['project_id'];
-		} else {
-			$project_id = 0;
-		}	
-
-		$this->load->model('service/project');
-			
-		$project_info = $this->model_service_project->getProject($project_id);
-		
-		if ($project_info) {
-			$this->document->setTitle($this->language->get('text_order'));
-			
-			$this->data['breadcrumbs'] = array();
-		
-			$this->data['breadcrumbs'][] = array(
-				'text'      => $this->language->get('text_home'),
-				'href'      => $this->url->link('common/home'),        	
-				'separator' => false
-			); 
-		
-			$this->data['breadcrumbs'][] = array(
-				'text'      => $this->language->get('text_account'),
-				'href'      => $this->url->link('account/account', '', 'SSL'),        	
-				'separator' => $this->language->get('text_separator')
-			);
-			
-			$url = '';
-			
-			if (isset($this->request->get['page'])) {
-				$url .= '&page=' . $this->request->get['page'];
-			}
-						
-			$this->data['breadcrumbs'][] = array(
-				'text'      => $this->language->get('heading_title'),
-				'href'      => $this->url->link('service/project', $url, 'SSL'),      	
-				'separator' => $this->language->get('text_separator')
-			);
-			
-			$this->data['breadcrumbs'][] = array(
-				'text'      => $this->language->get('text_order'),
-				'href'      => $this->url->link('service/project/info', 'project_id=' . $this->request->get['project_id'] . $url, 'SSL'),
-				'separator' => $this->language->get('text_separator')
-			);
-					
-      		$this->data['heading_title'] = $this->language->get('text_order');
-			
-    		$this->data['text_project_id'] = $this->language->get('text_project_id');
-			$this->data['text_date_added'] = $this->language->get('text_date_added');
-      		$this->data['text_history'] = $this->language->get('text_history');
-			$this->data['text_comment'] = $this->language->get('text_comment');
-
-      		$this->data['column_name'] = $this->language->get('column_name');
-      		$this->data['column_model'] = $this->language->get('column_model');
-      		$this->data['column_quantity'] = $this->language->get('column_quantity');
-      		$this->data['column_total'] = $this->language->get('column_total');
-			$this->data['column_action'] = $this->language->get('column_action');
-			$this->data['column_date_added'] = $this->language->get('column_date_added');
-      		$this->data['column_status'] = $this->language->get('column_status');
-			
-      		$this->data['button_continue'] = $this->language->get('button_continue');
-		
-
-			
-			$this->data['project_id'] = $this->request->get['project_id'];
-			$this->data['date_added'] = date($this->language->get('date_format_short'), strtotime($project_info['date_added']));
-			
-
-
-      		$this->data['continue'] = $this->url->link('service/project', '', 'SSL');
-      		$this->data['action'] = $this->url->link('service/project/apply', '', 'SSL');
-		
-			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/service/project_info.tpl')) {
-				$this->template = $this->config->get('config_template') . '/template/service/project_info.tpl';
-			} else {
-				$this->template = 'default/template/service/project_info.tpl';
-			}
-			
-			$this->children = array(
-				'common/column_left',
-				'common/column_right',
-				'common/content_top',
-				'common/content_bottom',
-				'common/footer',
-				'common/header'	
-			);
-								
-			$this->response->setOutput($this->render());		
-    	} else {
-			$this->document->setTitle($this->language->get('text_order'));
-			
-      		$this->data['heading_title'] = $this->language->get('text_order');
-
-      		$this->data['text_error'] = $this->language->get('text_error');
-
-      		$this->data['button_continue'] = $this->language->get('button_continue');
-			
-			$this->data['breadcrumbs'] = array();
-
-			$this->data['breadcrumbs'][] = array(
-				'text'      => $this->language->get('text_home'),
-				'href'      => $this->url->link('common/home'),
-				'separator' => false
-			);
-			
-			$this->data['breadcrumbs'][] = array(
-				'text'      => $this->language->get('text_account'),
-				'href'      => $this->url->link('account/account', '', 'SSL'),
-				'separator' => $this->language->get('text_separator')
-			);
-
-			$this->data['breadcrumbs'][] = array(
-				'text'      => $this->language->get('heading_title'),
-				'href'      => $this->url->link('service/project', '', 'SSL'),
-				'separator' => $this->language->get('text_separator')
-			);
-			
-			$this->data['breadcrumbs'][] = array(
-				'text'      => $this->language->get('text_order'),
-				'href'      => $this->url->link('service/project/info', 'project_id=' . $project_id, 'SSL'),
-				'separator' => $this->language->get('text_separator')
-			);
-												
-      		$this->data['continue'] = $this->url->link('service/project', '', 'SSL');
-			 			
-			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/error/not_found.tpl')) {
-				$this->template = $this->config->get('config_template') . '/template/error/not_found.tpl';
-			} else {
-				$this->template = 'default/template/error/not_found.tpl';
-			}
-			
-			$this->children = array(
-				'common/column_left',
-				'common/column_right',
-				'common/content_top',
-				'common/content_bottom',
-				'common/footer',
-				'common/header'	
-			);
-								
-			$this->response->setOutput($this->render());				
-    	}
-  	}
-
 
   	public function apply() {
 

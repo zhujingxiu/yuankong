@@ -27,11 +27,12 @@
                 <?php } else { ?>
                 <a href="<?php echo $sort_name; ?>"><?php echo $column_name; ?></a>
                 <?php } ?></td>
-                <td class="left"><?php if ($sort == 'pg.keyword') { ?>
+              <td class="left"><?php if ($sort == 'pg.keyword') { ?>
                 <a href="<?php echo $sort_keyword; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_keyword; ?></a>
                 <?php } else { ?>
                 <a href="<?php echo $sort_keyword; ?>"><?php echo $column_keyword; ?></a>
                 <?php } ?></td>
+              <td><?php echo $column_icon ?></td>
               <td class="left"><?php if ($sort == 'pg.show') { ?>
                 <a href="<?php echo $sort_show; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_show; ?></a>
                 <?php } else { ?>
@@ -59,6 +60,7 @@
                 <?php } ?></td>
               <td class="left"><?php echo $item['name']; ?></td>
               <td class="left"><?php echo $item['keyword']; ?></td>
+              <td class="left"><img src="<?php echo $item['icon']; ?>" /></td>
               <td class="left"><?php echo $item['show']; ?></td>
               <td class="right"><?php echo $item['sort_order']; ?></td>
               <td class="right"><?php foreach ($item['action'] as $action) { ?>
@@ -68,7 +70,7 @@
             <?php } ?>
             <?php } else { ?>
             <tr>
-              <td class="center" colspan="6"><?php echo $text_no_results; ?></td>
+              <td class="center" colspan="7"><?php echo $text_no_results; ?></td>
             </tr>
             <?php } ?>
           </tbody>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2015 年 08 月 20 日 15:35
+-- 生成日期: 2015 年 08 月 25 日 09:43
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.4.3
 
@@ -21921,6 +21921,7 @@ CREATE TABLE IF NOT EXISTS `yk_company` (
   `telephone` varchar(32) NOT NULL,
   `fax` varchar(32) NOT NULL,
   `website` varchar(255) NOT NULL,
+  `description` text,
   `code` varchar(64) NOT NULL,
   `permit` tinyint(4) NOT NULL DEFAULT '0',
   `recommend` tinyint(4) NOT NULL DEFAULT '0',
@@ -21944,12 +21945,12 @@ CREATE TABLE IF NOT EXISTS `yk_company` (
 -- 转存表中的数据 `yk_company`
 --
 
-INSERT INTO `yk_company` (`company_id`, `zone_id`, `title`, `logo`, `corporation`, `mobile_phone`, `identity_number`, `email`, `telephone`, `fax`, `website`, `code`, `permit`, `recommend`, `deposit`, `viewed`, `credit`, `commission`, `address`, `area_zone`, `areas`, `postcode`, `ip`, `status`, `approved`, `sort_order`, `date_added`) VALUES
-(1, 3, '天朝消防', 'data/logo.png', '萧十一郎', '18260051051', '321321199909091119', '18260051051@139.com', '111111', '', '', '55b88477d5f55', 0, 1, 10000, 0, '0.00', '5.00', '北京西路产业孵化器', '江苏省 苏州市 太仓市', '12|988|4346', '', '', 1, 1, 0, '2015-07-29 15:47:53'),
-(2, 1, '骊威消防', 'data/case/logopic3.jpg', '彭骊威', '18850921766', NULL, '', '', '', '', '55c8cb7680254', 0, 0, 0, 0, '0.00', '0.00', '南京西路街道号码', '江苏省 苏州市 昆山市', '12|988|47821', '', '', 1, 1, 0, '0000-00-00 00:00:00'),
-(3, 2, '金松龄消防公司', 'data/case/logopic6.jpg', '金松龄', '18959523214', NULL, '', '', '', '', '55c8cccbd1674', 0, 0, 0, 0, '0.00', '0.00', '北京西路产业孵化器', '江苏省 苏州市 太仓市', '12|988|4346', '', '', 1, 1, 0, '2015-08-11 00:11:09'),
-(4, 2, '松涛消防器材器械', 'data/case/logopic2.jpg', '郭松涛', '15956952355', NULL, '', '', '', '', '55c9f868d7449', 0, 0, 0, 0, '0.00', '0.00', '北京东路街道', '江苏省 苏州市 太仓市', '12|988|4346', '', '', 1, 1, 0, '2015-08-11 21:29:43'),
-(5, 1, '胡林翼消防', 'http://www.yk119.com//asset/image/cache/data/logopic5-100x100.jpg', '胡林翼', '15975345625', NULL, '', '', '', '', '55c9f939537f1', 0, 0, 0, 0, '0.00', '0.00', '南京东路', '江苏省 苏州市 平江区', '12|988|3087', '', '', 1, 1, 0, '2015-08-11 21:33:11');
+INSERT INTO `yk_company` (`company_id`, `zone_id`, `title`, `logo`, `corporation`, `mobile_phone`, `identity_number`, `email`, `telephone`, `fax`, `website`, `description`, `code`, `permit`, `recommend`, `deposit`, `viewed`, `credit`, `commission`, `address`, `area_zone`, `areas`, `postcode`, `ip`, `status`, `approved`, `sort_order`, `date_added`) VALUES
+(1, 3, '天朝消防', 'data/logo.png', '萧十一郎', '18260051051', '321321199909091119', '18260051051@139.com', '111111', '', '', NULL, '55b88477d5f55', 0, 1, 10000, 0, '0.00', '5.00', '北京西路产业孵化器', '江苏省 苏州市 太仓市', '12|988|4346', '', '', 1, 1, 0, '2015-07-29 15:47:53'),
+(2, 1, '骊威消防', 'data/case/logopic3.jpg', '彭骊威', '18850921766', NULL, '', '', '', '', NULL, '55c8cb7680254', 0, 0, 0, 0, '0.00', '0.00', '南京西路街道号码', '江苏省 苏州市 昆山市', '12|988|47821', '', '', 1, 1, 0, '0000-00-00 00:00:00'),
+(3, 2, '金松龄消防公司', 'data/case/logopic6.jpg', '金松龄', '18959523214', NULL, '', '', '', '', NULL, '55c8cccbd1674', 0, 0, 0, 0, '0.00', '0.00', '北京西路产业孵化器', '江苏省 苏州市 太仓市', '12|988|4346', '', '', 1, 1, 0, '2015-08-11 00:11:09'),
+(4, 2, '松涛消防器材器械', 'data/case/logopic2.jpg', '郭松涛', '15956952355', NULL, '', '', '', '', NULL, '55c9f868d7449', 0, 0, 0, 0, '0.00', '0.00', '北京东路街道', '江苏省 苏州市 太仓市', '12|988|4346', '', '', 1, 1, 0, '2015-08-11 21:29:43'),
+(5, 1, '胡林翼消防', 'http://www.yk119.com//asset/image/cache/data/logopic5-100x100.jpg', '胡林翼', '15975345625', NULL, '', '', '', '', NULL, '55c9f939537f1', 0, 0, 0, 0, '0.00', '0.00', '南京东路', '江苏省 苏州市 平江区', '12|988|3087', '', '', 1, 1, 0, '2015-08-11 21:33:11');
 
 -- --------------------------------------------------------
 
@@ -21977,28 +21978,6 @@ INSERT INTO `yk_company_case` (`case_id`, `company_id`, `name`, `note`, `image`,
 (2, 0, 'SubWay', '', 'data/case/logopic2.jpg', 0, NULL),
 (3, 0, '肯德基', '', 'data/case/logopic1.jpg', 0, NULL),
 (4, 0, '沃尔玛', '', 'data/case/logopic5.jpg', 0, NULL);
-
--- --------------------------------------------------------
-
---
--- 表的结构 `yk_company_description`
---
-
-CREATE TABLE IF NOT EXISTS `yk_company_description` (
-  `company_id` int(11) NOT NULL,
-  `title` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `text` text COLLATE utf8_unicode_ci,
-  `image` text COLLATE utf8_unicode_ci,
-  `date_modified` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- 转存表中的数据 `yk_company_description`
---
-
-INSERT INTO `yk_company_description` (`company_id`, `title`, `text`, `image`, `date_modified`) VALUES
-(1, '公司采风', '公司采风公司采公司采风公司采风风公司采风公司采风公司采风公公司采风司采公司采风风公司采风公司采风公司采风', 'data/sdetail2.jpg', '2015-08-10 23:32:58'),
-(5, 'dasdsadsa', 'sadasdsadsadassa', 'data/banner1.jpg', '2015-08-11 21:48:28');
 
 -- --------------------------------------------------------
 
@@ -22083,6 +22062,29 @@ INSERT INTO `yk_company_member` (`member_id`, `company_id`, `name`, `position`, 
 (3, 1, '沃尔玛', '总经理', 'data/logopic5.jpg', 'wewq', 0, '2015-08-10 23:28:07'),
 (4, 4, '是的撒旦', '撒的撒', 'data/qq-l_de85.png', '', 1, '2015-08-11 21:31:15'),
 (5, 5, '萨达撒', '撒的撒的撒', 'data/yuankong/shoppic2.jpg', '', 0, '2015-08-11 21:34:13');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `yk_company_module`
+--
+
+CREATE TABLE IF NOT EXISTS `yk_company_module` (
+  `company_id` int(11) NOT NULL,
+  `title` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `image` text COLLATE utf8_unicode_ci,
+  `status` tinyint(4) NOT NULL DEFAULT '1',
+  `sort` smallint(6) NOT NULL DEFAULT '1',
+  `date_added` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- 转存表中的数据 `yk_company_module`
+--
+
+INSERT INTO `yk_company_module` (`company_id`, `title`, `image`, `status`, `sort`, `date_added`) VALUES
+(1, '公司采风', 'data/sdetail2.jpg', 1, 1, '2015-08-10 23:32:58'),
+(5, 'dasdsadsa', 'data/banner1.jpg', 1, 1, '2015-08-11 21:48:28');
 
 -- --------------------------------------------------------
 
@@ -22480,18 +22482,14 @@ CREATE TABLE IF NOT EXISTS `yk_express` (
   `note` text COLLATE utf8_unicode_ci,
   `date_added` datetime DEFAULT NULL,
   PRIMARY KEY (`express_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 --
 -- 转存表中的数据 `yk_express`
 --
 
 INSERT INTO `yk_express` (`express_id`, `title`, `logo`, `telephone`, `sort_order`, `note`, `date_added`) VALUES
-(1, '消防e站送货', 'data/logo.png', '18850911766', 1, '阿萨德撒的撒的撒撒的撒的撒', '2015-08-16 22:23:16'),
-(2, '顺丰快递', 'data/other/sf.jpg', '95338', 1, '', '2015-08-19 21:42:23'),
-(3, '申通快递', 'data/other/st.jpg', '95543', 1, '', '2015-08-19 21:42:08'),
-(4, '圆通快递', 'data/other/yt.jpg', '95554', 1, '', '2015-08-19 21:41:49'),
-(5, '韵达快递', 'data/other/yd.jpg', '95546', 1, '', '2015-08-19 21:41:16');
+(1, '消防e站送货', 'data/logo.png', '18850911766', 1, '阿萨德撒的撒的撒撒的撒的撒', '2015-08-16 22:23:16');
 
 -- --------------------------------------------------------
 
@@ -22504,7 +22502,7 @@ CREATE TABLE IF NOT EXISTS `yk_extension` (
   `type` varchar(32) NOT NULL,
   `code` varchar(32) NOT NULL,
   PRIMARY KEY (`extension_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=477 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=479 ;
 
 --
 -- 转存表中的数据 `yk_extension`
@@ -22547,7 +22545,9 @@ INSERT INTO `yk_extension` (`extension_id`, `type`, `code`) VALUES
 (472, 'shipping', 'weight'),
 (473, 'module', 'ykconsult'),
 (474, 'module', 'ykbookproject'),
-(476, 'module', 'ykcompany');
+(476, 'module', 'ykcompany'),
+(477, 'module', 'ykpage'),
+(478, 'module', 'ykpage');
 
 -- --------------------------------------------------------
 
@@ -22570,7 +22570,7 @@ CREATE TABLE IF NOT EXISTS `yk_help` (
   `date_added` datetime DEFAULT NULL,
   `viewed` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`help_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- 转存表中的数据 `yk_help`
@@ -22580,8 +22580,7 @@ INSERT INTO `yk_help` (`help_id`, `customer_id`, `account`, `telephone`, `text`,
 (1, 0, '宝马740i', '12312312', '啊施工方和脚后跟的师范生的方式的公司的还是第三方', 0, 0, 'asdsadasdsa', 1, 1, '2015-06-10 06:14:38', '2015-06-10 06:14:38', 1),
 (2, 0, '各个房间公分', '12321321312', '一天换个房间就会根据规划成vbcvbkhjkjh需持续创新', 0, 0, '现场V型从环境和国家规划刚发的鬼地方豆腐干豆腐 ', 1, 1, NULL, '2015-05-25 07:37:26', 0),
 (3, 0, '汉武帝', '1312434243', '汉代建立起中原王朝的一个初步形态，尤以汉武帝对\r\n\r\n疆域的拓展最具开创意义。[详细]', 1, 2, '在李莎与李立三的后代看来，李莎"为了爱情的远行"\r\n\r\n，虽然为此付出了巨大的代价，但终生无悔。[详', 1, 1, NULL, '2015-06-10 08:25:06', 0),
-(4, 4, '彭骊威', '18850921766', '了规划和金融业的说法是东莞施工方的广泛的的发挥的双方各得施工方的规划烦得很', 0, 0, '阿萨法同一天范德萨史蒂芬史密斯', 1, 1, '2015-08-20 08:15:09', '2015-08-14 22:00:53', 1),
-(5, 4, '彭骊威', '18850921766', 'dsadsadsadasdsa', 0, 0, NULL, 0, 1, NULL, '2015-08-20 23:23:51', 1);
+(4, 4, '彭骊威', '18850921766', '了规划和金融业的说法是东莞施工方的广泛的的发挥的双方各得施工方的规划烦得很', 0, 0, '阿萨法同一天范德萨史蒂芬史密斯', 1, 1, NULL, '2015-08-14 22:00:53', 0);
 
 -- --------------------------------------------------------
 
@@ -22811,10 +22810,13 @@ CREATE TABLE IF NOT EXISTS `yk_manufacturer` (
 CREATE TABLE IF NOT EXISTS `yk_message` (
   `message_id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) NOT NULL DEFAULT '0',
-  `subject` varchar(128) DEFAULT NULL,
-  `text` text,
+  `text` varchar(512) DEFAULT NULL,
+  `is_top` tinyint(4) NOT NULL DEFAULT '0',
+  `sort_order` smallint(6) NOT NULL DEFAULT '0',
+  `reply` text,
   `user_id` int(11) NOT NULL DEFAULT '0',
   `status` tinyint(4) NOT NULL DEFAULT '1',
+  `date_replied` datetime DEFAULT NULL,
   `date_added` datetime DEFAULT NULL,
   PRIMARY KEY (`message_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
@@ -23163,18 +23165,7 @@ CREATE TABLE IF NOT EXISTS `yk_order_shipment` (
   `note` text NOT NULL,
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`order_shipment_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
-
---
--- 转存表中的数据 `yk_order_shipment`
---
-
-INSERT INTO `yk_order_shipment` (`order_shipment_id`, `order_id`, `express_id`, `tracking_no`, `notify`, `note`, `date_added`) VALUES
-(3, 24, 2, '9879813134564644', 1, 'sdsad', '2015-08-19 22:13:45'),
-(4, 24, 4, '31243243242', 1, '43243253223432', '2015-08-19 22:19:10'),
-(5, 22, 2, '4324324', 1, '', '2015-08-19 22:54:49'),
-(6, 22, 4, '2312321321321321', 1, '', '2015-08-19 22:56:37'),
-(9, 23, 2, '879sadawqe433254', 1, '', '2015-08-19 23:57:17');
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -23184,20 +23175,12 @@ INSERT INTO `yk_order_shipment` (`order_shipment_id`, `order_id`, `express_id`, 
 
 CREATE TABLE IF NOT EXISTS `yk_order_shipment_tracking` (
   `tracking_id` int(11) NOT NULL AUTO_INCREMENT,
-  `order_id` int(11) NOT NULL DEFAULT '0',
-  `order_shipment_id` int(11) NOT NULL,
+  `shipment_id` int(11) NOT NULL,
+  `notify` tinyint(4) NOT NULL DEFAULT '1',
   `note` text COLLATE utf8_unicode_ci,
   `date_added` datetime DEFAULT NULL,
   PRIMARY KEY (`tracking_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
-
---
--- 转存表中的数据 `yk_order_shipment_tracking`
---
-
-INSERT INTO `yk_order_shipment_tracking` (`tracking_id`, `order_id`, `order_shipment_id`, `note`, `date_added`) VALUES
-(1, 23, 9, 'rwqerwqewqeqweqw', '2015-08-19 05:21:21'),
-(5, 23, 9, 'asdsadsadsa', '2015-08-20 00:21:26');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -23337,6 +23320,27 @@ CREATE TABLE IF NOT EXISTS `yk_order_voucher` (
   `amount` decimal(15,4) NOT NULL,
   PRIMARY KEY (`order_voucher_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `yk_page`
+--
+
+CREATE TABLE IF NOT EXISTS `yk_page` (
+  `title` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `route` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `text` text COLLATE utf8_unicode_ci NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT '1',
+  `sort` smallint(6) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- 转存表中的数据 `yk_page`
+--
+
+INSERT INTO `yk_page` (`title`, `route`, `text`, `status`, `sort`) VALUES
+('公益页面', 'service/commonweal', '&lt;!--讲座安排--&gt;\r\n&lt;div class=&quot;w mt20&quot;&gt;\r\n&lt;h2 class=&quot;zttitle&quot;&gt;近期公益讲座安排&lt;/h2&gt;\r\n\r\n&lt;table class=&quot;kc-table f_m mt15&quot;&gt;\r\n	&lt;thead&gt;\r\n		&lt;tr&gt;\r\n			&lt;th width=&quot;15%&quot;&gt;讲座时间&lt;/th&gt;\r\n			&lt;th width=&quot;15%&quot;&gt;讲师安排&lt;/th&gt;\r\n			&lt;th width=&quot;15%&quot;&gt;讲座主题&lt;/th&gt;\r\n			&lt;th width=&quot;15%&quot;&gt;讲座内容&lt;/th&gt;\r\n			&lt;th width=&quot;15%&quot;&gt;讲座地点&lt;/th&gt;\r\n			&lt;th width=&quot;15%&quot;&gt;备注&lt;/th&gt;\r\n		&lt;/tr&gt;\r\n	&lt;/thead&gt;\r\n	&lt;tbody&gt;\r\n		&lt;tr&gt;\r\n			&lt;td&gt;2015年11月9日上午10:00&lt;/td&gt;\r\n			&lt;td&gt;樊继河，马斌超&lt;/td&gt;\r\n			&lt;td&gt;论消防与社会安全的重要关系&lt;/td&gt;\r\n			&lt;td&gt;1.日常防火知识&lt;br /&gt;\r\n			2.逃生急救基本常识&lt;/td&gt;\r\n			&lt;td&gt;太仓市北京西路6号留学生创业园主楼&lt;/td&gt;\r\n			&lt;td&gt;请于讲座开始前半小时内到达现场&lt;/td&gt;\r\n		&lt;/tr&gt;\r\n		&lt;tr&gt;\r\n			&lt;td&gt;2015年11月9日上午10:00&lt;/td&gt;\r\n			&lt;td&gt;樊继河，马斌超&lt;/td&gt;\r\n			&lt;td&gt;论消防与社会安全的重要关系&lt;/td&gt;\r\n			&lt;td&gt;1.日常防火知识&lt;br /&gt;\r\n			2.逃生急救基本常识&lt;/td&gt;\r\n			&lt;td&gt;太仓市北京西路6号留学生创业园主楼&lt;/td&gt;\r\n			&lt;td&gt;请于讲座开始前半小时内到达现场&lt;/td&gt;\r\n		&lt;/tr&gt;\r\n		&lt;tr&gt;\r\n			&lt;td&gt;2015年11月9日上午10:00&lt;/td&gt;\r\n			&lt;td&gt;樊继河，马斌超&lt;/td&gt;\r\n			&lt;td&gt;论消防与社会安全的重要关系&lt;/td&gt;\r\n			&lt;td&gt;1.日常防火知识&lt;br /&gt;\r\n			2.逃生急救基本常识&lt;/td&gt;\r\n			&lt;td&gt;太仓市北京西路6号留学生创业园主楼&lt;/td&gt;\r\n			&lt;td&gt;请于讲座开始前半小时内到达现场&lt;/td&gt;\r\n		&lt;/tr&gt;\r\n		&lt;tr&gt;\r\n			&lt;td&gt;2015年11月9日上午10:00&lt;/td&gt;\r\n			&lt;td&gt;樊继河，马斌超&lt;/td&gt;\r\n			&lt;td&gt;论消防与社会安全的重要关系&lt;/td&gt;\r\n			&lt;td&gt;1.日常防火知识&lt;br /&gt;\r\n			2.逃生急救基本常识&lt;/td&gt;\r\n			&lt;td&gt;太仓市北京西路6号留学生创业园主楼&lt;/td&gt;\r\n			&lt;td&gt;请于讲座开始前半小时内到达现场&lt;/td&gt;\r\n		&lt;/tr&gt;\r\n	&lt;/tbody&gt;\r\n&lt;/table&gt;\r\n&lt;/div&gt;\r\n&lt;!--2px红线--&gt;\r\n\r\n&lt;div class=&quot;red-line w mt20&quot;&gt;&amp;nbsp;&lt;/div&gt;\r\n\r\n&lt;div class=&quot;w mt20&quot;&gt;\r\n&lt;h2 class=&quot;zttitle&quot;&gt;讲师介绍&lt;/h2&gt;\r\n\r\n&lt;div class=&quot;ovh&quot;&gt;\r\n&lt;ul class=&quot;jslist mt15&quot;&gt;\r\n	&lt;li class=&quot;itemli fix&quot;&gt;\r\n	&lt;p class=&quot;l&quot;&gt;&lt;img src=&quot;http://www.yk119.com/asset/image/data/page/preson1_a5b6.jpg&quot; style=&quot;width: 250px; height: 165px;&quot; /&gt;&lt;/p&gt;\r\n\r\n	&lt;div class=&quot;r preson-p&quot;&gt;\r\n	&lt;h4&gt;马云&lt;em&gt;(高级码钻)&lt;/em&gt;&lt;/h4&gt;\r\n\r\n	&lt;p class=&quot;t-indet&quot;&gt;马云，男，1964年10月15日生于浙江省杭州市，祖籍浙江省嵊州市（原嵊县）谷来镇， 阿里巴巴集团主要创始人，现担任阿里巴巴集团董事局主席、日本软银董事、TNC（大自然保护协会）中国理事会主席兼全球董事会成员&lt;/p&gt;\r\n	&lt;/div&gt;\r\n	&lt;/li&gt;\r\n	&lt;li class=&quot;itemli fix&quot;&gt;\r\n	&lt;p class=&quot;l&quot;&gt;&lt;img src=&quot;http://www.yk119.com/asset/image/data/page/preson1_a5b6.jpg&quot; style=&quot;width: 250px; height: 165px;&quot; /&gt;&lt;/p&gt;\r\n\r\n	&lt;div class=&quot;r preson-p&quot;&gt;\r\n	&lt;h4&gt;马云&lt;em&gt;(高级码钻)&lt;/em&gt;&lt;/h4&gt;\r\n\r\n	&lt;p class=&quot;t-indet&quot;&gt;马云，男，1964年10月15日生于浙江省杭州市，祖籍浙江省嵊州市（原嵊县）谷来镇， 阿里巴巴集团主要创始人，现担任阿里巴巴集团董事局主席、日本软银董事、TNC（大自然保护协会）中国理事会主席兼全球董事会成员&lt;/p&gt;\r\n	&lt;/div&gt;\r\n	&lt;/li&gt;\r\n	&lt;li class=&quot;itemli fix&quot;&gt;\r\n	&lt;p class=&quot;l&quot;&gt;&lt;img src=&quot;http://www.yk119.com/asset/image/data/page/preson1_a5b6.jpg&quot; style=&quot;width: 250px; height: 165px;&quot; /&gt;&lt;/p&gt;\r\n\r\n	&lt;div class=&quot;r preson-p&quot;&gt;\r\n	&lt;h4&gt;马云&lt;em&gt;(高级码钻)&lt;/em&gt;&lt;/h4&gt;\r\n\r\n	&lt;p class=&quot;t-indet&quot;&gt;马云，男，1964年10月15日生于浙江省杭州市，祖籍浙江省嵊州市（原嵊县）谷来镇， 阿里巴巴集团主要创始人，现担任阿里巴巴集团董事局主席、日本软银董事、TNC（大自然保护协会）中国理事会主席兼全球董事会成员&lt;/p&gt;\r\n	&lt;/div&gt;\r\n	&lt;/li&gt;\r\n	&lt;li class=&quot;itemli fix&quot;&gt;\r\n	&lt;p class=&quot;l&quot;&gt;&lt;img src=&quot;http://www.yk119.com/asset/image/data/page/preson1_a5b6.jpg&quot; style=&quot;width: 250px; height: 165px;&quot; /&gt;&lt;/p&gt;\r\n\r\n	&lt;div class=&quot;r preson-p&quot;&gt;\r\n	&lt;h4&gt;马云&lt;em&gt;(高级码钻)&lt;/em&gt;&lt;/h4&gt;\r\n\r\n	&lt;p class=&quot;t-indet&quot;&gt;马云，男，1964年10月15日生于浙江省杭州市，祖籍浙江省嵊州市（原嵊县）谷来镇， 阿里巴巴集团主要创始人，现担任阿里巴巴集团董事局主席、日本软银董事、TNC（大自然保护协会）中国理事会主席兼全球董事会成员&lt;/p&gt;\r\n	&lt;/div&gt;\r\n	&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;!--2px红线--&gt;\r\n\r\n&lt;div class=&quot;red-line w mt20&quot;&gt;&amp;nbsp;&lt;/div&gt;\r\n\r\n&lt;div class=&quot;w mt20&quot;&gt;\r\n&lt;h2 class=&quot;zttitle&quot;&gt;公益资助&lt;/h2&gt;\r\n\r\n&lt;table class=&quot;kc-table f_m mt15&quot;&gt;\r\n	&lt;thead&gt;\r\n		&lt;tr&gt;\r\n			&lt;th width=&quot;33%&quot;&gt;资助重点&lt;/th&gt;\r\n			&lt;th width=&quot;33%&quot;&gt;最新资助&lt;/th&gt;\r\n			&lt;th width=&quot;33%&quot;&gt;资助基本原则&lt;/th&gt;\r\n		&lt;/tr&gt;\r\n	&lt;/thead&gt;\r\n	&lt;tbody&gt;\r\n		&lt;tr&gt;\r\n			&lt;td&gt;伤残消防员&lt;br /&gt;\r\n			贫困消防家属&lt;br /&gt;\r\n			因公残障&lt;br /&gt;\r\n			火灾受难家庭&lt;br /&gt;\r\n			...&lt;/td&gt;\r\n			&lt;td&gt;樊继河，马斌超&lt;/td&gt;\r\n			&lt;td&gt;资助基金主要用于解决消防高危职业特性带来的伤残、患重大疾病、特困官兵家庭和英烈家属的实际困难&lt;/td&gt;\r\n		&lt;/tr&gt;\r\n	&lt;/tbody&gt;\r\n&lt;/table&gt;\r\n&lt;/div&gt;\r\n&lt;!--2px红线--&gt;\r\n\r\n&lt;div class=&quot;red-line w mt20&quot;&gt;&amp;nbsp;&lt;/div&gt;\r\n\r\n&lt;div class=&quot;w mt20&quot;&gt;\r\n&lt;h2 class=&quot;zttitle&quot;&gt;公益形象大使&lt;/h2&gt;\r\n\r\n&lt;div class=&quot;ovh mt15&quot;&gt;\r\n&lt;ul class=&quot;jslist&quot;&gt;\r\n	&lt;li class=&quot;itempic&quot;&gt;&lt;img src=&quot;http://www.yk119.com/asset/image/data/page/preson2_e0ca.jpg&quot; /&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;itempic&quot;&gt;&lt;img src=&quot;http://www.yk119.com/asset/image/data/page/preson2_e0ca.jpg&quot; /&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;itempic&quot;&gt;&lt;img src=&quot;http://www.yk119.com/asset/image/data/page/preson2_e0ca.jpg&quot; /&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;itempic&quot;&gt;&lt;img src=&quot;http://www.yk119.com/asset/image/data/page/preson2_e0ca.jpg&quot; /&gt;&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;!--2px红线--&gt;\r\n\r\n&lt;div class=&quot;red-line w mt20&quot;&gt;&amp;nbsp;&lt;/div&gt;\r\n\r\n&lt;div class=&quot;w mt20&quot;&gt;\r\n&lt;h2 class=&quot;zttitle&quot;&gt;公益形象大使&lt;/h2&gt;\r\n\r\n&lt;div class=&quot;ovh mt15&quot;&gt;\r\n&lt;ul class=&quot;jslist&quot;&gt;\r\n	&lt;li class=&quot;itempic&quot;&gt;&lt;img src=&quot;http://www.yk119.com/asset/image/data/page/ztpic29_b649.jpg&quot; style=&quot;width: 280px; height: 219px;&quot; /&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;itempic&quot;&gt;&lt;img src=&quot;http://www.yk119.com/asset/image/data/page/ztpic29_b649.jpg&quot; style=&quot;width: 280px; height: 219px;&quot; /&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;itempic&quot;&gt;&lt;img src=&quot;http://www.yk119.com/asset/image/data/page/ztpic29_b649.jpg&quot; style=&quot;width: 280px; height: 219px;&quot; /&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;itempic&quot;&gt;&lt;img src=&quot;http://www.yk119.com/asset/image/data/page/ztpic29_b649.jpg&quot; style=&quot;width: 280px; height: 219px;&quot; /&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;itempic&quot;&gt;&lt;img src=&quot;http://www.yk119.com/asset/image/data/page/ztpic30_85ff.jpg&quot; style=&quot;width: 281px; height: 160px;&quot; /&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;itempic&quot;&gt;&lt;img src=&quot;http://www.yk119.com/asset/image/data/page/ztpic30_85ff.jpg&quot; style=&quot;width: 281px; height: 160px;&quot; /&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;itempic&quot;&gt;&lt;img src=&quot;http://www.yk119.com/asset/image/data/page/ztpic30_85ff.jpg&quot; style=&quot;width: 281px; height: 160px;&quot; /&gt;&lt;/li&gt;\r\n	&lt;li class=&quot;itempic&quot;&gt;&lt;img src=&quot;http://www.yk119.com/asset/image/data/page/ztpic30_85ff.jpg&quot; style=&quot;width: 281px; height: 160px;&quot; /&gt;&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;/div&gt;\r\n&lt;/div&gt;', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -23671,6 +23675,7 @@ CREATE TABLE IF NOT EXISTS `yk_project_group` (
   `group_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) DEFAULT NULL,
   `keyword` varchar(32) DEFAULT NULL,
+  `icon` varchar(128) DEFAULT NULL,
   `show` tinyint(4) NOT NULL DEFAULT '0',
   `remark` varchar(256) NOT NULL,
   `sort_order` int(3) NOT NULL,
@@ -23681,15 +23686,15 @@ CREATE TABLE IF NOT EXISTS `yk_project_group` (
 -- 转存表中的数据 `yk_project_group`
 --
 
-INSERT INTO `yk_project_group` (`group_id`, `name`, `keyword`, `show`, `remark`, `sort_order`) VALUES
-(1, '消防设计', 'design', 1, '十秒登记，免费获取专业消防设计案例', 1),
-(2, '消防检测', 'check', 1, '十秒登记，免费获取专业消防检测', 3),
-(3, '消防工程', 'project', 1, '十秒登记，免费获取专业消防工程案例', 2),
-(4, '消防维保', 'maintenance', 1, '十秒登记，免费获取专业消防维保服务', 5),
-(5, '消防审核验收', 'approve', 0, '', 4),
-(6, '消防托管', 'trusteeship', 0, '', 6),
-(7, '消防培训', 'train', 0, '', 7),
-(8, '消防保障', 'guarantee', 0, '', 8);
+INSERT INTO `yk_project_group` (`group_id`, `name`, `keyword`, `icon`, `show`, `remark`, `sort_order`) VALUES
+(1, '消防设计', 'design', 'data/project/btn2_4b4e.jpg', 1, '十秒登记，免费获取专业消防设计案例', 1),
+(2, '消防检测', 'check', 'data/project/btn4_47a4.jpg', 1, '十秒登记，免费获取专业消防检测', 3),
+(3, '消防工程', 'project', 'data/project/btn3_1128.jpg', 1, '十秒登记，免费获取专业消防工程案例', 2),
+(4, '消防维保', 'maintenance', 'data/project/btn6_0bb5.jpg', 1, '十秒登记，免费获取专业消防维保服务', 5),
+(5, '消防审核验收', 'approve', 'data/project/btn5_fba4.jpg', 0, '', 4),
+(6, '消防托管', 'trusteeship', 'data/project/btn7_b377.jpg', 0, '', 6),
+(7, '消防培训', 'train', 'data/project/btn8_60c5.jpg', 0, '', 7),
+(8, '消防保障', 'guarantee', 'data/project/btn9_bdf7.jpg', 0, '', 8);
 
 -- --------------------------------------------------------
 
@@ -24193,7 +24198,7 @@ CREATE TABLE IF NOT EXISTS `yk_user_group` (
 --
 
 INSERT INTO `yk_user_group` (`user_group_id`, `name`, `permission`) VALUES
-(1, '超级管理员', 'a:2:{s:6:"access";a:117:{i:0;s:17:"catalog/attribute";i:1;s:23:"catalog/attribute_group";i:2;s:16:"catalog/category";i:3;s:16:"catalog/download";i:4;s:14:"catalog/filter";i:5;s:19:"catalog/information";i:6;s:20:"catalog/manufacturer";i:7;s:14:"catalog/option";i:8;s:15:"catalog/product";i:9;s:14:"catalog/review";i:10;s:18:"common/filemanager";i:11;s:13:"design/banner";i:12;s:13:"design/layout";i:13;s:14:"extension/feed";i:14;s:17:"extension/manager";i:15;s:16:"extension/module";i:16;s:17:"extension/payment";i:17;s:18:"extension/shipping";i:18;s:15:"extension/total";i:19;s:16:"feed/google_base";i:20;s:19:"feed/google_sitemap";i:21;s:20:"localisation/country";i:22;s:21:"localisation/currency";i:23;s:21:"localisation/geo_zone";i:24;s:21:"localisation/language";i:25;s:25:"localisation/length_class";i:26;s:25:"localisation/order_status";i:27;s:26:"localisation/return_action";i:28;s:26:"localisation/return_reason";i:29;s:26:"localisation/return_status";i:30;s:25:"localisation/stock_status";i:31;s:22:"localisation/tax_class";i:32;s:21:"localisation/tax_rate";i:33;s:25:"localisation/weight_class";i:34;s:17:"localisation/zone";i:35;s:14:"module/account";i:36;s:16:"module/affiliate";i:37;s:13:"module/banner";i:38;s:17:"module/bestseller";i:39;s:15:"module/carousel";i:40;s:15:"module/category";i:41;s:15:"module/featured";i:42;s:13:"module/filter";i:43;s:18:"module/information";i:44;s:13:"module/latest";i:45;s:12:"module/oauth";i:46;s:14:"module/special";i:47;s:19:"module/themecontrol";i:48;s:14:"module/welcome";i:49;s:11:"module/wiki";i:50;s:18:"module/ykaffiliate";i:51;s:13:"module/ykcase";i:52;s:15:"module/ykcustom";i:53;s:14:"module/ykliked";i:54;s:13:"module/yklink";i:55;s:19:"module/yknavigation";i:56;s:13:"module/yknews";i:57;s:18:"module/ykprocedure";i:58;s:16:"module/ykproduct";i:59;s:16:"module/ykproject";i:60;s:18:"module/ykslideshow";i:61;s:15:"module/ykviewed";i:62;s:13:"module/ykwiki";i:63;s:21:"payment/alipay_direct";i:64;s:21:"payment/bank_transfer";i:65;s:11:"payment/cod";i:66;s:21:"payment/free_checkout";i:67;s:14:"payment/pp_pro";i:68;s:27:"report/affiliate_commission";i:69;s:22:"report/customer_credit";i:70;s:22:"report/customer_online";i:71;s:21:"report/customer_order";i:72;s:22:"report/customer_reward";i:73;s:24:"report/product_purchased";i:74;s:21:"report/product_viewed";i:75;s:18:"report/sale_coupon";i:76;s:17:"report/sale_order";i:77;s:18:"report/sale_return";i:78;s:20:"report/sale_shipping";i:79;s:15:"report/sale_tax";i:80;s:14:"sale/affiliate";i:81;s:12:"sale/contact";i:82;s:11:"sale/coupon";i:83;s:13:"sale/customer";i:84;s:20:"sale/customer_ban_ip";i:85;s:19:"sale/customer_group";i:86;s:10:"sale/order";i:87;s:11:"sale/return";i:88;s:12:"sale/voucher";i:89;s:18:"sale/voucher_theme";i:90;s:15:"setting/setting";i:91;s:13:"setting/store";i:92;s:14:"shipping/fedex";i:93;s:13:"shipping/flat";i:94;s:13:"shipping/free";i:95;s:13:"shipping/item";i:96;s:15:"shipping/pickup";i:97;s:12:"shipping/ups";i:98;s:15:"shipping/weight";i:99;s:11:"tool/backup";i:100;s:14:"tool/error_log";i:101;s:12:"total/coupon";i:102;s:12:"total/credit";i:103;s:14:"total/handling";i:104;s:12:"total/reward";i:105;s:14:"total/shipping";i:106;s:15:"total/sub_total";i:107;s:9:"total/tax";i:108;s:11:"total/total";i:109;s:13:"total/voucher";i:110;s:9:"user/user";i:111;s:20:"user/user_permission";i:112;s:15:"shipping/weight";i:113;s:16:"module/ykconsult";i:114;s:20:"module/ykbookproject";i:115;s:18:"module/ykaffiliate";i:116;s:16:"module/ykcompany";}s:6:"modify";a:117:{i:0;s:17:"catalog/attribute";i:1;s:23:"catalog/attribute_group";i:2;s:16:"catalog/category";i:3;s:16:"catalog/download";i:4;s:14:"catalog/filter";i:5;s:19:"catalog/information";i:6;s:20:"catalog/manufacturer";i:7;s:14:"catalog/option";i:8;s:15:"catalog/product";i:9;s:14:"catalog/review";i:10;s:18:"common/filemanager";i:11;s:13:"design/banner";i:12;s:13:"design/layout";i:13;s:14:"extension/feed";i:14;s:17:"extension/manager";i:15;s:16:"extension/module";i:16;s:17:"extension/payment";i:17;s:18:"extension/shipping";i:18;s:15:"extension/total";i:19;s:16:"feed/google_base";i:20;s:19:"feed/google_sitemap";i:21;s:20:"localisation/country";i:22;s:21:"localisation/currency";i:23;s:21:"localisation/geo_zone";i:24;s:21:"localisation/language";i:25;s:25:"localisation/length_class";i:26;s:25:"localisation/order_status";i:27;s:26:"localisation/return_action";i:28;s:26:"localisation/return_reason";i:29;s:26:"localisation/return_status";i:30;s:25:"localisation/stock_status";i:31;s:22:"localisation/tax_class";i:32;s:21:"localisation/tax_rate";i:33;s:25:"localisation/weight_class";i:34;s:17:"localisation/zone";i:35;s:14:"module/account";i:36;s:16:"module/affiliate";i:37;s:13:"module/banner";i:38;s:17:"module/bestseller";i:39;s:15:"module/carousel";i:40;s:15:"module/category";i:41;s:15:"module/featured";i:42;s:13:"module/filter";i:43;s:18:"module/information";i:44;s:13:"module/latest";i:45;s:12:"module/oauth";i:46;s:14:"module/special";i:47;s:19:"module/themecontrol";i:48;s:14:"module/welcome";i:49;s:11:"module/wiki";i:50;s:18:"module/ykaffiliate";i:51;s:13:"module/ykcase";i:52;s:15:"module/ykcustom";i:53;s:14:"module/ykliked";i:54;s:13:"module/yklink";i:55;s:19:"module/yknavigation";i:56;s:13:"module/yknews";i:57;s:18:"module/ykprocedure";i:58;s:16:"module/ykproduct";i:59;s:16:"module/ykproject";i:60;s:18:"module/ykslideshow";i:61;s:15:"module/ykviewed";i:62;s:13:"module/ykwiki";i:63;s:21:"payment/alipay_direct";i:64;s:21:"payment/bank_transfer";i:65;s:11:"payment/cod";i:66;s:21:"payment/free_checkout";i:67;s:14:"payment/pp_pro";i:68;s:27:"report/affiliate_commission";i:69;s:22:"report/customer_credit";i:70;s:22:"report/customer_online";i:71;s:21:"report/customer_order";i:72;s:22:"report/customer_reward";i:73;s:24:"report/product_purchased";i:74;s:21:"report/product_viewed";i:75;s:18:"report/sale_coupon";i:76;s:17:"report/sale_order";i:77;s:18:"report/sale_return";i:78;s:20:"report/sale_shipping";i:79;s:15:"report/sale_tax";i:80;s:14:"sale/affiliate";i:81;s:12:"sale/contact";i:82;s:11:"sale/coupon";i:83;s:13:"sale/customer";i:84;s:20:"sale/customer_ban_ip";i:85;s:19:"sale/customer_group";i:86;s:10:"sale/order";i:87;s:11:"sale/return";i:88;s:12:"sale/voucher";i:89;s:18:"sale/voucher_theme";i:90;s:15:"setting/setting";i:91;s:13:"setting/store";i:92;s:14:"shipping/fedex";i:93;s:13:"shipping/flat";i:94;s:13:"shipping/free";i:95;s:13:"shipping/item";i:96;s:15:"shipping/pickup";i:97;s:12:"shipping/ups";i:98;s:15:"shipping/weight";i:99;s:11:"tool/backup";i:100;s:14:"tool/error_log";i:101;s:12:"total/coupon";i:102;s:12:"total/credit";i:103;s:14:"total/handling";i:104;s:12:"total/reward";i:105;s:14:"total/shipping";i:106;s:15:"total/sub_total";i:107;s:9:"total/tax";i:108;s:11:"total/total";i:109;s:13:"total/voucher";i:110;s:9:"user/user";i:111;s:20:"user/user_permission";i:112;s:15:"shipping/weight";i:113;s:16:"module/ykconsult";i:114;s:20:"module/ykbookproject";i:115;s:18:"module/ykaffiliate";i:116;s:16:"module/ykcompany";}}'),
+(1, '超级管理员', 'a:2:{s:6:"access";a:119:{i:0;s:17:"catalog/attribute";i:1;s:23:"catalog/attribute_group";i:2;s:16:"catalog/category";i:3;s:16:"catalog/download";i:4;s:14:"catalog/filter";i:5;s:19:"catalog/information";i:6;s:20:"catalog/manufacturer";i:7;s:14:"catalog/option";i:8;s:15:"catalog/product";i:9;s:14:"catalog/review";i:10;s:18:"common/filemanager";i:11;s:13:"design/banner";i:12;s:13:"design/layout";i:13;s:14:"extension/feed";i:14;s:17:"extension/manager";i:15;s:16:"extension/module";i:16;s:17:"extension/payment";i:17;s:18:"extension/shipping";i:18;s:15:"extension/total";i:19;s:16:"feed/google_base";i:20;s:19:"feed/google_sitemap";i:21;s:20:"localisation/country";i:22;s:21:"localisation/currency";i:23;s:21:"localisation/geo_zone";i:24;s:21:"localisation/language";i:25;s:25:"localisation/length_class";i:26;s:25:"localisation/order_status";i:27;s:26:"localisation/return_action";i:28;s:26:"localisation/return_reason";i:29;s:26:"localisation/return_status";i:30;s:25:"localisation/stock_status";i:31;s:22:"localisation/tax_class";i:32;s:21:"localisation/tax_rate";i:33;s:25:"localisation/weight_class";i:34;s:17:"localisation/zone";i:35;s:14:"module/account";i:36;s:16:"module/affiliate";i:37;s:13:"module/banner";i:38;s:17:"module/bestseller";i:39;s:15:"module/carousel";i:40;s:15:"module/category";i:41;s:15:"module/featured";i:42;s:13:"module/filter";i:43;s:18:"module/information";i:44;s:13:"module/latest";i:45;s:12:"module/oauth";i:46;s:14:"module/special";i:47;s:19:"module/themecontrol";i:48;s:14:"module/welcome";i:49;s:11:"module/wiki";i:50;s:18:"module/ykaffiliate";i:51;s:13:"module/ykcase";i:52;s:15:"module/ykcustom";i:53;s:14:"module/ykliked";i:54;s:13:"module/yklink";i:55;s:19:"module/yknavigation";i:56;s:13:"module/yknews";i:57;s:18:"module/ykprocedure";i:58;s:16:"module/ykproduct";i:59;s:16:"module/ykproject";i:60;s:18:"module/ykslideshow";i:61;s:15:"module/ykviewed";i:62;s:13:"module/ykwiki";i:63;s:21:"payment/alipay_direct";i:64;s:21:"payment/bank_transfer";i:65;s:11:"payment/cod";i:66;s:21:"payment/free_checkout";i:67;s:14:"payment/pp_pro";i:68;s:27:"report/affiliate_commission";i:69;s:22:"report/customer_credit";i:70;s:22:"report/customer_online";i:71;s:21:"report/customer_order";i:72;s:22:"report/customer_reward";i:73;s:24:"report/product_purchased";i:74;s:21:"report/product_viewed";i:75;s:18:"report/sale_coupon";i:76;s:17:"report/sale_order";i:77;s:18:"report/sale_return";i:78;s:20:"report/sale_shipping";i:79;s:15:"report/sale_tax";i:80;s:14:"sale/affiliate";i:81;s:12:"sale/contact";i:82;s:11:"sale/coupon";i:83;s:13:"sale/customer";i:84;s:20:"sale/customer_ban_ip";i:85;s:19:"sale/customer_group";i:86;s:10:"sale/order";i:87;s:11:"sale/return";i:88;s:12:"sale/voucher";i:89;s:18:"sale/voucher_theme";i:90;s:15:"setting/setting";i:91;s:13:"setting/store";i:92;s:14:"shipping/fedex";i:93;s:13:"shipping/flat";i:94;s:13:"shipping/free";i:95;s:13:"shipping/item";i:96;s:15:"shipping/pickup";i:97;s:12:"shipping/ups";i:98;s:15:"shipping/weight";i:99;s:11:"tool/backup";i:100;s:14:"tool/error_log";i:101;s:12:"total/coupon";i:102;s:12:"total/credit";i:103;s:14:"total/handling";i:104;s:12:"total/reward";i:105;s:14:"total/shipping";i:106;s:15:"total/sub_total";i:107;s:9:"total/tax";i:108;s:11:"total/total";i:109;s:13:"total/voucher";i:110;s:9:"user/user";i:111;s:20:"user/user_permission";i:112;s:15:"shipping/weight";i:113;s:16:"module/ykconsult";i:114;s:20:"module/ykbookproject";i:115;s:18:"module/ykaffiliate";i:116;s:16:"module/ykcompany";i:117;s:13:"module/ykpage";i:118;s:13:"module/ykpage";}s:6:"modify";a:119:{i:0;s:17:"catalog/attribute";i:1;s:23:"catalog/attribute_group";i:2;s:16:"catalog/category";i:3;s:16:"catalog/download";i:4;s:14:"catalog/filter";i:5;s:19:"catalog/information";i:6;s:20:"catalog/manufacturer";i:7;s:14:"catalog/option";i:8;s:15:"catalog/product";i:9;s:14:"catalog/review";i:10;s:18:"common/filemanager";i:11;s:13:"design/banner";i:12;s:13:"design/layout";i:13;s:14:"extension/feed";i:14;s:17:"extension/manager";i:15;s:16:"extension/module";i:16;s:17:"extension/payment";i:17;s:18:"extension/shipping";i:18;s:15:"extension/total";i:19;s:16:"feed/google_base";i:20;s:19:"feed/google_sitemap";i:21;s:20:"localisation/country";i:22;s:21:"localisation/currency";i:23;s:21:"localisation/geo_zone";i:24;s:21:"localisation/language";i:25;s:25:"localisation/length_class";i:26;s:25:"localisation/order_status";i:27;s:26:"localisation/return_action";i:28;s:26:"localisation/return_reason";i:29;s:26:"localisation/return_status";i:30;s:25:"localisation/stock_status";i:31;s:22:"localisation/tax_class";i:32;s:21:"localisation/tax_rate";i:33;s:25:"localisation/weight_class";i:34;s:17:"localisation/zone";i:35;s:14:"module/account";i:36;s:16:"module/affiliate";i:37;s:13:"module/banner";i:38;s:17:"module/bestseller";i:39;s:15:"module/carousel";i:40;s:15:"module/category";i:41;s:15:"module/featured";i:42;s:13:"module/filter";i:43;s:18:"module/information";i:44;s:13:"module/latest";i:45;s:12:"module/oauth";i:46;s:14:"module/special";i:47;s:19:"module/themecontrol";i:48;s:14:"module/welcome";i:49;s:11:"module/wiki";i:50;s:18:"module/ykaffiliate";i:51;s:13:"module/ykcase";i:52;s:15:"module/ykcustom";i:53;s:14:"module/ykliked";i:54;s:13:"module/yklink";i:55;s:19:"module/yknavigation";i:56;s:13:"module/yknews";i:57;s:18:"module/ykprocedure";i:58;s:16:"module/ykproduct";i:59;s:16:"module/ykproject";i:60;s:18:"module/ykslideshow";i:61;s:15:"module/ykviewed";i:62;s:13:"module/ykwiki";i:63;s:21:"payment/alipay_direct";i:64;s:21:"payment/bank_transfer";i:65;s:11:"payment/cod";i:66;s:21:"payment/free_checkout";i:67;s:14:"payment/pp_pro";i:68;s:27:"report/affiliate_commission";i:69;s:22:"report/customer_credit";i:70;s:22:"report/customer_online";i:71;s:21:"report/customer_order";i:72;s:22:"report/customer_reward";i:73;s:24:"report/product_purchased";i:74;s:21:"report/product_viewed";i:75;s:18:"report/sale_coupon";i:76;s:17:"report/sale_order";i:77;s:18:"report/sale_return";i:78;s:20:"report/sale_shipping";i:79;s:15:"report/sale_tax";i:80;s:14:"sale/affiliate";i:81;s:12:"sale/contact";i:82;s:11:"sale/coupon";i:83;s:13:"sale/customer";i:84;s:20:"sale/customer_ban_ip";i:85;s:19:"sale/customer_group";i:86;s:10:"sale/order";i:87;s:11:"sale/return";i:88;s:12:"sale/voucher";i:89;s:18:"sale/voucher_theme";i:90;s:15:"setting/setting";i:91;s:13:"setting/store";i:92;s:14:"shipping/fedex";i:93;s:13:"shipping/flat";i:94;s:13:"shipping/free";i:95;s:13:"shipping/item";i:96;s:15:"shipping/pickup";i:97;s:12:"shipping/ups";i:98;s:15:"shipping/weight";i:99;s:11:"tool/backup";i:100;s:14:"tool/error_log";i:101;s:12:"total/coupon";i:102;s:12:"total/credit";i:103;s:14:"total/handling";i:104;s:12:"total/reward";i:105;s:14:"total/shipping";i:106;s:15:"total/sub_total";i:107;s:9:"total/tax";i:108;s:11:"total/total";i:109;s:13:"total/voucher";i:110;s:9:"user/user";i:111;s:20:"user/user_permission";i:112;s:15:"shipping/weight";i:113;s:16:"module/ykconsult";i:114;s:20:"module/ykbookproject";i:115;s:18:"module/ykaffiliate";i:116;s:16:"module/ykcompany";i:117;s:13:"module/ykpage";i:118;s:13:"module/ykpage";}}'),
 (10, '源控管理组', 'a:2:{s:6:"access";a:65:{i:0;s:16:"catalog/category";i:1;s:19:"catalog/information";i:2;s:20:"catalog/manufacturer";i:3;s:14:"catalog/option";i:4;s:15:"catalog/product";i:5;s:14:"catalog/review";i:6;s:18:"common/filemanager";i:7;s:14:"common/profile";i:8;s:13:"common/upload";i:9;s:13:"design/banner";i:10;s:19:"design/custom_field";i:11;s:13:"design/layout";i:12;s:25:"extension/affiliate_group";i:13;s:14:"extension/case";i:14;s:14:"extension/help";i:15;s:20:"extension/help_group";i:16;s:14:"extension/link";i:17;s:17:"extension/manager";i:18;s:16:"extension/module";i:19;s:15:"extension/total";i:20;s:14:"extension/wiki";i:21;s:20:"extension/wiki_group";i:22;s:14:"module/account";i:23;s:16:"module/affiliate";i:24;s:13:"module/banner";i:25;s:17:"module/bestseller";i:26;s:15:"module/carousel";i:27;s:15:"module/category";i:28;s:15:"module/featured";i:29;s:13:"module/filter";i:30;s:18:"module/information";i:31;s:13:"module/latest";i:32;s:12:"module/oauth";i:33;s:14:"module/special";i:34;s:19:"module/themecontrol";i:35;s:14:"module/welcome";i:36;s:11:"module/wiki";i:37;s:18:"module/ykaffiliate";i:38;s:13:"module/ykcase";i:39;s:15:"module/ykcustom";i:40;s:14:"module/ykliked";i:41;s:13:"module/yklink";i:42;s:19:"module/yknavigation";i:43;s:13:"module/yknews";i:44;s:18:"module/ykprocedure";i:45;s:16:"module/ykproduct";i:46;s:16:"module/ykproject";i:47;s:18:"module/ykslideshow";i:48;s:15:"module/ykviewed";i:49;s:13:"module/ykwiki";i:50;s:14:"sale/affiliate";i:51;s:12:"sale/contact";i:52;s:11:"sale/coupon";i:53;s:13:"sale/customer";i:54;s:20:"sale/customer_ban_ip";i:55;s:19:"sale/customer_group";i:56;s:10:"sale/order";i:57;s:12:"sale/project";i:58;s:18:"sale/project_group";i:59;s:11:"sale/return";i:60;s:12:"sale/voucher";i:61;s:18:"sale/voucher_theme";i:62;s:11:"setting/api";i:63;s:9:"user/user";i:64;s:20:"user/user_permission";}s:6:"modify";a:66:{i:0;s:16:"catalog/category";i:1;s:16:"catalog/download";i:2;s:19:"catalog/information";i:3;s:20:"catalog/manufacturer";i:4;s:14:"catalog/option";i:5;s:15:"catalog/product";i:6;s:14:"catalog/review";i:7;s:18:"common/filemanager";i:8;s:14:"common/profile";i:9;s:13:"common/upload";i:10;s:13:"design/banner";i:11;s:19:"design/custom_field";i:12;s:13:"design/layout";i:13;s:25:"extension/affiliate_group";i:14;s:14:"extension/case";i:15;s:14:"extension/feed";i:16;s:14:"extension/help";i:17;s:20:"extension/help_group";i:18;s:14:"extension/link";i:19;s:17:"extension/manager";i:20;s:16:"extension/module";i:21;s:15:"extension/total";i:22;s:14:"extension/wiki";i:23;s:20:"extension/wiki_group";i:24;s:14:"module/account";i:25;s:16:"module/affiliate";i:26;s:13:"module/banner";i:27;s:17:"module/bestseller";i:28;s:15:"module/carousel";i:29;s:15:"module/category";i:30;s:15:"module/featured";i:31;s:13:"module/filter";i:32;s:18:"module/information";i:33;s:13:"module/latest";i:34;s:12:"module/oauth";i:35;s:14:"module/special";i:36;s:19:"module/themecontrol";i:37;s:14:"module/welcome";i:38;s:11:"module/wiki";i:39;s:18:"module/ykaffiliate";i:40;s:13:"module/ykcase";i:41;s:15:"module/ykcustom";i:42;s:14:"module/ykliked";i:43;s:13:"module/yklink";i:44;s:19:"module/yknavigation";i:45;s:13:"module/yknews";i:46;s:18:"module/ykprocedure";i:47;s:16:"module/ykproduct";i:48;s:16:"module/ykproject";i:49;s:18:"module/ykslideshow";i:50;s:15:"module/ykviewed";i:51;s:13:"module/ykwiki";i:52;s:14:"sale/affiliate";i:53;s:12:"sale/contact";i:54;s:11:"sale/coupon";i:55;s:13:"sale/customer";i:56;s:20:"sale/customer_ban_ip";i:57;s:19:"sale/customer_group";i:58;s:10:"sale/order";i:59;s:12:"sale/project";i:60;s:18:"sale/project_group";i:61;s:11:"sale/return";i:62;s:12:"sale/voucher";i:63;s:18:"sale/voucher_theme";i:64;s:9:"user/user";i:65;s:20:"user/user_permission";}}');
 
 -- --------------------------------------------------------

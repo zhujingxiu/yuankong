@@ -21,6 +21,7 @@ class ControllerModuleYknews extends Controller {
         $this->data['expert'] = $this->url->link('service/assistant/expert','','SSL');
         $this->data['quoted_price'] = $this->url->link('service/assistant/quoted_price','','SSL');
         $this->data['bidding'] = $this->url->link('service/assistant/bidding','','SSL');
+        $this->data['lecture'] = $this->url->link('service/assistant/lecture','','SSL');
         $this->template = $this->config->get('config_template') . '/template/module/yknews.tpl';
         
         $this->render();

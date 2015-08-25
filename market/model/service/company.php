@@ -127,5 +127,33 @@ class ModelServiceCompany extends Model {
 
         return $query->rows;
     }
+    public function getCompany($company_id){
+        $query = $this->db->query("SELECT * FROM ".DB_PREFIX."company WHERE company_id = '".(int)$company_id."' AND status = '1' AND approved = '1'");
 
+        return $query->row;
+    }
+
+    public function getCompanyGroupsByCompanyId($company_id){
+        $query = $this->db->query("SELECT group_id FROM ".DB_PREFIX."company_to_group WHERE company_id = '".(int)$company_id."' ");
+
+        return $query->rows;
+    }
+
+    public function getCompanyModulesByCompanyId($company_id){
+        $query = $this->db->query("SELECT * FROM ".DB_PREFIX."company_module WHERE company_id = '".(int)$company_id."' AND status = '1' ORDER BY sort ASC ,date_added DESC");
+
+        return $query->rows;
+    }
+
+    public function getCompanyCasesByCompanyId($company_id){
+        $query = $this->db->query("SELECT * FROM ".DB_PREFIX."company_case WHERE company_id = '".(int)$company_id."' ORDER BY sort ASC ,date_added DESC");
+
+        return $query->rows;
+    }
+
+    public function getCompanyMembersByCompanyId($company_id){
+        $query = $this->db->query("SELECT * FROM ".DB_PREFIX."company_member WHERE company_id = '".(int)$company_id."' ORDER BY sort ASC ,date_added DESC");
+
+        return $query->rows;
+    }
 }

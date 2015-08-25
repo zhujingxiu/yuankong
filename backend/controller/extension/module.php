@@ -93,23 +93,7 @@ class ControllerExtensionModule extends Controller {
 			}
 		}
 		$this->data['extensions'] = array_chunk($this->data['extensions'], 3);
-		$this->data['pages']  = array();
-		$this->data['pages'][] = array(
-			'name'   => $this->language->get('公益'),			
-			'action' => $this->language->get('text_edit'),
-			'href' => $this->url->link('page/commonweal', 'token=' . $this->session->data['token'], 'SSL')
-		);
-		$this->data['pages'][] = array(
-			'name'   => $this->language->get('招投标'),			
-			'action' => $this->language->get('text_edit'),
-			'href' => $this->url->link('page/biding', 'token=' . $this->session->data['token'], 'SSL')
-		);
-		$this->data['pages'][] = array(
-			'name'   => $this->language->get('消防专家'),			
-			'action' => $this->language->get('text_edit'),
-			'href' => $this->url->link('page/expert', 'token=' . $this->session->data['token'], 'SSL')
-		);
-		$this->data['pages'] = array_chunk($this->data['pages'], 3);
+
 		$this->template = 'extension/module.tpl';
 		$this->children = array(
 			'common/header',

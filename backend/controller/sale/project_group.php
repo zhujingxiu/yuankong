@@ -114,7 +114,7 @@ class ControllerSaleProjectGroup extends Controller {
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
-			$sort = 'sort_order';
+			$sort = 'pg.sort_order';
 		}
 		
 		if (isset($this->request->get['order'])) {
@@ -168,7 +168,7 @@ class ControllerSaleProjectGroup extends Controller {
 			'start' => ($page - 1) * $this->config->get('config_admin_limit'),
 			'limit' => $this->config->get('config_admin_limit')
 		);
-		
+		$this->load->model('tool/image');
 		$project_group_total = $this->model_sale_project_group->getTotalProjectGroups();
 	
 		$results = $this->model_sale_project_group->getProjectGroups($data);
@@ -185,6 +185,7 @@ class ControllerSaleProjectGroup extends Controller {
 				'group_id' 			 => $result['group_id'],
 				'name'               => $result['name'],
 				'keyword'            => $result['keyword'],
+				'icon'            	 => $this->model_tool_image->resize($result['icon'],35,35),
 				'show'               => $result['show'] ? $this->language->get('text_yes') : $this->language->get('text_no'),
 				'sort_order'         => $result['sort_order'],
 				'selected'           => isset($this->request->post['selected']) && in_array($result['group_id'], $this->request->post['selected']),
@@ -198,6 +199,7 @@ class ControllerSaleProjectGroup extends Controller {
 
 		$this->data['column_name'] = $this->language->get('column_name');
 		$this->data['column_keyword'] = $this->language->get('column_keyword');
+		$this->data['column_icon'] = $this->language->get('column_icon');
 		$this->data['column_show'] = $this->language->get('column_show');
 		$this->data['column_sort_order'] = $this->language->get('column_sort_order');
 		$this->data['column_action'] = $this->language->get('column_action');		
@@ -273,11 +275,15 @@ class ControllerSaleProjectGroup extends Controller {
     	$this->data['entry_name'] = $this->language->get('entry_name');
     	$this->data['entry_keyword'] = $this->language->get('entry_keyword');
     	$this->data['entry_show'] = $this->language->get('entry_show');
+    	$this->data['entry_icon'] = $this->language->get('entry_icon');
     	$this->data['entry_remark'] = $this->language->get('entry_remark');
 		$this->data['entry_sort_order'] = $this->language->get('entry_sort_order');
 
 		$this->data['text_yes'] = $this->language->get('text_yes');
     	$this->data['text_no'] = $this->language->get('text_no');
+    	$this->data['text_image_manager'] = $this->language->get('text_image_manager');
+ 		$this->data['text_browse'] = $this->language->get('text_browse');
+		$this->data['text_clear'] = $this->language->get('text_clear');	
 
     	$this->data['button_save'] = $this->language->get('button_save');
     	$this->data['button_cancel'] = $this->language->get('button_cancel');
@@ -350,6 +356,18 @@ class ControllerSaleProjectGroup extends Controller {
 		} else {
 			$this->data['keyword'] = '';
 		}
+		$this->load->model('tool/image');
+
+		$this->data['thumb'] = $this->model_tool_image->resize('no_image.jpg', 35, 35);
+
+		if (isset($this->request->post['icon'])) {
+			$this->data['icon'] = $this->request->post['icon'];
+		} elseif (!empty($project_group_info['icon'])) {
+			$this->data['icon'] = $project_group_info['icon'];
+			$this->data['thumb'] = $this->model_tool_image->resize($project_group_info['icon'], 35, 35);
+		} else {
+			$this->data['icon'] = $this->model_tool_image->resize('no_image.jpg', 35, 35);
+		}
 
 		if (isset($this->request->post['show'])) {
 			$this->data['show'] = $this->request->post['show'];
@@ -374,7 +392,7 @@ class ControllerSaleProjectGroup extends Controller {
 		} else {
 			$this->data['sort_order'] = '';
 		}
-
+		$this->data['token'] = $this->session->data['token'];
 		$this->template = 'sale/project_group_form.tpl';
 		$this->children = array(
 			'common/header',

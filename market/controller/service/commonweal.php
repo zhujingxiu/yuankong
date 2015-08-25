@@ -7,20 +7,11 @@ class ControllerServiceCommonweal extends Controller {
 
         $this->document->setTitle($this->language->get('heading_title'));
         $this->document->addStyle('market/view/theme/yuankong/stylesheet/yk_zt.css');
-        $this->data['breadcrumbs'] = array();
 
-        $this->data['breadcrumbs'][] = array(
-            'text'      => $this->language->get('text_home'),
-            'href'      => $this->url->link('common/home'),         
-            'separator' => false
-        );                 
-        $this->data['breadcrumbs'][] = array(
-            'text'      => $this->language->get('heading_title'),
-            'href'      => $this->url->link('service/commonweal', '', 'SSL'),            
-            'separator' => $this->language->get('text_separator')
-        );
-
-        $this->template = $this->config->get('config_template') . '/template/service/commonweal.tpl';
+        $this->load->model('tool/common');
+        $page = $this->model_tool_common->getPage('service/commonweal');
+        $this->data['page_content'] = empty($page['text']) ? '' : html_entity_decode($page['text'],ENT_QUOTES,'UTF-8');
+        $this->template = $this->config->get('config_template') . '/template/service/static_page.tpl';
         
         $this->children = array(
             'common/column_left',

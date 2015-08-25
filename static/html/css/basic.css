@@ -22,7 +22,7 @@
 .head-ul li { float: left; line-height: 32px; z-index: 3;}
 .head-ul .hd { padding: 0 30px 0 10px; position: relative; z-index: 3; line-height: 32px;}
 .head-ul .hd .h-down { top: 13px; *top: 6px;}
-.head-ul .bd {display: none; position: absolute; top: 31px; left: 0; background: #fff; border: 1px solid #ddd;padding: 5px 10px; width: 80px;}
+.head-ul .bd {display: none; position: absolute; top: 31px; left: 0; background: #fff; border: 1px solid #ddd;padding: 5px 10px; width: 66px;}
 .head-ul .bd a { display: block; line-height: 28px; }
 .head-ul .hov .hd {padding: 0 29px 0 9px; background: #fff; border-left: 1px solid #ddd;border-right: 1px solid #ddd;}
 /*  logo  */
@@ -84,7 +84,7 @@
 .e-title .more { font-weight: normal;}
 .xf-box { width: 228px; height: 170px; overflow: hidden;}
 .xf-box ul { display: block; width:230px; height: 172px;}
-.xf-box ul li { float: left; border-bottom: 1px dotted #dedede; border-right: 1px dotted #dedede; width: 94px; height: 75px; padding: 10px 10px 0; text-align: center; font-size: 12px;}
+.xf-box ul li { float: left; border-bottom: 1px dotted #ccc; border-right: 1px dotted #ccc; width: 94px; height: 75px; padding: 10px 10px 0; text-align: center; font-size: 12px;}
 .xf-box ul li .icon {height: 43px; display: inline-block; transition:all 0.3s;-webkit-transition:all 0.3s;-moz-transition:all 0.3s;}
 .zxxf-des { background-position: -77px -3px; width: 37px; }
 .zxxf-sg { background-position: -118px -3px; width: 45px; }
@@ -199,7 +199,7 @@
 .newsb-bg2 { background: url("../imgs/icon/newspic.jpg") no-repeat 0 -180px; width: 181px; height: 181px;display: block; transition:all 0.3s;-webkit-transition:all 0.3s;-moz-transition:all 0.3s;}
 .newsb-bg2:hover { transform:translate(3px);-webkit-transform:translate(3px);-moz-transform:translate(3px);}
 .news-a { float: left; padding-left: 10px; width: 200px; overflow: hidden;}
-.news-a a { display: block;  white-space: nowrap; overflow: hidden; font-size: 12px; line-height: 22px;}
+.news-a a { display: block;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 12px; line-height: 22px;}
 .ztc-pic { float: left; border: 1px solid #dedede; padding: 1px; overflow: hidden; margin-right: 10px; display: inline;}
 .ztc-ul {width: 910px; display: inline;}
 .ztc-li { float: left; margin: 0 0 10px 15px; display: inline; width: 136px; font-size: 12px;}
@@ -490,3 +490,19 @@
 .helpbox { padding: 20px 35px; background: #fff; overflow: hidden; color: #333; font-size: 14px;}
 .helpbox h3 { font-size: 16px; font-weight: bold; color: #222; line-height: 35px; padding-bottom: 10px;}
 .helptext p { line-height: 28px; text-indent: 30px; padding-bottom: 10px;}
+/*消防公司详细*/
+.gs-detail-box { border: 1px solid #ddd; background: #fff; border-bottom-width: 3px; padding: 30px;}
+.gs-ad-pic { width: 480px; height: 300px; overflow: hidden;}
+.gs-detail { width:625px; }
+.gs-detail .gsjj { position: relative; padding-left: 115px;}
+.gs-detail .gsjj h3 { font-size: 24px; line-height: 30px; padding-bottom: 10px;}
+.qy-logo {position: absolute; top: 0; left: 0; width: 97px; height: 97px; border: 1px solid #ddd; overflow: hidden; }
+.gs-jianj { background: #f2f2f2; border: 1px solid #ccc; padding: 10px 15px; line-height: 25px; font-size: 12px; color: #666; height:125px; overflow: hidden;}
+.gs-jianj h5 { font-size: 14px; color: #333;}
+.gs-detail .gc-tab-sub { width: 260px; text-align: center; font-size: 12px;}
+.box-b-2 { background: #fff; border:1px solid #ddd; border-bottom-width: 3px;}
+.gs-d-box-t { font-size: 24px; color: #333;}
+.ebbox span { padding: 0 15px 0 16px;}
+.askul li { border-bottom: 1px dotted #ccc; padding: 10px  5px; line-height: 28px; font-size: 14px; color: #444;}
+.askul li:nth-last-child(1) { border-bottom: none;}
+.askul li h6 { color: #c30d23; font-size: 14px;}

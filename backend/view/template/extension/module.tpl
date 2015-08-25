@@ -40,28 +40,7 @@
             <?php } ?>
           </tbody>
         </table>
-        <table class="list">
-          <thead>
-            <tr>
-              <td class="left" colspan="3"><?php echo '指定单页模块'; ?></td>
-            </tr>
-          </thead>
-          <tbody>
-            <?php if ($pages) { ?>
-            <?php foreach ($pages as $row) { ?>
-            <tr>
-              <?php foreach ($row as $item): ?>
-              <td class="left"><?php echo $item['name']; ?>
-                <div style="float:right;">
-                [ <a href="<?php echo $item['href']; ?>"><?php echo $item['action']; ?></a> ]
-                </div>
-              </td>
-              <?php endforeach ?>
-            </tr>
-            <?php } ?>
-            <?php } ?>
-          </tbody>
-        </table>
+
     </div>
   </div>
 </div>

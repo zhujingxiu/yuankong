@@ -5,6 +5,7 @@ class ModelSaleProjectGroup extends Model {
 			'name' => isset($data['name']) ? strip_tags(trim($data['name'])) : '',
 			'keyword' => isset($data['keyword']) ? strtolower(strip_tags(trim($data['keyword']))) : '',
 			'show' => isset($data['show']) ? (int)$data['show'] : 0,
+			'icon' 		=> isset($data['icon']) ? htmlspecialchars_decode($data['icon']) : '',
 			'remark' => isset($data['remark']) ? $data['remark'] : '',
 			'sort_order' => isset($data['sort_order']) ? (int)$data['sort_order'] : 0
 		);
@@ -17,6 +18,7 @@ class ModelSaleProjectGroup extends Model {
 			'name' => isset($data['name']) ? strip_tags(trim($data['name'])) : 0,
 			'keyword' => isset($data['keyword']) ? strtolower(strip_tags(trim($data['keyword']))) : '',
 			'show' => isset($data['show']) ? (int)$data['show'] : 0,
+			'icon' 		=> isset($data['icon']) ? htmlspecialchars_decode($data['icon']) : '',
 			'remark' => isset($data['remark']) ? $data['remark'] : '',
 			'sort_order' => isset($data['sort_order']) ? (int)$data['sort_order'] : 0
 		);

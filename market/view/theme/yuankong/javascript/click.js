@@ -72,10 +72,10 @@ function list(thisObj,Num){
 	  if (i == Num)
 	  {
 	   thisObj.className = "yes"; 
-	   $('#'+tabObj+"_c_"+i).show();
+	   document.getElementById(tabObj+"_c_"+i).style.display = "block";
 	  }else{
 	   tabList[i].className = "not"; 
-	   $('#'+tabObj+"_c_"+i).hide();
+	   document.getElementById(tabObj+"_c_"+i).style.display = "none";
 	  }
 	}
 }

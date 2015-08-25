@@ -9,7 +9,7 @@
                 <a href="<?php echo $prefix ?>" class="lc-lia"><span class="icon xfzxcl"></span><br />消防前置条件</a>
             </li>
             <li class="lc-li">
-                <a href="<?php echo $design ?>" class="lc-lia"><span class="icon xfsj"></span><br />消防设计</a>
+                <a href="<?php echo $design ?>" class="lc-lia"><span class="icon xfsj"></span><br />消防改造</a>
             </li>
             <li class="lc-li">
                 <a href="<?php echo $project ?>" class="lc-lia"><span class="icon xfsg"></span><br />消防工程</a>

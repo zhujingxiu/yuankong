@@ -1,6 +1,6 @@
 <?php
 // Heading 
-$_['heading_title']         = '消防公司';
+$_['heading_title']         = '公益讲座_消防网上商城【消防E站官网】';
 
 // Text
 $_['text_account']          = '账号';

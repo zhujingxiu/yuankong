@@ -34,10 +34,9 @@ class ModelSettingSetting extends Model {
 			$fields = array(
 				'title' => $row['title'],
 				'route' => trim($row['route']),
-				'text'	=> htmlentities($row['text']),
+				'text'	=> $row['text'],
 				'status'=> $row['status'],
-				'sort'	=> $row['sort'],
-				'date_added'=>date('Y-m-d H:i:s')
+				'sort'	=> $row['sort']
 			);
 			$this->db->insert('page',$fields);
 		}
