@@ -17,9 +17,10 @@
       <div id="htabs" class="htabs"><a href="#tab-general"><?php echo $tab_general; ?></a> 
         <?php if ($company_id) { ?>
         <a href="#tab-file"><?php echo $tab_file; ?></a>
-        <a href="#tab-description"><?php echo $tab_description; ?></a>
+        <a href="#tab-module"><?php echo $tab_module; ?></a>
         <a href="#tab-member"><?php echo $tab_member; ?></a>
         <a href="#tab-case"><?php echo $tab_case; ?></a>
+        <a href="#tab-other"><?php echo $tab_other; ?></a>
         <?php } ?>
       </div>
       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
@@ -33,7 +34,7 @@
               <td><?php echo $entry_logo; ?></td>
               <td>
                 <div class="image">
-                  <img src="<?php echo $logo; ?>"id="thumb-logo" />
+                  <img src="<?php echo $thumb_logo; ?>"id="thumb-logo" />
                   <input type="hidden" name="logo" value="<?php echo $logo; ?>" id="logo" />
                   <br />
                   <a onclick="image_upload('logo', 'thumb-logo');">
@@ -45,7 +46,22 @@
                 </td>
             </tr>
             <tr>
-                <td class="left"><?php echo $text_group; ?></td>
+              <td><?php echo $entry_cover; ?></td>
+              <td>
+                <div class="image">
+                  <img src="<?php echo $thumb_cover; ?>"id="thumb-cover" />
+                  <input type="hidden" name="cover" value="<?php echo $cover; ?>" id="cover" />
+                  <br />
+                  <a onclick="image_upload('cover', 'thumb-cover');">
+                    <?php echo $text_browse; ?>
+                  </a>
+                  &nbsp;&nbsp;|&nbsp;&nbsp;
+                  <a onclick="$('#thumb-cover').attr('src', '<?php echo $no_image; ?>'); $('#cover').attr('value', '');"><?php echo $text_clear; ?></a>
+                  </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="left"><?php echo $entry_group; ?></td>
                 <td>
                     <?php foreach ($groups as $item): ?>
                     <input type="checkbox" name="group_id[]" value="<?php echo $item['group_id'] ?>" <?php echo in_array($item['group_id'], $group_id) ? 'checked' : '' ?> ><?php echo $item['name'] ?><br>
@@ -54,7 +70,15 @@
                     <span class="error"><?php echo $error_group; ?></span>
                     <?php } ?>
                 </td>
-            </tr>            
+            </tr>  
+            <tr>
+              <td><?php echo $entry_title; ?></td>
+              <td><textarea cols="80" rows="5" name="description"><?php echo $description; ?></textarea></td>
+            </tr>      
+            <tr>
+              <td><?php echo $entry_code; ?></td>
+              <td><input type="code" name="code" value="<?php echo $code; ?>"  /></td>
+            </tr>    
             <tr>
               <td><span class="required">*</span> <?php echo $entry_corporation; ?></td>
               <td><input type="text" name="corporation" value="<?php echo $corporation; ?>" />
@@ -69,7 +93,10 @@
                 <span class="error"><?php echo $error_mobile_phone; ?></span>
                 <?php } ?></td>
             </tr>
-             
+            <tr>
+              <td><?php echo $entry_identity_number; ?></td>
+              <td><input type="text" name="identity_number" value="<?php echo $identity_number; ?>" /></td>
+            </tr>
             <tr>
               <td><span class="required">*</span> <?php echo $entry_zone; ?></td>
               <td><select name="zone_id">
@@ -79,6 +106,7 @@
                 </select>
               </td>
             </tr>
+
             <tr>
               <td><span class="required">*</span> <?php echo $entry_address; ?></td>
               <td><div class="item-adress" id="area"></div>
@@ -89,10 +117,7 @@
                 <span class="error"><?php echo $error_address; ?></span>
                 <?php  } ?></td>
             </tr>
-            <tr>
-              <td><?php echo $entry_postcode; ?></td>
-              <td><input type="text" name="postcode" value="<?php echo $postcode; ?>" /></td>
-            </tr>
+
             <tr>
               <td><?php echo $entry_status; ?></td>
               <td><select name="status">
@@ -105,6 +130,7 @@
                   <?php } ?>
                 </select></td>
             </tr>
+                    
             <tr>
               <td><?php echo $entry_password; ?></td>
               <td><input type="password" name="password" value="<?php echo $password; ?>"  />
@@ -119,50 +145,8 @@
                 <span class="error"><?php echo $error_confirm; ?></span>
                 <?php  } ?></td>
             </tr>
-            <tr>
-              <td><?php echo $entry_recommend; ?></td>
-              <td><select name="recommend">
-                  <?php if ($recommend) { ?>
-                  <option value="1" selected="selected"><?php echo $text_yes; ?></option>
-                  <option value="0"><?php echo $text_no; ?></option>
-                  <?php } else { ?>
-                  <option value="1"><?php echo $text_yes; ?></option>
-                  <option value="0" selected="selected"><?php echo $text_no; ?></option>
-                  <?php } ?>
-                </select></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_deposit; ?></td>
-              <td><input type="text" name="deposit" value="<?php echo $deposit; ?>"/></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_viewed; ?></td>
-              <td><input type="text" name="viewed" value="<?php echo $viewed; ?>"/></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_credit; ?></td>
-              <td><input type="text" name="credit" value="<?php echo $credit; ?>"/></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_email; ?></td>
-              <td><input type="text" name="email" value="<?php echo $email; ?>" size="50"/></td>
-            </tr> 
-            <tr>
-              <td><?php echo $entry_telephone; ?></td>
-              <td><input type="text" name="telephone" value="<?php echo $telephone; ?>" /></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_fax; ?></td>
-              <td><input type="text" name="fax" value="<?php echo $fax; ?>" /></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_code; ?></td>
-              <td><input type="code" name="code" value="<?php echo $code; ?>"  /></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_sort; ?></td>
-              <td><input type="text" name="sort_order" value="<?php echo $sort_order; ?>"  /></td>
-            </tr>
+
+
           </table>
         </div>
         <?php if ($company_id) { ?>
@@ -205,37 +189,83 @@
           </table>
           
         </div>
-        <div id="tab-description">
-          <table class="form">
-            <tr>
-              <td><?php echo $entry_description; ?></td>
-              <td><input type="text" name="dtitle" value="<?php echo $dtitle ?>" /></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_text; ?></td>
-              <td><textarea cols="80" rows="5" name="text"><?php echo $text ?></textarea></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_image; ?></td>
-              <td>
-                <div class="image">
-                  <img src="<?php echo $image; ?>"id="thumb-image" />
-                  <input type="hidden" name="image" value="<?php echo $image ?>" id="image" />
-                  <br />
-                  <a onclick="image_upload('image', 'thumb-image');">
-                    <?php echo $text_browse; ?>
-                  </a>
-                  &nbsp;&nbsp;|&nbsp;&nbsp;
-                  <a onclick="$('#thumb-image').attr('src', '<?php echo $no_image; ?>'); $('#image').attr('value', '');"><?php echo $text_clear; ?></a>
-                </div>
-              </td>
-            </tr>
-          </table>
-
+        <div id="tab-module">
+          <fieldset>
+            <legend><?php echo $text_custom_1 ?></legend>
+            <table class="form">
+              <tr>
+                <td><?php echo $entry_status; ?></td>
+                <td>
+                    <?php if ($status_1) { ?>
+                    <input type="radio" name="module[1][status]" value="1" checked="checked"/><?php echo $text_enabled; ?>
+                    <input type="radio" name="module[1][status]" value="0"/><?php echo $text_disabled; ?>
+                    <?php } else { ?>
+                    <input type="radio" name="module[1][status]" value="1"/><?php echo $text_enabled; ?>
+                    <input type="radio" name="module[1][status]" value="0" checked="checked"/><?php echo $text_disabled; ?>
+                    <?php } ?>
+                </td>
+              </tr>
+              <tr>
+                <td><?php echo $entry_module_title; ?></td>
+                <td><input type="text" name="module[1][title]" value="<?php echo $title_1 ?>" /></td>
+              </tr>
+              <tr>
+                <td><?php echo $entry_image; ?></td>
+                <td>
+                  <div class="image">
+                    <img src="<?php echo $thumb_image_1; ?>"id="thumb-image-1" />
+                    <input type="hidden" name="module[1][image]" value="<?php echo $image_1 ?>" id="image-1" />
+                    <br />
+                    <a onclick="image_upload('image-1', 'thumb-image-1');">
+                      <?php echo $text_browse; ?>
+                    </a>
+                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                    <a onclick="$('#thumb-image').attr('src', '<?php echo $no_image; ?>'); $('#image').attr('value', '');"><?php echo $text_clear; ?></a>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </fieldset>
+          <fieldset>
+            <legend><?php echo $text_custom_2 ?></legend>
+            <table class="form">
+              <tr>
+                <td><?php echo $entry_status; ?></td>
+                <td>
+                    <?php if ($status_2) { ?>
+                    <input type="radio" name="module[2][status]" value="1" checked="checked"/><?php echo $text_enabled; ?>
+                    <input type="radio" name="module[2][status]" value="0"/><?php echo $text_disabled; ?>
+                    <?php } else { ?>
+                    <input type="radio" name="module[2][status]" value="1"/><?php echo $text_enabled; ?>
+                    <input type="radio" name="module[2][status]" value="0" checked="checked"/><?php echo $text_disabled; ?>
+                    <?php } ?>
+                </td>
+              </tr>
+              <tr>
+                <td><?php echo $entry_module_title; ?></td>
+                <td><input type="text" name="module[2][title]" value="<?php echo $title_2 ?>" /></td>
+              </tr>
+              <tr>
+                <td><?php echo $entry_image; ?></td>
+                <td>
+                  <div class="image">
+                    <img src="<?php echo $thumb_image_2; ?>"id="thumb-image-2" />
+                    <input type="hidden" name="module[2][image]" value="<?php echo $image_2 ?>" id="image-2" />
+                    <br />
+                    <a onclick="image_upload('image-2', 'thumb-image-2');">
+                      <?php echo $text_browse; ?>
+                    </a>
+                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                    <a onclick="$('#thumb-image').attr('src', '<?php echo $no_image; ?>'); $('#image').attr('value', '');"><?php echo $text_clear; ?></a>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </fieldset>
         </div>
         <div id="tab-member">
           <div id="members"></div>
-            <table class="form">
+          <table class="form">
             <tr>
               <td><?php echo $entry_member; ?></td>
               <td><input type="text" name="name" value="" /></td>
@@ -269,10 +299,88 @@
             <tr>
               <td colspan="2" style="text-align: right;"><a id="button-members" class="button"><span><?php echo $button_add_member; ?></span></a></td>
             </tr>
-          </table>
-          
+          </table>          
         </div>
-        <div id="tab-case"></div>
+        <div id="tab-case">
+          <div id="cases"></div>
+          <table class="form">
+            <tr>
+              <td><?php echo $entry_case_title; ?></td>
+              <td><input type="text" name="case_title" value="" /></td>
+            </tr>
+
+            <tr>
+              <td><?php echo $entry_image; ?></td>
+              <td><div class="image">
+                  <img src="<?php echo $no_image; ?>"id="thumb-photo" />
+                  <input type="hidden" name="photo" value="" id="photo" />
+                  <br />
+                  <a onclick="image_upload('photo', 'thumb-photo');">
+                    <?php echo $text_browse; ?>
+                  </a>
+                  &nbsp;&nbsp;|&nbsp;&nbsp;
+                  <a onclick="$('#thumb-photo').attr('src', '<?php echo $no_image; ?>'); $('#photo').attr('value', '');"><?php echo $text_clear; ?></a>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_sort; ?></td>
+              <td><input type="text" name="sort" value="" size="3" /></td>
+            </tr>
+            <tr>
+              <td colspan="2" style="text-align: right;"><a id="button-case" class="button"><span><?php echo $button_add_case; ?></span></a></td>
+            </tr>
+          </table>
+        </div>
+        <div id="tab-other">
+          <table class="form">
+            <tr>
+              <td><?php echo $entry_recommend; ?></td>
+              <td><select name="recommend">
+                  <?php if ($recommend) { ?>
+                  <option value="1" selected="selected"><?php echo $text_yes; ?></option>
+                  <option value="0"><?php echo $text_no; ?></option>
+                  <?php } else { ?>
+                  <option value="1"><?php echo $text_yes; ?></option>
+                  <option value="0" selected="selected"><?php echo $text_no; ?></option>
+                  <?php } ?>
+                </select></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_deposit; ?></td>
+              <td><input type="text" name="deposit" value="<?php echo $deposit; ?>"/></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_viewed; ?></td>
+              <td><input type="text" name="viewed" value="<?php echo $viewed; ?>"/></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_credit; ?></td>
+              <td><input type="text" name="credit" value="<?php echo $credit; ?>"/></td>
+            </tr>            
+            <tr>
+              <td><?php echo $entry_sort_order; ?></td>
+              <td><input type="text" name="sort_order" value="<?php echo $sort_order; ?>" size="3" /></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_postcode; ?></td>
+              <td><input type="text" name="postcode" value="<?php echo $postcode; ?>" /></td>
+            </tr>   
+            <tr>
+              <td><?php echo $entry_email; ?></td>
+              <td><input type="text" name="email" value="<?php echo $email; ?>" size="33"/></td>
+            </tr> 
+            <tr>
+              <td><?php echo $entry_telephone; ?></td>
+              <td><input type="text" name="telephone" value="<?php echo $telephone; ?>" /></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_fax; ?></td>
+              <td><input type="text" name="fax" value="<?php echo $fax; ?>" /></td>
+            </tr> 
+            
+          </table>
+        </div>
         <?php } ?>
       </form>
     </div>
@@ -327,7 +435,29 @@ $('#button-members').bind('click', function() {
     }
   });
 });
+$('#cases').load('index.php?route=sale/company/cases&token=<?php echo $token; ?>&company_id=<?php echo $company_id; ?>');
 
+$('#button-case').bind('click', function() {
+  $.ajax({
+    url: 'index.php?route=sale/company/cases&token=<?php echo $token; ?>&company_id=<?php echo $company_id; ?>',
+    type: 'post',
+    dataType: 'html',
+    data: 'title=' + encodeURIComponent($('#tab-case input[name=\'case_title\']').val()) + '&photo=' + encodeURIComponent($('#tab-case input[name=\'photo\']').val())+ '&sort=' + encodeURIComponent($('#tab-case input[name=\'sort\']').val()),
+    beforeSend: function() {
+      $('.success, .warning').remove();
+      $('#button-case').attr('disabled', true);
+      $('#cases').before('<div class="attention"><img src="view/image/loading.gif" /> <?php echo $text_wait; ?></div>');
+    },
+    complete: function() {
+      $('#button-case').attr('disabled', false);
+      $('.attention').remove();
+    },
+    success: function(html) {
+      $('#cases').html(html);     
+      $('#tab-case input').val('');    
+    }
+  });
+});
 //--></script> 
 <script type="text/javascript"><!--
 function image_upload(field, thumb) {
@@ -396,4 +526,7 @@ function image_upload(field, thumb) {
 
 $('.htabs a').tabs();
 //--></script> 
+<style type="text/css">
+  fieldset{margin:5px;padding: 5px; }
+</style>
 <?php echo $footer; ?>

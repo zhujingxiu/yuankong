@@ -602,15 +602,18 @@ class ControllerSaleCompany extends Controller {
 		$this->data['text_none'] = $this->language->get('text_none');
     	$this->data['text_wait'] = $this->language->get('text_wait');
 		$this->data['text_yes'] = $this->language->get('text_yes');
-		$this->data['text_no'] = $this->language->get('text_no');
-		$this->data['text_group'] = $this->language->get('text_group');
+		$this->data['text_no'] = $this->language->get('text_no');		
+		$this->data['text_custom_1'] = $this->language->get('text_custom_1');		
+		$this->data['text_custom_2'] = $this->language->get('text_custom_2');		
 		$this->data['text_image_manager'] = $this->language->get('text_image_manager');
  		$this->data['text_browse'] = $this->language->get('text_browse');
 		$this->data['text_clear'] = $this->language->get('text_clear');	
-				
+
+		$this->data['entry_group'] = $this->language->get('entry_group');
     	$this->data['entry_corporation'] = $this->language->get('entry_corporation');
     	$this->data['entry_mobile_phone'] = $this->language->get('entry_mobile_phone');
     	$this->data['entry_email'] = $this->language->get('entry_email');
+    	$this->data['entry_cover'] = $this->language->get('entry_cover');
     	$this->data['entry_telephone'] = $this->language->get('entry_telephone');
     	$this->data['entry_fax'] = $this->language->get('entry_fax');
     	$this->data['entry_title'] = $this->language->get('entry_title');
@@ -619,7 +622,7 @@ class ControllerSaleCompany extends Controller {
 		$this->data['entry_area_zone'] = $this->language->get('entry_area_zone');
 		$this->data['entry_zone'] = $this->language->get('entry_zone');
 		$this->data['entry_postcode'] = $this->language->get('entry_postcode');
-		$this->data['entry_commission'] = $this->language->get('entry_commission');
+		$this->data['entry_sort_order'] = $this->language->get('entry_sort_order');
 		$this->data['entry_code'] = $this->language->get('entry_code');
 		$this->data['entry_password'] = $this->language->get('entry_password');
     	$this->data['entry_confirm'] = $this->language->get('entry_confirm');
@@ -632,13 +635,15 @@ class ControllerSaleCompany extends Controller {
  		$this->data['entry_position'] = $this->language->get('entry_position');
  		$this->data['entry_avatar'] = $this->language->get('entry_avatar');
  		$this->data['entry_note'] = $this->language->get('entry_note');
- 		$this->data['entry_mode'] = $this->language->get('entry_mode');
+ 		$this->data['entry_mode'] = $this->language->get('entry_mode'); 		
  		$this->data['entry_sort'] = $this->language->get('entry_sort');
  		$this->data['entry_file'] = $this->language->get('entry_file');
  		$this->data['entry_identity'] = $this->language->get('entry_identity');
+ 		$this->data['entry_identity_number'] = $this->language->get('entry_identity_number');
  		$this->data['entry_permit'] = $this->language->get('entry_permit');
  		$this->data['entry_description'] = $this->language->get('entry_description');
- 		$this->data['entry_text'] = $this->language->get('entry_text');
+ 		$this->data['entry_module_title'] = $this->language->get('entry_module_title');
+ 		$this->data['entry_case_title'] = $this->language->get('entry_case_title');
  		$this->data['entry_image'] = $this->language->get('entry_image');
  
 		$this->data['button_save'] = $this->language->get('button_save');
@@ -649,10 +654,11 @@ class ControllerSaleCompany extends Controller {
     	$this->data['button_remove'] = $this->language->get('button_remove');
 	
 		$this->data['tab_general'] = $this->language->get('tab_general');
-		$this->data['tab_description'] = $this->language->get('tab_description');
+		$this->data['tab_module'] = $this->language->get('tab_module');
 		$this->data['tab_member'] = $this->language->get('tab_member');
 		$this->data['tab_case'] = $this->language->get('tab_case');
 		$this->data['tab_file'] = $this->language->get('tab_file');
+		$this->data['tab_other'] = $this->language->get('tab_other');
 
  		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
@@ -760,9 +766,8 @@ class ControllerSaleCompany extends Controller {
 
     	if (isset($this->request->get['company_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
       		$company_info = $this->model_sale_company->getCompany($this->request->get['company_id']);
-      		$company_description = $this->model_sale_company->getCompanyDescription($this->request->get['company_id']);
+      		$company_modules = $this->model_sale_company->getCompanyModules($this->request->get['company_id']);
     	}
-
 		$this->data['token'] = $this->session->data['token'];
 
 		if (isset($this->request->get['company_id'])) {
@@ -779,12 +784,22 @@ class ControllerSaleCompany extends Controller {
       		$this->data['title'] = '';
     	}
     	$this->load->model('tool/image');
+    	$this->data['thumb_logo'] = $this->data['thumb_cover'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
     	if (isset($this->request->post['logo'])) {
       		$this->data['logo'] = $this->request->post['logo'];
 		} elseif (!empty($company_info['logo'])) { 
-			$this->data['logo'] = $this->model_tool_image->resize($company_info['logo'], 100, 100);
+			$this->data['logo'] = $company_info['logo'];
+			$this->data['thumb_logo'] = $this->model_tool_image->resize($company_info['logo'], 100, 100);
 		} else {
       		$this->data['logo'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
+    	}
+    	if (isset($this->request->post['cover'])) {
+      		$this->data['cover'] = $this->request->post['cover'];
+		} elseif (!empty($company_info['cover'])) { 
+			$this->data['cover'] = $company_info['cover'];
+			$this->data['thumb_cover'] = $this->model_tool_image->resize($company_info['cover'], 100, 100);
+		} else {
+      		$this->data['cover'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
     	}
 					
     	if (isset($this->request->post['corporation'])) {
@@ -870,7 +885,15 @@ class ControllerSaleCompany extends Controller {
     	} elseif (!empty($company_info['code'])) { 
 			$this->data['code'] = $company_info['code'];
 		} else {
-      		$this->data['code'] = uniqid();
+      		$this->data['code'] = '';
+    	}
+
+    	if (isset($this->request->post['identity_number'])) {
+      		$this->data['identity_number'] = $this->request->post['identity_number'];
+    	} elseif (!empty($company_info['identity_number'])) { 
+			$this->data['identity_number'] = $company_info['identity_number'];
+		} else {
+      		$this->data['identity_number'] = '';
     	}
 																												
     	if (isset($this->request->post['status'])) {
@@ -933,29 +956,64 @@ class ControllerSaleCompany extends Controller {
 			$this->data['confirm'] = '';
 		}
 
-		if (isset($this->request->post['dtitle'])) {
-      		$this->data['dtitle'] = $this->request->post['dtitle'];
-    	} elseif (!empty($company_description['title'])) { 
-			$this->data['dtitle'] = $company_description['title'];
+		if (isset($this->request->post['description'])) {
+      		$this->data['description'] = $this->request->post['description'];
+    	} elseif (!empty($company_info['description'])) { 
+			$this->data['description'] = $company_info['description'];
 		} else {
-      		$this->data['dtitle'] = '';
+      		$this->data['description'] = '';
     	}
 
-    	if (isset($this->request->post['text'])) {
-      		$this->data['text'] = $this->request->post['text'];
-    	} elseif (!empty($company_description['text'])) { 
-			$this->data['text'] = $company_description['text'];
+		if (isset($this->request->post['module[1][status]'])) {
+      		$this->data['status_1'] = $this->request->post['module[1][status]'];
+    	} elseif (isset($company_modules[0]['status'])) { 
+			$this->data['status_1'] = $company_modules[0]['status'];
 		} else {
-      		$this->data['text'] = '';
+      		$this->data['status_1'] = 0;
     	}
 
-    	if (isset($this->request->post['image'])) {
-      		$this->data['image'] = $this->request->post['image'];
-    	} elseif (!empty($company_description['image'])) { 
-			$this->data['image'] = $this->model_tool_image->resize($company_description['image'],100,100);
+    	if (isset($this->request->post['module[2][status]'])) {
+      		$this->data['status_2'] = $this->request->post['module[2][status]'];
+    	} elseif (isset($company_modules[1]['status'])) { 
+			$this->data['status_2'] = $company_modules[1]['status'];
 		} else {
-      		$this->data['image'] = $this->model_tool_image->resize('no_image.jpg',100,100);
+      		$this->data['status_2'] = 0;
     	}
+
+    	if (isset($this->request->post['module[1][title]'])) {
+      		$this->data['title_1'] = $this->request->post['module[1][title]'];
+    	} elseif (isset($company_modules[0]['title'])) { 
+			$this->data['title_1'] = $company_modules[0]['title'];
+		} else {
+      		$this->data['title_1'] = '';
+    	}
+
+    	if (isset($this->request->post['module[2][title]'])) {
+      		$this->data['title_2'] = $this->request->post['module[2][title]'];
+    	} elseif (isset($company_modules[1]['title'])) { 
+			$this->data['title_2'] = $company_modules[1]['title'];
+		} else {
+      		$this->data['title_2'] = '';
+    	}
+		$this->data['thumb_image_1'] = $this->data['thumb_image_2'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
+    	if (isset($this->request->post['module[1][image]'])) {
+      		$this->data['image_1'] = $this->request->post['module[1][image]'];
+    	} elseif (!empty($company_modules[0]['image'])) { 
+			$this->data['image_1'] = $company_modules[0]['image'];
+			$this->data['thumb_image_1'] = $this->model_tool_image->resize($company_modules[0]['image'],100,100);
+		} else {
+      		$this->data['image_1'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
+    	}
+
+    	if (isset($this->request->post['module[2][image]'])) {
+      		$this->data['image_2'] = $this->request->post['module[2][image]'];
+    	} elseif (!empty($company_modules[1]['image'])) { 
+    		$this->data['image_2'] = $company_modules[1]['image'];
+			$this->data['thumb_image_2'] = $this->model_tool_image->resize($company_modules[1]['image'],100,100);
+		} else {
+      		$this->data['image_2'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
+    	}
+
         $this->load->model('sale/company_group');
         $this->data['groups'] = $this->model_sale_company_group->getCompanyGroups();
 		$this->load->model('sale/company_zone');
@@ -1151,6 +1209,88 @@ class ControllerSaleCompany extends Controller {
 		$this->response->setOutput($this->render());
 	}
 
+	public function cases() {
+    	$this->language->load('sale/company');
+		
+		$this->load->model('sale/company');
+		$this->load->model('tool/image');
+		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->user->hasPermission('modify', 'sale/company')) { 
+			$this->model_sale_company->addCase($this->request->get['company_id'], $this->request->post);
+				
+			$this->data['success'] = $this->language->get('text_success');
+		} else {
+			$this->data['success'] = '';
+		}
+		
+		if (($this->request->server['REQUEST_METHOD'] == 'POST') && !$this->user->hasPermission('modify', 'sale/company')) {
+			$this->data['error_warning'] = $this->language->get('error_permission');
+		} else {
+			$this->data['error_warning'] = '';
+		}	
+		$this->data['token'] = $this->session->data['token'];		
+		$this->data['text_no_results'] = $this->language->get('text_no_results');
+		
+		$this->data['column_date_added'] = $this->language->get('column_date_added');
+		$this->data['column_title'] = $this->language->get('column_case_title');
+		$this->data['column_photo'] = $this->language->get('column_photo');
+		$this->data['column_sort'] = $this->language->get('column_sort');
+		$this->data['column_action'] = $this->language->get('column_action');
+		$this->data['title'] = '企业案例';
+
+		$this->data['button_close'] = $this->language->get('button_close');
+		$this->data['button_save'] = $this->language->get('button_save');
+		$this->data['entry_title'] = $this->language->get('entry_title'); 		
+		$this->data['entry_photo'] = $this->language->get('entry_photo'); 		
+		$this->data['entry_note'] = $this->language->get('entry_note'); 		
+ 		$this->data['entry_sort'] = $this->language->get('entry_sort');
+ 		$this->data['text_wait'] = $this->language->get('text_wait');
+ 		$this->data['confirm_delete'] = $this->language->get('confirm_delete');
+		if (isset($this->request->get['page'])) {
+			$page = $this->request->get['page'];
+		} else {
+			$page = 1;
+		}  
+		
+		$this->data['cases'] = array();
+			
+		$results = $this->model_sale_company->getCases($this->request->get['company_id'], ($page - 1) * 10, 10);
+      		
+		foreach ($results as $result) {
+			$action = array();
+		
+			$action[] = array(
+				'text' 		=> $this->language->get('text_edit'),
+				'onclick' 	=> 'case_detail(' . $result['case_id'].','.$this->request->get['company_id'].')'
+			);
+			$action[] = array(
+				'text' 		=> $this->language->get('text_delete'),
+				'onclick' 	=> 'case_delete(' . $result['case_id'].','.$this->request->get['company_id'].')'
+			);
+        	$this->data['cases'][] = array(
+        		'title' 		=> $result['title'],        		
+				'photo'    => $this->model_tool_image->resize($result['photo'], 100,100),				
+				'sort' 		=> $result['sort'],
+        		'date_added'=> date($this->language->get('date_format_short'), strtotime($result['date_added'])),
+        		'action'	=> $action
+        	);
+      	}			
+	
+		$case_total = $this->model_sale_company->getTotalCases($this->request->get['company_id']);
+			
+		$pagination = new Pagination();
+		$pagination->total = $case_total;
+		$pagination->page = $page;
+		$pagination->limit = 10; 
+		$pagination->text = $this->language->get('text_pagination');
+		$pagination->url = $this->url->link('sale/company/case', 'token=' . $this->session->data['token'] . '&company_id=' . $this->request->get['company_id'] . '&page={page}', 'SSL');
+			
+		$this->data['pagination'] = $pagination->render();
+
+		$this->template = 'sale/company_case.tpl';		
+		
+		$this->response->setOutput($this->render());
+	}
+
 	public function ajax_data(){
 		$this->load->model('sale/company');
 		$this->load->model('tool/image');
@@ -1221,7 +1361,35 @@ class ControllerSaleCompany extends Controller {
 				}else{
 					$json = array('status' => 0 ,'msg' => $this->language->get('text_exception'));
 				}	
-			break;			
+			break;	
+			case 'get_case':
+				$case_id = isset($this->request->get['case_id']) ? (int)$this->request->get['case_id'] : false;
+				$case = $this->model_sale_company->getCompanyCase($case_id);
+				if(!empty($case['photo'])){
+					$case['src'] = $this->model_tool_image->resize($case['photo'], 100, 100);
+				}else{
+					$case['src'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
+				}
+				$json = array('status' => 1,'data'	=> $case);
+			break;
+			case 'save_case':
+				$case_id = isset($this->request->post['case_id']) ? (int)$this->request->post['case_id'] : 0;
+				
+				if($this->model_sale_company->saveCase($case_id,$this->request->post)){
+					$json = array('status' => 1);	
+				}else{
+					$json = array('status' => 0 ,'msg' => $this->language->get('text_exception'));
+				}
+			break;
+			case 'delete_case':
+				$case_id = isset($this->request->get['case_id']) ? (int)$this->request->get['case_id'] : 0;
+				
+				if($this->model_sale_company->deleteCase($case_id)){
+					$json = array('status' => 1);	
+				}else{
+					$json = array('status' => 0 ,'msg' => $this->language->get('text_exception'));
+				}	
+			break;		
 		}
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));

@@ -27,6 +27,8 @@ class ModelSaleCompany extends Model {
 			'address' 		=> isset($data['address']) ? $data['address'] : '',
 			'status' 		=> isset($data['status']) ? (int)$data['status'] : 0,
 			'logo' 			=> isset($data['logo']) ? htmlspecialchars_decode($data['logo']) : '',
+			'cover' 		=> isset($data['cover']) ? htmlspecialchars_decode($data['cover']) : '',
+			'description' 	=> isset($data['description']) ? strip_tags($data['description']) : '',
 			'zone_id' 		=> $data['zone_id'],
 			'recommend' 	=> $data['recommend'],
 			'deposit' 		=> $data['deposit'],
@@ -34,6 +36,7 @@ class ModelSaleCompany extends Model {
 			'sort_order' 	=> $data['sort_order'],
 			'credit' 		=> (float)$data['credit'],
 			'code' 			=> isset($data['code']) ? $data['code'] : '',	
+			'identity_number'=> isset($data['identity_number']) ? $data['identity_number'] : '',	
 			'date_added'	=> date('Y-m-d H:i:s')		
 		);
 
@@ -66,6 +69,7 @@ class ModelSaleCompany extends Model {
 	}
 	
 	public function editCompany($company_id, $data) {
+
 		$area_zone = array();
 		if(isset($data['area']) && is_array($data['area'])){
 			foreach ($data['area'] as $area_id) {
@@ -86,6 +90,8 @@ class ModelSaleCompany extends Model {
 			'postcode' 		=> isset($data['postcode']) ? $data['postcode'] : '',
 			'status' 		=> isset($data['status']) ? (int)$data['status'] : 0,
 			'logo' 			=> isset($data['logo']) ? htmlspecialchars_decode($data['logo']) : '',
+			'cover' 		=> isset($data['cover']) ? htmlspecialchars_decode($data['cover']) : '',
+			'description' 	=> isset($data['description']) ? strip_tags($data['description']) : '',
 			'zone_id' 		=> $data['zone_id'],
 			'recommend' 	=> $data['recommend'],
 			'deposit' 		=> $data['deposit'],
@@ -93,7 +99,7 @@ class ModelSaleCompany extends Model {
 			'sort_order' 	=> $data['sort_order'],
 			'credit' 		=> (float)$data['credit'],
 			'code' 			=> isset($data['code']) ? $data['code'] : '',
-			
+			'identity_number'=> isset($data['identity_number']) ? $data['identity_number'] : ''
 		);
 		if($area_zone){
 			$fileds['area_zone'] = implode(" ", $area_zone);
@@ -121,16 +127,18 @@ class ModelSaleCompany extends Model {
         	$this->db->query("UPDATE " . DB_PREFIX . "company SET salt = '" . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . "' WHERE company_id = '" . (int)$company_id . "'");
         	$this->db->query("UPDATE " . DB_PREFIX . "customer SET salt = '" . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . "' WHERE company_id = '" . (int)$company_id . "'");
       	}
-      	if (isset($data['dtitle']) && trim($data['dtitle'])) {
-      		$this->db->delete('company_description',array('company_id'=>$company_id));
-      		$fileds = array(
-      			'company_id' => $company_id,
-      			'title' => trim($data['dtitle']),
-      			'text'	=> strip_tags(trim($data['text'])),
-      			'image'	=> htmlspecialchars_decode($data['image']),
-      			'date_modified' => date('Y-m-d H:i:s')
-      		);
-        	$this->db->insert("company_description" , $fileds);
+      	if (isset($data['module'])) {
+      		$this->db->delete('company_module',array('company_id'=>$company_id));
+      		foreach ($data['module'] as $item) {
+      			$fileds = array(
+	      			'company_id' => $company_id,
+	      			'title' => trim($item['title']),	      			
+	      			'image'	=> htmlspecialchars_decode($item['image']),
+	      			'status'=> isset($item['status']) ? (int)$item['status'] : 0	      			
+	      		);
+	      		$this->db->insert("company_module" , $fileds);
+      		}     		
+        	
       	}
 	}
 	
@@ -192,7 +200,6 @@ class ModelSaleCompany extends Model {
 				foreach ($query->rows as $row) {
 					$cid[]= (int)$row['company_id'];
 				}
-
 			}
 			if($cid)
 			$implode[] = "c.company_id IN (" . implode(",", $cid) . ")";
@@ -338,11 +345,6 @@ class ModelSaleCompany extends Model {
 		return $query->row['total'];
 	}
 
-	public function getCompanyDescription($company_id){
-		$query = $this->db->query("SELECT * FROM ".DB_PREFIX."company_description WHERE company_id = '".(int)$company_id."' " );
-		return $query->row;
-	}
-
 	public function addFile($company_id,$data){
 		$fileds = array(
 			'company_id'	=> $company_id,
@@ -371,6 +373,11 @@ class ModelSaleCompany extends Model {
 	public function deleteFile($file_id) {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "company_file WHERE file_id = '" . (int)$file_id . "'");
 		return true;
+	}
+	public function getCompanyModules($company_id) {
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "company_module WHERE company_id = '" . (int)$company_id . "' ");
+	
+		return $query->rows;
 	}
 	public function getCompanyFile($file_id) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "company_file WHERE file_id = '" . (int)$file_id . "' ");
@@ -430,6 +437,48 @@ class ModelSaleCompany extends Model {
 	
 	public function getTotalMembers($company_id) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "company_member WHERE company_id = '" . (int)$company_id . "'");
+	
+		return $query->row['total'];
+	}
+
+	public function addCase($company_id,$data){
+		$fileds = array(
+			'company_id'=> $company_id,
+			'title'		=> $data['title'],
+			'photo'	=> isset($data['photo']) ? htmlspecialchars_decode($data['photo']) : '',
+			'sort'		=> $data['sort'],
+			'date_added'=> date('Y-m-d H:i:s')
+		);
+		$this->db->insert("company_case" ,$fileds);
+	}
+	public function saveCase($case_id,$data){
+		$fileds = array(
+			'title' 		=> $data['title'],			
+			'sort'   	=> isset($data['sort']) ? (int)$data['sort'] : 1,
+			'photo'	 	=> isset($data['photo']) ? htmlspecialchars_decode($data['photo']) : '',
+			'date_added'=>date('Y-m-d H:i:s')
+		);
+
+		$this->db->update('company_case',array('case_id'=>$case_id),$fileds);
+		return true;
+	}
+	public function deleteCase($case_id) {
+		$this->db->query("DELETE FROM " . DB_PREFIX . "company_case WHERE case_id = '" . (int)$case_id . "'");
+		return true;
+	}
+	public function getCompanyCase($case_id) {
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "company_case WHERE case_id = '" . (int)$case_id . "' ");
+	
+		return $query->row;
+	}
+	public function getCases($company_id, $start = 0, $limit = 10) {
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "company_case WHERE company_id = '" . (int)$company_id . "' ORDER BY date_added DESC LIMIT " . (int)$start . "," . (int)$limit);
+	
+		return $query->rows;
+	}
+	
+	public function getTotalCases($company_id) {
+		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "company_case WHERE company_id = '" . (int)$company_id . "'");
 	
 		return $query->row['total'];
 	}
