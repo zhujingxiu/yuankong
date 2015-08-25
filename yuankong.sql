@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2015 年 08 月 25 日 09:43
+-- 生成日期: 2015 年 08 月 25 日 16:14
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.4.3
 
@@ -21914,6 +21914,7 @@ CREATE TABLE IF NOT EXISTS `yk_company` (
   `zone_id` int(11) NOT NULL DEFAULT '0',
   `title` varchar(64) DEFAULT NULL,
   `logo` varchar(256) DEFAULT NULL,
+  `cover` varchar(128) DEFAULT NULL,
   `corporation` varchar(64) DEFAULT NULL,
   `mobile_phone` varchar(16) NOT NULL,
   `identity_number` varchar(32) DEFAULT NULL,
@@ -21945,12 +21946,12 @@ CREATE TABLE IF NOT EXISTS `yk_company` (
 -- 转存表中的数据 `yk_company`
 --
 
-INSERT INTO `yk_company` (`company_id`, `zone_id`, `title`, `logo`, `corporation`, `mobile_phone`, `identity_number`, `email`, `telephone`, `fax`, `website`, `description`, `code`, `permit`, `recommend`, `deposit`, `viewed`, `credit`, `commission`, `address`, `area_zone`, `areas`, `postcode`, `ip`, `status`, `approved`, `sort_order`, `date_added`) VALUES
-(1, 3, '天朝消防', 'data/logo.png', '萧十一郎', '18260051051', '321321199909091119', '18260051051@139.com', '111111', '', '', NULL, '55b88477d5f55', 0, 1, 10000, 0, '0.00', '5.00', '北京西路产业孵化器', '江苏省 苏州市 太仓市', '12|988|4346', '', '', 1, 1, 0, '2015-07-29 15:47:53'),
-(2, 1, '骊威消防', 'data/case/logopic3.jpg', '彭骊威', '18850921766', NULL, '', '', '', '', NULL, '55c8cb7680254', 0, 0, 0, 0, '0.00', '0.00', '南京西路街道号码', '江苏省 苏州市 昆山市', '12|988|47821', '', '', 1, 1, 0, '0000-00-00 00:00:00'),
-(3, 2, '金松龄消防公司', 'data/case/logopic6.jpg', '金松龄', '18959523214', NULL, '', '', '', '', NULL, '55c8cccbd1674', 0, 0, 0, 0, '0.00', '0.00', '北京西路产业孵化器', '江苏省 苏州市 太仓市', '12|988|4346', '', '', 1, 1, 0, '2015-08-11 00:11:09'),
-(4, 2, '松涛消防器材器械', 'data/case/logopic2.jpg', '郭松涛', '15956952355', NULL, '', '', '', '', NULL, '55c9f868d7449', 0, 0, 0, 0, '0.00', '0.00', '北京东路街道', '江苏省 苏州市 太仓市', '12|988|4346', '', '', 1, 1, 0, '2015-08-11 21:29:43'),
-(5, 1, '胡林翼消防', 'http://www.yk119.com//asset/image/cache/data/logopic5-100x100.jpg', '胡林翼', '15975345625', NULL, '', '', '', '', NULL, '55c9f939537f1', 0, 0, 0, 0, '0.00', '0.00', '南京东路', '江苏省 苏州市 平江区', '12|988|3087', '', '', 1, 1, 0, '2015-08-11 21:33:11');
+INSERT INTO `yk_company` (`company_id`, `zone_id`, `title`, `logo`, `cover`, `corporation`, `mobile_phone`, `identity_number`, `email`, `telephone`, `fax`, `website`, `description`, `code`, `permit`, `recommend`, `deposit`, `viewed`, `credit`, `commission`, `address`, `area_zone`, `areas`, `postcode`, `ip`, `status`, `approved`, `sort_order`, `date_added`) VALUES
+(1, 3, '天朝消防', 'data/logo.png', NULL, '萧十一郎', '18260051051', '321321199909091119', '18260051051@139.com', '111111', '', '', NULL, '55b88477d5f55', 0, 1, 10000, 0, '0.00', '5.00', '北京西路产业孵化器', '江苏省 苏州市 太仓市', '12|988|4346', '', '', 1, 1, 0, '2015-07-29 15:47:53'),
+(2, 1, '骊威消防', 'data/case/logopic3.jpg', NULL, '彭骊威', '18850921766', NULL, '', '', '', '', NULL, '55c8cb7680254', 0, 0, 0, 0, '0.00', '0.00', '南京西路街道号码', '江苏省 苏州市 昆山市', '12|988|47821', '', '', 1, 1, 0, '0000-00-00 00:00:00'),
+(3, 2, '金松龄消防公司', 'data/case/logopic6.jpg', NULL, '金松龄', '18959523214', NULL, '', '', '', '', NULL, '55c8cccbd1674', 0, 0, 0, 0, '0.00', '0.00', '北京西路产业孵化器', '江苏省 苏州市 太仓市', '12|988|4346', '', '', 1, 1, 0, '2015-08-11 00:11:09'),
+(4, 2, '松涛消防器材器械', 'data/case/logopic2.jpg', NULL, '郭松涛', '15956952355', NULL, '', '', '', '', NULL, '55c9f868d7449', 0, 0, 0, 0, '0.00', '0.00', '北京东路街道', '江苏省 苏州市 太仓市', '12|988|4346', '', '', 1, 1, 0, '2015-08-11 21:29:43'),
+(5, 1, 'XXXX消防公司', 'data/yuankong/bkpic2.jpg', 'data/yuankong/bkpic3.jpg', '胡林翼', '15975345625', '', '', '', '', '', 'asdsadcxzczxbvcvccvbcv', '55c9f939537f1', 0, 0, 0, 0, '0.00', '0.00', '南京东路', '江苏省 苏州市 平江区', '12|988|3087', '', '', 1, 1, 0, '2015-08-11 21:33:11');
 
 -- --------------------------------------------------------
 
@@ -21961,23 +21962,24 @@ INSERT INTO `yk_company` (`company_id`, `zone_id`, `title`, `logo`, `corporation
 CREATE TABLE IF NOT EXISTS `yk_company_case` (
   `case_id` int(11) NOT NULL AUTO_INCREMENT,
   `company_id` int(11) NOT NULL DEFAULT '0',
-  `name` varchar(64) NOT NULL,
-  `note` text,
-  `image` varchar(255) DEFAULT NULL,
+  `title` varchar(64) NOT NULL,
+  `photo` varchar(255) DEFAULT NULL,
   `sort` smallint(6) NOT NULL DEFAULT '0',
   `date_added` datetime DEFAULT NULL,
   PRIMARY KEY (`case_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- 转存表中的数据 `yk_company_case`
 --
 
-INSERT INTO `yk_company_case` (`case_id`, `company_id`, `name`, `note`, `image`, `sort`, `date_added`) VALUES
-(1, 0, '大润发', '', 'data/case/logopic6.jpg', 0, NULL),
-(2, 0, 'SubWay', '', 'data/case/logopic2.jpg', 0, NULL),
-(3, 0, '肯德基', '', 'data/case/logopic1.jpg', 0, NULL),
-(4, 0, '沃尔玛', '', 'data/case/logopic5.jpg', 0, NULL);
+INSERT INTO `yk_company_case` (`case_id`, `company_id`, `title`, `photo`, `sort`, `date_added`) VALUES
+(1, 0, '大润发', 'data/case/logopic6.jpg', 0, NULL),
+(2, 0, 'SubWay', 'data/case/logopic2.jpg', 0, NULL),
+(3, 0, '肯德基', 'data/case/logopic1.jpg', 0, NULL),
+(4, 0, '沃尔玛', 'data/case/logopic5.jpg', 0, NULL),
+(6, 5, 'wqewqewq', 'data/banner2.jpg', 2, '2015-08-25 23:31:43'),
+(7, 5, 'rerewrewrw', 'data/banner1.jpg', 3, '2015-08-25 23:33:46');
 
 -- --------------------------------------------------------
 
@@ -22074,17 +22076,17 @@ CREATE TABLE IF NOT EXISTS `yk_company_module` (
   `title` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
   `image` text COLLATE utf8_unicode_ci,
   `status` tinyint(4) NOT NULL DEFAULT '1',
-  `sort` smallint(6) NOT NULL DEFAULT '1',
-  `date_added` datetime DEFAULT NULL
+  `sort` smallint(6) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- 转存表中的数据 `yk_company_module`
 --
 
-INSERT INTO `yk_company_module` (`company_id`, `title`, `image`, `status`, `sort`, `date_added`) VALUES
-(1, '公司采风', 'data/sdetail2.jpg', 1, 1, '2015-08-10 23:32:58'),
-(5, 'dasdsadsa', 'data/banner1.jpg', 1, 1, '2015-08-11 21:48:28');
+INSERT INTO `yk_company_module` (`company_id`, `title`, `image`, `status`, `sort`) VALUES
+(1, '公司采风', 'data/sdetail2.jpg', 1, 1),
+(5, 'asdsad', 'data/yuankong/banner5.jpg', 1, 1),
+(5, '4534543', 'data/yuankong/banner6.jpg', 1, 1);
 
 -- --------------------------------------------------------
 
