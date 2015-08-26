@@ -66,7 +66,7 @@ $(function(){ $('input, textarea').placeholder(); });
 	<div class="regis-box fix">
 	  	<div class="r">
             <p class="f_m c46"><?php echo $text_qr_code ?></p>
-            <p><img src="asset/image/data/yuankong/ewm2.jpg" alt=""/></p>
+            <p><img src="asset/image/qrcode.jpg" alt=""/></p>
         </div>
 	  	<form id="customer-signup" action="<?php echo $action; ?>" method="post" >
 			<div class="regis">
