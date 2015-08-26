@@ -50,9 +50,9 @@
                 <ul class="gongslist">
                     <?php foreach ($companies as $item): ?>
                     <li class="item">
-                        <p class="gspic"><a href="#"><img src="<?php echo $item['logo'] ?>"></a></p>
+                        <p class="gspic"><a href="<?php echo $item['link'] ?>"><img src="<?php echo $item['logo'] ?>"></a></p>
                         <div class="ovh gsjj">
-                            <h3><a href="#"><?php echo $item['title'] ?></a></h3>
+                            <h3><a href="<?php echo $item['link'] ?>"><?php echo $item['title'] ?></a></h3>
                             <p class="lh30 c9 f_m">
                                 <i class="ying">营</i>
                                 <?php if ($item['recommend']): ?>
@@ -63,13 +63,17 @@
                                 <em class="pr10"><?php echo $item['deposit'] ?>元</em> 
                                 <?php endif ?>
                                 
-                                <i class="icon2 dezbtn"></i><?php echo $item['address'] ?>
+                                <i class="icon2 dezbtn"></i><?php echo $item['area_zone'].' '.$item['address'] ?>
                             </p>
-                            <p class="pt5"><em class="design-btn styon">设计</em><em class="design-btn">设计</em></p>
-                            <p class="gsjj-t">郑重承诺:所有与消防e站签约客户，消防服务项目均实行先办理后付费，同时免费享有一年后续服务；若未在约定时间内完成办理，消防e站将双倍退款。</p>
+                            <p class="pt5">
+                                <?php foreach ($groups as $group): ?>
+                                <em class="design-btn <?php echo in_array($group['group_id'], $item['groups']) ? 'styon' : '' ?>"><?php echo $group['tag'] ?></em>
+                                <?php endforeach ?>
+                            </p>
+                            <p class="gsjj-t"><?php echo $item['description'] ?></p>
                         </div>
                         <p class="sqyuyue">
-                            <a href="#" class="yybtn">立即申请预约</a>
+                            <a onclick="company_request(<?php echo $item['company_id'] ?>);" class="yybtn" >立即申请预约</a>
                         </p>
                     </li>
                     <?php endforeach ?>
@@ -88,7 +92,9 @@
     </div>
     <?php endif; ?>
 </div>
-<script type="text/javascript">
-    
-</script>
+
+<div class="tm-mask" id="tm-mask" style="display:none;"></div>
+<div class="iframe-login" style="display:none;">
+  <?php echo $mini_login ?>
+</div>
 <?php echo $footer; ?>

@@ -263,7 +263,7 @@
                 <?php if(!$this->customer->isLogged()){?>
 			        $('#tm-mask').show();
                     $('.iframe-login').show().focus();
-                    $('#mini-login input[name="redirect"]').val(json['redirect'])
+                    $('#mini-login input[name="redirect"]').val(json['redirect']);
                 <?php }else{?>                
                     location.href = json['redirect'];                
                 <?php }?>

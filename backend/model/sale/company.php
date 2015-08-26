@@ -499,6 +499,8 @@ class ModelSaleCompany extends Model {
 		$query = $this->db->query("SELECT * FROM ".DB_PREFIX."company WHERE status = '1' AND approved = '1'");
 		return $query->rows;
 	}
+
+
 	public function approve($company_id,$notify=false) {
 		$company_info = $this->getCompany($company_id);
 			

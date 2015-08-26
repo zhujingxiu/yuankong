@@ -90,6 +90,28 @@ function getURLVar(key) {
         }
     }
 }
+function company_request(cid){
+    $.ajax({
+        url: 'index.php?route=service/company/apply',
+        type: 'post',
+        data: {company_id:cid},
+        dataType: 'json',
+        success: function(json) {
+            $('.msg-success, .warning, .attention, information, .error').remove();
+            
+            if(json['redirect']){
+                $('#tm-mask').show();
+                $('.iframe-login').show().focus();
+                $('#mini-login input[name="redirect"]').val(json['redirect']);
+            }else if (json['error']) {
+                Alertbox({type:false,msg:json.error,delay:5000});
+            }else{
+                Alertbox({type:true,msg:json.msg,delay:5000});
+            }
+        }
+    });
+}
+
 function applyProject(el){
     var obj = $(el).parent('.project-form');
     var account = obj.find('input[name="account"]').val();

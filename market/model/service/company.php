@@ -3,8 +3,8 @@ class ModelServiceCompany extends Model {
     public function addCompanyRequest($data) {
         $fields =  array(
             'company_id'    => isset($data['company_id']) ? (int)$data['company_id'] : 0,
-            'mobile_phone'     => $data['mobile_phone'],
-            'account'       => $data['account'],
+            'mobile_phone'  => isset($data['company_id']) ? $this->customer->getMobilePhone() : $data['mobile_phone'],
+            'account'       => isset($data['company_id']) ? $this->customer->getFullName() : $data['account'],
             'status'        => 1,
             'date_added'    => date('Y-m-d H:i:s'),
         );
@@ -134,26 +134,35 @@ class ModelServiceCompany extends Model {
     }
 
     public function getCompanyGroupsByCompanyId($company_id){
+        $data = array();
         $query = $this->db->query("SELECT group_id FROM ".DB_PREFIX."company_to_group WHERE company_id = '".(int)$company_id."' ");
-
-        return $query->rows;
+        foreach ($query->rows as $item) {
+            $data[] = $item['group_id'];
+        }
+        return $data;
     }
 
     public function getCompanyModulesByCompanyId($company_id){
-        $query = $this->db->query("SELECT * FROM ".DB_PREFIX."company_module WHERE company_id = '".(int)$company_id."' AND status = '1' ORDER BY sort ASC ,date_added DESC");
+        $query = $this->db->query("SELECT * FROM ".DB_PREFIX."company_module WHERE company_id = '".(int)$company_id."' AND status = '1' ORDER BY sort ASC ");
 
-        return $query->rows;
+        return $query->num_rows ? $query->rows : array();
     }
 
     public function getCompanyCasesByCompanyId($company_id){
         $query = $this->db->query("SELECT * FROM ".DB_PREFIX."company_case WHERE company_id = '".(int)$company_id."' ORDER BY sort ASC ,date_added DESC");
 
-        return $query->rows;
+        return $query->num_rows ? $query->rows : array();
     }
 
     public function getCompanyMembersByCompanyId($company_id){
         $query = $this->db->query("SELECT * FROM ".DB_PREFIX."company_member WHERE company_id = '".(int)$company_id."' ORDER BY sort ASC ,date_added DESC");
 
-        return $query->rows;
+        return $query->num_rows ? $query->rows : array();
+    }
+
+    public function addCompanyViewed($company_id){
+        if((int)$company_id){
+            $this->db->query("UPDATE ".DB_PREFIX."company SET viewed = viewed + 1 WHERE company_id = '".(int)$company_id."'");
+        }
     }
 }
