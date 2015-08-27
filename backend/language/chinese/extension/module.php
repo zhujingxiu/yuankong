@@ -7,6 +7,9 @@ $_['text_install']       = '安装';
 $_['text_uninstall']     = '卸载';
 $_['text_left']          = '左边';
 $_['text_right']         = '右边';
+$_['text_static_page']   = '静态单页面（e站特色、e站公益等）';
+$_['text_procedure_page']= '消防流程单页面';
+$_['text_promotion_page']= '促销专题单页面';
 
 // Column
 $_['column_name']        = '模块名称';

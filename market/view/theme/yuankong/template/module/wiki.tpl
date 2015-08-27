@@ -34,7 +34,8 @@
             $(this).parent().removeClass("phover");
         }else{
             $(this).parent().siblings().removeClass("phover");
-            $(this).parent().addClass("phover");}
+            $(this).parent().addClass("phover");
+        }
     });
     $(function(){
         $.each($('a.wiki-item'),function(){
@@ -42,8 +43,10 @@
                 $('.shopsty-box').removeClass('phover');
                 $(this).parent().parent().parent('.shopstylebox').parent('.shopsty-box').addClass('phover');
             }
-        })
+        });
+        <?php if(!isset($this->request->get['wiki_group'])){ ?>
         $(".shopsty-box h3:first").trigger('click');
+        <?php }?>
     })
 </script>
 </div>

@@ -409,7 +409,7 @@ i,em,cite {
 .bornone { border: none !important;}
 .z-i { z-index: 1;}
 /*右侧公共9图标*/
-.fixed-btn {display: none; position: fixed; top: 20%;right: 0; width: 40px; z-index: 11; _position: absolute;_top:expression(eval(document.documentElement.clientHeight/2+document.documentElement.scrollTop)); }
+.fixed-btn { position: fixed; top: 15%;right: 0; width: 40px; z-index: 11; _position: absolute;_top:expression(eval(document.documentElement.clientHeight/2+document.documentElement.scrollTop)); }
 .btn-ul { width: 40px; overflow: hidden;}
 .btn-ul li { background: #fff; width: 40px; height: 40px; border-bottom: 1px solid #eee; overflow: hidden; *vertical-align: top;}
 .btn-a {display: none; font-size: 12px; background: #c30c22; line-height:18px; height: 38px; padding-top: 2px; text-align: center; color: #fff;}

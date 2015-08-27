@@ -93,6 +93,17 @@ class ControllerExtensionModule extends Controller {
 			}
 		}
 		$this->data['extensions'] = array_chunk($this->data['extensions'], 3);
+		$pages = array(
+			array(
+				'name'=>$this->language->get('text_static_page'),
+				'href'=>$this->url->link('page/static','token=' . $this->session->data['token'], 'SSL')
+			),
+			array(
+				'name'=>$this->language->get('text_procedure_page'),
+				'href'=>$this->url->link('page/procedure','token=' . $this->session->data['token'], 'SSL')
+			),
+		);
+		$this->data['pages']= array_chunk($pages, 3);
 
 		$this->template = 'extension/module.tpl';
 		$this->children = array(

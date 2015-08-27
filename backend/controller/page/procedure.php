@@ -1,23 +1,23 @@
 <?php
-class ControllerModuleYkPage extends Controller {
+class ControllerPageProcedure extends Controller {
 	private $error = array(); 
 	 
 	public function index() {   
-		$this->language->load('module/ykpage');
+		$this->language->load('page/page');
 
-		$this->document->setTitle($this->language->get('heading_title'));
+		$this->document->setTitle($this->language->get('title_procedure'));
 		
 		$this->load->model('setting/setting');
 				
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-			$this->model_setting_setting->editPage('static',$this->request->post['ykpage']);		
+			$this->model_setting_setting->editPage('procedure',$this->request->post['page']);		
 			
 			$this->session->data['success'] = $this->language->get('text_success');
 						
 			$this->redirect($this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL'));
 		}
 				
-		$this->data['heading_title'] = $this->language->get('heading_title');
+		$this->data['heading_title'] = $this->language->get('title_procedure');
 
 		$this->data['text_enabled'] = $this->language->get('text_enabled');
 		$this->data['text_disabled'] = $this->language->get('text_disabled');
@@ -56,12 +56,12 @@ class ControllerModuleYkPage extends Controller {
    		);
 		
    		$this->data['breadcrumbs'][] = array(
-       		'text'      => $this->language->get('heading_title'),
-			'href'      => $this->url->link('module/ykpage', 'token=' . $this->session->data['token'], 'SSL'),
+       		'text'      => $this->language->get('title_procedure'),
+			'href'      => $this->url->link('page/procedure', 'token=' . $this->session->data['token'], 'SSL'),
       		'separator' => ' :: '
    		);
 		
-		$this->data['action'] = $this->url->link('module/ykpage', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['action'] = $this->url->link('page/procedure', 'token=' . $this->session->data['token'], 'SSL');
 		
 		$this->data['cancel'] = $this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL');
 		
@@ -69,13 +69,13 @@ class ControllerModuleYkPage extends Controller {
 
 		$this->data['modules'] = array();
 		
-		if (isset($this->request->post['ykpage'])) {
-			$this->data['modules'] = $this->request->post['ykpage'];
+		if (isset($this->request->post['page'])) {
+			$this->data['modules'] = $this->request->post['page'];
 		} else { 
-			$this->data['modules'] = $this->model_setting_setting->getPages();
+			$this->data['modules'] = $this->model_setting_setting->getPages('procedure');
 		}	
 
-		$this->template = 'module/ykpage.tpl';
+		$this->template = 'page/page.tpl';
 		$this->children = array(
 			'common/header',
 			'common/footer'
@@ -85,7 +85,7 @@ class ControllerModuleYkPage extends Controller {
 	}
 	
 	protected function validate() {
-		if (!$this->user->hasPermission('modify', 'module/ykpage')) {
+		if (!$this->user->hasPermission('modify', 'page/procedure')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 		

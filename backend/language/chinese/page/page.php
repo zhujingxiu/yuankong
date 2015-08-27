@@ -1,6 +1,7 @@
 <?php
 // Heading
-$_['heading_title']       = '通用单页面';
+$_['title_static']       = '静态单页面';
+$_['title_procedure']    = '消防流程单页面';
 
 // Text
 $_['text_module']         = '模块管理';
@@ -12,7 +13,7 @@ $_['text_column_right']   = '右列显示';
 
 // Entry
 $_['entry_text']   		  = '文本内容：';
-$_['entry_route']         = '页面路径：';
+$_['entry_route']         = '页面路径或关键字：';
 $_['entry_title']         = '页面标题：';
 $_['entry_status']        = '状态：';
 $_['entry_sort_order']    = '排序：';

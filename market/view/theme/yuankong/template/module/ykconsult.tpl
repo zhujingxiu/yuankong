@@ -7,7 +7,7 @@
         <ul class="ovh">
             <?php foreach ($helps as $item): ?>
             <li class="gs-l-dd">
-                <a href="#"><?php echo truncate_string($item['text'],18) ?></a>
+                <a href="<?php echo $item['link'] ?>"><?php echo truncate_string($item['text'],18) ?></a>
             </li>
             <?php endforeach ?>
         </ul>

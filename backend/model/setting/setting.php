@@ -28,24 +28,26 @@ class ModelSettingSetting extends Model {
 		}
 	}
 
-	public function editPage($data){
-		$this->db->query("TRUNCATE TABLE `" . DB_PREFIX . "page` ");
-		foreach ($data as $row) {
-			$fields = array(
-				'title' => $row['title'],
-				'route' => trim($row['route']),
-				'text'	=> $row['text'],
-				'status'=> $row['status'],
-				'sort'	=> $row['sort']
-			);
-			$this->db->insert('page',$fields);
+	public function editPage($model='static',$data=array()){
+		$this->db->query("DELETE FROM `" . DB_PREFIX . "page` WHERE `model` = '".$this->db->escape(strtolower($model))."'");
+		if($data){
+			foreach ($data as $row) {
+				$fields = array(
+					'title' => $row['title'],
+					'route' => trim($row['route']),
+					'model' => strtolower($model),
+					'text'	=> $row['text'],
+					'status'=> $row['status'],
+					'sort'	=> $row['sort']
+				);
+				$this->db->insert('page',$fields);
+			}
 		}
-		
 	}
 
-	public function getPages() {
+	public function getPages($model='static') {
 		$data = array();
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "page ");
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "page WHERE `model` = '".$this->db->escape(strtolower($model))."'");
 		foreach ($query->rows as $row) {
 			$row['text'] = html_entity_decode($row['text']);
 			$data[] = $row;

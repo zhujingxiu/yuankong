@@ -85,8 +85,10 @@ class ControllerServiceProject extends Controller {
         	'name'	=> $this->language->get('title_prefix'),
         	'icon'	=> $this->model_tool_image->resize('project_prefix.jpg',35,35)
         );
-
-		$this->template = $this->config->get('config_template') . '/template/service/'.$template.'.tpl';
+        $this->load->model('tool/common');
+        $page = $this->model_tool_common->getPage($keyword,'procedure');
+        $this->data['page_content'] = empty($page['text']) ? '' : html_entity_decode($page['text'],ENT_QUOTES,'UTF-8');
+		$this->template = $this->config->get('config_template') . '/template/service/procedure.tpl';
 		
 		$this->children = array(
 			'common/footer',

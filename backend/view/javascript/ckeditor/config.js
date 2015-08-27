@@ -9,6 +9,7 @@ CKEDITOR.editorConfig = function( config ) {
 	// http://docs.ckeditor.com/#!/api/CKEDITOR.config
 	config.filebrowserWindowWidth = '800';
 	config.filebrowserWindowHeight = '500';
+    config.fillEmptyBlocks = false;
 	config.resize_enabled = false;
 	config.htmlEncodeOutput = false;
 	config.entities = false;
