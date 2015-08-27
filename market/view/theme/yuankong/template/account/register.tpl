@@ -66,13 +66,13 @@ $(function(){ $('input, textarea').placeholder(); });
 	<div class="regis-box fix">
 	  	<div class="r">
             <p class="f_m c46"><?php echo $text_qr_code ?></p>
-            <p><img src="asset/image/qrcode.jpg" alt=""/></p>
+            <p><img src="asset/image/qrcode.jpg" alt="" width="250px" height="250px"/></p>
         </div>
 	  	<form id="customer-signup" action="<?php echo $action; ?>" method="post" >
 			<div class="regis">
 			  	<table class="registable" id="customer-form">
 					<tr>
-					  <td class="tr" width="90">
+					  <td class="tr" width="90" valign="top">
 					  	<em class="c_r">*</em> <?php echo $entry_mobile_phone; ?>
 					  </td>
 					  <td>
@@ -157,7 +157,7 @@ $(function(){ $('input, textarea').placeholder(); });
 			<div class="regis" style="display: none;">
 	            <table class="registable" id="company-form">
 	            	<tr>
-	                    <td class="tr" width="96">
+	                    <td class="tr" width="96" valign="top">
 	                    	<em class="c_r">*</em> <?php echo $entry_email ?>
 	                    </td>
 	                    <td>
@@ -192,7 +192,7 @@ $(function(){ $('input, textarea').placeholder(); });
 	                    </td>
 	                    <td>
 	                    	<div class="form-group">
-	                    		<input type="text" class="regis-text" name="company" placeholder="<?php echo $text_company_name ?>" />
+	                    		<input type="text" class="regis-text" name="title" placeholder="<?php echo $text_company_name ?>" />
 	                    	</div>
 	                    </td>
 	                </tr>
@@ -202,12 +202,12 @@ $(function(){ $('input, textarea').placeholder(); });
 	                    </td>
 	                    <td>
 							<div class="form-group">
-		                    	<select class="regis-text" name="group_id">
-			                    	<option>设计公司</option>
-			                    	<option>工程公司</option>
-			                    	<option>检测公司</option>
-			                    	<option>维保公司</option>
-			                    </select>
+		                    	<div class="form-group">
+									<?php foreach ($company_groups as $item): ?>
+									<div class="w100"><input type="checkbox" name="group_id[]" value="<?php echo $item['group_id'] ?>" /> <?php echo $item['name'] ?></div>
+									<?php endforeach ?>
+			                    	
+				                </div>
 			                </div>
 		                </td>
 	                </tr>
@@ -217,7 +217,7 @@ $(function(){ $('input, textarea').placeholder(); });
 	                    </td>
 	                    <td>
 	                    	<div class="form-group">
-	                    		<input type="text" class="regis-text" name="address_1" />
+	                    		<input type="text" class="regis-text" name="address" />
 	                    	</div>
 	                    </td>
 	                </tr>
@@ -227,7 +227,7 @@ $(function(){ $('input, textarea').placeholder(); });
 	                    </td>
 	                    <td>
 	                    	<div class="form-group">
-	                    		<input type="text" class="regis-text" name="nickname" />
+	                    		<input type="text" class="regis-text" name="corporation" />
 	                    	</div>
 	                    </td>
 	                </tr>
@@ -364,11 +364,11 @@ $(function(){ $('input, textarea').placeholder(); });
 	    			required: true,
 	    			byteRangeLength:[4,32]
 	    		},
-	    		nickname:{
+	    		corporation:{
 	    			required: true,
 	    			byteRangeLength:[2,6]
 	    		},
-	    		address_1:{
+	    		address:{
 	    			required: true,
 	    			byteRangeLength:[4,32]
 	    		},

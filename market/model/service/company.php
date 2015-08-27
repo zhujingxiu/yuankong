@@ -1,5 +1,56 @@
 <?php
 class ModelServiceCompany extends Model {
+        public function addCompany($data) {
+        $area_zone = array();
+        if(isset($data['area']) && is_array($data['area'])){
+            foreach ($data['area'] as $area_id) {
+                if($area_id){
+                    $_area_info = $this->db->fetch('area',array('one'=>true,'condition'=> array('area_id'=>$area_id)));
+                    if(!empty($_area_info['name'])){
+                        $area_zone[] = $_area_info['name'];
+                    }
+                }               
+            }
+        }
+        $salt = substr(md5(uniqid(rand(), true)), 0, 9);
+        $password = sha1($salt . sha1($salt . sha1($data['password'])));
+        $fileds = array(
+            'title'         => $data['title'],
+            'corporation'   => $data['corporation'],
+            'mobile_phone'  => $data['mobile_phone'],
+            'email'         => $data['email'],
+            'area_zone'     => implode(" ", $area_zone),
+            'areas'         => implode("|",$data['area']),
+            'postcode'      => isset($data['postcode']) ? $data['postcode'] : '',
+            'address'       => isset($data['address']) ? $data['address'] : '',
+            'status'        =>  0,
+            'date_added'    => date('Y-m-d H:i:s')      
+        );
+
+        $company_id = $this->db->insert("company",$fileds);    
+
+        if(isset($data['group_id']) && is_array($data['group_id'])) {
+            $this->db->delete('company_to_group',array('company_id'=>$company_id));
+            foreach ($data['group_id'] as $group) {
+                $this->db->insert('company_to_group',array('company_id'=>$company_id,'group_id'=>$group));
+            }
+        }
+
+        $this->db->delete('customer',array('company_id'=>$company_id));
+        $fileds =array(
+            'fullname'      => $data['corporation'],
+            'mobile_phone'  => $data['mobile_phone'],
+            'email'         => $data['email'],
+            'salt'          => $salt,
+            'password'      => $password,
+            'company_id'    => $company_id,
+            'customer_group_id'=> $this->config->get('config_customer_group_id'),
+            'status'        => 0,
+            'approved'      => 0,
+            'date_added'    => date('Y-m-d H:i:s')
+        );
+        $this->db->insert('customer',$fileds);
+    }
     public function addCompanyRequest($data) {
         $fields =  array(
             'company_id'    => isset($data['company_id']) ? (int)$data['company_id'] : 0,

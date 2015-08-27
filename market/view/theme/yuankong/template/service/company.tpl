@@ -92,7 +92,12 @@
     </div>
     <?php endif; ?>
 </div>
-
+<script type="text/javascript">
+<?php if($search){ ?>
+    $('#top-filter input[name="search_model"]').val('company');
+    $('#top-filter .search-dt span').text(($('#top-filter').find('span[val="company"]').text()));
+<?php }?>
+</script>
 <div class="tm-mask" id="tm-mask" style="display:none;"></div>
 <div class="iframe-login" style="display:none;">
   <?php echo $mini_login ?>

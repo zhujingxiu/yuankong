@@ -219,6 +219,9 @@ class ControllerAccountRegister extends Controller {
 		} else {
 			$this->data['agree'] = false;
 		}
+
+		$this->load->model('service/company');
+		$this->data['company_groups'] = $this->model_service_company->getCompanyGroups();
 		$this->data['captcha_link'] = $this->url->link('account/register/captcha','','ssl');
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/register.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/account/register.tpl';

@@ -9,6 +9,7 @@ class ControllerInformationWiki extends Controller {
         if (isset($this->request->get['search'])) {
             $search = $this->request->get['search'];
             $this->document->addScript(TPL_JS."jquery.textfilter.js");
+            $this->data['searched'] = 'wiki';
         } else {
             $search = null;
         }

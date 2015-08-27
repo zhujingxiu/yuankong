@@ -53,6 +53,8 @@
 <script type="text/javascript">
 <?php if($search){ ?>
     $('.newslist-li h4,.newslist-li .news-text').textSearch('<?php echo $search ?>',{markColor: "#C30D23"});
+    $('#top-filter input[name="search_model"]').val('wiki');
+    $('#top-filter .search-dt span').text(($('#top-filter').find('span[val="wiki"]').text()));
 <?php }?>
 $('.s-sbtn').bind('click',function(){
     if($(this).parent('.gs-search').find('input').val()!=''){
@@ -62,7 +64,8 @@ $('.s-sbtn').bind('click',function(){
         var search = '&search='+$(this).parent('.gs-search').find('input').val();
         location.href= $('base').attr('href') + 'index.php?'+route+group+sort+search;
     }
-})
+});
+
 </script>
 <div class="tm-mask" id="tm-mask" style="display:none;"></div>
 <div class="iframe-login" style="display:none;">
