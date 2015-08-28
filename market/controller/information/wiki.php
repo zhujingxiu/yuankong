@@ -132,7 +132,7 @@ class ControllerInformationWiki extends Controller {
 
             foreach ($results as $result) {
                 $result['date_added'] = date('Y-m-d',strtotime($result['date_added']));
-                $result['link'] = $this->url->link('information/wiki/info','wiki_group='.$wiki_group.'&wiki_id='.$result['wiki_id'],'SSL');
+                $result['link'] = $this->url->link('information/wiki/info','wiki_group='.$result['group_id'].'&wiki_id='.$result['wiki_id'],'SSL');
                 $this->data['wikis'][] = $result;
             }
         }

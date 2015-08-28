@@ -81,7 +81,6 @@ class ModelServiceCompany extends Model {
                 foreach ($query->rows as $row) {
                     $cid[]= (int)$row['company_id'];
                 }
-
             }
             if($cid)
             $implode[] = " AND c.company_id IN (" . implode(",", $cid) . ")";
@@ -103,6 +102,11 @@ class ModelServiceCompany extends Model {
             $sql .= " ORDER BY " . $data['sort'];
         } else {
             $sql .= " ORDER BY c.sort_order";   
+        }
+        if (isset($data['order']) && ($data['order'] == 'DESC')) {
+            $sql .= " DESC";
+        } else {
+            $sql .= " ASC";
         }
         if (isset($data['start']) || isset($data['limit'])) {
             if ($data['start'] < 0) {

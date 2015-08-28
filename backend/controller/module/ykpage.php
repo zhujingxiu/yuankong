@@ -10,7 +10,7 @@ class ControllerModuleYkPage extends Controller {
 		$this->load->model('setting/setting');
 				
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-			$this->model_setting_setting->editPage('static',$this->request->post['ykpage']);		
+			$this->model_setting_setting->editPage($this->request->post['ykpage']);		
 			
 			$this->session->data['success'] = $this->language->get('text_success');
 						

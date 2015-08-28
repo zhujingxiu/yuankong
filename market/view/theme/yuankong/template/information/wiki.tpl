@@ -29,6 +29,7 @@
                   <li class="newslist-li">
                     <h4><a <?php echo isset($item['link']) ? 'href="'.$item['link'].'"' : '' ?>><?php echo truncate_string($item['title']) ?></a></h4>
                     <p class="lh30 f_s c9">
+                        <?php echo empty($item['from']) ? truncate_string($item['date_added'],20) : '' ?>
                         更新日期:<?php echo $item['date_added'] ?>
                         <em class="pl20">阅读:<?php echo $item['viewed'] ?>次</em>
                     </p>

@@ -102,6 +102,10 @@ class ControllerExtensionModule extends Controller {
 				'name'=>$this->language->get('text_procedure_page'),
 				'href'=>$this->url->link('page/procedure','token=' . $this->session->data['token'], 'SSL')
 			),
+			array(
+				'name'=>'',//$this->language->get('text_procedure_page'),
+				'href'=>''//$this->url->link('page/procedure','token=' . $this->session->data['token'], 'SSL')
+			),
 		);
 		$this->data['pages']= array_chunk($pages, 3);
 

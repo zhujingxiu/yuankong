@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']       = '信息块';
+$_['heading_title']       = '首页百科信息块';
 
 // Text
 $_['text_module']         = 'Modules';

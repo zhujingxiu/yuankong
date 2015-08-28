@@ -18,14 +18,11 @@
 <script type="text/javascript">
     o.mous.init(".nav-adbox","hov");
     $(function(){
-        var rt = getQueryString('route');
-        if(rt == ''){
+        var keyword = '<?php echo $keyword ?>';
+        if(keyword == ''){
             $('ul.nav > li.nav-li:first').removeClass('on').addClass('on');
         }else{
-            var keyword = rt;
-            if(rt=='product/product'){
-                keyword = 'product/category';
-            }
+            
             $.each($('ul.nav > li.nav-li'),function(){
                 if($(this).find('a').attr('href').indexOf(keyword)!=-1){
                     $('ul.nav > li.nav-li.on').removeClass('on');

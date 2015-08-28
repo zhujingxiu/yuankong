@@ -33,6 +33,17 @@ class ControllerModuleYknavigation extends Controller {
         if(isset($part[0]) && $part[0] =='account'){
             $this->data['container_class'] = "register-w";
         }
+        $keyword = $part[0].'/'.$part[1];
+        if($keyword == 'product/product'){
+            $keyword = 'product/category';
+        }
+        if($keyword == 'service/project'){
+            $group = isset($this->request->get['group']) ? strtolower(trim($this->request->get['group'])) : false ;
+            if($group && in_array($group,array('design','train'))){
+                $keyword = 'group='.$group;
+            }
+        }
+        $this->data['keyword'] = $keyword;
         $this->data['commonweal'] = $this->url->link('service/commonweal','','SSL');
         $this->template = $this->config->get('config_template') . '/template/module/yknavigation.tpl';
         

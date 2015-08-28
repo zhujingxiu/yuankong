@@ -35,7 +35,7 @@
 <?php endif ?>
 <div class="fixed-btn" style="display:block;">
     <ul class="btn-ul">
-        <li>
+        <li <?php echo !$group_id ? 'class="hover"' : '' ?>>
             <a href="<?php echo $prefix['link'] ?>" class="btn-a">
                 <span class="grp-txt"><?php echo $prefix['name'] ?></span>
             </a>
