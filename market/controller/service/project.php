@@ -58,6 +58,7 @@ class ControllerServiceProject extends Controller {
             $result['group'] = $result['name'];
             $result['date_applied'] = date('Y-m-d',strtotime($result['date_applied']));
             $result['telephone'] = substr_replace($result['telephone'],'****',3,4);
+            
             $this->data['projects'][] = $result;
         }
         $this->data['groups'] = array();
@@ -72,14 +73,9 @@ class ControllerServiceProject extends Controller {
         	$this->data['groups'][strtolower($item['keyword'])] = $item;
         }
 
-        if(isset($this->data['groups'][$keyword])){
-        	$this->document->setTitle($this->data['groups'][$keyword]['heading_title']);
-            $template = $this->data['groups'][$keyword]['template'];
-        }else{
-        	$this->document->setTitle($this->language->get('heading_title'));
-            $template = 'project';
-        }
 
+         
+        
         $this->data['prefix'] = array(
         	'link'	=> $this->url->link('service/project','','SSL'),
         	'name'	=> $this->language->get('title_prefix'),
@@ -87,7 +83,40 @@ class ControllerServiceProject extends Controller {
         );
         $this->load->model('tool/common');
         $page = $this->model_tool_common->getPage($keyword,'procedure');
+        $this->document->setTitle($page['title'].' '.$this->language->get('heading_title'));
         $this->data['page_content'] = empty($page['text']) ? '' : html_entity_decode($page['text'],ENT_QUOTES,'UTF-8');
+        $FOREACH_GROUPS = $FOREACH_PROJECTS = array();
+        $FOREACH_GROUPS[] = '<dl class="chose-xm">';
+        $FOREACH_GROUPS[] = '<dt class="c-xm-dt"><span>'.$page['title'].'</span></dt>';
+        $FOREACH_GROUPS[] = '<dd class="c-xm-dd">';
+        foreach ($this->data['groups'] as $item){
+            $FOREACH_GROUPS[] = '<span class="group-option" data-val="'. $item['keyword'] .'">'.$item['name'].'</span>';
+        }
+        $FOREACH_GROUPS[] = '</dd></dl>';
+                    
+        $FOREACH_PROJECTS[] = '<ul class="sc-begin ovh" id="sc-begin">';
+        foreach ($this->data['projects'] as $item){
+            $FOREACH_PROJECTS[] = '<li class="fix">';
+            $FOREACH_PROJECTS[] = '<span class="w200">' .$item['group'] .'</span>';
+            $FOREACH_PROJECTS[] = '<span class="w200">' .$item['account'].'</span>';
+            $FOREACH_PROJECTS[] = '<span class="w200">' .$item['telephone']. '</span>';
+            $FOREACH_PROJECTS[] = '<span class="w200">' .$item['status_text']. '</span>';
+            $FOREACH_PROJECTS[] = '<span class="w200">' .$item['date_applied'].'</span>';
+            $FOREACH_PROJECTS[] = '</li>';
+        }
+        $FOREACH_PROJECTS[] = '</ul>';
+        $replace = array(
+            implode('', $FOREACH_GROUPS),
+            $this->data['group_id'],
+            implode('',$FOREACH_PROJECTS)
+        );
+        $pattern = array(
+            '__FOREACH_GROUPS__',
+            '__GROUP_ID__',
+            '__FOREACH_PROJECTS__'
+        );
+        $this->data['page_content'] = str_replace( $pattern,$replace, $this->data['page_content']);
+        $this->data['quick_project'] = $keyword != 'index';
 		$this->template = $this->config->get('config_template') . '/template/service/procedure.tpl';
 		
 		$this->children = array(

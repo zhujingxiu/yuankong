@@ -30,7 +30,7 @@
         <img src="asset/image/project/ztpic8.jpg" />
     </div>
 </div>
-<!--右侧定位9图标-->
+
 <div class="fixed-btn" style="display:block;">
     <ul class="btn-ul">
         <li>
@@ -47,13 +47,7 @@
             <span class="iconlc"><img src="<?php echo $item['icon'] ?>" /></span>
         </li>
         <?php endforeach ?>
-        
     </ul>
-    <script type="text/javascript">
-        $(function(){
-            o.mous.init(".btn-ul li","hover");
-        });
-    </script>
 </div>
 
 <script type="text/javascript">
@@ -62,6 +56,7 @@
         o.dlist.init(".chose-xm",".c-xm-dt",".c-xm-dd");
         valid.gcdj.gcvdation(".gc-b-detail");
         valid.gcdj.gcvdation(".fix-gc");
+        o.mous.init(".btn-ul li","hover");
     });
 </script>
 <?php echo $footer; ?>

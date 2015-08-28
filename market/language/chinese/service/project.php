@@ -1,6 +1,6 @@
 <?php
 // Heading 
-$_['heading_title']         = '消防前置条件_消防网上商城【消防E站官网】';
+$_['heading_title']         = '消防网上商城【消防E站官网】';
 $_['title_design']          = '消防设计_消防网上商城【消防E站官网】';
 $_['title_project']          = '消防工程_消防网上商城【消防E站官网】';
 $_['title_check']           = '消防检测_消防网上商城【消防E站官网】';
