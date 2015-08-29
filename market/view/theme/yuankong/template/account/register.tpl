@@ -39,8 +39,8 @@ $(function(){ $('input, textarea').placeholder(); });
 <![endif]-->
 <script type="text/javascript" src="market/view/theme/yuankong/javascript/index.js"></script>
 <script type="text/javascript" src="<?php echo TPL_JS ?>validation/dist/jquery.validate.js"></script>
-<script type="text/javascript" src="<?php echo TPL_JS ?>validation/dist/additional-methods.js"></script>
 <script type="text/javascript" src="<?php echo TPL_JS ?>validation/dist/localization/messages_zh.js"></script>
+<script type="text/javascript" src="market/view/theme/yuankong/javascript/passport.js"></script>
 <link rel="stylesheet" type="text/css" href="market/view/theme/yuankong/stylesheet/yk_validate.css" />
 </head>
 <body class="b_fa">
@@ -77,7 +77,7 @@ $(function(){ $('input, textarea').placeholder(); });
 					  </td>
 					  <td>
 					  	<div class="form-group">
-					  		<input type="text" name="mobile_phone" value="<?php echo $mobile_phone; ?>" class="regis-text" placeholder="<?php echo $entry_mobile_phone ?>" id="customer-mobilephone"/>
+					  		<input type="text" name="mobile_phone" value="<?php echo $mobile_phone; ?>" class="regis-text" placeholder="<?php echo $entry_mobile_phone ?>" data-rel="customer" id="customer-mobilephone"/>
 					  	</div>
 						<?php if ($error_mobile_phone) { ?>
 						<span class="error"><?php echo $error_mobile_phone; ?></span>
@@ -237,7 +237,7 @@ $(function(){ $('input, textarea').placeholder(); });
 	                    </td>
 	                    <td>
 	                    	<div class="form-group">
-		                    	<input type="text" class="regis-text" name="mobile_phone" id="company-mobilephone" />
+		                    	<input type="text" class="regis-text" data-rel="company" name="mobile_phone" id="company-mobilephone" />
 		                    </div>
 	                    </td>
 	                </tr>
@@ -263,7 +263,7 @@ $(function(){ $('input, textarea').placeholder(); });
 	                    <td>
 	                    	<div class="form-group">
 		                    	<input type="password" class="regis-text w100" name="sms" />
-		                    	<a href="javascript:void(0)" class="hq-yzm"><?php echo $text_get_sms ?></a> 
+		                    	<a href="javascript:void(0)" data-rel="company" class="hq-yzm"><?php echo $text_get_sms ?></a> 
 		                    </div>
 	                    </td>
 	                </tr>
@@ -296,196 +296,6 @@ $(function(){ $('input, textarea').placeholder(); });
     	e.preventDefault();
     	$('.captcha img').attr('src',"<?php echo $captcha_link ?>&t="+(Math.round(Math.random()*999)+9999))
     });
-    $(function(){
-    	$.validator.setDefaults({      
-	        submitHandler: function(form) {   
-	            form.submit();   
-	       }
-	    }),
-	    $("#customer-signup").validate({
-	    	rules:{
-	    		password: {
-	                required: true,
-	                byteRangeLength: [6,20]
-	            },
-	            confirm: {
-	                required: true,
-	                equalTo: "#customer-password"
-	            },	            
-	            mobile_phone: {
-	            	required: true,
-	            	isMobile: true,
-	                mobileCN: true
-	            },
-	            captcha:{
-	            	required:true,
-	            	validCaptcha:true
-	            },
-	            sms:{
-	            	validSMS:"#customer-mobilephone"
-	            },
-	            agree:{
-	            	required:true
-	            }
-	    	},
-	    	messages:{
-	    		password:{
-	    			required:"密码必填",
-	    			byteRangeLength:"密码长度须在6到20个字符",
-	    		},
-	    		mobile_phone:{
-	    			required:"手机号必填",
-	    			isMobile:"手机号非法，请填写有效的手机号码",
-	    			mobileCN:"手机号码已注册",
-	    		},
-	    		sms:{
-	    			validSMS:"短信验证码无效"
-	    		},
-	    		agree:{
-	    			required:"请先阅读注册协议"
-	    		}
-	    	},
-	    	errorElement: "span",
-	    	errorPlacement: function (error, element) {	 
-	    		element.parent('.form-group').removeClass('valid').after(error);         
-	        },
-	        focusInvalid: true,
-	        success:function(e){
-	        	e.prev('.form-group').addClass("valid").next('.error').remove();
-	        }
-	    });
-	    $('#company-signup').validate({
-	    	rules:{
-	    		email:{
-					required: true,
-					email:true
-	    		},
-	    		company:{
-	    			required: true,
-	    			byteRangeLength:[4,32]
-	    		},
-	    		corporation:{
-	    			required: true,
-	    			byteRangeLength:[2,6]
-	    		},
-	    		address:{
-	    			required: true,
-	    			byteRangeLength:[4,32]
-	    		},
-	    		password: {
-	                required: true,
-	                byteRangeLength:[6,20]
-	            },
-	            confirm: {
-	                required: true,
-	                equalTo: "#company-password"
-	            },	            
-	            mobile_phone: {
-	            	required: true,
-	            	isMobile: true,
-	                mobileCN: true
-	            },
-	            captcha:{
-	            	required:true,
-	            	validCaptcha:true
-	            },
-	            agree: "required"
-	    	},
-	    	messages:{
-	    		password:{
-	    			required:"密码必填",
-	    			byteRangeLength:"密码长度须在6到20个字符",
-	    		},
-	    		mobile_phone:{
-	    			required:"手机号必填",
-	    			isMobile:"手机号非法，请填写有效的手机号码",
-	    			mobileCN:"手机号码已注册"
-	    		},
-	    		agree:{
-	                required:"请先阅读注册协议"
-	            },
-	    	},
-	    	errorElement: "span",
-	    	errorPlacement: function (error, element) {
-	            element.parent('.form-group').removeClass('valid').after(error); 
-	        },
-	        focusInvalid: true,
-	        success:function(e){
-	        	e.prev('.form-group').addClass("valid").next('.error').remove();
-	        }
-	    });
-		$.validator.addMethod("byteRangeLength", function(value, element, params) {
-			var valueStripped = stripHtml(value);
-			return this.optional(element) || valueStripped.length >= params[0] && valueStripped.length <= params[1];
-		}, "字符长度须在 {0} 到 {1} 之间");
-
-		$.validator.addMethod("isMobile", function(phone_number, element) {
-			phone_number = phone_number.replace(/\(|\)|\s+|-/g, "");
-			var isMobile = this.optional(element) || phone_number.length > 9 &&
-				phone_number.match(/^[(86)|0]?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/);
-			return isMobile;
-		}, "手机号码非法");
-		$.validator.addMethod("mobileCN", function(phone_number, element) {
-			phone_number = phone_number.replace(/\(|\)|\s+|-/g, "");
-			var isMobile = this.optional(element) || phone_number.length > 9 &&
-				phone_number.match(/^[(86)|0]?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/);
-			if(isMobile){
-				var used = false;
-				$.ajax({
-					url:'index.php?route=account/register/validatePhone',
-					data:{mobile_phone:phone_number},
-					type:'post',
-					async:false,
-					dataType:'json',
-					success:function(json){
-						used = json.used==0 ? false : true;
-					}
-				});
-				return used ? false : true;
-			}
-			return isMobile;
-		}, "手机号码已注册");
-		$.validator.addMethod("validCaptcha", function(captcha, element) {
-			captcha = captcha.replace(/\(|\)|\s+|-/g, "");
-			var validCaptcha = this.optional(element) || captcha.length == 4 ;
-			if(validCaptcha){
-				var valide = false;
-				$.ajax({
-					url:'index.php?route=account/register/validateCaptcha',
-					data:{captcha:captcha},
-					type:'post',
-					dataType:'json',
-					async:false,
-					success:function(json){
-						valide = json.status==0 ? false : true;
-					}
-				});
-				return valide ? true : false;
-			}
-			return validCaptcha;
-		}, "验证码错误");
-
-		$.validator.addMethod("validSMS", function(sms, element,param) {
-			sms = sms.replace(/\(|\)|\s+|-/g, "");
-			var target = $( param );
-			var validSMS = this.optional(element) || sms.length == 6 ;
-			if(validSMS){
-				var valide = false;
-				$.ajax({
-					url:'index.php?route=account/register/validateSMS',
-					data:{sms:sms,mobile_phone:target.val()},
-					type:'post',
-					dataType:'json',
-					async:false,
-					success:function(json){
-						valide = json.status==0 ? false : true;
-					}
-				});
-				return valide ? true : false;
-			}
-			return validSMS;
-		}, "短信验证码错误");
-    });
 
 	$(function(){
 		$('input[name="agree"]').change(function(){			
@@ -493,22 +303,32 @@ $(function(){ $('input, textarea').placeholder(); });
 		});
 		$('input[name="agree"]:checked').trigger('change');
 	});
-
+	var resetSMS,regedMobile,interval = 120;
+	$('input[name="mobile_phone"]').bind("propertychange input",function(){
+		if($(this).val() != regedMobile ){
+			clearTimeout(resetSMS);
+			$('a.hq-yzm[data-rel="'+$(this).attr('data-rel')+'"]')
+				.removeAttr('disabled')
+				.text('<?php echo $text_get_sms ?>');
+		}
+	});
 	$('.hq-yzm').bind('click',function(){
-		var send = true;
-		var $that = $(this);
+		
 		$('#'+$(this).attr('data-rel')+'-form').submit();
-		var items = $('#'+$(this).attr('data-rel')+'-form .form-group').length,
-		valids = $('#'+$(this).attr('data-rel')+'-form .form-group.valid').length;
-		if(items - valids == 1){
+		var obj_mobile = $('#'+$(this).attr('data-rel')+'-form input[name="mobile_phone"]');
+		var obj_captcha = $('#'+$(this).attr('data-rel')+'-form input[name="captcha"]');
+		if(obj_mobile.parent('.form-group').hasClass('valid') && obj_captcha.parent('.form-group').hasClass('valid')){
+			var $that = $(this);
 			$.ajax({
-				url:'index.php?route=account/register/getSMS',
-				data:{mobile_phone:$('#'+$(this).attr('data-rel')+'-form input[name="mobile_phone"]').val(),captcha:$('#'+$(this).attr('data-rel')+'-form input[name="captcha"]').val()},
+				url:'index.php?route=common/tool/getSMS',
+				data:{mobile_phone:obj_mobile.val(),captcha:obj_captcha.val()},
 				type:'post',
 				dataType:'json',
 				success:function(json){
 					if(json.success){
-						$that.html(json.success).attr('disabled');
+						$that.attr('disabled','disabled');
+						regedMobile = obj_mobile.val();
+						send_agin($('a.hq-yzm[data-rel="'+$that.attr('data-rel')+'"]'));
 					}else{
 						alert(json.error.sms)
 					}
@@ -518,5 +338,17 @@ $(function(){ $('input, textarea').placeholder(); });
 			alert('请确认输入的数据合法')
 		}
 	});
+	
+	function send_agin(obj){
+		interval--;
+		
+		if(interval>0){
+			resetSMS = setTimeout(function(){send_agin(obj);},1000);			
+			obj.text(interval+'<?php echo '秒后'.$text_get_sms ?>');
+		}else{
+			obj.removeAttr('disabled').text('<?php echo $text_get_sms ?>');			
+			interval=120;
+		}
+	}
 </script>
 <?php echo $footer; ?>

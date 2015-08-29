@@ -2,7 +2,7 @@ $(function(){
     /* Search */
     $('.button-search').bind('click', function() {
 
-        url = $('base').attr('href') + 'index.php?route=common/search';
+        url = $('base').attr('href') + 'index.php?route=common/tool/search';
                  
         var search = $('#top-filter input[name=\'search\']').val();
         var mode = $('#top-filter input[name=\'search_model\']').val();
@@ -15,7 +15,7 @@ $(function(){
     
     $('#top-filter input[name=\'search\']').bind('keydown', function(e) {
         if (e.keyCode == 13) {
-            url = $('base').attr('href') + 'index.php?route=common/search';
+            url = $('base').attr('href') + 'index.php?route=common/tool/search';
              
             var search = $('input[name=\'search\']').val();
             

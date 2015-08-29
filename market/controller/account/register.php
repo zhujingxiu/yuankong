@@ -40,9 +40,15 @@ class ControllerAccountRegister extends Controller {
 		$this->document->setTitle($this->language->get('heading_title'));
 				
 		$this->load->model('account/customer'); 
+		$this->load->model('service/company'); 
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-			$this->model_account_customer->addCustomer($this->request->post);
+			if(isset($this->request->post['corporation'])){
+				$this->model_service_company->addCompany($this->request->post);
+			}else{
+				$this->model_account_customer->addCustomer($this->request->post);
+			}
+			
 
 			$this->customer->phone_login($this->request->post['mobile_phone'], $this->request->post['password']);
 			
@@ -210,7 +216,7 @@ class ControllerAccountRegister extends Controller {
 			$information_info = $this->model_catalog_information->getInformation($this->config->get('config_account_id'));
 			
 			if ($information_info) {
-				$this->data['text_agree'] = sprintf($this->language->get('text_agree'), $this->url->link('information/information/info', 'information_id=' . $this->config->get('config_account_id'), 'SSL'), $information_info['title'], $information_info['title']);
+				$this->data['text_agree'] = sprintf($this->language->get('text_agree'), $this->url->link('information/information', 'information_id=' . $this->config->get('config_account_id'), 'SSL'), $information_info['title'], $information_info['title']);
 			} 
 		} 
 		
@@ -219,10 +225,9 @@ class ControllerAccountRegister extends Controller {
 		} else {
 			$this->data['agree'] = false;
 		}
-
-		$this->load->model('service/company');
+		
 		$this->data['company_groups'] = $this->model_service_company->getCompanyGroups();
-		$this->data['captcha_link'] = $this->url->link('account/register/captcha','','ssl');
+		$this->data['captcha_link'] = $this->url->link('common/tool/captcha','','ssl');
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/register.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/account/register.tpl';
 		} else {
@@ -239,72 +244,6 @@ class ControllerAccountRegister extends Controller {
 		);
 				
 		$this->response->setOutput($this->render());	
-  	}
-
-  	public function validatePhone(){
-  		$used = 0;
-  		$this->load->model('account/customer');
-  		$customer = $this->model_account_customer->getCustomerByMobilePhone($this->request->post['mobile_phone']);
-  		if($customer){
-  			$used = 1;
-  		}
-  		$this->response->setOutput(json_encode(array('used'=>$used)));
-  	}
-
-  	public function validateCaptcha(){
-  		$status = 0;
-  		$captcha = isset($this->session->data['captcha']) ? $this->session->data['captcha'] : false;
-  		$_captcha = isset($this->request->post['captcha']) ? $this->request->post['captcha'] : false;
-  		if($captcha && $_captcha && $captcha==$_captcha ){
-  			$status = 1;
-  		}
-  		$this->response->setOutput(json_encode(array('status'=>$status)));
-  	}
-
-  	public function validateSMS(){
-  		$status = 0;
-  		$sms = isset($this->request->post['sms']) ? $this->request->post['sms'] : false;
-  		$mobile_phone = isset($this->request->post['mobile_phone']) ? $this->request->post['mobile_phone'] : false;
-  		$this->load->model('account/customer');
-  		$sms_log = $this->model_account_customer->getSMS($this->request->post['mobile_phone']);
-  		if(!empty($sms_log['sms']) && ($sms_log['sms'] == $sms) && (time() < ($sms_log['time']+30*60))) {
-  			$status = 1;
-  		}
-  		$this->response->setOutput(json_encode(array('status'=>$status)));
-  	}
-
-  	public function getSMS(){
-        $this->language->load('account/register');
-  		$json = array();	
-
-  		if(empty($this->session->data['captcha']) || ($this->session->data['captcha'] != $this->request->post['captcha'])) {
-			$json['error']['captcha'] = $this->language->get('error_captcha');
-		}
-		if ((utf8_strlen($this->request->post['mobile_phone']) < 3) || !isMobile($this->request->post['mobile_phone'])) {
-      		$json['error']['mobile_phone'] = $this->language->get('error_mobile_phone');
-    	}
-    	$this->load->model('account/customer');
-    	if ($this->model_account_customer->getCustomerByMobilePhone($this->request->post['mobile_phone'])) {
-      		$json['error']['mobile_phone'] = $this->language->get('error_exists');
-    	}
-    	$sms_log = $this->model_account_customer->getSMS($this->request->post['mobile_phone']);
-    	if($sms_log){
-    		if(!empty($sms_log['sms']) && time() < ($sms_log['time']+30*60) ){
-    			$json['error']['sms'] = $this->language->get('error_sms_time');
-    		}
-    	}
-
-    	if(!$json){
-	  		$sms = new Sms();
-	        $sms_number = mt_rand(100000,999999);
-	  		$pattern = "尊敬的用户，您的验证码是".$sms_number."请填入以完成注册。该验证码30分钟内有效，限本次使用。【消防e站】";
-	  		$res = $sms->sendMsg($this->request->post['mobile_phone'],$pattern);
-	  		$this->model_account_customer->delSMS($this->request->post['mobile_phone']);
-	  		$this->model_account_customer->addSMS($this->request->post['mobile_phone'],$sms_number);
-	  		$json['success'] = $this->language->get('text_send_success');
-	  		
-    	}
-  		$this->response->setOutput(json_encode($json));
   	}
 
   	protected function validate() {
@@ -348,13 +287,5 @@ class ControllerAccountRegister extends Controller {
     	}
   	}
 
-	public function captcha() {
-		$this->load->library('captcha');
-		
-		$captcha = new Captcha(4,35,60);
-		
-		$this->session->data['captcha'] = $captcha->getCode();
-		
-		$captcha->showImage();
-	}	
+	
 }
