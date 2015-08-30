@@ -59,6 +59,7 @@ class ControllerAccountAccount extends Controller {
 		$this->data['transaction'] = $this->url->link('account/transaction', '', 'SSL');
         $this->data['newsletter'] = $this->url->link('account/newsletter', '', 'SSL');
         $this->data['finish'] = $this->url->link('account/order', 'status=finished', 'SSL');
+
 		$this->data['fullname'] = ($this->customer->isCompany() ? $this->customer->getCompany() : $this->customer->getFullName());
         $this->load->model('tool/image');
         $this->load->model('account/order');
@@ -157,12 +158,12 @@ class ControllerAccountAccount extends Controller {
                         'product_id' => $product_info['product_id'],
                         'thumb'      => $image,
                         'name'       => $product_info['name'],
-                        'subtitle'       => $product_info['subtitle'],
+                        'subtitle'   => truncate_string($product_info['subtitle'],26),
                         'price'      => $price,
                         'special'    => $special,
                         'rating'     => $rating,
                         'reviews'    => sprintf($this->language->get('text_reviews'), (int)$product_info['reviews']),
-                        'href'       => $this->url->link('product/product', 'product_id=' . $product_info['product_id'].$path_param),
+                        'link'       => $this->url->link('product/product', 'product_id=' . $product_info['product_id'].$path_param),
                     );
                 }
             }

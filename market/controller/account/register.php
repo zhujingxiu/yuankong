@@ -11,8 +11,9 @@ class ControllerAccountRegister extends Controller {
 		} else {
 			$server = $this->config->get('config_url');
 		}
-
+		
 		$this->data['base'] = $server;
+
 		$this->data['description'] = $this->document->getDescription();
 		$this->data['keywords'] = $this->document->getKeywords();
 		$this->data['links'] = $this->document->getLinks();	 
@@ -38,7 +39,7 @@ class ControllerAccountRegister extends Controller {
     	$this->language->load('account/register');
 		$this->data['title'] = $this->language->get('title_register');
 		$this->document->setTitle($this->language->get('heading_title'));
-				
+		
 		$this->load->model('account/customer'); 
 		$this->load->model('service/company'); 
 
@@ -47,8 +48,7 @@ class ControllerAccountRegister extends Controller {
 				$this->model_service_company->addCompany($this->request->post);
 			}else{
 				$this->model_account_customer->addCustomer($this->request->post);
-			}
-			
+			}			
 
 			$this->customer->phone_login($this->request->post['mobile_phone'], $this->request->post['password']);
 			
@@ -288,4 +288,49 @@ class ControllerAccountRegister extends Controller {
   	}
 
 	
+    public function area_js(){
+        $file = TPL_JS.'area.js';
+        if(!file_exists($file)){
+            $this->load->model('localisation/area');
+            $areas = $this->model_localisation_area->getAreas();
+            $area_rows_group_by_pid = $this->array_group($areas, 'pid');
+
+            $address = array();
+            foreach ($area_rows_group_by_pid as $pid => $item) {
+                if ($pid == 0) {                    
+                    $item = array_filter($item, function($item){
+                        return $item['pid'] == 0;
+                    });
+                }
+                $address['name'.$pid] = array_keys($this->array_group($item, 'name'));
+                $address['code'.$pid] = array_keys($this->array_group($item, 'area_id'));
+            }
+            file_put_contents($file, 'var area = ' . json_encode_ex($address) . ';');            
+        }
+        return $file;
+    } 
+
+    private function array_group($array, $key, $limit = false){
+        if (empty ($array) || !is_array($array)){
+            return $array;
+        }
+
+        $_result = array ();
+        foreach ($array as $item) {
+            if ((isset($item[$key]))) {
+                $_result[(string)$item[$key]][] = $item;
+            } else {
+                $_result[count($_result)][] = $item;
+            }
+        }
+        if (!$limit) {
+            return $_result;
+        }
+
+        $result = array ();
+        foreach ($_result as $k => $item) {
+            $result[$k] = $item[0];
+        }
+        return $result;
+    } 
 }

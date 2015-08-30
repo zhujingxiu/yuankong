@@ -26,11 +26,12 @@
     
 
 </div>
-    <!-- 我的应用 -->
+<?php if($this->customer->isCompany()){?>
 <div class="userbox1 mt10">
     <h3><b>企业发布</b></h3>
     <ul class="useryy">
-      <li class="usergl"><a href="#">信息发布</a></li>
+      <li class="usergl"><a href="<?php echo $company ?>">企业中心</a></li>
       <li class="userwt"><a href="#">在线提问</a></li>
     </ul>
 </div>
+<?php }?>

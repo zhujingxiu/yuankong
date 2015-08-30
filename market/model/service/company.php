@@ -23,7 +23,7 @@ class ModelServiceCompany extends Model {
             'areas'         => implode("|",$data['area']),
             'postcode'      => isset($data['postcode']) ? $data['postcode'] : '',
             'address'       => isset($data['address']) ? $data['address'] : '',
-            'status'        =>  0,
+            'status'        => 1,
             'date_added'    => date('Y-m-d H:i:s')      
         );
 
@@ -45,11 +45,30 @@ class ModelServiceCompany extends Model {
             'password'      => $password,
             'company_id'    => $company_id,
             'customer_group_id'=> $this->config->get('config_customer_group_id'),
-            'status'        => 0,
+            'status'        => 1,
             'approved'      => 0,
             'date_added'    => date('Y-m-d H:i:s')
         );
-        $this->db->insert('customer',$fileds);
+        $customer_id = $this->db->insert('customer',$fileds);
+        reset($data['area']);
+        $address = array(
+            'customer_id'   => $customer_id,
+            'fullname'      => $data['corporation'],
+            'company'       => $data['title'],
+            'telephone'     => $data['mobile_phone'],
+            'address'       => $data['address'],
+            'postcode'      => isset($data['postcode']) ? $data['postcode'] : '',
+            'province_id'   => current($data['area']),
+            'area_zone'     => implode(" ", $area_zone),
+            'areas'         => isset($data['area']) && is_array($data['area']) ? implode("|", $data['area']) : '',
+        );
+        $this->db->insert("address", $address);
+        
+        $address_id = $this->db->getLastId();
+        
+        if (!empty($data['default'])) {
+            $this->db->query("UPDATE " . DB_PREFIX . "customer SET address_id = '" . (int)$address_id . "' WHERE customer_id = '" . (int)$this->customer->getId() . "'");
+        }
     }
     public function addCompanyRequest($data) {
         $fields =  array(
@@ -82,8 +101,11 @@ class ModelServiceCompany extends Model {
                     $cid[]= (int)$row['company_id'];
                 }
             }
-            if($cid)
-            $implode[] = " AND c.company_id IN (" . implode(",", $cid) . ")";
+            if($cid){
+                $implode[] = " AND c.company_id IN (" . implode(",", $cid) . ")";
+            }else{
+                return array();
+            }
         }
         if($implode){
             $sql .= implode(" ", $implode);
@@ -146,8 +168,11 @@ class ModelServiceCompany extends Model {
                 }
 
             }
-            if($cid)
-            $implode[] = " AND c.company_id IN (" . implode(",", $cid) . ")";
+            if($cid){
+                $implode[] = " AND c.company_id IN (" . implode(",", $cid) . ")";
+            }else{
+                return 0;
+            }
         }
         if($implode){
             $sql .= implode(" AND ", $implode);

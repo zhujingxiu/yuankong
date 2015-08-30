@@ -35,7 +35,7 @@ class Customer {
 				$this->address_id = $customer_query->row['address_id'];
 				$this->company_id = $customer_query->row['company_id'];
 				if($this->company_id){
-					$c = $this->db->query("SELECT * FROM " . DB_PREFIX . "company WHERE company_id = '" . (int)$this->company_id . "' AND status = '1' AND approved = '1'");
+					$c = $this->db->query("SELECT * FROM " . DB_PREFIX . "company WHERE company_id = '" . (int)$this->company_id . "' AND status = '1' ");
 					$this->company = empty($c->row['title']) ? '' : trim($c->row['title']);
 				}
 							

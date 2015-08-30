@@ -8,7 +8,7 @@ $_['text_account']         		= '我的账户';
 $_['text_register']        		= '用户注册';
 $_['text_account_already'] 		= '欢迎来到我们网站，如果您是新用户，请填写下面的表单进行注册。如果您已经是本站的会员，请您直接<a href="%s">登录</a>。';
 $_['text_regs_customer']   		= '个人用户';
-$_['text_regs_company']  		= '企业用户';
+$_['text_regs_company']  		= '企业入驻';
 $_['text_qr_code']      		= '手机微信扫描二维码，关注e站';
 $_['text_captcha_change']  		= '换一张';
 $_['text_company_name']   	= '请填写营业执照上的单位名称';

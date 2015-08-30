@@ -42,6 +42,7 @@ $(function(){ $('input, textarea').placeholder(); });
 <script type="text/javascript" src="<?php echo TPL_JS ?>validation/dist/localization/messages_zh.js"></script>
 <script type="text/javascript" src="market/view/theme/yuankong/javascript/passport.js"></script>
 <link rel="stylesheet" type="text/css" href="market/view/theme/yuankong/stylesheet/yk_validate.css" />
+<script type="text/javascript" src="<?php echo TPL_JS ?>area.js"></script>
 </head>
 <body class="b_fa">
 <?php echo $top ?>
@@ -197,7 +198,7 @@ $(function(){ $('input, textarea').placeholder(); });
 	                    </td>
 	                </tr>
 	                <tr>
-	                    <td class="tr">
+	                    <td class="tr" valign="top">
 	                    	<em class="c_r">*</em> <?php echo $entry_company_group ?>
 	                    </td>
 	                    <td>
@@ -206,17 +207,19 @@ $(function(){ $('input, textarea').placeholder(); });
 									<?php foreach ($company_groups as $item): ?>
 									<div class="w100"><input type="checkbox" name="group_id[]" value="<?php echo $item['group_id'] ?>" /> <?php echo $item['name'] ?></div>
 									<?php endforeach ?>
-			                    	
 				                </div>
 			                </div>
 		                </td>
 	                </tr>
 	                <tr>
-	                    <td class="tr">
-	                    	<em class="c_r">*</em> <?php echo $entry_company_address ?>
+	                    <td class="tr" valign="top">
+	                    	<em class="c_r">*</em> 
+	                    	
+	                    	<?php echo $entry_company_address ?>
 	                    </td>
 	                    <td>
 	                    	<div class="form-group">
+	                    		<div id="area"></div>
 	                    		<input type="text" class="regis-text" name="address" />
 	                    	</div>
 	                    </td>
@@ -302,6 +305,43 @@ $(function(){ $('input, textarea').placeholder(); });
 			$(this).parent('.form-group').toggleClass('valid');
 		});
 		$('input[name="agree"]:checked').trigger('change');
+
+		add_select(0);
+
+        $('body').on('change', '#area select', function() {
+            var $me = $(this);
+            var $next = $me.next();
+
+            if ($me.val() == $next.data('pid')) {
+                return;
+            }
+            $me.nextAll().remove();
+            add_select($me.val());
+        });
+
+        function add_select(pid) {
+            var area_names = area['name'+pid];
+            if (!area_names) {
+                return false;
+            }
+            var area_codes = area['code'+pid];
+            var $select = $('<select >');
+            $select.attr('name', 'area[]');
+            $select.attr('class', 'adress-sec');
+            $select.data('pid', pid);
+            if (area_codes[0] != -1) {
+                area_names.unshift('请选择');
+                area_codes.unshift(0);
+            }
+            for (var idx in area_codes) {
+                var $option = $('<option>');
+                $option.attr('value', area_codes[idx]);
+                $option.text(area_names[idx]);
+                $select.append($option);
+            }
+            $('#area').append($select);
+        };
+        add_select(<?php echo $this->config->get('config_province_id') ?>);
 	});
 	var resetSMS,regedMobile,interval = 120;
 	$('input[name="mobile_phone"]').bind("propertychange input",function(){
@@ -313,8 +353,12 @@ $(function(){ $('input, textarea').placeholder(); });
 		}
 	});
 	$('.hq-yzm').bind('click',function(){
-		
-		$('#'+$(this).attr('data-rel')+'-form').submit();
+		if($(this).attr('disabled')=='disabled'){
+			alert('短信验证码申请太过于频繁，请稍后再试！');
+			return false;
+		}
+		$('#'+$(this).attr('data-rel')+'-form input[name="mobile_phone"]').trigger('blur');
+		$('#'+$(this).attr('data-rel')+'-form input[name="captcha"]').trigger('blur');
 		var obj_mobile = $('#'+$(this).attr('data-rel')+'-form input[name="mobile_phone"]');
 		var obj_captcha = $('#'+$(this).attr('data-rel')+'-form input[name="captcha"]');
 		if(obj_mobile.parent('.form-group').hasClass('valid') && obj_captcha.parent('.form-group').hasClass('valid')){
@@ -335,13 +379,12 @@ $(function(){ $('input, textarea').placeholder(); });
 				}
 			})
 		}else{
-			alert('请确认输入的数据合法')
+			alert('请确认输入的数据合法！')
 		}
 	});
 	
 	function send_agin(obj){
-		interval--;
-		
+		interval--;		
 		if(interval>0){
 			resetSMS = setTimeout(function(){send_agin(obj);},1000);			
 			obj.text(interval+'<?php echo '秒后'.$text_get_sms ?>');

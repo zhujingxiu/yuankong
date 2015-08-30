@@ -31,6 +31,26 @@ $.validator.addMethod("hasMobile", function(phone_number, element) {
 	return isMobile;
 }, "手机号码已注册");
 
+$.validator.addMethod("hasEmail", function(email, element) {
+    var isEmail = this.optional( element ) || /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test( email );
+    if(isEmail){
+        var validate = false;
+        $.ajax({
+            url:'index.php?route=common/tool/validateHasEmail',
+            data:{email:email},
+            type:'post',
+            async:false,
+            dataType:'json',
+            success:function(json){
+                validate = ( json.exist == 0 );
+            }
+        });
+        return validate;
+    }
+    return isMobile;
+}, "邮箱已注册");
+
+
 $.validator.addMethod("validateCaptcha", function(captcha, element) {
 	captcha = captcha.replace(/\(|\)|\s+|-/g, "");
 	var validateCaptcha = this.optional(element) || captcha.length == 4 ;
@@ -134,7 +154,8 @@ $(function(){
     	rules:{
     		email:{
 				required: true,
-				email:true
+				email:true,
+                hasEmail:true
     		},
     		company:{
     			required: true,
@@ -144,6 +165,9 @@ $(function(){
     			required: true,
     			byteRangeLength:[2,6]
     		},
+            'group_id[]':{
+                required: true,
+            },
     		address:{
     			required: true,
     			byteRangeLength:[4,32]
