@@ -12,135 +12,99 @@ class ControllerAccountCompany extends Controller {
 		$this->language->load('account/company');
 		
 		$this->document->setTitle($this->language->get('heading_title'));
-        $this->document->addScript('market/view/theme/yuankong/javascript/click.js');
-        $this->document->addScript(TPL_JS.'ajaxupload.js');
-		$this->document->addScript(TPL_JS.'form.js');
-		$this->document->addScript($this->area_js());
-        $this->load->model('account/customer');
-		$this->load->model('account/address');
-
-      	$this->data['breadcrumbs'] = array();
-
-      	$this->data['breadcrumbs'][] = array(
-        	'text'      => $this->language->get('text_home'),
-			'href'      => $this->url->link('common/home'),     	
-        	'separator' => false
-      	); 
-
-      	$this->data['breadcrumbs'][] = array(
-        	'text'      => $this->language->get('text_account'),
-			'href'      => $this->url->link('account/account', '', 'SSL'),        	
-        	'separator' => $this->language->get('text_separator')
-      	);
-
-      	$this->data['breadcrumbs'][] = array(
-        	'text'      => $this->language->get('text_edit'),
-			'href'      => $this->url->link('account/company', '', 'SSL'),       	
-        	'separator' => $this->language->get('text_separator')
-      	);
+        $this->document->addScript($this->area_js());
+        $this->load->model('service/company');
+        $this->load->model('tool/image');
 		
 		$this->data['heading_title'] = $this->language->get('heading_title');
 
 		$this->data['text_your_details'] = $this->language->get('text_your_details');
 
-		$this->data['entry_fullname'] = $this->language->get('entry_fullname');
-		$this->data['entry_lastname'] = $this->language->get('entry_lastname');
-		$this->data['entry_email'] = $this->language->get('entry_email');
-		$this->data['entry_telephone'] = $this->language->get('entry_telephone');
-		$this->data['entry_fax'] = $this->language->get('entry_fax');
-
-		$this->data['button_continue'] = $this->language->get('button_continue');
-		$this->data['button_back'] = $this->language->get('button_back');
-
 		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
 		} else {
 			$this->data['error_warning'] = '';
-		}
-
-		if (isset($this->error['fullname'])) {
-			$this->data['error_fullname'] = $this->error['fullname'];
-		} else {
-			$this->data['error_fullname'] = '';
-		}
-		
-		if (isset($this->error['email'])) {
-			$this->data['error_email'] = $this->error['email'];
-		} else {
-			$this->data['error_email'] = '';
 		}	
 
-        $this->data['password_action'] = $this->url->link('account/company/password', '', 'SSL');
-        $this->data['address_action'] = $this->url->link('account/company/address', '', 'SSL');
-		$this->data['avatar_action'] = $this->url->link('account/company/avatar', '', 'SSL');
-        $this->data['info_action'] = $this->url->link('account/company/info', '', 'SSL');
-        $this->data['company_action'] = $this->url->link('account/company/company', '', 'SSL');
-
+        $this->data['action'] = $this->url->link('account/company/info', '', 'SSL');
+        $company_id = $this->customer->isCompany();
 		if ($this->request->server['REQUEST_METHOD'] != 'POST') {
-            $customer_info = $this->model_account_customer->getCustomer($this->customer->getId());
-			
-		}
-		if (isset($customer_info['mobile_phone'])) {
-			$this->data['mobile_phone'] = $customer_info['mobile_phone'];
-		} else {
-			$this->data['mobile_phone'] = '';
+            $company_info = $this->model_service_company->getCompany($company_id);
 		}
 
-		if (isset($this->request->post['fullname'])) {
-			$this->data['fullname'] = $this->request->post['fullname'];
-		} else if (isset($customer_info['fullname'])) {
-			$this->data['fullname'] = $customer_info['fullname'];
-		} else {
-			$this->data['fullname'] = '';
-		}
-
-		if (isset($this->request->post['email'])) {
-			$this->data['email'] = $this->request->post['email'];
-		} else if (isset($customer_info['email'])) {
-			$this->data['email'] = $customer_info['email'];
-		} else {
-			$this->data['email'] = '';
-		}
-
-		if (isset($this->request->post['telephone'])) {
-			$this->data['telephone'] = $this->request->post['telephone'];
-		} else if (isset($customer_info['telephone'])) {
-			$this->data['telephone'] = $customer_info['telephone'];
-		} else {
-			$this->data['telephone'] = '';
-		}
-
-		if (isset($this->request->post['fax'])) {
-			$this->data['fax'] = $this->request->post['fax'];
-		} else if (isset($customer_info['fax'])) {
-			$this->data['fax'] = $customer_info['fax'];
-		} else {
-			$this->data['fax'] = '';
-		}
-
-        if (isset($this->request->post['avatar'])) {
-            $this->data['avatar'] = $this->request->post['avatar'];
-        } else if (isset($customer_info['avatar']) && file_exists($customer_info['avatar'])) {
-            $this->data['avatar'] = $customer_info['avatar'];
+        if (isset($company_info['mobile_phone'])) {
+            $this->data['mobile_phone'] = $company_info['mobile_phone'];
         } else {
-            $this->data['avatar'] = TPL_IMG.'avatar/default.jpg';
+            $this->data['mobile_phone'] = '';
         }
-        $this->data['addresses'] = $this->model_account_address->getAddresses();
 
-        $this->data['back'] = $this->url->link('account/account', '', 'SSL');
-		$this->data['isCompany'] = $this->customer->isCompany();
-
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/company.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/account/company.tpl';
+		if (isset($this->request->post['logo'])) {
+            $this->data['logo'] = $this->request->post['logo'];
+        } else if (isset($company_info['logo'])) {
+			$this->data['logo'] = $this->model_tool_image->resize($company_info['logo'],95,95);
 		} else {
-			$this->template = 'default/template/account/company.tpl';
+			$this->data['logo'] = $this->model_tool_image->resize('nopic.jpg',95,95);
 		}
-		
+
+        if (isset($this->request->post['cover'])) {
+            $this->data['cover'] = $this->request->post['cover'];
+        } else if (isset($company_info['cover'])) {
+            $this->data['cover'] = $this->model_tool_image->resize($company_info['cover'],280,175);
+        } else {
+            $this->data['cover'] = $this->model_tool_image->resize('nopic.jpg',280,175);
+        }
+
+		if (isset($this->request->post['corporation'])) {
+			$this->data['corporation'] = $this->request->post['corporation'];
+		} else if (isset($company_info['corporation'])) {
+			$this->data['corporation'] = $company_info['corporation'];
+		} else {
+			$this->data['corporation'] = '';
+		}
+
+        if (isset($this->request->post['title'])) {
+            $this->data['title'] = $this->request->post['title'];
+        } else if (isset($company_info['title'])) {
+            $this->data['title'] = $company_info['title'];
+        } else {
+            $this->data['title'] = '';
+        }
+
+        if (isset($this->request->post['address'])) {
+            $this->data['address'] = $this->request->post['address'];
+        } else if (isset($company_info['address'])) {
+            $this->data['address'] = $company_info['address'];
+        } else {
+            $this->data['address'] = '';
+        }
+
+        if (isset($this->request->post['area_zone'])) {
+            $this->data['area_zone'] = $this->request->post['area_zone'];
+        } else if (isset($company_info['area_zone'])) {
+            $this->data['area_zone'] = $company_info['area_zone'];
+        } else {
+            $this->data['area_zone'] = '';
+        }
+
+        if (isset($company_info['recommend'])) {
+            $this->data['recommend'] = $company_info['recommend'];
+        } else {
+            $this->data['recommend'] = '';
+        }
+
+        if (isset($company_info['deposit'])) {
+            $this->data['deposit'] = $company_info['deposit'];
+        } else {
+            $this->data['deposit'] = '';
+        }
+
+        $this->data['groups'] = $this->model_service_company->getCompanyGroupsByCompanyId($company_id);
+        $this->data['all_groups'] = $this->model_service_company->getCompanyGroups();
+
+        $this->template = $this->config->get('config_template') . '/template/account/company.tpl';
 		$this->children = array(
 			'common/column_left',
 			'common/column_right',
-			'common/content_top',
-			'common/content_bottom',
 			'common/footer',
 			'common/header'	
 		);
@@ -148,66 +112,308 @@ class ControllerAccountCompany extends Controller {
 		$this->response->setOutput($this->render());	
 	}
 
-    public function info(){
-        $this->load->language('account/company');
-        $this->load->model('account/customer');
-        $json = array('status'=>0,'msg'=>$this->language->get('text_exception'));
-        if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateInfo()) {
-            $this->model_account_customer->editCustomer($this->request->post);
-            
-            //$this->session->data['success'] = $this->language->get('text_success_customer');
-            $json = array('status'=>1,'msg'=>$this->language->get('text_success_customer'));
-            
+    public function description() {
+        if (!$this->customer->isLogged()) {
+            $this->session->data['redirect'] = $this->url->link('account/company', '', 'SSL');
+
+            $this->redirect($this->url->link('account/login', '', 'SSL'));
         }
-        $this->response->setOutput(json_encode($json));
+
+        $this->language->load('account/company');
+        
+        $this->document->setTitle($this->language->get('heading_title'));
+        $this->load->model('service/company');
+        
+        $this->data['heading_title'] = $this->language->get('heading_title');
+
+        $this->data['text_your_details'] = $this->language->get('text_your_details');
+
+        $this->data['entry_fullname'] = $this->language->get('entry_fullname');
+        $this->data['entry_email'] = $this->language->get('entry_email');
+        $this->data['entry_telephone'] = $this->language->get('entry_telephone');
+        $this->data['entry_fax'] = $this->language->get('entry_fax');
+
+        $this->data['button_continue'] = $this->language->get('button_continue');
+        $this->data['button_back'] = $this->language->get('button_back');
+
+        if (isset($this->error['warning'])) {
+            $this->data['error_warning'] = $this->error['warning'];
+        } else {
+            $this->data['error_warning'] = '';
+        }   
+
+        $this->data['action'] = $this->url->link('account/company/info', '', 'SSL');
+
+        $company_id = $this->customer->isCompany();
+        if ($this->request->server['REQUEST_METHOD'] != 'POST') {
+            $company_info = $this->model_service_company->getCompany($company_id);
+        }
+
+        if (isset($this->request->post['description'])) {
+            $this->data['description'] = $this->request->post['description'];
+        } else if (isset($company_info['description'])) {
+            $this->data['description'] = $company_info['description'];
+        } else {
+            $this->data['description'] = '';
+        }
+        $this->template = $this->config->get('config_template') . '/template/account/company_description.tpl';
+        $this->children = array(
+            'common/column_left',
+            'common/column_right',
+            'common/footer',
+            'common/header' 
+        );
+                        
+        $this->response->setOutput($this->render());    
     }
-    public function avatar(){
-        $this->load->language('account/company');
-        $this->load->model('account/customer');
-        $json = array('status'=>0,'msg'=>$this->language->get('text_exception'));
-        
-        if (($this->request->server['REQUEST_METHOD'] == 'POST') && isset($this->request->post['avatar'])) {
-            $this->model_account_customer->editAvatar(htmlspecialchars_decode($this->request->post['avatar']));
-            
-            //$this->session->data['success'] = $this->language->get('text_success_avatar');
 
-            $json = array('status'=>1,'msg'=>$this->language->get('text_success_avatar'));
+
+    public function custom1() {
+        if (!$this->customer->isLogged()) {
+            $this->session->data['redirect'] = $this->url->link('account/company', '', 'SSL');
+
+            $this->redirect($this->url->link('account/login', '', 'SSL'));
         }
-        $this->response->setOutput(json_encode($json));
-    }    
 
-    public function address(){
+        $this->language->load('account/company');
         
-        $this->load->model('account/address');
-        $this->load->language('account/company');
-        $json = array('status'=>0,'msg'=>$this->language->get('text_exception'));
-        if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateAddress()) {
-            $this->model_account_address->addAddress($this->request->post);
-            
-            //$this->session->data['success'] = $this->language->get('text_success_address');
+        $this->document->setTitle($this->language->get('heading_title'));
+        $this->load->model('service/company');
+        $this->load->model('tool/image');
 
-            $json = array('status'=>1,'msg'=>$this->language->get('text_success_address'));
-        }else{
-            $json = array('status' =>0 , 'error'=>$this->error);
+        $this->data['heading_title'] = $this->language->get('heading_title');
+
+        $this->data['text_your_details'] = $this->language->get('text_your_details');
+
+        if (isset($this->error['warning'])) {
+            $this->data['error_warning'] = $this->error['warning'];
+        } else {
+            $this->data['error_warning'] = '';
+        }   
+
+        $this->data['action'] = $this->url->link('account/company/info', '', 'SSL');
+        $company_id = $this->customer->isCompany();
+        if ($this->request->server['REQUEST_METHOD'] != 'POST') {
+            $company_info = $this->model_service_company->getCompanyModulesByCompanyId($company_id);
         }
-        $this->response->setOutput(json_encode($json));
-    }    
 
-    public function password(){
+        if (isset($this->request->post['status'])) {
+            $this->data['status'] = $this->request->post['status'];
+        } else if (isset($company_info['status'])) {
+            $this->data['status'] = $company_info['status'];
+        } else {
+            $this->data['status'] = 0;
+        }
+
+        if (isset($this->request->post['title'])) {
+            $this->data['title'] = $this->request->post['title'];
+        } else if (isset($company_info['title'])) {
+            $this->data['title'] = $company_info['title'];
+        } else {
+            $this->data['title'] = '';
+        }
+
+        if (isset($this->request->post['image'])) {
+            $this->data['image'] = $this->request->post['image'];
+        } else if (isset($company_info['image'])) {
+            $this->data['image'] = $this->model_tool_image->resize($company_info['image'],205,128);
+        } else {
+            $this->data['image'] = $this->model_tool_image->resize('nopic.jpg',205,128);
+        }
+        $this->template = $this->config->get('config_template') . '/template/account/company_custom.tpl';
         
-        $this->load->model('account/customer');
-        $this->load->language('account/company');
-        $json = array('status'=>0,'msg'=>$this->language->get('text_exception'));
-        if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validatePassword()) {
-            $this->model_account_customer->editPassword($this->request->post);
-            
-            //$this->session->data['success'] = $this->language->get('text_success_password');
+        $this->children = array(
+            'common/column_left',
+            'common/column_right',
+            'common/footer',
+            'common/header' 
+        );
+                        
+        $this->response->setOutput($this->render());    
+    }
+    public function custom2() {
+        if (!$this->customer->isLogged()) {
+            $this->session->data['redirect'] = $this->url->link('account/company', '', 'SSL');
 
-            $json = array('status'=>1,'msg'=>$this->language->get('text_success_password'));
-        }else{
-            $json = array('status'=>0,'error'=>$this->error);
+            $this->redirect($this->url->link('account/login', '', 'SSL'));
         }
-        $this->response->setOutput(json_encode($json));
+
+        $this->language->load('account/company');
+        
+        $this->document->setTitle($this->language->get('heading_title'));
+        $this->load->model('service/company');
+        
+        $this->data['heading_title'] = $this->language->get('heading_title');
+
+        $this->data['text_your_details'] = $this->language->get('text_your_details');
+
+        $this->data['entry_fullname'] = $this->language->get('entry_fullname');
+        $this->data['entry_email'] = $this->language->get('entry_email');
+        $this->data['entry_telephone'] = $this->language->get('entry_telephone');
+        $this->data['entry_fax'] = $this->language->get('entry_fax');
+
+        $this->data['button_continue'] = $this->language->get('button_continue');
+        $this->data['button_back'] = $this->language->get('button_back');
+
+        if (isset($this->error['warning'])) {
+            $this->data['error_warning'] = $this->error['warning'];
+        } else {
+            $this->data['error_warning'] = '';
+        }   
+
+        $this->data['action'] = $this->url->link('account/company/info', '', 'SSL');
+
+        if ($this->request->server['REQUEST_METHOD'] != 'POST') {
+            $company_info = $this->model_service_company->getCompany($this->customer->isCompany());
+            
+        }
+        if (isset($company_info['mobile_phone'])) {
+            $this->data['mobile_phone'] = $company_info['mobile_phone'];
+        } else {
+            $this->data['mobile_phone'] = '';
+        }
+
+        if (isset($this->request->post['fullname'])) {
+            $this->data['fullname'] = $this->request->post['fullname'];
+        } else if (isset($company_info['fullname'])) {
+            $this->data['fullname'] = $company_info['fullname'];
+        } else {
+            $this->data['fullname'] = '';
+        }
+
+        $this->template = $this->config->get('config_template') . '/template/account/company_custom.tpl';
+        
+        $this->children = array(
+            'common/column_left',
+            'common/column_right',
+            'common/footer',
+            'common/header' 
+        );
+                        
+        $this->response->setOutput($this->render());    
+    }  
+
+    public function cases() {
+        if (!$this->customer->isLogged()) {
+            $this->session->data['redirect'] = $this->url->link('account/company', '', 'SSL');
+
+            $this->redirect($this->url->link('account/login', '', 'SSL'));
+        }
+
+        $this->language->load('account/company');
+        
+        $this->document->setTitle($this->language->get('heading_title'));
+        $this->load->model('service/company');
+        
+        $this->data['heading_title'] = $this->language->get('heading_title');
+
+        $this->data['text_your_details'] = $this->language->get('text_your_details');
+
+        $this->data['entry_fullname'] = $this->language->get('entry_fullname');
+        $this->data['entry_email'] = $this->language->get('entry_email');
+        $this->data['entry_telephone'] = $this->language->get('entry_telephone');
+        $this->data['entry_fax'] = $this->language->get('entry_fax');
+
+        $this->data['button_continue'] = $this->language->get('button_continue');
+        $this->data['button_back'] = $this->language->get('button_back');
+
+        if (isset($this->error['warning'])) {
+            $this->data['error_warning'] = $this->error['warning'];
+        } else {
+            $this->data['error_warning'] = '';
+        }   
+
+        $this->data['action'] = $this->url->link('account/company/info', '', 'SSL');
+
+        if ($this->request->server['REQUEST_METHOD'] != 'POST') {
+            $company_info = $this->model_service_company->getCompany($this->customer->isCompany());
+            
+        }
+        if (isset($company_info['mobile_phone'])) {
+            $this->data['mobile_phone'] = $company_info['mobile_phone'];
+        } else {
+            $this->data['mobile_phone'] = '';
+        }
+
+        if (isset($this->request->post['fullname'])) {
+            $this->data['fullname'] = $this->request->post['fullname'];
+        } else if (isset($company_info['fullname'])) {
+            $this->data['fullname'] = $company_info['fullname'];
+        } else {
+            $this->data['fullname'] = '';
+        }
+        $this->template = $this->config->get('config_template') . '/template/account/company_case.tpl';
+        
+        $this->children = array(
+            'common/column_left',
+            'common/column_right',
+            'common/footer',
+            'common/header' 
+        );
+                        
+        $this->response->setOutput($this->render());    
+    }  
+
+    public function member() {
+        if (!$this->customer->isLogged()) {
+            $this->session->data['redirect'] = $this->url->link('account/company', '', 'SSL');
+
+            $this->redirect($this->url->link('account/login', '', 'SSL'));
+        }
+
+        $this->language->load('account/company');
+        
+        $this->document->setTitle($this->language->get('heading_title'));
+        $this->load->model('service/company');
+        
+        $this->data['heading_title'] = $this->language->get('heading_title');
+
+        $this->data['text_your_details'] = $this->language->get('text_your_details');
+
+        $this->data['entry_fullname'] = $this->language->get('entry_fullname');
+        $this->data['entry_email'] = $this->language->get('entry_email');
+        $this->data['entry_telephone'] = $this->language->get('entry_telephone');
+        $this->data['entry_fax'] = $this->language->get('entry_fax');
+
+        $this->data['button_continue'] = $this->language->get('button_continue');
+        $this->data['button_back'] = $this->language->get('button_back');
+
+        if (isset($this->error['warning'])) {
+            $this->data['error_warning'] = $this->error['warning'];
+        } else {
+            $this->data['error_warning'] = '';
+        }   
+
+        $this->data['action'] = $this->url->link('account/company/info', '', 'SSL');
+
+        if ($this->request->server['REQUEST_METHOD'] != 'POST') {
+            $company_info = $this->model_service_company->getCompany($this->customer->isCompany());
+            
+        }
+        if (isset($company_info['mobile_phone'])) {
+            $this->data['mobile_phone'] = $company_info['mobile_phone'];
+        } else {
+            $this->data['mobile_phone'] = '';
+        }
+
+        if (isset($this->request->post['fullname'])) {
+            $this->data['fullname'] = $this->request->post['fullname'];
+        } else if (isset($company_info['fullname'])) {
+            $this->data['fullname'] = $company_info['fullname'];
+        } else {
+            $this->data['fullname'] = '';
+        }
+
+        $this->template = $this->config->get('config_template') . '/template/account/company_member.tpl';
+        
+        $this->children = array(
+            'common/column_left',
+            'common/column_right',
+            'common/footer',
+            'common/header' 
+        );
+                        
+        $this->response->setOutput($this->render());    
     }
 	protected function validateInfo() {
         $this->load->model('account/customer');
@@ -319,62 +525,4 @@ class ControllerAccountCompany extends Controller {
         return $result;
     }
 
-    public function upload() {
-        $this->language->load('product/product');
-        
-        $json = array();
-        
-        if (!empty($this->request->files['avatar']['name'])) {
-            $filename = basename(preg_replace('/[^a-zA-Z0-9\.\-\s+]/', '', html_entity_decode($this->request->files['avatar']['name'], ENT_QUOTES, 'UTF-8')));
-            
-            if ((utf8_strlen($filename) < 3) || (utf8_strlen($filename) > 64)) {
-                $json['error'] = $this->language->get('error_filename');
-            }       
-
-            // Allowed file extension types
-            $allowed = array();
-            
-            $filetypes = explode("\n", $this->config->get('config_file_extension_allowed'));
-            
-            foreach ($filetypes as $filetype) {
-                $allowed[] = trim($filetype);
-            }
-            
-            if (!in_array(substr(strrchr($filename, '.'), 1), $allowed)) {
-                $json['error'] = $this->language->get('error_filetype');
-            }   
-            
-            // Allowed file mime types      
-            $allowed = array();
-            
-            $filetypes = explode("\n", $this->config->get('config_file_mime_allowed'));
-            
-            foreach ($filetypes as $filetype) {
-                $allowed[] = trim($filetype);
-            }
-                            
-            if (!in_array($this->request->files['avatar']['type'], $allowed)) {
-                $json['error'] = $this->language->get('error_filetype');
-            }           
-            if ($this->request->files['avatar']['error'] != UPLOAD_ERR_OK) {
-                $json['error'] = $this->language->get('error_upload_' . $this->request->files['avatar']['error']);
-            }
-        } else {
-            $json['error'] = $this->language->get('error_upload');
-        }
-        
-        if (!$json && is_uploaded_file($this->request->files['avatar']['tmp_name']) && file_exists($this->request->files['avatar']['tmp_name'])) {
-            $pathinfo = pathinfo($filename);
-            $file = substr(md5(mt_rand()),rand(0,12),12).'.'.$pathinfo['extension'];
-            
-            // Hide the uploaded file name so people can not link to it directly.
-            
-            move_uploaded_file($this->request->files['avatar']['tmp_name'], DIR_IMAGE.'avatar/' . $file);
-            $json['path'] = TPL_IMG.'avatar/' . $file;
-            $json['filename'] = basename($filename);            
-            $json['success'] = $this->language->get('text_upload');
-        }   
-        
-        $this->response->setOutput(json_encode($json));     
-    } 
 }

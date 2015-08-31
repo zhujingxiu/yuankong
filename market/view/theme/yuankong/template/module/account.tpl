@@ -5,7 +5,11 @@
         $keyword = '';
         if(isset($part[0]) && isset($part[1]))
         $keyword = strtolower($part[0].'/'.$part[1]);
-
+        if(!isset($part[2]) || strtolower($part[2]) == 'index'){
+            $action = 'index';
+        }else{
+            $action = strtolower($part[2]);
+        }
     ?>
     <b class="userbg"></b>
     <dl class="userxinxi">
@@ -26,12 +30,16 @@
     
 
 </div>
-<?php if($this->customer->isCompany()){?>
+<?php if($this->customer->isCompany()){ ?>
 <div class="userbox1 mt10">
-    <h3><b>企业信息管理</b></h3>
-    <ul class="useryy">
-      <li class="usergl"><a href="<?php echo $company ?>">企业中心</a></li>
-      <li class="userwt"><a href="#">在线提问</a></li>
-    </ul>
+    <h3><b>企业中心</b></h3>
+    <dl class="userxinxi"> 
+        <dd><a <?php echo ( $keyword == 'account/company' && $action == 'index' ) ? 'class="redbg"' : '' ?> href="<?php echo $company ?>">基本资料</a></dd>       
+        <dd><a <?php echo ( $keyword == 'account/company' && $action == 'description' ) ? 'class="redbg"' : '' ?> href="<?php echo $description ?>">公司简介</a></dd>
+        <dd><a <?php echo ( $keyword == 'account/company' && $action == 'custom1' ) ? 'class="redbg"' : '' ?> href="<?php echo $custom1 ?>">自定义1</a></dd>
+        <dd><a <?php echo ( $keyword == 'account/company' && $action == 'custom2' ) ? 'class="redbg"' : '' ?> href="<?php echo $custom2 ?>">自定义2</a></dd>
+        <dd><a <?php echo ( $keyword == 'account/company' && $action == 'cases' ) ? 'class="redbg"' : '' ?> href="<?php echo $cases ?>">案例精选</a></dd>
+        <dd><a <?php echo ( $keyword == 'account/company' && $action == 'member' ) ? 'class="redbg"' : '' ?> href="<?php echo $member ?>">优秀团队</a></dd>
+    </dl>
 </div>
 <?php }?>
