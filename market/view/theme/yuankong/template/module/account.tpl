@@ -28,7 +28,7 @@
 </div>
 <?php if($this->customer->isCompany()){?>
 <div class="userbox1 mt10">
-    <h3><b>企业发布</b></h3>
+    <h3><b>企业信息管理</b></h3>
     <ul class="useryy">
       <li class="usergl"><a href="<?php echo $company ?>">企业中心</a></li>
       <li class="userwt"><a href="#">在线提问</a></li>

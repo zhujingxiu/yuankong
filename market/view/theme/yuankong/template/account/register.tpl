@@ -265,7 +265,7 @@ $(function(){ $('input, textarea').placeholder(); });
 	                    </td>
 	                    <td>
 	                    	<div class="form-group">
-		                    	<input type="password" class="regis-text w100" name="sms" />
+		                    	<input type="text" class="regis-text w100" name="sms" />
 		                    	<a href="javascript:void(0)" data-rel="company" class="hq-yzm"><?php echo $text_get_sms ?></a> 
 		                    </div>
 	                    </td>

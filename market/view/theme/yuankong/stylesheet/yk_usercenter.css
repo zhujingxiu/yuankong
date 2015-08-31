@@ -232,3 +232,21 @@ border-top-color:#c4c4c4;}
 .weijiejue{ color:#f80;}
 .page { font-size: 14px;}
 .page-num { vertical-align: top;}
+/*商户中心*/
+.p30 { padding: 20px 30px;}
+.userbox4 { border:1px solid #dfdfdf; width:808px; overflow:hidden; min-height:515px; font-family: "Microsoft Yahei";}
+.usergs-box { padding: 25px 30px; border-bottom: 2px solid #c30c22;}
+.usergs-box .gsjj { position: relative; padding-left: 120px; height: 110px;}
+.usergs-box .gsjj h3 { font-size: 24px; line-height: 45px;}
+.usergs-box .gsjj .qy-logo { top: 6px;}
+.usertable { width: 100%;}
+.borb td { border-bottom: 1px dotted #ddd; }
+.usertable td { padding: 15px 10px;font-size: 14px; color: #111; vertical-align: middle;}
+.input-t { height: 30px; line-height: 30px; padding: 0 5px; border: 1px solid #ddd; border-top-color: #ccc;}
+.input-m { margin: 0 5px 2px 0; vertical-align: middle;*margin: 0 5px 0 0;}
+.select-put { margin-right: 10px; border: 1px solid #eee; padding: 3px; width: 100px;}
+.addt {border: 1px solid #dedede;}
+.addt th{ border-bottom: 1px solid #dedede;border-right: 1px solid #dedede;background: #f5f5f5; padding: 5px 0; text-align: center; line-height: 30px; color: #333; font-size: 14px;}
+.addt td{ border-bottom: 1px solid #dedede;border-right: 1px solid #dedede;}
+.add-anli { position: fixed; top: 10%; left: 50%; margin-left: -300px; width: 600px; background: #fff; border: 1px solid #ddd; z-index: 999;}
+.add-anl-title { height: 35px; line-height: 35px; background: #f5f5f5; border-bottom: 1px solid #ddd; padding: 0 10px; font-size: 14px; color: #333;}

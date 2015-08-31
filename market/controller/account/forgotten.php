@@ -42,9 +42,11 @@ class ControllerAccountForgotten extends Controller {
 		$this->document->setTitle($this->language->get('heading_title'));
 		
 		$this->load->model('account/customer');
+		$this->load->model('affiliate/affiliate');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			$this->model_account_customer->editPassword($this->request->post['mobile_phone'], $this->request->post['password']);
+			$this->model_affiliate_affiliate->editPasswordByMobilePhone($this->request->post['mobile_phone'], $this->request->post['password']);
  
 			$this->session->data['success'] = $this->language->get('text_success');
 	  
@@ -226,9 +228,9 @@ class ControllerAccountForgotten extends Controller {
     	if(!$json){
 	  		
 	        $sms_number = mt_rand(100000,999999);
-	        //$sms = new Sms();
-	  		//$pattern = "尊敬的用户，您的验证码是".$sms_number."请填入以完成注册。该验证码30分钟内有效，限本次使用。【消防e站】";
-	  		//$res = $sms->sendMsg($this->request->post['mobile_phone'],$pattern);
+	        $sms = new Sms();
+	  		$pattern = "尊敬的用户，".$sms_number."是您本次的验证码，该验证码10分钟内有效。【消防e站】";
+	  		$res = $sms->sendMsg($this->request->post['mobile_phone'],$pattern);
 	  		$this->model_account_customer->delSMS($this->request->post['mobile_phone']);
 	  		$this->model_account_customer->addSMS($this->request->post['mobile_phone'],$sms_number);
 	  		$json['success'] = $this->language->get('text_send_success');

@@ -189,6 +189,9 @@ $(function(){
             	required:true,
             	validateCaptcha:true
             },
+            sms:{
+                validateSMS:"#company-mobilephone"
+            },
             agree: "required"
     	},
     	messages:{
@@ -201,6 +204,9 @@ $(function(){
     			isMobile:"手机号非法，请填写有效的手机号码",
     			hasMobile:"手机号码已注册"
     		},
+            sms:{
+                validateSMS:"短信验证码无效"
+            },
     		agree:{
                 required:"请先阅读注册协议"
             },

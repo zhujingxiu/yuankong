@@ -50,15 +50,16 @@ class ControllerCommonTool extends Controller {
             $json['error']['mobile_phone'] = $this->language->get('error_exists');
         }
         $sms_log = $this->model_account_customer->getSMS($this->request->post['mobile_phone']);     
-        if(!empty($sms_log['sms']) && time() < ($sms_log['time']+30*60) ){
+        if(!empty($sms_log['sms']) && time() < ($sms_log['time']+120) ){
             $json['error']['sms'] = $this->language->get('error_sms_time');
         }
 
         if(!$json){
             $sms = new Sms();
             $sms_number = mt_rand(100000,999999);
-            $pattern = "尊敬的用户，".$sms_number."是您本次的验证码，该验证码30分钟内有效。【消防e站】";
-            $sms->sendMsg($this->request->post['mobile_phone'],$pattern);
+            $pattern = "尊敬的用户，".$sms_number."是您本次的验证码，该验证码10分钟内有效。【消防e站】";
+            $res = $sms->sendMsg($this->request->post['mobile_phone'],$pattern);
+            //var_dump($res);
             $this->model_account_customer->delSMS($this->request->post['mobile_phone']);
             $this->model_account_customer->addSMS($this->request->post['mobile_phone'],$sms_number);
             $json['success'] =  $this->language->get('text_send_success');           
@@ -72,7 +73,7 @@ class ControllerCommonTool extends Controller {
         $mobile_phone = isset($this->request->post['mobile_phone']) ? $this->request->post['mobile_phone'] : false;
         $this->load->model('account/customer');
         $sms_log = $this->model_account_customer->getSMS($this->request->post['mobile_phone']);
-        if(!empty($sms_log['sms']) && ($sms_log['sms'] == $sms) && (time() < ($sms_log['time']+30*60))) {
+        if(!empty($sms_log['sms']) && ($sms_log['sms'] == $sms) && (time() < ($sms_log['time']+600))) {
             $status = 1;
         }
         $this->response->setOutput(json_encode(array('status'=>$status)));

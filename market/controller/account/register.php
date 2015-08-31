@@ -94,8 +94,10 @@ class ControllerAccountRegister extends Controller {
 		$this->data['text_regs_customer'] = $this->language->get('text_regs_customer');
     	$this->data['text_regs_company'] = $this->language->get('text_regs_company');
     	$this->data['text_company_name'] = $this->language->get('text_company_name');
+    	$this->data['text_company_phone'] = $this->language->get('text_company_phone');
     	$this->data['text_company_email'] = $this->language->get('text_company_email');
 		$this->data['text_qr_code'] = $this->language->get('text_qr_code');
+		$this->data['text_customer_phone'] = $this->language->get('text_customer_phone');
 		$this->data['text_yes'] = $this->language->get('text_yes');
 		$this->data['text_no'] = $this->language->get('text_no');
 		$this->data['text_select'] = $this->language->get('text_select');
