@@ -222,10 +222,28 @@ class ModelServiceCompany extends Model {
         return $data;
     }
 
+    public function getCompanyModule($company_id,$sort=1){
+        $query = $this->db->query("SELECT * FROM ".DB_PREFIX."company_module WHERE company_id = '".(int)$company_id."' AND status = '1'  AND sort = '".$sort."' ");
+
+        return $query->row;
+    }
+
     public function getCompanyModulesByCompanyId($company_id){
         $query = $this->db->query("SELECT * FROM ".DB_PREFIX."company_module WHERE company_id = '".(int)$company_id."' AND status = '1' ORDER BY sort ASC ");
 
         return $query->num_rows ? $query->rows : array();
+    }
+
+    public function getCompanyFilesByCompanyId($company_id){
+        $query = $this->db->query("SELECT * FROM ".DB_PREFIX."company_file WHERE company_id = '".(int)$company_id."' ORDER BY sort ASC ,date_added DESC");
+
+        return $query->num_rows ? $query->rows : array();
+    }
+
+    public function getCompanyFile($file_id,$company_id){
+        $query = $this->db->query("SELECT * FROM ".DB_PREFIX."company_file WHERE file_id = '".(int)$file_id."' AND company_id = '".$company_id."' ORDER BY sort ASC ,date_added DESC");
+
+        return $query->row;
     }
 
     public function getCompanyCasesByCompanyId($company_id){

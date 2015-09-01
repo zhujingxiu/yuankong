@@ -15,6 +15,7 @@
     <div class="bkbox-title c9">
       <h2><?php echo $heading_title; ?></h2>
       <p class="tc f_m">
+        <?php if(!empty($from)){?><span class="plr">来源：<?php echo $from ?></span><?php }?>
         <span class="plr"><?php echo $text_date_modified ?><?php echo $date_added ?></span>
         <span class="plr"><?php echo $text_viewed ?><?php echo $viewed ?></span>
       </p>

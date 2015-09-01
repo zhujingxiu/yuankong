@@ -81,7 +81,7 @@ class ControllerAccountHelp extends Controller {
 		$pagination->text = $this->language->get('text_pagination');
 		$pagination->url = $this->url->link('account/help', 'page={page}', 'SSL');
 			
-		$this->data['pagination'] = $pagination->render_list();
+		$this->data['pagination'] = $pagination->render_page();
 				
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/help.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/account/help.tpl';

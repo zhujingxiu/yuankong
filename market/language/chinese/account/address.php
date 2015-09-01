@@ -3,7 +3,7 @@
 $_['heading_title']     = '地址簿';
 
 // Text
-$_['text_account']      = '我的账户';
+$_['text_account']      = '用户中心';
 $_['text_address_book'] = '地址簿';
 $_['text_edit_address'] = '您的个人资料';
 $_['text_insert']       = '成功插入您的地址';

@@ -261,7 +261,8 @@ class ControllerInformationWiki extends Controller {
       		$this->data['text_date_modified'] = $this->language->get('text_date_modified');
       		$this->data['text_viewed'] = $this->language->get('text_viewed');
 			
-			$this->data['title'] = html_entity_decode($wiki_info['title'], ENT_QUOTES, 'UTF-8');
+            $this->data['title'] = html_entity_decode($wiki_info['title'], ENT_QUOTES, 'UTF-8');
+			$this->data['from'] = html_entity_decode($wiki_info['from'], ENT_QUOTES, 'UTF-8');
 			$this->data['subtitle'] = html_entity_decode($wiki_info['subtitle'], ENT_QUOTES, 'UTF-8');
 			$this->data['description'] = html_entity_decode($wiki_info['text'], ENT_QUOTES, 'UTF-8');
 

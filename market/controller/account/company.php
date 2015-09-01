@@ -13,6 +13,7 @@ class ControllerAccountCompany extends Controller {
 		
 		$this->document->setTitle($this->language->get('heading_title'));
         $this->document->addScript($this->area_js());
+        $this->document->addScript(TPL_JS.'ajaxupload.js');
         $this->load->model('service/company');
         $this->load->model('tool/image');
 		
@@ -26,7 +27,7 @@ class ControllerAccountCompany extends Controller {
 			$this->data['error_warning'] = '';
 		}	
 
-        $this->data['action'] = $this->url->link('account/company/info', '', 'SSL');
+        $this->data['action'] = $this->url->link('account/company/index', '', 'SSL');
         $company_id = $this->customer->isCompany();
 		if ($this->request->server['REQUEST_METHOD'] != 'POST') {
             $company_info = $this->model_service_company->getCompany($company_id);
@@ -100,7 +101,7 @@ class ControllerAccountCompany extends Controller {
 
         $this->data['groups'] = $this->model_service_company->getCompanyGroupsByCompanyId($company_id);
         $this->data['all_groups'] = $this->model_service_company->getCompanyGroups();
-
+        $this->data['no_photo'] = $this->model_tool_image->resize('nopic.jpg',100,100);
         $this->template = $this->config->get('config_template') . '/template/account/company.tpl';
 		$this->children = array(
 			'common/column_left',
@@ -121,20 +122,12 @@ class ControllerAccountCompany extends Controller {
 
         $this->language->load('account/company');
         
-        $this->document->setTitle($this->language->get('heading_title'));
+        $this->document->setTitle($this->language->get('title_description'));
         $this->load->model('service/company');
         
-        $this->data['heading_title'] = $this->language->get('heading_title');
+        $this->data['heading_title'] = $this->language->get('title_description');
 
         $this->data['text_your_details'] = $this->language->get('text_your_details');
-
-        $this->data['entry_fullname'] = $this->language->get('entry_fullname');
-        $this->data['entry_email'] = $this->language->get('entry_email');
-        $this->data['entry_telephone'] = $this->language->get('entry_telephone');
-        $this->data['entry_fax'] = $this->language->get('entry_fax');
-
-        $this->data['button_continue'] = $this->language->get('button_continue');
-        $this->data['button_back'] = $this->language->get('button_back');
 
         if (isset($this->error['warning'])) {
             $this->data['error_warning'] = $this->error['warning'];
@@ -142,7 +135,7 @@ class ControllerAccountCompany extends Controller {
             $this->data['error_warning'] = '';
         }   
 
-        $this->data['action'] = $this->url->link('account/company/info', '', 'SSL');
+        $this->data['action'] = $this->url->link('account/company/description', '', 'SSL');
 
         $company_id = $this->customer->isCompany();
         if ($this->request->server['REQUEST_METHOD'] != 'POST') {
@@ -166,7 +159,58 @@ class ControllerAccountCompany extends Controller {
                         
         $this->response->setOutput($this->render());    
     }
+    public function file(){
+        if (!$this->customer->isLogged()) {
+            $this->session->data['redirect'] = $this->url->link('account/company', '', 'SSL');
 
+            $this->redirect($this->url->link('account/login', '', 'SSL'));
+        }
+
+        $this->language->load('account/company');
+        
+        $this->document->setTitle($this->language->get('title_file'));
+        $this->document->addScript(TPL_JS.'ajaxupload.js');
+        $this->load->model('service/company');
+        $this->load->model('tool/image');
+
+        $this->data['heading_title'] = $this->language->get('title_file');
+
+        if (isset($this->error['warning'])) {
+            $this->data['error_warning'] = $this->error['warning'];
+        } else {
+            $this->data['error_warning'] = '';
+        }   
+
+        $this->data['action'] = $this->url->link('account/company/file', '', 'SSL');
+        $this->data['files'] = array();
+        $company_id = $this->customer->isCompany();
+        if ($this->request->server['REQUEST_METHOD'] != 'POST') {
+            $results = $this->model_service_company->getCompanyFilesByCompanyId($company_id);
+            foreach ($results as $item) {
+                $this->data['files'][] = array(
+                    'file_id'   => $item['file_id'],
+                    'name'      => $item['name'],
+                    'mode'      => $item['mode'],
+                    'sort'      => $item['sort'],
+                    'status'    => $item['status'],
+                    'photo'     => $this->model_tool_image->resize($item['path'],205,128),
+                    'date_added'=> date('Y-m-d H:i',strtotime($item['date_added']))
+                );
+            }
+        }
+        $this->data['no_photo'] = $this->model_tool_image->resize('nopic.jpg', 205, 128);
+        $this->template = $this->config->get('config_template') . '/template/account/company_file.tpl';
+        
+        $this->children = array(
+            'common/column_left',
+            'common/column_right',
+            'common/footer',
+            'common/header' 
+        );
+                        
+        $this->response->setOutput($this->render());    
+
+    }
 
     public function custom1() {
         if (!$this->customer->isLogged()) {
@@ -177,13 +221,12 @@ class ControllerAccountCompany extends Controller {
 
         $this->language->load('account/company');
         
-        $this->document->setTitle($this->language->get('heading_title'));
+        $this->document->setTitle($this->language->get('title_custom1'));
+        $this->document->addScript(TPL_JS.'ajaxupload.js');
         $this->load->model('service/company');
         $this->load->model('tool/image');
 
-        $this->data['heading_title'] = $this->language->get('heading_title');
-
-        $this->data['text_your_details'] = $this->language->get('text_your_details');
+        $this->data['heading_title'] = $this->language->get('title_custom1');
 
         if (isset($this->error['warning'])) {
             $this->data['error_warning'] = $this->error['warning'];
@@ -191,10 +234,10 @@ class ControllerAccountCompany extends Controller {
             $this->data['error_warning'] = '';
         }   
 
-        $this->data['action'] = $this->url->link('account/company/info', '', 'SSL');
+        $this->data['action'] = $this->url->link('account/company/custom1', '', 'SSL');
         $company_id = $this->customer->isCompany();
         if ($this->request->server['REQUEST_METHOD'] != 'POST') {
-            $company_info = $this->model_service_company->getCompanyModulesByCompanyId($company_id);
+            $company_info = $this->model_service_company->getCompanyModule($company_id,1);
         }
 
         if (isset($this->request->post['status'])) {
@@ -220,6 +263,8 @@ class ControllerAccountCompany extends Controller {
         } else {
             $this->data['image'] = $this->model_tool_image->resize('nopic.jpg',205,128);
         }
+        $this->data['sort'] = 1;
+        $this->data['no_photo'] = $this->model_tool_image->resize('nopic.jpg',100,100);
         $this->template = $this->config->get('config_template') . '/template/account/company_custom.tpl';
         
         $this->children = array(
@@ -240,20 +285,11 @@ class ControllerAccountCompany extends Controller {
 
         $this->language->load('account/company');
         
-        $this->document->setTitle($this->language->get('heading_title'));
+        $this->document->setTitle($this->language->get('title_custom2'));
+        $this->document->addScript(TPL_JS.'ajaxupload.js');
         $this->load->model('service/company');
-        
-        $this->data['heading_title'] = $this->language->get('heading_title');
-
-        $this->data['text_your_details'] = $this->language->get('text_your_details');
-
-        $this->data['entry_fullname'] = $this->language->get('entry_fullname');
-        $this->data['entry_email'] = $this->language->get('entry_email');
-        $this->data['entry_telephone'] = $this->language->get('entry_telephone');
-        $this->data['entry_fax'] = $this->language->get('entry_fax');
-
-        $this->data['button_continue'] = $this->language->get('button_continue');
-        $this->data['button_back'] = $this->language->get('button_back');
+        $this->load->model('tool/image');
+        $this->data['heading_title'] = $this->language->get('title_custom2');
 
         if (isset($this->error['warning'])) {
             $this->data['error_warning'] = $this->error['warning'];
@@ -261,26 +297,37 @@ class ControllerAccountCompany extends Controller {
             $this->data['error_warning'] = '';
         }   
 
-        $this->data['action'] = $this->url->link('account/company/info', '', 'SSL');
-
+        $this->data['action'] = $this->url->link('account/company/custom2', '', 'SSL');
+        $company_id = $this->customer->isCompany();
         if ($this->request->server['REQUEST_METHOD'] != 'POST') {
-            $company_info = $this->model_service_company->getCompany($this->customer->isCompany());
+            $company_info = $this->model_service_company->getCompanyModule($company_id,2);
             
         }
-        if (isset($company_info['mobile_phone'])) {
-            $this->data['mobile_phone'] = $company_info['mobile_phone'];
+        if (isset($this->request->post['status'])) {
+            $this->data['status'] = $this->request->post['status'];
+        } else if (isset($company_info['status'])) {
+            $this->data['status'] = $company_info['status'];
         } else {
-            $this->data['mobile_phone'] = '';
+            $this->data['status'] = 0;
         }
 
-        if (isset($this->request->post['fullname'])) {
-            $this->data['fullname'] = $this->request->post['fullname'];
-        } else if (isset($company_info['fullname'])) {
-            $this->data['fullname'] = $company_info['fullname'];
+        if (isset($this->request->post['title'])) {
+            $this->data['title'] = $this->request->post['title'];
+        } else if (isset($company_info['title'])) {
+            $this->data['title'] = $company_info['title'];
         } else {
-            $this->data['fullname'] = '';
+            $this->data['title'] = '';
         }
 
+        if (isset($this->request->post['image'])) {
+            $this->data['image'] = $this->request->post['image'];
+        } else if (isset($company_info['image'])) {
+            $this->data['image'] = $this->model_tool_image->resize($company_info['image'],205,128);
+        } else {
+            $this->data['image'] = $this->model_tool_image->resize('nopic.jpg',205,128);
+        }
+        $this->data['sort'] = 2;
+        $this->data['no_photo'] = $this->model_tool_image->resize('nopic.jpg',100,100);
         $this->template = $this->config->get('config_template') . '/template/account/company_custom.tpl';
         
         $this->children = array(
@@ -302,20 +349,14 @@ class ControllerAccountCompany extends Controller {
 
         $this->language->load('account/company');
         
-        $this->document->setTitle($this->language->get('heading_title'));
+        $this->document->setTitle($this->language->get('title_cases'));
+        $this->document->addScript(TPL_JS.'ajaxupload.js');
         $this->load->model('service/company');
+        $this->load->model('tool/image');
         
-        $this->data['heading_title'] = $this->language->get('heading_title');
+        $this->data['heading_title'] = $this->language->get('title_cases');
 
-        $this->data['text_your_details'] = $this->language->get('text_your_details');
-
-        $this->data['entry_fullname'] = $this->language->get('entry_fullname');
-        $this->data['entry_email'] = $this->language->get('entry_email');
-        $this->data['entry_telephone'] = $this->language->get('entry_telephone');
-        $this->data['entry_fax'] = $this->language->get('entry_fax');
-
-        $this->data['button_continue'] = $this->language->get('button_continue');
-        $this->data['button_back'] = $this->language->get('button_back');
+        $this->data['text_no_results'] = $this->language->get('text_no_results');
 
         if (isset($this->error['warning'])) {
             $this->data['error_warning'] = $this->error['warning'];
@@ -323,25 +364,21 @@ class ControllerAccountCompany extends Controller {
             $this->data['error_warning'] = '';
         }   
 
-        $this->data['action'] = $this->url->link('account/company/info', '', 'SSL');
-
+        $this->data['action'] = $this->url->link('account/company/cases', '', 'SSL');
+        $this->data['cases'] = array();
+        $company_id = $this->customer->isCompany();
         if ($this->request->server['REQUEST_METHOD'] != 'POST') {
-            $company_info = $this->model_service_company->getCompany($this->customer->isCompany());
-            
+            $results = $this->model_service_company->getCompanyCasesByCompanyId($company_id);
+            foreach ($results as $item) {
+                $this->data['cases'][] = array(
+                    'module_id' => $item['module_id'],
+                    'name'      => $item['name'],
+                    'sort'      => $item['sort'],
+                    'photo'     => $this->model_tool_image->resize($item['photo'],150,150)
+                );
+            }
         }
-        if (isset($company_info['mobile_phone'])) {
-            $this->data['mobile_phone'] = $company_info['mobile_phone'];
-        } else {
-            $this->data['mobile_phone'] = '';
-        }
-
-        if (isset($this->request->post['fullname'])) {
-            $this->data['fullname'] = $this->request->post['fullname'];
-        } else if (isset($company_info['fullname'])) {
-            $this->data['fullname'] = $company_info['fullname'];
-        } else {
-            $this->data['fullname'] = '';
-        }
+        $this->data['no_photo'] = $this->model_tool_image->resize('nopic.jpg', 205, 128);
         $this->template = $this->config->get('config_template') . '/template/account/company_case.tpl';
         
         $this->children = array(
@@ -363,20 +400,14 @@ class ControllerAccountCompany extends Controller {
 
         $this->language->load('account/company');
         
-        $this->document->setTitle($this->language->get('heading_title'));
+        $this->document->setTitle($this->language->get('title_member'));
+        $this->document->addScript(TPL_JS.'ajaxupload.js');
         $this->load->model('service/company');
+        $this->load->model('tool/image');
         
-        $this->data['heading_title'] = $this->language->get('heading_title');
+        $this->data['heading_title'] = $this->language->get('title_member');
 
-        $this->data['text_your_details'] = $this->language->get('text_your_details');
-
-        $this->data['entry_fullname'] = $this->language->get('entry_fullname');
-        $this->data['entry_email'] = $this->language->get('entry_email');
-        $this->data['entry_telephone'] = $this->language->get('entry_telephone');
-        $this->data['entry_fax'] = $this->language->get('entry_fax');
-
-        $this->data['button_continue'] = $this->language->get('button_continue');
-        $this->data['button_back'] = $this->language->get('button_back');
+        $this->data['text_no_results'] = $this->language->get('text_no_results');
 
         if (isset($this->error['warning'])) {
             $this->data['error_warning'] = $this->error['warning'];
@@ -384,26 +415,23 @@ class ControllerAccountCompany extends Controller {
             $this->data['error_warning'] = '';
         }   
 
-        $this->data['action'] = $this->url->link('account/company/info', '', 'SSL');
+        $this->data['action'] = $this->url->link('account/company/member', '', 'SSL');
 
+        $this->data['members'] = array();
+        $company_id = $this->customer->isCompany();
         if ($this->request->server['REQUEST_METHOD'] != 'POST') {
-            $company_info = $this->model_service_company->getCompany($this->customer->isCompany());
-            
+            $results = $this->model_service_company->getCompanyMembersByCompanyId($company_id);
+            foreach ($results as $item) {
+                $this->data['members'][] = array(
+                    'member_id' => $item['member_id'],
+                    'name'      => $item['name'],
+                    'position'  => $item['position'],
+                    'sort'      => $item['sort'],
+                    'avatar'    => $this->model_tool_image->resize($item['avatar'],150,150)
+                );
+            }
         }
-        if (isset($company_info['mobile_phone'])) {
-            $this->data['mobile_phone'] = $company_info['mobile_phone'];
-        } else {
-            $this->data['mobile_phone'] = '';
-        }
-
-        if (isset($this->request->post['fullname'])) {
-            $this->data['fullname'] = $this->request->post['fullname'];
-        } else if (isset($company_info['fullname'])) {
-            $this->data['fullname'] = $company_info['fullname'];
-        } else {
-            $this->data['fullname'] = '';
-        }
-
+        $this->data['no_photo'] = $this->model_tool_image->resize('nopic.jpg', 205, 128);
         $this->template = $this->config->get('config_template') . '/template/account/company_member.tpl';
         
         $this->children = array(

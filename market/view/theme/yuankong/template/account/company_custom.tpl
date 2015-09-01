@@ -14,25 +14,32 @@
                 <table class="usertable">
                     <tr>
                         <td width="60">状态</td>
-                        <td><label class="pr20"><input type="radio" name="r1" class="input-m"/>开启</label><label class="pr20"><input type="radio" name="r1" class="input-m"/>关闭</label></td>
+                        <td>
+                            <label class="pr20">
+                                <input type="radio" name="status" class="input-m" <?php echo $status==1 ? 'checked="checked"' : '' ?>/>开启
+                            </label>
+                            <label class="pr20">
+                                <input type="radio" name="status" class="input-m" <?php echo !$status ? 'checked="checked"' : '' ?>/>关闭
+                            </label>
+                        </td>
                     </tr>
                     <tr>
                         <td>名称</td>
-                        <td><input type="text" class="input-t w350"/></td>
+                        <td><input type="text" class="input-t w350" name="title" value="<?php echo $title ?>"/></td>
                     </tr>
                     <tr>
                         <td>内容</td>
                         <td>
                             <div class="l p10 bd1">
-                                <p class="tc"><img src="imgs/adimg/sjadpic.jpg" width="205" /></p>
+                                <p class="tc"><img src="<?php echo $image ?>" width="205" /></p>
                                 <p class="c9 pt5 tc"><a href="#">选择图像</a><em class="plr c9">|</em><a href="#">清除图像</a></p>
                             </div>
                             <div class="fix"></div>
-                            <p class="c_red f_s mt10">最大单张图片尺寸——宽1150px,支持0-3M文件快速上传,支持png,jpg格式</p>
+                            <p class="c_red f_s mt10">建议图片尺寸480*300px,支持0-3M文件快速上传,支持png,jpg格式</p>
                         </td>
                     </tr>
                     <tr>
-                        <td>&nbsp;</td>
+                        <td>&nbsp;<input name="sort" value="<?php echo $sort ?>" type="hidden"></td>
                         <td><input type="submit" class="gc-tab-sub w150" value="提交"/></td>
                     </tr>
                 </table>

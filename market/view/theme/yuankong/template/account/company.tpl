@@ -44,8 +44,15 @@
                         <td>logo</td>
                         <td>
                             <div class="l p10 bd1">
-                                <p class="tc"><img src="<?php echo $logo ?>" width="95" /></p>
-                                <p class="c9 pt5 tc"><a href="#">选择图像</a><em class="plr c9">|</em><a href="#">清除图像</a></p>
+                                <p class="tc">
+                                    <img src="<?php echo $logo ?>" width="95" />
+                                    <input type="hidden" name="logo" value="<?php echo $logo ?>" />
+                                </p>
+                                <p class="c9 pt5 tc">
+                                    <a id="logo-upload">选择图像</a>
+                                    <em class="plr c9">|</em>
+                                    <a href="#">清除图像</a>
+                                </p>
                             </div>
                             <div class="fix"></div>
                             <p class="c_red f_s mt10">建议图片尺寸120*120px,支持0-3M文件快速上传,支持png,jpg格式</p>
@@ -55,8 +62,15 @@
                         <td>公司形象</td>
                         <td>
                             <div class="l p10 bd1">
-                                <p class="tc"><img src="<?php echo $cover ?>" width="280" /></p>
-                                <p class="c9 pt5 tc"><a href="#">选择图像</a><em class="plr c9">|</em><a href="#">清除图像</a></p>
+                                <p class="tc">
+                                    <img src="<?php echo $cover ?>" width="280" />
+                                    <input type="hidden" name="cover" value="<?php echo $cover ?>" />
+                                </p>
+                                <p class="c9 pt5 tc">
+                                    <a id="cover-upload" data-rel="cover">选择图像</a>
+                                    <em class="plr c9">|</em>
+                                    <a href="#">清除图像</a>
+                                </p>
                             </div>
                             <div class="fix"></div>
                             <p class="c_red f_s mt10">建议图片尺寸480*300px,支持0-3M文件快速上传,支持png,jpg格式</p>
@@ -150,7 +164,38 @@
         });
     });
 </script>
+<script type="text/javascript"><!--
+function ajax_upload(el){
+    new AjaxUpload('#'+el, {
+        action: 'index.php?route=common/tool/upload',
+        name: 'file',
+        autoSubmit: true,
+        responseType: 'json',
+        onSubmit: function(file, extension) {
+            $(this).after('<img src="market/view/theme/default/image/loading.gif" class="loading" style="padding-left: 5px;" />');
+            $(this).attr('disabled', true);
+        },
+        onComplete: function(file, json) {
+            $(this).attr('disabled', false);
+            
+            $('.error').remove();
+            
+            if (json['success']) {
+                alert(json['success']);
+                $('input[name="'+$('#'+el).attr('data-rel')+'"]').val(json['file'])
+            }
+            
+            if (json['error']) {
+                alert(json['error']);
+            }
+            
+            $('.loading').remove(); 
+        }
+    });
+}
+$(function(){
+    ajax_upload('logo-upload');
+    ajax_upload('cover-upload');
+})
+//--></script>
 <?php echo $footer; ?> 
-
-
-    

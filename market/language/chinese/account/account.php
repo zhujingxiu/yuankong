@@ -3,7 +3,7 @@
 $_['heading_title']      = '我的账户';
 
 // Text
-$_['text_account']       = '我的账户';
+$_['text_account']       = '用户中心';
 $_['text_my_account']    = '我的账户';
 $_['text_my_orders']     = '总订单';
 $_['text_my_newsletter'] = '我的订阅';

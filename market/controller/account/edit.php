@@ -17,7 +17,8 @@ class ControllerAccountEdit extends Controller {
 		$this->document->addScript(TPL_JS.'form.js');
 		$this->document->addScript($this->area_js());
         $this->load->model('account/customer');
-		$this->load->model('account/address');
+        $this->load->model('account/address');
+		$this->load->model('service/company');
 
       	$this->data['breadcrumbs'] = array();
 
@@ -78,7 +79,7 @@ class ControllerAccountEdit extends Controller {
 
 		if ($this->request->server['REQUEST_METHOD'] != 'POST') {
             $customer_info = $this->model_account_customer->getCustomer($this->customer->getId());
-			
+			$company_info = $this->model_service_company->getCompany($this->customer->isCompany());
 		}
 		if (isset($customer_info['mobile_phone'])) {
 			$this->data['mobile_phone'] = $customer_info['mobile_phone'];
@@ -127,6 +128,43 @@ class ControllerAccountEdit extends Controller {
         }
         $this->data['addresses'] = $this->model_account_address->getAddresses();
 
+        if (isset($this->request->post['title'])) {
+            $this->data['title'] = $this->request->post['title'];
+        } else if (isset($company_info['title'])) {
+            $this->data['title'] = $company_info['title'];
+        } else {
+            $this->data['title'] = '';
+        }
+        if (isset($this->request->post['code'])) {
+            $this->data['code'] = $this->request->post['code'];
+        } else if (isset($company_info['code'])) {
+            $this->data['code'] = $company_info['code'];
+        } else {
+            $this->data['code'] = '';
+        }
+        if (isset($this->request->post['corporation'])) {
+            $this->data['corporation'] = $this->request->post['corporation'];
+        } else if (isset($company_info['corporation'])) {
+            $this->data['corporation'] = $company_info['corporation'];
+        } else {
+            $this->data['corporation'] = '';
+        }
+
+        if (isset($this->request->post['area_zone'])) {
+            $this->data['area_zone'] = $this->request->post['area_zone'];
+        } else if (isset($company_info['area_zone'])) {
+            $this->data['area_zone'] = $company_info['area_zone'];
+        } else {
+            $this->data['area_zone'] = '';
+        }
+
+        if (isset($this->request->post['address'])) {
+            $this->data['address'] = $this->request->post['address'];
+        } else if (isset($company_info['address'])) {
+            $this->data['address'] = $company_info['address'];
+        } else {
+            $this->data['address'] = '';
+        }
         $this->data['back'] = $this->url->link('account/account', '', 'SSL');
 		$this->data['isCompany'] = $this->customer->isCompany();
 

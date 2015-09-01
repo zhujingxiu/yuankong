@@ -99,5 +99,34 @@ class ControllerCommonTool extends Controller {
         $this->response->setOutput(json_encode(array('status'=>$status)));
     }
 
+    public function upload(){
+        $result=array('status'=>0,'msg'=>'');
+        if (!empty($this->request->file)){
+            $timePath=date('Ymd',time());
+            $tempFile = $this->request->file['file']['tmp_name'];
 
+            $targetPath = DIR_UPLOAD.'/'.$timePath;
+            if(!file_exists($targetPath)){
+                mkdir($targetPath);
+            }           
+    
+            // Validate the file type
+            $fileTypes  = array('jpg','jpeg','gif','png'); // File extensions
+            $fileParts  = pathinfo($this->request->file['file']['name']);
+            $fileName   = md5(uniqid()).'.'.$fileParts['extension'];
+            $targetFile = rtrim($targetPath,'/') . '/'. $fileName;
+            $imgUri     = TPL_UPLOAD.$timePath.'/'.$fileName;
+            
+            if (in_array($fileParts['extension'],$fileTypes)) {
+                move_uploaded_file($tempFile,$targetFile);
+                $result['status']=1;
+                $result['msg']=$imgUri;
+            } else {
+                $result['status']=0;
+                $result['msg']='无效的文件类型,允许上传的类型为 '.join(' | ',$fileTypes).' ';
+            }
+        }
+        die(json_encode($result));
+    }
+    
 }

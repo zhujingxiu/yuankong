@@ -10,24 +10,26 @@
     <div class="article">
         <div class="userbox4">
             <div class="p30">
-                <h3 class="index-t"><b class="f_l">案列精选</b></h3>
+                <h3 class="index-t"><b class="f_l">文件信息</b></h3>
                 <div class="mt20 ovh"><span class="dib gc-tab-sub w150 tc">+新增</span> </div>
-                <?php if($cases){ ?>
+                <?php if($files){ ?>
                 <table class="usertable addt mt20 tc">
                     <thead>
                     <tr>
-                        <th>案例图片</th>
-                        <th>案例名称</th>
-                        <th>排列顺序</th>
+                        <th>文件</th>
+                        <th>类型</th>
+                        <th>排序</th>
+                        <th>状态</th>
                         <th>管理</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <?php foreach($cases as $item){ ?>
+                    <?php foreach($files as $item){ ?>
                     <tr>
-                        <td><img src="<?php echo $item['photo'] ?>" width="150" /></td>
-                        <td><?php echo $item['name'] ?></td>
-                        <td>1</td>
+                        <td><img src="<?php echo $item['photo'] ?>" width="205" /></td>
+                        <td><?php echo $item['mode'] ?></td>
+                        <td><?php echo $item['sort'] ?></td>
+                        <td><?php echo $item['status'] ?></td>
                         <td><a href="#" class="plr c_red">编辑</a><a href="#" class="plr c_red">删除</a> </td>
                     </tr>
                     <?php } ?>
@@ -50,17 +52,20 @@
 <div class="add-anli" style="display: none;">
     <div class="add-anl-title">
         <span class="r f_xl">X</span>
-        <h3>新增案列</h3>
+        <h3>上传文件</h3>
     </div>
     <div class="p20">
         <table class="usertable">
             <tr>
-                <td width="60">名称</td>
-                <td><input type="text" class="input-t w350" name="name" /></td>
-            </tr>
-            <tr>
-                <td>顺序</td>
-                <td><input type="text" class="input-t w100" name="sort" /></td>
+                <td width="60">类型</td>
+                <td>
+                    <label class="pr20">
+                    <input type="radio" class="input-m" name="mode" value="identity" />法人身份证件
+                    </label>
+                    <label class="pr20">
+                    <input type="radio" class="input-m" name="mode" value="permit"/>营业执照
+                    </label>
+                </td>
             </tr>
             <tr>
                 <td>图片</td>
@@ -77,7 +82,7 @@
                         </p>
                     </div>
                     <div class="fix"></div>
-                    <p class="c_red f_s mt10">建议图片尺寸480*300px,支持0-3M文件快速上传,支持png,jpg格式</p>
+                    <p class="c_red f_s mt10">最大单张图片尺寸——宽1150px,支持0-3M文件快速上传,支持png,jpg格式</p>
                 </td>
             </tr>
             <tr>

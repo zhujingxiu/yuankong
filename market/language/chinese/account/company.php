@@ -1,9 +1,16 @@
 <?php
 // Heading 
-$_['heading_title']       = '我的账户信息';
+$_['heading_title']       = '企业中心_公司基本资料';
+
+$_['title_description']   = '企业中心_公司简介';
+$_['title_file']   		  = '企业中心_上传信息';
+$_['title_custom1']       = '企业中心_自定义模块1';
+$_['title_custom2']       = '企业中心_自定义模块2';
+$_['title_cases']         = '企业中心_案例精选';
+$_['title_member']        = '企业中心_团队成员';
 
 // Text
-$_['text_account']        = '我的账户';
+$_['text_account']        = '用户中心';
 $_['text_edit']           = '修改信息';
 $_['text_your_details']   = '我的详细信息';
 $_['text_success']        = '成功： 您的账户已更新。';

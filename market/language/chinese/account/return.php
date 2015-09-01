@@ -3,7 +3,7 @@
 $_['heading_title']      = '商品退换';
 
 // Text
-$_['text_account']       = '账户';
+$_['text_account']       = '用户中心';
 $_['text_return']        = '退换资料';
 $_['text_return_detail'] = '退换信息';
 $_['text_description']   = '<p>请完整填写下表，并获取RMA号。</p>';

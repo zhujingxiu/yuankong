@@ -3,7 +3,7 @@
 $_['heading_title']  = '更改密码';
 
 // Text
-$_['text_account']   = '我的账户';
+$_['text_account']   = '用户中心';
 $_['text_password']  = '您的账户密码';
 $_['text_success']   = '成功： 您的密码已更新。';
 

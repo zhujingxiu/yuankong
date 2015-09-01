@@ -90,7 +90,7 @@
   </div>
 </div>
 <div id="status-dialog" style="display:none">
-
+  <div class="do-result"></div>
   <table class="form">
     <tr>
       <td><?php echo $entry_status ?></td>
@@ -115,22 +115,23 @@
           $(this).dialog('close');
         },
         '<?php echo $button_save ?>':function(){
-          if(confirm('<?php echo $text_confirm ?>')){
+          
             $.ajax({
               url:'index.php?route=sale/project/edit&token=<?php echo $token ?>',
               type:'post',
               data:{project_id:project_id,status:$('#status-dialog select[name="status"]').val()},
               dataType:'json',
               success:function(json){
+                $('.do-result').empty();
                 if(json.status==0){
-                  alert(json.msg);
+                  $('.do-result').html('<div class="alert success">'+json.msg+'</div>');
                 }else{
-                  alert(json.msg);
-                  setTimeout('location.reload();',3000);
+                  $('.do-result').html('<div class="alert success">'+json.msg+'</div>');
+                  setTimeout('location.reload();',2000);
                 }
               }
             })
-          }
+          
         }
       }
     });
