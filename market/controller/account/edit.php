@@ -167,7 +167,13 @@ class ControllerAccountEdit extends Controller {
         }
         $this->data['back'] = $this->url->link('account/account', '', 'SSL');
 		$this->data['isCompany'] = $this->customer->isCompany();
-
+        $this->data['groups'] = array();
+        $groups = $this->model_service_company->getCompanyGroupsByCompanyId($this->customer->isCompany());
+        foreach ($groups as $item) {
+            $group = $this->model_service_company->getCompanyGroup($item);
+            if(!empty($group['name']))
+            $this->data['groups'][] = $group['name'];
+        }
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/edit.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/account/edit.tpl';
 		} else {

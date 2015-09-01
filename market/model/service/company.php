@@ -207,6 +207,11 @@ class ModelServiceCompany extends Model {
 
         return $query->rows;
     }
+    public function getCompanyGroup($company_id){
+        $query = $this->db->query("SELECT * FROM ".DB_PREFIX."company_group WHERE group_id = '".(int)$company_id."' AND `status` = '1' AND `show` = '1' ORDER BY sort_order ASC");
+
+        return $query->row;
+    }
     public function getCompany($company_id){
         $query = $this->db->query("SELECT * FROM ".DB_PREFIX."company WHERE company_id = '".(int)$company_id."' AND status = '1' AND approved = '1'");
 

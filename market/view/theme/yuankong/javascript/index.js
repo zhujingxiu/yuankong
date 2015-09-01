@@ -339,6 +339,7 @@ o.scr={
         }
     }
 }
+var pCommon = {};
 pCommon.slider = {
     //对外提供重置全局参数
     opts: {},

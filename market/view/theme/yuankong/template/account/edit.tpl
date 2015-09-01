@@ -31,27 +31,15 @@
                     <?php if($this->customer->isCompany()){ ?>
                         
                         <li><label>公司名：</label><?php echo $title ?></li>
-                        <li><label>机构代码：</label>
-                            <input type="text" class="xingming" name="code" value="<?php echo $code ?>" placeholder="请填写真实的机构代码" />
-                        </li>
-                        <li><label>公司项目：</label>消防设计，消防维保</li>
-                        <li><label>公司地址：</label>
-                            <input type="text" class="xingming address" name="address" value="<?php echo $address ?>" />
-                        </li>
-                        <li class="none"><label>联系人：</label>
-                            <input type="text" class="xingming" name="corporation" value="<?php echo $corporation ?>" />                       
-                        </li>
+                        <li><label>机构代码：</label><?php echo $code ?></li>
+                        <li><label>公司项目：</label><?php echo implode(" , ", $groups); ?></li>
+                        <li><label>公司地址：</label><?php echo $area_zone.' '.$address ?></li>
+                        <li class="none"><label>联系人：</label><?php echo $corporation ?></li>
                         <li class="none"><label>联系人手机号：</label>
-                            <input id="block" style="display:none;" type="text" class="xingming" name="mobile_phone" value="<?php echo $mobile_phone ?>" />
                             <b id="block1" ><?php echo $mobile_phone ?></b>
-                            <span onclick="tihuan('block');">[修改]</span>
-                            <a href="#">未验证</a>
                         </li>
                         <li class="none"><label>企业邮箱：</label>
-                            <input id="blocks" style="display:none;" type="text" class="xingming" name="email" value="<?php echo $email ?>" />
                             <b id="blocks1"><?php echo $email ?></b>
-                            <span onclick="tihuan('blocks');">[修改]</span>
-                            <a href="#">未验证</a>
                         </li>
                     <?php }else{?>
                         <li class="none"><label>手机号：</label>
@@ -74,8 +62,9 @@
                             <input type="radio" name="sex" class="sex" <?php echo $gender==1 ? 'checked="checked"' : '' ?>>男
                             <input type="radio" name="sex" class="sex" <?php echo $gender==2 ? 'checked="checked"' : '' ?>>女
                         </li>
-                    <?php }?>
                         <li><label>&nbsp;</label><input type="submit" value="保存资料" class="baocun"></li>
+                    <?php }?>
+                        
                     </ul>
                 </form>
             </div>

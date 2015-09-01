@@ -101,10 +101,8 @@ class ControllerCommonTool extends Controller {
 
     public function upload(){
         $result=array('status'=>0,'msg'=>'');
-        if (!empty($this->request->file)){
+        if (!empty($this->request->files)){
             $timePath=date('Ymd',time());
-            $tempFile = $this->request->file['file']['tmp_name'];
-
             $targetPath = DIR_UPLOAD.'/'.$timePath;
             if(!file_exists($targetPath)){
                 mkdir($targetPath);
@@ -112,18 +110,16 @@ class ControllerCommonTool extends Controller {
     
             // Validate the file type
             $fileTypes  = array('jpg','jpeg','gif','png'); // File extensions
-            $fileParts  = pathinfo($this->request->file['file']['name']);
-            $fileName   = md5(uniqid()).'.'.$fileParts['extension'];
-            $targetFile = rtrim($targetPath,'/') . '/'. $fileName;
-            $imgUri     = TPL_UPLOAD.$timePath.'/'.$fileName;
-            
-            if (in_array($fileParts['extension'],$fileTypes)) {
-                move_uploaded_file($tempFile,$targetFile);
-                $result['status']=1;
-                $result['msg']=$imgUri;
+            $pathinfo  = pathinfo($this->request->files['file']['name']);
+            $file   = date('His').substr(md5(uniqid()),rand(0,9),4).'.'.$pathinfo['extension'];
+            $targetFile = rtrim($targetPath,'/') . '/'. $file;
+            if ($this->request->files['file']['size'] > 3100000) {
+                $result = array('status' => 0,'msg' =>'仅支持3M以下大小的文件');
+            }else if (in_array($pathinfo['extension'],$fileTypes)) {
+                @move_uploaded_file($this->request->files['file']['tmp_name'],$targetFile);
+                $result = array('status' => 1,'file' => TPL_UPLOAD.$timePath.'/'.$file,'path'=>'upload/'.$timePath.'/'.$file);
             } else {
-                $result['status']=0;
-                $result['msg']='无效的文件类型,允许上传的类型为 '.join(' | ',$fileTypes).' ';
+                $result = array('status' => 0,'msg' =>'无效的文件类型,允许上传的类型为 '.join(' | ',$fileTypes));
             }
         }
         die(json_encode($result));

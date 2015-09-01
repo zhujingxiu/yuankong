@@ -13,7 +13,7 @@
         <div class="userbox4">
             <div class="usergs-box">
                 <div class="ovh gsjj">
-                    <p class="qy-logo"><img src="<?php echo $logo ?>" /></p>
+                    <p class="qy-logo"><img src="<?php echo $logo_thumb ?>" /></p>
                     <h3><?php echo $title ?></h3>
                     <p class="lh30 f_m">
                         <i class="ying">营</i>
@@ -41,11 +41,15 @@
                         <td><input type="text" name="title" class="input-t w350" value="<?php echo $title ?>"/></td>
                     </tr>
                     <tr>
+                        <td width="150">机构代码</td>
+                        <td><input type="text" name="code" class="input-t w350" value="<?php echo $code ?>"/></td>
+                    </tr>
+                    <tr>
                         <td>logo</td>
                         <td>
                             <div class="l p10 bd1">
                                 <p class="tc">
-                                    <img src="<?php echo $logo ?>" width="95" />
+                                    <img src="<?php echo $logo_thumb ?>" width="95" id="company-logo"/>
                                     <input type="hidden" name="logo" value="<?php echo $logo ?>" />
                                 </p>
                                 <p class="c9 pt5 tc">
@@ -63,7 +67,7 @@
                         <td>
                             <div class="l p10 bd1">
                                 <p class="tc">
-                                    <img src="<?php echo $cover ?>" width="280" />
+                                    <img src="<?php echo $cover_thumb ?>" width="280" id="company-cover"/>
                                     <input type="hidden" name="cover" value="<?php echo $cover ?>" />
                                 </p>
                                 <p class="c9 pt5 tc">
@@ -156,6 +160,7 @@
             }
             $('#area').append($select);
         };
+        add_select(<?php echo $this->config->get('config_province_id') ?>);
         //下拉选框事件
         o.mous.init(".adtressli","adrhover");
         $(".add-addr").on("click",function(){
@@ -165,24 +170,23 @@
     });
 </script>
 <script type="text/javascript"><!--
-function ajax_upload(el){
+function ajax_upload(el,rel_name){
     new AjaxUpload('#'+el, {
         action: 'index.php?route=common/tool/upload',
         name: 'file',
         autoSubmit: true,
         responseType: 'json',
         onSubmit: function(file, extension) {
-            $(this).after('<img src="market/view/theme/default/image/loading.gif" class="loading" style="padding-left: 5px;" />');
-            $(this).attr('disabled', true);
+            $('#'+el).after('<img src="market/view/theme/default/image/loading.gif" class="loading" style="padding-left: 5px;" />');
         },
         onComplete: function(file, json) {
-            $(this).attr('disabled', false);
             
             $('.error').remove();
             
-            if (json['success']) {
-                alert(json['success']);
-                $('input[name="'+$('#'+el).attr('data-rel')+'"]').val(json['file'])
+            if (json['status']==1) {
+                alert(json['msg']);
+                $('input[name="'+rel_name+'"]').val(json['path']);
+                $('#company-'+rel_name).attr('src',json['file'])
             }
             
             if (json['error']) {
@@ -194,8 +198,8 @@ function ajax_upload(el){
     });
 }
 $(function(){
-    ajax_upload('logo-upload');
-    ajax_upload('cover-upload');
+    ajax_upload('logo-upload','logo');
+    ajax_upload('cover-upload','cover');
 })
 //--></script>
 <?php echo $footer; ?> 

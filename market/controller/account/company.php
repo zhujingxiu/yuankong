@@ -39,10 +39,19 @@ class ControllerAccountCompany extends Controller {
             $this->data['mobile_phone'] = '';
         }
 
+        if (isset($this->request->post['code'])) {
+            $this->data['code'] = $this->request->post['code'];
+        } else if (isset($company_info['code'])) {
+            $this->data['code'] = $company_info['code'];
+        } else {
+            $this->data['code'] = '';
+        }
+        $this->data['logo_thumb'] = $this->data['avatar_thumb'] = '';
 		if (isset($this->request->post['logo'])) {
             $this->data['logo'] = $this->request->post['logo'];
         } else if (isset($company_info['logo'])) {
-			$this->data['logo'] = $this->model_tool_image->resize($company_info['logo'],95,95);
+            $this->data['logo'] = $company_info['logo'];
+			$this->data['logo_thumb'] = $this->model_tool_image->resize($company_info['logo'],95,95);
 		} else {
 			$this->data['logo'] = $this->model_tool_image->resize('nopic.jpg',95,95);
 		}
@@ -50,7 +59,8 @@ class ControllerAccountCompany extends Controller {
         if (isset($this->request->post['cover'])) {
             $this->data['cover'] = $this->request->post['cover'];
         } else if (isset($company_info['cover'])) {
-            $this->data['cover'] = $this->model_tool_image->resize($company_info['cover'],280,175);
+            $this->data['cover'] = $company_info['cover'];
+            $this->data['cover_thumb'] = $this->model_tool_image->resize($company_info['cover'],280,175);
         } else {
             $this->data['cover'] = $this->model_tool_image->resize('nopic.jpg',280,175);
         }
@@ -189,8 +199,7 @@ class ControllerAccountCompany extends Controller {
             foreach ($results as $item) {
                 $this->data['files'][] = array(
                     'file_id'   => $item['file_id'],
-                    'name'      => $item['name'],
-                    'mode'      => $item['mode'],
+                    'mode'      => $item['mode']=='identity' ? '法人身份证件' : '营业执照',
                     'sort'      => $item['sort'],
                     'status'    => $item['status'],
                     'photo'     => $this->model_tool_image->resize($item['path'],205,128),
