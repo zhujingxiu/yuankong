@@ -98,6 +98,10 @@
               <td><input type="text" name="identity_number" value="<?php echo $identity_number; ?>" /></td>
             </tr>
             <tr>
+              <td><?php echo $entry_email; ?></td>
+              <td><input type="text" name="email" value="<?php echo $email; ?>" /></td>
+            </tr>
+            <tr>
               <td><span class="required">*</span> <?php echo $entry_zone; ?></td>
               <td><select name="zone_id">
                   <?php foreach ($zones as $item): ?>

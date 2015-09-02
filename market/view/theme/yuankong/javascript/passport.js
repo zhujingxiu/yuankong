@@ -6,14 +6,14 @@ $.validator.addMethod("byteRangeLength", function(value, element, params) {
 $.validator.addMethod("isMobile", function(phone_number, element) {
 	phone_number = phone_number.replace(/\(|\)|\s+|-/g, "");
 	var isMobile = this.optional(element) || phone_number.length > 9 &&
-		phone_number.match(/^[(86)|0]?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/);
+		phone_number.match(/^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/);
 	return isMobile;
 }, "手机号码非法");
 
 $.validator.addMethod("hasMobile", function(phone_number, element) {
 	phone_number = phone_number.replace(/\(|\)|\s+|-/g, "");
 	var isMobile = this.optional(element) || phone_number.length > 9 &&
-		phone_number.match(/^[(86)|0]?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/);
+		phone_number.match(/^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/);
 	if(isMobile){
 		var validate = false;
 		$.ajax({

@@ -122,7 +122,7 @@ class ModelSaleCompany extends Model {
 			'status' 		=> isset($data['status']) ? (int)$data['status'] : 0,
 			'avatar' 		=> isset($data['logo']) ? htmlspecialchars_decode($data['logo']) : '',
       	);
-      	$this->db->update('customer',$customer,array('company_id'=>$company_id));
+      	$this->db->update('customer',array('company_id'=>$company_id),$customer);
       	if ($data['password']) {
         	$this->db->query("UPDATE " . DB_PREFIX . "company SET salt = '" . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . "' WHERE company_id = '" . (int)$company_id . "'");
         	$this->db->query("UPDATE " . DB_PREFIX . "customer SET salt = '" . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . "' WHERE company_id = '" . (int)$company_id . "'");
@@ -141,6 +141,7 @@ class ModelSaleCompany extends Model {
         	
       	}
 	}
+
 	
 	public function deleteCompany($company_id) {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "company WHERE company_id = '" . (int)$company_id . "'");

@@ -55,7 +55,8 @@ class ModelToolImage extends Model {
 	}
 
 	public function resize_upload($filename, $width, $height, $type = "") {
-		if (!file_exists(DIR_UPLOAD . $filename) || !is_file(DIR_UPLOAD . $filename)) {
+		var_dump(DIR_ASSET.$filename);
+		if (!file_exists(DIR_ASSET . $filename) || !is_file(DIR_ASSET . $filename)) {
 			return;
 		} 
 		
@@ -66,7 +67,7 @@ class ModelToolImage extends Model {
 		$old_image = $filename;
 		$new_image = 'cache/' . utf8_substr($filename, 0, utf8_strrpos($filename, '.')) . '-' . $width . 'x' . $height . $type .'.' . $extension;
 		
-		if (!file_exists(DIR_UPLOAD . $new_image) || (filemtime(DIR_UPLOAD . $old_image) > filemtime(DIR_UPLOAD . $new_image))) {
+		if (!file_exists(DIR_ASSET . $new_image) || (filemtime(DIR_ASSET . $old_image) > filemtime(DIR_ASSET . $new_image))) {
 			$path = '';
 			
 			$directories = explode('/', dirname(str_replace('../', '', $new_image)));
@@ -74,19 +75,19 @@ class ModelToolImage extends Model {
 			foreach ($directories as $directory) {
 				$path = $path . '/' . $directory;
 				
-				if (!file_exists(DIR_UPLOAD . $path)) {
-					@mkdir(DIR_UPLOAD . $path, 0777);
+				if (!file_exists(DIR_ASSET . $path)) {
+					@mkdir(DIR_ASSET . $path, 0777);
 				}		
 			}
 
-			list($width_orig, $height_orig) = getimagesize(DIR_UPLOAD . $old_image);
+			list($width_orig, $height_orig) = getimagesize(DIR_ASSET . $old_image);
 
 			if ($width_orig != $width || $height_orig != $height) {
-				$image = new Image(DIR_UPLOAD . $old_image);
+				$image = new Image(DIR_ASSET . $old_image);
 				$image->resize($width, $height, $type);
-				$image->save(DIR_UPLOAD . $new_image);
+				$image->save(DIR_ASSET . $new_image);
 			} else {
-				copy(DIR_UPLOAD . $old_image, DIR_UPLOAD . $new_image);
+				copy(DIR_ASSET . $old_image, DIR_ASSET . $new_image);
 			}
 		}
 		

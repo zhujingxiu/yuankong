@@ -1,6 +1,6 @@
 <?php
 class ModelServiceCompany extends Model {
-        public function addCompany($data) {
+    public function addCompany($data) {
         $area_zone = array();
         if(isset($data['area']) && is_array($data['area'])){
             foreach ($data['area'] as $area_id) {
@@ -68,6 +68,105 @@ class ModelServiceCompany extends Model {
         
         if (!empty($data['default'])) {
             $this->db->query("UPDATE " . DB_PREFIX . "customer SET address_id = '" . (int)$address_id . "' WHERE customer_id = '" . (int)$this->customer->getId() . "'");
+        }
+    }
+
+    public function editCompany($company_id,$data=array()){
+        $area_zone = array();
+        if(isset($data['area']) && is_array($data['area'])){
+            foreach ($data['area'] as $area_id) {
+                $_area_info = $this->db->fetch('area',array('one'=>true,'condition'=> array('area_id'=>$area_id)));
+                if(!empty($_area_info['name'])){
+                    $area_zone[] = $_area_info['name'];
+                }               
+            }
+        }
+        $company = $customer = array();
+        if(isset($data['title'])){
+            $company['title'] = $data['title'];
+        }
+        if(isset($data['corporation'])){
+            $company['corporation'] = $data['corporation'];
+            $customer['fullname'] = $data['corporation'];
+        }
+        if(isset($data['mobile_phone'])){
+            $company['mobile_phone'] = $data['mobile_phone'];
+            $customer['mobile_phone'] = $data['mobile_phone'];
+        }
+        if(isset($data['email'])){
+            $company['email'] = $data['email'];
+            $customer['email'] = $data['email'];
+        }
+        if(isset($data['telephone'])){
+            $company['telephone'] = $data['telephone'];
+            $customer['telephone'] = $data['telephone'];
+        }
+        if(isset($data['fax'])){
+            $company['fax'] = $data['fax'];
+            $customer['fax'] = $data['fax'];
+        }
+        if(isset($data['postcode'])){
+            $company['postcode'] = $data['postcode'];
+            $customer['postcode'] = $data['postcode'];
+        }
+        if(isset($data['logo'])){
+            $company['logo'] = htmlspecialchars_decode($data['logo']);
+            $customer['avatar'] = htmlspecialchars_decode($data['logo']);
+        }
+        if(isset($data['cover'])){
+            $company['cover'] = htmlspecialchars_decode($data['cover']);
+        }
+        if(isset($data['zone_id'])){
+            $company['zone_id'] = $data['zone_id'];
+        }
+        if(isset($data['code'])){
+            $company['code'] = strip_tags($data['code']);
+        }
+
+        if($area_zone && !empty($data['address'])){
+            $company['area_zone'] = implode(" ", $area_zone);
+            $company['areas'] = implode("|",$data['area']);
+            $company['address'] = $data['address'];
+        }
+        echo "<pre>";
+        print_r($company);
+        echo "</pre>";
+        if($company){
+            $company['approved'] = 0;
+            $this->db->update("company", array('company_id' => (int)$company_id),$company);
+        }
+        echo "<pre>";
+        print_r($customer);
+        echo "</pre>";
+        if($customer){
+            $this->db->update('customer',array('company_id'=>$company_id),$customer);
+        }
+        echo "<pre>";
+        print_r($data['group_id']);
+        echo "</pre>";
+        if(isset($data['group_id']) && is_array($data['group_id'])) {
+            $this->db->delete('company_to_group',array('company_id'=>$company_id));
+            foreach ($data['group_id'] as $group) {
+                var_dump($group);
+                $this->db->insert('company_to_group',array('company_id'=>$company_id,'group_id'=>$group));
+            }
+        }
+        exit;
+        
+    }
+
+
+    public function editDescription($company_id,$data=array()){
+        $company = array();
+        if(isset($data['description'])){
+            $company['description'] = strip_tags($data['description']);
+        }
+
+        if(isset($data['cover'])){
+            $company['cover'] = htmlspecialchars_decode($data['cover']);
+        }
+        if($company){
+            $this->db->update("company", array('company_id' => (int)$company_id),$company);
         }
     }
     public function addCompanyRequest($data) {
