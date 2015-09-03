@@ -55,6 +55,7 @@
         <h3>新增成员</h3>
     </div>
     <div class="p20">
+        <form id="case-form" method="post" action="<?php echo $action ?>" enctype="multipart/form-data">
         <table class="usertable">
             <tr>
                 <td width="60">名称</td>
@@ -72,18 +73,26 @@
                 <td>头像</td>
                 <td>
                     <div class="l p10 bd1">
-                        <p class="tc"><img src="<?php echo $no_photo ?>" width="205" /></p>
-                        <p class="c9 pt5 tc"><a href="#">选择图像</a><em class="plr c9">|</em><a href="#">清除图像</a></p>
+                        <p class="tc">
+                            <img src="<?php echo $no_photo ?>" width="205" id="thumb"/>
+                            <input type="hidden" name="avatar" />
+                        </p>
+                        <p class="c9 pt5 tc">
+                            <a id="member-upload">选择图像</a>
+                            <em class="plr c9">|</em>
+                            <a onclick="$('#thumb').attr('src', '<?php echo $no_photo; ?>'); $('input[name=\'avatar\']').attr('value', '');">清除图像</a>
+                        </p>
                     </div>
                     <div class="fix"></div>
                     <p class="c_red f_s mt10">建议图片尺寸480*300px,支持0-3M文件快速上传,支持png,jpg格式</p>
                 </td>
             </tr>
             <tr>
-                <td>&nbsp;</td>
+                <td>&nbsp;<input name="member_id" type="hidden"></td>
                 <td><input type="submit" class="gc-tab-sub w150" value="提交"/></td>
             </tr>
         </table>
+        </form>
     </div>
 </div>
 <script type="text/javascript">
@@ -97,4 +106,27 @@
         $(".tm-mask").show();
     });
 </script>
+<script type="text/javascript"><!--
+new AjaxUpload('#member-upload', {
+    action: 'index.php?route=common/tool/upload',
+    name: 'file',
+    autoSubmit: true,
+    responseType: 'json',
+    onSubmit: function(file, extension) {
+        $('#member-upload').after('<img src="market/view/theme/default/image/loading.gif" class="loading" style="padding-left: 5px;" />');
+    },
+    onComplete: function(file, json) {
+        
+        if (json['status']==1) {
+            $('input[name="avatar"]').val(json['file']);
+            $('#thumb').attr('src',json['file'])
+        }else{
+            alert(json['msg']);
+            return false;
+        } 
+        
+        $('.loading').remove(); 
+    }
+});
+//--></script>
 <?php echo $footer; ?> 

@@ -55,7 +55,7 @@ class ModelToolImage extends Model {
 	}
 
 	public function resize_upload($filename, $width, $height, $type = "") {
-		var_dump(DIR_ASSET.$filename);
+		//var_dump(DIR_ASSET.$filename);
 		if (!file_exists(DIR_ASSET . $filename) || !is_file(DIR_ASSET . $filename)) {
 			return;
 		} 

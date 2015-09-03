@@ -55,12 +55,13 @@
         <h3>上传文件</h3>
     </div>
     <div class="p20">
+        <form id="case-form" method="post" action="<?php echo $action ?>" enctype="multipart/form-data">
         <table class="usertable">
             <tr>
                 <td width="60">类型</td>
                 <td>
                     <label class="pr20">
-                    <input type="radio" class="input-m" name="mode" value="identity" />法人身份证件
+                    <input type="radio" class="input-m" name="mode" value="identity" checked="checked"/>法人身份证件
                     </label>
                     <label class="pr20">
                     <input type="radio" class="input-m" name="mode" value="permit"/>营业执照
@@ -72,24 +73,25 @@
                 <td>
                     <div class="l p10 bd1">
                         <p class="tc">
-                            <img src="<?php echo $no_photo ?>" width="205" />
-                            <input type="hidden" name="photo" value="<?php echo $cover; ?>" id="cover" />
+                            <img src="<?php echo $no_photo ?>" width="205" id="thumb"/>
+                            <input type="hidden" name="path" value="" id="cover" />
                         </p>
                         <p class="c9 pt5 tc">
                             <a id="btn-upload" >选择图像</a>
                             <em class="plr c9">|</em>
-                            <a href="#">清除图像</a>
+                            <a onclick="$('#thumb').attr('src', '<?php echo $no_photo; ?>'); $('input[name=\'avatar\']').attr('value', '');">清除图像</a>
                         </p>
                     </div>
                     <div class="fix"></div>
-                    <p class="c_red f_s mt10">最大单张图片尺寸——宽1150px,支持0-3M文件快速上传,支持png,jpg格式</p>
+                    <p class="c_red f_s mt10">建议图片尺寸480*300px,支持0-3M文件快速上传,支持png,jpg格式</p>
                 </td>
             </tr>
             <tr>
-                <td>&nbsp;</td>
+                <td>&nbsp;<input name="file_id" type="hidden"></td>
                 <td><input type="submit" class="gc-tab-sub w150" value="提交"/></td>
             </tr>
         </table>
+        </form>
     </div>
 </div>
 <script type="text/javascript">
@@ -111,22 +113,16 @@ new AjaxUpload('#btn-upload', {
     responseType: 'json',
     onSubmit: function(file, extension) {
         $('#btn-upload').after('<img src="market/view/theme/default/image/loading.gif" class="loading" style="padding-left: 5px;" />');
-        $('#btn-upload').attr('disabled', true);
     },
     onComplete: function(file, json) {
-        $('#btn-upload').attr('disabled', false);
         
-        $('.error').remove();
-        
-        if (json['success']) {
-            alert(json['success']);
-            
-            $('input[name=\'option[<?php echo $option['product_option_id']; ?>]\']').attr('value', json['file']);
-        }
-        
-        if (json['error']) {
-            alert(json['error']);
-        }
+        if (json['status']==1) {
+            $('input[name="path"]').val(json['file']);
+            $('#thumb').attr('src',json['file'])
+        }else{
+            alert(json['msg']);
+            return false;
+        } 
         
         $('.loading').remove(); 
     }

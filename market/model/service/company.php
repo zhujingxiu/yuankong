@@ -128,33 +128,23 @@ class ModelServiceCompany extends Model {
             $company['areas'] = implode("|",$data['area']);
             $company['address'] = $data['address'];
         }
-        echo "<pre>";
-        print_r($company);
-        echo "</pre>";
+
         if($company){
             $company['approved'] = 0;
             $this->db->update("company", array('company_id' => (int)$company_id),$company);
         }
-        echo "<pre>";
-        print_r($customer);
-        echo "</pre>";
+
         if($customer){
             $this->db->update('customer',array('company_id'=>$company_id),$customer);
         }
-        echo "<pre>";
-        print_r($data['group_id']);
-        echo "</pre>";
+
         if(isset($data['group_id']) && is_array($data['group_id'])) {
             $this->db->delete('company_to_group',array('company_id'=>$company_id));
             foreach ($data['group_id'] as $group) {
-                var_dump($group);
                 $this->db->insert('company_to_group',array('company_id'=>$company_id,'group_id'=>$group));
             }
-        }
-        exit;
-        
+        }        
     }
-
 
     public function editDescription($company_id,$data=array()){
         $company = array();
@@ -168,6 +158,107 @@ class ModelServiceCompany extends Model {
         if($company){
             $this->db->update("company", array('company_id' => (int)$company_id),$company);
         }
+    }
+
+    public function editModule($company_id,$data=array()){
+        $module = array();
+        if(isset($data['sort'])){
+            $module['sort'] = (int)$data['sort'];
+        }else{
+            $module['sort'] = 1;
+        }
+        $this->db->query("DELETE FROM ".DB_PREFIX."company_module WHERE company_id = '".(int)$company_id."' AND sort = '".$module['sort']."'");
+        if(isset($data['status'])){
+            $module['status'] = (int)$data['status'];
+        }else{
+            $module['status'] = 0;
+        }
+        if(!empty($data['title'])){
+            $module['title'] = strip_tags($data['title']);
+        }
+        if(isset($data['image'])){
+            $module['image'] = htmlspecialchars_decode($data['image']);
+        }
+        $module['company_id'] =(int)$company_id;
+
+        $this->db->insert("company_module",$module);
+
+    }
+
+    public function editCase($company_id,$data=array()){
+
+        $case = array();
+        
+        if(!empty($data['title'])){
+            $case['title'] = strip_tags($data['title']);
+        }
+        if(isset($data['photo'])){
+            $case['photo'] = htmlspecialchars_decode($data['photo']);
+        }
+        if(isset($data['sort'])){
+            $case['sort'] = (int)$data['sort'];
+        }else{
+            $case['sort'] = 1;
+        }
+        $case['company_id'] =(int)$company_id;
+        $case['date_added'] =date('Y-m-d H:i:s');
+        if(isset($data['case_id']) && $data['case_id']){
+            $this->db->update("company_case",array('case_id'=>$case_id),$case);
+        }else{
+            $this->db->insert("company_case",$case);
+        }        
+    }
+
+    public function editMember($company_id,$data=array()){
+
+        $member = array();
+        
+        if(!empty($data['name'])){
+            $member['name'] = strip_tags($data['name']);
+        }
+        if(!empty($data['position'])){
+            $member['position'] = strip_tags($data['position']);
+        }
+        if(isset($data['avatar'])){
+            $member['avatar'] = htmlspecialchars_decode($data['avatar']);
+        }
+        if(isset($data['sort'])){
+            $member['sort'] = (int)$data['sort'];
+        }else{
+            $member['sort'] = 1;
+        }
+        $member['company_id'] =(int)$company_id;
+        $member['date_added'] =date('Y-m-d H:i:s');
+        if(isset($data['member_id']) && $data['member_id']){
+            $this->db->update("company_member",array('member_id'=>$member_id),$member);
+        }else{
+            $this->db->insert("company_member",$member);
+        }        
+    }
+
+    public function editFile($company_id,$data=array()){
+
+        $file = array();
+        
+        if(!empty($data['mode'])){
+            $file['mode'] = strtolower($data['mode']);
+        }
+
+        if(isset($data['path'])){
+            $file['path'] = htmlspecialchars_decode($data['path']);
+        }
+        if(isset($data['sort'])){
+            $file['sort'] = (int)$data['sort'];
+        }else{
+            $file['sort'] = 1;
+        }
+        $file['company_id'] =(int)$company_id;
+        $file['date_added'] =date('Y-m-d H:i:s');
+        if(isset($data['file_id']) && $data['file_id']){
+            $this->db->update("company_file",array('file_id'=>$file_id),$file);
+        }else{
+            $this->db->insert("company_file",$file);
+        }        
     }
     public function addCompanyRequest($data) {
         $fields =  array(

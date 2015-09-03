@@ -26,7 +26,7 @@
                     <?php foreach($cases as $item){ ?>
                     <tr>
                         <td><img src="<?php echo $item['photo'] ?>" width="150" /></td>
-                        <td><?php echo $item['name'] ?></td>
+                        <td><?php echo $item['title'] ?></td>
                         <td>1</td>
                         <td><a href="#" class="plr c_red">编辑</a><a href="#" class="plr c_red">删除</a> </td>
                     </tr>
@@ -53,27 +53,28 @@
         <h3>新增案列</h3>
     </div>
     <div class="p20">
+        <form id="case-form" method="post" action="<?php echo $action ?>" enctype="multipart/form-data">
         <table class="usertable">
             <tr>
                 <td width="60">名称</td>
-                <td><input type="text" class="input-t w350" name="name" /></td>
+                <td><input type="text" class="input-t w350" name="title" /></td>
             </tr>
             <tr>
                 <td>顺序</td>
-                <td><input type="text" class="input-t w100" name="sort" /></td>
+                <td><input type="text" class="input-t w100" name="sort" value="1"/></td>
             </tr>
             <tr>
                 <td>图片</td>
                 <td>
                     <div class="l p10 bd1">
                         <p class="tc">
-                            <img src="<?php echo $no_photo ?>" width="205" />
-                            <input type="hidden" name="photo" value="<?php echo $cover; ?>" id="cover" />
+                            <img src="<?php echo $no_photo ?>" width="205" id="thumb"/>
+                            <input type="hidden" name="photo" />
                         </p>
                         <p class="c9 pt5 tc">
-                            <a id="btn-upload" >选择图像</a>
+                            <a id="case-upload" >选择图像</a>
                             <em class="plr c9">|</em>
-                            <a href="#">清除图像</a>
+                            <a onclick="$('#thumb').attr('src', '<?php echo $no_photo; ?>'); $('input[name=\'photo\']').attr('value', '');">清除图像</a>
                         </p>
                     </div>
                     <div class="fix"></div>
@@ -81,10 +82,11 @@
                 </td>
             </tr>
             <tr>
-                <td>&nbsp;</td>
+                <td>&nbsp;<input name="case_id" type="hidden"></td>
                 <td><input type="submit" class="gc-tab-sub w150" value="提交"/></td>
             </tr>
         </table>
+        </form>
     </div>
 </div>
 <script type="text/javascript">
@@ -99,29 +101,23 @@
     });
 </script>
 <script type="text/javascript"><!--
-new AjaxUpload('#btn-upload', {
+new AjaxUpload('#case-upload', {
     action: 'index.php?route=common/tool/upload',
     name: 'file',
     autoSubmit: true,
     responseType: 'json',
     onSubmit: function(file, extension) {
-        $('#btn-upload').after('<img src="market/view/theme/default/image/loading.gif" class="loading" style="padding-left: 5px;" />');
-        $('#btn-upload').attr('disabled', true);
+        $('#case-upload').after('<img src="market/view/theme/default/image/loading.gif" class="loading" style="padding-left: 5px;" />');
     },
     onComplete: function(file, json) {
-        $('#btn-upload').attr('disabled', false);
         
-        $('.error').remove();
-        
-        if (json['success']) {
-            alert(json['success']);
-            
-            $('input[name=\'option[<?php echo $option['product_option_id']; ?>]\']').attr('value', json['file']);
-        }
-        
-        if (json['error']) {
-            alert(json['error']);
-        }
+        if (json['status']==1) {
+            $('input[name="photo"]').val(json['file']);
+            $('#thumb').attr('src',json['file'])
+        }else{
+            alert(json['msg']);
+            return false;
+        } 
         
         $('.loading').remove(); 
     }
