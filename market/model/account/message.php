@@ -1,25 +1,9 @@
 <?php
 class ModelAccountMessage extends Model {	
 	public function getMessages($data = array()) {
-		$sql = "SELECT * FROM `" . DB_PREFIX . "message` WHERE customer_id = '" . (int)$this->customer->getId() . "'";
-		   
-		$sort_data = array(
-			'customer_id',
-			'is_top',
-			'date_added'
-		);
-	
-		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
-			$sql .= " ORDER BY " . $data['sort'];	
-		} else {
-			$sql .= " ORDER BY date_added";	
-		}
-			
-		if (isset($data['order']) && ($data['order'] == 'DESC')) {
-			$sql .= " DESC";
-		} else {
-			$sql .= " ASC";
-		}
+		$sql = "SELECT * FROM `" . DB_PREFIX . "customer_message` WHERE customer_id = '" . (int)$this->customer->getId() . "'";
+		   	
+		$sql .= " ORDER BY `read` = '1' , date_added DESC";	
 		
 		if (isset($data['start']) || isset($data['limit'])) {
 			if ($data['start'] < 0) {
@@ -38,8 +22,16 @@ class ModelAccountMessage extends Model {
 		return $query->rows;
 	}			
 	public function getTotalMessages() {
-      	$query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "message` WHERE customer_id = '" . (int)$this->customer->getId() . "'");
+      	$query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "customer_message` WHERE customer_id = '" . (int)$this->customer->getId() . "'");
 			
 		return $query->row['total'];
+	}
+
+	public function updateRead($message_id){
+		$this->db->update('customer_message',array('message_id'=>$message_id),array('read'=>1));
+	}
+
+	public function deleteMessage($message_id){
+		$this->db->delete('customer_message',array('message_id'=>$message_id));	
 	}
 }

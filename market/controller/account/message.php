@@ -35,10 +35,6 @@ class ControllerAccountMessage extends Controller {
 
     	$this->data['heading_title'] = $this->language->get('heading_title');
 		
-		$this->data['column_date_added'] = $this->language->get('column_date_added');
-		$this->data['column_description'] = $this->language->get('column_description');
-		$this->data['column_amount'] = sprintf($this->language->get('column_amount'), $this->config->get('config_currency'));
-		
 		$this->data['text_total'] = $this->language->get('text_total');
 		$this->data['text_empty'] = $this->language->get('text_empty');
 		
@@ -65,9 +61,11 @@ class ControllerAccountMessage extends Controller {
  		
     	foreach ($results as $result) {
 			$this->data['messages'][] = array(
-				'amount'      => $this->currency->format($result['amount'], $this->config->get('config_currency')),
-				'description' => $result['description'],
-				'date_added'  => date($this->language->get('date_format_short'), strtotime($result['date_added']))
+				'message_id'    => $result['message_id'],
+				'subject'      	=> $result['subject'],
+				'text'      	=> $result['text'],
+				'read' 			=> $result['read'],
+				'date_added'  	=> date('Y-m-d H:i', strtotime($result['date_added']))
 			);
 		}	
 
@@ -78,27 +76,36 @@ class ControllerAccountMessage extends Controller {
 		$pagination->text = $this->language->get('text_pagination');
 		$pagination->url = $this->url->link('account/message', 'page={page}', 'SSL');
 			
-		$this->data['pagination'] = $pagination->render();
+		$this->data['pagination'] = $pagination->render_page();
 		
-		$this->data['total'] = $this->currency->format($this->customer->getBalance());
 		
 		$this->data['continue'] = $this->url->link('account/account', '', 'SSL');
 		
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/message.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/account/message.tpl';
-		} else {
-			$this->template = 'default/template/account/message.tpl';
-		}
+		$this->template = $this->config->get('config_template') . '/template/account/message.tpl';
 		
 		$this->children = array(
 			'common/column_left',
 			'common/column_right',
-			'common/content_top',
-			'common/content_bottom',
 			'common/footer',
 			'common/header'	
 		);
 						
 		$this->response->setOutput($this->render());		
 	} 		
+
+	public function setRead(){
+		$message = isset($this->request->get['message_id']) ? $this->request->get['message_id'] : false;
+		if($message){
+			$this->load->model('account/message');
+			$this->model_account_message->updateRead($message);
+		}
+	}
+
+	public function delete(){
+		$message = isset($this->request->get['message_id']) ? $this->request->get['message_id'] : false;
+		if($message){
+			$this->load->model('account/message');
+			$this->model_account_message->deleteMessage($message);
+		}
+	}
 }
