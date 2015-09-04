@@ -40,6 +40,7 @@
 .detail-view{
     color: #05e;
 }
+a[onclick]{cursor: pointer;}
 .l-products{border-left-color: #C30D23;}
 .button-search{cursor: pointer;}
 .ebbox span { padding: 0 11px 0 16px;}  

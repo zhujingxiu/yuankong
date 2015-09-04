@@ -65,7 +65,7 @@
             <ul class="jslist">
             	<?php foreach ($cases as $item): ?>
             	<li class="itempic">
-                    <img src="<?php echo $item['photo'] ?>" />
+                    <img src="<?php echo $item['photo'] ?>" title="<?php echo $item['title'] ?>" alt="<?php echo $item['title'] ?>"/>
                 </li>	
             	<?php endforeach ?>
             </ul>
@@ -80,7 +80,7 @@
             <ul class="yk_members">
             	<?php foreach ($members as $item): ?>
             	<li>
-                    <img src="<?php echo $item['avatar'] ?>" />
+                    <img src="<?php echo $item['avatar'] ?>" title="<?php echo $item['name'] ?>" alt="<?php echo $item['name'] ?>"/>
                     <p><?php echo $item['name'] ?></p>
                     <p class="thin"><?php echo $item['position'] ?></p>
                 </li>	

@@ -143,7 +143,8 @@ class ModelServiceCompany extends Model {
             foreach ($data['group_id'] as $group) {
                 $this->db->insert('company_to_group',array('company_id'=>$company_id,'group_id'=>$group));
             }
-        }        
+        }    
+           
     }
 
     public function editDescription($company_id,$data=array()){
@@ -185,6 +186,15 @@ class ModelServiceCompany extends Model {
 
     }
 
+    public function getCase($case_id){
+        return $this->db->fetch('company_case',array('one'=>true,'condition'=>array('case_id'=>$case_id,'company_id'=>$this->customer->isCompany())));
+    }
+
+    public function deleteCase($case_id){
+        $this->db->delete('company_case',array('case_id'=>$case_id,'company_id'=>$this->customer->isCompany()));
+        return true;
+    }
+
     public function editCase($company_id,$data=array()){
 
         $case = array();
@@ -202,11 +212,21 @@ class ModelServiceCompany extends Model {
         }
         $case['company_id'] =(int)$company_id;
         $case['date_added'] =date('Y-m-d H:i:s');
+        
         if(isset($data['case_id']) && $data['case_id']){
-            $this->db->update("company_case",array('case_id'=>$case_id),$case);
+            $this->db->update("company_case",array('case_id'=>$data['case_id']),$case);
         }else{
             $this->db->insert("company_case",$case);
-        }        
+        }      
+    }
+
+    public function getMember($member_id){
+        return $this->db->fetch('company_member',array('one'=>true,'condition'=>array('member_id'=>$member_id,'company_id'=>$this->customer->isCompany())));
+    }
+
+    public function deleteMember($member_id){
+        $this->db->delete('company_member',array('member_id'=>$member_id,'company_id'=>$this->customer->isCompany()));
+        return true;
     }
 
     public function editMember($company_id,$data=array()){
@@ -230,12 +250,20 @@ class ModelServiceCompany extends Model {
         $member['company_id'] =(int)$company_id;
         $member['date_added'] =date('Y-m-d H:i:s');
         if(isset($data['member_id']) && $data['member_id']){
-            $this->db->update("company_member",array('member_id'=>$member_id),$member);
+            $this->db->update("company_member",array('member_id'=>$data['member_id']),$member);
         }else{
             $this->db->insert("company_member",$member);
         }        
     }
+    public function getFile($file_id){
+        return $this->db->fetch('company_file',array('one'=>true,'condition'=>array('file_id'=>$file_id,'company_id'=>$this->customer->isCompany())));
+    }
 
+    public function deleteFile($file_id){
+        $this->db->delete('company_file',array('file_id'=>$file_id,'company_id'=>$this->customer->isCompany()));
+        return true;
+    }
+    
     public function editFile($company_id,$data=array()){
 
         $file = array();
@@ -255,7 +283,7 @@ class ModelServiceCompany extends Model {
         $file['company_id'] =(int)$company_id;
         $file['date_added'] =date('Y-m-d H:i:s');
         if(isset($data['file_id']) && $data['file_id']){
-            $this->db->update("company_file",array('file_id'=>$file_id),$file);
+            $this->db->update("company_file",array('file_id'=>$data['file_id']),$file);
         }else{
             $this->db->insert("company_file",$file);
         }        
@@ -403,7 +431,7 @@ class ModelServiceCompany extends Model {
         return $query->row;
     }
     public function getCompany($company_id){
-        $query = $this->db->query("SELECT * FROM ".DB_PREFIX."company WHERE company_id = '".(int)$company_id."' AND status = '1' AND approved = '1'");
+        $query = $this->db->query("SELECT * FROM ".DB_PREFIX."company WHERE company_id = '".(int)$company_id."' AND status = '1'");
 
         return $query->row;
     }

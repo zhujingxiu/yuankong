@@ -175,6 +175,23 @@ function getProjectStatus($status,$entry_id){
     return $text;
 }
 
+function getCompanyFileStatus($status){
+    $text = '';
+    switch ((int)$status) {
+        case 1:
+            $text = '已过审';
+            break;
+        case 2:
+            $text = '未过审';
+            break;
+        default:
+            $text = '待审核';
+            break;
+    }
+    return $text;
+
+}
+
   /**
    * *
    * @param string $value

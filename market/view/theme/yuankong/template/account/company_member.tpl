@@ -30,7 +30,10 @@
                         <td><?php echo $item['name'] ?></td>
                         <td><?php echo $item['position'] ?></td>
                         <td><?php echo $item['sort'] ?></td>
-                        <td><a href="#" class="plr c_red">编辑</a><a href="#" class="plr c_red">删除</a> </td>
+                        <td>
+                            <a onclick="detail(<?php echo $item['member_id'] ?>);" class="plr c_red">编辑</a>
+                            <a onclick="delMember(<?php echo $item['member_id'] ?>)" class="plr c_red">删除</a> 
+                        </td>
                     </tr>
                     <?php } ?>
 
@@ -55,7 +58,7 @@
         <h3>新增成员</h3>
     </div>
     <div class="p20">
-        <form id="case-form" method="post" action="<?php echo $action ?>" enctype="multipart/form-data">
+        <form id="member-form" method="post" action="<?php echo $action ?>" enctype="multipart/form-data">
         <table class="usertable">
             <tr>
                 <td width="60">名称</td>
@@ -96,12 +99,49 @@
     </div>
 </div>
 <script type="text/javascript">
-
+    function detail(member_id){
+        $.get(
+            'index.php?route=account/company/ajax_data',
+            {action:'getmember',member_id:member_id},
+            function(json){
+                if(json.status==1){
+                    $('#member-form input[type!="submit"]').val('');
+                    $('#member-form #thumb').attr('src','<?php echo $no_photo ?>');
+                    var data = json.info;
+                    $('#member-form input[name="name"]').val(data.name);
+                    $('#member-form input[name="position"]').val(data.position);
+                    $('#member-form input[name="member_id"]').val(data.member_id);
+                    $('#member-form input[name="avatar"]').val(data.avatar);
+                    $('#member-form input[name="sort"]').val(data.sort);
+                    $('#member-form #thumb').attr('src',data.avatar);
+                    $(".add-anli").show();
+                    $(".tm-mask").show();
+                }else{  
+                    alert(json.msg)
+                }
+        },'json');
+    }
+    function delMember(member_id){
+        if(confirm('确认删除该成员？')){
+            $.get(
+                'index.php?route=account/company/ajax_data',
+                {action:'deletemember',member_id:member_id},
+                function(json){
+                    if(json.status==1){
+                        location.reload();
+                    }else{  
+                        alert(json.msg)
+                    }
+            },'json');
+        }
+    }
     $(".add-anl-title span").bind('click',function(){
         $(this).parent().parent().hide();
         $(".tm-mask").hide();
     });
     $("span.gc-tab-sub").bind('click',function(){
+        $('#member-form input[type!="submit"]').val('');
+        $('#member-form #thumb').attr('src','<?php echo $no_photo ?>');
         $(".add-anli").show()
         $(".tm-mask").show();
     });

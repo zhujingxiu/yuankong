@@ -37,6 +37,24 @@ class ControllerAccountCompany extends Controller {
 
         $company_info = $this->model_service_company->getCompany($company_id);
 
+        if(isset($this->error['email'])){
+            $this->data['error_email'] = $this->error['email'];
+        }else{
+            $this->data['error_email'] = '';
+        }
+
+        if(isset($this->error['title'])){
+            $this->data['error_title'] = $this->error['title'];
+        }else{
+            $this->data['error_title'] = '';
+        }
+
+        if(isset($this->error['corporation'])){
+            $this->data['error_corporation'] = $this->error['corporation'];
+        }else{
+            $this->data['error_corporation'] = '';
+        }
+
         if (isset($this->error['warning'])) {
             $this->data['error_warning'] = $this->error['warning'];
         } else {
@@ -74,7 +92,7 @@ class ControllerAccountCompany extends Controller {
             $this->data['logo'] = $this->request->post['logo'];
         } else if (isset($company_info['logo']) && file_exists(DIR_UPLOAD.$company_info['logo'])) {
             $this->data['logo'] = $company_info['logo'];
-			$this->data['thumb'] = $this->model_tool_image->resize_upload($company_info['logo'],95,95);
+			$this->data['thumb'] = $company_info['logo'];
 		} else {
 			$this->data['logo'] = '';
 		}
@@ -245,9 +263,9 @@ class ControllerAccountCompany extends Controller {
         foreach ($results as $item) {
             $this->data['files'][] = array(
                 'file_id'   => $item['file_id'],
-                'mode'      => $item['mode']=='identity' ? '法人身份证件' : '营业执照',
-                'sort'      => $item['sort'],
-                'status'    => $item['status'],
+                'mode'      => $item['mode']=='identity' ? '身份证件' : '营业执照',
+                //'sort'      => $item['sort'],
+                'status'    => getCompanyFileStatus($item['status']).($item['status']==2 ? '<br><span title="'.$item['note'].'">'.truncate_string($item['note'],30).'</span>' : ''),
                 'photo'     => file_exists($item['path']) ? $item['path'] : $this->model_tool_image->resize($item['path'],205,128),
                 'date_added'=> date('Y-m-d H:i',strtotime($item['date_added']))
             );
@@ -552,6 +570,9 @@ class ControllerAccountCompany extends Controller {
 	protected function validateCompany() {
         $this->load->model('account/customer');
         $this->load->language('account/company');
+        if ((utf8_strlen($this->request->post['title']) < 1) || (utf8_strlen($this->request->post['title']) > 32)) {
+            $this->error['title'] = $this->language->get('error_title');
+        }
 		if ((utf8_strlen($this->request->post['corporation']) < 1) || (utf8_strlen($this->request->post['corporation']) > 32)) {
 			$this->error['corporation'] = $this->language->get('error_corporation');
 		}
@@ -682,4 +703,59 @@ class ControllerAccountCompany extends Controller {
         return $result;
     }
 
+    public function ajax_data(){
+        $this->load->model('service/company');
+        $this->load->language('account/company');
+        if(isset($this->request->get['action'])){
+            $action = strtolower(trim($this->request->get['action']));
+        }else if(isset($this->request->post['action'])){
+            $action = strtolower(trim($this->request->post['action']));
+        }else{
+            $action = 'get';
+        }
+        $json = array('status'=>0,'msg'=>$this->language->get('text_exception'));
+        switch ($action) {
+            case 'getcase':
+                $case_id = isset($this->request->get['case_id']) ? (int)$this->request->get['case_id'] : 0;
+                $data = $this->model_service_company->getCase($case_id);
+                if($data){
+                    $json = array('status'=>1,'info'=>$data);
+                }
+            break;
+            case 'deletecase':
+                $case_id = isset($this->request->get['case_id']) ? (int)$this->request->get['case_id'] : 0;
+                if($this->model_service_company->deleteCase($case_id)){
+                    $json = array('status'=>1,'msg'=>$this->language->get('text_success_delete'));
+                }
+            break;
+            case 'getmember':
+                $member_id = isset($this->request->get['member_id']) ? (int)$this->request->get['member_id'] : 0;
+                $data = $this->model_service_company->getMember($member_id);
+                if($data){
+                    $json = array('status'=>1,'info'=>$data);
+                }
+            break;
+            case 'deletemember':
+                $member_id = isset($this->request->get['member_id']) ? (int)$this->request->get['member_id'] : 0;
+                if($this->model_service_company->deleteMember($member_id)){
+                    $json = array('status'=>1,'msg'=>$this->language->get('text_success_delete'));
+                }
+            break;
+            case 'getfile':
+                $file_id = isset($this->request->get['file_id']) ? (int)$this->request->get['file_id'] : 0;
+                $data = $this->model_service_company->getFile($file_id);
+                if($data){
+                    $json = array('status'=>1,'info'=>$data);
+                }
+            break;
+            case 'deletefile':
+                $file_id = isset($this->request->get['file_id']) ? (int)$this->request->get['file_id'] : 0;
+                if($this->model_service_company->deleteFile($file_id)){
+                    $json = array('status'=>1,'msg'=>$this->language->get('text_success_delete'));
+                }
+            break;
+        }
+        $this->response->addHeader('Content-Type: application/json');
+        $this->response->setOutput(json_encode($json));
+    }
 }

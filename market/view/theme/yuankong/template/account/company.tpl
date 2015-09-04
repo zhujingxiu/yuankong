@@ -43,7 +43,10 @@
                         </tr>
                         <tr>
                             <td width="150">公司名称</td>
-                            <td><input type="text" name="title" class="input-t w350" value="<?php echo $title ?>"/></td>
+                            <td><input type="text" name="title" class="input-t w350" value="<?php echo $title ?>"/>
+                            <?php if(!empty($error_title)){ ?>
+                                <span class="validate error"><?php echo $error_title ?></span>
+                                <?php }?></td>
                         </tr>
                         <tr>
                             <td width="150">机构代码</td>
@@ -51,7 +54,11 @@
                         </tr>
                         <tr>
                             <td>法人姓名</td>
-                            <td><input type="text" class="input-t w150" name="corporation" value="<?php echo $corporation ?>"/></td>
+                            <td><input type="text" class="input-t w150" name="corporation" value="<?php echo $corporation ?>"/>
+                                <?php if(!empty($error_corporation)){ ?>
+                                <span class="validate error"><?php echo $error_corporation ?></span>
+                                <?php }?>
+                            </td>
                         </tr>
                         <?php if(false){?>
                         <tr>
@@ -80,7 +87,10 @@
                         <?php }?>
                         <tr>
                             <td>E-mail</td>
-                            <td><input type="text" class="input-t w350" name="email" value="<?php echo $email ?>"/></td>
+                            <td><input type="text" class="input-t w350" name="email" value="<?php echo $email ?>"/>
+                            <?php if(!empty($error_email)){ ?>
+                                <span class="validate error"><?php echo $error_email ?></span>
+                                <?php }?></td>
                         </tr>
                         <tr>
                             <td>logo</td>

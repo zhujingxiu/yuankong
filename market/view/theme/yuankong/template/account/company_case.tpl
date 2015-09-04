@@ -27,8 +27,11 @@
                     <tr>
                         <td><img src="<?php echo $item['photo'] ?>" width="150" /></td>
                         <td><?php echo $item['title'] ?></td>
-                        <td>1</td>
-                        <td><a href="#" class="plr c_red">编辑</a><a href="#" class="plr c_red">删除</a> </td>
+                        <td><?php echo $item['sort'] ?></td>
+                        <td>
+                            <a onclick="detail(<?php echo $item['case_id'] ?>);" class="plr c_red">编辑</a>
+                            <a onclick="delCase(<?php echo $item['case_id'] ?>);" class="plr c_red">删除</a> 
+                        </td>
                     </tr>
                     <?php } ?>
 
@@ -91,14 +94,52 @@
 </div>
 <script type="text/javascript">
 
+    function detail(case_id){
+        $.get(
+            'index.php?route=account/company/ajax_data',
+            {action:'getcase',case_id:case_id},
+            function(json){
+                if(json.status==1){
+                    $('#case-form input[type!="submit"]').val('');
+                    $('#case-form #thumb').attr('src','<?php echo $no_photo ?>');
+                    var data = json.info;
+                    $('#case-form input[name="title"]').val(data.title);
+                    $('#case-form input[name="case_id"]').val(data.case_id);
+                    $('#case-form input[name="photo"]').val(data.photo);
+                    $('#case-form input[name="sort"]').val(data.sort);
+                    $('#case-form #thumb').attr('src',data.photo);
+                    $(".add-anli").show();
+                    $(".tm-mask").show();
+                }else{  
+                    alert(json.msg)
+                }
+        },'json');
+    }
+    function delCase(case_id){
+        if(confirm('确认删除该案例？')){
+            $.get(
+                'index.php?route=account/company/ajax_data',
+                {action:'deletecase',case_id:case_id},
+                function(json){
+                    if(json.status==1){
+                        location.reload();
+                    }else{  
+                        alert(json.msg)
+                    }
+            },'json');
+        }
+    }
     $(".add-anl-title span").bind('click',function(){
         $(this).parent().parent().hide();
         $(".tm-mask").hide();
     });
     $("span.gc-tab-sub").bind('click',function(){
-        $(".add-anli").show()
+        $('#case-form input[type!="submit"]').val('');
+        $('#case-form #thumb').attr('src','<?php echo $no_photo ?>');
+        $(".add-anli").show();
         $(".tm-mask").show();
     });
+
 </script>
 <script type="text/javascript"><!--
 new AjaxUpload('#case-upload', {

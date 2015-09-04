@@ -18,7 +18,6 @@
                     <tr>
                         <th>文件</th>
                         <th>类型</th>
-                        <th>排序</th>
                         <th>状态</th>
                         <th>管理</th>
                     </tr>
@@ -28,9 +27,11 @@
                     <tr>
                         <td><img src="<?php echo $item['photo'] ?>" width="205" /></td>
                         <td><?php echo $item['mode'] ?></td>
-                        <td><?php echo $item['sort'] ?></td>
-                        <td><?php echo $item['status'] ?></td>
-                        <td><a href="#" class="plr c_red">编辑</a><a href="#" class="plr c_red">删除</a> </td>
+                        <td style="width:15%;word-break: break-all;"><?php echo $item['status'] ?></td>
+                        <td>
+                            <a onclick="detail(<?php echo $item['file_id'] ?>)" class="plr c_red">编辑</a>
+                            <a onclick="delFile(<?php echo $item['file_id'] ?>)" class="plr c_red">删除</a>
+                        </td>
                     </tr>
                     <?php } ?>
 
@@ -55,13 +56,13 @@
         <h3>上传文件</h3>
     </div>
     <div class="p20">
-        <form id="case-form" method="post" action="<?php echo $action ?>" enctype="multipart/form-data">
+        <form id="file-form" method="post" action="<?php echo $action ?>" enctype="multipart/form-data">
         <table class="usertable">
             <tr>
                 <td width="60">类型</td>
                 <td>
                     <label class="pr20">
-                    <input type="radio" class="input-m" name="mode" value="identity" checked="checked"/>法人身份证件
+                    <input type="radio" class="input-m" name="mode" value="identity" checked="checked"/>身份证件
                     </label>
                     <label class="pr20">
                     <input type="radio" class="input-m" name="mode" value="permit"/>营业执照
@@ -74,7 +75,7 @@
                     <div class="l p10 bd1">
                         <p class="tc">
                             <img src="<?php echo $no_photo ?>" width="205" id="thumb"/>
-                            <input type="hidden" name="path" value="" id="cover" />
+                            <input type="hidden" name="path"/>
                         </p>
                         <p class="c9 pt5 tc">
                             <a id="btn-upload" >选择图像</a>
@@ -95,12 +96,49 @@
     </div>
 </div>
 <script type="text/javascript">
-
+    function detail(file_id){
+        $.get(
+            'index.php?route=account/company/ajax_data',
+            {action:'getfile',file_id:file_id},
+            function(json){
+                if(json.status==1){
+                    $('#file-form input[type!="submit"][type!="radio"]').val('');
+                    $('#file-form #thumb').attr('src','<?php echo $no_photo ?>');
+                    var data = json.info;
+                    $('#file-form input[name="mode"]').removeProp('checked');
+                    $('#file-form input[name="mode"][value="'+data.mode+'"]').prop('checked','checked');
+                    
+                    $('#file-form input[name="file_id"]').val(data.file_id);
+                    $('#file-form input[name="path"]').val(data.path);                    
+                    $('#file-form #thumb').attr('src',data.path);
+                    $(".add-anli").show();
+                    $(".tm-mask").show();
+                }else{  
+                    alert(json.msg);
+                }
+        },'json');
+    }
+    function delfile(file_id){
+        if(confirm('确认删除该成员？')){
+            $.get(
+                'index.php?route=account/company/ajax_data',
+                {action:'deletefile',file_id:file_id},
+                function(json){
+                    if(json.status==1){
+                        location.reload();
+                    }else{  
+                        alert(json.msg)
+                    }
+            },'json');
+        }
+    }
     $(".add-anl-title span").bind('click',function(){
         $(this).parent().parent().hide();
         $(".tm-mask").hide();
     });
     $("span.gc-tab-sub").bind('click',function(){
+        $('#file-form input[type!="submit"][type!="radio"]').val('');
+        $('#file-form #thumb').attr('src','<?php echo $no_photo ?>');
         $(".add-anli").show()
         $(".tm-mask").show();
     });

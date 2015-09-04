@@ -22,13 +22,13 @@
                         <td>
                             <div class="l p10 bd1">
                                 <p class="tc">
-                                    <img src="<?php echo $thumb ?>" width="280" id="thumb-cover"/>
+                                    <img src="<?php echo $thumb ?>" width="280" id="thumb"/>
                                     <input type="hidden" name="cover" value="<?php echo $cover ?>" />
                                 </p>
                                 <p class="c9 pt5 tc">
                                     <a id="cover-upload">选择图像</a>
                                     <em class="plr c9">|</em>
-                                    <a onclick="$('#thumb-cover').attr('src', '<?php echo $no_photo; ?>'); $('input[name=\'cover\']').attr('value', '');">清除图像</a>
+                                    <a onclick="$('#thumb').attr('src', '<?php echo $no_photo; ?>'); $('input[name=\'cover\']').attr('value', '');">清除图像</a>
                                 </p>
                             </div>
                             <div class="fix"></div>
@@ -65,7 +65,7 @@
                         
             if (json['status']==1) {
                 $('input[name="cover"]').val(json['file']);
-                $('#thumb-cover').attr('src',json['file'])
+                $('#thumb').attr('src',json['file'])
             }else{
                 alert(json['msg']);
                 return false;

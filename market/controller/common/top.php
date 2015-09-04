@@ -38,8 +38,8 @@ class ControllerCommonTop extends Controller {
         $this->data['help'] = $this->url->link('information/information', '', 'SSL');
         $this->data['news'] = $this->url->link('information/wiki', 'wiki_group=2', 'SSL');
         $this->data['company'] = $this->url->link('account/company', '', 'SSL');
-        $this->data['upload'] = $this->url->link('account/account', '', 'SSL');
-        $this->data['perfact'] = $this->url->link('account/edit', '', 'SSL');
+        $this->data['upload'] = $this->url->link('account/company/file', '', 'SSL');
+        $this->data['perfact'] = $this->url->link('account/company', '', 'SSL');
         
         if (isset($this->request->get['route'])) {
             $route = (string)$this->request->get['route'];
