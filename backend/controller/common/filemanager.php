@@ -494,4 +494,30 @@ class ControllerCommonFileManager extends Controller {
 		
 		$this->response->setOutput(json_encode($json));
 	}
+
+	public function upload_custom(){
+        $result=array('status'=>0,'msg'=>'');
+        if (!empty($this->request->files)){
+            $timePath=date('Ymd',time());
+            $targetPath = DIR_UPLOAD.'/'.$timePath;
+            if(!file_exists($targetPath)){
+                mkdir($targetPath);
+            }           
+    
+            // Validate the file type
+            $fileTypes  = array('jpg','jpeg','gif','png'); // File extensions
+            $pathinfo  = pathinfo($this->request->files['file']['name']);
+            $file   = date('His').substr(md5(uniqid()),rand(0,9),4).'.'.$pathinfo['extension'];
+            $targetFile = rtrim($targetPath,'/') . '/'. $file;
+            if ($this->request->files['file']['size'] > 3100000) {
+                $result = array('status' => 0,'msg' =>'仅支持3M以下大小的文件');
+            }else if (in_array($pathinfo['extension'],$fileTypes)) {
+                @move_uploaded_file($this->request->files['file']['tmp_name'],$targetFile);
+                $result = array('status' => 1,'path' => trim(TPL_UPLOAD,'/').'/'.$timePath.'/'.$file,'file'=>HTTP_CATALOG.trim(TPL_UPLOAD,'/').'/'.$timePath.'/'.$file);
+            } else {
+                $result = array('status' => 0,'msg' =>'无效的文件类型,允许上传的类型为 '.join(' | ',$fileTypes));
+            }
+        }
+        die(json_encode($result));
+    }
 } 

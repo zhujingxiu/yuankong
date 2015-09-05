@@ -603,11 +603,25 @@ class ControllerProductProduct extends Controller {
 		$results = $this->model_catalog_product->getTransactionByProductId($this->request->get['product_id'], ($page - 1) * 5, 5);
 
 		foreach ($results as $result) {
+			$option = array();
+			$options = $this->model_catalog_product->getOrderOptions($result['order_id'],$result['order_product_id']);
+
+			foreach ($options as $item) { 
+				if(isset($item['option_value']) && is_array($item['option_value'])){
+					foreach ($item['option_value'] as $option_value) {
+						if(!empty($option_value['value']))
+						$option[] = $option_value['value'];
+					}
+				}else if(!empty($item['value'])){					
+					$option[] = $item['value'];
+				}
+			}
         	$this->data['transactions'][] = array(
         		'fullname'     => $result['fullname'],
-				'mobile_phone' => substr_replace($result['mobile_phone'], '****', 3,6),
+				'mobile_phone' => substr_replace($result['mobile_phone'], '****', 3,4),
 				'quantity'     => (int)$result['quantity'],
 				'price'        => $this->currency->format($result['price']),
+				'options'		=> $option ? implode(",", $option) : $result['model'],
         		'date_added'   => date('Y-m-d', strtotime($result['date_added']))
         	);
       	}			

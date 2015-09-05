@@ -59,7 +59,7 @@ class ControllerAccountAccount extends Controller {
 		$this->data['transaction'] = $this->url->link('account/transaction', '', 'SSL');
         $this->data['newsletter'] = $this->url->link('account/newsletter', '', 'SSL');
         $this->data['finish'] = $this->url->link('account/order', 'status=finished', 'SSL');
-
+        $this->data['bind'] = $this->url->link('account/bind', '', 'SSL');
 		$this->data['fullname'] = ($this->customer->isCompany() ? $this->customer->getCompany() : $this->customer->getFullName());
         $this->load->model('tool/image');
         $this->load->model('account/order');

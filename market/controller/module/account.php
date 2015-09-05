@@ -36,6 +36,7 @@ class ControllerModuleAccount extends Controller {
 		$this->data['custom2'] = $this->url->link('account/company/custom2', '', 'SSL');
 		$this->data['cases'] = $this->url->link('account/company/cases', '', 'SSL');
 		$this->data['member'] = $this->url->link('account/company/member', '', 'SSL');
+		$this->data['bind'] = $this->url->link('account/bind', '', 'SSL');
 
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/account.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/module/account.tpl';

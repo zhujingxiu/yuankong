@@ -127,24 +127,42 @@ class ModelSaleCompany extends Model {
         	$this->db->query("UPDATE " . DB_PREFIX . "company SET salt = '" . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . "' WHERE company_id = '" . (int)$company_id . "'");
         	$this->db->query("UPDATE " . DB_PREFIX . "customer SET salt = '" . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . "' WHERE company_id = '" . (int)$company_id . "'");
       	}
-      	if (isset($data['module'])) {
-      		$this->db->delete('company_module',array('company_id'=>$company_id));
-      		foreach ($data['module'] as $item) {
-      			$fileds = array(
-	      			'company_id' => $company_id,
-	      			'title' => trim($item['title']),	      			
-	      			'image'	=> htmlspecialchars_decode($item['image']),
-	      			'status'=> isset($item['status']) ? (int)$item['status'] : 0	      			
-	      		);
-	      		$this->db->insert("company_module" , $fileds);
-      		}     		
-        	
+      	if (isset($data['status_1'])) {
+      		$this->db->delete('company_module',array('company_id'=>$company_id,'sort'=>1));
+      		
+  			$module = array(
+      			'company_id' => $company_id,
+      			'title' => trim($data['title_1']),	      			
+      			'image'	=> htmlspecialchars_decode($data['image_1']),
+      			'status'=> (int)$data['status_1'],
+      			'sort'	=> (int)$data['sort_1'],
+      		);
+      		$this->db->insert("company_module" , $module);
+      	}
+      	if (isset($data['status_2'])) {
+      		$this->db->delete('company_module',array('company_id'=>$company_id,'sort'=>2));
+      		
+  			$module = array(
+      			'company_id' => $company_id,
+      			'title' => trim($data['title_2']),	      			
+      			'image'	=> htmlspecialchars_decode($data['image_2']),
+      			'status'=> (int)$data['status_2'],
+      			'sort'	=> (int)$data['sort_2'],
+      		);
+      		$this->db->insert("company_module" , $module);
       	}
 	}
 
 	
 	public function deleteCompany($company_id) {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "company WHERE company_id = '" . (int)$company_id . "'");
+		$this->db->query("DELETE FROM " . DB_PREFIX . "customer WHERE company_id = '" . (int)$company_id . "'");
+		$this->db->query("DELETE FROM " . DB_PREFIX . "company_file WHERE company_id = '" . (int)$company_id . "'");
+		$this->db->query("DELETE FROM " . DB_PREFIX . "company_case WHERE company_id = '" . (int)$company_id . "'");
+		$this->db->query("DELETE FROM " . DB_PREFIX . "company_module WHERE company_id = '" . (int)$company_id . "'");
+		$this->db->query("DELETE FROM " . DB_PREFIX . "company_to_group WHERE company_id = '" . (int)$company_id . "'");
+		$this->db->query("DELETE FROM " . DB_PREFIX . "company_member WHERE company_id = '" . (int)$company_id . "'");
+
 	}
 	
 	public function getCompany($company_id) {

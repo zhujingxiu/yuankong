@@ -178,7 +178,7 @@ class ControllerExtensionLink extends Controller {
                         
             $action[] = array(
                 'text' => $this->language->get('text_edit'),
-                'href' => $this->url->link('extension/link/update', 'token=' . $this->session->data['token'] . '&link_id=' . $result['link_id'] . $url, 'SSL')
+                'href' => 'javascript:detail(' . $result['link_id'] . ')'
             );
                         
             $this->data['links'][] = array(
@@ -244,7 +244,7 @@ class ControllerExtensionLink extends Controller {
         if (isset($this->request->get['order'])) {
             $url .= '&order=' . $this->request->get['order'];
         }
-
+        $this->data['token'] = $this->session->data['token'];
         $pagination = new Pagination();
         $pagination->total = $link_total;
         $pagination->page = $page;
@@ -256,7 +256,20 @@ class ControllerExtensionLink extends Controller {
 
         $this->data['sort'] = $sort;
         $this->data['order'] = $order;
+        $this->data['entry_status'] = $this->language->get('entry_status');
+        $this->data['entry_name'] = $this->language->get('entry_name');
+        $this->data['entry_url'] = $this->language->get('entry_url');
+        $this->data['entry_sort_order'] = $this->language->get('entry_sort_order');
 
+        $this->data['button_save'] = $this->language->get('button_save');
+        $this->data['button_cancel'] = $this->language->get('button_cancel');
+        $this->data['button_close'] = $this->language->get('button_close');
+        $this->data['text_enabled'] = $this->language->get('text_enabled');
+        $this->data['text_disabled'] = $this->language->get('text_disabled');
+        $this->data['text_yes'] = $this->language->get('text_yes');
+        $this->data['text_no'] = $this->language->get('text_no');
+        $this->data['text_none'] = $this->language->get('text_none');
+        $this->data['text_select'] = $this->language->get('text_select');
         $this->template = 'extension/link_list.tpl';
         $this->children = array(
             'common/header',
@@ -394,7 +407,7 @@ class ControllerExtensionLink extends Controller {
         if ((utf8_strlen($this->request->post['name']) < 1) || (utf8_strlen($this->request->post['name']) > 64)) {
             $this->error['name'] = $this->language->get('error_name');
         }
-        if ((utf8_strlen($this->request->post['url']) < 1) || (utf8_strlen($this->request->post['url']) > 32)) {
+        if ((utf8_strlen($this->request->post['url']) < 1) || (!isURL($this->request->post['url']))) {
             $this->error['url'] = $this->language->get('error_url');
         }
                 
@@ -416,4 +429,29 @@ class ControllerExtensionLink extends Controller {
             return false;
         }
     }   
+
+    public function getDetail(){
+        $link_id = isset($this->request->get['link_id']) ? $this->request->get['link_id'] : false;
+        $this->load->model('extension/link');
+        $info = $this->model_extension_link->getLink($link_id);
+        if($info){
+            $json = array('status'=>1,'info'=> $info);
+            die(json_encode($json));
+        }
+    }
+
+    public function save() {
+        $this->load->language('extension/link');
+
+        $this->load->model('extension/link');
+        $json = array('status'=>0,'msg'=>$this->language->get('text_exception'));
+        if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm('edit')) {
+
+            $this->model_extension_link->saveLink($this->request->post);
+            $json = array('status'=>1,'msg'=>$this->language->get('text_success'));
+
+            $this->session->data['success'] = $this->language->get('text_success');
+        }
+        $this->response->setOutput(json_encode($json));
+    }
 }

@@ -22,10 +22,10 @@
     <tr>
       <td class="left"><?php echo $item['date_added']; ?></td>
       <td class="left"><?php echo $item['mode']; ?></td>
-      <td class="left"><img src="<?php echo $item['file']; ?>"></td>
+      <td class="left"><img src="<?php echo $item['file']; ?>" width="122" height="122"></td>
       <td class="left"><?php echo $item['sort']; ?></td>
       <td class="left"><?php echo $item['status']; ?></td>
-      <td class="left"><?php echo $item['note']; ?></td>
+      <td class="left" style="width:120px;word-break: break-all;"><?php echo $item['note']; ?></td>
       <td class="right">
         <?php foreach ($item['action'] as $action): ?>
           <a onclick="<?php echo $action['onclick'] ?>"><?php echo $action['text'] ?></a>
@@ -54,17 +54,16 @@
         }else{
           html += '<tr><td><?php echo $entry_mode ?></td><td><?php echo $entry_identity ?></td></tr>';
         }        
-        html += '<tr><td><?php echo $entry_file ?></td><td><img src="'+json.data.src+'"></td></tr>';
-        html += '<tr><td><?php echo $entry_file_status ?></td><td>';
-        html += '<select name="status">';
-        if(parseInt(json.data.status)==1){
-          html += '<option value="1" selected><?php echo $text_approved ?></option>';
-          html += '<option value="0"><?php echo $text_unapprove ?></option>';
-        }else{
-          html += '<option value="1"><?php echo $text_approved ?></option>';
-          html += '<option value="0" selected><?php echo $text_unapprove ?></option>';
+        html += '<tr><td><?php echo $entry_file ?></td><td><img src="'+json.data.src+'" width="205"></td></tr>';
+        html += '<tr><td valign="top"><?php echo $entry_file_status ?></td><td>';
+        if(parseInt(json.data.status)==0){
+          html += '<div><?php echo "当前状态：待审核" ?></div>';
         }
-        html += '</select></td></tr>';
+        
+        html += '<input type="radio" name="status" value="1" '+((parseInt(json.data.status)==1) ? 'checked="checked"' : '' )+'><?php echo "通过" ?>';
+        html += '<input type="radio" name="status" value="2" '+((parseInt(json.data.status)==2) ? 'checked="checked"' : '' )+'><?php echo "拒绝" ?>';
+        
+        html += '</td></tr>';
         html += '<tr><td><?php echo $entry_sort ?></td><td><input type="text" name="sort" value="'+json.data.sort+'" size="3"></td></tr>';
         html += '<tr><td><?php echo $entry_note ?></td><td><textarea name="note" cols="40">'+json.data.note+'</textarea></td></tr>';
         html += '<input type="hidden" name="file_id" value="'+file_id+'"></table></form>';
@@ -78,7 +77,7 @@
               $.ajax({
                 url:'index.php?route=sale/company/ajax_data&token=<?php echo $token ?>&action=save_file',
                 type:'post',
-                data:$('#detail-form input,#detail-form textarea,#detail-form select'),
+                data:$('#detail-form input[type="text"],#detail-form input[type="hidden"],#detail-form textarea,#detail-form input[type="radio"]:checked'),
                 dataType:'json',
                 beforeSend: function() {
                   $('.success, .warning, .attention').remove();

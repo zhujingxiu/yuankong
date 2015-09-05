@@ -14,7 +14,7 @@
         <tr>
             <td><?php echo $item['mobile_phone'] ?></td>
             <td>
-                5公斤<br>红色装
+                <?php echo $item['options'] ?>
             </td>
             <td><?php echo $item['quantity'] ?></td>
             <td><em class="c_red"><?php echo $item['price'] ?></em></td>

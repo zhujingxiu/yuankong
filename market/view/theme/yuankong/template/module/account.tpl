@@ -25,6 +25,7 @@
     <dl class="userxinxi">
         <dt><?php echo $text_account; ?></dt>
         <dd><a <?php echo $keyword == 'account/edit' ? 'class="redbg"' : '' ?> href="<?php echo $edit; ?>"><?php echo $text_edit; ?></a></dd>
+        <dd><a <?php echo $keyword == 'account/bind' ? 'class="redbg"' : '' ?> href="<?php echo $bind; ?>"><?php echo '绑定手机'; ?></a></dd>
         <dd><a <?php echo $keyword == 'account/message' ? 'class="redbg"' : '' ?> href="<?php echo $messages; ?>">站内信息</a></dd>
     </dl>
     

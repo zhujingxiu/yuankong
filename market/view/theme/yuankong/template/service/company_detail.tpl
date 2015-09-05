@@ -3,11 +3,11 @@
 <div class="w mt10 fix">
     <div class="gs-detail-box fix">
         <div class="l gs-ad-pic">
-            <img src="<?php echo $cover ?>" />
+            <img src="<?php echo $cover ?>" width="480" height="300"/>
         </div>
         <div class="r gs-detail">
             <div class="ovh gsjj">
-                <p class="qy-logo"><img src="<?php echo $logo ?>" /></p>
+                <p class="qy-logo"><img src="<?php echo $logo ?>" width="100" height="100"/></p>
                 <h3><?php echo $title ?></h3>
                 <p class="lh30 c9 f_m">
                 	<i class="ying">营</i>
@@ -65,7 +65,7 @@
             <ul class="jslist">
             	<?php foreach ($cases as $item): ?>
             	<li class="itempic">
-                    <img src="<?php echo $item['photo'] ?>" title="<?php echo $item['title'] ?>" alt="<?php echo $item['title'] ?>"/>
+                    <img src="<?php echo $item['photo'] ?>" title="<?php echo $item['title'] ?>" alt="<?php echo $item['title'] ?>" width="280" height="219"/>
                 </li>	
             	<?php endforeach ?>
             </ul>
@@ -80,7 +80,7 @@
             <ul class="yk_members">
             	<?php foreach ($members as $item): ?>
             	<li>
-                    <img src="<?php echo $item['avatar'] ?>" title="<?php echo $item['name'] ?>" alt="<?php echo $item['name'] ?>"/>
+                    <img src="<?php echo $item['avatar'] ?>" title="<?php echo $item['name'] ?>" alt="<?php echo $item['name'] ?>" width="122" height="122"/>
                     <p><?php echo $item['name'] ?></p>
                     <p class="thin"><?php echo $item['position'] ?></p>
                 </li>	

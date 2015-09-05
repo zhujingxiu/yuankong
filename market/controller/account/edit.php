@@ -166,6 +166,7 @@ class ControllerAccountEdit extends Controller {
             $this->data['address'] = '';
         }
         $this->data['back'] = $this->url->link('account/account', '', 'SSL');
+        $this->data['bind'] = $this->url->link('account/bind', '', 'SSL');
 		$this->data['isCompany'] = $this->customer->isCompany();
         $this->data['groups'] = array();
         $groups = $this->model_service_company->getCompanyGroupsByCompanyId($this->customer->isCompany());

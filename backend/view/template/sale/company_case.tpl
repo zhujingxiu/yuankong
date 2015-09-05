@@ -20,7 +20,7 @@
     <tr>
       <td class="left"><?php echo $item['date_added']; ?></td>
       <td class="left"><?php echo $item['title']; ?></td>
-      <td class="left"><img src="<?php echo $item['photo']; ?>"></td>
+      <td class="left"><img src="<?php echo $item['photo']; ?>" width="280"></td>
       
       <td class="left"><?php echo $item['sort']; ?></td>
       
@@ -48,7 +48,7 @@
         $('#detail-dialog').remove();
         var html = '<form id="detail-form"><table class="form">';
         html += '<tr><td><?php echo $entry_title ?></td><td><input name="title" value="'+json.data.title+'" /></td></tr>';      
-        html += '<tr><td><?php echo $entry_photo ?></td><td><img src="'+json.data.src+'"/><input name="photo" value="'+json.data.photo+'" type="hidden"/></td></tr>';
+        html += '<tr><td><?php echo $entry_photo ?></td><td><img src="'+json.data.src+'" width="205"/><input name="photo" value="'+json.data.photo+'" type="hidden"/></td></tr>';
         html += '</select></td></tr>';
         html += '<tr><td><?php echo $entry_sort ?></td><td><input type="text" name="sort" value="'+json.data.sort+'" size="3"></td></tr>';
         html += '<input type="hidden" name="case_id" value="'+case_id+'"></table></form>';

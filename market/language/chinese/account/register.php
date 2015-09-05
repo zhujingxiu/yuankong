@@ -17,7 +17,7 @@ $_['text_company_email']   	= '填写企业邮箱';
 $_['text_company_phone']   	= '可使用该手机号码登录';
 $_['text_send_success']   		= '短信发送成功';
 $_['text_get_sms']   	   		= '获取验证码';
-$_['text_agree']           		= '<em class="pl5">我已经阅读并同意</em> <a class="colorbox c_r" href="%s" alt="%s"><b>%s</b></a>条款';
+$_['text_agree']           		= '<em class="pl5">我已经阅读并同意</em> <a class="colorbox c_r" href="%s" alt="%s" target="_blank"><b>%s</b></a>条款';
 
 // Entry
 $_['entry_fullname']      		= '昵称：';

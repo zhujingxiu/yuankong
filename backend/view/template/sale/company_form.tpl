@@ -34,14 +34,14 @@
               <td><?php echo $entry_logo; ?></td>
               <td>
                 <div class="image">
-                  <img src="<?php echo $thumb_logo; ?>"id="thumb-logo" />
-                  <input type="hidden" name="logo" value="<?php echo $logo; ?>" id="logo" />
+                  <img src="<?php echo $thumb_logo; ?>"id="thumb-logo" width="150"/>
+                  <input type="hidden" name="logo" value="<?php echo $logo; ?>" />
                   <br />
-                  <a onclick="image_upload('logo', 'thumb-logo');">
+                  <a onclick="image_upload('logo', 'thumb-logo');" id="logo">
                     <?php echo $text_browse; ?>
                   </a>
                   &nbsp;&nbsp;|&nbsp;&nbsp;
-                  <a onclick="$('#thumb-logo').attr('src', '<?php echo $no_image; ?>'); $('#logo').attr('value', '');"><?php echo $text_clear; ?></a>
+                  <a onclick="$('#thumb-logo').attr('src', '<?php echo $no_image; ?>'); $(input[name=\'logo\']).attr('value', '');"><?php echo $text_clear; ?></a>
                   </div>
                 </td>
             </tr>
@@ -49,14 +49,14 @@
               <td><?php echo $entry_cover; ?></td>
               <td>
                 <div class="image">
-                  <img src="<?php echo $thumb_cover; ?>"id="thumb-cover" />
-                  <input type="hidden" name="cover" value="<?php echo $cover; ?>" id="cover" />
+                  <img src="<?php echo $thumb_cover; ?>"id="thumb-cover" width="205"/>
+                  <input type="hidden" name="cover" value="<?php echo $cover; ?>"  />
                   <br />
-                  <a onclick="image_upload('cover', 'thumb-cover');">
+                  <a id="cover" onclick="image_upload('cover', 'thumb-cover');">
                     <?php echo $text_browse; ?>
                   </a>
                   &nbsp;&nbsp;|&nbsp;&nbsp;
-                  <a onclick="$('#thumb-cover').attr('src', '<?php echo $no_image; ?>'); $('#cover').attr('value', '');"><?php echo $text_clear; ?></a>
+                  <a onclick="$('#thumb-cover').attr('src', '<?php echo $no_image; ?>'); $('input[name=\'cover\']').attr('value', '');"><?php echo $text_clear; ?></a>
                   </div>
                 </td>
             </tr>
@@ -168,14 +168,14 @@
               <td><?php echo $entry_file; ?></td>
               <td>
                 <div class="image">
-                  <img src="<?php echo $no_image; ?>"id="thumb-file" />
-                  <input type="hidden" name="file" value="" id="file" />
+                  <img src="<?php echo $no_image; ?>"id="thumb-path" width="205"/>
+                  <input type="hidden" name="path" value=""  />
                   <br />
-                  <a onclick="image_upload('file', 'thumb-file');">
+                  <a onclick="image_upload('path', 'thumb-path');" id="path">
                     <?php echo $text_browse; ?>
                   </a>
                   &nbsp;&nbsp;|&nbsp;&nbsp;
-                  <a onclick="$('#thumb-file').attr('src', '<?php echo $no_image; ?>'); $('#file').attr('value', '');"><?php echo $text_clear; ?></a>
+                  <a onclick="$('#thumb-path').attr('src', '<?php echo $no_image; ?>'); $('input[name=\'path\']').attr('value', '');"><?php echo $text_clear; ?></a>
                 </div>
               </td>
             </tr>
@@ -201,30 +201,31 @@
                 <td><?php echo $entry_status; ?></td>
                 <td>
                     <?php if ($status_1) { ?>
-                    <input type="radio" name="module[1][status]" value="1" checked="checked"/><?php echo $text_enabled; ?>
-                    <input type="radio" name="module[1][status]" value="0"/><?php echo $text_disabled; ?>
+                    <input type="radio" name="status_1" value="1" checked="checked"/><?php echo $text_enabled; ?>
+                    <input type="radio" name="status_1" value="0"/><?php echo $text_disabled; ?>
                     <?php } else { ?>
-                    <input type="radio" name="module[1][status]" value="1"/><?php echo $text_enabled; ?>
-                    <input type="radio" name="module[1][status]" value="0" checked="checked"/><?php echo $text_disabled; ?>
+                    <input type="radio" name="status_1" value="1"/><?php echo $text_enabled; ?>
+                    <input type="radio" name="status_1" value="0" checked="checked"/><?php echo $text_disabled; ?>
                     <?php } ?>
                 </td>
               </tr>
               <tr>
                 <td><?php echo $entry_module_title; ?></td>
-                <td><input type="text" name="module[1][title]" value="<?php echo $title_1 ?>" /></td>
+                <td><input type="text" name="title_1" value="<?php echo $title_1 ?>" /></td>
               </tr>
               <tr>
                 <td><?php echo $entry_image; ?></td>
                 <td>
                   <div class="image">
-                    <img src="<?php echo $thumb_image_1; ?>"id="thumb-image-1" />
-                    <input type="hidden" name="module[1][image]" value="<?php echo $image_1 ?>" id="image-1" />
+                    <img src="<?php echo $thumb_image_1; ?>"id="thumb-image-1" width="480"/>
+                    <input type="hidden" name="image_1" value="<?php echo $image_1 ?>"  />
+                    <input type="hidden" name="sort_1" value="1"  />
                     <br />
-                    <a onclick="image_upload('image-1', 'thumb-image-1');">
+                    <a onclick="image_upload('image-1', 'thumb-image-1');" id="image_1">
                       <?php echo $text_browse; ?>
                     </a>
                     &nbsp;&nbsp;|&nbsp;&nbsp;
-                    <a onclick="$('#thumb-image').attr('src', '<?php echo $no_image; ?>'); $('#image').attr('value', '');"><?php echo $text_clear; ?></a>
+                    <a onclick="$('#thumb-image-1').attr('src', '<?php echo $no_image; ?>'); $('input[name=\'image_1\']').attr('value', '');"><?php echo $text_clear; ?></a>
                   </div>
                 </td>
               </tr>
@@ -237,30 +238,31 @@
                 <td><?php echo $entry_status; ?></td>
                 <td>
                     <?php if ($status_2) { ?>
-                    <input type="radio" name="module[2][status]" value="1" checked="checked"/><?php echo $text_enabled; ?>
-                    <input type="radio" name="module[2][status]" value="0"/><?php echo $text_disabled; ?>
+                    <input type="radio" name="status_2" value="1" checked="checked"/><?php echo $text_enabled; ?>
+                    <input type="radio" name="status_2" value="0"/><?php echo $text_disabled; ?>
                     <?php } else { ?>
-                    <input type="radio" name="module[2][status]" value="1"/><?php echo $text_enabled; ?>
-                    <input type="radio" name="module[2][status]" value="0" checked="checked"/><?php echo $text_disabled; ?>
+                    <input type="radio" name="status_2" value="1"/><?php echo $text_enabled; ?>
+                    <input type="radio" name="status_2" value="0" checked="checked"/><?php echo $text_disabled; ?>
                     <?php } ?>
                 </td>
               </tr>
               <tr>
                 <td><?php echo $entry_module_title; ?></td>
-                <td><input type="text" name="module[2][title]" value="<?php echo $title_2 ?>" /></td>
+                <td><input type="text" name="title_2" value="<?php echo $title_2 ?>" /></td>
               </tr>
               <tr>
                 <td><?php echo $entry_image; ?></td>
                 <td>
                   <div class="image">
-                    <img src="<?php echo $thumb_image_2; ?>"id="thumb-image-2" />
-                    <input type="hidden" name="module[2][image]" value="<?php echo $image_2 ?>" id="image-2" />
+                    <img src="<?php echo $thumb_image_2; ?>"id="thumb-image-2" width="480"/>
+                    <input type="hidden" name="image_2" value="<?php echo $image_2 ?>" />
+                    <input type="hidden" name="sort_2" value="2" />
                     <br />
-                    <a onclick="image_upload('image-2', 'thumb-image-2');">
+                    <a onclick="image_upload('image_2', 'thumb-image-2');" id="image_2">
                       <?php echo $text_browse; ?>
                     </a>
                     &nbsp;&nbsp;|&nbsp;&nbsp;
-                    <a onclick="$('#thumb-image').attr('src', '<?php echo $no_image; ?>'); $('#image').attr('value', '');"><?php echo $text_clear; ?></a>
+                    <a onclick="$('#thumb-image-2').attr('src', '<?php echo $no_image; ?>'); $('input[name=\'image_2\']').attr('value', '');"><?php echo $text_clear; ?></a>
                   </div>
                 </td>
               </tr>
@@ -281,14 +283,14 @@
             <tr>
               <td><?php echo $entry_avatar; ?></td>
               <td><div class="image">
-                  <img src="<?php echo $no_image; ?>"id="thumb-avatar" />
-                  <input type="hidden" name="avatar" value="" id="avatar" />
+                  <img src="<?php echo $no_image; ?>"id="thumb-avatar" width="150"/>
+                  <input type="hidden" name="avatar" value=""  />
                   <br />
-                  <a onclick="image_upload('avatar', 'thumb-avatar');">
+                  <a onclick="image_upload('avatar', 'thumb-avatar');" id="avatar">
                     <?php echo $text_browse; ?>
                   </a>
                   &nbsp;&nbsp;|&nbsp;&nbsp;
-                  <a onclick="$('#thumb-avatar').attr('src', '<?php echo $no_image; ?>'); $('#avatar').attr('value', '');"><?php echo $text_clear; ?></a>
+                  <a onclick="$('#thumb-avatar').attr('src', '<?php echo $no_image; ?>'); $('input[name=\'avatar\']').attr('value', '');"><?php echo $text_clear; ?></a>
                 </div>
               </td>
             </tr>
@@ -316,14 +318,14 @@
             <tr>
               <td><?php echo $entry_image; ?></td>
               <td><div class="image">
-                  <img src="<?php echo $no_image; ?>"id="thumb-photo" />
-                  <input type="hidden" name="photo" value="" id="photo" />
+                  <img src="<?php echo $no_image; ?>"id="thumb-photo" width="205"/>
+                  <input type="hidden" name="photo" value=""  />
                   <br />
-                  <a onclick="image_upload('photo', 'thumb-photo');">
+                  <a onclick="image_upload('photo', 'thumb-photo');" id="photo">
                     <?php echo $text_browse; ?>
                   </a>
                   &nbsp;&nbsp;|&nbsp;&nbsp;
-                  <a onclick="$('#thumb-photo').attr('src', '<?php echo $no_image; ?>'); $('#photo').attr('value', '');"><?php echo $text_clear; ?></a>
+                  <a onclick="$('#thumb-photo').attr('src', '<?php echo $no_image; ?>'); $('input[name=\'photo\']').attr('value', '');"><?php echo $text_clear; ?></a>
                 </div>
               </td>
             </tr>
@@ -398,7 +400,7 @@ $('#button-files').bind('click', function() {
     url: 'index.php?route=sale/company/file&token=<?php echo $token; ?>&company_id=<?php echo $company_id; ?>',
     type: 'post',
     dataType: 'html',
-    data: 'path=' + encodeURIComponent($('#tab-file input[name=\'file\']').val()) + '&mode=' + encodeURIComponent($('#tab-file input[name=\'mode\']:checked').val())+ '&note=' + encodeURIComponent($('#tab-file textarea[name=\'note\']').val())+ '&sort=' + encodeURIComponent($('#tab-file input[name=\'sort\']').val()),
+    data: 'path=' + encodeURIComponent($('#tab-file input[name=\'path\']').val()) + '&mode=' + encodeURIComponent($('#tab-file input[name=\'mode\']:checked').val())+ '&note=' + encodeURIComponent($('#tab-file textarea[name=\'note\']').val())+ '&sort=' + encodeURIComponent($('#tab-file input[name=\'sort\']').val()),
     beforeSend: function() {
       $('.success, .warning').remove();
       $('#button-files').attr('disabled', true);
@@ -412,6 +414,7 @@ $('#button-files').bind('click', function() {
       $('#files').html(html);     
       $('#tab-files input').val('');
       $('#tab-files textarea').html('');
+      $('#tab-files #thumb-path').attr('src','<?php echo $no_image ?>');
     }
   });
 });
@@ -436,6 +439,7 @@ $('#button-members').bind('click', function() {
       $('#members').html(html);     
       $('#tab-member input').val('');
       $('#tab-member textarea').html('');
+      $('#tab-files #thumb-avatar').attr('src','<?php echo $no_image ?>');
     }
   });
 });
@@ -459,36 +463,48 @@ $('#button-case').bind('click', function() {
     success: function(html) {
       $('#cases').html(html);     
       $('#tab-case input').val('');    
+      $('#tab-files #thumb-photo').attr('src','<?php echo $no_image ?>');
     }
   });
 });
 //--></script> 
 <script type="text/javascript"><!--
 function image_upload(field, thumb) {
-  $('#dialog').remove();
-  
-  $('#content').prepend('<div id="dialog" style="padding: 3px 0px 0px 0px;"><iframe src="index.php?route=common/filemanager&token=<?php echo $token; ?>&field=' + encodeURIComponent(field) + '" style="padding:0; margin: 0; display: block; width: 100%; height: 100%;" frameborder="no" scrolling="auto"></iframe></div>');
-  
-  $('#dialog').dialog({
-    title: '<?php echo $text_image_manager; ?>',
-    close: function (event, ui) {
-      if ($('#' + field).attr('value')) {
-        $.ajax({
-          url: 'index.php?route=common/filemanager/image&token=<?php echo $token; ?>&image=' + encodeURIComponent($('#' + field).val()),
-          dataType: 'text',
-          success: function(data) {
-            $('#' + thumb).replaceWith('<img src="' + data + '" alt="" id="' + thumb + '" />');
-          }
-        });
-      }
-    },  
-    bgiframe: false,
-    width: 800,
-    height: 400,
-    resizable: false,
-    modal: false
+  new AjaxUpload('#'+field, {
+    action: 'index.php?route=common/filemanager/upload_custom&token=<?php echo $token;?>',
+    name: 'file',
+    autoSubmit: true,
+    responseType: 'json',
+    onSubmit: function(file, extension) {
+        $('#'+field).after('<img src="view/image/loading.gif" class="loading" style="padding-left: 5px;" />');
+    },
+    onComplete: function(file, json) {
+                    
+        if (json['status']==1) {
+            $('input[name="'+field+'"]').val(json['path']);
+            $('#'+thumb).attr('src',json['file'])
+        }else{
+            alert(json['msg']);
+            return false;
+        }            
+        
+        $('.loading').remove(); 
+    }
   });
+
 };
+
+$(function(){
+  image_upload('logo','thumb-logo');
+  image_upload('cover','thumb-cover');
+  <?php if ($company_id) { ?>
+  image_upload('path','thumb-path');
+  image_upload('image_1','thumb-image-1');
+  image_upload('image_2','thumb-image-2');
+  image_upload('photo','thumb-photo');
+  image_upload('avatar','thumb-avatar');
+  <?php }?>
+})
 //--></script> 
 <script type="text/javascript"><!--
     $(function(){
@@ -533,4 +549,5 @@ $('.htabs a').tabs();
 <style type="text/css">
   fieldset{margin:5px;padding: 5px; }
 </style>
+
 <?php echo $footer; ?>

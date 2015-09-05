@@ -178,10 +178,7 @@ class ControllerAccountCompany extends Controller {
         
         $this->data['heading_title'] = $this->language->get('title_description');
 
-        $this->data['text_your_details'] = $this->language->get('text_your_details');
-
-         
-
+        $this->data['bind'] = $this->url->link('account/bind', '', 'SSL');
         $this->data['action'] = $this->url->link('account/company/description', '', 'SSL');
 
         $company_id = $this->customer->isCompany();

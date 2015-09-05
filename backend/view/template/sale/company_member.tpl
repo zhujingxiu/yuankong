@@ -22,7 +22,7 @@
     <tr>
       <td class="left"><?php echo $item['date_added']; ?></td>
       <td class="left"><?php echo $item['name']; ?></td>
-      <td class="left"><img src="<?php echo $item['avatar']; ?>"></td>
+      <td class="left"><img src="<?php echo $item['avatar']; ?>" width="122"></td>
       <td class="left"><?php echo $item['position']; ?></td>
       <td class="left"><?php echo $item['sort']; ?></td>
       <td class="left"><?php echo $item['note']; ?></td>
@@ -51,7 +51,7 @@
         var html = '<form id="detail-form"><table class="form">';
 
         html += '<tr><td><?php echo $entry_member ?></td><td><input name="name" value="'+json.data.name+'" /></td></tr>';      
-        html += '<tr><td><?php echo $entry_avatar ?></td><td><img src="'+json.data.src+'"></td></tr>';
+        html += '<tr><td><?php echo $entry_avatar ?></td><td><img src="'+json.data.src+'" width="122" /></td></tr>';
         html += '<tr><td><?php echo $entry_position ?></td><td><input name="position" value="'+json.data.position+'"></td></tr>';
 
         html += '</select></td></tr>';

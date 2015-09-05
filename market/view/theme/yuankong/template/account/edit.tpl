@@ -37,16 +37,16 @@
                         <li class="none"><label>联系人：</label><?php echo $corporation ?></li>
                         <li class="none"><label>联系人手机号：</label>
                             <b id="block1" ><?php echo $mobile_phone ?></b>
+                             &nbsp; [<a href="<?php echo $bind;?>">修改手机号码</a>]
                         </li>
                         <li class="none"><label>企业邮箱：</label>
                             <b id="blocks1"><?php echo $email ?></b>
                         </li>
                     <?php }else{?>
                         <li class="none"><label>手机号：</label>
-                            <input id="blocks3" style="display:none;" type="text" class="xingming" name="mobile_phone" value="<?php echo $mobile_phone ?>">
+                            
                             <b id="block4"><?php echo $mobile_phone; ?></b>
-                            <span onclick="tihuan('block');">[修改]</span>
-                            <a href="#">未验证</a>
+                             &nbsp; [<a href="<?php echo $bind;?>">修改手机号码</a>]
                         </li>
                         <li><label>会员名：</label>
                             <input type="text" name="fullname" class="xingming" value="<?php echo $fullname; ?>">

@@ -71,7 +71,7 @@
                 },
                 messages:{
                     account:{
-                        required:'请输入名字',
+                        required:'请正确填写姓名',
                         byteRangeLength:'姓名长度须在2到20个字符之间'
                     },
                     telephone:{

@@ -14,7 +14,7 @@
   <div class="box">
     <div class="heading">
       <h1><img src="view/image/log.png" alt="" width="22px" height="22px"/> <?php echo $heading_title; ?></h1>
-      <div class="buttons"><a href="<?php echo $insert; ?>" class="button"><?php echo $button_insert; ?></a><a onclick="$('form').submit();" class="button"><?php echo $button_delete; ?></a></div>
+      <div class="buttons"><a href="javascript:detail(null)" class="button"><?php echo $button_insert; ?></a><a onclick="$('form').submit();" class="button"><?php echo $button_delete; ?></a></div>
     </div>
     <div class="content">
       <form action="<?php echo $delete; ?>" method="post" enctype="multipart/form-data" id="form">
@@ -77,4 +77,101 @@
     </div>
   </div>
 </div>
+<div id="detail-dialog" style="display:none">
+  <div class="do-result"></div>
+    <table class="form">
+      <tr>
+        <td><span class="required">*</span> <?php echo $entry_name; ?></td>
+        <td><input type="text" name="name" value="" style="width:90%"/></td>
+      </tr>
+      <tr>
+        <td><span class="required">*</span> <?php echo $entry_url; ?></td>
+        <td><input type="text" name="url" value="" style="width:90%" /></td>
+      </tr>
+
+      <tr>
+        <td><?php echo $entry_status; ?></td>
+        <td><select name="status">
+            <option value="1"><?php echo $text_enabled; ?></option>
+            <option value="0"><?php echo $text_disabled; ?></option>
+          </select></td>
+      </tr>
+      <tr>
+        <td><?php echo $entry_sort_order; ?></td>
+        <td><input type="text" name="sort_order" size="4"/><input type="hidden" name="link_id"/></td>
+      </tr>
+    </table>
+</div>
+<script type="text/javascript">
+  function detail(link_id){
+    if(link_id){
+      $.get(
+        'index.php?route=extension/link/getDetail&token=<?php echo $token?>',
+        {link_id:link_id},
+        function(json){
+          var data = json.info;
+          $('#detail-dialog input[name="name"]').val(data.name);
+          $('#detail-dialog input[name="url"]').val(data.url);
+          $('#detail-dialog input[name="sort_order"]').val(data.sort_order);
+          $('#detail-dialog select[name="status"]').val(data.status);
+          $('#detail-dialog input[name="link_id"]').val(data.link_id);
+          $('#detail-dialog').dialog('open');
+          $('#detail-dialog').dialog('option',{title:'编辑详情'});
+        },'json');
+    }else{
+        $('#detail-dialog input[name="name"]').val('');
+        $('#detail-dialog input[name="url"]').val('');
+        $('#detail-dialog input[name="sort_order"]').val(1);
+        $('#detail-dialog select[name="status"]').val(1);
+        $('#detail-dialog input[name="link_id"]').val(0);
+        $('#detail-dialog').dialog('open');
+        $('#detail-dialog').dialog('option',{title:'添加链接'});
+    }
+    
+  }
+
+  $('#detail-dialog').dialog({
+      width:600,
+      autoOpen:false,
+      modal:true,
+      buttons:{
+        '<?php echo $button_close ?>':function(){
+          $(this).dialog('close');
+        },
+        '<?php echo $button_save ?>':function(){
+          if($('#detail-dialog input[name="name"]').val()=='' ){
+            alert('标题不得为空');
+            $('#detail-dialog input[name="name"]').focus();
+            return false;
+          }
+          if($('#detail-dialog input[name="url"]').val()=='' || !isURL($('#detail-dialog input[name="url"]').val())){
+            alert('URL链接无效');
+            $('#detail-dialog input[name="url"]').focus();
+            return false;
+          }
+          $.ajax({
+            url:'index.php?route=extension/link/save&token=<?php echo $token ?>',
+            type:'post',
+            data:$('#detail-dialog input,#detail-dialog select'),
+            dataType:'json',
+            success:function(json){
+              $('.do-result').empty();
+              if(json.status==0){
+                $('.do-result').html('<div class="alert success">'+json.msg+'</div>');
+              }else{
+                $('.do-result').html('<div class="alert success">'+json.msg+'</div>');
+                setTimeout('location.reload();',2000);
+              }
+            }
+          })
+          
+        }
+      }
+    });
+
+  function isURL(str){
+    var p = /^http[s]?:\/\/([\w-]+\.)+[\w-]+([\w-./?%&=]*)?$/i;
+    return p.test(str);
+  }
+</script>
 <?php echo $footer; ?>

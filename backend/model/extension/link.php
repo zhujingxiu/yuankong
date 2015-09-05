@@ -77,5 +77,19 @@ class ModelExtensionLink extends Model {
         
         return $query->row['total'];
     }
+
+    public function saveLink($data=array()){
+        $fields = array(
+            'name'  => $data['name'],
+            'url'   => htmlspecialchars_decode($data['url']),
+            'status'=> (int)$data['status'],
+            'sort_order'=> (int)$data['sort_order'],
+        );
+        if(isset($data['link_id']) && $data['link_id']){
+            $this->db->update('link',array('link_id'=>$data['link_id']),$fields);
+        }else{
+            $this->db->insert('link',$fields);
+        }
+    }
     
 }

@@ -39,7 +39,7 @@
                     <table class="usertable borb">
                         <tr>
                             <td width="150">会员名</td>
-                            <td><?php echo $mobile_phone ?></td>
+                            <td><?php echo $mobile_phone ?> &nbsp; [<a href="<?php echo $bind;?>">修改手机号码</a>]</td>
                         </tr>
                         <tr>
                             <td width="150">公司名称</td>
