@@ -130,7 +130,7 @@ class ModelServiceCompany extends Model {
         }
 
         if($company){
-            $company['approved'] = 0;
+            //$company['approved'] = 1;
             $this->db->update("company", array('company_id' => (int)$company_id),$company);
         }
 
@@ -288,6 +288,38 @@ class ModelServiceCompany extends Model {
             $this->db->insert("company_file",$file);
         }        
     }
+
+    public function getCertificate($file_id){
+        return $this->db->fetch('company_certificate',array('one'=>true,'condition'=>array('file_id'=>$file_id,'company_id'=>$this->customer->isCompany())));
+    }
+
+    public function deleteCertificate($file_id){
+        $this->db->delete('company_certificate',array('file_id'=>$file_id,'company_id'=>$this->customer->isCompany()));
+        return true;
+    }
+    
+    public function editCertificate($company_id,$data=array()){
+
+        $file = array();
+        if(isset($data['title'])){
+            $file['title'] = strip_tags($data['title']);
+        }
+        if(isset($data['image'])){
+            $file['image'] = htmlspecialchars_decode($data['image']);
+        }
+        if(isset($data['sort'])){
+            $file['sort'] = (int)$data['sort'];
+        }else{
+            $file['sort'] = 1;
+        }
+        $file['company_id'] =(int)$company_id;
+        $file['date_added'] =date('Y-m-d H:i:s');
+        if(isset($data['file_id']) && $data['file_id']){
+            $this->db->update("company_certificate",array('file_id'=>$data['file_id']),$file);
+        }else{
+            $this->db->insert("company_certificate",$file);
+        }        
+    }    
     public function addCompanyRequest($data) {
         $fields =  array(
             'company_id'    => isset($data['company_id']) ? (int)$data['company_id'] : 0,
@@ -463,6 +495,12 @@ class ModelServiceCompany extends Model {
         return $query->num_rows ? $query->rows : array();
     }
 
+    public function getCompanyCertificatesByCompanyId($company_id){
+        $query = $this->db->query("SELECT * FROM ".DB_PREFIX."company_certificate WHERE company_id = '".(int)$company_id."' ORDER BY sort ASC ,date_added DESC LIMIT 8");
+
+        return $query->num_rows ? $query->rows : array();
+    }
+
     public function getCompanyFile($file_id,$company_id){
         $query = $this->db->query("SELECT * FROM ".DB_PREFIX."company_file WHERE file_id = '".(int)$file_id."' AND company_id = '".$company_id."' ORDER BY sort ASC ,date_added DESC");
 
@@ -476,7 +514,7 @@ class ModelServiceCompany extends Model {
     }
 
     public function getCompanyMembersByCompanyId($company_id){
-        $query = $this->db->query("SELECT * FROM ".DB_PREFIX."company_member WHERE company_id = '".(int)$company_id."' ORDER BY sort ASC ,date_added DESC");
+        $query = $this->db->query("SELECT * FROM ".DB_PREFIX."company_member WHERE company_id = '".(int)$company_id."' ORDER BY sort ASC ,date_added DESC LIMIT 8");
 
         return $query->num_rows ? $query->rows : array();
     }

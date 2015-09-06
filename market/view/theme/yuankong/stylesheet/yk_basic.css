@@ -506,3 +506,7 @@
 .askul li { border-bottom: 1px dotted #ccc; padding: 10px  5px; line-height: 28px; font-size: 14px; color: #444;}
 .askul li:nth-last-child(1) { border-bottom: none;}
 .askul li h6 { color: #c30d23; font-size: 14px;}
+/*登录修改*/
+.loginbg { background: #070960;}
+.loginbg .loginbox { margin: 10px 120px 0; min-height:455px;}
+.loginbg  .loginbox-r { background: #fff; border-top-color: #dedede; margin-top: 50px;}

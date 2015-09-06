@@ -99,6 +99,16 @@ class ControllerCommonTool extends Controller {
         $this->response->setOutput(json_encode(array('status'=>$status)));
     }
 
+    public function validatePwd(){
+        $status = 0;
+        $this->load->model('account/customer');
+        $pwd = isset($this->request->post['pwd']) ? $this->request->post['pwd'] : false;
+        if($pwd && $this->model_account_customer->validatePassword($pwd)){
+            $status = 1;
+        }
+        $this->response->setOutput(json_encode(array('status'=>$status)));
+    }
+
     public function upload(){
         $result=array('status'=>0,'msg'=>'');
         if (!empty($this->request->files)){

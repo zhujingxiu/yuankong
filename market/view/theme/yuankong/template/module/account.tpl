@@ -38,6 +38,7 @@
         <dd><a <?php echo ( $keyword == 'account/company' && $action == 'index' ) ? 'class="redbg"' : '' ?> href="<?php echo $company ?>">基本资料</a></dd>
         <dd><a <?php echo ( $keyword == 'account/company' && $action == 'file' ) ? 'class="redbg"' : '' ?> href="<?php echo $file ?>">上传信息</a></dd>       
         <dd><a <?php echo ( $keyword == 'account/company' && $action == 'description' ) ? 'class="redbg"' : '' ?> href="<?php echo $description ?>">公司简介</a></dd>
+        <dd><a <?php echo ( $keyword == 'account/company' && $action == 'certificate' ) ? 'class="redbg"' : '' ?> href="<?php echo $certificate ?>">资质证书</a></dd>
         <dd><a <?php echo ( $keyword == 'account/company' && $action == 'custom1' ) ? 'class="redbg"' : '' ?> href="<?php echo $custom1 ?>">自定义1</a></dd>
         <dd><a <?php echo ( $keyword == 'account/company' && $action == 'custom2' ) ? 'class="redbg"' : '' ?> href="<?php echo $custom2 ?>">自定义2</a></dd>
         <dd><a <?php echo ( $keyword == 'account/company' && $action == 'cases' ) ? 'class="redbg"' : '' ?> href="<?php echo $cases ?>">案例精选</a></dd>

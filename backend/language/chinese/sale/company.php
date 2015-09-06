@@ -6,10 +6,12 @@ $_['tab_module']           		= '自定义模块';
 $_['tab_file']                  = '文件资料';
 $_['tab_member']                = '团队成员';
 $_['tab_case']                  = '公司案例';
+$_['tab_certificate']           = '资质证书';
 $_['tab_other']                 = '其他';
 
 $_['button_add_member']         = '添加成员';
 $_['button_add_case']           = '添加案例';
+$_['button_add_certificate']    = '添加证书';
 $_['button_add_file']           = '添加文件';
 $_['button_add']                = '添加';
 // Text
@@ -18,8 +20,8 @@ $_['text_success_approved']     = '成功： 您已审核了%s个企业公司！
 $_['text_approved']             = '已过审';
 $_['text_unapprove']            = '未审核';
 $_['text_wait']                 = '请耐心等待！';
-$_['text_custom_1']              = '自定义模块1';
-$_['text_custom_2']              = '自定义模块2';
+$_['text_custom_1']             = '自定义模块1';
+$_['text_custom_2']             = '自定义模块2';
 
 $_['confirm_delete']            = '确认删除吗?';
 
@@ -44,6 +46,7 @@ $_['column_position']           = '职位';
 $_['column_member']             = '成员';
 $_['column_action']             = '管理';
 $_['column_case_title']         = '案例标题';
+$_['column_certificate_title']  = '证书标题';
 $_['column_photo']         		= '图片';
 
 // Entry
@@ -78,6 +81,7 @@ $_['entry_member']              = '成员：';
 $_['entry_avatar']              = '头像：';
 $_['entry_module_title']        = '模块名称：';
 $_['entry_case_title']          = '案例名称：';
+$_['entry_certificate_title']   = '资质名称：';
 $_['entry_sort']                = '排序：';
 $_['entry_file']                = '文件：';
 $_['entry_mode']                = '文件类型：';
@@ -101,6 +105,6 @@ $_['error_confirm']             = '密码和确认密码不一致！';
 $_['error_address']             = '详细地址必须在3至128个字符之间！';
 $_['error_city']                = '城市名必须在2至128个字符之间！';
 $_['error_postcode']            = '邮编必须在2至10个字符之间！';
-$_['error_group_id']             = '请选择公司类型！';
+$_['error_group_id']            = '请选择公司类型！';
 $_['error_zone']                = '请选择区域/省/市！';
 $_['error_code']                = '请输入跟踪号！';

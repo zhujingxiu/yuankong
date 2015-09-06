@@ -14,6 +14,7 @@
             </div>
             <div class="userboxcen">
                 <div class="xinxi znnew">
+                    <?php if($messages){ ?>
                     <?php foreach ($messages as $item): ?>                
                     <dl>
                         <dt <?php echo $item['read'] ? 'class="looked"' : '' ?>>
@@ -29,6 +30,13 @@
                         </dd>
                     </dl>
                     <?php endforeach ?>
+                    <?php }else{ ?>
+                    <dl>
+                        <dd class="znnews" style="display:block;">
+                            <?php echo $text_empty ?>
+                        </dd>
+                    </dl>
+                    <?php }?>
                 </div>
             </div>
         </div>

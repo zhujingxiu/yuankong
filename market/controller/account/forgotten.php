@@ -42,7 +42,6 @@ class ControllerAccountForgotten extends Controller {
 		$this->document->setTitle($this->language->get('heading_title'));
 		
 		$this->load->model('account/customer');
-		$this->load->model('affiliate/affiliate');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			$this->model_account_customer->editPassword($this->request->post['mobile_phone'], $this->request->post['password']);
@@ -79,7 +78,7 @@ class ControllerAccountForgotten extends Controller {
 		$this->data['action'] = $this->url->link('account/forgotten', '', 'SSL');
  
 		$this->data['back'] = $this->url->link('account/login', '', 'SSL');
-		$this->data['captcha'] = $this->url->link('account/register/captcha','','ssl');
+		$this->data['captcha'] = $this->url->link('common/tool/captcha','','ssl');
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/forgotten.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/account/forgotten.tpl';

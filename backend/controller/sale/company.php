@@ -645,11 +645,13 @@ class ControllerSaleCompany extends Controller {
  		$this->data['entry_description'] = $this->language->get('entry_description');
  		$this->data['entry_module_title'] = $this->language->get('entry_module_title');
  		$this->data['entry_case_title'] = $this->language->get('entry_case_title');
+ 		$this->data['entry_certificate_title'] = $this->language->get('entry_certificate_title');
  		$this->data['entry_image'] = $this->language->get('entry_image');
  
 		$this->data['button_save'] = $this->language->get('button_save');
     	$this->data['button_add_member'] = $this->language->get('button_add_member');
     	$this->data['button_add_case'] = $this->language->get('button_add_case');
+    	$this->data['button_add_certificate'] = $this->language->get('button_add_certificate');
     	$this->data['button_add_file'] = $this->language->get('button_add_file');
     	$this->data['button_cancel'] = $this->language->get('button_cancel');
     	$this->data['button_remove'] = $this->language->get('button_remove');
@@ -657,6 +659,7 @@ class ControllerSaleCompany extends Controller {
 		$this->data['tab_general'] = $this->language->get('tab_general');
 		$this->data['tab_module'] = $this->language->get('tab_module');
 		$this->data['tab_member'] = $this->language->get('tab_member');
+		$this->data['tab_certificate'] = $this->language->get('tab_certificate');
 		$this->data['tab_case'] = $this->language->get('tab_case');
 		$this->data['tab_file'] = $this->language->get('tab_file');
 		$this->data['tab_other'] = $this->language->get('tab_other');
@@ -684,7 +687,6 @@ class ControllerSaleCompany extends Controller {
 		} else {
 			$this->data['error_title'] = '';
 		}
-
 		
  		if (isset($this->error['password'])) {
 			$this->data['error_password'] = $this->error['password'];
@@ -788,7 +790,7 @@ class ControllerSaleCompany extends Controller {
     	$this->data['thumb_logo'] = $this->data['thumb_cover'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
     	if (isset($this->request->post['logo'])) {
       		$this->data['logo'] = $this->request->post['logo'];
-		} elseif (!empty($company_info['logo'])) { 
+		} elseif (!empty($company_info['logo'])  && file_exists('../'.$company_info['logo'])) { 
 			$this->data['logo'] = $company_info['logo'];
 			$this->data['thumb_logo'] = HTTP_CATALOG.$company_info['logo'];
 		} else {
@@ -796,7 +798,7 @@ class ControllerSaleCompany extends Controller {
     	}
     	if (isset($this->request->post['cover'])) {
       		$this->data['cover'] = $this->request->post['cover'];
-		} elseif (!empty($company_info['cover'])) { 
+		} elseif (!empty($company_info['cover']) && file_exists('../'.$company_info['cover'])) { 
 			$this->data['cover'] = $company_info['cover'];
 			$this->data['thumb_cover'] = HTTP_CATALOG.$company_info['cover'];
 		} else {
@@ -999,7 +1001,7 @@ class ControllerSaleCompany extends Controller {
 		$this->data['thumb_image_1'] = $this->data['thumb_image_2'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
     	if (isset($this->request->post['image_1'])) {
       		$this->data['image_1'] = $this->request->post['image_1'];
-    	} elseif (!empty($company_modules[0]['image'])) { 
+    	} elseif (!empty($company_modules[0]['image']) && file_exists('../'.$company_modules[0]['image'])) { 
 			$this->data['image_1'] = $company_modules[0]['image'];
 			$this->data['thumb_image_1'] = HTTP_CATALOG.$company_modules[0]['image'];
 		} else {
@@ -1008,7 +1010,7 @@ class ControllerSaleCompany extends Controller {
 
     	if (isset($this->request->post['image_2'])) {
       		$this->data['image_2'] = $this->request->post['image_2'];
-    	} elseif (!empty($company_modules[1]['image'])) { 
+    	} elseif (!empty($company_modules[1]['image']) && file_exists('../'.$company_modules[1]['image'])) { 
     		$this->data['image_2'] = $company_modules[1]['image'];
 			$this->data['thumb_image_2'] = HTTP_CATALOG.$company_modules[1]['image'];
 		} else {
@@ -1096,7 +1098,7 @@ class ControllerSaleCompany extends Controller {
 				'onclick' 	=> 'file_delete(' . $result['file_id'].','.$this->request->get['company_id'].')'
 			);
         	$this->data['files'][] = array(
-				'file'      => file_exists('../'.$result['path']) ? HTTP_CATALOG.$result['path'] : $this->model_tool_image->resize('no_image.jpg', 100, 100),
+				'file'      => !empty($result['path']) && file_exists('../'.$result['path']) ? HTTP_CATALOG.$result['path'] : $this->model_tool_image->resize('no_image.jpg', 100, 100),
 				'note' 		=> $result['note'],
 				'sort' 		=> $result['sort'],
 				'mode' 		=> strtolower($result['mode'])=='identity' ? $this->language->get('entry_identity') : $this->language->get('entry_permit'),
@@ -1185,7 +1187,7 @@ class ControllerSaleCompany extends Controller {
         	$this->data['members'][] = array(
         		'name' 		=> $result['name'],
         		'position' 	=> $result['position'],
-				'avatar'    => file_exists('../'.$result['avatar']) ? HTTP_CATALOG.$result['avatar'] : $this->model_tool_image->resize('no_image.jpg', 100, 100),
+				'avatar'    => !empty($result['avatar']) && file_exists('../'.$result['avatar']) ? HTTP_CATALOG.$result['avatar'] : $this->model_tool_image->resize('no_image.jpg', 100, 100),
 				'note' 		=> $result['note'],
 				'sort' 		=> $result['sort'],
         		'date_added'=> date($this->language->get('date_format_short'), strtotime($result['date_added'])),
@@ -1268,8 +1270,8 @@ class ControllerSaleCompany extends Controller {
 				'onclick' 	=> 'case_delete(' . $result['case_id'].','.$this->request->get['company_id'].')'
 			);
         	$this->data['cases'][] = array(
-        		'title' 		=> $result['title'],        		
-				'photo'    => file_exists('../'.$result['photo']) ? HTTP_CATALOG.$result['photo'] : $this->model_tool_image->resize('no_image.jpg', 100,100),				
+        		'title' 	=> $result['title'],        		
+				'photo'     => !empty($result['photo']) && file_exists('../'.$result['photo']) ? HTTP_CATALOG.$result['photo'] : $this->model_tool_image->resize('no_image.jpg', 100,100),				
 				'sort' 		=> $result['sort'],
         		'date_added'=> date($this->language->get('date_format_short'), strtotime($result['date_added'])),
         		'action'	=> $action
@@ -1292,6 +1294,87 @@ class ControllerSaleCompany extends Controller {
 		$this->response->setOutput($this->render());
 	}
 
+	public function certificate() {
+    	$this->language->load('sale/company');
+		
+		$this->load->model('sale/company');
+		$this->load->model('tool/image');
+		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->user->hasPermission('modify', 'sale/company')) { 
+			$this->model_sale_company->addCertificate($this->request->get['company_id'], $this->request->post);
+				
+			$this->data['success'] = $this->language->get('text_success');
+		} else {
+			$this->data['success'] = '';
+		}
+		
+		if (($this->request->server['REQUEST_METHOD'] == 'POST') && !$this->user->hasPermission('modify', 'sale/company')) {
+			$this->data['error_warning'] = $this->language->get('error_permission');
+		} else {
+			$this->data['error_warning'] = '';
+		}	
+		$this->data['token'] = $this->session->data['token'];		
+		$this->data['text_no_results'] = $this->language->get('text_no_results');
+		
+		$this->data['column_date_added'] = $this->language->get('column_date_added');
+		$this->data['column_title'] = $this->language->get('column_title');
+		$this->data['column_photo'] = $this->language->get('column_photo');
+		$this->data['column_sort'] = $this->language->get('column_sort');
+		$this->data['column_action'] = $this->language->get('column_action');
+		$this->data['title'] = '资质证书';
+
+		$this->data['button_close'] = $this->language->get('button_close');
+		$this->data['button_save'] = $this->language->get('button_save');
+		$this->data['entry_title'] = $this->language->get('entry_certificate_title'); 		
+		$this->data['entry_photo'] = $this->language->get('entry_photo'); 		
+		$this->data['entry_note'] = $this->language->get('entry_note'); 		
+ 		$this->data['entry_sort'] = $this->language->get('entry_sort');
+ 		$this->data['text_wait'] = $this->language->get('text_wait');
+ 		$this->data['confirm_delete'] = $this->language->get('confirm_delete');
+		if (isset($this->request->get['page'])) {
+			$page = $this->request->get['page'];
+		} else {
+			$page = 1;
+		}  
+		
+		$this->data['certificates'] = array();
+			
+		$results = $this->model_sale_company->getCertificates($this->request->get['company_id'], ($page - 1) * 10, 10);
+      		
+		foreach ($results as $result) {
+			$action = array();
+		
+			$action[] = array(
+				'text' 		=> $this->language->get('text_edit'),
+				'onclick' 	=> 'certificate_detail(' . $result['file_id'].','.$this->request->get['company_id'].')'
+			);
+			$action[] = array(
+				'text' 		=> $this->language->get('text_delete'),
+				'onclick' 	=> 'certificate_delete(' . $result['file_id'].','.$this->request->get['company_id'].')'
+			);
+        	$this->data['certificates'][] = array(
+        		'title' 	=> $result['title'],        		
+				'image'     => !empty($result['image']) && file_exists('../'.$result['image']) ? HTTP_CATALOG.$result['image'] : $this->model_tool_image->resize('no_image.jpg', 100,100),				
+				'sort' 		=> $result['sort'],
+        		'date_added'=> date($this->language->get('date_format_short'), strtotime($result['date_added'])),
+        		'action'	=> $action
+        	);
+      	}			
+	
+		$total = $this->model_sale_company->getTotalCertificates($this->request->get['company_id']);
+			
+		$pagination = new Pagination();
+		$pagination->total = $total;
+		$pagination->page = $page;
+		$pagination->limit = 10; 
+		$pagination->text = $this->language->get('text_pagination');
+		$pagination->url = $this->url->link('sale/company/certificate', 'token=' . $this->session->data['token'] . '&company_id=' . $this->request->get['company_id'] . '&page={page}', 'SSL');
+			
+		$this->data['pagination'] = $pagination->render();
+
+		$this->template = 'sale/company_certificate.tpl';		
+		
+		$this->response->setOutput($this->render());
+	}
 	public function ajax_data(){
 		$this->load->model('sale/company');
 		$this->load->model('tool/image');
@@ -1390,7 +1473,35 @@ class ControllerSaleCompany extends Controller {
 				}else{
 					$json = array('status' => 0 ,'msg' => $this->language->get('text_exception'));
 				}	
-			break;		
+			break;	
+			case 'get_certificate':
+				$file_id = isset($this->request->get['file_id']) ? (int)$this->request->get['file_id'] : false;
+				$certificate = $this->model_sale_company->getCompanyCertificate($file_id);
+				if(!empty($certificate['image']) && file_exists('../'.$certificate['image'])){
+					$certificate['src'] = HTTP_CATALOG.$certificate['image'];
+				}else{
+					$certificate['src'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
+				}
+				$json = array('status' => 1,'data'	=> $certificate);
+			break;
+			case 'save_certificate':
+				$file_id = isset($this->request->post['file_id']) ? (int)$this->request->post['file_id'] : 0;
+				
+				if($this->model_sale_company->saveCertificate($file_id,$this->request->post)){
+					$json = array('status' => 1);	
+				}else{
+					$json = array('status' => 0 ,'msg' => $this->language->get('text_exception'));
+				}
+			break;
+			case 'delete_certificate':
+				$file_id = isset($this->request->get['file_id']) ? (int)$this->request->get['file_id'] : 0;
+				
+				if($this->model_sale_company->deleteCertificate($file_id)){
+					$json = array('status' => 1);	
+				}else{
+					$json = array('status' => 0 ,'msg' => $this->language->get('text_exception'));
+				}	
+			break;	
 		}
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));

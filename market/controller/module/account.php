@@ -30,6 +30,7 @@ class ControllerModuleAccount extends Controller {
 		$this->data['messages'] = $this->url->link('account/message', '', 'SSL');
 		$this->data['transaction'] = $this->url->link('account/transaction', '', 'SSL');
 		$this->data['description'] = $this->url->link('account/company/description', '', 'SSL');
+		$this->data['certificate'] = $this->url->link('account/company/certificate', '', 'SSL');
 		$this->data['company'] = $this->url->link('account/company', '', 'SSL');
 		$this->data['file'] = $this->url->link('account/company/file', '', 'SSL');
 		$this->data['custom1'] = $this->url->link('account/company/custom1', '', 'SSL');

@@ -149,10 +149,10 @@ class ControllerServiceCompany extends Controller {
 		$results = $this->model_service_company->getCompanies($filter_data);
 
 		foreach ($results as $result) {
-			if ($result['logo']) {
-				$result['logo'] = $this->model_tool_image->resize_upload($result['logo'], 117, 117);
+			if (file_exists($result['logo'])) {
+				$result['logo'] = $result['logo'];
 			} else {
-				$result['logo'] = $this->model_tool_image->resize("nopic.jpg", 117, 117);
+				$result['logo'] = $this->model_tool_image->resize("nopic.jpg", 128, 128);
 			}
 			$result['groups'] = $this->model_service_company->getCompanyGroupsByCompanyId($result['company_id']);
 			$result['link'] = $this->url->link("service/company/info", 'company_id='.$result['company_id'], 'SSL');
@@ -361,8 +361,12 @@ class ControllerServiceCompany extends Controller {
 			$this->data['viewed'] = (int)$company_info['viewed'];
 			$this->data['recommend'] = (int)$company_info['recommend'];
 			$this->data['deposit'] = (int)$company_info['deposit'];
-			$this->data['modules'] = $this->data['cases'] = $this->data['members'] = array();
-
+			$this->data['certificates'] = $this->data['modules'] = $this->data['cases'] = $this->data['members'] = array();
+			$certificate = $this->model_service_company->getCompanyCertificatesByCompanyId($company_id);
+			foreach ($certificate as $item) {
+				$item['image'] = file_exists($item['image']) ? $item['image'] : $this->model_tool_image->resize('nopic.jpg',280,219);
+				$this->data['certificates'][]=$item;
+			}
 			$modules = $this->model_service_company->getCompanyModulesByCompanyId($company_id);
 			foreach ($modules as $item) {
 				if($item['status']){

@@ -27,6 +27,7 @@ class ControllerAccountCompany extends Controller {
 		$this->data['text_your_details'] = $this->language->get('text_your_details');
 
         $this->data['action'] = $this->url->link('account/company/index', '', 'SSL');
+        $this->data['bind'] = $this->url->link('account/bind', '', 'SSL');
         $company_id = $this->customer->isCompany();
 
 		if ($this->request->server['REQUEST_METHOD'] == 'POST' && $this->validateCompany()) {
@@ -90,7 +91,7 @@ class ControllerAccountCompany extends Controller {
         $this->data['thumb'] =  $this->model_tool_image->resize('nopic.jpg',95,95);
 		if (isset($this->request->post['logo'])) {
             $this->data['logo'] = $this->request->post['logo'];
-        } else if (isset($company_info['logo']) && file_exists(DIR_UPLOAD.$company_info['logo'])) {
+        } else if (isset($company_info['logo']) && file_exists($company_info['logo'])) {
             $this->data['logo'] = $company_info['logo'];
 			$this->data['thumb'] = $company_info['logo'];
 		} else {
@@ -226,6 +227,7 @@ class ControllerAccountCompany extends Controller {
                         
         $this->response->setOutput($this->render());    
     }
+
     public function file(){
         if (!$this->customer->isLogged()) {
             $this->session->data['redirect'] = $this->url->link('account/company', '', 'SSL');
@@ -281,6 +283,59 @@ class ControllerAccountCompany extends Controller {
 
     }
 
+    public function certificate(){
+        if (!$this->customer->isLogged()) {
+            $this->session->data['redirect'] = $this->url->link('account/company', '', 'SSL');
+
+            $this->redirect($this->url->link('account/login', '', 'SSL'));
+        }
+
+        $this->language->load('account/company');
+        
+        $this->document->setTitle($this->language->get('title_file'));
+        $this->document->addScript(TPL_JS.'ajaxupload.js');
+        $this->load->model('service/company');
+        $this->load->model('tool/image');
+
+        $this->data['heading_title'] = $this->language->get('title_file');
+
+        if (isset($this->error['warning'])) {
+            $this->data['error_warning'] = $this->error['warning'];
+        } else {
+            $this->data['error_warning'] = '';
+        }   
+
+        $this->data['action'] = $this->url->link('account/company/certificate', '', 'SSL');
+        $this->data['certificates'] = array();
+        $company_id = $this->customer->isCompany();
+        if ($this->request->server['REQUEST_METHOD'] == 'POST') {
+            $this->model_service_company->editCertificate($company_id,$this->request->post); 
+            $this->session->data['success']  = $this->language->get('text_success_file');
+            $this->redirect($this->url->link('account/company/certificate'),'','SSL');
+        }
+        $results = $this->model_service_company->getCompanyCertificatesByCompanyId($company_id);
+        foreach ($results as $item) {
+            $this->data['certificates'][] = array(
+                'file_id'   => $item['file_id'],
+                'title'     => $item['title'],
+                'sort'      => $item['sort'],                
+                'image'     => file_exists($item['image']) ? $item['image'] : $this->model_tool_image->resize('nopic.jpg',205,128),
+                'date_added'=> date('Y-m-d H:i',strtotime($item['date_added']))
+            );
+        }
+        $this->data['no_photo'] = $this->model_tool_image->resize('nopic.jpg', 205, 128);
+        $this->template = $this->config->get('config_template') . '/template/account/company_certificate.tpl';
+        
+        $this->children = array(
+            'common/column_left',
+            'common/column_right',
+            'common/footer',
+            'common/header' 
+        );
+                        
+        $this->response->setOutput($this->render());    
+
+    }
     public function custom1() {
         if (!$this->customer->isLogged()) {
             $this->session->data['redirect'] = $this->url->link('account/company', '', 'SSL');
@@ -576,12 +631,10 @@ class ControllerAccountCompany extends Controller {
         if(isset($this->request->post['email'])){
     		if ((utf8_strlen($this->request->post['email']) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $this->request->post['email'])) {
     			$this->error['email'] = $this->language->get('error_email');
-    		}
+    		}else if (($this->customer->getEmail() != $this->request->post['email']) && $this->model_account_customer->getTotalCustomersByEmail($this->request->post['email'])) {
+                $this->error['email'] = $this->language->get('error_exists');
+            }
         }
-		
-		if (($this->customer->getEmail() != $this->request->post['email']) && $this->model_account_customer->getTotalCustomersByEmail($this->request->post['email'])) {
-			$this->error['warning'] = $this->language->get('error_exists');
-		}
 
 		if (!$this->error) {
 			return true;
@@ -748,6 +801,18 @@ class ControllerAccountCompany extends Controller {
             case 'deletefile':
                 $file_id = isset($this->request->get['file_id']) ? (int)$this->request->get['file_id'] : 0;
                 if($this->model_service_company->deleteFile($file_id)){
+                    $json = array('status'=>1,'msg'=>$this->language->get('text_success_delete'));
+                }
+            case 'getcertificate':
+                $file_id = isset($this->request->get['file_id']) ? (int)$this->request->get['file_id'] : 0;
+                $data = $this->model_service_company->getCertificate($file_id);
+                if($data){
+                    $json = array('status'=>1,'info'=>$data);
+                }
+            break;
+            case 'deletecertificate':
+                $file_id = isset($this->request->get['file_id']) ? (int)$this->request->get['file_id'] : 0;
+                if($this->model_service_company->deleteCertificate($file_id)){
                     $json = array('status'=>1,'msg'=>$this->language->get('text_success_delete'));
                 }
             break;

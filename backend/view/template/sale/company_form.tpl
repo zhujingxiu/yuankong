@@ -17,6 +17,7 @@
       <div id="htabs" class="htabs"><a href="#tab-general"><?php echo $tab_general; ?></a> 
         <?php if ($company_id) { ?>
         <a href="#tab-file"><?php echo $tab_file; ?></a>
+        <a href="#tab-certificate"><?php echo $tab_certificate; ?></a>
         <a href="#tab-module"><?php echo $tab_module; ?></a>
         <a href="#tab-member"><?php echo $tab_member; ?></a>
         <a href="#tab-case"><?php echo $tab_case; ?></a>
@@ -192,6 +193,37 @@
             </tr>
           </table>
           
+        </div>
+        <div id="tab-certificate">
+          <div id="certificates"></div>
+          <table class="form">
+            <tr>
+              <td><?php echo $entry_certificate_title; ?></td>
+              <td><input type="text" name="title" value="" /></td>
+            </tr>
+
+            <tr>
+              <td><?php echo $entry_image; ?></td>
+              <td><div class="image">
+                  <img src="<?php echo $no_image; ?>"id="thumb-picture" width="210"/>
+                  <input type="hidden" name="picture" value=""  />
+                  <br />
+                  <a onclick="image_upload('picture', 'thumb-picture');" id="picture">
+                    <?php echo $text_browse; ?>
+                  </a>
+                  &nbsp;&nbsp;|&nbsp;&nbsp;
+                  <a onclick="$('#thumb-picture').attr('src', '<?php echo $no_image; ?>'); $('input[name=\'picture\']').attr('value', '');"><?php echo $text_clear; ?></a>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_sort; ?></td>
+              <td><input type="text" name="sort" value="" size="3" /></td>
+            </tr>
+            <tr>
+              <td colspan="2" style="text-align: right;"><a id="button-certificate" class="button"><span><?php echo $button_add_certificate; ?></span></a></td>
+            </tr>
+          </table>
         </div>
         <div id="tab-module">
           <fieldset>
@@ -463,7 +495,32 @@ $('#button-case').bind('click', function() {
     success: function(html) {
       $('#cases').html(html);     
       $('#tab-case input').val('');    
-      $('#tab-files #thumb-photo').attr('src','<?php echo $no_image ?>');
+      $('#tab-case #thumb-photo').attr('src','<?php echo $no_image ?>');
+    }
+  });
+});
+
+$('#certificates').load('index.php?route=sale/company/certificate&token=<?php echo $token; ?>&company_id=<?php echo $company_id; ?>');
+
+$('#button-certificate').bind('click', function() {
+  $.ajax({
+    url: 'index.php?route=sale/company/certificate&token=<?php echo $token; ?>&company_id=<?php echo $company_id; ?>',
+    type: 'post',
+    dataType: 'html',
+    data: 'title=' + encodeURIComponent($('#tab-certificate input[name=\'title\']').val()) + '&image=' + encodeURIComponent($('#tab-certificate input[name=\'picture\']').val())+ '&sort=' + encodeURIComponent($('#tab-certificate input[name=\'sort\']').val()),
+    beforeSend: function() {
+      $('.success, .warning').remove();
+      $('#button-certificate').attr('disabled', true);
+      $('#certificates').before('<div class="attention"><img src="view/image/loading.gif" /> <?php echo $text_wait; ?></div>');
+    },
+    complete: function() {
+      $('#button-certificate').attr('disabled', false);
+      $('.attention').remove();
+    },
+    success: function(html) {
+      $('#certificates').html(html);     
+      $('#tab-certificate input').val('');    
+      $('#tab-certificate #thumb-picture').attr('src','<?php echo $no_image ?>');
     }
   });
 });
@@ -501,6 +558,7 @@ $(function(){
   image_upload('path','thumb-path');
   image_upload('image_1','thumb-image-1');
   image_upload('image_2','thumb-image-2');
+  image_upload('picture','thumb-picture');
   image_upload('photo','thumb-photo');
   image_upload('avatar','thumb-avatar');
   <?php }?>

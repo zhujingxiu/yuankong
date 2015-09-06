@@ -501,6 +501,48 @@ class ModelSaleCompany extends Model {
 	
 		return $query->row['total'];
 	}
+
+	public function addCertificate($company_id,$data){
+		$fileds = array(
+			'company_id'=> $company_id,
+			'title'		=> $data['title'],
+			'image'	=> isset($data['image']) ? htmlspecialchars_decode($data['image']) : '',
+			'sort'		=> $data['sort'],
+			'date_added'=> date('Y-m-d H:i:s')
+		);
+		$this->db->insert("company_certificate" ,$fileds);
+	}
+	public function saveCertificate($file_id,$data){
+		$fileds = array(
+			'title' 		=> $data['title'],			
+			'sort'   	=> isset($data['sort']) ? (int)$data['sort'] : 1,
+			'image'	 	=> isset($data['image']) ? htmlspecialchars_decode($data['image']) : '',
+			'date_added'=>date('Y-m-d H:i:s')
+		);
+
+		$this->db->update('company_certificate',array('file_id'=>$file_id),$fileds);
+		return true;
+	}
+	public function deleteCertificate($file_id) {
+		$this->db->query("DELETE FROM " . DB_PREFIX . "company_certificate WHERE file_id = '" . (int)$file_id . "'");
+		return true;
+	}
+	public function getCompanyCertificate($file_id) {
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "company_certificate WHERE file_id = '" . (int)$file_id . "' ");
+	
+		return $query->row;
+	}
+	public function getCertificates($company_id, $start = 0, $limit = 10) {
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "company_certificate WHERE company_id = '" . (int)$company_id . "' ORDER BY date_added DESC LIMIT " . (int)$start . "," . (int)$limit);
+	
+		return $query->rows;
+	}
+	
+	public function getTotalCertificates($company_id) {
+		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "company_certificate WHERE company_id = '" . (int)$company_id . "'");
+	
+		return $query->row['total'];
+	}
 		
 	public function getTotalCompaniesAwaitingApproval() {
       	$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "company WHERE status = '0' OR approved = '0'");

@@ -152,7 +152,7 @@ $(function(){ $('input, textarea').placeholder(); });
   </div>  
 
 <script type="text/javascript">
-    o.moushov.init(".regis-tab li",".regis-box .regis");
+    
     $('.captcha a.c_g').bind('click',function(e){
       $('.captcha img').attr('src',"<?php echo $captcha ?>&t="+(Math.round(Math.random()*999)+9999))
     });

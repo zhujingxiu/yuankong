@@ -46,6 +46,20 @@
             <span><img src="market/view/theme/yuankong/yk_img/adimg/eb5.png" /></span>
         </div>
     </div>
+    <?php if($certificates){ ?>
+    <div class="box-b-2 mt15 p20">
+        <h5 class="gs-d-box-t">资质证书</h5>
+        <div class="ovh mt20">
+            <ul class="jslist">
+                <?php foreach ($certificates as $item): ?>
+                <li class="itempic">
+                    <img src="<?php echo $item['image'] ?>" title="<?php echo $item['title'] ?>" alt="<?php echo $item['title'] ?>" width="210" height="140"/>
+                </li>   
+                <?php endforeach ?>
+            </ul>
+        </div>
+    </div>
+    <?php }?>    
     <?php if($modules){ ?>
     <?php foreach ($modules as $item): ?> 
     <div class="box-b-2 mt15 p20">

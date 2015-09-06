@@ -3,4 +3,3 @@ select.error { border: 1px solid #C30D23;  }
 .error {color:#C30D23; font-size:11px;}
 .valid {background: url("../yk_img/icon/success.png") no-repeat 280px 10px;color:#3c763d;}
 input.valid{ border:1px solid #3c763d;}
-select.valid{ background:#3c763d;}

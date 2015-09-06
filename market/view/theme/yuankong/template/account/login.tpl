@@ -41,6 +41,7 @@ $(function(){ $('input, textarea').placeholder(); });
     <span class="pl20 logospan"><?php echo $heading_title ?></span>
 </div>
 <section id="columns">
+	<div class="loginbg ovh mt20">
 <div class="w">
   	<div class="loginbox fix">
   		<div class="loginbox-l l"><img src="asset/image/loginpic.jpg" /></div>
@@ -78,6 +79,7 @@ $(function(){ $('input, textarea').placeholder(); });
 			</div>
 		</div>
 	</div>
+</div>
 </div> 
 <script type="text/javascript"><!--
 $('#login input').keydown(function(e) {

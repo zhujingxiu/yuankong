@@ -50,7 +50,11 @@
                 <ul class="gongslist">
                     <?php foreach ($companies as $item): ?>
                     <li class="item">
-                        <p class="gspic"><a href="<?php echo $item['link'] ?>"><img src="<?php echo $item['logo'] ?>"></a></p>
+                        <p class="gspic">
+                            <a href="<?php echo $item['link'] ?>">
+                                <img src="<?php echo $item['logo'] ?>" width="128" height="128" />
+                            </a>
+                        </p>
                         <div class="ovh gsjj">
                             <h3><a href="<?php echo $item['link'] ?>"><?php echo $item['title'] ?></a></h3>
                             <p class="lh30 c9 f_m">

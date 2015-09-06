@@ -1,45 +1,12 @@
-.msg-success, .msg-warning, .msg-attention, .msg-information {
-    padding: 10px 10px 10px 33px;
-    margin-bottom: 15px;
-    color: #555555;
-
-}
-.msg-success {
-    background: #EAF7D9 url('../yk_img/icon/success.png') 10px center no-repeat;
-    border: 1px solid #BBDF8D;
-    font-size:14px;
-}
-.msg-warning {
-    background: #FFD1D1 url('../yk_img/icon/warning.png') 10px center no-repeat;
-    border: 1px solid #F8ACAC;
-}
-.msg-attention {
-    background: #FFF5CC url('../yk_img/icon/attention.png') 10px center no-repeat;
-    border: 1px solid #F2DD8C;
-}
-.msg-success .close, .msg-warning .close, .msg-attention .close, .msg-information .close {
-    float: right;
-    padding-top: 4px;
-    padding-right: 4px;
-    cursor: pointer;
-}
-.required {
-    color: #FF0000;
-    font-weight: bold;
-}
-.error {
-    display: block;
-    color: #FF0000;
-}
-.help {
-    color: #999;
-    font-size: 10px;
-    font-weight: normal;
-    display: block;
-}
-.detail-view{
-    color: #05e;
-}
+.msg-success, .msg-warning, .msg-attention, .msg-information {padding: 10px 10px 10px 33px; margin-bottom: 15px;color: #555555;}
+.msg-success {background: #EAF7D9 url('../yk_img/icon/success.png') 10px center no-repeat;border: 1px solid #BBDF8D;font-size:14px;}
+.msg-warning {background: #FFD1D1 url('../yk_img/icon/warning.png') 10px center no-repeat;border: 1px solid #F8ACAC;}
+.msg-attention {background: #FFF5CC url('../yk_img/icon/attention.png') 10px center no-repeat;border: 1px solid #F2DD8C;}
+.msg-success .close, .msg-warning .close, .msg-attention .close, .msg-information .close {float: right;padding-top: 4px;padding-right: 4px;cursor: pointer;}
+.required {color: #FF0000;font-weight: bold;}
+.error {display: block;color: #FF0000;}
+.help {color: #999;font-size: 10px;font-weight: normal;display: block;}
+.detail-view{color: #05e;}
 a[onclick]{cursor: pointer;}
 .l-products{border-left-color: #C30D23;}
 .button-search{cursor: pointer;}
@@ -53,16 +20,17 @@ a[onclick]{cursor: pointer;}
 .yk_members a span{display:block;width:80px;height:50px;margin:34px auto;text-align:center;font-size:14px;color:#999;}
 /**/
 .bind_content { border: 1px solid #eee; margin: 20px 10px; width: auto;}
+.msg_error {color: #ff6769;}
 .mobile {width: auto;}
 .mobile em.green {color: #01a469;}
 .mobile_step1 {width: 400px;}
 .mobile_step1 .message {left: 142px;}
 .mobile_step1 .next_bit {margin: 20px 0 0 142px;}
 .mobile_step1 .mobile_code span {text-align: right;width: 137px;}
-.mobile .img {background-position: -100px -130px;height: 42px;margin-top: 0;}
+.mobile .img {background:url('../yk_img/icon/bind.png') 10px center no-repeat;height: 42px;margin-top: 0;}
 .mobile_code {height: 36px;margin-top: 20px;position: relative;}
 .email_bind {height: 42px;padding: 25px 30px;width: auto;}
-.email_bind .img {background-position: -110px -96px;float: left;height: 34px;margin: 4px 20px 0 0;width: 42px;}
+.email_bind .img {background:url('../yk_img/icon/bind.png') 10px center no-repeat;float: left;height: 42px;margin: 4px 20px 0 0;width: 42px;}
 .email_bind .mid {float: left;width: auto;}
 .email_bind .btn {float: right;height: 36px;width: 87px;}
 .email_bind .btn .bind_click {background: #f36f20 none repeat scroll 0 0;height: 36px;width: 87px;}
@@ -86,10 +54,12 @@ a[onclick]{cursor: pointer;}
 .reset_content img {float: left;height: 32px;margin-left: 5px;width: 100px;}
 .reset_content a {color: #999;line-height: 30px;margin-left: 5px;}
 .reset_content_mobile {margin: 82px auto;width: 450px;}
+.reset_content_mobile .mobile_code input.hq_yzm {width: 108px;height: 34px;margin-left: 5px;border: 0;}
 .reset_content_mobile input.user_txt {border: 1px solid #ccc;float: left;height: 32px;line-height: 32px;padding: 0 10px;width: 228px;}
 .reset_content_mobile .next_bit {margin: 20px 0 0 70px;}
+.reset_content_mobile .mobile_code {position: relative;height: 36px;margin-top: 20px;}
 .reset_content_mobile .mobile_code span {color: #333;float: left;line-height: 36px;padding-right: 5px;text-align: right;width: 80px;}
-.reset_content_mobile .message {clear: both;display: none;font-size: 12px;height: auto;left: 60px;padding: 0 5px;position: absolute;top: 36px;width: auto;}
+.reset_content_mobile .message {clear: both;display: none;font-size: 12px;height: auto;left: 60px;padding: 0 5px;position: absolute;top: 20px;width: auto;}
 .reset_content_mobile .mobile_code .code {border: 1px solid #ccc;float: left;font-size: 14px;height: 32px;line-height: 32px;padding: 0 10px;width: 113px;}
 input.next_bit {background: #f37020 none repeat scroll 0 0;border: 0 none;color: #fff;height: 36px;margin-left: 52px;width: 100px;}
 .focus_border {border: 1px solid #00b34a;}
