@@ -388,6 +388,18 @@ class ControllerInformationWiki extends Controller {
 
             $this->model_catalog_information->addHelpViewed($help_id);
 
+            $relateds = $this->model_catalog_information->getRelateds($help_info['tag']);
+            if(count($relateds)>5){
+                $relateds = array_rand($relateds,5);    
+            }
+            $this->data['relateds']= array();
+            shuffle($relateds);
+            foreach ($relateds as $item) {
+                $item['date_added'] = date('Y-m-d',strtotime($item['date_added']));
+                $item['link'] = $this->url->link('information/wiki/help','wiki_group=help&help_id='.$item['help_id'],'SSL');
+                $this->data['relateds'][] = $item;
+            }
+
             $this->template = $this->config->get('config_template') . '/template/information/wiki_help.tpl';
             
             $this->children = array(

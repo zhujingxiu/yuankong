@@ -15,9 +15,7 @@
                     <div class="email_bind mobile border_bottom">
                         <span class="img"></span>
                         <span class="mid"><em>手机号绑定</em><br><?php echo $mobile_phone ?></span>
-                        <span class="btn">
-                            <input type="button" onclick="" class="bind_click" value="修改" style="background:#BAB7B7;cursor:default;" disabled="true">
-                        </span>
+                        
                     </div>
                     <?php if($step=='pwd'){?>
                     <div class="reset_line">
@@ -27,7 +25,7 @@
                             <li class="last"><em>3</em><span>完成</span></li>
                         </ul>
                     </div>
-                    <form id="bind-form" action="<?php echo $action ?>" method="post" onsubmit="return checkBind()">                        
+                    <form id="pwd-form" action="<?php echo $action ?>" method="post" onsubmit="return checkPwd();">                        
                         <div style="display:block;" class="reset_content_mobile mobile_step1">                  
                             <div class="mobile_code">
                                 <span>输入登陆密码</span>
@@ -52,7 +50,7 @@
                             <li class="last"><em>3</em><span>完成</span></li>
                         </ul>
                     </div>
-                    <form action="<?php echo $action ?>" method="post" onsubmit="return checkF(this)">
+                    <form id="sms-form" action="<?php echo $action ?>" method="post" onsubmit="return checkSMS()">
                         <div class="reset_content_mobile mobile_step2" style="display:block;">              
                             <div class="mobile_code">
                                 <span>手机号</span>
@@ -61,13 +59,24 @@
                             </div>
                             <div class="mobile_code">
                                 <span>验证码</span>
-                                <input type="text" class="code" name="yzm" id="pyzm">
-                                <div class="message" id="pyzmmessage"></div>
+                                <input type="text" class="code" name="sms" id="sms">
+                                <div class="message" id="smsmsg"></div>
                                 <input type="button" value="获取短信验证码" class="hq_yzm" id="hqyzm">
                             </div>
                             <input type="submit" value="提交" class="next_bit">
                         </div>
                     </form>
+                    <?php }else if($step=='success'){?>
+                    <div class="reset_line">
+                        <ul>
+                            <li><em>1</em><b></b><span>身份验证</span></li>
+                            <li><em>2</em><b></b><span>修改手机号</span></li>
+                            <li class="last cur"><em>3</em><span>完成</span></li>
+                        </ul>
+                    </div>
+                    <div class="reset_content_mobile mobile_step3" style="display:block;">
+                        <div class="msg-success">手机号码修改成功！</div>                        
+                    </div>
                     <?php }?>
                 </div>
                 
@@ -86,11 +95,9 @@
         $('.c_img').attr('src',"<?php echo $captcha ?>&t="+(Math.round(Math.random()*999)+9999))
     });
     
-    function checkBind() {
+    function checkPwd() {
         if (!$("#pwd").val() || typeof ($("#pwd").val()) == undefined) {
-            $('#pwdmsg').html('请输入登陆密码');
-            $('#pwdmsg').addClass('msg_error');
-            $('#pwdmsg').css('display', 'block');
+            $('#pwdmsg').html('请输入登陆密码').addClass('msg_error').css('display', 'block');
             return false;
         }
         var flag = 0;
@@ -138,65 +145,97 @@
             return false;
         }
     }
-    $('#hqyzm').click(function () {
-        if ($('phone').value && is_moblie($('phone').value)) {
-            $('#div_mathcode').show();
-            $('#phone').next('.message').css('display', 'none');
-        } else {
-            $('#phone').focus().next('.message').addClass('msg_error').css('display', 'block');
-            if (!$('phone').value && !is_moblie($('phone').value)) {
-                $('#phone').next('.message').html('请输入手机号！');
-                return;
-            }
-            if ($('phone').value && !is_moblie($('phone').value)) {
-                $('#phonemsg').html('请输入正确的手机号');
-                return ;
-            }
-        }
-        checkYzm();
-    });
+
     function checkPhone() {
-        if ($('phone').value == '') {
-            jq('#phone').next('.message').addClass('msg_error');
-            jq('#phone').next('.message').html('请输入手机号！');
-            jq('#phone').focus();
-            jq('#phone').next('.message').css('display', 'block');
+        if ($('#phone').val() == '') {
+            $('#phone').focus().next('.message').addClass('msg_error').html('请输入手机号').css('display', 'block');
             return;
         }
-        if ($('phone').value != '' && typeof ($('phone').value) != undefined) {
-            jq('#phone').next('.message').css('display', 'none');
+        if ($('#phone').val() != '' && typeof ($('#phone').val()) != undefined) {
+            $('#phone').next('.message').css('display', 'none');
         }
-        if(!is_moblie($('phone').value)) {
-            jq('#phone').next('.message').addClass('msg_error');
-            jq('#phone').next('.message').html('请输入正确的手机号！');
-            jq('#phone').next('.message').css('display', 'block');
+        if(!isMoblieCN($('#phone').val())) {
+            $('#phone').next('.message').addClass('msg_error').html('输入的手机号无效').css('display', 'block');
         }
     }
-    function checkYzm() {
-
-        var rand_num = jq('#yzm').val();
-        if (rand_num == '') {
-            jq('#yzm').focus();
+    function checkSMS() {
+        var sms = $('#sms').val();
+        if (sms == '') {
+            $('#sms').focus();
         } else {
-            var mobile = jq('#phone').val();
-            jq.ajax({
-                type: "GET",
-                url: "/my/get_moblie_yz.php",
-                data: {ajaxmobile: 1, rand_num: rand_num,mobile:mobile},
-                success: function (data) {
-                    if (data == 1) {
-                        jq('#yzm').next('.message').css('display', 'none');
-                    } else {
-                        jq('#yzm').focus();
-                        jq('#yzm').next('.message').addClass('msg_error').html('请输入正确的短信验证码！').css('display', 'block');
+            var mobile = $('#phone').val();
+            $.ajax({
+                type: "post",
+                url: "index.php?route=common/tool/validateSMS",
+                data: {sms: sms,mobile_phone:mobile},
+                success: function (json) {
+                    if (json.status == 1) {
+                        $('#sms').next('.message').css('display', 'none');
+                    } else {                        
+                        $('#sms').focus().next('.message').addClass('msg_error').html('请输入正确的短信验证码！').css('display', 'block');
+                        return false;
                     }
                 }
             });
         }
-        if (jq('#yzm').value != '' && typeof (jq('#yzm').value) != undefined) {
-            jq('#yzm').next('.message').css('display', 'none');
+        if ($('#sms').val() != '' && typeof ($('#sms').val()) != undefined) {
+            $('#sms').next('.message').css('display', 'none');
         }
     }
+    var resetSMS,appliedMobile,interval = 120;
+    $('#phone').bind("propertychange input",function(){  
+        if($(this).val() != appliedMobile ){      
+            clearTimeout(resetSMS);
+            $('#hqyzm').removeAttr('disabled').val('获取短信验证码');
+        }
+    });
 
+    $('#hqyzm').bind('click',function(){
+        if($(this).attr('disabled')=='disabled'){
+            alert('短信验证码申请太过于频繁，请稍后再试！');
+            return false;
+        }      
+        if($('#phone').val()=='')  {
+            $('#phone').focus().next('.message').addClass('msg_error').css('display', 'block').html('请输入手机号');;
+            return false;
+        }else if (!isMoblieCN($('#phone').val())) {            
+            $('#phone').focus().next('.message').addClass('msg_error').css('display', 'block').html('输入的手机号无效');
+            return false;
+        } else {            
+            $('#phone').next('.message').css('display', 'none');
+        }
+        var mobile = $('#phone').val();
+        $.ajax({
+            url:'index.php?route=common/tool/getSMS',
+            data:{mobile_phone:mobile},
+            type:'post',
+            dataType:'json',
+            success:function(json){
+                if(json.success){
+                    $('#hqyzm').attr('disabled','disabled');   
+                    appliedMobile = mobile;                     
+                    send_agin($('#hqyzm'));
+                }else{
+                    if(json.error.mobile_phone){
+                        $('#phone').focus().next('.message').addClass('msg_error').css('display', 'block').html(json.error.mobile_phone);
+                    }
+                    if(json.error.sms)
+                    alert(json.error.sms)
+                }
+            }
+        });
+
+    });
+    
+    function send_agin(obj){
+        interval--;     
+        if(interval>0){
+            resetSMS = setTimeout(function(){send_agin(obj);},1000);            
+            obj.val(interval+'秒后获取验证码');
+        }else{
+            obj.removeAttr('disabled').val('获取验证码');         
+            interval=120;
+        }
+    }
 </script>
 <?php echo $footer; ?> 

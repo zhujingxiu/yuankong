@@ -237,5 +237,10 @@ class ModelAccountCustomer extends Model {
 
 		return $data;
 	}
-
+	public function editMobilePhone($mobile_phone){
+		$this->db->query("UPDATE ".DB_PREFIX."customer SET mobile_phone = '".$this->db->escape($mobile_phone)."' WHERE customer_id = '".(int)$this->customer->getId()."'");
+		if($this->customer->isCompany()){
+			$this->db->query("UPDATE ".DB_PREFIX."company SET mobile_phone = '".$this->db->escape($mobile_phone)."' WHERE company_id = '".(int)$this->customer->isCompany()."'");
+		}
+	}
 }

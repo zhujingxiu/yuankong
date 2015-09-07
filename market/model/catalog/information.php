@@ -142,10 +142,32 @@ class ModelCatalogInformation extends Model {
 	}
 
 	public function getTopHelps($limit=5){
-		$sql= "SELECT * FROM ".DB_PREFIX."help WHERE LENGTH(reply) >5 AND user_id > 0 ORDER BY is_top DESC ,date_replied DESC LIMIT ".$limit;
+		$sql= "SELECT * FROM ".DB_PREFIX."help WHERE LENGTH(reply) >5 AND user_id > 0 ORDER BY is_top DESC ,date_replied DESC,date_added DESC LIMIT ".$limit;
 		$query = $this->db->query($sql);
 		return $query->rows;
 	}
 
-
+	public function getRelateds($tag){
+		$data = array();
+		$tag = trim($tag);
+		$tags = strlen($tag) ? explode(";", $tag) : false;
+		if(is_array($tags)){
+			foreach ($tags as $value) {
+				if(empty($value)){
+					continue;
+				}
+				$query = $this->db->query("SELECT * FROM ".DB_PREFIX."help WHERE tag LIKE '%".$this->db->escape($value)."%'");
+				if($query->num_rows){
+					$data = array_merge($query->rows,$data);
+				}
+			}
+		}
+		if(count($data)<3){
+			$query = $this->db->query("SELECT * FROM ".DB_PREFIX."help WHERE LENGTH(reply) > 4 ORDER BY is_top DESC, viewed DESC ,date_replied DESC LIMIT 5");
+			if($query->num_rows){
+				$data = array_merge($query->rows,$data);
+			}
+		}
+		return $data;
+	}
 }

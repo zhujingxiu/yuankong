@@ -25,6 +25,7 @@ $_['entry_reply']       = '回答:';
 $_['entry_status']      = '状态:';
 $_['entry_text']        = '内容:';
 $_['entry_top']         = '置顶:';
+$_['entry_tag']         = '标签:<span class="help">用于相关问答处，多个用;号分割</span>';
 
 // Error
 $_['error_permission']  = '没有编辑权限';

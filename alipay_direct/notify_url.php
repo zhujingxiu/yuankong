@@ -135,7 +135,15 @@ if($verify_result) {//验证成功
         //调试用，写文本函数记录程序运行情况是否正常
         //logResult("这里写入想要调试的代码变量值，或其他运行的结果记录");
 		$db->query("UPDATE `" . DB_PREFIX . "order` SET payment_trade_no = '".$db->escape($trade_no)."',payment_trade_status = '".$db->escape($trade_status)."' ,order_status_id = '".$order_status_id."' WHERE order_id = '".$out_trade_no."' ");
-        
+		//quantity
+        $query = $db->query("SELECT product_id ,quantity FROM ".DB_PREFIX."order_product WHERE order_id = '".(int)$out_trade_no."'");
+        if($query->num_rows){
+        	foreach ($query->rows as $item) {
+        		if($item['product_id'] && $item['quantity']) {
+        			$db->query("UPDATE ".DB_PREFIX."product SET sales = sales + ".(int)$item['quantity']." WHERE product_id = '".(int)$item['product_id']."'");
+        		}
+        	}
+        }
 		logResult('TRADE_SUCCESS');
     }
 
@@ -152,4 +160,3 @@ else {
     //调试用，写文本函数记录程序运行情况是否正常
     //logResult("这里写入想要调试的代码变量值，或其他运行的结果记录");
 }
-?>

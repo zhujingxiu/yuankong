@@ -290,6 +290,7 @@ class ControllerExtensionHelp extends Controller {
 		$this->data['entry_reply'] = $this->language->get('entry_reply');
 		$this->data['entry_sort_order'] = $this->language->get('entry_sort_order');
 		$this->data['entry_top'] = $this->language->get('entry_top');
+		$this->data['entry_tag'] = $this->language->get('entry_tag');
 
 		$this->data['button_save'] = $this->language->get('button_save');
 		$this->data['button_cancel'] = $this->language->get('button_cancel');
@@ -407,6 +408,14 @@ class ControllerExtensionHelp extends Controller {
 			$this->data['is_top'] = $help_info['is_top'];
 		} else {
 			$this->data['is_top'] = '';
+		}
+
+		if (isset($this->request->post['tag'])) {
+			$this->data['tag'] = $this->request->post['tag'];
+		} elseif (!empty($help_info['tag'])) {
+			$this->data['tag'] = $help_info['tag'];
+		} else {
+			$this->data['tag'] = '';
 		}
 
 		if (isset($this->request->post['sort_order'])) {

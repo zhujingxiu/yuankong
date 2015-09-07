@@ -25,18 +25,30 @@ class ControllerAccountBind extends Controller {
             $this->data['step'] = 'sms';
             $this->data['action'] = $this->url->link('account/bind/sms', '', 'SSL');
         }
+
+        if(isset($this->session->data['step'])){
+            switch ($this->session->data['step']) {
+                case 'sms':
+                    $this->data['step'] = 'sms';
+                    $this->data['action'] = $this->url->link('account/bind/sms', '', 'SSL');
+                    break;
+                case 'success':
+                    $this->data['step'] = 'success';
+                    break;
+            }
+        }
+        
         if (isset($this->error['warning'])) {
             $this->data['error_warning'] = $this->error['warning'];
         } else {
             $this->data['error_warning'] = '';
         }  
 
-        if (isset($this->session->data['success'])) {
-            $this->data['error_success'] = $this->session->data['success'];
-            unset($this->session->data['success']);
-        } else {
-            $this->data['error_success'] = '';
-        }  
+        if (isset($this->session->data['step'])) {
+            $this->data['step'] = $this->session->data['step'];
+            $this->data['action'] = $this->url->link('account/bind/sms', '', 'SSL');
+            unset($this->session->data['step']);
+        }
 
         $this->data['mobile_phone'] = substr_replace($this->customer->getMobilePhone(),'****', 3,4);
         $company_info = $this->model_service_company->getCompany($company_id);
@@ -54,11 +66,19 @@ class ControllerAccountBind extends Controller {
     }
 
     public function sms(){
+        $mobile_phone = isset($this->request->post['phone']) ? $this->request->post['phone'] : false;
+        $sms = isset($this->request->post['sms']) ? $this->request->post['sms'] : false;
+        $this->load->model('account/customer');
+        $sms_log = $this->model_account_customer->getSMS($mobile_phone);
 
-    }
-
-    public function success(){
-
+        if($sms && !empty($sms_log['sms']) && ($sms_log['sms'] == $sms) ) {
+            $this->model_account_customer->editMobilePhone($mobile_phone);
+            $this->session->data['step'] = 'success';
+            $this->redirect($this->url->link('account/bind','','SSL'));
+        }else{
+            $this->session->data['step'] = 'sms';
+            $this->redirect($this->url->link('account/bind'));
+        }
     }
 
     public function validate(){

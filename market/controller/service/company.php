@@ -149,7 +149,7 @@ class ControllerServiceCompany extends Controller {
 		$results = $this->model_service_company->getCompanies($filter_data);
 
 		foreach ($results as $result) {
-			if (file_exists($result['logo'])) {
+			if (!empty($result['logo']) && file_exists($result['logo'])) {
 				$result['logo'] = $result['logo'];
 			} else {
 				$result['logo'] = $this->model_tool_image->resize("nopic.jpg", 128, 128);
@@ -353,8 +353,8 @@ class ControllerServiceCompany extends Controller {
       		$this->data['text_viewed'] = $this->language->get('text_viewed');
 			
 			$this->data['title'] = html_entity_decode($company_info['title'], ENT_QUOTES, 'UTF-8');
-			$this->data['logo'] = file_exists($company_info['logo']) ? $company_info['logo'] : $this->model_tool_image->resize('nopic.jpg', 100, 100);
-			$this->data['cover'] = file_exists($company_info['cover']) ? $company_info['cover'] : $this->model_tool_image->resize('nopic.jpg', 480, 300);			
+			$this->data['logo'] = !empty($company_info['logo']) && file_exists($company_info['logo']) ? $company_info['logo'] : $this->model_tool_image->resize('nopic.jpg', 100, 100);
+			$this->data['cover'] = !empty($company_info['cover']) && file_exists($company_info['cover']) ? $company_info['cover'] : $this->model_tool_image->resize('nopic.jpg', 480, 300);			
 			$this->data['description'] = html_entity_decode($company_info['description'], ENT_QUOTES, 'UTF-8');
 			$this->data['address'] = $company_info['area_zone'].' '.trim($company_info['address']);
 
@@ -364,26 +364,26 @@ class ControllerServiceCompany extends Controller {
 			$this->data['certificates'] = $this->data['modules'] = $this->data['cases'] = $this->data['members'] = array();
 			$certificate = $this->model_service_company->getCompanyCertificatesByCompanyId($company_id);
 			foreach ($certificate as $item) {
-				$item['image'] = file_exists($item['image']) ? $item['image'] : $this->model_tool_image->resize('nopic.jpg',280,219);
+				$item['image'] = !empty($item['image']) && file_exists($item['image']) ? $item['image'] : $this->model_tool_image->resize('nopic.jpg',280,219);
 				$this->data['certificates'][]=$item;
 			}
 			$modules = $this->model_service_company->getCompanyModulesByCompanyId($company_id);
 			foreach ($modules as $item) {
 				if($item['status']){
-					$item['image'] = file_exists($item['image']) ? $item['image'] : '';
+					$item['image'] = !empty($item['image']) && file_exists($item['image']) ? $item['image'] : '';
 					$this->data['modules'][]=$item;
 				}
 			}
 
 			$cases = $this->model_service_company->getCompanyCasesByCompanyId($company_id);
 			foreach ($cases as $item) {
-				$item['photo'] = file_exists($item['photo']) ? $item['photo'] : $this->model_tool_image->resize('nopic.jpg',280,219);
+				$item['photo'] = !empty($item['photo']) && file_exists($item['photo']) ? $item['photo'] : $this->model_tool_image->resize('nopic.jpg',280,219);
 				$this->data['cases'][]=$item;
 			}
 			
 			$members = $this->model_service_company->getCompanyMembersByCompanyId($company_id);
 			foreach ($members as $item) {
-				$item['avatar'] = file_exists($item['avatar']) ? $item['avatar'] : $this->model_tool_image->resize('nopic.jpg',122,122);
+				$item['avatar'] = !empty($item['avatar']) && file_exists($item['avatar']) ? $item['avatar'] : $this->model_tool_image->resize('nopic.jpg',122,122);
 				$this->data['members'][]=$item;
 			}
       		$this->data['groups'] = $this->model_service_company->getCompanyGroupsByCompanyId($company_id);

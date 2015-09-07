@@ -1,7 +1,9 @@
 <?php
 // Heading 
-$_['heading_title']         = '消防公司';
-$_['lecture_title']         = '公益讲座_消防网上商城【消防E站官网】';
+$_['heading_title']         = '消防助手_消防网上商城【消防E站官网】';
+$_['title_lecture']         = '公益讲座_消防网上商城【消防E站官网】';
+$_['title_expert']          = '消防专家_消防网上商城【消防E站官网】';
+$_['title_quoted']          = '项目报价_消防网上商城【消防E站官网】';
 // Text
 $_['text_account']          = '账号';
 $_['text_status']           = '状态：';

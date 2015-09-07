@@ -97,6 +97,12 @@
 
     });
     $('#btn-quoted').bind('click',function(){
+
+        <?php if(!$this->customer->isLogged()){ ?>
+        $('#tm-mask').show();
+        $('.iframe-login').show().focus();
+        $('#mini-login input[name="redirect"]').val('<?php echo $this->url->link('service/assistant/quoted_price')?>');
+        <?php }else{?>
         var size = $('#quoted-form input[name="size"]').val();
         if(!$.isNumeric(size) && size<= 0){
             alert('请填写有效数字');
@@ -109,9 +115,19 @@
             data:$('#quoted-form input[type="text"],#quoted-form input[type="radio"]:checked,#quoted-form select'),
             dataType:'json',
             success:function(json){
-
+                if (json.status==0) {
+                    Alertbox({type:false,msg:json.msg,delay:5000});
+                }else{
+                    Alertbox({type:true,msg:json.msg,delay:5000});
+                    location.reload();
+                }
             }
         });
+        <?php }?>
     })
 </script>
+<div class="tm-mask" id="tm-mask" style="display:none;"></div>
+<div class="iframe-login" style="display:none;">
+  <?php echo $mini_login ?>
+</div>
 <?php echo $footer; ?>

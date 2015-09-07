@@ -67,6 +67,10 @@
             <td><?php echo $entry_sort_order; ?></td>
             <td><input type="text" name="sort_order" value="<?php echo $sort_order; ?>" size="10"/></td>
           </tr>
+          <tr>
+            <td><?php echo $entry_tag; ?></td>
+            <td><input type="text" name="tag" value="<?php echo $tag; ?>" size="10"/></td>
+          </tr>
         </table>
 
       </form>

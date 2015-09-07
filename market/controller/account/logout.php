@@ -21,9 +21,9 @@ class ControllerAccountLogout extends Controller {
 			unset($this->session->data['voucher']);
 			unset($this->session->data['vouchers']);
             setcookie("_remember_id", 0, time()-1); 
-      		$this->redirect($this->url->link('account/login', '', 'SSL'));
+      		
     	}
- 
+ 		$this->redirect($this->url->link('account/login', '', 'SSL'));
     	$this->language->load('account/logout');
 		
 		$this->document->setTitle($this->language->get('heading_title'));
