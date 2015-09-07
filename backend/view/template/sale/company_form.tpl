@@ -73,8 +73,8 @@
                 </td>
             </tr>  
             <tr>
-              <td><?php echo $entry_title; ?></td>
-              <td><textarea cols="80" rows="5" name="description"><?php echo $description; ?></textarea></td>
+              <td><?php echo $entry_description; ?></td>
+              <td><textarea cols="100" rows="6" name="description"><?php echo $description; ?></textarea></td>
             </tr>      
             <tr>
               <td><?php echo $entry_code; ?></td>
@@ -117,7 +117,7 @@
               <td><div class="item-adress" id="area"></div>
                 <br>
                 <?php echo $area_zone ?>
-                <input type="text" name="address" value="<?php echo $address; ?>" />
+                <input type="text" name="address" value="<?php echo $address; ?>" size="33"/>
                 <?php if ($error_address) { ?>
                 <span class="error"><?php echo $error_address; ?></span>
                 <?php  } ?></td>

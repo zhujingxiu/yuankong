@@ -1,12 +1,25 @@
 <?php
 class ModelCheckoutOrder extends Model {
 	private function generateSN($customer_id){
-		return '';
+		/*
+		$this->load->model('account/customer');
+		$info = $this->model_account_customer->getCustomer($customer_id);
+		$reg_time = !empty($info['date_added']) ? strtotime($info['date_added']) : time();
+		*/
+		$data['number'] = $this->getOrdersNumber();
+		$data['date'] = date('ymd');
+		$data['suffix'] = substr($this->customer->getMobilePhone(), 3,4);
+		return $data;
 	}	
+
+	public function getOrdersNumber(){
+		$query = $this->db->query("SELECT COUNT(order_id) total FROM ".DB_PREFIX."order WHRE DATE(date_added) = '".$this->db->escape(date('Y-m-d'))."'");
+		return $query->row['total'];
+	}
 	public function addOrder($data) {
 		$fields = array(
 			'invoice_prefix' 	=> $data['invoice_prefix'],
-			'order_sn' 			=> $this->generateSN($this->customer->getId()),
+			'order_sn' 			=> '',
 			'customer_id' 		=> $data['customer_id'],
 			'customer_group_id' => $data['customer_group_id'],
 			'fullname' 			=> $data['fullname'],
@@ -22,6 +35,7 @@ class ModelCheckoutOrder extends Model {
 			'shipping_address'	=> $data['shipping_address'],
 			'shipping_postcode'	=> $data['shipping_postcode'],
 			'shipping_province'	=> $data['shipping_province'],
+			'shipping_area_zone'=> $data['shipping_area_zone'],
 			'shipping_province_id'=> $data['shipping_province_id'],			
 			'shipping_method'	=> $data['shipping_method'],
 			'shipping_code'		=> $data['shipping_code'],
@@ -40,7 +54,11 @@ class ModelCheckoutOrder extends Model {
 			'date_modified'		=> date('Y-m-d H:i:s')
 		);
 		$order_id = $this->db->insert("order",$fields);
-
+		/*
+		$tmp = $this->generateSN($this->customer->getId());
+		$order_sn = $order_id.$tmp['date'].$tmp['number'].$tmp['suffix'];
+		$this->db->query("UPDATE ".DB_PREFIX."order SET order_sn = '".$this->db->escape($order_sn)."' WHERE order_id = '".(int)$order_id."'");
+		*/
 		foreach ($data['products'] as $product) { 
 			$this->db->query("INSERT INTO " . DB_PREFIX . "order_product SET order_id = '" . (int)$order_id . "', product_id = '" . (int)$product['product_id'] . "', name = '" . $this->db->escape($product['name']) . "', model = '" . $this->db->escape($product['model']) . "', quantity = '" . (int)$product['quantity'] . "', price = '" . (float)$product['price'] . "', total = '" . (float)$product['total'] . "', tax = '" . (float)$product['tax'] . "', reward = '" . (int)$product['reward'] . "'");
  
@@ -528,7 +546,7 @@ class ModelCheckoutOrder extends Model {
 				$this->model_checkout_voucher->confirm($order_id);
 			}	
 	
-			if ($notify) {
+			if ($notify && false) {
 				$language = new Language($order_info['language_directory']);
 				$language->load($order_info['language_filename']);
 				$language->load('mail/order');

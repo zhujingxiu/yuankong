@@ -1,6 +1,6 @@
 <?php
 // Heading 
-$_['heading_title']         = '历史订单';
+$_['heading_title']         = '我的订单';
 
 // Text
 $_['text_account']          = '账号';

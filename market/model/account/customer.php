@@ -211,7 +211,7 @@ class ModelAccountCustomer extends Model {
 	}
 
 	public function getTotalMessages(){
-		$sql = "SELECT COUNT(message_id) total FROM ".DB_PREFIX."message WHERE customer_id = '".$this->customer->getId()."'";
+		$sql = "SELECT COUNT(message_id) total FROM ".DB_PREFIX."customer_message WHERE customer_id = '".$this->customer->getId()."'";
 		$query = $this->db->query($sql);
 		return $query->row['total'];		
 	}

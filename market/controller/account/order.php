@@ -107,6 +107,7 @@ class ControllerAccountOrder extends Controller {
 		
 		$this->data['orders'] = array();
 		$this->load->model('tool/image');
+		$this->load->model('catalog/product');
 		$order_total = $this->model_account_order->getTotalOrders($filter_status);
 		
 		$results = $this->model_account_order->getOrders(($page - 1) * 10, 10,$filter_status);
@@ -138,6 +139,11 @@ class ControllerAccountOrder extends Controller {
                 } else {
                     $image = '';
                 }
+                $parent_id = $this->model_catalog_product->getProductCategories($product['product_id']);
+			
+				$path = $this->model_catalog_product->getCategoryPath($parent_id);
+				
+				$path_param = empty($path) ? '' : '&path='.$path;
                 $products[] = array(
                     'name'     => $product['name'],
                     'thumb'    => $image,
@@ -146,7 +152,8 @@ class ControllerAccountOrder extends Controller {
                     'quantity' => $product['quantity'],
                     'price'    => $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $result['currency_code'], $result['currency_value']),
                     'total'    => $this->currency->format($product['total'] + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), $result['currency_code'], $result['currency_value']),
-                    'return'   => $this->url->link('account/return/insert', 'order_id=' . $result['order_id'] . '&product_id=' . $product['product_id'], 'SSL')
+                    'return'   => $this->url->link('account/return/insert', 'order_id=' . $result['order_id'] . '&product_id=' . $product['product_id'], 'SSL'),
+                    'link'     => $this->url->link('product/product', $path_param.'&product_id=' . $product['product_id'] )
                 );
             }
 			$this->data['orders'][] = array(
@@ -244,7 +251,7 @@ class ControllerAccountOrder extends Controller {
 			
 			$this->data['breadcrumbs'][] = array(
 				'text'      => $this->language->get('text_order'),
-				'href'      => $this->url->link('account/order/info', 'order_id=' . $this->request->get['order_id'] . $url, 'SSL'),
+				'href'      => $this->url->link('account/order/info', 'order_id=' . $order_id . $url, 'SSL'),
 				'separator' => $this->language->get('text_separator')
 			);
 					
@@ -281,7 +288,7 @@ class ControllerAccountOrder extends Controller {
 			}
 			
 			$this->data['order_id'] = $this->request->get['order_id'];
-			$this->data['date_added'] = date($this->language->get('date_format_short'), strtotime($order_info['date_added']));
+			$this->data['date_added'] = date('Y-m-d', strtotime($order_info['date_added']));
 			
       		$this->data['payment_method'] = $order_info['payment_method'];
       		$this->data['shipping_area_zone'] = $order_info['shipping_area_zone'];
@@ -295,13 +302,14 @@ class ControllerAccountOrder extends Controller {
 			$this->data['products'] = array();
 
 			$this->load->model('tool/image');
+			$this->load->model('catalog/product');
 			
-			$products = $this->model_account_order->getOrderProducts($this->request->get['order_id']);
+			$products = $this->model_account_order->getOrderProducts($order_id);
 
       		foreach ($products as $product) {
 				$option_data = array();
 				
-				$options = $this->model_account_order->getOrderOptions($this->request->get['order_id'], $product['order_product_id']);
+				$options = $this->model_account_order->getOrderOptions($order_id, $product['order_product_id']);
 
          		foreach ($options as $option) {
           			if ($option['type'] != 'file') {
@@ -321,7 +329,11 @@ class ControllerAccountOrder extends Controller {
                 } else {
                     $image = '';
                 }
-
+                $parent_id = $this->model_catalog_product->getProductCategories($product['product_id']);
+			
+				$path = $this->model_catalog_product->getCategoryPath($parent_id);
+				
+				$path_param = empty($path) ? '' : '&path='.$path;
         		$this->data['products'][] = array(
           			'name'     => $product['name'],
           			'thumb'    => $image,
@@ -330,14 +342,15 @@ class ControllerAccountOrder extends Controller {
           			'quantity' => $product['quantity'],
           			'price'    => $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']),
 					'total'    => $this->currency->format($product['total'] + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), $order_info['currency_code'], $order_info['currency_value']),
-					'return'   => $this->url->link('account/return/insert', 'order_id=' . $order_info['order_id'] . '&product_id=' . $product['product_id'], 'SSL')
+					'return'   => $this->url->link('account/return/insert', 'order_id=' . $order_info['order_id'] . '&product_id=' . $product['product_id'], 'SSL'),
+					'link'     => $this->url->link('product/product', $path_param.'&product_id=' . $product['product_id'] )
         		);
       		}
 
 			// Voucher
 			$this->data['vouchers'] = array();
 			
-			$vouchers = $this->model_account_order->getOrderVouchers($this->request->get['order_id']);
+			$vouchers = $this->model_account_order->getOrderVouchers($order_id);
 			
 			foreach ($vouchers as $voucher) {
 				$this->data['vouchers'][] = array(
@@ -346,22 +359,34 @@ class ControllerAccountOrder extends Controller {
 				);
 			}
 			
-      		$this->data['totals'] = $this->model_account_order->getOrderTotals($this->request->get['order_id']);
-			
+      		$this->data['totals'] = $this->model_account_order->getOrderTotals($order_id);
+			$this->data['order_totals']= array();
+			foreach ($this->data['totals'] as $key => $item) {
+				$this->data['order_totals'][$item['code']] = $item;
+			}
 			$this->data['comment'] = nl2br($order_info['comment']);
 			
 			$this->data['histories'] = array();
 
-			$results = $this->model_account_order->getOrderHistories($this->request->get['order_id']);
+			$results = $this->model_account_order->getOrderHistories($order_id);
 
       		foreach ($results as $result) {
         		$this->data['histories'][] = array(
-          			'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
+          			'date_added' => date('Y-m-d H:i:s', strtotime($result['date_added'])),
           			'status'     => $result['status'],
           			'comment'    => nl2br($result['comment'])
         		);
       		}
+      		$order_shipment = $this->model_account_order->getOrderShipmentHistory($order_id);
+      		if(!empty($order_shipment['date_added'])){
+      			$this->data['shipment_date'] = date('Y-m-d',strtotime($order_shipment['date_added']));
 
+      		}else{
+      			$this->data['shipment_date'] = false;
+      		}
+
+      		$this->data['order_shipments'] = $this->model_account_order->getOrderShipments($order_id);
+      		$this->data['order_status'] = $this->model_account_order->getOrderStatus($order_info['order_status_id']);
       		$this->data['continue'] = $this->url->link('account/order', '', 'SSL');
 		
 			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/order_info.tpl')) {

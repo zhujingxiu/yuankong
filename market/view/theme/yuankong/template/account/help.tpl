@@ -13,7 +13,7 @@
         <div class="userboxtop">
           <?php require( DIR_TEMPLATE.$this->config->get('config_template')."/template/common/breadcrumb.tpl" ); ?>
         </div>
-        
+        <?php if($helps){?>
         <h3 class="pl20 pt10"><b>我发布的问题</b></h3>
         <ul class="fabuwenti fix">
             <?php foreach ($helps as $key => $item): ?>
@@ -32,6 +32,9 @@
         <div class="pagebox mt10">
             <?php echo $pagination ?>
         </div>
+        <?php }else{?>
+        <div><?php echo $text_empty ?></div>
+        <?php }?>
     </div>
     <?php echo $content_bottom; ?>
 </div> 

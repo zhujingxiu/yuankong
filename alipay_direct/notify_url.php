@@ -45,6 +45,7 @@ $registry->set('config', $config);
 $db = new DB(DB_DRIVER, DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 $registry->set('db', $db);
 
+
 // Settings
 $query = $db->query("SELECT * FROM `" . DB_PREFIX . "setting` WHERE group = 'alipay_direct' ");
 foreach($query->rows as $result){

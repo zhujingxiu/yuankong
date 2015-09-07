@@ -36,6 +36,7 @@ class ControllerCheckoutConfirm extends Controller {
 			}				
 		}
 		$json = array();
+		$shipping_address = false;
 		if($this->validateShipping()){
 			if ($this->checkout->hasShipping()) {
 				// Validate if shipping address has been set.		
@@ -141,14 +142,8 @@ class ControllerCheckoutConfirm extends Controller {
 			} else {
 				$data['payment_code'] = '';
 			}
-						
-			if ($this->checkout->hasShipping()) {
-				if ($this->customer->isLogged()) {
-					$this->load->model('account/address');
-					
-					$shipping_address = $this->model_account_address->getAddress($this->session->data['shipping_address_id']);	
-				} 			
-				
+
+			if ($this->checkout->hasShipping() && $shipping_address) {
 				$data['shipping_fullname'] = $shipping_address['fullname'];
 				$data['shipping_telephone'] = $shipping_address['telephone'];
 				$data['shipping_company'] = $shipping_address['company'];	
@@ -157,7 +152,7 @@ class ControllerCheckoutConfirm extends Controller {
 				$data['shipping_province'] = $shipping_address['province'];
 				$data['shipping_area_zone'] = $shipping_address['area_zone'];
 				$data['shipping_province_id'] = $shipping_address['province_id'];
-			
+
 				if (isset($this->session->data['shipping_method']['title'])) {
 					$data['shipping_method'] = $this->session->data['shipping_method']['title'];
 				} else {
@@ -181,7 +176,7 @@ class ControllerCheckoutConfirm extends Controller {
 				$data['shipping_method'] = '';
 				$data['shipping_code'] = '';
 			}
-			
+
 			$product_data = array();
 		
 			foreach ($this->checkout->getProducts() as $product) {
@@ -271,9 +266,9 @@ class ControllerCheckoutConfirm extends Controller {
 			}
 						
 			$this->load->model('checkout/order');
-			$data['order_status_id'] = $this->config->get('config_order_status_id');
 			$this->session->data['order_id'] = $this->model_checkout_order->addOrder($data);
 
+			$this->model_checkout_order->update($this->session->data['order_id'],$this->config->get('config_order_status_id'),'',1);
 			$json['status'] = 1;
 			$json['redirect'] = $this->url->link('payment/'.$data['payment_code'], '', 'SSL');
 		} else {

@@ -25,7 +25,7 @@
       <h3 class="xg_wenti1">相关问题</h3>
       <ul>
           <?php foreach ($relateds as $item): ?>
-          <li><a href="<?php echo $item['link'] ?>"><span><?php echo truncate_string($item['text']) ?></span></a><span><?php echo $item['date_added'] ?></span></li>
+          <li><a href="<?php echo $item['link'] ?>"><span><?php echo truncate_string($item['text'],50) ?></span></a><span><?php echo $item['date_added'] ?></span></li>
           <?php endforeach ?>
       </ul>
     </div>

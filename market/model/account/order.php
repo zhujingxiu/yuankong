@@ -119,5 +119,18 @@ class ModelAccountOrder extends Model {
 		
 		return $query->row['total'];
 	}	
-	
+	public function getOrderShipmentHistory($order_id){
+		$query = $this->db->query("SELECT * FROM ".DB_PREFIX."order_history WHERE order_id = '".(int)$order_id."' AND order_status_id = '".$this->config->get('config_shipped_status_id')."' ORDER BY date_added DESC");
+		return $query->row;
+	}
+
+	public function getOrderShipments($order_id){
+		$query = $this->db->query("SELECT os.*,e.title FROM ".DB_PREFIX."order_shipment os LEFT JOIN ".DB_PREFIX."express e ON os.express_id = e.express_id  WHERE os.order_id = '".(int)$order_id."' ORDER BY date_added ");
+		return $query->rows;
+	}
+
+	public function getOrderStatus($order_status_id){
+		$query = $this->db->query("SELECT * FROM ".DB_PREFIX."order_status WHERE order_status_id = '".(int)$order_status_id."'");
+		return $query->row;
+	}
 }

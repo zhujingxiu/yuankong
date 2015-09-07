@@ -57,11 +57,11 @@
                 <tr class="jtuserdd">
                     <td style="text-align:left;" width="40%">
                         <div class="ovh">
-                            <a class="shop-pic" href="#">
+                            <a class="shop-pic" href="<?php echo $product['link'] ?>">
                                 <img src="<?php echo $product['thumb'] ?>" />
                             </a>
                             <span class="shop-name">
-                                <a href="#"><?php echo $product['name'] ?></a>
+                                <a href="<?php echo $product['link'] ?>"><?php echo $product['name'] ?></a>
                             </span>
                         </div>
                     </td>
@@ -87,15 +87,18 @@
                 <?php } ?>
             </table>
             <?php } ?>
+            
+            <?php } else { ?>
+            <div style="text-align:center;padding:5px;"><h3><?php echo $text_empty; ?></h3></div>
+            <?php } ?>
             <div class="fy">
                 <?php echo $pagination; ?>
+                <?php if ($orders) { ?>
                 <input type="checkbox" id="selected">
                 <label>全选</label>
                 <input type="button" class="dingdan" value="删除订单">
+                <?php }?>
             </div>
-            <?php } else { ?>
-            <div class="content"><?php echo $text_empty; ?></div>
-            <?php } ?>
         </div>
         <?php echo $content_bottom; ?>
     </div>

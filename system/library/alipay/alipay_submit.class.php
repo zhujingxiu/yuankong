@@ -100,11 +100,11 @@ class AlipaySubmit {
 		while (list ($key, $val) = each ($para)) {
             $sHtml.= "<input type='hidden' name='".$key."' value='".$val."'/>";
         }
-
+        $sHtml = $sHtml."<div style='margin:0 auto;top:100px;'><img src='asset/image/fc_loading.gif' /></div>";
 		//submit按钮控件请不要含有name属性
-        $sHtml = $sHtml."<input class='btn btn-primary' type='submit' value='".$button_name."'></form>";
+        $sHtml = $sHtml."<input style='display:none;' class='btn btn-primary' type='submit' value='".$button_name."'></form>";
 		
-		$sHtml = $sHtml."<script>document.forms['alipaysubmit'].submit();</script>";
+		$sHtml = $sHtml."<script charset='UTF-8'>document.forms['alipaysubmit'].submit();</script>";
 		
 		return $sHtml;
 	}

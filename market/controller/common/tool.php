@@ -59,11 +59,11 @@ class ControllerCommonTool extends Controller {
             $sms = new Sms();
             $sms_number = mt_rand(100000,999999);
             $pattern = "尊敬的用户，".$sms_number."是您本次的验证码，该验证码10分钟内有效。【消防e站】";
-            //$res = $sms->sendMsg($this->request->post['mobile_phone'],$pattern);
+            $res = $sms->sendMsg($this->request->post['mobile_phone'],$pattern);
             //var_dump($res);
             $this->model_account_customer->delSMS($this->request->post['mobile_phone']);
             $this->model_account_customer->addSMS($this->request->post['mobile_phone'],$sms_number);
-            $json['success'] =  $sms_number.$this->language->get('text_send_success');           
+            $json['success'] =  $this->language->get('text_send_success');           
         }
         $this->response->setOutput(json_encode($json));
     }
