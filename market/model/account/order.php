@@ -47,7 +47,7 @@ class ModelAccountOrder extends Model {
 		if ($limit < 1) {
 			$limit = 1;
 		}	
-		$sql = "SELECT o.order_id, o.fullname, os.name as status, o.date_added, o.total, o.currency_code, o.currency_value FROM `" . DB_PREFIX . "order` o LEFT JOIN " . DB_PREFIX . "order_status os ON (o.order_status_id = os.order_status_id) WHERE o.customer_id = '" . (int)$this->customer->getId() . "' AND ";
+		$sql = "SELECT o.order_id,o.order_status_id, o.fullname, os.name as status, o.date_added, o.total, o.currency_code, o.currency_value FROM `" . DB_PREFIX . "order` o LEFT JOIN " . DB_PREFIX . "order_status os ON (o.order_status_id = os.order_status_id) WHERE o.customer_id = '" . (int)$this->customer->getId() . "' AND ";
 		
 		if($filter_status && is_array($filter_status) && count($filter_status)){
 			$sql .= " o.order_status_id IN (".implode(",", $filter_status).")";

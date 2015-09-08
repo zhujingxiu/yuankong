@@ -45,7 +45,7 @@
             <table class="userxldd">              
                 <tr>
                     <td class="xlddtop" colspan="6">
-                        <input class="xlddcheck headcheck" type="checkbox" name="selected[]"/>
+                        <input class="xlddcheck headcheck" type="checkbox" name="selected[]" value="<?php echo $order['order_id'] ?>"/>
                         <span>订单编号：#<?php echo $order['order_id']; ?></span>
                         <span>下单时间：<?php echo $order['date_added']; ?></span>
                         <span><a class="detail-view" href="<?php echo $order['href']; ?>"><?php echo $button_view; ?></a></span>
@@ -67,7 +67,10 @@
                     <td width="15%"><?php echo $product['model'] ?></td>
                     <td width="10%"><?php echo $product['quantity']; ?></td>
                     <td width="10%">
-                      <a href="<?php echo $product['return'] ?>">退款/退货</a><br />
+                    <?php if($review){ ?>
+                        <a href="<?php echo $product['toreview'] ?>">评价</a><br />
+                    <?php }?>
+                        <a href="<?php echo $product['return'] ?>">退款/退货</a><br />
                     </td>
                     <?php if(!$key){ ?>
                     <td width="15%" rowspan="<?php echo count($order['products']) ?>">
@@ -77,6 +80,9 @@
                     <?php if(!$key){ ?>
                     <td width="10%" rowspan="<?php echo count($order['products']) ?>">
                         <?php echo $order['status']; ?>
+                        <?php if($this->config->get('config_order_status_id')==$order['status_id']){ ?>
+                        <input type="button" class="dingdan repay" value="去支付" data-val="<?php echo $order['order_id'] ?>">
+                        <?php }?>
                     </td>
                     <?php }?>                    
                 </tr>
@@ -153,7 +159,16 @@
             alert('请选择一个订单');
             return false;
         }
-
+    });
+    $('.repay').bind('click',function(){
+        $.post('index.php?route=account/order/repay',{entity:$(this).attr('data-val')},function(json){
+            if(json.redirect){
+                location.href = json.redirect;
+            }
+        },'json');
     })
 </script>
+<style type="text/css">
+    .repay{background: #66b6ff;}
+</style>
 <?php echo $footer; ?>

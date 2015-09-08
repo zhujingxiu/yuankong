@@ -8,7 +8,6 @@
 	</div>
 <?php endif; ?> 
 <div class="<?php echo $SPAN[1];?> article">
-    <?php echo $content_top; ?>
     <div class="userbox3">
         <div class="userboxtop">
           <?php require( DIR_TEMPLATE.$this->config->get('config_template')."/template/common/breadcrumb.tpl" ); ?>
@@ -23,23 +22,36 @@
                 </li>
             </ul>
             <div class="xinei clearfix"  id="list0_c_0" style="display:block;">
+                <?php if($products){ ?>
                 <ul class="dianping martop">
-                    <li><input type="submit" value="立即点评" class="lijidp"/><a href="#">【牛丸优惠】价比三家图优惠，不如看准品质更优惠！</a>（2012-03-13）</li>
-                    <li><input type="submit" value="立即点评" class="lijidp"/><a href="#">【牛丸优惠】价比三家图优惠，不如看准品质更优惠！</a>（2012-03-13）</li>
-                    <li><input type="submit" value="立即点评" class="lijidp"/><a href="#">【牛丸优惠】价比三家图优惠，不如看准品质更优惠！</a>（2012-03-13）</li>
+                    <?php foreach ($products as $item): ?>
+                    <li>
+                        <a href="<?php echo $item['link'] ?>"><input type="button" value="立即点评" class="lijidp"/></a>
+                        <a href="<?php echo $item['link'] ?>"><?php echo '【#'.$item['order_id'].'】'.truncate_string($item['name'],40) ?></a>
+                        (<?php echo $item['date'] ?>)
+                    </li>
+                    <?php endforeach ?>
                 </ul>
-            </div>
-            <div class="xinei" id="list0_c_1" style="display:none;">
+                <?php }?>
+                <?php if($reviews){ ?>
                 <ul class="dianping martop">
-                    <li><span>已点评<a href="#">删除</a></span><a href="#">【牛丸优惠】价比三家图优惠，不如看准品质更优惠！</a>（2012-03-13）</li>
-                    <li><span>已点评<a href="#">删除</a></span><a href="#">【牛丸优惠】价比三家图优惠，不如看准品质更优惠！</a>（2012-03-13）</li>
-                    <li><span>已点评<a href="#">删除</a></span><a href="#">【牛丸优惠】价比三家图优惠，不如看准品质更优惠！</a>（2012-03-13）</li>
-                    <li><span>已点评<a href="#">删除</a></span><a href="#">【牛丸优惠】价比三家图优惠，不如看准品质更优惠！</a>（2012-03-13）</li>
-                    <li><span>已点评<a href="#">删除</a></span><a href="#">【牛丸优惠】价比三家图优惠，不如看准品质更优惠！</a>（2012-03-13）</li>
+                    <?php foreach ($reviews as $item): ?>
+                    <li>     
+
+                        <span><?php echo $item['status'] ?><a onclick="removeReview(<?php echo $item['review_id'] ?>)">删除</a></span>
+                        <a href="<?php echo $item['link'] ?>" title="追加评论"><?php echo '【#'.$item['order_id'].'】'.truncate_string($item['text'],40) ?></a>
+                        (<?php echo $item['date'] ?>)
+                    </li>
+                    </li>
+                    <?php endforeach ?>
                 </ul>
+                <?php }?>
+                <?php if(($tab=='unreview' && !$products) || ($tab=='reviewed' && !$reviews) ){ ?>
+                <div style="margin:10px;padding:5px;"><h3><?php echo $text_empty; ?></h3></div>
+                <?php } ?>
+                <div class="pagebox mt10"><?php echo $pagination; ?></div>
             </div>
         </div>
-        <?php echo $content_bottom; ?>
     </div>
 </div> 
 <?php if( $SPAN[2] ): ?>
@@ -48,4 +60,22 @@
 </div>
 <?php endif; ?>
 </div>
+<script type="text/javascript">
+    function removeReview(id){
+        if(confirm("确认删除吗？")){
+            $.ajax({
+                url:'index.php?route=account/review/delete',
+                data:'review_id='+id,
+                type:'get',
+                dataType:'json',
+                success:function(json){
+                    if(json.status==1){
+                        Alertbox({type:true,msg:json.msg,delay:5000});
+                        location.reload();
+                    }
+                }
+            });
+        }
+    }
+</script>
 <?php echo $footer; ?>

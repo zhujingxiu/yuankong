@@ -139,6 +139,15 @@ class ControllerAccountOrder extends Controller {
                 } else {
                     $image = '';
                 }
+                $this->data['review'] = $this->data['rereview'] = false;
+	            if($result['order_status_id'] >= $this->config->get('config_received_status_id')){
+	            	$reviewed = $this->model_account_review->getReview($result['order_id'],$product['product_id']);
+	            	if(!$reviewed){
+	            		$this->data['review'] = true;
+	            	}else{
+	            		$this->data['rereview'] = true;
+	            	}
+	            }
                 $parent_id = $this->model_catalog_product->getProductCategories($product['product_id']);
 			
 				$path = $this->model_catalog_product->getCategoryPath($parent_id);
@@ -153,13 +162,16 @@ class ControllerAccountOrder extends Controller {
                     'price'    => $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $result['currency_code'], $result['currency_value']),
                     'total'    => $this->currency->format($product['total'] + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), $result['currency_code'], $result['currency_value']),
                     'return'   => $this->url->link('account/return/insert', 'order_id=' . $result['order_id'] . '&product_id=' . $product['product_id'], 'SSL'),
-                    'link'     => $this->url->link('product/product', $path_param.'&product_id=' . $product['product_id'] )
+                    'link'     => $this->url->link('product/product', $path_param.'&product_id=' . $product['product_id'] ),
+                    'toreview' => $this->url->link('account/review/info', 'order_id='.$result['order_id'].'&product_id=' . $product['product_id'] ),
                 );
             }
+
 			$this->data['orders'][] = array(
 				'order_id'   => $result['order_id'],
 				'name'       => $result['fullname'] ,
 				'status'     => $result['status'],
+				'status_id'  => $result['order_status_id'],
 				'date_added' => date('Y-m-d H:i', strtotime($result['date_added'])),
                 'quantity'   => ($product_total + $voucher_total),
 				'products'   => $products,
@@ -168,12 +180,18 @@ class ControllerAccountOrder extends Controller {
 				'reorder'    => $this->url->link('account/order', 'order_id=' . $result['order_id'], 'SSL')
 			);
 		}
+		$url = '';
+		if(isset($this->request->get['tab'])){
+			$url .= '&tab='.strtolower($this->request->get['tab']);
+		}else{
+			$url .= '&tab=unreview';
+		}
 		$pagination = new Pagination();
 		$pagination->total = $order_total;
 		$pagination->page = $page;
 		$pagination->limit = 10;
 		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = $this->url->link('account/order', 'page={page}', 'SSL');
+		$pagination->url = $this->url->link('account/order', 'page={page}'.$url, 'SSL');
 		
 		$this->data['pagination'] = $pagination->render_list();
 
@@ -480,5 +498,50 @@ class ControllerAccountOrder extends Controller {
   			$json = array('status'=>0,'msg'=>$this->language->get('error_delete_order'));
   		}
   		$this->response->setOutput(json_encode($json_encode));	
+  	}
+
+  	public function repay(){
+  		$order_id = isset($this->request->post['entity']) ? (int)$this->request->post['entity'] : false;
+  		if($order_id){
+  			$this->session->data['order_id'] = $order_id;
+  			$total = 0;
+  			$method_data = array();
+			$this->load->model('setting/extension');		
+			$results = $this->model_setting_extension->getExtensions('payment');
+
+			foreach ($results as $result) {
+				if ($this->config->get($result['code'] . '_status')) {
+					$this->load->model('payment/' . $result['code']);
+					
+					$method = $this->{'model_payment_' . $result['code']}->getMethod($total);
+					
+					if ($method) {
+	                    $method_data[$result['code']] = $method;                        
+					}					
+	                if (!isset($this->session->data['payment_method'])) {
+	                    $this->session->data['payment_method'] = $method;
+	                }
+				}
+			}
+			$sort_order = array(); 
+	  
+			foreach ($method_data as $key => $value) {
+				$sort_order[$key] = $value['sort_order'];
+			}
+
+			array_multisort($sort_order, SORT_ASC, $method_data);			
+
+			$this->session->data['payment_methods'] = $method_data;	
+			if (isset($this->session->data['payment_methods'])) {
+				$this->data['payment_methods'] = $this->session->data['payment_methods']; 
+			} else {
+				$this->data['payment_methods'] = array();
+			}
+
+			if (isset($this->session->data['payment_method']['code'])) {
+				$json['redirect'] = $this->url->link('payment/'.$this->session->data['payment_method']['code'], '', 'SSL');
+				$this->response->setOutput(json_encode($json));
+			}
+		}
   	}
 }

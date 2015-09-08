@@ -30,6 +30,7 @@
                         </dd>
                     </dl>
                     <?php endforeach ?>
+                    <div class="pagebox mt10"><?php echo $pagination; ?></div>
                     <?php }else{ ?>
                     <dl>
                         <dd class="znnews" style="display:block;">

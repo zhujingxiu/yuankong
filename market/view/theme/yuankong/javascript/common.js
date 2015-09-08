@@ -355,3 +355,7 @@ function isMoblieCN(phone){
         return false;
     }
 }
+
+function getStrActualLen(sChars){  
+    return sChars.replace(/[^x00-xff]/g,"xx").length;  
+} 
