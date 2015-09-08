@@ -218,7 +218,7 @@ class ModelCheckoutOrder extends Model {
 				}
 			}
 			$store_name = $this->config->get('config_name');
-			if($notify){
+			if($notify && false){
 				// Send out order confirmation mail
 				$language = new Language($order_info['language_directory']);
 				$language->load($order_info['language_filename']);
@@ -591,5 +591,11 @@ class ModelCheckoutOrder extends Model {
 				$mail->send();
 			}
 		}
+	}
+
+	public function getOrderProducts($order_id) {
+		$query = $this->db->query("SELECT op.*,p.image FROM " . DB_PREFIX . "order_product op LEFT JOIN ".DB_PREFIX."product p ON op.product_id = p.product_id WHERE op.order_id = '" . (int)$order_id . "'");
+	
+		return $query->rows;
 	}
 }

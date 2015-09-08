@@ -20,7 +20,7 @@ class ControllerSaleCompany extends Controller {
 		$this->load->model('sale/company');
 			
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-      	  	$this->model_sale_company->addCompany($this->request->post);
+      	  	$company_id = $this->model_sale_company->addCompany($this->request->post);
 			
 			$this->session->data['success'] = $this->language->get('text_success');
 		  
@@ -64,8 +64,12 @@ class ControllerSaleCompany extends Controller {
 			if (isset($this->request->get['page'])) {
 				$url .= '&page=' . $this->request->get['page'];
 			}
+			if(empty($this->request->post['keep'])){
+				$this->redirect($this->url->link('sale/company', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+			}else{				
+				$this->redirect($this->url->link('sale/company/update', 'token=' . $this->session->data['token'] . '&company_id='.$company_id, 'SSL'));
+			}
 			
-			$this->redirect($this->url->link('sale/company', 'token=' . $this->session->data['token'] . $url, 'SSL'));
 		}
     	
     	$this->getForm();
@@ -123,8 +127,12 @@ class ControllerSaleCompany extends Controller {
 			if (isset($this->request->get['page'])) {
 				$url .= '&page=' . $this->request->get['page'];
 			}
+			if(empty($this->request->post['keep'])){
+				$this->redirect($this->url->link('sale/company', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+			}else{
+				$this->redirect($this->url->link('sale/company/update', 'token=' . $this->session->data['token'] . '&company_id='.$this->request->get['company_id'], 'SSL'));
+			}
 			
-			$this->redirect($this->url->link('sale/company', 'token=' . $this->session->data['token'] . $url, 'SSL'));
 		}
     
     	$this->getForm();

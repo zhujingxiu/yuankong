@@ -133,4 +133,21 @@ class ModelAccountOrder extends Model {
 		$query = $this->db->query("SELECT * FROM ".DB_PREFIX."order_status WHERE order_status_id = '".(int)$order_status_id."'");
 		return $query->row;
 	}
+
+	public function deleteOrder($order_id){
+		$order_query = $this->db->query("SELECT order_id FROM `" . DB_PREFIX . "order` WHERE customer_id = '".$this->customer->getId()."' AND order_id = '" . (int)$order_id . "'");
+		if ($order_query->num_rows) {
+			$this->db->delete('order',array('order_id'=>$order_id));
+			$this->db->delete('order_product',array('order_id'=>$order_id));
+			$this->db->delete('order_history',array('order_id'=>$order_id));
+			$this->db->delete('order_total',array('order_id'=>$order_id));
+			$this->db->delete('order_shipment',array('order_id'=>$order_id));
+			$this->db->delete('order_shipment_tracking',array('order_id'=>$order_id));
+			$this->db->delete('order_option',array('order_id'=>$order_id));
+			$this->db->delete('order_voucher',array('order_id'=>$order_id));
+			$this->db->delete('review',array('order_id'=>$order_id));
+		}else{
+			return false;
+		}
+	}
 }

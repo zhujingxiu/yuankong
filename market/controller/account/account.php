@@ -65,12 +65,18 @@ class ControllerAccountAccount extends Controller {
         $this->load->model('account/order');
         $this->load->model('catalog/product');
         $this->load->model('account/customer');
+
+        $account = $this->model_account_customer->getCustomer($this->customer->getId());
+        if($this->customer->isCompany()){
+            $this->data['approved'] = isset($account['approved']) && (int)$account['approved'] ;
+        }
         $this->data['messages'] = $this->model_account_customer->getTotalMessages();
         $this->data['message'] = $this->url->link('account/message','','SSL');
         $this->data['reviews'] = $this->model_account_customer->getTotalReviews();
         $this->data['review'] = $this->url->link('account/review','','SSL');
         $this->data['helps'] = $this->model_account_customer->getTotalHelps();
         $this->data['help'] = $this->url->link('account/help','','SSL');
+
         $this->data['recently'] = array();
         $results = $this->model_account_order->getOrders(0,5);
        	$already = array();

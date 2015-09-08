@@ -111,7 +111,7 @@ class ControllerAccountOrder extends Controller {
 		$order_total = $this->model_account_order->getTotalOrders($filter_status);
 		
 		$results = $this->model_account_order->getOrders(($page - 1) * 10, 10,$filter_status);
-		
+
 		foreach ($results as $result) {
 			$product_total = $this->model_account_order->getTotalOrderProductsByOrderId($result['order_id']);
 			$voucher_total = $this->model_account_order->getTotalOrderVouchersByOrderId($result['order_id']);
@@ -459,5 +459,26 @@ class ControllerAccountOrder extends Controller {
 								
 			$this->response->setOutput($this->render());				
     	}
+  	}
+
+  	public function delete(){
+  		$this->load->model('account/order');
+  		$selected = isset($this->request->post['selected']) ? $this->request->post['selected'] : false;
+  		$ids = explode(",", $selected);
+  		$n = 0 ;
+  		if(is_array($ids)){
+  			foreach ($ids as $order) {
+  				if($order){
+  					$this->model_account_order->deleteOrder($order);
+  					$n++;
+  				}
+  			}
+  		}
+  		if($n){
+  			$json = array('status'=>1,'msg'=>sprintf($this->language->get('text_delete_order'),$n));
+  		}else{
+  			$json = array('status'=>0,'msg'=>$this->language->get('error_delete_order'));
+  		}
+  		$this->response->setOutput(json_encode($json_encode));	
   	}
 }

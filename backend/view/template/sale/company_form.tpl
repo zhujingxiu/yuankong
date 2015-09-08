@@ -11,7 +11,11 @@
   <div class="box">
     <div class="heading">
       <h1><img src="view/image/customer.png" alt="" /> <?php echo $heading_title; ?></h1>
-      <div class="buttons"><a onclick="$('#form').submit();" class="button"><?php echo $button_save; ?></a><a href="<?php echo $cancel; ?>" class="button"><?php echo $button_cancel; ?></a></div>
+      <div class="buttons">
+        <a onclick="$('#form').submit();" class="button" style="display: block; position: fixed; bottom: 150px; right:40px; z-index: 99999;"><?php echo '保存后返回'; ?></a>
+        <a onclick="$('#form').append('<input name=keep value=1 type=hidden >');$('#form').submit();" class="button" style="display: block; position: fixed; bottom: 200px; right:40px; z-index: 99999;"><?php echo '保存后继续'; ?></a>
+        <a href="<?php echo $cancel; ?>" class="button"><?php echo $button_cancel; ?></a>
+      </div>
     </div>
     <div class="content">
       <div id="htabs" class="htabs"><a href="#tab-general"><?php echo $tab_general; ?></a> 
@@ -21,11 +25,11 @@
         <a href="#tab-module"><?php echo $tab_module; ?></a>
         <a href="#tab-member"><?php echo $tab_member; ?></a>
         <a href="#tab-case"><?php echo $tab_case; ?></a>
-        <a href="#tab-other"><?php echo $tab_other; ?></a>
         <?php } ?>
       </div>
-      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
+      
         <div id="tab-general">
+        <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
           <table class="form">
             <tr>
               <td><span class="required">*</span> <?php echo $entry_title; ?></td>
@@ -150,9 +154,58 @@
                 <span class="error"><?php echo $error_confirm; ?></span>
                 <?php  } ?></td>
             </tr>
-
-
           </table>
+          <?php if($company_id){?>
+          <h4><a onclick="$('#company-more').toggle();">显示/隐藏更多数据</a></h4>
+          <table class="form" id="company-more" style="display: none;">
+            <tr>
+              <td><?php echo $entry_recommend; ?></td>
+              <td><select name="recommend">
+                  <?php if ($recommend) { ?>
+                  <option value="1" selected="selected"><?php echo $text_yes; ?></option>
+                  <option value="0"><?php echo $text_no; ?></option>
+                  <?php } else { ?>
+                  <option value="1"><?php echo $text_yes; ?></option>
+                  <option value="0" selected="selected"><?php echo $text_no; ?></option>
+                  <?php } ?>
+                </select></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_deposit; ?></td>
+              <td><input type="text" name="deposit" value="<?php echo $deposit; ?>"/></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_viewed; ?></td>
+              <td><input type="text" name="viewed" value="<?php echo $viewed; ?>"/></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_credit; ?></td>
+              <td><input type="text" name="credit" value="<?php echo $credit; ?>"/></td>
+            </tr>            
+            <tr>
+              <td><?php echo $entry_sort_order; ?></td>
+              <td><input type="text" name="sort_order" value="<?php echo $sort_order; ?>" size="3" /></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_postcode; ?></td>
+              <td><input type="text" name="postcode" value="<?php echo $postcode; ?>" /></td>
+            </tr>   
+            <tr>
+              <td><?php echo $entry_email; ?></td>
+              <td><input type="text" name="email" value="<?php echo $email; ?>" size="33"/></td>
+            </tr> 
+            <tr>
+              <td><?php echo $entry_telephone; ?></td>
+              <td><input type="text" name="telephone" value="<?php echo $telephone; ?>" /></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_fax; ?></td>
+              <td><input type="text" name="fax" value="<?php echo $fax; ?>" /></td>
+            </tr> 
+            
+          </table>
+          <?php }?>
+          </form>
         </div>
         <?php if ($company_id) { ?>
         <div id="tab-file">
@@ -370,57 +423,9 @@
             </tr>
           </table>
         </div>
-        <div id="tab-other">
-          <table class="form">
-            <tr>
-              <td><?php echo $entry_recommend; ?></td>
-              <td><select name="recommend">
-                  <?php if ($recommend) { ?>
-                  <option value="1" selected="selected"><?php echo $text_yes; ?></option>
-                  <option value="0"><?php echo $text_no; ?></option>
-                  <?php } else { ?>
-                  <option value="1"><?php echo $text_yes; ?></option>
-                  <option value="0" selected="selected"><?php echo $text_no; ?></option>
-                  <?php } ?>
-                </select></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_deposit; ?></td>
-              <td><input type="text" name="deposit" value="<?php echo $deposit; ?>"/></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_viewed; ?></td>
-              <td><input type="text" name="viewed" value="<?php echo $viewed; ?>"/></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_credit; ?></td>
-              <td><input type="text" name="credit" value="<?php echo $credit; ?>"/></td>
-            </tr>            
-            <tr>
-              <td><?php echo $entry_sort_order; ?></td>
-              <td><input type="text" name="sort_order" value="<?php echo $sort_order; ?>" size="3" /></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_postcode; ?></td>
-              <td><input type="text" name="postcode" value="<?php echo $postcode; ?>" /></td>
-            </tr>   
-            <tr>
-              <td><?php echo $entry_email; ?></td>
-              <td><input type="text" name="email" value="<?php echo $email; ?>" size="33"/></td>
-            </tr> 
-            <tr>
-              <td><?php echo $entry_telephone; ?></td>
-              <td><input type="text" name="telephone" value="<?php echo $telephone; ?>" /></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_fax; ?></td>
-              <td><input type="text" name="fax" value="<?php echo $fax; ?>" /></td>
-            </tr> 
-            
-          </table>
-        </div>
+
         <?php } ?>
-      </form>
+      
     </div>
   </div>
 </div>

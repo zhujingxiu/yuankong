@@ -13,7 +13,9 @@ class ControllerPageStatic extends Controller {
 			$this->model_setting_setting->editPage('static',$this->request->post['page']);		
 			
 			$this->session->data['success'] = $this->language->get('text_success');
-						
+			if(!empty($this->request->post['keep'])){
+				$this->redirect($this->url->link('page/static', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+			}			
 			$this->redirect($this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL'));
 		}
 				

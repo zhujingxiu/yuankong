@@ -3,7 +3,7 @@
 $_['heading_title']   = '找回密码';
 
 // Text
-$_['text_account']    = '我的账户';
+$_['text_account']    = '用户中心';
 $_['text_forgotten']  = '忘记密码';
 $_['text_your_email'] = '您的邮箱地址';
 $_['text_email']      = '请输入您注册账户时填写的电子邮件地址，点击继续。您的新密码将通过电子邮件发送给您！';

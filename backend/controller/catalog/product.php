@@ -20,7 +20,7 @@ class ControllerCatalogProduct extends Controller {
 		$this->load->model('catalog/product');
 		
     	if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_catalog_product->addProduct($this->request->post);
+			$product_id = $this->model_catalog_product->addProduct($this->request->post);
 	  		
 			$this->session->data['success'] = $this->language->get('text_success');
 	  
@@ -58,7 +58,11 @@ class ControllerCatalogProduct extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 			
-			$this->redirect($this->url->link('catalog/product', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+			if(empty($this->request->post['keep'])){
+				$this->redirect($this->url->link('catalog/product', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+			}else{
+				$this->redirect($this->url->link('catalog/product/update', 'token=' . $this->session->data['token'] . '&product_id='.$product_id, 'SSL'));
+			}
     	}
 	
     	$this->getForm();
@@ -111,6 +115,8 @@ class ControllerCatalogProduct extends Controller {
 			}
 			if(empty($this->request->post['keep'])){
 				$this->redirect($this->url->link('catalog/product', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+			}else{
+				$this->redirect($this->url->link('catalog/product/update', 'token=' . $this->session->data['token'] . '&product_id='.$this->request->get['product_id'], 'SSL'));
 			}
 			
 		}

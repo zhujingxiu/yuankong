@@ -6,7 +6,16 @@ class ControllerAccountReview extends Controller {
 			
 	  		$this->redirect($this->url->link('account/login', '', 'SSL'));
     	}		
-		
+		$tab = isset($this->request->get['tab']) ? strtolower(trim($this->request->get['tab'])) : 'unreview';
+		$filter_tab = array();
+		switch ($tab) {
+			case 'reviewed':
+				$filter_tab = array(6,7);
+				break;
+			default :
+				$filter_tab = array(1,2,3);
+				break;
+		}
 		$this->language->load('account/review');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -67,7 +76,7 @@ class ControllerAccountReview extends Controller {
 			$this->data['reviews'][] = array(
 				'amount'      => $this->currency->format($result['amount'], $this->config->get('config_currency')),
 				'description' => $result['description'],
-				'date_added'  => date($this->language->get('date_format_short'), strtotime($result['date_added']))
+				'date_added'  => date('Y-m-d', strtotime($result['date_added']))
 			);
 		}	
 
@@ -101,4 +110,42 @@ class ControllerAccountReview extends Controller {
 						
 		$this->response->setOutput($this->render());		
 	} 		
+
+	public function info(){
+
+	}
+
+	public function write() {
+		$this->language->load('product/product');
+		
+		$this->load->model('account/review');
+		
+		$json = array();
+		
+		if ($this->request->server['REQUEST_METHOD'] == 'POST') {
+			if ((utf8_strlen($this->request->post['name']) < 1) || (utf8_strlen($this->request->post['name']) > 25)) {
+				$json['error'] = $this->language->get('error_name');
+			}
+			
+			if ((utf8_strlen($this->request->post['text']) < 3) || (utf8_strlen($this->request->post['text']) > 1000)) {
+				$json['error'] = $this->language->get('error_text');
+			}
+	
+			if (empty($this->request->post['rating'])) {
+				$json['error'] = $this->language->get('error_rating');
+			}
+	
+			if (empty($this->session->data['captcha']) || ($this->session->data['captcha'] != $this->request->post['captcha'])) {
+				$json['error'] = $this->language->get('error_captcha');
+			}
+				
+			if (!isset($json['error'])) {
+				$this->model_account_review->addReview($this->request->get['product_id'], $this->request->post);
+				
+				$json['success'] = $this->language->get('text_success');
+			}
+		}
+		
+		$this->response->setOutput(json_encode($json));
+	}
 }

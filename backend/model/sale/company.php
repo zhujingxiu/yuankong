@@ -66,6 +66,7 @@ class ModelSaleCompany extends Model {
 			'date_added'	=> date('Y-m-d H:i:s')
       	);
       	$this->db->insert('customer',$fileds);
+      	return $company_id;
 	}
 	
 	public function editCompany($company_id, $data) {
@@ -568,7 +569,7 @@ class ModelSaleCompany extends Model {
 		if ($company_info) {
 			$this->db->query("UPDATE " . DB_PREFIX . "company SET approved = '1' WHERE company_id = '" . (int)$company_id . "'");
 			$this->db->query("UPDATE " . DB_PREFIX . "customer SET approved = '1' WHERE company_id = '" . (int)$company_id . "'");
-			if($notify){
+			if($notify && false){
 				$this->language->load('mail/company');
 		
 				$message  = sprintf($this->language->get('text_approve_welcome'), $this->config->get('config_name')) . "\n\n";

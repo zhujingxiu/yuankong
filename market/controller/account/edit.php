@@ -316,6 +316,50 @@ class ControllerAccountEdit extends Controller {
         }
     }
 
+    public function deleteAddress() {
+        if (!$this->customer->isLogged()) {
+            $this->session->data['redirect'] = $this->url->link('account/address', '', 'SSL');
+
+            $this->redirect($this->url->link('account/login', '', 'SSL')); 
+        } 
+            
+        $this->language->load('account/address');
+
+        $this->document->setTitle($this->language->get('heading_title'));
+        
+        $this->load->model('account/address');
+        
+        if (isset($this->request->get['address_id'])) {
+            if($this->model_account_address->deleteAddress($this->request->get['address_id'])){
+            
+                // Default Shipping Address
+                if (isset($this->session->data['shipping_address_id']) && ($this->request->get['address_id'] == $this->session->data['shipping_address_id'])) {
+                    unset($this->session->data['shipping_address_id']);
+                    unset($this->session->data['shipping_province_id']);
+                    unset($this->session->data['shipping_postcode']);               
+                    unset($this->session->data['shipping_method']);
+                    unset($this->session->data['shipping_methods']);
+                }
+                
+                // Default Payment Address
+                if (isset($this->session->data['payment_address_id']) && ($this->request->get['address_id'] == $this->session->data['payment_address_id'])) {
+                    unset($this->session->data['payment_address_id']);
+                    unset($this->session->data['payment_province_id']);             
+                    unset($this->session->data['payment_method']);
+                    unset($this->session->data['payment_methods']);
+                }
+                
+                $json = array('status'=>1 ,'msg' => $this->language->get('text_delete'));
+            }else{
+                $json = array('status'=>0 ,'msg' => $this->language->get('text_exception'));
+            }
+      
+        }else{
+            $json = array('status'=>0 ,'msg' => $this->language->get('text_exception'));
+        }
+        $this->response->setOutput(json_encode($json));
+    }
+
 	private function area_js(){
         $file = TPL_JS.'area.js';
         if(!file_exists($file)){

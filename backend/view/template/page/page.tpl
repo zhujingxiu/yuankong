@@ -11,7 +11,11 @@
   <div class="box">
     <div class="heading">
       <h1><img src="view/image/module.png" alt="" /> <?php echo $heading_title; ?></h1>
-      <div class="buttons"><a onclick="$('#form').submit();" class="button"><?php echo $button_save; ?></a><a href="<?php echo $cancel; ?>" class="button"><?php echo $button_cancel; ?></a></div>
+      <div class="buttons">
+        <a onclick="$('#form').submit();" class="button" style="display: block; position: fixed; bottom: 150px; right:40px; z-index: 99999;"><?php echo '保存后返回'; ?></a>
+        <a onclick="$('#form').append('<input name=keep value=1 type=hidden >');$('#form').submit();" class="button" style="display: block; position: fixed; bottom: 200px; right:40px; z-index: 99999;"><?php echo '保存后继续'; ?></a>
+        <a href="<?php echo $cancel; ?>" class="button"><?php echo $button_cancel; ?></a>
+      </div>
     </div>
     <div class="content">
       <form action="<?php echo $action; ?>" method="post" id="form">

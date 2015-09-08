@@ -48,7 +48,22 @@ class ModelAccountCustomer extends Model {
 	}
 	
 	public function editCustomer($data) {
-		$this->db->query("UPDATE " . DB_PREFIX . "customer SET fullname = '" . $this->db->escape($data['fullname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "' WHERE customer_id = '" . (int)$this->customer->getId() . "'");
+		$fields = array();
+		if(isset($data['fullname'])){
+			$fields['fullname'] = strip_tags($data['fullname']);
+		}
+		if(isset($data['email'])){
+			$fields['email'] = strip_tags($data['email']);
+		}
+		if(isset($data['gender'])){
+			$fields['gender'] = (int)$data['gender'];
+		}
+		if($fields){
+
+			$this->db->query('customer',array('customer_id'=>$this->customer->getId()),$fields);
+
+		}
+
 	}
 
 	public function editPassword($password) {

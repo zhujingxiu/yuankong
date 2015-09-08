@@ -26,9 +26,15 @@ class ControllerPaymentAlipayDirect extends Controller {
         //商户网站订单系统中唯一订单号，必填
 		
 		$order_id = $this->session->data['order_id'];
+		$title= array();
+		$products = $this->model_checkout_order->getOrderProducts($order_id);
+		foreach ($products as $product) {
+			if(!empty($product['name']))
+			$title[] = $product['name'];
+		}
 		
         //订单名称
-        $subject = $this->config->get('config_store').' Order:' . $order_id;
+        $subject = $this->config->get('config_store').' #' . $order_id.'-'.truncate_string(implode(" ", $title));
         //必填
 
         //付款金额
@@ -37,7 +43,7 @@ class ControllerPaymentAlipayDirect extends Controller {
 
         //订单描述
 
-        $body = $this->config->get('config_store').' Order:' . $order_id;
+        $body = $this->config->get('config_store').' #' . $order_id.'-'.truncate_string(implode(" ", $title));
         //商品展示地址
         $show_url = '';
         //需以http://开头的完整路径，例如：http://www.商户网址.com/myorder.html

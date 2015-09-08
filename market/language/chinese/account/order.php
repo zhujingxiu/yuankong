@@ -3,7 +3,7 @@
 $_['heading_title']         = '我的订单';
 
 // Text
-$_['text_account']          = '账号';
+$_['text_account']          = '用户中心';
 $_['text_order']            = '订单信息';
 $_['text_order_detail']     = '订单详细';
 $_['text_invoice_no']       = '发票号：';
@@ -26,6 +26,7 @@ $_['text_action']           = '选择操作：';
 $_['text_selected']         = '请选择您想要操作的选项';
 $_['text_reorder']          = '加入购物车';
 $_['text_return']           = '退换产品';
+$_['text_delete_order']     = '您成功已删除了%s个订单！';
 
 // Column
 $_['column_name']           = '品名';
@@ -40,4 +41,5 @@ $_['column_comment']        = '备注';
 
 // Error
 $_['error_warning']         = '请选择商品及处理方式来完成操作！';
+$_['error_delete_order']    = '参数错误，请稍后再试！';
 $_['button_view']        	= '查看详情';

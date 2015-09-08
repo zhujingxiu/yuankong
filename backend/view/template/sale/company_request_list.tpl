@@ -80,9 +80,9 @@
             <?php foreach ($requests as $item) { ?>
             <tr>
               <td style="text-align: center;"><?php if ($item['selected']) { ?>
-                <input type="checkbox" name="selected[]" value="<?php echo $item['company_id']; ?>" checked="checked" />
+                <input type="checkbox" name="selected[]" value="<?php echo $item['request_id']; ?>" checked="checked" />
                 <?php } else { ?>
-                <input type="checkbox" name="selected[]" value="<?php echo $item['company_id']; ?>" />
+                <input type="checkbox" name="selected[]" value="<?php echo $item['request_id']; ?>" />
                 <?php } ?></td>
               <td class="left"><?php echo $item['account']; ?></td>
               <td class="left"><?php echo $item['mobile_phone']; ?></td>

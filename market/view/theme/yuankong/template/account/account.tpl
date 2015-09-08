@@ -22,7 +22,13 @@
                 </div>
                 <ul class="fl pad20 uname">
                 	<li class="uname1">欢迎您！<strong><?php echo $fullname ?></strong></li>
-                	<li>为了账户安全，请您尽快完善资料</li>
+                    <?php if(!isset($approved)){?>
+                    <li>为了账户安全，请您尽快完善资料</li>
+                	<?php }else if($approved===true){?>
+                    <li>您的资料已通过审核</li>
+                    <?php }else if($approved===false){?>
+                    <li>您的资料尚未审核通过，为了账户安全，请您尽快完善资料</li>
+                    <?php }?>
                     <li>
                     	<a class="pad15" href="<?php echo $edit ?>">完善资料</a>
                         <a href="<?php echo $quickavatar ?>">编辑头像</a>

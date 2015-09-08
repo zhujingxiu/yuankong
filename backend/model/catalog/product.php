@@ -127,6 +127,8 @@ class ModelCatalogProduct extends Model {
 		}
 						
 		$this->cache->delete('product');
+
+		return $product_id;
 	}
 	
 	public function editProduct($product_id, $data) {

@@ -36,8 +36,7 @@
                         <td width="10%">数量</td>
                         <td width="10%">商品操作</td>
                         <td width="15%">总价格</td>
-                        <td width="10%">订单状态</td>
-                        
+                        <td width="10%">订单状态</td>                        
                     </tr>
                 </table>
             </div>
@@ -46,7 +45,7 @@
             <table class="userxldd">              
                 <tr>
                     <td class="xlddtop" colspan="6">
-                        <input class="xlddcheck" type="checkbox" name="xldd" />
+                        <input class="xlddcheck headcheck" type="checkbox" name="selected[]"/>
                         <span>订单编号：#<?php echo $order['order_id']; ?></span>
                         <span>下单时间：<?php echo $order['date_added']; ?></span>
                         <span><a class="detail-view" href="<?php echo $order['href']; ?>"><?php echo $button_view; ?></a></span>
@@ -69,7 +68,6 @@
                     <td width="10%"><?php echo $product['quantity']; ?></td>
                     <td width="10%">
                       <a href="<?php echo $product['return'] ?>">退款/退货</a><br />
-                      
                     </td>
                     <?php if(!$key){ ?>
                     <td width="15%" rowspan="<?php echo count($order['products']) ?>">
@@ -80,8 +78,7 @@
                     <td width="10%" rowspan="<?php echo count($order['products']) ?>">
                         <?php echo $order['status']; ?>
                     </td>
-                    <?php }?>
-                    
+                    <?php }?>                    
                 </tr>
                 <?php endforeach ?>
                 <?php } ?>
@@ -94,9 +91,9 @@
             <div class="fy">
                 <?php echo $pagination; ?>
                 <?php if ($orders) { ?>
-                <input type="checkbox" id="selected">
+                <input type="checkbox" id="selected" class="headcheck" name="all">
                 <label>全选</label>
-                <input type="button" class="dingdan" value="删除订单">
+                <input type="button" class="dingdan" value="删除订单" id="remove-orders"/>
                 <?php }?>
             </div>
         </div>
@@ -109,4 +106,54 @@
 </div>
 <?php endif; ?>
 </div>
+<script type="text/javascript">
+    $('.headcheck[name="all"]').bind('click',function(){
+        $('.headcheck[name^="selected"]').prop('checked', this.checked);
+        $('.headcheck[name="all"]').prop('checked', this.checked);        
+    });
+    $('.headcheck[name^="selected"]').bind('click',function(){
+        $('.headcheck[name="all"]').removeAttr('checked');
+        var checked = 0;
+        $.each($('.headcheck[name^="selected"]'),function(){
+            if($(this).is(":checked")){
+                checked++;
+            }
+        });
+        if(checked == $('.headcheck[name^="selected"]').length){
+            $('.headcheck[name="all"]').prop('checked',this.checked);
+        }
+    });
+    $('#remove-orders').bind('click',function(){
+        var checked = 0;
+        var selected = [];
+        $.each($('.headcheck[name^="selected"]'),function(){
+            if($(this).is(":checked")){
+                checked++;
+                selected.push($(this).val());
+            }
+        });
+        if(checked > 0){
+            if(confirm('确定删除订单吗？')){
+                $.ajax({
+                    url:'index.php?route=account/order/delete',
+                    type:'post',
+                    data:'selected='+selected.join(),
+                    dataType:'json',
+                    success:function(json){
+                        if(json.status==1){
+                            Alertbox({type:true,msg:json.msg,delay:5000});
+                            location.reload();
+                        }else{
+                            Alertbox({type:false,msg:json.msg,delay:5000});
+                        }
+                    }
+                });
+            }
+        }else{
+            alert('请选择一个订单');
+            return false;
+        }
+
+    })
+</script>
 <?php echo $footer; ?>

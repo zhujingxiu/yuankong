@@ -62,7 +62,7 @@
                             <input type="radio" name="sex" class="sex" <?php echo $gender==1 ? 'checked="checked"' : '' ?>>男
                             <input type="radio" name="sex" class="sex" <?php echo $gender==2 ? 'checked="checked"' : '' ?>>女
                         </li>
-                        <li><label>&nbsp;</label><input type="submit" value="保存资料" class="baocun"></li>
+                        <li><label>&nbsp;</label><input type="submit" value="保存资料" class="baocun" id="save-info"></li>
                     <?php }?>
                         
                     </ul>
@@ -167,9 +167,9 @@
                     <div class="ovh fix mt15">
                         <ul class="fix">
                             <?php foreach ($addresses as $item) { ?>
-                            <li class="adtressli">
+                            <li class="adtressli" data-entity="<?php echo $item['address_id']?>">
                                 <i class="icon2 quej"></i>
-                                <i class="icon2 adressdel"></i>
+                                <i class="icon2 adressdel remove-address"></i>
                                 <h5><?php echo $item['fullname'] ?><span class="pl15"><?php echo $item['telephone'] ?></span></h5>
                                 <div class="mt5"><?php echo $item['area_zone'] ?></div>
                                 <div class="c8"><?php echo $item['address'] ?></div>
@@ -191,6 +191,22 @@
 <?php endif; ?>
 </div>
 <script type="text/javascript">
+    $('#save-info').bind('click',function(){
+        $('#info-form').ajaxSubmit({
+            type:'post',
+            data:$('#info-form'),
+            dataType:'json',
+            success:function(json){
+                if(json.status==0){
+                    Alertbox({type:false,msg:json.msg,delay:5000});
+                }else{
+                    Alertbox({type:true,msg:json.msg,delay:5000});
+                    location.reload();
+                }
+            }
+
+        })
+    });
     $('#save-avatar').bind('click',function(){
         $('#avatar-form').ajaxSubmit({
             type:'post',
@@ -198,9 +214,10 @@
             dataType:'json',
             success:function(json){
                 if(json.status==0){
-                    alert(json.msg)
+                    Alertbox({type:false,msg:json.msg,delay:5000});
                 }else{
-
+                    Alertbox({type:true,msg:json.msg,delay:5000});
+                    location.reload();
                 }
             }
 
@@ -223,8 +240,9 @@
                     if(json['error']['confirm']){
                         $('#password-form input[name="confirm"]').after('<div class="invalid">'+json['error']['confirm']+'</div>');
                     }
-                }else{
-
+                }else{                    
+                    Alertbox({type:true,msg:json.msg,delay:5000});
+                    location.reload();
                 }
             }
         });
@@ -256,10 +274,31 @@
                         }                    
                     }
 
+                }else{
+                    Alertbox({type:true,msg:json.msg,delay:5000});
+                    location.reload();
                 }
             }
         })
     })
+    $('.remove-address').bind('click',function(){
+        if(confirm('删除地址？')){
+            $.ajax({
+                url:'index.php?route=account/edit/deleteAddress',
+                type:'get',
+                data:'address_id='+parseInt($(this).parent('li').attr('data-entity')),
+                dataType:'json',
+                success:function(json){
+                    if(json.status==1){
+                        Alertbox({type:true,msg:json.msg,delay:5000});
+                        location.reload();
+                    }else{
+                        Alertbox({type:false,msg:json.msg,delay:5000});
+                    }
+                }
+            })
+        }
+    });
     $(function(){
         add_select(0);
         $('body').on('change', '#area select', function() {
