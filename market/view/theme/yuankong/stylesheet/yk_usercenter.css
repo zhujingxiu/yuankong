@@ -193,7 +193,7 @@ background:#FFF; font-family:"微软雅黑";}
 .dpright{ width:360px; float:right;}
 .dpright textarea{ margin:10px 15px; width:325px; height:123px; padding:5px; border:1px solid #dcdcdc; border-left-color:#c4c4c4; 
 border-top-color:#c4c4c4;}
-.dpright input{ width:90px; height:32px; background:url("../yk_img/adimg/headbg.png") no-repeat -88px -90px; border-style:none; color:#fff; margin:10px 15px; font-size:14px; font-weight:bold; cursor:pointer;}
+.dpright input[type="button"],.dpright input[type="submit"]{ width:90px; height:32px; background:url("../yk_img/adimg/headbg.png") no-repeat -88px -90px; border-style:none; color:#fff; margin:10px 15px; font-size:14px; font-weight:bold; cursor:pointer;}
 /*优惠劵*/
 .youhuijuan{ margin:20px;}
 .youhuijuan dt{ font-size:14px; color:#3e3e3e; font-weight:bold; padding-bottom:25px;}

@@ -15,7 +15,7 @@
             <div class="dianpingxq martop20">
                 <dl class="dpxq">
                     <dt>订单信息：</dt>
-                    <dd><a href="#"><?php echo $product ?></a></dd>
+                    <dd><a href="<?php //echo $link ?>"><?php echo $product ?></a></dd>
                     <dd>规格型号:<?php echo $model ?>
                     <?php if($options){?>
                     <?php foreach ($options as $item): ?>

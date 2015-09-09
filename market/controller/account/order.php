@@ -108,6 +108,7 @@ class ControllerAccountOrder extends Controller {
 		$this->data['orders'] = array();
 		$this->load->model('tool/image');
 		$this->load->model('catalog/product');
+		$this->load->model('account/review');
 		$order_total = $this->model_account_order->getTotalOrders($filter_status);
 		
 		$results = $this->model_account_order->getOrders(($page - 1) * 10, 10,$filter_status);
@@ -139,13 +140,13 @@ class ControllerAccountOrder extends Controller {
                 } else {
                     $image = '';
                 }
-                $this->data['review'] = $this->data['rereview'] = false;
+                $product['review'] = $product['rereview'] = false;
 	            if($result['order_status_id'] >= $this->config->get('config_received_status_id')){
 	            	$reviewed = $this->model_account_review->getReview($result['order_id'],$product['product_id']);
 	            	if(!$reviewed){
-	            		$this->data['review'] = true;
+	            		$product['review'] = true;
 	            	}else{
-	            		$this->data['rereview'] = true;
+	            		$product['rereview'] = true;
 	            	}
 	            }
                 $parent_id = $this->model_catalog_product->getProductCategories($product['product_id']);
@@ -159,6 +160,8 @@ class ControllerAccountOrder extends Controller {
                     'model'    => $product['model'],
                     'option'   => $option_data,
                     'quantity' => $product['quantity'],
+                    'review' 	=> $product['review'],
+                    'rereview' => $product['rereview'],
                     'price'    => $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $result['currency_code'], $result['currency_value']),
                     'total'    => $this->currency->format($product['total'] + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), $result['currency_code'], $result['currency_value']),
                     'return'   => $this->url->link('account/return/insert', 'order_id=' . $result['order_id'] . '&product_id=' . $product['product_id'], 'SSL'),

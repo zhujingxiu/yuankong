@@ -178,6 +178,7 @@ class ControllerAccountReview extends Controller {
 			$this->data['options'] = $this->model_account_order->getOrderOptions($order_id,$info['order_product_id']);		
 			$this->data['order_id'] = $order_id;
 			$this->data['product_id'] = $product_id;
+			$this->data['link'] = $product_id;
 		}else{
 			//$this->redirect($this->url->link('account/review','','SSL'));
 		}

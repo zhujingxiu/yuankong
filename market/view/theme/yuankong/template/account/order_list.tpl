@@ -67,10 +67,15 @@
                     <td width="15%"><?php echo $product['model'] ?></td>
                     <td width="10%"><?php echo $product['quantity']; ?></td>
                     <td width="10%">
-                    <?php if($review){ ?>
+                    <?php if($product['review']){ ?>
                         <a href="<?php echo $product['toreview'] ?>">评价</a><br />
                     <?php }?>
+                    <?php if($product['rereview']){ ?>
+                        <a href="<?php echo $product['toreview'] ?>">追加评价</a><br />
+                    <?php }?>
+                    <?php if($order['status_id'] <= $this->config->get('config_unshipped_status_id')){ ?>
                         <a href="<?php echo $product['return'] ?>">退款/退货</a><br />
+                    <?php }?>
                     </td>
                     <?php if(!$key){ ?>
                     <td width="15%" rowspan="<?php echo count($order['products']) ?>">

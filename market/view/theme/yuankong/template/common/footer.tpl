@@ -57,4 +57,15 @@ if( count($modules) ){ ?>
     o.dlist.init(".s-select",".search-dt",".search-dd");
 </script>
 <?php echo $baidu_analytics;?>
+<?php if(false){?>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?984e2587f574bb0ebca6048b807003c9";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<?php  } ?>	
 </body></html>

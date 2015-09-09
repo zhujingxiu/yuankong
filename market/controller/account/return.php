@@ -108,6 +108,11 @@ class ControllerAccountReturn extends Controller {
 	}
 	
 	public function info() {
+		if (!$this->customer->isLogged()) {
+      		$this->session->data['redirect'] = $this->url->link('account/return', '', 'SSL');
+
+	  		$this->redirect($this->url->link('account/login', '', 'SSL'));
+    	}
 		$this->language->load('account/return');
 		
 		if (isset($this->request->get['return_id'])) {
@@ -297,6 +302,11 @@ class ControllerAccountReturn extends Controller {
 	}
 		
 	public function insert() {
+		if (!$this->customer->isLogged()) {
+      		$this->session->data['redirect'] = $this->url->link('account/return', '', 'SSL');
+
+	  		$this->redirect($this->url->link('account/login', '', 'SSL'));
+    	}
 		$this->language->load('account/return');
 
 		$this->load->model('account/return');
@@ -416,87 +426,76 @@ class ControllerAccountReturn extends Controller {
 
 		$this->data['action'] = $this->url->link('account/return/insert', '', 'SSL');
 	
+		$this->load->model('account/return');
 		$this->load->model('account/order');
-		
+		$this->load->model('tool/image');
 		if (isset($this->request->get['order_id'])) {
-			$order_info = $this->model_account_order->getOrder($this->request->get['order_id']);
+			$order_info = $this->model_account_return->getOrderAndProduct($this->request->get['order_id'],$this->request->get['product_id']);
 		}
 		
-		$this->load->model('catalog/product');
-		
-		if (isset($this->request->get['product_id'])) {
-			$product_info = $this->model_catalog_product->getProduct($this->request->get['product_id']);
-		}
-		
-    	if (isset($this->request->post['order_id'])) {
-      		$this->data['order_id'] = $this->request->post['order_id']; 	
-		} elseif (!empty($order_info)) {
+    	if (!empty($order_info['order_id'])) {
 			$this->data['order_id'] = $order_info['order_id'];
 		} else {
       		$this->data['order_id'] = ''; 
     	}
 				
-    	if (isset($this->request->post['date_ordered'])) {
-      		$this->data['date_ordered'] = $this->request->post['date_ordered']; 	
-		} elseif (!empty($order_info)) {
+    	if (!empty($order_info['date_added'])) {
 			$this->data['date_ordered'] = date('Y-m-d', strtotime($order_info['date_added']));
 		} else {
       		$this->data['date_ordered'] = '';
     	}
 				
-		if (isset($this->request->post['fullname'])) {
-    		$this->data['fullname'] = $this->request->post['fullname'];
-		} elseif (!empty($order_info['fullname'])) {
+		if (!empty($order_info['fullname'])) {
 			$this->data['fullname'] = $order_info['fullname'];	
 		} else {
 			$this->data['fullname'] = $this->customer->getFullName();
 		}
 
-		if (isset($this->request->post['mobile_phone'])) {
-    		$this->data['mobile_phone'] = $this->request->post['mobile_phone'];
-		} elseif (!empty($order_info['mobile_phone'])) {
+		if (!empty($order_info['mobile_phone'])) {
 			$this->data['mobile_phone'] = $order_info['mobile_phone'];			
 		} else {
 			$this->data['mobile_phone'] = $this->customer->getMobilePhone();
 		}
 		
-		if (isset($this->request->post['email'])) {
-    		$this->data['email'] = $this->request->post['email'];
-		} elseif (!empty($order_info['email'])) {
+		if (!empty($order_info['email'])) {
 			$this->data['email'] = $order_info['email'];				
 		} else {
 			$this->data['email'] = $this->customer->getEmail();
 		}
 		
-		if (isset($this->request->post['telephone'])) {
-    		$this->data['telephone'] = $this->request->post['telephone'];
-		} elseif (!empty($order_info['telephone'])) {
+		if (!empty($order_info['telephone'])) {
 			$this->data['telephone'] = $order_info['telephone'];				
 		} else {
 			$this->data['telephone'] = $this->customer->getTelephone();
 		}
 		
-		if (isset($this->request->post['product'])) {
-    		$this->data['product'] = $this->request->post['product'];
-		} elseif (!empty($product_info['name'])) {
-			$this->data['product'] = $product_info['name'];				
+		if (!empty($order_info['name'])) {
+			$this->data['product'] = $order_info['name'];				
 		} else {
 			$this->data['product'] = '';
 		}
 		
-		if (isset($this->request->post['model'])) {
-    		$this->data['model'] = $this->request->post['model'];
-		} elseif (!empty($product_info['model'])) {
-			$this->data['model'] = $product_info['model'];				
+		if (!empty($order_info['model'])) {
+			$this->data['model'] = $order_info['model'];				
 		} else {
 			$this->data['model'] = '';
 		}
+		if (isset($order_info['image'])) {
+            $this->data['image'] = $this->model_tool_image->resize($order_info['image'], $this->config->get('config_image_cart_width'), $this->config->get('config_image_cart_height'));
+        } else {
+            $this->data['image'] = '';
+        }
 			
-		if (isset($this->request->post['quantity'])) {
-    		$this->data['quantity'] = $this->request->post['quantity'];
+		if (isset($order_info['quantity'])) {
+    		$this->data['quantity'] = $order_info['quantity'];
 		} else {
 			$this->data['quantity'] = 1;
 		}	
+		if (isset($order_info['total'])) {
+    		$this->data['total'] = $this->currency->format($order_info['total'] + ($this->config->get('config_tax') ? ($order_info['tax'] * $order_info['quantity']) : 0));
+		} else {
+			$this->data['total'] = 1;
+		}
 				
 		if (isset($this->request->post['opened'])) {
     		$this->data['opened'] = $this->request->post['opened'];
@@ -546,7 +545,7 @@ class ControllerAccountReturn extends Controller {
 			$this->data['agree'] = false;
 		}
 
-		$this->data['back'] = $this->url->link('account/account', '', 'SSL');
+		$this->data['captcha_link'] = $this->url->link('common/tool/captcha','','ssl');
 				
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/return_form.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/account/return_form.tpl';
@@ -567,6 +566,11 @@ class ControllerAccountReturn extends Controller {
   	}
 	
   	public function success() {
+  		if (!$this->customer->isLogged()) {
+      		$this->session->data['redirect'] = $this->url->link('account/return', '', 'SSL');
+
+	  		$this->redirect($this->url->link('account/login', '', 'SSL'));
+    	}
 		$this->language->load('account/return');
 
 		$this->document->setTitle($this->language->get('heading_title')); 
@@ -611,35 +615,13 @@ class ControllerAccountReturn extends Controller {
  		$this->response->setOutput($this->render()); 
 	}
 		
-  	protected function validate() {
-    	if (!$this->request->post['order_id']) {
-      		$this->error['order_id'] = $this->language->get('error_order_id');
-    	}
-		
-		if ((utf8_strlen($this->request->post['fullname']) < 1) || (utf8_strlen($this->request->post['fullname']) > 32)) {
-      		$this->error['fullname'] = $this->language->get('error_fullname');
-    	}
-
-    	if ((utf8_strlen($this->request->post['mobile_phone']) < 1) || !isMobile($this->request->post['mobile_phone']) ) {
-      		$this->error['mobile_phone'] = $this->language->get('error_mobile_phone');
-    	}
-
-    	if ((utf8_strlen($this->request->post['email']) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $this->request->post['email'])) {
-      		$this->error['email'] = $this->language->get('error_email');
-    	}
-		
-    	if ((utf8_strlen($this->request->post['telephone']) < 3) || (utf8_strlen($this->request->post['telephone']) > 32)) {
-      		$this->error['telephone'] = $this->language->get('error_telephone');
-    	}		
-		
-		if ((utf8_strlen($this->request->post['product']) < 1) || (utf8_strlen($this->request->post['product']) > 255)) {
+  	protected function validate() {						
+  		if (empty($this->request->post['order_id'])) {
+			$this->error['order'] = $this->language->get('error_order');
+		}
+		if (empty($this->request->post['product_id'])) {
 			$this->error['product'] = $this->language->get('error_product');
-		}	
-		
-		if ((utf8_strlen($this->request->post['model']) < 1) || (utf8_strlen($this->request->post['model']) > 64)) {
-			$this->error['model'] = $this->language->get('error_model');
-		}							
-
+		}
 		if (empty($this->request->post['return_reason_id'])) {
 			$this->error['reason'] = $this->language->get('error_reason');
 		}	
@@ -664,14 +646,4 @@ class ControllerAccountReturn extends Controller {
       		return false;
     	}
   	}
-	
-	public function captcha() {
-		$this->load->library('captcha');
-		
-		$captcha = new Captcha();
-		
-		$this->session->data['captcha'] = $captcha->getCode();
-		
-		$captcha->showImage();
-	}	
 }

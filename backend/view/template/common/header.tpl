@@ -69,8 +69,102 @@ $(document).ready(function(){
     </div>
     <?php } ?>
   </div>
-  <?php if ($logged) { ?>
+  <?php if ($logged) {;?>
   <div id="menu">
+    <?php if (isset($menu['left'])): ?>
+    <ul class="left" style="display: none;">
+      <?php foreach ($menu['left'] as $key => $top): ?>
+      <li id="<?php echo strtolower($key) ?>" class="lv1">
+        <?php if (is_array($top)): ?>
+        <a class="top"><?php echo $this->language->get('text_'.strtolower($key)) ?></a>
+          <ul>
+          <?php foreach ($top as $key1 => $item): ?>
+            <li>
+              <?php if (is_array($item)): ?>
+              <a class="parent"><?php echo $this->language->get('text_'.strtolower($key1)); ?></a>
+              <ul>
+                <?php foreach ($item as $key2 => $last): ?>
+                <?php if ($this->user->hasPermission('access',$last)): ?>
+                <li>
+                  <a href="<?php echo $this->url->link($last,'token='.$token,'SSL'); ?>">
+                    <?php echo $this->language->get('text_'.strtolower($key2)) ?>
+                  </a>
+                </li>
+                <?php endif ?>
+                <?php endforeach ?>
+              </ul>
+              <?php else: ?>
+                <?php if ($this->user->hasPermission('access',$item)): ?>
+                <a href="<?php echo $this->url->link($item,'token='.$token,'SSL'); ?>">
+                <?php echo $this->language->get('text_'.strtolower($key1)) ?>
+                </a>
+                <?php endif ?>              
+              <?php endif ?>              
+            </li>
+          <?php endforeach ?>
+          </ul>         
+        <?php else: ?>
+          <?php if ($this->user->hasPermission('access',$top)): ?>
+          <a class="top" href="<?php echo $this->url->link($top,'token='.$token,'SSL'); ?>">
+            <?php echo $this->language->get('text_'.strtolower($key)) ?>
+          </a> 
+          <?php endif ?>         
+        <?php endif ?>        
+      </li>
+      <?php endforeach ?>      
+    </ul>
+    <?php endif ?>
+    <?php if (isset($menu['right'])): ?>
+    <ul class="right" style="display: none;">
+      <li id="messages"><a class="top lv1"><?php echo $text_messages; ?></a>
+        <ul>
+          <li><a href="<?php echo $new_orders; ?>"><?php echo $text_new_orders; ?></a></li>
+          <li><a href="<?php echo $new_projects; ?>"><?php echo $text_new_projects; ?></a></li>
+          <li><a href="<?php echo $new_helps; ?>"><?php echo $text_new_helps; ?></a></li>
+        </ul>
+      </li>
+      <?php foreach ($menu['right'] as $key => $top): ?>
+      <li id="<?php echo strtolower($key) ?>" class="lv1">
+        <?php if (is_array($top)): ?>
+        <a class="top"><?php echo $this->language->get('text_'.strtolower($key)) ?></a>
+          <ul>
+          <?php foreach ($top as $key1 => $item): ?>
+            <li>
+              <?php if (is_array($item)): ?>
+              <a class="parent"><?php echo $this->language->get('text_'.strtolower($key1)); ?></a>
+              <ul>
+                <?php foreach ($item as $key2 => $last): ?>
+                <?php if ($this->user->hasPermission('access',$last)): ?>
+                <li>
+                  <a href="<?php echo $this->url->link($last,'token='.$token,'SSL'); ?>">
+                    <?php echo $this->language->get('text_'.strtolower($key2)) ?>
+                  </a>
+                </li>
+                <?php endif ?>
+                <?php endforeach ?>
+              </ul>
+              <?php else: ?>
+                <?php if ($this->user->hasPermission('access',$item)): ?>
+                <a href="<?php echo $this->url->link($item,'token='.$token,'SSL'); ?>">
+                <?php echo $this->language->get('text_'.strtolower($key1)) ?>
+                </a>
+                <?php endif ?>              
+              <?php endif ?>              
+            </li>
+          <?php endforeach ?>
+          </ul>         
+        <?php else: ?>
+        <?php if ($this->user->hasPermission('access',$top)): ?>
+        <a class="top" href="<?php echo $this->url->link($top,'token='.$token,'SSL'); ?>">
+          <?php echo $this->language->get('text_'.strtolower($key)) ?>
+        </a>  
+        <?php endif ?>        
+        <?php endif ?>        
+      </li>
+      <?php endforeach ?>      
+    </ul>
+    <?php endif ?>    
+    <?php if (false): ?>    
     <ul class="left" style="display: none;">
       <li id="dashboard"><a href="<?php echo $home; ?>" class="top"><?php echo $text_dashboard; ?></a></li>
       <li id="project"><a class="top"><?php echo $text_project; ?></a>
@@ -231,6 +325,34 @@ $(document).ready(function(){
         </ul>
       </li>
     </ul>
+    <?php endif ?>
   </div>
   <?php } ?>
 </div>
+<script type="text/javascript">
+  $(function(){
+    $.each($('#menu li'),function(index) {   
+      if($.trim($(this).text()).length == 0){
+        $(this).remove();
+      }
+    });
+    $.each($('#menu ul'),function(index) {   
+      $.each($(this).children('li'),function(){
+        if($.trim($(this).text()).length == 0){
+          $(this).remove();
+        }
+      });
+    });
+    $.each($('#menu ul'),function(){
+      if($(this).children('li').size()==0){
+        $(this).parent().remove();
+      }
+    })
+      /*
+    $('li a.parent').each(function(index) { 
+       if($(this).next('ul').children('li').size() == 0) {
+          $(this).parent('li').css('display', 'none');
+       }
+    });*/
+  });
+</script>

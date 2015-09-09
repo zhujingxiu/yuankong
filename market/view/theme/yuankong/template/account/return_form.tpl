@@ -10,156 +10,153 @@
   	</div>
     <?php endif; ?> 
     <div class="<?php echo $SPAN[1];?> article">
-        <?php echo $content_top; ?>
-        <div id="content" class="userbox2">
+        <div class="userbox3">
             <div class="userboxtop">
-              <?php require( DIR_TEMPLATE.$this->config->get('config_template')."/template/common/breadcrumb.tpl" ); ?>
+            <?php require( DIR_TEMPLATE.$this->config->get('config_template')."/template/common/breadcrumb.tpl" ); ?>
             </div>
-  <div class="page-content">
-  <?php echo $text_description; ?>
-  <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
-    <h2><?php echo $text_order; ?></h2>
-    <div class="content">
-      <div class="left"><span class="required">*</span> <?php echo $entry_fullname; ?><br />
-        <input type="text" name="fullname" value="<?php echo $fullname; ?>" class="large-field" />
-        <br />
-        <?php if ($error_fullname) { ?>
-        <span class="error"><?php echo $error_fullname; ?></span>
-        <?php } ?>
-        <br />
-        <span class="required">*</span> <?php echo $entry_mobile_phone; ?><br />
-        <input type="text" name="mobile_phone" value="<?php echo $mobile_phone; ?>" class="large-field" />
-        <br />
-        <?php if ($error_mobile_phone) { ?>
-        <span class="error"><?php echo $error_mobile_phone; ?></span>
-        <?php } ?>
-        <br />
-        <span class="required">*</span> <?php echo $entry_email; ?><br />
-        <input type="text" name="email" value="<?php echo $email; ?>" class="large-field" />
-        <br />
-        <?php if ($error_email) { ?>
-        <span class="error"><?php echo $error_email; ?></span>
-        <?php } ?>
-        <br />
-        <span class="required">*</span> <?php echo $entry_telephone; ?><br />
-        <input type="text" name="telephone" value="<?php echo $telephone; ?>" class="large-field" />
-        <br />
-        <?php if ($error_telephone) { ?>
-        <span class="error"><?php echo $error_telephone; ?></span>
-        <?php } ?>
-        <br />
-      </div>
-      <div class="right"><span class="required">*</span> <?php echo $entry_order_id; ?><br />
-        <input type="text" name="order_id" value="<?php echo $order_id; ?>" class="large-field" />
-        <br />
-        <?php if ($error_order_id) { ?>
-        <span class="error"><?php echo $error_order_id; ?></span>
-        <?php } ?>
-        <br />
-        <?php echo $entry_date_ordered; ?><br />
-        <input type="text" name="date_ordered" value="<?php echo $date_ordered; ?>" class="large-field date" />
-        <br />
-      </div>
-    </div>
-    <h2><?php echo $text_product; ?></h2>
-    <div id="return-product">
-      <div class="content">
-        <div class="return-product">
-          <div class="return-name"><span class="required">*</span> <b><?php echo $entry_product; ?></b><br />
-            <input type="text" name="product" value="<?php echo $product; ?>" />
-            <br />
-            <?php if ($error_product) { ?>
-            <span class="error"><?php echo $error_product; ?></span>
-            <?php } ?>
-          </div>
-          <div class="return-model"><span class="required">*</span> <b><?php echo $entry_model; ?></b><br />
-            <input type="text" name="model" value="<?php echo $model; ?>" />
-            <br />
-            <?php if ($error_model) { ?>
-            <span class="error"><?php echo $error_model; ?></span>
-            <?php } ?>
-          </div>
-          <div class="return-quantity"><b><?php echo $entry_quantity; ?></b><br />
-            <input type="text" name="quantity" value="<?php echo $quantity; ?>" />
-          </div>
-        </div>
-        <div class="return-detail">
-          <div class="return-reason"><span class="required">*</span> <b><?php echo $entry_reason; ?></b><br />
-            <table>
-              <?php foreach ($return_reasons as $return_reason) { ?>
-              <?php if ($return_reason['return_reason_id'] == $return_reason_id) { ?>
-              <tr>
-                <td width="1"><input type="radio" name="return_reason_id" value="<?php echo $return_reason['return_reason_id']; ?>" id="return-reason-id<?php echo $return_reason['return_reason_id']; ?>" checked="checked" /></td>
-                <td><label for="return-reason-id<?php echo $return_reason['return_reason_id']; ?>"><?php echo $return_reason['name']; ?></label></td>
-              </tr>
-              <?php } else { ?>
-              <tr>
-                <td width="1"><input type="radio" name="return_reason_id" value="<?php echo $return_reason['return_reason_id']; ?>" id="return-reason-id<?php echo $return_reason['return_reason_id']; ?>" /></td>
-                <td><label for="return-reason-id<?php echo $return_reason['return_reason_id']; ?>"><?php echo $return_reason['name']; ?></label></td>
-              </tr>
-              <?php  } ?>
-              <?php  } ?>
-            </table>
-            <?php if ($error_reason) { ?>
-            <span class="error"><?php echo $error_reason; ?></span>
-            <?php } ?>
-          </div>
-          <div class="return-opened"><b><?php echo $entry_opened; ?></b><br />
-            <?php if ($opened) { ?>
-            <input type="radio" name="opened" value="1" id="opened" checked="checked" />
-            <?php } else { ?>
-            <input type="radio" name="opened" value="1" id="opened" />
-            <?php } ?>
-            <label for="opened"><?php echo $text_yes; ?></label>
-            <?php if (!$opened) { ?>
-            <input type="radio" name="opened" value="0" id="unopened" checked="checked" />
-            <?php } else { ?>
-            <input type="radio" name="opened" value="0" id="unopened" />
-            <?php } ?>
-            <label for="unopened"><?php echo $text_no; ?></label>
-            <br />
-            <br />
-            <?php echo $entry_fault_detail; ?><br />
-            <textarea name="comment" cols="150" rows="6"><?php echo $comment; ?></textarea>
-          </div>
-          <div class="return-captcha"><b><?php echo $entry_captcha; ?></b><br />
-            <input type="text" name="captcha" value="<?php echo $captcha; ?>" />
-            <br />
-            <img src="index.php?route=account/return/captcha" alt="" />
-            <?php if ($error_captcha) { ?>
-            <span class="error"><?php echo $error_captcha; ?></span>
-            <?php } ?>
-          </div>
+            
+            <div class="message">                          
+              <h5><i class="title-btn"></i><?php echo $text_order; ?> # <?php echo $order_id; ?></h5>
+              <ul class="orderstyle-ul">
+                <li><label>下单时间：</label> <?php echo $date_ordered; ?></li>
+                <li><label>联系人：</label> <?php echo $fullname; ?></li>
+                <li><label>手机号码：</label> <?php echo $mobile_phone; ?></li>
+                <?php if(!empty($email)){?>
+                <li><label>Email：</label> <?php echo $email; ?></li>
+                <?php }?>
+              </ul>
+            </div>
+            <div class="message">
+              <h5><i class="title-btn"></i>商品信息</h5>
+              <table class="cart-table">
+                <thead>
+                  <tr>
+                    <th class="shop-n">商品</th>
+                    <th width="120">规格型号</th>
+                    <th>数量</th>
+                    <th>总价</th>
+                  </tr>
+                </thead>
+                <tbody>                    
+                  <tr>
+                    <td>
+                      <div class="ovh">
+                        <a class="shop-pic" >
+                            <img src="<?php echo $image ?>" />
+                        </a>
+                        <span class="shop-name"><?php echo $product; ?></span>
+                      </div>
+                    </td>
+                    <td><p class="tc"><?php echo $model; ?></p></td>
+                    <td><p class="tc f_m c_g"><?php echo $quantity; ?></p></td>
+                    <td><p class="tc f_m c_g"><?php echo $total; ?></p></td>
+                  </tr>                    
+                </tbody>
+              </table>
+            </div>
+            <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
+            <div class="dianpingxq martop20">
+            <?php echo $text_description; ?>  
+              <dl class="dpxq">
+                <dt><?php echo $entry_reason; ?></dt>
+                <dd>
+                  <select name="return_reason_id" class="adress-sec" style="width: 150px">
+                  <?php foreach ($return_reasons as $return_reason) { ?>
+                  <?php if ($return_reason['return_reason_id'] == $return_reason_id) { ?>                  
+                    <option value="<?php echo $return_reason['return_reason_id']; ?>" selected="selected" ><?php echo $return_reason['name']; ?></option>
+                  <?php } else { ?>
+                    <option value="<?php echo $return_reason['return_reason_id']; ?>"><?php echo $return_reason['name']; ?></option>
+                  <?php  } ?>
+                  <?php  } ?>
+                  </select>
+                </dd>
+                <dt><?php echo $entry_opened; ?></dt>              
+                <dd>
+                  <?php if ($opened) { ?>
+                  <input type="radio" name="opened" value="1" id="opened" checked="checked" />
+                  <?php } else { ?>
+                  <input type="radio" name="opened" value="1" id="opened" />
+                  <?php } ?>
+                  <label for="opened"><?php echo $text_yes; ?></label>
+                  <?php if (!$opened) { ?>
+                  <input type="radio" name="opened" value="0" id="unopened" checked="checked" />
+                  <?php } else { ?>
+                  <input type="radio" name="opened" value="0" id="unopened" />
+                  <?php } ?>
+                  <label for="unopened"><?php echo $text_no; ?></label>
+                </dd>
+            </dl>
+            <div class="dpright" id="return-form">
+              <dl class="dpxq dpw1">
+                <dd><?php echo $entry_fault_detail; ?></dd>
+                <dd><textarea name="comment" style="width: 305px;"><?php echo $comment; ?></textarea></dd>
+                <dd><?php echo $entry_captcha; ?></dd>
+                <dd class="captcha" style="margin: 1px 15px;">
+                    <input type="text" name="captcha" value="<?php echo $captcha; ?>" class="input-t" size="8"/>       
+                    <img src="<?php echo $captcha_link ?>"/>
+                    <i class="pl10 c_g chg-img" style="cursor: pointer;">换一张</i>
+                </dd>
+                <?php if ($text_agree) { ?>
+                <dd class="right"><?php echo $text_agree; ?>
+                  <?php if ($agree) { ?>
+                  <input type="checkbox" name="agree" value="1" checked="checked" />
+                  <?php } else { ?>
+                  <input type="checkbox" name="agree" value="1" />
+                  <?php } ?>
+                </dd>
+                <?php } ?>
+              </dl>
+              <input type="hidden" name="order_id" value="<?php echo $order_id;?>" />
+              <input type="hidden" name="product_id" value="<?php echo $product_id;?>" />
+              <input type="button" id="btn-return" value="提交申请" />
+            </div>
+          </form>
         </div>
       </div>
-    </div>
-    <?php if ($text_agree) { ?>
-    <div class="buttons">
-      <div class="right"><?php echo $text_agree; ?>
-        <?php if ($agree) { ?>
-        <input type="checkbox" name="agree" value="1" checked="checked" />
-        <?php } else { ?>
-        <input type="checkbox" name="agree" value="1" />
-        <?php } ?>
-        <input type="submit" value="<?php echo $button_continue; ?>" class="button" />
-      </div>
-    </div>
-
-    <?php } ?>
-  </form>
   </div>
-  <?php echo $content_bottom; ?>
+  <?php if( $SPAN[2] ): ?>
+  <div class="<?php echo $SPAN[2];?>">	
+	<?php echo $column_right; ?>
+  </div>
+  <?php endif; ?>
 </div>
 <script type="text/javascript"><!--
-$(document).ready(function() {
-	$('.date').datepicker({dateFormat: 'yy-mm-dd'});
-});
+  $(document).ready(function() {
+    $('.captcha .chg-img').bind('click',function(e){
+      e.preventDefault();
+      $('.captcha img').attr('src',"<?php echo $captcha_link ?>&t="+(Math.round(Math.random()*999)+9999))
+    });
+  });
+  $('#btn-return').bind('click',function(){
+    if($('input[name="rating"]').val()<=0){
+      alert('请为 服务满意度 选择一个星级');
+      return false;
+    }
+    if($('input[name="shipping"]').val()<=0){
+      alert('请为 物流服务 选择一个星级');
+      return false;
+    }
+    if($('input[name="service"]').val()<=0){
+      alert('请为 客服服务 选择一个星级');
+      return false;
+    }
+    var txt = $('textarea[name="text"]').val();
+    if(getStrActualLen(txt) <5 || getStrActualLen(txt) >=300){
+      alert('评论内容须在5-300个字符之间');
+      return false;
+    }
+    $.ajax({
+      url:'index.php?route=account/return/write',
+      type:'post',
+      data:$('#return-form input,#return-form textarea'),
+      dataType:'json',
+      success:function(json){
+        if(json.status==1){
+            Alertbox({type:true,msg:json.msg,delay:5000});
+            location.href='<?php echo $this->url->link('account/return') ?>';
+        }
+      }
+    });
+  })
 //--></script> 
-</div>
-<?php if( $SPAN[2] ): ?>
-<div class="<?php echo $SPAN[2];?>">	
-	<?php echo $column_right; ?>
-</div>
-<?php endif; ?>
-</div>
 <?php echo $footer; ?>

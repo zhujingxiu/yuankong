@@ -35,5 +35,10 @@ class ModelAccountReturn extends Model {
 
 		return $query->rows;
 	}			
+
+	public function getOrderAndProduct($order_id,$product_id){
+		$query = $this->db->query("SELECT op.*,p.image,o.fullname,o.telephone,o.mobile_phone,o.email,o.date_added FROM " . DB_PREFIX . "order_product op LEFT JOIN ".DB_PREFIX."product p ON op.product_id = p.product_id LEFT JOIN ".DB_PREFIX."order o ON o.order_id = op.order_id WHERE o.customer_id = '".$this->customer->getId()."' AND op.order_id = '" . (int)$order_id . "' AND op.product_id = '".(int)$product_id."'");
+	
+		return $query->row;
+	}
 }
-?>

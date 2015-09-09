@@ -6,7 +6,7 @@ $_['heading_title']      = '商品退换';
 $_['text_account']       = '用户中心';
 $_['text_return']        = '退换资料';
 $_['text_return_detail'] = '退换信息';
-$_['text_description']   = '<p>请完整填写下表，并获取RMA号。</p>';
+$_['text_description']   = '<p>请完整填写退货申请，客服会在3个工作日内处理。</p>';
 $_['text_order']         = '订单信息';
 $_['text_product']       = '商品信息 &amp; 退换原因';
 $_['text_message']       = '<p>感谢您提交退换信息。 您的请求已经发送到相关部门处理。</p><p> 我们将通过邮件通知您相关退换安排。</p>';
@@ -47,7 +47,7 @@ $_['entry_model']        = '商品型号：';
 $_['entry_quantity']     = '数量：';
 $_['entry_reason']       = '退换原因：';
 $_['entry_opened']       = '商品已开封：';
-$_['entry_fault_detail'] = '有瑕疵或其它：';
+$_['entry_fault_detail'] = '有瑕疵或其它事由：';
 $_['entry_captcha']      = '请在下框输入验证码：';
 
 // Error
@@ -61,4 +61,3 @@ $_['error_model']        = '商品名称必须在3-64字符之间。';
 $_['error_reason']       = '请选择一个退换原因。';
 $_['error_captcha']      = '验证码与图像提供的验证号码不一致。';
 $_['error_name']         = '商品名称必须在3-255字符之间。';
-?>

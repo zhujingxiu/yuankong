@@ -265,3 +265,119 @@ function getCompanyFileStatus($status){
             return false;
         return preg_match($match,$v);
     }
+
+//配置后台菜单
+function initAdminMenu(){
+    $dashboard      = 'common/home';
+    $project        = array(
+            'project'       => 'sale/project',
+            'project_group' => 'sale/project_group',
+        );
+    $sale           = array(
+            'order'         => 'sale/order',
+            'return'        => 'sale/return',
+        );
+    $module         = 'extension/module';
+    $catalog        = array(
+            'category'      => 'catalog/category',
+            'product'       => 'catalog/product',
+            'option'        => 'catalog/option',
+            'attribute'     => array(
+                    'attribute'         => 'catalog/attribute',
+                    'attribute_group'   => 'catalog/attribute_group'
+                ),
+            'manufacturer'  => 'catalog/manufacturer',
+            );
+    $wiki           = array(
+            'wiki'          => 'extension/wiki',
+            'wiki_group'    => 'extension/wiki_group',
+        );
+    
+    $customer       = array(
+            'customer'      => 'sale/customer',
+            'customer_group'=> 'sale/customer_group',
+            'contact'       => 'sale/contact',
+            'customer_ban'  => 'sale/customer_ban_ip',
+        );
+    $review         = 'catalog/review';
+    $help           = 'extension/help';
+    $company        = array(
+            'company'       => 'sale/company',
+            'company_group' => 'sale/company_group',
+            'company_zone'  => 'sale/company_zone',
+            'company_request' => 'sale/company_request',
+            'case'          => 'extension/case',
+
+        );
+    $link           = 'extension/link';
+    $message        = array(
+            'msg_order'     => 'common/message/order',
+            'msg_return'    => 'common/message/return',
+            'msg_project'   => 'common/message/project',
+            'msg_company'   => 'common/message/company',
+            'msg_help'      => 'common/message/help',
+        );
+    $system         = array(
+            'setting'       => 'setting/setting',
+            'users'         => array(
+                'user'              =>'user/user',
+                'user_group'        =>'user/user_permission',
+            ),
+            'localisation'  => array(
+                'order_status'      =>'localisation/order_status',
+                'return'            => array(
+                    'return_status'      =>'localisation/return_status',
+                    'return_action'      =>'localisation/return_action',
+                    'return_reason'      =>'localisation/return_reason',
+                ),
+                'area'          =>'localisation/area',
+                'area_geo'      =>'localisation/area_geo',
+                'tax'           => array(
+                    'tax_class'         =>'localisation/tax_class',
+                    'tax_rate'          =>'localisation/tax_rate',
+                ),
+                'length_class'      =>'localisation/length_class',
+                'weight_class'      =>'localisation/weight_class',
+                'stock_status'      =>'localisation/stock_status',
+                'currency'          =>'localisation/currency',
+                'language'          =>'localisation/language',
+                
+            ),
+            'error_log'     => 'tool/error_log',
+            'backup'        => 'tool/backup'
+        );
+
+    $extension = array(
+            'shipping'      => 'extension/shipping',
+            'payment'       => 'extension/payment',
+            'total'         => 'extension/total',
+            'feed'          => 'extension/feed',
+            'coupon'        => 'sale/coupon',
+            'voucher'       => array(
+                'voucher'           =>'sale/voucher',
+                'voucher_theme' =>'sale/voucher_theme',
+            ),   
+        );
+
+    return array(
+        'left'  =>  array(
+            'dashboard' => $dashboard,
+            'project'   => $project,
+            'order'     => $sale,
+            'module'    => $module,
+            'catalog'   => $catalog,
+            'wiki'      => $wiki,
+            'customer'  => $customer,
+            'review'    => $review,
+            'help'      => $help,
+            'company'   => $company,
+            'link'      => $link,
+            
+        ),
+        'right' =>  array(
+            //'message'   =>$message,
+            'system'    =>$system,
+            'extension' =>$extension,
+        )
+    );
+}
